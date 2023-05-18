@@ -1,45 +1,48 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 enum CUSTOMERCODE {
     NOCODE,
-    ALREADYEXISTS,
+    EXISTS,
     ACCOUNTDOESNTEXISTS
 
 }
 
 public class Customer {
 
-    final private CustomerAccount[] accounts;
+    final private List<CustomerAccount> accounts;
     private CUSTOMERCODE code;
 
     public Customer() {
-        this.accounts = new CustomerAccount[2];
+        this.accounts = new ArrayList<>();
         code = CUSTOMERCODE.NOCODE;
     }
 
-    public CustomerAccount getCredit() {
-        return accounts[0];
+    public CustomerAccount getCredit(String accountName) {
+        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> x.getAccountName() == accountName).findFirst().orElse(null);
     }
 
-    public CustomerAccount getSavings() {
-        return accounts[1];
+    public CustomerAccount getSavings(String accountName) {
+        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> x.getAccountName() == accountName).findFirst().orElse(null);
     }
 
-    public boolean createCredit() {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT);
-        if (accountExists(accounts[0])) return false;
-        accounts[0] = customerAccount;
+    public boolean createCredit(String accountName) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName);
+        if (accountExists(customerAccount)) return false;
+        accounts.add(customerAccount);
         return true;
     }
 
-    public boolean createSavings() {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS);
-        if (accountExists(accounts[1])) return false;
-        accounts[1] = customerAccount;
+    public boolean createSavings(String accountName) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName);
+        if (accountExists(customerAccount)) return false;
+        accounts.add(customerAccount);
         return true;
     }
 
-    //todo
     public String printStatements(CustomerAccount account) {
         String statement = "date || credit  || debit  || balance\n";
         if (!accountExists(account)) return statement;
@@ -60,25 +63,27 @@ public class Customer {
         return account.isOverdraft();
     }
 
-    public static void main(String[] args) {
-        Customer customer = new Customer();
-        customer.createCredit();
-        System.out.println(customer.requestOverDraft(customer.getCredit()));
-    }
 
     private boolean accountExists(CustomerAccount account) {
-        if (account == null) {
-            code = CUSTOMERCODE.ACCOUNTDOESNTEXISTS;
-            return false;
-        }
-        for (CustomerAccount customerAccount : accounts) {
-            if (customerAccount.getType() == account.getType()) {
-                code = CUSTOMERCODE.ALREADYEXISTS;
+        for (int i = 0; i < accounts.size(); i++) {
+            CustomerAccount customerAccount = accounts.get(i);
+            if (Objects.equals(account, customerAccount)) {
+                code = CUSTOMERCODE.EXISTS;
                 return true;
             }
         }
-        code = CUSTOMERCODE.NOCODE;
+        code = CUSTOMERCODE.ACCOUNTDOESNTEXISTS;
         return false;
+    }
+
+    private List<CustomerAccount> getAccounts(ACCOUNTTYPE type) {
+        List<CustomerAccount> theAccounts = new ArrayList<>();
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).getType() == type) {
+                theAccounts.add((accounts.get(i)));
+            }
+        }
+        return theAccounts;
     }
 
 

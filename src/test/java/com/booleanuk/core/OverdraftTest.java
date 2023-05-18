@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 
 public class OverdraftTest {
 
-
+//
     @Test
     void shouldWithdrawMoreWithOverdraftTrue() {
         Customer customer = new Customer();
-        customer.createCredit();
-        CustomerAccount creditAccount = customer.getCredit();
+        customer.createCredit("John");
+        CustomerAccount creditAccount = customer.getCredit("John");
         while(!creditAccount.isOverdraft()){
             customer.requestOverDraft(creditAccount);
         }
@@ -19,8 +19,8 @@ public class OverdraftTest {
     @Test
     void shouldWithdrawMoreWithOverdraftFalse() {
         Customer customer = new Customer();
-        customer.createCredit();
-        CustomerAccount creditAccount = customer.getCredit();
+        customer.createCredit("John");
+        CustomerAccount creditAccount = customer.getCredit("John");
         while(creditAccount.isOverdraft()){
             customer.requestOverDraft(creditAccount);
         }

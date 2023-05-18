@@ -3,6 +3,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 enum ACCOUNTTYPE {
     CREDIT,
@@ -31,7 +32,9 @@ public class CustomerAccount extends BankAccount {
 
     @Override
     public boolean withdraw(double withdraw) {
-        if (!checkBalance(withdraw)) return false;
+        if (!this.isOverdraft()) {
+            if (!checkBalance(withdraw)) return false;
+        }
         BankStatement bankStatement = new BankStatement();
         double previousBalance = this.getBalance();
         bankStatement.withdraw(withdraw, previousBalance);
@@ -39,6 +42,8 @@ public class CustomerAccount extends BankAccount {
         this.balanceType = BALANCETYPE.NOCODE;
         return true;
     }
+
+
 
     @Override
     public boolean deposit(double deposit) {
@@ -59,6 +64,13 @@ public class CustomerAccount extends BankAccount {
         }
         return sb.toString().trim();
     }
+    @Override
+    public void changeOverdraft() {
+        Random rd = new Random(); // creating Random object
+        this.overdraft=rd.nextBoolean();
+    }
+
+
 
     private boolean checkBalance(double withdraw) {
         if (statements.size() > 0) {

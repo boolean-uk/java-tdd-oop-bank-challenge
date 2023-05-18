@@ -20,6 +20,7 @@ public class Customer {
     public CustomerAccount getCredit() {
         return accounts[0];
     }
+
     public CustomerAccount getSavings() {
         return accounts[1];
     }
@@ -40,9 +41,9 @@ public class Customer {
 
     //todo
     public String printStatements(CustomerAccount account) {
-        String statement ="date || credit  || debit  || balance\n";
+        String statement = "date || credit  || debit  || balance\n";
         if (!accountExists(account)) return statement;
-        return statement+ account.printStatements(account);
+        return statement + account.printStatements(account);
     }
 
     public boolean deposit(CustomerAccount account, double amount) {
@@ -51,6 +52,18 @@ public class Customer {
 
     public boolean withdraw(CustomerAccount account, double amount) {
         return accountExists(account) && account.withdraw(amount);
+    }
+
+
+    public boolean requestOverDraft(CustomerAccount account) {
+        account.changeOverdraft();
+        return account.isOverdraft();
+    }
+
+    public static void main(String[] args) {
+        Customer customer = new Customer();
+        customer.createCredit();
+        System.out.println(customer.requestOverDraft(customer.getCredit()));
     }
 
     private boolean accountExists(CustomerAccount account) {
@@ -67,4 +80,6 @@ public class Customer {
         code = CUSTOMERCODE.NOCODE;
         return false;
     }
+
+
 }

@@ -1,14 +1,14 @@
 ## User Stories
 
-1. Customer create a current account
-2. Customer create a savings account
-3. Customer create bank statements(dates,amount,balance.(at transaction))
-4. Customer can deposit and withdraw from account
+1. Customer create a current account✔️
+2. Customer create a savings account✔️
+3. Customer create bank statements(dates,amount,balance.(at transaction))✔️
+4. Customer can deposit and withdraw from account✔️
 
 ## Extensions
 
-5. Engineer want to transaction history generate account balance
-6. Bank Manager accounts associated with branches
+5. Engineer want to transaction history generate account balance✔️
+6. Bank Manager accounts associated with branches✔️
 7. Customer request an overdraft on my account
 8. Bank Manager approve/reject overdraft requests
 9. Customer get statements sent to the customer phone?
@@ -26,6 +26,7 @@
 |                                     |                                       |                                            |                                              |         |
 | BankAccount                         |                                       |                                            |                                              |         |
 |                                     | `ArrayList<BankStatement> statements` |                                            |                                              |         |
+|                                     | boolean overdraft                     |                                            |                                              |         |
 |                                     |                                       | printStatements(BankAccount account)       |                                              |         |
 |                                     |                                       | deposit(double deposit)                    |                                              |         |
 |                                     |                                       | withdraw(double withdraw)                  |                                              |         |

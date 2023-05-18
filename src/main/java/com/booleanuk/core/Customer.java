@@ -20,29 +20,25 @@ public class Customer {
         this.accounts = new ArrayList<>();
         code = CUSTOMERCODE.NOCODE;
     }
-
-    public CustomerAccount getCredit(String accountName) {
-        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> x.getAccountName() == accountName).findFirst().orElse(null);
+    public CustomerAccount getCredit(String accountName,String branch) {
+        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(),branch) ).findFirst().orElse(null);
     }
+    public CustomerAccount getSavings(String accountName,String branch) {
+        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(),branch) ).findFirst().orElse(null);
 
-    public CustomerAccount getSavings(String accountName) {
-        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> x.getAccountName() == accountName).findFirst().orElse(null);
     }
-
-    public boolean createCredit(String accountName) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName);
+    public boolean createCredit(String accountName,String branch) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName,branch);
         if (accountExists(customerAccount)) return false;
         accounts.add(customerAccount);
         return true;
     }
-
-    public boolean createSavings(String accountName) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName);
+    public boolean createSavings(String accountName,String branch) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName,branch);
         if (accountExists(customerAccount)) return false;
         accounts.add(customerAccount);
         return true;
     }
-
     public String printStatements(CustomerAccount account) {
         String statement = "date || credit  || debit  || balance\n";
         if (!accountExists(account)) return statement;

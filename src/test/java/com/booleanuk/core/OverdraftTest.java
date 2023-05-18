@@ -9,8 +9,8 @@ public class OverdraftTest {
     @Test
     void shouldWithdrawMoreWithOverdraftTrue() {
         Customer customer = new Customer();
-        customer.createCredit("John");
-        CustomerAccount creditAccount = customer.getCredit("John");
+        customer.createCredit("AccountName","BankBranch");
+        CustomerAccount creditAccount = customer.getCredit("AccountName","BankBranch");
         while(!creditAccount.isOverdraft()){
             customer.requestOverDraft(creditAccount);
         }
@@ -19,8 +19,8 @@ public class OverdraftTest {
     @Test
     void shouldWithdrawMoreWithOverdraftFalse() {
         Customer customer = new Customer();
-        customer.createCredit("John");
-        CustomerAccount creditAccount = customer.getCredit("John");
+        customer.createCredit("AccountName","BankBranch");
+        CustomerAccount creditAccount = customer.getCredit("AccountName","BankBranch");
         while(creditAccount.isOverdraft()){
             customer.requestOverDraft(creditAccount);
         }

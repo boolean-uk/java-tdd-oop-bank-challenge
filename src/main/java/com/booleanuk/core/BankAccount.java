@@ -6,6 +6,12 @@ public abstract class BankAccount {
     protected ArrayList<BankStatement> statements;
     protected boolean overdraft=false;
 
+    protected String branch;
+
+    public String getBranch() {
+        return branch;
+    }
+
     public boolean isOverdraft() {
         return overdraft;
     }

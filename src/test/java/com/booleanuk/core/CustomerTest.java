@@ -11,40 +11,43 @@ public class CustomerTest {
     @Test
     void shouldCreateCreditTrue() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("John"));
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createCredit("AccountNameOther","BankBranch"));
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranchOther"));
+
     }
 
     @Test
     void shouldCreateCreditFalse() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("John"));
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
 
-        Assertions.assertFalse(customer.createCredit("John"));
+        Assertions.assertFalse(customer.createCredit("AccountName","BankBranch"));
     }
 
     @Test
     void shouldCreateCreditAndSavings() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("John"));
-        Assertions.assertTrue(customer.createSavings("John"));
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createSavings("AccountName","BankBranch"));
     }
 
     @Test
     void shouldDepositWithdrawFromCredit() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("John"));
-        Assertions.assertTrue(customer.createSavings("Panos"));
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createSavings("AccountName","BankBranch"));
 
-        Assertions.assertTrue(customer.deposit(customer.getCredit("John"), 100));
-        Assertions.assertEquals(100, customer.getCredit("John").getBalance());
-        Assertions.assertEquals(0, customer.getSavings("Panos").getBalance());
+        Assertions.assertTrue(customer.deposit(customer.getCredit("AccountName","BankBranch"), 100));
+        Assertions.assertEquals(100, customer.getCredit("AccountName","BankBranch").getBalance());
+        Assertions.assertEquals(0, customer.getSavings("AccountName","BankBranch").getBalance());
     }
 
     @Test
     void shouldPrintStatements() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("John"));
-        CustomerAccount credit = customer.getCredit("John");
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        CustomerAccount credit = customer.getCredit("AccountName","BankBranch");
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));

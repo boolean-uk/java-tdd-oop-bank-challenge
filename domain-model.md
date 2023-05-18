@@ -9,8 +9,8 @@
 
 5. Engineer want to transaction history generate account balance✔️
 6. Bank Manager accounts associated with branches✔️
-7. Customer request an overdraft on my account
-8. Bank Manager approve/reject overdraft requests
+7. Customer request an overdraft on my account✔️
+8. Bank Manager approve/reject overdraft requests✔️
 9. Customer get statements sent to the customer phone?
 
 | Class                               | Member                                | Method                                     | Scenario                                     | Output  |

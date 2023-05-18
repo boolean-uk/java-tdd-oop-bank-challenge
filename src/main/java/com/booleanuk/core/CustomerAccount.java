@@ -23,14 +23,13 @@ public class CustomerAccount extends BankAccount {
     public ACCOUNTTYPE getType() {
         return type;
     }
-
-    public CustomerAccount(ACCOUNTTYPE type, String accountName) {
+    public CustomerAccount(ACCOUNTTYPE type, String accountName, String branch) {
         this.type = type;
         this.statements = new ArrayList<>();
         this.balanceType = BALANCETYPE.NOCODE;
         this.accountName = accountName;
+        this.branch = branch;
     }
-
     public String getAccountName() {
         return accountName;
     }
@@ -98,11 +97,11 @@ public class CustomerAccount extends BankAccount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerAccount that = (CustomerAccount) o;
-        return type == that.type && Objects.equals(accountName, that.accountName);
+        return type == that.type && Objects.equals(branch, that.branch) && Objects.equals(accountName, that.accountName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, accountName);
+        return Objects.hash(type, accountName, branch);
     }
 }

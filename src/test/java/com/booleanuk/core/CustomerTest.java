@@ -3,8 +3,12 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class CustomerTest {
 
@@ -51,7 +55,6 @@ public class CustomerTest {
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));
-
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));
         String dateString = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
@@ -63,5 +66,36 @@ public class CustomerTest {
                 dateString + "||100.0||0.0||200.0\n" +
                 dateString + "||100.0||0.0||100.0";
         Assertions.assertEquals(answer, customer.printStatements(credit));
+        customer.printStatementsToFile(credit);
+    }
+    @Test
+    void ShouldAppendStateMentToFIle(){
+        Customer customer = new Customer();
+        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        CustomerAccount credit = customer.getCredit("AccountName","BankBranch");
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.withdraw(credit, 50));
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.withdraw(credit, 10));
+        customer.printStatementsToFile(credit);
+        try {
+            File file = new File("PhoneNumberSMS.txt");
+            Scanner reader = new Scanner(file);
+            String[] expectedData =customer.printStatements(credit).split("\\R");
+            ArrayList<String> actualData = new ArrayList<>();
+            while (reader.hasNextLine()) {
+                String data = reader.nextLine();
+                actualData.add(data);
+            }
+            for (int i = 0; i < actualData.size(); i++) {
+                Assertions.assertEquals(expectedData[i],actualData.get(i));
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(customer.printStatements(credit).split("\\R")[0]);
     }
 }

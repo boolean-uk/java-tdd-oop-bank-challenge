@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,21 +22,21 @@ public class Customer {
         this.accounts = new ArrayList<>();
         code = CUSTOMERCODE.NOCODE;
     }
-    public CustomerAccount getCredit(String accountName,String branch) {
-        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(),branch) ).findFirst().orElse(null);
+    public CustomerAccount getCredit(String accountName, String branch) {
+        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
     }
-    public CustomerAccount getSavings(String accountName,String branch) {
-        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(),branch) ).findFirst().orElse(null);
+    public CustomerAccount getSavings(String accountName, String branch) {
+        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
 
     }
-    public boolean createCredit(String accountName,String branch) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName,branch);
+    public boolean createCredit(String accountName, String branch) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName, branch);
         if (accountExists(customerAccount)) return false;
         accounts.add(customerAccount);
         return true;
     }
-    public boolean createSavings(String accountName,String branch) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName,branch);
+    public boolean createSavings(String accountName, String branch) {
+        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName, branch);
         if (accountExists(customerAccount)) return false;
         accounts.add(customerAccount);
         return true;
@@ -80,6 +82,17 @@ public class Customer {
             }
         }
         return theAccounts;
+    }
+    public void printStatementsToFile(CustomerAccount account) {
+        String statements = printStatements(account);
+        System.out.println(statements);
+        try {
+            FileWriter myWriter = new FileWriter("PhoneNumberSMS.txt");
+            myWriter.append(statements);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

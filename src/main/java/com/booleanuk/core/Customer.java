@@ -88,10 +88,10 @@ public class Customer {
         }
     }
 
-    public void sentMessage(CustomerAccount account) {
+    public boolean sentMessage(CustomerAccount account) {
         String statements = printStatements(account);
         TwilioHelper twilioHelper = new TwilioHelper();
-        twilioHelper.sentMessage(statements);
+        return twilioHelper.sentMessage(statements);
     }
 
 

@@ -14,13 +14,17 @@ public class TwilioHelper {
         AUTH_TOKEN = dotenv.get("TWILIO_AUTH_TOKEN");
     }
 
-    public void sentMessage(String statements) {
+    public boolean sentMessage(String statements) {
+        if (this.ACCOUNT_SID==null||this.AUTH_TOKEN==null){
+            return false;
+        }
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                         new com.twilio.type.PhoneNumber("+306947136253"),//To
                         new com.twilio.type.PhoneNumber("+12544254965"),//From
                         statements) //Body
                 .create();
+        return true;
     }
 }
 

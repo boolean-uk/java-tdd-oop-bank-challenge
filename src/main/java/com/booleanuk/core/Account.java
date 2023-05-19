@@ -27,17 +27,15 @@ public class Account {
     }
 
     public void statement() {
-        StringBuilder result = new StringBuilder("""
-
-                Statement:
-                date        || deposit     || withdraw     || balance""");
+        String result = "\nStatement:";
+        result += "\ndate        || deposit     || withdraw     || balance";
 
         double balance = balance();
         for(int i = transactions.size()-1; i > -1; i--) {
-            result.append(transactions.get(i)).append(balance);
+            result += transactions.get(i) + "" + balance;
             balance -= transactions.get(i).signedAmount();
         }
-        result.append("\n");
+        result += "\n";
         System.out.println(result);
     }
 

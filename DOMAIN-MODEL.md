@@ -82,7 +82,7 @@
 | `CurrentAccount extends Account` |                                                  |                                                                                                    |                                                                       |                                                                                                        |
 |                                  | `overdraftRequests: List<OverdraftRequest>`      |                                                                                                    |                                                                       |                                                                                                        |
 |                                  |                                                  | `requestOverdraft(amount: BigDecimal): void`                                                       | Request an overdraft from this account.                               | Creates a new OverdraftRequest which is in PENDING state and awaits approval.                          |
-|                                  |                                                  | `overdraft(overdraftRequest): void`                                                                | Withdraw the amount requested.                                        | Creates a new Transaction of WITHDRAWAL type and adds it to the transactions list.                     |
+|                                  |                                                  | `overdraft(overdraftRequest: OverdraftRequest): void`                                              | Withdraw the amount requested.                                        | Creates a new Transaction of WITHDRAWAL type and adds it to the transactions list.                     |
 |                                  |                                                  |                                                                                                    | Overdraft hasn't been approved. Overdraft hasn't been processed.      | Show corresponding message.                                                                            |
 | `SavingsAccount extends Account` |                                                  |                                                                                                    |                                                                       |                                                                                                        |
 | `OverdraftRequest`               |                                                  |                                                                                                    |                                                                       |                                                                                                        |
@@ -121,8 +121,8 @@ OverdraftState: PENDING, APPROVED, DENIED
 |                    | `BankManager`      |                   |
 |                    | `Branch`           |                   |
 | `core.customer`    |                    |                   |
-|                    | `Customer`         |                   |
 |                    | `IDCard`           |                   |
+|                    | `Customer`         |                   |
 | `core.account`     |                    |                   |
 |                    | `Account`          |                   |
 |                    |                    | `AccountType`     |
@@ -154,6 +154,7 @@ A Bank must have one BankManager, and can have only one.
 <!-- 
 TODO:
  - Create UML Diagram
+ - Update domain with static methods. update details: represented by _method
  - Controller.-checkDateFormat(date: String)
  - BankManager/Customer could extend User
  - Locale Greece = el_GR ?
@@ -166,4 +167,4 @@ TODO:
 
 ## Class Diagram
 
-[//]: # (![A class diagram.]&#40;/assets/class_diagram&#41;)
+![A class diagram.](/assets/uml_diagram.png)

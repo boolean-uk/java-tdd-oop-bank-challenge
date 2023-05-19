@@ -8,7 +8,7 @@ public class Account {
     public Account(int intPart, int decimalPart){
         setBalance(new Balance(intPart,decimalPart));
     }
-    //setBalance is private because i don't want any other class to use it.
+    //setBalance is private because I don't want any other class to use it.
     private void setBalance(Balance balance) {
         if(balance.getIntPart()>5){
             this.balance = balance;
@@ -20,5 +20,16 @@ public class Account {
     }
     public Balance getBalance(){
         return this.balance;
+    }
+    public boolean withdraw(Balance toWithdraw){
+        if(this.getBalance().getIntPart()>toWithdraw.getIntPart() && this.getBalance().getDecimalPart()>toWithdraw.getDecimalPart()){
+            System.out.println("Withdrew "+toWithdraw.toString()+" ");
+            this.balance.interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
+            return true;
+        }
+        return false;
+    }
+    public boolean deposit(Balance toDeposit){
+
     }
 }

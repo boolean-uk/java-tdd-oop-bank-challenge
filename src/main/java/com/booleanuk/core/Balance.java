@@ -16,5 +16,10 @@ public class Balance {
     public String toString(){
         return this.getIntPart()+","+this.getDecimalPart();
     }
+    //the interact method will either add or remove(if the balance is positive or negative) balances
+    public void interact(Balance balance){
+        this.intPart += balance.getIntPart();
+        this.decimalPart += balance.getDecimalPart();
+    }
 
 }

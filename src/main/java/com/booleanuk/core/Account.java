@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
+    private static int ACCOUNT_ID = 0;
 
+    private int id;
     private int monthlyTransactionLimit;
     private boolean canOverdraft;
     private float interest;
@@ -14,6 +16,7 @@ public abstract class Account {
     private List<Transaction> transactions;
 
     protected Account(BigDecimal initialBalance){
+        this.id = ACCOUNT_ID++;
         this.balance = initialBalance.compareTo(BigDecimal.ZERO) > 0 ? initialBalance : BigDecimal.ZERO;
         this.transactions = new ArrayList<>();
     }
@@ -25,6 +28,9 @@ public abstract class Account {
         this.interest = interest;
     }
 
+    public int getId(){
+        return id;
+    }
     public int getMonthlyTransactionLimit() {
         return monthlyTransactionLimit;
     }
@@ -60,4 +66,5 @@ public abstract class Account {
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
+
 }

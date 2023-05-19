@@ -22,6 +22,13 @@ public class AccountTest {
         Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccounts().get(0));
         Assertions.assertFalse(bank.getAccounts().isEmpty());
     }
+
+    @Test
+    public void shouldIncrementAccountIdOnCreateAccount(){
+        bank.createAccount(Bank.AccountType.CURRENT, 2500);
+        bank.createAccount(Bank.AccountType.CURRENT, 5000);
+        Assertions.assertEquals(1, bank.getAccounts().get(1).getId());
+    }
     @Test
     public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
         bank.createAccount(Bank.AccountType.CURRENT, -34);

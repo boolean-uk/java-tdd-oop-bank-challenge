@@ -2,11 +2,16 @@ package com.booleanuk.core;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Bank {
 
+
+
     public static void main(String[] args){
+        Account account = new CurrentAccount(100.0);
 
     }
     public enum AccountType {
@@ -14,28 +19,21 @@ public class Bank {
         SAVINGS
     }
 
-    private List<Account> accounts;
+    private Map<Integer, Account> accounts;
 
     public Bank(){
-        this.accounts = new ArrayList<>();
+        this.accounts = new HashMap<>();
     }
 
-    public List<Account> getAccounts() {
+    public Map<Integer, Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public boolean createAccount(AccountType accountType, double initialBalance) {
+        Account newAccount = AccountType.CURRENT.equals(accountType) ? new CurrentAccount(initialBalance) : new SavingsAccount(initialBalance);
+        accounts.put(newAccount.getId(), newAccount);
+
+        return true;
     }
 
-    public boolean createAccount(AccountType accountType, double balance) {
-        try{
-            Account newAccount = AccountType.CURRENT.equals(accountType) ? new CurrentAccount(balance) : new SavingsAccount(balance);
-            accounts.add(newAccount);
-            return true;
-        } catch(Exception e) {
-            return false;
-        }
-
-    }
 }

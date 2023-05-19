@@ -21,4 +21,16 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(2500,account.getBalance());
     }
+
+    @Test
+    public void testGenerateStatementBasedOnTransactions() {
+
+        com.booleanuk.core.SavingAccount account = new com.booleanuk.core.SavingAccount(0);
+        account.deposit(1000.00, LocalDate.of(2012, 1, 10));
+        account.deposit(2000.00, LocalDate.of(2012, 1, 13));
+        account.withdraw(500.00, LocalDate.of(2012, 1, 14));
+
+        account.generateStatement();
+        Assertions.assertEquals(2500, account.getBalance());
+    }
 }

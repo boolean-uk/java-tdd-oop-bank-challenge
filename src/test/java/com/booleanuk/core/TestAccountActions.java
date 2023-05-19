@@ -33,7 +33,19 @@ public class TestAccountActions {
         Assertions.assertNull(accountAction.searchAccount("ABCD"));
     }
 
+    @Test
+    public void testDeposit() {
+        AccountActions accountAction = new AccountActions();
+        accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
 
+        //Test for successful deposit
+        Assertions.assertTrue(accountAction.deposit("NDBK-0000-0001", 200.50));
+        Assertions.assertEquals(200.50, accountAction.accounts.get(0).balanceInDollars());
+
+        //Test for failed deposit
+        Assertions.assertFalse(accountAction.deposit("ABCD", 200.50));
+
+    }
 
 
 

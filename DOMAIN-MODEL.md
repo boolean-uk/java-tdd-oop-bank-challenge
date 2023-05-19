@@ -26,12 +26,18 @@ I want to deposit and withdraw funds.
 ```
 ## User story 1
 
-| Class name | Attributes      | Methods       | Scenarios                           | Outcome                                                                                                          |      
-|------------|-----------------|---------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| Balance    | int intPart     |               |                                     |                                                                                                                  |
-|            | int decimalPart |               |                                     |                                                                                                                  |
-| Account    | Balance balance |               |                                     |                                                                                                                  |
-| User       | Account account | createAccount | The user wants to create an account | The account attribute is initialized with the users initial deposit. The initial deposit should be more than $5. |
+| Class name | Attributes                       | Methods      | Scenarios                           | Outcome                                                                                                          |      
+|------------|----------------------------------|--------------|-------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Balance    | int intPart                      |              |                                     |                                                                                                                  |
+|            | int decimalPart                  |              |                                     |                                                                                                                  |
+|            |                                  |              |                                     |                                                                                                                  |
+| Account    | Balance balance                  |              |                                     |                                                                                                                  |
+|            |                                  |              |                                     |                                                                                                                  |
+| Customer   | Account account                  | setUpAccount | The user wants to create an account | The account attribute is initialized with the users initial deposit. The initial deposit should be more than $5. |
+|            | String fullName                  |              |                                     |                                                                                                                  |
+|            | String address                   |              |                                     |                                                                                                                  |
+|            | String dateOfBirth               |              |                                     |                                                                                                                  |
+|            | int taxpayerIdentificationNumber |              |                                     |                                                                                                                  |
 
 ### On all classes the getters/setters are implied, except for:
 #### The setters for the intPart and decimalPart of the Balance class, and the setters for balance in the Account class

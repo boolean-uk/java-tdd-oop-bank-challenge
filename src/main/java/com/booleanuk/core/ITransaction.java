@@ -5,6 +5,5 @@ import java.time.LocalDate;
 public interface ITransaction {
     LocalDate date();
     double amount();
-//    double balance();
     double signedAmount();
 }

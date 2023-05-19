@@ -51,7 +51,13 @@ public class Account {
         return balanceInCents;
     }
 
-    public void setBalanceInCents(int balanceInCents) {
-        this.balanceInCents = balanceInCents;
+    public void setBalanceInCents(double AmountInDollars) {
+        this.balanceInCents = (int) AmountInDollars * 100;
     }
+
+    public double balanceInDollars() {
+        return (getBalanceInCents() / 100.0);
+    }
+
+
 }

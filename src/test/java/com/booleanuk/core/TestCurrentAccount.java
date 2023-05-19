@@ -11,6 +11,8 @@ public class TestCurrentAccount {
         Assertions.assertEquals("Aidan", currentAcc.accountHolderFirstName);
         Assertions.assertEquals("van Geest", currentAcc.accountHolderLastName);
         Assertions.assertEquals("ROT001", currentAcc.branchCode);
-
     }
+
+
+
 }

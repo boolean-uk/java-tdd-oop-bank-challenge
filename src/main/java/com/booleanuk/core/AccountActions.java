@@ -8,15 +8,40 @@ public class AccountActions {
     List<Account> accounts = new ArrayList<>();
 
     public boolean createAccount(String accountType, String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
-        for (Account account : accounts) {
-            if (account.getAccountNumber().equals(accountNumber)) {
-                System.out.println("Could not create account because this account number is already in use");
-                return false;
+
+        //Current Account
+        if (accountType.equalsIgnoreCase("Current")) {
+            for (Account account : accounts) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    System.out.println("Could not create account because this account number is already in use");
+                    return false;
+                }
             }
+            accounts.add(new CurrentAccount(accountNumber, accountHolderFirstName, accountHolderLastName, branchCode));
+            System.out.println("Congratulations on your new Current Account!");
+            return true;
+
+        //Savings Account
+        } else if (accountType.equalsIgnoreCase("Savings")) {
+            for (Account account : accounts) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    System.out.println("Could not create account because this account number is already in use");
+                    return false;
+                }
+            }
+            accounts.add(new SavingsAccount(accountNumber, accountHolderFirstName, accountHolderLastName, branchCode));
+            System.out.println("Congratulations on your new Savings Account!");
+            return true;
         }
 
-
-        return true;
+        //Invalid Account Type
+        System.out.println("This account type is invalid. Please enter Current or Savings.");
+        return false;
     }
+
+
+
+
+
 
 }

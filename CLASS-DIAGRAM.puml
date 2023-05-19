@@ -1,27 +1,67 @@
 @startuml
 'https://plantuml.com/class-diagram
+'
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+Account <|..SavingAccount
+Account <|..CurrentAccount
+Transaction -- TransactionType
+Bank o-- Account
+SavingAccount o-- Transaction
+CurrentAccount o-- Transaction
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+class SavingAccount{
+- int: balance
+- ArrayList<Transaction>: transactions
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
++ void deposit(double: amount)
++ void withdraw (double: amount)
++ void generateStatement()
 }
+class CurrentAccount{
+- int: balance
+- ArrayList<Transaction>: transactions
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
++ void deposit(double: amount)
++ void withdraw (double: amount)
++ void generateStatement()
 }
-
+class Bank {
+- ArrayList<Account>: accounts
+}
+interface Account{
++ void deposit(double: amount)
++ void withdraw (double: amount)
++ void generateStatement()
+}
+class Transaction{
+- LocalDate: date
+- TransactionType: type
+- int: amount
+- int: balance
+}
+enum TransactionType{
+DEBIT
+CREDIT
+}
 @enduml

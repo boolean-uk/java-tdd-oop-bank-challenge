@@ -14,7 +14,7 @@ public class Balance {
     }
     @Override
     public String toString(){
-        return this.getIntPart()+"."+this.getDecimalPart();
+        return this.getIntPart()+","+this.getDecimalPart();
     }
 
 }

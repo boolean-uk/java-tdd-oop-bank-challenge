@@ -41,3 +41,6 @@ I want to deposit and withdraw funds.
 
 ### On all classes the getters/setters are implied, except for:
 #### The setters for the intPart and decimalPart of the Balance class, and the setters for balance in the Account class
+For this user story, the UML diagram is:
+![d1.png](d1.png)
+

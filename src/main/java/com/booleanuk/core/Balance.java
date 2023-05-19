@@ -7,7 +7,7 @@ public class Balance {
         this.decimalPart = decimalPart;
     }
     public int getIntPart(){
-        return 22;
+        return this.intPart;
     }
 
 }

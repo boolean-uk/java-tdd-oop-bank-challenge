@@ -11,14 +11,14 @@ enum ACCOUNTTYPE {
 }
 
 enum BALANCETYPE {
-    NOCODE,
-    NOBALANCE
+    NOERROR,
+    NOBALANCE,
+    ZEROBALANCE
 }
 
 public class CustomerAccount extends BankAccount {
     final private ACCOUNTTYPE type;
     private BALANCETYPE balanceType;
-    private String accountName;
 
     public ACCOUNTTYPE getType() {
         return type;
@@ -26,12 +26,9 @@ public class CustomerAccount extends BankAccount {
     public CustomerAccount(ACCOUNTTYPE type, String accountName, String branch) {
         this.type = type;
         this.statements = new ArrayList<>();
-        this.balanceType = BALANCETYPE.NOCODE;
+        this.balanceType = BALANCETYPE.NOERROR;
         this.accountName = accountName;
         this.branch = branch;
-    }
-    public String getAccountName() {
-        return accountName;
     }
 
     @Override
@@ -43,7 +40,7 @@ public class CustomerAccount extends BankAccount {
         double previousBalance = this.getBalance();
         bankStatement.withdraw(withdraw, previousBalance);
         statements.add(bankStatement);
-        this.balanceType = BALANCETYPE.NOCODE;
+        this.balanceType = BALANCETYPE.NOERROR;
         return true;
     }
 
@@ -54,7 +51,7 @@ public class CustomerAccount extends BankAccount {
         double previousBalance = this.getBalance();
         bankStatement.deposit(deposit, previousBalance);
         statements.add(bankStatement);
-        this.balanceType = BALANCETYPE.NOCODE;
+        this.balanceType = BALANCETYPE.NOERROR;
         return true;
     }
 
@@ -63,7 +60,6 @@ public class CustomerAccount extends BankAccount {
         StringBuilder sb = new StringBuilder();
         for (int i = account.statements.size() - 1; i >= 0; i--) {
             sb.append(account.statements.get(i) + "\n");
-//            System.out.println(account.statements.get(i).toString());
         }
         return sb.toString().trim();
     }
@@ -73,11 +69,10 @@ public class CustomerAccount extends BankAccount {
         this.overdraft = new Random().nextBoolean();
     }
 
-
     private boolean checkBalance(double withdraw) {
         if (statements.size() > 0) {
             if (this.getBalance() > withdraw) {
-                this.balanceType = BALANCETYPE.NOCODE;
+                this.balanceType = BALANCETYPE.NOERROR;
                 return true;
             }
         }
@@ -87,8 +82,10 @@ public class CustomerAccount extends BankAccount {
 
     public double getBalance() {
         if (statements.size() == 0) {
+            this.balanceType=BALANCETYPE.NOBALANCE;
             return 0;
         }
+        this.balanceType=BALANCETYPE.NOERROR;
         return this.statements.get(statements.size() - 1).getBalance();
     }
 

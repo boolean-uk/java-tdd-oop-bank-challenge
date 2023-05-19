@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 enum CUSTOMERCODE {
-    NOCODE,
+    NOERROR,
     EXISTS,
     ACCOUNTDOESNTEXISTS
 
@@ -20,7 +20,7 @@ public class Customer {
 
     public Customer() {
         this.accounts = new ArrayList<>();
-        code = CUSTOMERCODE.NOCODE;
+        code = CUSTOMERCODE.NOERROR;
     }
     public CustomerAccount getCredit(String accountName, String branch) {
         return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);

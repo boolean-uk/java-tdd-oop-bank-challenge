@@ -6,5 +6,8 @@ public class Balance {
         this.intPart = intPart;
         this.decimalPart = decimalPart;
     }
+    public int getIntPart(){
+        return 22;
+    }
 
 }

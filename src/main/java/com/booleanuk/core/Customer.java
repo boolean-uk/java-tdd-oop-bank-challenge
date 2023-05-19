@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class Customer {
-    private Account account;
+    private ArrayList<Account> accounts;
     private String name;
     private String address;
     private final String dateOfBirth;
@@ -14,25 +16,37 @@ public class Customer {
         this.address = address;
         dateOfBirth = dateBirt;
         this.taxpayerIdentificationNumber = taxpayerIdentificationNumber;
+        this.accounts = new ArrayList<>();
     }
     //as a customer, you can use setUpAccount to create a new account under your name using the methods below.
-    public void setUpAccount(Balance balance){
+    public void setUpCurrentAccount(Balance balance){
         System.out.println("Setting up account....");
-        account = new Account(balance);
+        this.accounts.add(new CurrentAccount(balance));
     }
-    public void setUpAccount(int intPart, int decimalPart){
-        System.out.println("Setting up account....");
+    public void setUpCurrentAccount(int intPart, int decimalPart){
         try{
             Thread.sleep(1000);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        account = new Account(intPart,decimalPart);
+        setUpCurrentAccount(new Balance(intPart,decimalPart));
 
     }
+    public void setUpSavingsAccount(Balance balance){
+        System.out.println("Setting up account....");
+        this.accounts.add(new SavingsAccount(balance));
+    }
+    public void setUpSavingsAccount(int intPart, int decimalPart){
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        setUpSavingsAccount(new Balance(intPart, decimalPart));
 
-    public Account getAccount() {
-        return account;
+    }
+    public ArrayList<Account> getAccounts() {
+        return this.accounts;
     }
 
     public String getName() {
@@ -51,9 +65,7 @@ public class Customer {
         return taxpayerIdentificationNumber;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
+
 
     public void setName(String name) {
         this.name = name;

@@ -13,6 +13,9 @@ public class CreditStatement extends BasicStatement {
 
     @Override
     public Cell cellData(int column) {
-        return new Cell(List.of(""));
+        Cell cell = super.cellData(column);
+        cell.updateColumn(1, Double.toString(credit));
+
+        return cell;
     }
 }

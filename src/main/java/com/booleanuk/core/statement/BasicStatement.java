@@ -15,6 +15,13 @@ public class BasicStatement implements Statement {
     }
 
     public Cell cellData(int column) {
-        return new Cell(List.of(""));
+        ArrayList<String> data = new ArrayList<>(column) {{
+            add(date.toString());
+            add(Double.toString(balance));
+        }};
+
+        IntStream.range(1, column - 1).forEach(i -> data.add(i, ""));
+
+        return new Cell(data);
     }
 }

@@ -13,6 +13,9 @@ public class DepositStatement extends BasicStatement {
 
     @Override
     public Cell cellData(int column) {
-        return new Cell(List.of(""));
+        Cell cell = super.cellData(column);
+        cell.updateColumn(2, Double.toString(deposit));
+
+        return cell;
     }
 }

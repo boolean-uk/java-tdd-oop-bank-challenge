@@ -1,29 +1,38 @@
 package com.booleanuk.core.account;
 
-import com.booleanuk.core.statement.Statement;
+import com.booleanuk.core.statement.CreditStatement;
+import com.booleanuk.core.statement.DepositStatement;
+import com.booleanuk.core.statement.Statements;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 public class BasicBankAccount implements BankAccount {
     private double balance;
-    private final List<Statement> statements;
-    public BasicBankAccount(double balance) {
+    private final Statements statements;
+    public BasicBankAccount(double balance, Statements statements) {
         this.balance = balance;
-        this.statements = new ArrayList<>();
+        this.statements = statements;
     }
     @Override
     public double deposit(double amount) {
-        return 0;
+        if (amount <= 0) return balance;
+
+        statements.add(new DepositStatement(LocalDate.now(), balance, amount));
+        balance += amount;
+        return balance;
     }
 
     @Override
     public double withdraw(double amount) {
-        return 0;
+        if (amount <= 0) return balance;
+
+        statements.add(new CreditStatement(LocalDate.now(), balance, amount));
+        balance -= amount;
+        return balance;
     }
 
     @Override
-    public String statements() {
-        return "";
+    public String statement() {
+        return statements.details();
     }
 }

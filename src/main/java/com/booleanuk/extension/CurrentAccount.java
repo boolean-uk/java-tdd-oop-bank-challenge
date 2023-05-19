@@ -10,11 +10,13 @@ import java.util.List;
 public class CurrentAccount implements Account {
     private int balance;
     private ArrayList <Transaction> transactions;
+    private Branch branch;
 
-    public CurrentAccount(double balance) {
+    public CurrentAccount(double balance, Branch branch) {
 
         this.balance = Util.fromDoubleToInt(balance);
         this.transactions=new ArrayList<Transaction>();
+        this.branch = branch;
     }
 
     public ArrayList<Transaction> getTransactions() {
@@ -28,6 +30,14 @@ public class CurrentAccount implements Account {
 
     public void setBalance(double balance) {
         this.balance = Util.fromDoubleToInt(balance);
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     @Override

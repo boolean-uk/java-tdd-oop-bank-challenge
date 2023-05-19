@@ -10,9 +10,11 @@ import java.util.List;
 public class SavingAccount implements Account {
     private int balance;
     private ArrayList <Transaction> transactions;
-    public SavingAccount(double balance) {
+    private Branch branch;
+    public SavingAccount(double balance, Branch branch) {
         this.balance = Util.fromDoubleToInt(balance);
         this.transactions=new ArrayList<Transaction>();
+        this.branch= branch;
     }
 
     public ArrayList<Transaction> getTransactions() {
@@ -31,6 +33,14 @@ public class SavingAccount implements Account {
     public void deposit(double amount,LocalDate date) {
         this.setBalance(getBalance() + amount);
         this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()));
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     @Override

@@ -9,19 +9,17 @@ public abstract class Account {
     private int monthlyTransactionLimit;
     private boolean canOverdraft;
     private float interest;
-    protected BigDecimal balance;
+    private BigDecimal balance;
 
     private List<Transaction> transactions;
 
-    protected Account(BigDecimal balance) throws IllegalArgumentException{
-        if(balance.signum() <= 0) throw new IllegalArgumentException("Initial Balance cannot be less than 0.");
-
-        this.balance = balance;
+    protected Account(BigDecimal initialBalance){
+        this.balance = initialBalance.compareTo(BigDecimal.ZERO) > 0 ? initialBalance : BigDecimal.ZERO;
         this.transactions = new ArrayList<>();
     }
 
-    protected Account(int monthlyTransactionLimit, boolean canOverdraft, float interest, BigDecimal balance){
-        this(balance);
+    protected Account(int monthlyTransactionLimit, boolean canOverdraft, float interest, BigDecimal initialBalance){
+        this(initialBalance);
         this.monthlyTransactionLimit = monthlyTransactionLimit;
         this.canOverdraft = canOverdraft;
         this.interest = interest;
@@ -53,10 +51,6 @@ public abstract class Account {
 
     public BigDecimal getBalance() {
         return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
     }
 
     public List<Transaction> getTransactions() {

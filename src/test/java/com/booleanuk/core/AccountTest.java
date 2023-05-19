@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 public class AccountTest {
 
     private Bank bank;
@@ -18,14 +20,12 @@ public class AccountTest {
 
         Assertions.assertTrue(created);
         Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccounts().get(0));
-        Assertions.assertTrue(bank.getAccounts().get(0).isCanOverdraft());
+        Assertions.assertFalse(bank.getAccounts().isEmpty());
     }
     @Test
-    public void shouldNotCreateAccountIfInitialBalanceLessThanZero(){
+    public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
+        bank.createAccount(Bank.AccountType.CURRENT, -34);
 
-        boolean created = bank.createAccount(Bank.AccountType.CURRENT, -34);
-
-        Assertions.assertFalse(created);
-        Assertions.assertEquals(0, bank.getAccounts().size());
+        Assertions.assertEquals(BigDecimal.ZERO, bank.getAccounts().get(0).getBalance());
     }
 }

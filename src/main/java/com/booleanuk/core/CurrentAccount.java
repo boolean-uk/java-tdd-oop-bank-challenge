@@ -1,12 +1,13 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class CurrentCount implements Account {
+public class CurrentAccount implements Account {
     private int balance;
     private ArrayList <Transaction> transactions;
 
-    public CurrentCount(double balance) {
+    public CurrentAccount(double balance) {
 
         this.balance = Util.fromDoubleToInt(balance);
         this.transactions=new ArrayList<Transaction>();
@@ -26,12 +27,12 @@ public class CurrentCount implements Account {
     }
 
     @Override
-    public void deposit(double amount) {
+    public void deposit(double amount, LocalDate date) {
 
     }
 
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(double amount, LocalDate date) {
 
     }
 

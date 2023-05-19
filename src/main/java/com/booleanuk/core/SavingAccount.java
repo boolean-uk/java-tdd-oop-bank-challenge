@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SavingAccount implements Account {
@@ -23,12 +24,13 @@ public class SavingAccount implements Account {
     }
 
     @Override
-    public void deposit(double amount) {
-        this.setBalance(amount);
+    public void deposit(double amount,LocalDate date) {
+        this.setBalance(getBalance() + amount);
+        this.transactions.add(new Transaction(date,TransactionType.CREDIT,amount, this.getBalance()));
     }
 
     @Override
-    public void withdraw(double amount) {
+    public void withdraw(double amount,LocalDate date) {
 
     }
 

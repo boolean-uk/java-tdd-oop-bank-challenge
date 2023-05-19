@@ -24,8 +24,16 @@ public class CurrentAccount implements Account {
     }
 
     public double getBalance() {
+        int result = 0;
+        for (Transaction tr : this.transactions) {
+            if (tr.getType().equals(TransactionType.CREDIT)){
+                result+=Util.fromDoubleToInt(tr.getAmount());
+            } else if (tr.getType().equals(TransactionType.DEBIT)){
+                result-=Util.fromDoubleToInt(tr.getAmount());
+            }
+        }
 
-        return Util.fromIntToDouble(balance);
+        return Util.fromIntToDouble(result);
     }
 
     public void setBalance(double balance) {
@@ -42,13 +50,13 @@ public class CurrentAccount implements Account {
 
     @Override
     public void deposit(double amount, LocalDate date) {
-        this.setBalance(this.getBalance() + amount);
+        //this.setBalance(this.getBalance() + amount);
         this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()));
     }
 
     @Override
     public void withdraw(double amount, LocalDate date) {
-        this.setBalance(this.getBalance() - amount);
+        //this.setBalance(this.getBalance() - amount);
         this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()));
     }
 

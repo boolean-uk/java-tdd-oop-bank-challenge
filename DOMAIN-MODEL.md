@@ -110,6 +110,31 @@ AccountType: CURRENT, SAVINGS
 OverdraftState: PENDING, APPROVED, DENIED
 ``` 
 
+### Mapping - Classes in Package, Enums in Class
+
+| Package            | Class              | Enum              |
+|--------------------|--------------------|-------------------|
+| `core`             | `Main`             |                   |
+|                    | `Controller`       |                   |
+| `core.bank`        |                    |                   |
+|                    | `Bank`             |                   |
+|                    | `BankManager`      |                   |
+|                    | `Branch`           |                   |
+| `core.customer`    |                    |                   |
+|                    | `Customer`         |                   |
+|                    | `IDCard`           |                   |
+| `core.account`     |                    |                   |
+|                    | `Account`          |                   |
+|                    |                    | `AccountType`     |
+|                    | `CurrentAccount`   |                   |
+|                    | `SavingsAccount`   |                   |
+| `core.transaction` |                    |                   |
+|                    | `Transaction`      |                   |
+|                    |                    | `TransactionType` |
+|                    | `OverdraftRequest` |                   |
+|                    |                    | `OverdraftState`  |
+|                    | `Money`            |                   |
+
 ### Extra details
 
 ```
@@ -120,6 +145,7 @@ Prints in Outcome means: print to the console. TODO?
 Private methods have a "-" sign.
 assume a Greek Locale. TODO?
 toString, Comparable, equals, hashcode are not mentioned in the domain model. TODO?
+The getters for the Enumeration are not mentioned in the domain model. TODO?
 Unique Values: bankCode, branchCode, accountNumber, IBAN, IDCard.cardCode, TIN.
 Outcomes addition: all outcomes inform the user in some way. TODO?
 A Bank must have one BankManager, and can have only one.
@@ -131,7 +157,7 @@ TODO:
  - Controller.-checkDateFormat(date: String)
  - BankManager/Customer could extend User
  - Locale Greece = el_GR ?
- - UserInterface/MessageClass/Controller.print() - replace printBankStatement and change getBalance() to viewBalance.
+ - UserInterface/MessageClass/Controller.print() - replace/use printBankStatement and change getBalance().
  - Check for wrong inputs?
  - For Bank - Branch - Customer - Override and modify equals method to check so specific fields must be unique.
  - Search todo

@@ -12,7 +12,14 @@ public class AccountTest {
         bank = new Bank();
     }
 
+    @Test
+    public void shouldCreateCurrentAccount(){
+        boolean created = bank.createAccount(Bank.AccountType.CURRENT, 2500);
 
+        Assertions.assertTrue(created);
+        Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccounts().get(0));
+        Assertions.assertTrue(bank.getAccounts().get(0).isCanOverdraft());
+    }
     @Test
     public void shouldNotCreateAccountIfInitialBalanceLessThanZero(){
 

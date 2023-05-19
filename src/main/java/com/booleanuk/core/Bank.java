@@ -27,4 +27,15 @@ public class Bank {
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
+
+    public boolean createAccount(AccountType accountType, double balance) {
+        try{
+            Account newAccount = AccountType.CURRENT.equals(accountType) ? new CurrentAccount(balance) : new SavingsAccount(balance);
+            accounts.add(newAccount);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
+
+    }
 }

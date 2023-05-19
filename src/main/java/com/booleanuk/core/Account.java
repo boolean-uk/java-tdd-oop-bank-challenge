@@ -21,6 +21,7 @@ public abstract class Account {
     }
 
     protected Account(int monthlyTransactionLimit, boolean canOverdraft, float interest, BigDecimal balance){
+        this(balance);
         this.monthlyTransactionLimit = monthlyTransactionLimit;
         this.canOverdraft = canOverdraft;
         this.interest = interest;

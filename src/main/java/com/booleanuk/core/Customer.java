@@ -21,6 +21,7 @@ public class Customer {
         this.accounts = new ArrayList<>();
         code = CUSTOMERCODE.NOERROR;
     }
+
     public CustomerAccount getAccount(ACCOUNTTYPE type, String accountName, String branch) {
         return getAccounts(type).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
     }
@@ -31,6 +32,7 @@ public class Customer {
         accounts.add(customerAccount);
         return true;
     }
+
     public String printStatements(CustomerAccount account) {
         if (!accountExists(account)) return "Account doesn't exist!";
         String statement = "date || credit  || debit  || balance\n";
@@ -76,7 +78,7 @@ public class Customer {
 
     public void printStatementsToFile(CustomerAccount account) {
         String statements = printStatements(account);
-        System.out.println(statements);
+//        System.out.println(statements);
         try {
             FileWriter myWriter = new FileWriter("PhoneNumberSMS.txt");
             myWriter.append(statements);
@@ -84,6 +86,12 @@ public class Customer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sentMessage(CustomerAccount account) {
+        String statements = printStatements(account);
+        TwilioHelper twilioHelper = new TwilioHelper();
+        twilioHelper.sentMessage(statements);
     }
 
 

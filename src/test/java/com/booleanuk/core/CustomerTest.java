@@ -98,4 +98,17 @@ public class CustomerTest {
 
         System.out.println(customer.printStatements(credit).split("\\R")[0]);
     }
+
+    @Test
+    void ShouldSentMessage(){
+        Customer customer = new Customer();
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        CustomerAccount credit = customer.getAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch");
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.withdraw(credit, 50));
+        Assertions.assertTrue(customer.deposit(credit, 100));
+        Assertions.assertTrue(customer.withdraw(credit, 50));
+        customer.sentMessage(credit);
+    }
 }

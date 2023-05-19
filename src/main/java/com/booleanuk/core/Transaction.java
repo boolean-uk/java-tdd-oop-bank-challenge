@@ -8,11 +8,11 @@ public class Transaction {
     private int balance;
     private int amount;
 
-    public Transaction(LocalDate date, TransactionType type, int balance, int amount) {
+    public Transaction(LocalDate date, TransactionType type, double balance, double amount) {
         this.date = date;
         this.type = type;
-        this.balance = balance;
-        this.amount = amount;
+        this.balance = Util.fromDoubleToInt(balance);
+        this.amount = Util.fromDoubleToInt(amount);
     }
 
     public LocalDate getDate() {
@@ -31,19 +31,19 @@ public class Transaction {
         this.type = type;
     }
 
-    public int getBalance() {
-        return balance;
+    public double getBalance() {
+        return Util.fromIntToDouble(balance);
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public void setBalance(double balance) {
+        this.balance = Util.fromDoubleToInt(balance);
     }
 
-    public int getAmount() {
-        return amount;
+    public double getAmount() {
+        return Util.fromIntToDouble(amount);
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmount(double amount) {
+        this.amount = Util.fromDoubleToInt(amount);
     }
 }

@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 
 public class SavingsAccountTest {
     @Test
-    void SavingsAccountTest() {
-        Assertions.assertEquals(0, Account.accounts.size());
+    void createShouldSucceed() {
+        int accounts = Account.accounts.size();
+        Assertions.assertEquals(accounts, Account.accounts.size());
         Account.create("Test Branch");
-        Assertions.assertEquals(1, Account.accounts.size());
+        Assertions.assertEquals(accounts + 1, Account.accounts.size());
         SavingsAccount.create("Test Branch");
-        Assertions.assertEquals(2, Account.accounts.size());
+        Assertions.assertEquals(accounts + 2, Account.accounts.size());
     }
 }

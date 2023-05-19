@@ -39,7 +39,15 @@ public class AccountActions {
         return false;
     }
 
-
+    public Account searchAccount(String accountNumber) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account;
+            }
+        }
+        System.out.println("Account could not be found");
+        return null;
+    }
 
 
 

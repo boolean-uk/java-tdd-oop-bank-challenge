@@ -34,7 +34,7 @@ public class CurrentAccount implements Account {
 
     @Override
     public void withdraw(double amount, LocalDate date) {
-
+        this.setBalance(getBalance() - amount);
     }
 
     @Override

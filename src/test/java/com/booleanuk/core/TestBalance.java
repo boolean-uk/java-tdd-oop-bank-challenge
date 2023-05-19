@@ -11,6 +11,6 @@ public class TestBalance {
         Balance newBalance = new Balance(44,22);
         Assertions.assertEquals(44,newBalance.getIntPart());
         Assertions.assertEquals(22,newBalance.getDecimalPart());
-        Assertions.assertEquals("44.22",newBalance.toString());
+        Assertions.assertEquals("44,22",newBalance.toString());
     }
 }

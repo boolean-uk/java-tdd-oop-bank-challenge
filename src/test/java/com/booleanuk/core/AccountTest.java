@@ -41,7 +41,18 @@ public class AccountTest {
         Assertions.assertEquals(0.0, account.balance());
 
         account.transaction(new Deposit(LocalDate.now(), 100.0, account.balance()));
+        account.transaction(new Withdraw(LocalDate.now(), 40.0, account.balance()));
 
-        Assertions.assertEquals(100.0, account.balance());
+        Assertions.assertEquals(60.0, account.balance());
+    }
+
+    @Test
+    void statementBlackBox() {
+        Account account = Account.create("Test Branch");
+
+        account.transaction(new Deposit(LocalDate.now(), 100.0, account.balance()));
+        account.transaction(new Withdraw(LocalDate.now(), 40.0, account.balance()));
+
+        account.statement();
     }
 }

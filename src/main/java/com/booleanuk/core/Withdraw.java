@@ -7,6 +7,10 @@ public class Withdraw implements ITransaction {
     final double amount;
     final double balance;
 
+    public LocalDate date() {return date;}
+    public double amount() {return amount;}
+    public double balance() {return balance;}
+
     public Withdraw(LocalDate date, double amount, double balance) {
         this.date = date;
         this.amount = amount;
@@ -14,6 +18,9 @@ public class Withdraw implements ITransaction {
     }
 
     public String toString() {
-        return "";
+        return String.format(
+                "\n%s  ||             || %s         || %s",
+                date(), amount(), balance()
+        );
     }
 }

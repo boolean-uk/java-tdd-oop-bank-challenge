@@ -43,21 +43,21 @@ I want statements to be sent as messages to my phone.
 ```
 
 ## Model
-| Classes        | Members             | Methods                   | Scenario                          | Output         |
-|----------------|---------------------|---------------------------|-----------------------------------|----------------|
-| Account        | List\<Account>      | create()                  | adds new account to list          | Account        |
-|                | List\<ITransaction> | transaction()             | adds new transaction to list      | boolean        |
-|                |                     |                           | If withdraw <= balance            | true           |
-|                |                     |                           | Else                              | false          |
-|                |                     | statement()               | print list of transactions        |                |
-|                |                     | balance()                 | get balance from last transaction | double         |
-|                | String branch       |                           |                                   |                |
-|                | boolean overdraft   |                           |                                   |                |
-| SavingsAccount |                     | create()                  | adds new savings account to list  | SavingsAccount |
-| Manager        | List\<Account>      | overdraftRequest(Account) | adds request to list              |                |
-|                |                     | acceptRequest(boolean)    |                                   |                |
-| ITransaction   |                     | date()                    |                                   | LocalDate      |
-|                |                     | amount()                  |                                   | double         |
-|                |                     | balance()                 |                                   | double         |
-| Deposit        |                     | toString()                |                                   | String         |
-| Withdraw       |                     | toString()                |                                   | String         |
+| Classes        | Members             | Methods                   | Scenario                                 | Output         |
+|----------------|---------------------|---------------------------|------------------------------------------|----------------|
+| Account        | List\<Account>      | create()                  | adds new account to list                 | Account        |
+|                | List\<ITransaction> | transaction()             | adds new transaction to list             | boolean        |
+|                |                     |                           | If withdraw <= balance                   | true           |
+|                |                     |                           | Else                                     | false          |
+|                |                     | statement()               | print list of transactions               |                |
+|                |                     | balance()                 | get calculated balance from transactions | double         |
+|                | String branch       |                           |                                          |                |
+|                | boolean overdraft   |                           |                                          |                |
+| SavingsAccount |                     | create()                  | adds new savings account to list         | SavingsAccount |
+| Manager        | List\<Account>      | overdraftRequest(Account) | adds request to list                     |                |
+|                |                     | acceptRequest(boolean)    |                                          |                |
+| ITransaction   |                     | date()                    | get date of transaction                  | LocalDate      |
+|                |                     | amount()                  | get absolute amount                      | double         |
+|                |                     | signedAmount()            | get signed amount (+/-)                  | double         |
+| Deposit        |                     | toString()                |                                          | String         |
+| Withdraw       |                     | toString()                |                                          | String         |

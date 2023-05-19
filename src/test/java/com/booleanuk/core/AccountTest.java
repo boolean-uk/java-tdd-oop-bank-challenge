@@ -15,7 +15,7 @@ public class AccountTest {
     void transactionShouldSucceed() {
         Account account = Account.create("Test Branch");
         int transactionsBefore = account.transactions.size();
-        account.transaction(new Deposit(LocalDate.now(), 100.0, account.balance()));
+        account.transaction(new Deposit(LocalDate.now(), 100.0));
         int transactionsAfter = account.transactions.size();
 
         Assertions.assertEquals(transactionsAfter, transactionsBefore + 1);
@@ -28,7 +28,7 @@ public class AccountTest {
 
         int transactionsBefore = account.transactions.size();
 
-        Assertions.assertFalse(account.transaction(new Withdraw(LocalDate.now(), 100.0, account.balance())));
+        Assertions.assertFalse(account.transaction(new Withdraw(LocalDate.now(), 100.0)));
 
         int transactionsAfter = account.transactions.size();
 
@@ -40,18 +40,19 @@ public class AccountTest {
         Account account = Account.create("Test Branch");
         Assertions.assertEquals(0.0, account.balance());
 
-        account.transaction(new Deposit(LocalDate.now(), 100.0, account.balance()));
-        account.transaction(new Withdraw(LocalDate.now(), 40.0, account.balance()));
+        account.transaction(new Deposit(LocalDate.now(), 100.0));
+        account.transaction(new Withdraw(LocalDate.now(), 40.0));
 
         Assertions.assertEquals(60.0, account.balance());
     }
 
     @Test
-    void statementBlackBox() {
+    void statementBlackBoxTest() {
         Account account = Account.create("Test Branch");
 
-        account.transaction(new Deposit(LocalDate.now(), 100.0, account.balance()));
-        account.transaction(new Withdraw(LocalDate.now(), 40.0, account.balance()));
+        account.transaction(new Deposit(LocalDate.now(), 100.0));
+        account.transaction(new Withdraw(LocalDate.now(), 40.0));
+        account.transaction(new Deposit(LocalDate.now(), 200.0));
 
         account.statement();
     }

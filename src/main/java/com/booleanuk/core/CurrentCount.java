@@ -4,17 +4,25 @@ import java.util.ArrayList;
 
 public class CurrentCount implements Account {
     private int balance;
+    private ArrayList <Transaction> transactions;
 
-    public CurrentCount(int balance) {
-        this.balance = balance;
+    public CurrentCount(double balance) {
+
+        this.balance = Util.fromDoubleToInt(balance);
+        this.transactions=new ArrayList<Transaction>();
     }
 
-    public int getBalance() {
-        return balance;
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public double getBalance() {
+
+        return Util.fromIntToDouble(balance);
+    }
+
+    public void setBalance(double balance) {
+        this.balance = Util.fromDoubleToInt(balance);
     }
 
     @Override

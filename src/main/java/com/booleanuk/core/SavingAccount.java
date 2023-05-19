@@ -1,18 +1,25 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class SavingAccount implements Account {
     private int balance;
-
-    public SavingAccount(int balance) {
-        this.balance = balance;
+    private ArrayList <Transaction> transactions;
+    public SavingAccount(double balance) {
+        this.balance = Util.fromDoubleToInt(balance);
+        this.transactions=new ArrayList<Transaction>();
     }
 
-    public int getBalance() {
-        return balance;
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
+    public double getBalance() {
+        return Util.fromIntToDouble(balance);
+    }
+
+    public void setBalance(double balance) {
+        this.balance = Util.fromDoubleToInt(balance);
     }
 
     @Override

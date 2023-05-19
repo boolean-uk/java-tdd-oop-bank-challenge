@@ -10,4 +10,7 @@ public class Account {
         this.branchCode = branchCode;
         this.balanceInCents = balanceInCents;
     }
+
+
+
 }

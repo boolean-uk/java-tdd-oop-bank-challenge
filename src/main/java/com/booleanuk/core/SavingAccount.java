@@ -31,7 +31,8 @@ public class SavingAccount implements Account {
 
     @Override
     public void withdraw(double amount,LocalDate date) {
-
+        this.setBalance(getBalance() - amount);
+        this.transactions.add(new Transaction(date,TransactionType.DEBIT,amount, this.getBalance()));
     }
 
     @Override

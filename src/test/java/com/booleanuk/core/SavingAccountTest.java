@@ -29,8 +29,7 @@ public class SavingAccountTest {
         account.withdraw(100.00, LocalDate.of(2023,5,19));
 
         Assertions.assertEquals(200.00,account.getBalance());
-
         Assertions.assertEquals(4,account.getTransactions().size());
-        Assertions.assertEquals(TransactionType.CREDIT,account.getTransactions().get(3).getType());
+        Assertions.assertEquals(TransactionType.DEBIT,account.getTransactions().get(3).getType());
     }
 }

@@ -19,9 +19,23 @@ public class TestAccountActions {
 
         //Test for failed creation of account due to invalid account type
         Assertions.assertFalse(accountAction.createAccount("Investment","NDBK-0000-0003", "Aidan", "van Geest", "ROT001"));
-
-
     }
+
+    @Test
+    public void testSearchAccount() {
+        AccountActions accountAction = new AccountActions();
+        accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
+
+        //Test for existing account
+        Assertions.assertEquals(accountAction.accounts.get(0), accountAction.searchAccount("NDBK-0000-0001"));
+
+        //Test for account that does not exist
+        Assertions.assertNull(accountAction.searchAccount("ABCD"));
+    }
+
+
+
+
 
 
 

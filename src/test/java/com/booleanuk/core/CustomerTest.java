@@ -15,43 +15,43 @@ public class CustomerTest {
     @Test
     void shouldCreateCreditTrue() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
-        Assertions.assertTrue(customer.createCredit("AccountNameOther","BankBranch"));
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranchOther"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountNameOther","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranchOther"));
 
     }
 
     @Test
     void shouldCreateCreditFalse() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
 
-        Assertions.assertFalse(customer.createCredit("AccountName","BankBranch"));
+        Assertions.assertFalse(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
     }
 
     @Test
     void shouldCreateCreditAndSavings() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
-        Assertions.assertTrue(customer.createSavings("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.SAVINGS,"AccountName","BankBranch"));
     }
 
     @Test
     void shouldDepositWithdrawFromCredit() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
-        Assertions.assertTrue(customer.createSavings("AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.SAVINGS,"AccountName","BankBranch"));
 
-        Assertions.assertTrue(customer.deposit(customer.getCredit("AccountName","BankBranch"), 100));
-        Assertions.assertEquals(100, customer.getCredit("AccountName","BankBranch").getBalance());
-        Assertions.assertEquals(0, customer.getSavings("AccountName","BankBranch").getBalance());
+        Assertions.assertTrue(customer.deposit(customer.getAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"), 100));
+        Assertions.assertEquals(100, customer.getAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch").getBalance());
+        Assertions.assertEquals(0, customer.getAccount(ACCOUNTTYPE.SAVINGS,"AccountName","BankBranch").getBalance());
     }
 
     @Test
     void shouldPrintStatements() {
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
-        CustomerAccount credit = customer.getCredit("AccountName","BankBranch");
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        CustomerAccount credit = customer.getAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch");
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));
@@ -71,8 +71,8 @@ public class CustomerTest {
     @Test
     void ShouldAppendStateMentToFIle(){
         Customer customer = new Customer();
-        Assertions.assertTrue(customer.createCredit("AccountName","BankBranch"));
-        CustomerAccount credit = customer.getCredit("AccountName","BankBranch");
+        Assertions.assertTrue(customer.createAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch"));
+        CustomerAccount credit = customer.getAccount(ACCOUNTTYPE.CREDIT,"AccountName","BankBranch");
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));

@@ -14,7 +14,6 @@ enum CUSTOMERCODE {
 }
 
 public class Customer {
-
     final private List<CustomerAccount> accounts;
     private CUSTOMERCODE code;
 
@@ -22,28 +21,19 @@ public class Customer {
         this.accounts = new ArrayList<>();
         code = CUSTOMERCODE.NOERROR;
     }
-    public CustomerAccount getCredit(String accountName, String branch) {
-        return getAccounts(ACCOUNTTYPE.CREDIT).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
+    public CustomerAccount getAccount(ACCOUNTTYPE type, String accountName, String branch) {
+        return getAccounts(type).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
     }
-    public CustomerAccount getSavings(String accountName, String branch) {
-        return getAccounts(ACCOUNTTYPE.SAVINGS).stream().filter(x -> Objects.equals(x.getAccountName(), accountName) && Objects.equals(x.getBranch(), branch)).findFirst().orElse(null);
 
-    }
-    public boolean createCredit(String accountName, String branch) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.CREDIT, accountName, branch);
-        if (accountExists(customerAccount)) return false;
-        accounts.add(customerAccount);
-        return true;
-    }
-    public boolean createSavings(String accountName, String branch) {
-        CustomerAccount customerAccount = new CustomerAccount(ACCOUNTTYPE.SAVINGS, accountName, branch);
+    public boolean createAccount(ACCOUNTTYPE accounttype, String accountName, String branch) {
+        CustomerAccount customerAccount = new CustomerAccount(accounttype, accountName, branch);
         if (accountExists(customerAccount)) return false;
         accounts.add(customerAccount);
         return true;
     }
     public String printStatements(CustomerAccount account) {
+        if (!accountExists(account)) return "Account doesn't exist!";
         String statement = "date || credit  || debit  || balance\n";
-        if (!accountExists(account)) return statement;
         return statement + account.printStatements(account);
     }
 
@@ -83,6 +73,7 @@ public class Customer {
         }
         return theAccounts;
     }
+
     public void printStatementsToFile(CustomerAccount account) {
         String statements = printStatements(account);
         System.out.println(statements);

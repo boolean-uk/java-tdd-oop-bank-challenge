@@ -8,5 +8,7 @@ public class BalanceTest {
     public void testGetBalance(){
         Balance balance = new Balance(22,44);
         Assertions.assertEquals(22,balance.getIntPart());
+        Balance newBalance = new Balance(44,22);
+        Assertions.assertEquals(44,newBalance.getIntPart());
     }
 }

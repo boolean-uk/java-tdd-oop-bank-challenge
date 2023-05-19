@@ -12,5 +12,9 @@ public class Balance {
     public int getDecimalPart(){
         return this.decimalPart;
     }
+    @Override
+    public String toString(){
+        return this.getIntPart()+"."+this.getDecimalPart();
+    }
 
 }

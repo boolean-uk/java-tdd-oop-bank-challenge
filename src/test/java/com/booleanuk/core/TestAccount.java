@@ -22,6 +22,14 @@ public class TestAccount {
         Assertions.assertEquals("ROT001", savingsAcc.getBranchCode());
     }
 
+    @Test
+    public void testCentsToDollars() {
+        Account currentAcc = new CurrentAccount("NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
+        currentAcc.setBalanceInCents(50.45);
+        Assertions.assertEquals(5045, currentAcc.getBalanceInCents());
+        Assertions.assertEquals(50.45, currentAcc.getBalanceInDollars());
+    }
+
 
 
 }

@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BalanceTest {
+public class TestBalance {
     @Test
     public void testGetBalance(){
         Balance balance = new Balance(22,44);

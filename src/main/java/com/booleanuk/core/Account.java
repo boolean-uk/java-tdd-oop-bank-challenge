@@ -12,8 +12,10 @@ public class Account {
     private void setBalance(Balance balance) {
         if(balance.getIntPart()>5){
             this.balance = balance;
+        }else if(balance.getIntPart()<0){
+            System.out.println("Cannot open an account with a negative balance!");
         }else{
-            System.out.println("When opening an account, a minimum of $5 is required as an original deposit");
+            System.out.println("When opening an account, a minimum of $5 is required as an original deposit!");
         }
     }
     public Balance getBalance(){

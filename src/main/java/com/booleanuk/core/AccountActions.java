@@ -45,7 +45,15 @@ public class AccountActions {
         return null;
     }
 
+    public boolean deposit(String accountNumber, double amountInDollars) {
+        if (searchAccount(accountNumber) == null) {
+            System.out.println("Could not process deposit as this account does not exist");
+            return false;
+        }
 
+        searchAccount(accountNumber).setBalanceInCents(amountInDollars);
+        return true;
+    }
 
 
 }

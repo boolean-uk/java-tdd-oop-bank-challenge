@@ -24,7 +24,7 @@ public class SavingAccountTest {
 
     @Test
     public void testGenerateStatementBasedOnTransactions() {
-
+        // This test will also test of withdraw and deposit method
         com.booleanuk.core.SavingAccount account = new com.booleanuk.core.SavingAccount(0);
         account.deposit(1000.00, LocalDate.of(2012, 1, 10));
         account.deposit(2000.00, LocalDate.of(2012, 1, 13));

@@ -23,4 +23,15 @@ public class CurrentAccountTest {
 
         Assertions.assertEquals(2500,account.getBalance());
     }
+    @Test
+    public void testGenerateStatementBasedOnTransactions() {
+        // This test will also test of withdraw and deposit methods
+        CurrentAccount account = new CurrentAccount(0,new Branch("XXXX","XXX"));
+        account.deposit(1000.00, LocalDate.of(2012, 1, 10));
+        account.deposit(2000.00, LocalDate.of(2012, 1, 13));
+        account.withdraw(500.00, LocalDate.of(2012, 1, 14));
+
+        account.generateStatement();
+        Assertions.assertEquals(2500, account.getBalance());
+    }
 }

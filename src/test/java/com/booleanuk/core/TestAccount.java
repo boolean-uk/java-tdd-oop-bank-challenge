@@ -7,19 +7,19 @@ public class TestAccount {
     @Test
     public void testCurrentAccount() {
         Account currentAcc = new CurrentAccount("NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
-        Assertions.assertEquals("NDBK-0000-0001", currentAcc.accountNumber);
-        Assertions.assertEquals("Aidan", currentAcc.accountHolderFirstName);
-        Assertions.assertEquals("van Geest", currentAcc.accountHolderLastName);
-        Assertions.assertEquals("ROT001", currentAcc.branchCode);
+        Assertions.assertEquals("NDBK-0000-0001", currentAcc.getAccountNumber());
+        Assertions.assertEquals("Aidan", currentAcc.getAccountHolderFirstName());
+        Assertions.assertEquals("van Geest", currentAcc.getAccountHolderLastName());
+        Assertions.assertEquals("ROT001", currentAcc.getBranchCode());
     }
 
     @Test
     public void testSavingsAccount() {
         Account savingsAcc = new SavingsAccount("NDBK-0000-0002", "Aidan", "van Geest", "ROT001");
-        Assertions.assertEquals("NDBK-0000-0002", savingsAcc.accountNumber);
-        Assertions.assertEquals("Aidan", savingsAcc.accountHolderFirstName);
-        Assertions.assertEquals("van Geest", savingsAcc.accountHolderLastName);
-        Assertions.assertEquals("ROT001", savingsAcc.branchCode);
+        Assertions.assertEquals("NDBK-0000-0002", savingsAcc.getAccountNumber());
+        Assertions.assertEquals("Aidan", savingsAcc.getAccountHolderFirstName());
+        Assertions.assertEquals("van Geest", savingsAcc.getAccountHolderLastName());
+        Assertions.assertEquals("ROT001", savingsAcc.getBranchCode());
     }
 
 

@@ -12,13 +12,14 @@
 
 ## Domain Model
 ### Account (Parent of CurrentAccount & SavingsAccount)
-| Members                | Methods     | Scenarios | Outcomes | User Stories |
-|------------------------|-------------|-----------|----------|--------------|
-| `String accountNumber` |             |           |          |              |
-| `String accountHolder` |             |           |          |              |
-| `String branchCode`    |             |           |          | 6            |
-| `int balanceInCents`   |             |           |          |              |
-|                        | `Account()` |           |          |              |
+| Members                         | Methods     | Scenarios | Outcomes | User Stories |
+|---------------------------------|-------------|-----------|----------|--------------|
+| `String accountNumber`          |             |           |          |              |
+| `String accountHolderFirstName` |             |           |          |              |
+| `String accountHolderLastName`  |             |           |          |              |
+| `String branchCode`             |             |           |          | 6            |
+| `int balanceInCents`            |             |           |          |              |
+|                                 | `Account()` |           |          |              |
 
 
 ### CurrentAccount (Child of Account)

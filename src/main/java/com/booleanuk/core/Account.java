@@ -1,14 +1,14 @@
 package com.booleanuk.core;
 
 public class Account {
-    String accountNumber, accountHolder, branchCode;
-    int balanceInCents;
+    String accountNumber, accountHolderFirstName, accountHolderLastName, branchCode;
+    int balanceInCents = 0;
 
-    public Account(String accountNumber, String accountHolder, String branchCode, int balanceInCents) {
+    public Account(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
         this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
+        this.accountHolderFirstName = accountHolderFirstName;
+        this.accountHolderLastName = accountHolderLastName;
         this.branchCode = branchCode;
-        this.balanceInCents = balanceInCents;
     }
 
 

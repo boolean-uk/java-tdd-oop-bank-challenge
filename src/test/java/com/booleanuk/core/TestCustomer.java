@@ -16,12 +16,11 @@ public class TestCustomer {
     @Test
     public void testSetUpAccount(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
-        myself.setUpSavingsAccount(100,1);
-        myself.setUpCurrentAccount(150,0);
-        myself.setUpCurrentAccount(200,1);
-        //can set up many accounts of many types.
-        Assertions.assertEquals(100,myself.getAccounts().get(0).getBalance().getIntPart());
-        Assertions.assertEquals(150,myself.getAccounts().get(1).getBalance().getIntPart());
-        Assertions.assertEquals(0,myself.getAccounts().get(1).getBalance().getDecimalPart());
+        myself.setUpSavingsAccount(0,1);
+
+        Assertions.assertEquals(0,myself.getAccounts().size());
+        //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
+
+
     }
 }

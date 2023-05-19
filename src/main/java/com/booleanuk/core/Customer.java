@@ -22,6 +22,7 @@ public class Customer {
     public void setUpCurrentAccount(Balance balance){
         System.out.println("Setting up account....");
         this.accounts.add(new CurrentAccount(balance));
+        this.removeNullAccounts();
     }
     public void setUpCurrentAccount(int intPart, int decimalPart){
         try{
@@ -35,6 +36,7 @@ public class Customer {
     public void setUpSavingsAccount(Balance balance){
         System.out.println("Setting up account....");
         this.accounts.add(new SavingsAccount(balance));
+        this.removeNullAccounts();
     }
     public void setUpSavingsAccount(int intPart, int decimalPart){
         try{
@@ -73,6 +75,14 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void removeNullAccounts(){
+        for(int i=0;i<this.accounts.size();i++){
+            if(this.accounts.get(i).getBalance()==null){
+                this.accounts.remove(i);
+            }
+        }
     }
 
 }

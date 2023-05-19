@@ -12,5 +12,7 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(100.00,account.getBalance());
 
+        Assertions.assertEquals(1,account.getTransactions().size());
+
     }
 }

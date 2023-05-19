@@ -24,7 +24,7 @@ public class SavingAccount implements Account {
 
     @Override
     public void deposit(double amount) {
-
+        this.setBalance(amount);
     }
 
     @Override

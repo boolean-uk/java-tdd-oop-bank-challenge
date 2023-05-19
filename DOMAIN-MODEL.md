@@ -36,4 +36,4 @@ I want to deposit and withdraw funds.
 | `Concrete`  | `SavingsBankAccount extends BasicBankAccount` |                              |                           |                               |                                                  |
 
 ## Class Diagram
-![](C:\Users\Redox\Desktop\boolean\java\day17\java-tdd-oop-bank-challenge\core-diagram.png)
+![](.\core-diagram.png)

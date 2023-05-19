@@ -109,6 +109,6 @@ public class CustomerTest {
         Assertions.assertTrue(customer.withdraw(credit, 50));
         Assertions.assertTrue(customer.deposit(credit, 100));
         Assertions.assertTrue(customer.withdraw(credit, 50));
-        customer.sentMessage(credit);
+        //customer.sentMessage(credit);
     }
 }

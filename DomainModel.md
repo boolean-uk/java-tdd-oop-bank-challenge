@@ -39,15 +39,17 @@
 |         |                    |           |          |              |
 
 ### AccountActions
-| Members                        | Methods              | Scenarios | Outcomes | User Stories |
-|--------------------------------|----------------------|-----------|----------|--------------|
-| `List<Integer> transactions`   |                      |           |          |              |
-|                                | `createAccount`      |           |          | 1-2          |
-|                                | `generateStatement`  |           |          | 3            |
-|                                | `deposit`            |           |          | 4            |
-|                                | `withdraw`           |           |          | 4            |
-|                                | `searchAccount`      |           |          |              |
-|                                |                      |           |          |              |
+| Members                      | Methods                                                                                                                        | Scenarios                            | Outcomes                               | User Stories |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|----------------------------------------|--------------|
+| `List<Integer> transactions` |                                                                                                                                |                                      |                                        |              |
+| `List<Account> accounts`     |                                                                                                                                |                                      |                                        |              |
+|                              | `boolean createAccount(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode)`  | accountNumber does not already exist | print success message and return true  | 1-2          |
+|                              |                                                                                                                                | accountNumber already exists         | print failure message and return false | 1-2          |
+|                              | `generateStatement`                                                                                                            |                                      |                                        | 3            |
+|                              | `deposit`                                                                                                                      |                                      |                                        | 4            |
+|                              | `withdraw`                                                                                                                     |                                      |                                        | 4            |
+|                              | `searchAccount`                                                                                                                |                                      |                                        |              |
+|                              |                                                                                                                                |                                      |                                        |              |
 
 ### Main
 | Members | Methods | Scenarios | Outcomes | User Stories |

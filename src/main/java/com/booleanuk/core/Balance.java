@@ -9,5 +9,8 @@ public class Balance {
     public int getIntPart(){
         return this.intPart;
     }
+    public int getDecimalPart(){
+        return this.decimalPart;
+    }
 
 }

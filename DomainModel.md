@@ -48,7 +48,7 @@
 |                                | `searchAccount`      |           |          |              |
 |                                |                      |           |          |              |
 
-### MainMenu
+### Main
 | Members | Methods | Scenarios | Outcomes | User Stories |
 |---------|---------|-----------|----------|--------------|
 |         |         |           |          |              |

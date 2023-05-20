@@ -24,7 +24,7 @@ public class AccountTest {
     @Test
     public void shouldNotDepositIfDepositAmountIsZeroOrNegative(){
         Assertions.assertFalse(currentAccount.deposit(-100.0));
-        Assertions.assertEquals(initialBalance, currentAccount.getBalance());
+        Assertions.assertEquals(BigDecimal.valueOf(initialBalance), currentAccount.getBalance());
 
     }
 

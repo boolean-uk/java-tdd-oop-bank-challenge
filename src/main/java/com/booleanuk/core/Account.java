@@ -64,4 +64,19 @@ public abstract class Account {
         return transactions;
     }
 
+    public boolean deposit(double amount){
+        if(amount <= 0) return false;
+
+        transactions.add(new Transaction(amount));
+        balance = balance.add(BigDecimal.valueOf(amount));
+        return true;
+    }
+
+    public boolean withdraw(double amount){
+        if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
+
+        transactions.add(new Transaction(-amount));
+        balance = balance.subtract(BigDecimal.valueOf(amount));
+        return true;
+    }
 }

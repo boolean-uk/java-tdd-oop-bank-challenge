@@ -39,10 +39,11 @@ public class SavingAccountTest {
         account.deposit(1000.00,LocalDate.of(2012,1,14));
         String message = account.withdraw(500.00,LocalDate.of(2012,1,14));
 
-        // Test for overdraft should fail
+        // Test should pass
         Assertions.assertEquals("Transaction succeeded",message);
         Assertions.assertEquals(500,account.getBalance());
 
+        // Test for overdraft should fail
         message = account.withdraw(600.00,LocalDate.of(2012,1,14));
         Assertions.assertEquals("Overdraft not allowed",message);
         Assertions.assertEquals(500,account.getBalance());

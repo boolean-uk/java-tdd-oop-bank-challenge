@@ -24,13 +24,13 @@ public class Bank {
         this.overdraftRequests.add(account);
     }
 
-    public String overdraftApproval(Account account) {
+    public String overdraftApproval(Account account, boolean approval) {
         if (this.overdraftRequests.contains(account)) {
             if (account.getClass().getSimpleName().equals("CurrentAccount")) {
-                ((CurrentAccount) account).setOverdraft(true);
-                return "Approved";
+                ((CurrentAccount) account).setOverdraft(approval);
+                return approval?"Approved":"Rejected";
             } else {
-                return "Rejected";
+                return "Overdraft not allowed";
             }
         }
         return "Invalid request";

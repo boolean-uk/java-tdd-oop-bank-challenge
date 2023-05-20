@@ -53,6 +53,8 @@ class CurrentAccount{
 }
 class Bank {
 - ArrayList<Account>: accounts
+- ArrayList<Account>: overdraftRequests
++ requestOverdraft(Account: account)
 + overdraftApproval(Account: account): String
 }
 class Transaction{

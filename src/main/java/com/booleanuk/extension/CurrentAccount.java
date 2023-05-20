@@ -11,12 +11,13 @@ public class CurrentAccount implements Account {
     private int balance;
     private ArrayList <Transaction> transactions;
     private Branch branch;
-
+    private boolean overdraft;
     public CurrentAccount(double balance, Branch branch) {
 
         this.balance = Util.fromDoubleToInt(balance);
         this.transactions=new ArrayList<Transaction>();
         this.branch = branch;
+        this.overdraft= false;
     }
 
     public ArrayList<Transaction> getTransactions() {
@@ -46,6 +47,14 @@ public class CurrentAccount implements Account {
 
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    public boolean isOverdraft() {
+        return overdraft;
+    }
+
+    public void setOverdraft(boolean overdraft) {
+        this.overdraft = overdraft;
     }
 
     @Override

@@ -17,7 +17,6 @@ public class TestCustomer {
     public void testSetUpAccount(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
         myself.setUpSavingsAccount(0,1);
-
         Assertions.assertEquals(0,myself.getAccounts().size());
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
     }

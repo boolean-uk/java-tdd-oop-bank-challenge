@@ -33,4 +33,17 @@ public class SavingAccountTest {
         account.generateStatement();
         Assertions.assertEquals(2500, account.getBalance());
     }
+    @Test
+    public void testWithdraw(){
+        SavingAccount account = new SavingAccount(1000,new Branch("xxxx","xxxx"));
+        String message = account.withdraw(500.00,LocalDate.of(2012,1,14));
+
+        // Test for overdraft should fail
+        Assertions.assertEquals("Transaction succeeded",message);
+        Assertions.assertEquals(500,account.getBalance());
+
+        message = account.withdraw(600.00,LocalDate.of(2012,1,14));
+        Assertions.assertEquals("Overdraft not allowed",message);
+        Assertions.assertEquals(500,account.getBalance());
+    }
 }

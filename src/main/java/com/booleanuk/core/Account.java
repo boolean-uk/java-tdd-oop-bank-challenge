@@ -12,13 +12,14 @@ public abstract class Account {
     private int monthlyTransactionLimit;
     private boolean canOverdraft;
     private float interest;
-    private BigDecimal balance;
+    //private BigDecimal balance;
 
     private List<Transaction> transactions;
 
     protected Account(BigDecimal initialBalance){
         this.id = ACCOUNT_ID++;
-        this.balance = initialBalance.compareTo(BigDecimal.ZERO) > 0 ? initialBalance : BigDecimal.ZERO;
+        //this.balance = initialBalance.compareTo(BigDecimal.ZERO) > 0 ? initialBalance : BigDecimal.ZERO;
+        //this.balance = initialBalance;
         this.transactions = new ArrayList<>();
         transactions.add(new Transaction(initialBalance.doubleValue()));
     }
@@ -58,7 +59,8 @@ public abstract class Account {
     }
 
     public BigDecimal getBalance() {
-        return balance;
+        //return balance;
+        return BigDecimal.ZERO;
     }
 
     public List<Transaction> getTransactions() {
@@ -69,30 +71,30 @@ public abstract class Account {
         if(amount <= 0) return false;
 
         transactions.add(new Transaction(amount));
-        balance = balance.add(BigDecimal.valueOf(amount));
+        //balance = balance.add(BigDecimal.valueOf(amount));
         return true;
     }
     public boolean deposit(LocalDateTime date, double amount){
         if(amount <= 0) return false;
 
         transactions.add(new Transaction(date, amount));
-        balance = balance.add(BigDecimal.valueOf(amount));
+        //balance = balance.add(BigDecimal.valueOf(amount));
         return true;
     }
 
     public boolean withdraw(double amount){
-        if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
+        //if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
 
         transactions.add(new Transaction(-amount));
-        balance = balance.subtract(BigDecimal.valueOf(amount));
+        //balance = balance.subtract(BigDecimal.valueOf(amount));
         return true;
     }
 
     public boolean withdraw(LocalDateTime date, double amount){
-        if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
+        //if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
 
         transactions.add(new Transaction(date, -amount));
-        balance = balance.subtract(BigDecimal.valueOf(amount));
+        //balance = balance.subtract(BigDecimal.valueOf(amount));
         return true;
     }
 }

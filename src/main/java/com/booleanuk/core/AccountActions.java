@@ -55,5 +55,18 @@ public class AccountActions {
         return true;
     }
 
+    public boolean withdraw(String accountNumber, double amountInDollars) {
+        if (searchAccount(accountNumber) == null) {
+            System.out.println("Could not process deposit as this account does not exist");
+            return false;
+        } else if(searchAccount(accountNumber).getBalanceInDollars() - amountInDollars < 0) {
+            System.out.println("Insufficient funds");
+            return false;
+        }
+
+        searchAccount(accountNumber).setBalanceInCents(-amountInDollars);
+        return true;
+    }
+
 
 }

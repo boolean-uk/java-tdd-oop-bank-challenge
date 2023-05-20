@@ -6,6 +6,7 @@ public class Account {
     private String accountHolderLastName;
     private String branchCode;
     private int balanceInCents = 0;
+    private boolean approvedForOverdraft = false;
 
     public Account(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
         this.setAccountNumber(accountNumber);
@@ -60,4 +61,11 @@ public class Account {
     }
 
 
+    public boolean isApprovedForOverdraft() {
+        return approvedForOverdraft;
+    }
+
+    public void setApprovedForOverdraft(boolean approvedForOverdraft) {
+        this.approvedForOverdraft = approvedForOverdraft;
+    }
 }

@@ -98,4 +98,15 @@ public class BankTest {
     public void shouldReturnFalseOnOverdraftRequestForNonExistentAccount(){
         Assertions.assertFalse(bank.requestOverdraft(-4));
     }
+
+    @Test
+    public void shouldReturnAcceptedStatusAndAccountShouldOverdraftForAcceptedOverdraftRequest(){
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
+        bank.requestOverdraft(accountId);
+        bank.evaluateOverdraftRequest(accountId, Bank.OverdraftStatus.ACCEPTED);
+
+        Assertions.assertEquals(Bank.OverdraftStatus.ACCEPTED, bank.getOverdraftRequests().get(accountId).getStatus());
+        Assertions.assertTrue(bank.getAccounts().get(accountId).isOverdraft());
+
+    }
 }

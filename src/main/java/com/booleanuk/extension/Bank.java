@@ -20,14 +20,19 @@ public class Bank {
         return overdraftRequests;
     }
 
-    public void requestOverdraft(Account account){
+    public void requestOverdraft(Account account) {
         this.overdraftRequests.add(account);
     }
-    public String overdraftApproval(Account account){
-        if (account.getClass().getSimpleName().equals("CurrentAccount")){
-            ((CurrentAccount) account).setOverdraft(true);
-            return "Approved";
+
+    public String overdraftApproval(Account account) {
+        if (this.overdraftRequests.contains(account)) {
+            if (account.getClass().getSimpleName().equals("CurrentAccount")) {
+                ((CurrentAccount) account).setOverdraft(true);
+                return "Approved";
+            } else {
+                return "Rejected";
+            }
         }
-        return "Rejected";
+        return "Invalid request";
     }
 }

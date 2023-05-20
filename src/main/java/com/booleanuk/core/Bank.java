@@ -7,7 +7,6 @@ public class Bank {
 
 
     public static void main(String[] args){
-        Account account = new CurrentAccount(100.0);
 
     }
     public enum AccountType {
@@ -25,8 +24,10 @@ public class Bank {
         return accounts;
     }
 
-    public int createAccount(AccountType accountType, double initialBalance) {
-        Account newAccount = AccountType.CURRENT.equals(accountType) ? new CurrentAccount(initialBalance) : new SavingsAccount(initialBalance);
+    public int createAccount(String branch, AccountType accountType, double initialBalance) {
+        Account newAccount = AccountType.CURRENT.equals(accountType) ?
+                new CurrentAccount(branch, initialBalance) :
+                new SavingsAccount(branch, initialBalance);
         accounts.put(newAccount.getId(), newAccount);
 
         return newAccount.getId();

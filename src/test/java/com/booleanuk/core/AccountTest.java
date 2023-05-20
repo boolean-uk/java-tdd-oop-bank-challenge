@@ -10,11 +10,13 @@ public class AccountTest {
 
     private Account currentAccount;
     private double initialBalance;
+    private String branchName;
     @BeforeEach
     public void setup(){
         Bank bank = new Bank();
         initialBalance = 2500.0;
-        int accountId = bank.createAccount(Bank.AccountType.CURRENT, initialBalance);
+        branchName = "Alpha Bank Athens";
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, initialBalance);
         currentAccount = bank.getAccounts().get(accountId);
     }
 

@@ -19,7 +19,8 @@ public class BankTest {
 
     @Test
     public void shouldCreateCurrentAccount(){
-        int accountId = bank.createAccount(Bank.AccountType.CURRENT, 2500);
+        String branchName = "Eurobank Sepolia";
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
 
         Assertions.assertFalse(bank.getAccounts().isEmpty());
         Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccounts().get(accountId));
@@ -27,15 +28,18 @@ public class BankTest {
 
     @Test
     public void shouldIncrementAccountIdOnCreateAccount(){
-        int account1Id = bank.createAccount(Bank.AccountType.CURRENT, 2500);
-        int account2Id = bank.createAccount(Bank.AccountType.CURRENT, 5000);
+        String branchName = "Eurobank Sepolia";
+        String branchName2 = "Eurobank Thessaloniki";
+        int account1Id = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
+        int account2Id = bank.createAccount(branchName2, Bank.AccountType.CURRENT, 5000);
         int expected = account1Id + 1;
 
         Assertions.assertEquals(expected, bank.getAccounts().get(account2Id).getId());
     }
     @Test
     public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
-        int accountId = bank.createAccount(Bank.AccountType.CURRENT, -34);
+        String branchName = "Eurobank Sepolia";
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, -34);
 
         Assertions.assertEquals(BigDecimal.ZERO, bank.getAccounts().get(accountId).getBalance());
     }
@@ -46,7 +50,8 @@ public class BankTest {
     }
     @Test
     public void shouldPrintBankStatement(){
-        int accountId = bank.createAccount(Bank.AccountType.CURRENT, 2500);
+        String branchName = "Eurobank Sepolia";
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
         LocalDateTime withdrawDateTime = LocalDateTime.of(LocalDate.of(2023, 5, 27), LocalTime.now());
         bank.getAccounts().get(accountId).withdraw(withdrawDateTime, 1000.0);
 

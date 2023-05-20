@@ -72,6 +72,14 @@ public class BankTest {
     }
 
     @Test
+    public void shouldReturnFalseOnReIssueOverdraftForCurrentAccount(){
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2000);
+
+        bank.requestOverdraft(accountId);
+        Assertions.assertFalse(bank.requestOverdraft(accountId));
+    }
+
+    @Test
     public void shouldCreateOverdraftRequestForCurrentAccount(){
         int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
 

@@ -12,4 +12,11 @@ public class Bank {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
+    public String overdraftApproval(Account account){
+        if (account.getClass().getSimpleName().equals("CurrentAccount")){
+            ((CurrentAccount) account).setOverdraft(true);
+            return "Approved";
+        }
+        return "Rejected";
+    }
 }

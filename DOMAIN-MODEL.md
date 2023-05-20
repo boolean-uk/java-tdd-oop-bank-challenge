@@ -38,7 +38,6 @@ getters and setters are not included in the domain model.
 |                        |                                      |                                                     |                              | Rejected               |
 |                        |                                      |                                                     |                              | Overdraft not allowed  |
 |                        |                                      |                                                     |                              | Invalid request        |
-|                        |                                      |                                                     |                              |                        |
 | Account (Interface)    |                                      |                                                     |                              |                        |
 |                        |                                      | withdraw(double amount)                             |                              | String message         |
 |                        |                                      | deposit(double amount)                              |                              | void                   |
@@ -63,8 +62,6 @@ getters and setters are not included in the domain model.
 |                        | int balance                          |                                                     |                              |                        |
 | TransactionType (Enum) | CREDIT                               |                                                     |                              |                        |
 |                        | DEBIT                                |                                                     |                              |                        |
-|                        |                                      |                                                     |                              |                        |
-
 
 
 

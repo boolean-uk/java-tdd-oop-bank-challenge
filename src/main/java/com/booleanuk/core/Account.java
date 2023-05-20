@@ -20,6 +20,7 @@ public abstract class Account {
         this.id = ACCOUNT_ID++;
         this.balance = initialBalance.compareTo(BigDecimal.ZERO) > 0 ? initialBalance : BigDecimal.ZERO;
         this.transactions = new ArrayList<>();
+        transactions.add(new Transaction(initialBalance.doubleValue()));
     }
 
     protected Account(int monthlyTransactionLimit, boolean canOverdraft, float interest, BigDecimal initialBalance){
@@ -71,11 +72,26 @@ public abstract class Account {
         balance = balance.add(BigDecimal.valueOf(amount));
         return true;
     }
+    public boolean deposit(LocalDateTime date, double amount){
+        if(amount <= 0) return false;
+
+        transactions.add(new Transaction(date, amount));
+        balance = balance.add(BigDecimal.valueOf(amount));
+        return true;
+    }
 
     public boolean withdraw(double amount){
         if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
 
         transactions.add(new Transaction(-amount));
+        balance = balance.subtract(BigDecimal.valueOf(amount));
+        return true;
+    }
+
+    public boolean withdraw(LocalDateTime date, double amount){
+        if(amount <= 0 || balance.compareTo(BigDecimal.valueOf(amount)) < 0) return false;
+
+        transactions.add(new Transaction(date, -amount));
         balance = balance.subtract(BigDecimal.valueOf(amount));
         return true;
     }

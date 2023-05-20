@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Transaction {
@@ -33,5 +34,18 @@ public class Transaction {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public boolean isCredit(){
+        return amount.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    @Override
+    public String toString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String dateText = date.format(formatter);
+
+        return dateText + "," + (isCredit() ? amount.toString() : " ") + "," + (!isCredit() ? amount.abs().toString() : " ");
+
     }
 }

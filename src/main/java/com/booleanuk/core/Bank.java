@@ -32,4 +32,9 @@ public class Bank {
         return newAccount.getId();
     }
 
+    public BankStatement generateStatement(int accountId){
+        if(!accounts.containsKey(accountId)) return null;
+        return new BankStatement(accounts.get(accountId));
+    }
+
 }

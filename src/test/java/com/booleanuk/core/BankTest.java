@@ -41,8 +41,11 @@ public class BankTest {
     @Test
     public void shouldPrintBankStatement(){
         int accountId = bank.createAccount(Bank.AccountType.CURRENT, 2500);
-        bank.getAccounts().get(accountId).withdraw(1000);
-        bank.getAccounts().get(accountId).deposit(LocalDateTime.of(LocalDate.of(2023, 5, 10), LocalTime.now()), 500);
+        LocalDateTime withdrawDateTime = LocalDateTime.of(LocalDate.of(2023, 5, 27), LocalTime.now());
+        bank.getAccounts().get(accountId).withdraw(withdrawDateTime, 1000.0);
+
+        LocalDateTime depositDateTime = LocalDateTime.of(LocalDate.of(2023, 7, 2), LocalTime.now());
+        bank.getAccounts().get(accountId).deposit(depositDateTime, 500);
 
         BankStatement bankStatement = bank.generateStatement(accountId);
         bankStatement.print();

@@ -9,60 +9,47 @@ import java.math.BigInteger;
 
 public class AccountTest {
 
-    private Bank bank;
+    private Account currentAccount;
+    private double initialBalance;
     @BeforeEach
     public void setup(){
-        bank = new Bank();
-    }
-
-    @Test
-    public void shouldCreateCurrentAccount(){
-        boolean created = bank.createAccount(Bank.AccountType.CURRENT, 2500);
-
-        Assertions.assertTrue(created);
-        Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccounts().get(0));
-        Assertions.assertFalse(bank.getAccounts().isEmpty());
-    }
-
-    @Test
-    public void shouldIncrementAccountIdOnCreateAccount(){
-        bank.createAccount(Bank.AccountType.CURRENT, 2500);
-        bank.createAccount(Bank.AccountType.CURRENT, 5000);
-        Assertions.assertEquals(1, bank.getAccounts().get(1).getId());
-    }
-    @Test
-    public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
-        bank.createAccount(Bank.AccountType.CURRENT, -34);
-
-        Assertions.assertEquals(BigDecimal.ZERO, bank.getAccounts().get(0).getBalance());
+        Bank bank = new Bank();
+        initialBalance = 2500.0;
+        int accountId = bank.createAccount(Bank.AccountType.CURRENT, initialBalance);
+        currentAccount = bank.getAccounts().get(accountId);
     }
 
 
-    @Test
-    public void shouldReturnFalseIfAccountDoesNotExist(){
-        int accountId = 100;
 
-        Assertions.assertFalse(bank.deposit(accountId, accountId));
-    }
     @Test
-    public void shouldReturnFalseIfDepositAmountIsZeroOrNegative(){
-        double initialBalance = 2500;
-        bank.createAccount(Bank.AccountType.CURRENT, initialBalance);
-        int accountId = bank.getAccounts().get(0).getId();
-
-        Assertions.assertFalse(bank.deposit(accountId, -100));
-        Assertions.assertEquals(BigDecimal.valueOf(initialBalance), bank.getAccounts().get(accountId).getBalance());
+    public void shouldNotDepositIfDepositAmountIsZeroOrNegative(){
+        Assertions.assertFalse(currentAccount.deposit(-100.0));
+        Assertions.assertEquals(initialBalance, currentAccount.getBalance());
 
     }
 
     @Test
-    public void shouldReturnTrueIfAccountAndDepositAmountIsValid(){
-        double initialBalance = 2500;
-        bank.createAccount(Bank.AccountType.CURRENT, initialBalance);
-        int accountId = bank.getAccounts().get(0).getId();
-        double depositAmout = 500d;
-        Assertions.assertTrue(bank.deposit(accountId, depositAmout));
-        Assertions.assertEquals(BigDecimal.valueOf(initialBalance + depositAmout), bank.getAccounts().get(accountId).getBalance());
+    public void shouldReturnTrueIfDepositAmountIsValid(){
+        double depositAmount = 500d;
+        double balanceAfterDeposit = initialBalance + depositAmount;
+        Assertions.assertTrue(currentAccount.deposit(depositAmount));
+        Assertions.assertEquals(BigDecimal.valueOf(balanceAfterDeposit), currentAccount.getBalance());
+    }
 
+    @Test
+    public void shouldNotWithdrawIfAmountIsGreaterThanBalance(){
+        double withdrawAmount = 4000.0;
+
+        Assertions.assertFalse(currentAccount.withdraw(withdrawAmount));
+        Assertions.assertEquals(BigDecimal.valueOf(initialBalance), currentAccount.getBalance());
+    }
+
+    @Test
+    public void shouldReturnTrueIfWithdrawAmountIsValid(){
+        double withdrawAmount = 1000.0;
+        double balanceAfterWithdraw = initialBalance - withdrawAmount;
+
+        Assertions.assertTrue(currentAccount.withdraw(withdrawAmount));
+        Assertions.assertEquals(BigDecimal.valueOf(balanceAfterWithdraw), currentAccount.getBalance());
     }
 }

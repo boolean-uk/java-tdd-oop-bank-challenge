@@ -1,10 +1,6 @@
 package com.booleanuk.core;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Bank {
 
@@ -29,11 +25,11 @@ public class Bank {
         return accounts;
     }
 
-    public boolean createAccount(AccountType accountType, double initialBalance) {
+    public int createAccount(AccountType accountType, double initialBalance) {
         Account newAccount = AccountType.CURRENT.equals(accountType) ? new CurrentAccount(initialBalance) : new SavingsAccount(initialBalance);
         accounts.put(newAccount.getId(), newAccount);
 
-        return true;
+        return newAccount.getId();
     }
 
 }

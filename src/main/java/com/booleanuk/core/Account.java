@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,10 +62,6 @@ public abstract class Account {
 
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
 }

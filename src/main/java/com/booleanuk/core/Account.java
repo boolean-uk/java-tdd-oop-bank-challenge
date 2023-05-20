@@ -56,14 +56,21 @@ public class Account {
     public void addToStatements(Balance balance){
         this.statements+= convertEpochTimeToDateTime(System.currentTimeMillis())+ " ||";
         if(balance.getIntPart()>=0){
-            this.statements+= " $"+balance+" ||          || $"+this.getBalance().toString();
+            this.statements+= " $"+balance+" ||          || $"+this.getBalance().toString()+'\n';
         }else{
-            this.statements+="         || $"+balance+" || $"+this.getBalance().toString();
+            this.statements+="         || $"+balance+" || $"+this.getBalance().toString()+"\n";
         }
     }
     public String showStatements(){
-        System.out.println(statements);
-        return this.statements;
+        //reverse the order of statements
+        String[] transactions = this.statements.split("\n");
+        String res = transactions[0]+"\n"+transactions[1]+"\n";
+        //transactions[0] will contain the line where the Account is initialized, transactions[1] will contain the data line
+        for(int i=transactions.length-1;i>2;i--){
+            res+= transactions[i]+"\n";
+        }
+        System.out.println(res);
+        return res;
     }
     public static String convertEpochTimeToDateTime(long epochTimeInMillis) {
         Instant instant = Instant.ofEpochMilli(epochTimeInMillis);

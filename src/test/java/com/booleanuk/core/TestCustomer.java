@@ -27,9 +27,11 @@ public class TestCustomer {
         myself.setUpCurrentAccount(new Balance(100,0));
         myself.setUpSavingsAccount(new Balance(50,0));
         myself.getAccounts().get(0).deposit(new Balance(10,0));
-        //deposit $10 in the first account
+        myself.getAccounts().get(0).deposit(new Balance(20,0));
+        //deposit $10 then 20 in the first account
         myself.getAccounts().get(1).deposit(new Balance(20,0));
         //deposited $20 in the second account
         myself.getAccounts().get(0).showStatements();
+        //i want to see the 20 first then the 10.
     }
 }

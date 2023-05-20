@@ -57,7 +57,12 @@ public class Bank {
     }
 
     public void evaluateOverdraftRequest(int accountId, OverdraftStatus updatedStatus){
-        if()
+        if(updatedStatus.equals(OverdraftStatus.PENDING)) return;
+        if(!getAccounts().containsKey(accountId)) return;
+        if(!getAccounts().get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return;
+
+        getAccounts().get(accountId).setOverdraftStatus(updatedStatus);
+
     }
 
 }

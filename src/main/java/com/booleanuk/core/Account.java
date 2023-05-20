@@ -10,16 +10,13 @@ public abstract class Account {
 
     private int id;
     private int monthlyTransactionLimit;
-    //private boolean overdraft;
     private Bank.OverdraftStatus overdraftStatus;
     private float interest;
     private String branch;
-
     private List<Transaction> transactions;
 
     protected Account(String branch, BigDecimal initialBalance){
         this.id = ACCOUNT_ID++;
-        //this.overdraft = false; //TODO unnecessary
         this.overdraftStatus = Bank.OverdraftStatus.NONE;
         this.branch = branch;
         this.transactions = new ArrayList<>();
@@ -51,14 +48,6 @@ public abstract class Account {
     protected void setOverdraftStatus(Bank.OverdraftStatus overdraftStatus) {
         this.overdraftStatus = overdraftStatus;
     }
-
-    /*public boolean isOverdraft() {
-        return overdraft;
-    }*/
-
-    /*public void setOverdraft(boolean overdraft) {
-        this.overdraft = overdraft;
-    }*/
 
     public float getInterest() {
         return interest;
@@ -93,16 +82,22 @@ public abstract class Account {
     }
 
     public boolean withdraw(double amount){
-        if(amount <= 0 || getBalance().compareTo(BigDecimal.valueOf(amount)) < 0) return false;
-        transactions.add(new Transaction(-amount));
+        if(amount <= 0 ) return false;
+        if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
+            if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+        }
 
+        transactions.add(new Transaction(-amount));
         return true;
     }
 
     public boolean withdraw(LocalDateTime date, double amount){
-        if(amount <= 0 || getBalance().compareTo(BigDecimal.valueOf(amount)) < 0) return false;
-        transactions.add(new Transaction(date, -amount));
+        if(amount <= 0 ) return false;
+        if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
+            if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+        }
 
+        transactions.add(new Transaction(date, -amount));
         return true;
     }
 

@@ -18,4 +18,5 @@ public class TestAccount {
         //on the 2 accounts above, their balance will not get initialized. This results in faulty accounts that can't be used.
         //this can be seen by messages in the terminal.
     }
+
 }

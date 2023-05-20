@@ -20,4 +20,16 @@ public class TestCustomer {
         Assertions.assertEquals(0,myself.getAccounts().size());
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
     }
+    //these tests can also be done in the TestAccount class but since all of these things want to be done by the user, i decided to do them here.
+    @Test
+    public void testStatements(){
+        Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
+        myself.setUpCurrentAccount(new Balance(100,0));
+        myself.setUpSavingsAccount(new Balance(50,0));
+        myself.getAccounts().get(0).deposit(new Balance(10,0));
+        //deposit $10 in the first account
+        myself.getAccounts().get(1).deposit(new Balance(20,0));
+        //deposited $20 in the second account
+        myself.getAccounts().get(0).showStatements();
+    }
 }

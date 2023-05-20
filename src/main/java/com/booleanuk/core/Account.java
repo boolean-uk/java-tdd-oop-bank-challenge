@@ -28,20 +28,23 @@ public class Account {
         if(this.getBalance().getIntPart()>toWithdraw.getIntPart() && this.getBalance().getDecimalPart()>toWithdraw.getDecimalPart()){
             System.out.println("Withdrew "+toWithdraw.toString()+" ");
             this.balance.interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
+            this.addToStatements(toWithdraw);
             return true;
         }
         return false;
     }
     public boolean deposit(Balance toDeposit){
-        if(toDeposit.getDecimalPart()>0 && toDeposit.getIntPart()>0){
+        if(toDeposit.getDecimalPart()>=0 && toDeposit.getIntPart()>0){
             System.out.println("Successfully deposited "+toDeposit);
             this.balance.interact(new Balance(toDeposit.getIntPart(),toDeposit.getDecimalPart()));
+            this.addToStatements(toDeposit);
             return true;
         }
+
         return false;
     }
     public void addToStatements(Balance balance){
-        this.statements+= balance.toString()+"\n";
+        this.statements+= "Transaction: "+balance.toString()+"\n";
     }
     public String showStatements(){
         System.out.println(statements);

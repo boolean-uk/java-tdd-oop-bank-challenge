@@ -64,8 +64,14 @@ public class CurrentAccount implements Account {
 
     @Override
     public String withdraw(double amount, LocalDate date) {
-        this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()- amount));
-        return "";
+        if ((this.getBalance()-amount) >= 0){
+            this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()- amount));
+            return "Transaction succeeded";
+        } else if ((this.getBalance()-amount) < 0 && this.isOverdraft()) {
+            this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()- amount));
+            return "Transaction succeeded";
+        }
+        return "Overdraft not allowed";
     }
 
     @Override

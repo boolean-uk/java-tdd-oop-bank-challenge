@@ -43,7 +43,7 @@ public class CurrentAccountTest {
         Assertions.assertEquals("Transaction succeeded",message);
         Assertions.assertEquals(500,account.getBalance());
 
-        // Test for overdraft should fail
+        // Test for overdraft should fail as default overdraft is false
         message = account.withdraw(600.00,LocalDate.of(2012,1,14));
         Assertions.assertEquals("Overdraft not allowed",message);
         Assertions.assertEquals(500,account.getBalance());
@@ -51,7 +51,7 @@ public class CurrentAccountTest {
         // Test for overdraft should pass
         account.setOverdraft(true);
         message = account.withdraw(600.00,LocalDate.of(2012,1,14));
-        Assertions.assertEquals("Overdraft not allowed",message);
+        Assertions.assertEquals("Transaction succeeded",message);
         Assertions.assertEquals(-100.00,account.getBalance());
     }
 }

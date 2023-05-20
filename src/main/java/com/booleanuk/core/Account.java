@@ -64,11 +64,12 @@ public class Account {
     public String showStatements(){
         //reverse the order of statements
         String[] transactions = this.statements.split("\n");
-        String res = transactions[0]+"\n"+transactions[1]+"\n";
+        String res = transactions[2]+"\n";
         //transactions[0] will contain the line where the Account is initialized, transactions[1] will contain the data line
         for(int i=transactions.length-1;i>2;i--){
             res+= transactions[i]+"\n";
         }
+        res += transactions[1]+"\n";
         System.out.println(res);
         return res;
     }

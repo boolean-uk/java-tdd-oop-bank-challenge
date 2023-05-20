@@ -2,11 +2,14 @@ package com.booleanuk.core;
 
 public class Account {
     private Balance balance;
+    private String statements;
     public Account(Balance balance){
         setBalance(balance);
+        this.statements = "";
     }
     public Account(int intPart, int decimalPart){
         setBalance(new Balance(intPart,decimalPart));
+        this.statements = "";
     }
     //setBalance is private because I don't want any other class to use it.
     private void setBalance(Balance balance) {
@@ -30,6 +33,19 @@ public class Account {
         return false;
     }
     public boolean deposit(Balance toDeposit){
-
+        if(toDeposit.getDecimalPart()>0 && toDeposit.getIntPart()>0){
+            System.out.println("Successfully deposited "+toDeposit);
+            this.balance.interact(new Balance(toDeposit.getIntPart(),toDeposit.getDecimalPart()));
+            return true;
+        }
+        return false;
     }
+    public void addToStatements(Balance balance){
+        this.statements+= balance.toString()+"\n";
+    }
+    public String showStatements(){
+        System.out.println(statements);
+        return this.statements;
+    }
+
 }

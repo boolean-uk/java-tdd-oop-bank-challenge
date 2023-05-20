@@ -87,8 +87,8 @@ For this user story, the UML diagram is:
 |                | String statements                |                            | The user wants to deposit an invalid amount of money                                                    | Returns false                                       |
 |                |                                  | boolean withdraw(Balance)  | The user wants to withdraw a valid amount of money(valid Balance and has enough money for the withdraw) | Returns true                                        |
 |                |                                  |                            | The user wants to withdraw an invalid amount of money(invalid Balance or does not have enough money     | Returns false                                       |
-|                |                                  | void showStatements()      |                                                                                                         |                                                     |
-|                |                                  |                            |                                                                                                         |                                                     |
+|                |                                  | String showStatements()    | The user wants to see their statements for a specified account                                          | Returns the String of statements                    |
+|                |                                  | void addToStatements()     | Add a transaction info to the statements String.                                                        |                                                     |
 | CurrentAccount |                                  |                            |                                                                                                         |                                                     |
 |                |                                  |                            |                                                                                                         |                                                     |
 | SavingsAccount |                                  |                            |                                                                                                         |                                                     |
@@ -105,3 +105,4 @@ For this user story, the UML diagram is:
 #### The setters for the intPart and decimalPart of the Balance class, and the setters for balance in the Account class
 ##### Note: We could have 2 attributes that are both Account objects, one could be named currentAccount and the other savingsAccount, but implementing inheritance will help down the line when the 2 accounts will inevitably want to use behave differently.
 For this user story, the UML diagram is:
+![d3+4.png](d3%2B4.png)

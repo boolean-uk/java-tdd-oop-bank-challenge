@@ -20,7 +20,5 @@ public class TestCustomer {
 
         Assertions.assertEquals(0,myself.getAccounts().size());
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
-
-
     }
 }

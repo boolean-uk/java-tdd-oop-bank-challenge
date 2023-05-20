@@ -51,8 +51,18 @@ public class AccountTest {
         currentAccount.setOverdraftStatus(Bank.OverdraftStatus.ACCEPTED);
         double expectedBalance = initialBalance - withdrawAmount;
         currentAccount.withdraw(withdrawAmount);
+
         Assertions.assertEquals(BigDecimal.valueOf(expectedBalance), currentAccount.getBalance());
 
+    }
+
+    @Test
+    public void shouldNotWithdrawIfOverdraftIsRejected(){
+        double withdrawAmount = 7000.0;
+        currentAccount.setOverdraftStatus(Bank.OverdraftStatus.REJECTED);
+        currentAccount.withdraw(withdrawAmount);
+
+        Assertions.assertEquals(BigDecimal.valueOf(initialBalance), currentAccount.getBalance());
     }
 
     @Test

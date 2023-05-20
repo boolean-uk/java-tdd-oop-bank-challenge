@@ -7,6 +7,30 @@ public class Bank {
 
 
     public static void main(String[] args){
+        Bank bank = new Bank();
+        int savingsAccountId = bank.createAccount("Alpha Bank West Side", AccountType.SAVINGS, 10500.0);
+        int currentAccountId = bank.createAccount("Alpha Bank West Side", AccountType.CURRENT, 3200.0);
+
+        bank.getAccounts().get(savingsAccountId).withdraw(4700.0);
+        bank.getAccounts().get(currentAccountId).withdraw(3400);
+        bank.requestOverdraft(currentAccountId);
+
+        bank.getAccounts().get(currentAccountId).withdraw(4000);
+
+        bank.evaluateOverdraftRequest(currentAccountId, OverdraftStatus.ACCEPTED);
+        bank.getAccounts().get(currentAccountId).withdraw(5000);
+
+
+        bank.getAccounts().get(savingsAccountId).deposit(12200.0);
+
+        bank.requestOverdraft(savingsAccountId);
+
+        bank.getAccounts().get(savingsAccountId).withdraw(120000);
+
+
+        bank.generateStatement(currentAccountId).print();
+        System.out.println("\n\n");
+        bank.generateStatement(savingsAccountId).print();
 
     }
     public enum AccountType {

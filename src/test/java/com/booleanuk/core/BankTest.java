@@ -27,17 +27,23 @@ public class BankTest {
 
     @Test
     public void shouldIncrementAccountIdOnCreateAccount(){
-        bank.createAccount(Bank.AccountType.CURRENT, 2500);
-        bank.createAccount(Bank.AccountType.CURRENT, 5000);
-        Assertions.assertEquals(1, bank.getAccounts().get(1).getId());
+        int account1Id = bank.createAccount(Bank.AccountType.CURRENT, 2500);
+        int account2Id = bank.createAccount(Bank.AccountType.CURRENT, 5000);
+        int expected = account1Id + 1;
+
+        Assertions.assertEquals(expected, bank.getAccounts().get(account2Id).getId());
     }
     @Test
     public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
-        bank.createAccount(Bank.AccountType.CURRENT, -34);
+        int accountId = bank.createAccount(Bank.AccountType.CURRENT, -34);
 
-        Assertions.assertEquals(BigDecimal.ZERO, bank.getAccounts().get(0).getBalance());
+        Assertions.assertEquals(BigDecimal.ZERO, bank.getAccounts().get(accountId).getBalance());
     }
 
+    @Test
+    public void shouldReturnNullForBankStatementIfAccountDoesNotExist(){
+        Assertions.assertNull(bank.generateStatement(-20));
+    }
     @Test
     public void shouldPrintBankStatement(){
         int accountId = bank.createAccount(Bank.AccountType.CURRENT, 2500);

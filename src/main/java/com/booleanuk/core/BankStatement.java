@@ -3,8 +3,6 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class BankStatement {
@@ -27,6 +25,7 @@ public class BankStatement {
         System.out.println(createFooter());
         BigDecimal initialBalance = BigDecimal.ZERO;
         List<String> rows = new ArrayList<>();
+
         for(Transaction transaction : account.getTransactions()){
             String[] info = transaction.toString().split(",");
             initialBalance = initialBalance.add(transaction.getAmount());
@@ -36,7 +35,6 @@ public class BankStatement {
                     createCell(info[2]),
                     createCell(String.format("%.2f", initialBalance))
             ));
-
         }
         for(int i = rows.size()-1; i  >=0; i--) System.out.println(rows.get(i));
     }

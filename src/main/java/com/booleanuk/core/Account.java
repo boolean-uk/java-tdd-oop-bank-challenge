@@ -18,16 +18,16 @@ public abstract class Account {
 
     protected Account(String branch, BigDecimal initialBalance){
         this.id = ACCOUNT_ID++;
+        this.canOverdraft = false; //TODO unnecessary
         this.branch = branch;
         this.transactions = new ArrayList<>();
         if(initialBalance.compareTo(BigDecimal.ZERO) > 0)
             transactions.add(new Transaction(initialBalance.doubleValue()));
     }
 
-    protected Account(String branch, int monthlyTransactionLimit, boolean canOverdraft, float interest, BigDecimal initialBalance){
+    protected Account(String branch, int monthlyTransactionLimit, float interest, BigDecimal initialBalance){
         this(branch, initialBalance);
         this.monthlyTransactionLimit = monthlyTransactionLimit;
-        this.canOverdraft = canOverdraft;
         this.interest = interest;
     }
 
@@ -95,4 +95,5 @@ public abstract class Account {
 
         return true;
     }
+
 }

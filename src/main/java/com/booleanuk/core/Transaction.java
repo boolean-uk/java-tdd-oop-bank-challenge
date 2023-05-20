@@ -40,6 +40,7 @@ public class Transaction {
         return amount.compareTo(BigDecimal.ZERO) > 0;
     }
 
+    /**Returns a string representation of the transaction in the form of data,credit,debit*/
     @Override
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -12,9 +12,11 @@ import java.time.LocalTime;
 public class BankTest {
 
     private Bank bank;
+    private String branchName;
     @BeforeEach
     public void setup(){
         bank = new Bank();
+        branchName = "Eurobank Athens";
     }
 
     @Test
@@ -60,5 +62,32 @@ public class BankTest {
 
         BankStatement bankStatement = bank.generateStatement(accountId);
         bankStatement.print();
+    }
+
+    @Test
+    public void shouldReturnFalseOnIssueOverdraftForSavingsAccount(){
+        int accountId = bank.createAccount(branchName, Bank.AccountType.SAVINGS, 2000);
+
+        Assertions.assertFalse(bank.requestOverdraft(accountId));
+    }
+
+    @Test
+    public void shouldCreateOverdraftRequestForCurrentAccount(){
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
+
+        Assertions.assertTrue(bank.requestOverdraft(accountId));
+        Assertions.assertFalse(bank.getOverdraftRequests().isEmpty());
+    }
+
+    @Test
+    public void shouldReturnPendingStatusForNewOverdraftRequest(){
+        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
+        bank.requestOverdraft(accountId);
+
+        Assertions.assertEquals(Bank.OverdraftStatus.PENDING, bank.getOverdraftRequests().get(accountId).getStatus());
+    }
+    @Test
+    public void shouldReturnFalseOnOverdraftRequestForNonExistentAccount(){
+        Assertions.assertFalse(bank.requestOverdraft(-4));
     }
 }

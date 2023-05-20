@@ -38,4 +38,8 @@ public class Bank {
         return new BankStatement(accounts.get(accountId));
     }
 
+    public boolean requestOverdraft(int accountId){
+        if(!accounts.containsKey(accountId)) return false;
+    }
+
 }

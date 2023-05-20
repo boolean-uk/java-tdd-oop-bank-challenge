@@ -7,7 +7,7 @@ public class BankTest {
     @Test
     public void testBankIsCreated(){
         Bank bank = new Bank();
-        Assertions.assertEquals(0, bank.getCustomers().size());
-        Assertions.assertEquals(0, bank.getAccounts().size());
+        Assertions.assertTrue(bank.getCustomers().isEmpty());
+        Assertions.assertTrue(bank.getAccounts().isEmpty());
     }
 }

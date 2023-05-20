@@ -8,13 +8,13 @@ public class AccountTest {
     @Test
     public void testAccountCreation(){
         Bank bank = new Bank();
-        Assertions.assertEquals(0, bank.getAccounts().size());
-        Customer customer = new Customer(1);
-        Assertions.assertTrue(customer.createAccount("current", 400));
+        bank.addCustomer(1);
+        Customer customer = bank.getCustomers().get(0);
+        Assertions.assertTrue(customer.createCurrentAccount(400));
         Assertions.assertEquals(1, bank.getAccounts().size());
-        Assertions.assertTrue(customer.createAccount("savings", 930));
+        Assertions.assertTrue(customer.createSavingsAccount(930));
         Customer customer2 = new Customer(2);
-        Assertions.assertTrue(customer2.createAccount("savings", 9020));
-        Assertions.assertEquals(3, account.getAccounts().size());
+        Assertions.assertTrue(customer2.createSavingsAccount(9020));
+        Assertions.assertEquals(3, bank.getAccounts().size());
     }
 }

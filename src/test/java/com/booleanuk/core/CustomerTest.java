@@ -8,19 +8,21 @@ public class CustomerTest {
     @Test
     public void testCustomerCanCreateOnlyOneCurrentAndSavingsAccount(){
         Bank bank = new Bank();
-        Customer customer = new Customer();
-        Assertions.assertTrue(customer.createAccount("current", 500));
-        Assertions.assertFalse(customer.createAccount("current", 500));
-        Assertions.assertTrue(customer.createAccount("savings", 5000));
-        Assertions.assertFalse(customer.createAccount("savings", 5000));
+        bank.addCustomer(3);
+        Customer customer = bank.getCustomers().get(0);
+        Assertions.assertTrue(customer.createCurrentAccount(500));
+        Assertions.assertFalse(customer.createCurrentAccount(500));
+        Assertions.assertTrue(customer.createSavingsAccount(5000));
+        Assertions.assertFalse(customer.createSavingsAccount(5000));
     }
 
     @Test
     public void testDeposit(){
         Bank bank = new Bank();
-        Customer customer = new Customer();
+        bank.addCustomer(3);
+        Customer customer = bank.getCustomers().get(0);
 
-        Assertions.assertTrue(customer.createAccount("current", 500));
+        Assertions.assertTrue(customer.createCurrentAccount(500));
         Assertions.assertTrue(customer.deposit("current", 200));
         Assertions.assertEquals(700, customer.getCurrentAccount().getBalance());
 
@@ -34,9 +36,9 @@ public class CustomerTest {
     @Test
     public void testWithdraw(){
         Bank bank = new Bank();
-        Customer customer = new Customer();
+        Customer customer = new Customer(5);
 
-        Assertions.assertTrue(customer.createAccount("current", 5000));
+        Assertions.assertTrue(customer.createCurrentAccount(5000));
         Assertions.assertTrue(customer.withdraw("current", 200));
         Assertions.assertEquals(4800, customer.getCurrentAccount().getBalance());
 
@@ -45,7 +47,7 @@ public class CustomerTest {
 
         Assertions.assertFalse(customer.withdraw("current", 4000));
 
-        Assertions.assertTrue(customer.createAccount("savings", 1000));
+        Assertions.assertTrue(customer.createSavingsAccount(1000));
         Assertions.assertTrue(customer.withdraw("savings", 200));
         Assertions.assertFalse(customer.withdraw("savings", 210));
         Assertions.assertFalse(customer.withdraw("savings", 250));

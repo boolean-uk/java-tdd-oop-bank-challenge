@@ -79,34 +79,26 @@ public class BankTest {
         Assertions.assertFalse(bank.requestOverdraft(accountId));
     }
 
+
     @Test
-    public void shouldCreateOverdraftRequestForCurrentAccount(){
+    public void shouldReturnTrueAndPengingStatusOnOverdraftRequestForCurrentAccount(){
         int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
 
         Assertions.assertTrue(bank.requestOverdraft(accountId));
-        Assertions.assertFalse(bank.getOverdraftRequests().isEmpty());
+        Assertions.assertEquals(Bank.OverdraftStatus.PENDING, bank.getAccounts().get(accountId).getOverdraftStatus());
     }
 
-    @Test
-    public void shouldReturnPendingStatusForNewOverdraftRequest(){
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
-        bank.requestOverdraft(accountId);
-
-        Assertions.assertEquals(Bank.OverdraftStatus.PENDING, bank.getOverdraftRequests().get(accountId).getStatus());
-    }
     @Test
     public void shouldReturnFalseOnOverdraftRequestForNonExistentAccount(){
         Assertions.assertFalse(bank.requestOverdraft(-4));
     }
 
     @Test
-    public void shouldReturnAcceptedStatusAndAccountShouldOverdraftForAcceptedOverdraftRequest(){
+    public void shouldReturnAcceptedStatusForAcceptedOverdraftRequest(){
         int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
         bank.requestOverdraft(accountId);
         bank.evaluateOverdraftRequest(accountId, Bank.OverdraftStatus.ACCEPTED);
 
-        Assertions.assertEquals(Bank.OverdraftStatus.ACCEPTED, bank.getOverdraftRequests().get(accountId).getStatus());
-        Assertions.assertTrue(bank.getAccounts().get(accountId).isOverdraft());
-
+        Assertions.assertEquals(Bank.OverdraftStatus.ACCEPTED, bank.getAccounts().get(accountId).getOverdraftStatus());
     }
 }

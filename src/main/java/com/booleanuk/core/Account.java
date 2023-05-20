@@ -10,7 +10,8 @@ public abstract class Account {
 
     private int id;
     private int monthlyTransactionLimit;
-    private boolean overdraft;
+    //private boolean overdraft;
+    private Bank.OverdraftStatus overdraftStatus;
     private float interest;
     private String branch;
 
@@ -18,7 +19,8 @@ public abstract class Account {
 
     protected Account(String branch, BigDecimal initialBalance){
         this.id = ACCOUNT_ID++;
-        this.overdraft = false; //TODO unnecessary
+        //this.overdraft = false; //TODO unnecessary
+        this.overdraftStatus = Bank.OverdraftStatus.NONE;
         this.branch = branch;
         this.transactions = new ArrayList<>();
         if(initialBalance.compareTo(BigDecimal.ZERO) > 0)
@@ -42,13 +44,21 @@ public abstract class Account {
         this.monthlyTransactionLimit = monthlyTransactionLimit;
     }
 
-    public boolean isOverdraft() {
-        return overdraft;
+    public Bank.OverdraftStatus getOverdraftStatus() {
+        return overdraftStatus;
     }
 
-    public void setOverdraft(boolean overdraft) {
-        this.overdraft = overdraft;
+    protected void setOverdraftStatus(Bank.OverdraftStatus overdraftStatus) {
+        this.overdraftStatus = overdraftStatus;
     }
+
+    /*public boolean isOverdraft() {
+        return overdraft;
+    }*/
+
+    /*public void setOverdraft(boolean overdraft) {
+        this.overdraft = overdraft;
+    }*/
 
     public float getInterest() {
         return interest;

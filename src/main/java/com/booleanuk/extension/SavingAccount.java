@@ -24,7 +24,16 @@ public class SavingAccount implements Account {
     }
 
     public double getBalance() {
-        return Util.fromIntToDouble(balance);
+        int result = 0;
+        for (Transaction tr : this.transactions) {
+            if (tr.getType().equals(TransactionType.CREDIT)){
+                result+=Util.fromDoubleToInt(tr.getAmount());
+            } else if (tr.getType().equals(TransactionType.DEBIT)){
+                result-=Util.fromDoubleToInt(tr.getAmount());
+            }
+        }
+
+        return Util.fromIntToDouble(result);
     }
 
     public void setBalance(double balance) {
@@ -39,12 +48,6 @@ public class SavingAccount implements Account {
         this.overdraft = overdraft;
     }
 
-    @Override
-    public void deposit(double amount,LocalDate date) {
-        this.setBalance(getBalance() + amount);
-        this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()));
-    }
-
     public Branch getBranch() {
         return branch;
     }
@@ -54,13 +57,22 @@ public class SavingAccount implements Account {
     }
 
     @Override
-    public void withdraw(double amount,LocalDate date) {
-        this.setBalance(getBalance() - amount);
-        this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()));
+    public void deposit(double amount,LocalDate date) {
+        this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()+ amount));
     }
 
     @Override
-    public void generateStatement() {       List<Transaction> sortedTransactions=this.transactions.stream()
+    public String  withdraw(double amount,LocalDate date) {
+        if ((this.getBalance()-amount)>=0){
+            this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()- amount));
+            return "Transaction succeeded";
+        }
+        return "Overdraft not allowed";
+    }
+
+    @Override
+    public void generateStatement() {
+        List<Transaction> sortedTransactions=this.transactions.stream()
             .sorted(Comparator.comparing(Transaction::getDate).reversed()).toList();
 
         StringBuilder strBuilder = new StringBuilder();

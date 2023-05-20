@@ -25,7 +25,7 @@ public class SavingAccountTest {
     @Test
     public void testGenerateStatementBasedOnTransactions() {
         // This test will also test of withdraw and deposit method
-        com.booleanuk.core.SavingAccount account = new com.booleanuk.core.SavingAccount(0);
+        SavingAccount account = new SavingAccount(0, new Branch("xxx","xxx"));
         account.deposit(1000.00, LocalDate.of(2012, 1, 10));
         account.deposit(2000.00, LocalDate.of(2012, 1, 13));
         account.withdraw(500.00, LocalDate.of(2012, 1, 14));
@@ -35,7 +35,8 @@ public class SavingAccountTest {
     }
     @Test
     public void testWithdraw(){
-        SavingAccount account = new SavingAccount(1000,new Branch("xxxx","xxxx"));
+        SavingAccount account = new SavingAccount(0,new Branch("xxxx","xxxx"));
+        account.deposit(1000.00,LocalDate.of(2012,1,14));
         String message = account.withdraw(500.00,LocalDate.of(2012,1,14));
 
         // Test for overdraft should fail

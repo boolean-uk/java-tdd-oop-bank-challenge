@@ -59,14 +59,13 @@ public class CurrentAccount implements Account {
 
     @Override
     public void deposit(double amount, LocalDate date) {
-        //this.setBalance(this.getBalance() + amount);
-        this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()));
+        this.transactions.add(new Transaction(date, TransactionType.CREDIT,amount, this.getBalance()+ amount));
     }
 
     @Override
-    public void withdraw(double amount, LocalDate date) {
-        //this.setBalance(this.getBalance() - amount);
-        this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()));
+    public String withdraw(double amount, LocalDate date) {
+        this.transactions.add(new Transaction(date, TransactionType.DEBIT,amount, this.getBalance()- amount));
+        return "";
     }
 
     @Override

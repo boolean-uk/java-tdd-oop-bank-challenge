@@ -46,10 +46,26 @@ public class TestAccountActions {
 
         //Test for failed deposit
         Assertions.assertFalse(accountAction.deposit("ABCD", 200.50));
-
     }
 
+    @Test
+    public void testWithdraw() {
+        AccountActions accountAction = new AccountActions();
+        accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
+        accountAction.deposit("NDBK-0000-0001", 200.50);
 
+        //Test for successful withdrawals
+        Assertions.assertTrue(accountAction.withdraw("NDBK-0000-0001", 50));
+        Assertions.assertTrue(accountAction.withdraw("NDBK-0000-0001", 10.25));
+
+        Assertions.assertEquals(140.25, accountAction.accounts.get(0).getBalanceInDollars());
+
+        //Test for failed withdrawal (Account doesn't exist)
+        Assertions.assertFalse(accountAction.withdraw("ABCD", 200.50));
+
+        //Test for failed withdrawal (Balance will become negative)
+        Assertions.assertFalse(accountAction.withdraw("NDBK-0000-0001", 300));
+    }
 
 
 

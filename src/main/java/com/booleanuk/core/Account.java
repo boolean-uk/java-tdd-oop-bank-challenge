@@ -52,7 +52,7 @@ public class Account {
     }
 
     public void setBalanceInCents(double AmountInDollars) {
-        this.balanceInCents += (int) (AmountInDollars * 100.0);
+            this.balanceInCents += (int) (AmountInDollars * 100.0);
     }
 
     public double getBalanceInDollars() {

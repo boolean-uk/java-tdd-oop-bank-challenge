@@ -10,10 +10,10 @@ public class BankTest {
         bank.getAccounts().add(new CurrentAccount(0, new Branch("xxx", "xx")));
         bank.getAccounts().add(new SavingAccount(0, new Branch("xxx", "xx")));
 
-        bank.requestOverdrift(bank.getAccounts().get(0));
-        bank.requestOverdrift(bank.getAccounts().get(1));
+        bank.requestOverdraft(bank.getAccounts().get(0));
+        bank.requestOverdraft(bank.getAccounts().get(1));
 
-        Assertions.assertEquals(2, bank.getoverdraftRequests().size());
+        Assertions.assertEquals(2, bank.getOverdraftRequests().size());
     }
 
     @Test

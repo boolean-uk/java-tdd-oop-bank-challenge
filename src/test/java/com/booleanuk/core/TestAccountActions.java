@@ -38,9 +38,11 @@ public class TestAccountActions {
         AccountActions accountAction = new AccountActions();
         accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
 
-        //Test for successful deposit
+        //Test for successful deposits
         Assertions.assertTrue(accountAction.deposit("NDBK-0000-0001", 200.50));
-        Assertions.assertEquals(200.50, accountAction.accounts.get(0).getBalanceInDollars());
+        Assertions.assertTrue(accountAction.deposit("NDBK-0000-0001", 100.25));
+
+        Assertions.assertEquals(300.75, accountAction.accounts.get(0).getBalanceInDollars());
 
         //Test for failed deposit
         Assertions.assertFalse(accountAction.deposit("ABCD", 200.50));

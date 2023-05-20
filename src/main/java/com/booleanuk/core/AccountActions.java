@@ -59,7 +59,7 @@ public class AccountActions {
         if (searchAccount(accountNumber) == null) {
             System.out.println("Could not process deposit as this account does not exist");
             return false;
-        } else if(searchAccount(accountNumber).getBalanceInDollars() - amountInDollars < 0) {
+        } else if(searchAccount(accountNumber).getBalanceInDollars() - amountInDollars < 0 && !searchAccount(accountNumber).isApprovedForOverdraft()) {
             System.out.println("Insufficient funds");
             return false;
         }
@@ -67,6 +67,19 @@ public class AccountActions {
         searchAccount(accountNumber).setBalanceInCents(-amountInDollars);
         return true;
     }
+
+    public boolean approveOverdraft(String accountNumber) {
+        if (searchAccount(accountNumber) == null) {
+            System.out.println("Could not approve overdraft as this account does not exist");
+            return false;
+        }
+
+        searchAccount(accountNumber).setApprovedForOverdraft(true);
+        return true;
+    }
+
+
+
 
 
 }

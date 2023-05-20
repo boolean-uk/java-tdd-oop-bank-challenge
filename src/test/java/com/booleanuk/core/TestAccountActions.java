@@ -68,6 +68,7 @@ public class TestAccountActions {
 
         //Test for successful withdrawals (Insufficient funds but overdraft has been approved)
         Assertions.assertTrue(accountAction.approveOverdraft("NDBK-0000-0001"));
+        Assertions.assertFalse(accountAction.approveOverdraft("ABCD"));
 
         Assertions.assertTrue(accountAction.withdraw("NDBK-0000-0001", 240.25));
 

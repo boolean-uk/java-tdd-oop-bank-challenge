@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class Bank {
-    private String bankName;
+    private final String bankName;
     private final String bankCode;
     private final Locale locale;
     private BankManager bankManager;
@@ -42,9 +42,22 @@ public class Bank {
         }
     }
 
+    public void createBankManager() {
+        if(this.bankManager == null) {
+            this.bankManager = new BankManager();
+            System.out.println("Bank manager created.");
+        } else {
+            System.out.println("This bank already has a manager.");
+        }
+    }
+
     public List<Branch> getBranches() { return this.branches; }
 
     public String getBankCode() { return bankCode; }
 
     public Locale getLocale() { return locale; }
+
+    public BankManager geBankManager() {
+        return this.bankManager;
+    }
 }

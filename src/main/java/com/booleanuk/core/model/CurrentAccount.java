@@ -24,8 +24,10 @@ public class CurrentAccount extends Account {
     public void overdraft(OverdraftRequest request) {
         if (request == null)
             throw new NullPointerException("Overdraft request must be non-null.");
-        if (request.getState() == OVERDRAFT_STATE.APPROVED)
-            request.getAccount().createTransaction(request.getAmount(),TRANSACTION_TYPE.WITHDRAWAL);
+        if (request.getState() == OVERDRAFT_STATE.APPROVED) {
+            request.getAccount().createTransaction(request.getAmount(), TRANSACTION_TYPE.WITHDRAWAL);
+            System.out.println("Overdraft request has been completed.");
+        }
         else if (request.getState() == OVERDRAFT_STATE.DENIED)
             System.out.println("Request has not been approved.");
         else

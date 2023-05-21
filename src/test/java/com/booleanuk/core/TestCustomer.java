@@ -26,13 +26,17 @@ public class TestCustomer {
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
         myself.setUpCurrentAccount(new Balance(100,0));
         myself.setUpSavingsAccount(new Balance(50,0));
-        myself.getAccounts().get(0).withdraw(new Balance(10,0));
+        System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
+        myself.getAccounts().get(0).withdraw(new Balance(30,0));
+        System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
         myself.getAccounts().get(0).withdraw(new Balance(20,0));
+        System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
         myself.getAccounts().get(0).deposit(new Balance(20,0));
+        System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
         //deposit $10 then 20 in the first account
         myself.getAccounts().get(1).deposit(new Balance(20,0));
         //deposited $20 in the second account
-        myself.getAccounts().get(0).showStatements();
+//        myself.getAccounts().get(0).showStatements();
 //        myself.getAccounts().get(0).getBalanceByStatements();
 //        System.out.println(myself.getAccounts().get(0).getBalanceByStatements()); // works as i want it
         //i want to see the 20 first then the 10.

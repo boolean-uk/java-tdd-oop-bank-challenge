@@ -43,15 +43,22 @@ public class Account {
         String[] statements = this.statements.split("\n");
         Balance balance = new Balance(0,0);
         // i know where the latest balance is
-        String[] parts = statements[2].split("\\|\\|");
+        if(statements.length==3){
+            return this.balance;
+        }
+        String[] parts = statements[statements.length-1].split("\\|\\|");
+        System.out.println(Arrays.toString(statements));
+        System.out.println(Arrays.toString(parts));
         String[] almostThere = parts[3].split("\\$");
-        String[] number = almostThere[0].split(",");
+        System.out.println(Arrays.toString(almostThere));
+        String[] number = almostThere[1].split(",");
+        System.out.println(Arrays.toString(number));
         int intPart = Integer.parseInt(number[0]);
         int decimalPart = Integer.parseInt(number[1]);
         return new Balance(intPart,decimalPart);
     }
     public boolean withdraw(Balance toWithdraw){
-        if(this.getBalance().getIntPart()>toWithdraw.getIntPart()){
+        if(this.getBalanceByStatements().getIntPart()>toWithdraw.getIntPart()){
             System.out.println("Withdrew "+toWithdraw.toString()+" ");
             this.balance.interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
             this.addToStatements(new Balance(-toWithdraw.getIntPart(), -toWithdraw.getDecimalPart()));

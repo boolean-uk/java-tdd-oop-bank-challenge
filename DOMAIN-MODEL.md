@@ -108,7 +108,35 @@ For this user story, the UML diagram is:
 For this user story, the UML diagram is:
 ![d3+4.png](d3%2B4.png)
 
-# Extension
+# Extensions
+
+```
+5.
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
+6.
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+7.
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+8.
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+9.
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```
+
 ## User story 5.
 ### For this user story, we want the balance of an account to be calculated by the statements and not by any other means. What this means is that now the balance attribute of an account will not be changed directly when withdrawing or depositing, and when asked for it it will be given through the statements.
 

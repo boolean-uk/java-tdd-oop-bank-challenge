@@ -53,9 +53,10 @@ public class Customer {
             System.out.println("Customer already has a current account");
             return false;
         }
-        setCurrentAccount(new Account(getId(), "current", initalDeposit));
+        setCurrentAccount(new Account( Account.getUniqueRandomAccountId(),getId(), "current", initalDeposit));
         getCurrentAccount().addDepositStatement(initalDeposit);
-        Bank.addAccount(getId(), "current", initalDeposit);
+        //first id is account id, second is user id
+        Bank.addAccount(getCurrentAccount().getId(), getId(), "current", initalDeposit);
         return true;
     }
 
@@ -67,13 +68,13 @@ public class Customer {
             return false;
         }
 
-        setSavingsAccount(new Account(getId(), "savings", initalDeposit));
-        getSavingsAccount().addWithdrawStatement(initalDeposit);
-        Bank.addAccount(getId(), "savings", initalDeposit);
+        setSavingsAccount(new Account(Account.getUniqueRandomAccountId(), getId(), "savings", initalDeposit));
+        getSavingsAccount().addDepositStatement(initalDeposit);
+        Bank.addAccount(getSavingsAccount().getId(), getId(), "savings", initalDeposit);
         return true;
     }
 
-    public boolean withdraw(@org.jetbrains.annotations.NotNull String accountType, int ammount) {
+    public boolean withdraw(@NotNull String accountType, int ammount) {
 
         if (accountType.equals("current") && hasCurrentAccount()) {
 
@@ -118,5 +119,23 @@ public class Customer {
 
         return false;
     }
+
+    //statement generator for each account type
+    public void generateSavingsAccountStatements () {
+        if (hasSavingsAccount()) {
+            getSavingsAccount().generateStatements();
+        } else {
+            System.out.println("You do not have a savings account yet!");
+        }
+    }
+
+    public void generateCurrentAccountStatements () {
+        if (hasCurrentAccount()) {
+            getCurrentAccount().generateStatements();
+        } else {
+            System.out.println("You do not have a current account yet!");
+        }
+    }
+
 
 }

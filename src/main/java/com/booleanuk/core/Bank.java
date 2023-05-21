@@ -31,8 +31,8 @@ public class Bank {
         return true;
     }
 
-    public static void addAccount (int customerId, String accountType, int initalDeposit) {
-        getAccounts().add(new Account(customerId, accountType, initalDeposit));
+    public static void addAccount (int id, int customerId, String accountType, int initalDeposit) {
+        getAccounts().add(new Account(id, customerId, accountType, initalDeposit));
     }
 
 }

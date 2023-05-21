@@ -15,6 +15,9 @@ public class StatementTest {
         Assertions.assertEquals(1, customer.getSavingsAccount().getStatements().size());
         Assertions.assertTrue(customer.deposit("savings", 1200));
         Assertions.assertEquals(2, customer.getSavingsAccount().getStatements().size());
+        Assertions.assertTrue(customer.withdraw("savings", 100));
+
+        customer.getSavingsAccount().generateStatements();
     }
 
 }

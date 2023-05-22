@@ -5,4 +5,5 @@ public class Util {
         return (double)(num * 100.00);
     }
     public static int fromDoubleToInt(double num){return (int)(num/100); }
+
 }

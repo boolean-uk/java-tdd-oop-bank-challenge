@@ -75,7 +75,7 @@ public class CurrentAccount implements Account {
     }
 
     @Override
-    public void generateStatement() {
+    public String generateStatement() {
         List<Transaction> sortedTransactions=this.transactions.stream()
                 .sorted(Comparator.comparing(Transaction::getDate).reversed()).toList();
 
@@ -93,7 +93,9 @@ public class CurrentAccount implements Account {
             strBuilder.append(" ").append(tr.getBalance());
             strBuilder.append("\n");
         }
+
         System.out.println(strBuilder.toString());
+        return strBuilder.toString();
     }
 
 }

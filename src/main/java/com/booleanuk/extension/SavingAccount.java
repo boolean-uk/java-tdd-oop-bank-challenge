@@ -71,7 +71,7 @@ public class SavingAccount implements Account {
     }
 
     @Override
-    public void generateStatement() {
+    public String generateStatement() {
         List<Transaction> sortedTransactions=this.transactions.stream()
             .sorted(Comparator.comparing(Transaction::getDate).reversed()).toList();
 
@@ -90,5 +90,6 @@ public class SavingAccount implements Account {
             strBuilder.append("\n");
         }
         System.out.println(strBuilder.toString());
+        return strBuilder.toString();
     }
 }

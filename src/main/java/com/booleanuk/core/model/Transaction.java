@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
-public class Transaction {
+class Transaction {
     private final String transactionID;
     private final LocalDate date;
     private final TRANSACTION_TYPE type;

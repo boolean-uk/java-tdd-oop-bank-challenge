@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Money {
+class Money {
 
     private final BigDecimal amount;
     private final NumberFormat numberFormat;

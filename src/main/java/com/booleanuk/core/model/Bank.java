@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class Bank {
+class Bank {
     private final String bankName;
     private final String bankCode;
     private final Locale locale;

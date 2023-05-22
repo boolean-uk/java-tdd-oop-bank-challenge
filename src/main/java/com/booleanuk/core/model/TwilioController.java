@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.model;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;

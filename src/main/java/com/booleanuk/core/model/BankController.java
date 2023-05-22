@@ -1,6 +1,5 @@
-package com.booleanuk.core;
+package com.booleanuk.core.model;
 
-import com.booleanuk.core.model.*;
 import com.booleanuk.core.model.enumerations.ACCOUNT_TYPE;
 import com.booleanuk.core.model.enumerations.OVERDRAFT_STATE;
 
@@ -11,7 +10,7 @@ import java.util.Locale;
 public class BankController {
     private final Bank bank;
 
-    BankController(String bankName, String bankCode, Locale locale) {
+    public BankController(String bankName, String bankCode, Locale locale) {
         this.bank = createBank(bankName,bankCode, locale);
         if (this.bank == null) System.out.println("Something went wrong. Bank wasn't created.");
     }
@@ -31,11 +30,11 @@ public class BankController {
         return null;
     }
 
-    Bank getBank() {
+    public Bank getBank() {
         return this.bank;
     }
 
-    BankManager createBankManager() {
+    public BankManager createBankManager() {
         try {
             this.bank.createBankManager();
             return bank.geBankManager();
@@ -45,7 +44,7 @@ public class BankController {
         return null;
     }
 
-    Branch createBranch(String branchName, String bankCode) {
+    public Branch createBranch(String branchName, String bankCode) {
         try {
             this.bank.createBranch(branchName, bankCode);
             System.out.println("Branch was created.");
@@ -57,7 +56,7 @@ public class BankController {
         return null;
     }
 
-    Customer createCustomer(Branch branch, String tin, String idCard, String givenNames, String surname, LocalDate dateOfBirth) {
+    public Customer createCustomer(Branch branch, String tin, String idCard, String givenNames, String surname, LocalDate dateOfBirth) {
         try {
             branch.createCustomer(tin, idCard, givenNames, surname, dateOfBirth);
             System.out.println("Customer was created.");
@@ -69,7 +68,7 @@ public class BankController {
         return null;
     }
 
-    CurrentAccount createCurrentAccount(Customer customer) {
+    public CurrentAccount createCurrentAccount(Customer customer) {
         try {
             customer.createAccount(ACCOUNT_TYPE.CURRENT);
             Account account = customer.getAccounts().get(customer.getAccounts().size() - 1);
@@ -84,7 +83,7 @@ public class BankController {
         return null;
     }
 
-    CurrentAccount createCurrentAccount(Customer customer, BigDecimal amount) {
+    public CurrentAccount createCurrentAccount(Customer customer, BigDecimal amount) {
         try {
             customer.createAccount(ACCOUNT_TYPE.CURRENT, amount);
             Account account = customer.getAccounts().get(customer.getAccounts().size() - 1);
@@ -99,7 +98,7 @@ public class BankController {
         return null;
     }
 
-    SavingsAccount createSavingsAccount(Customer customer) {
+    public SavingsAccount createSavingsAccount(Customer customer) {
         try {
             customer.createAccount(ACCOUNT_TYPE.SAVINGS);
             Account account = customer.getAccounts().get(customer.getAccounts().size() - 1);
@@ -114,7 +113,7 @@ public class BankController {
         return null;
     }
 
-    SavingsAccount createSavingsAccount(Customer customer, BigDecimal amount) {
+    public SavingsAccount createSavingsAccount(Customer customer, BigDecimal amount) {
         try {
             customer.createAccount(ACCOUNT_TYPE.SAVINGS, amount);
             Account account = customer.getAccounts().get(customer.getAccounts().size() - 1);
@@ -129,7 +128,7 @@ public class BankController {
         return null;
     }
 
-    void deposit(Account account,BigDecimal amount) {
+    public void deposit(Account account,BigDecimal amount) {
         try {
             account.deposit(amount);
         } catch (Exception e) {
@@ -137,7 +136,7 @@ public class BankController {
         }
     }
 
-    void withdraw(Account account,BigDecimal amount) {
+    public void withdraw(Account account,BigDecimal amount) {
         try {
             account.withdraw(amount);
         } catch (Exception e) {
@@ -145,7 +144,7 @@ public class BankController {
         }
     }
 
-    OverdraftRequest createOverdraftRequest(CurrentAccount account, BigDecimal amount) {
+    public OverdraftRequest createOverdraftRequest(CurrentAccount account, BigDecimal amount) {
             try {
                 account.requestOverdraft(amount);
                 System.out.println("Overdraft request was created.");
@@ -157,7 +156,7 @@ public class BankController {
         return null;
     }
 
-    void approveOverdraftRequest(OverdraftRequest request) {
+    public void approveOverdraftRequest(OverdraftRequest request) {
         try {
             this.bank.geBankManager().processOverdraftRequest(request, OVERDRAFT_STATE.APPROVED);
             System.out.println("Overdraft request was approved.");
@@ -166,7 +165,7 @@ public class BankController {
         }
     }
 
-    void denyOverdraftRequest(OverdraftRequest request) {
+    public void denyOverdraftRequest(OverdraftRequest request) {
         try {
             this.bank.geBankManager().processOverdraftRequest(request, OVERDRAFT_STATE.DENIED);
             System.out.println("Overdraft request was denied.");
@@ -175,7 +174,7 @@ public class BankController {
         }
     }
 
-    void overdraft(Account account, OverdraftRequest request) {
+    public void overdraft(Account account, OverdraftRequest request) {
         if (account instanceof CurrentAccount) {
             CurrentAccount currentAccount = (CurrentAccount) account;
             try {
@@ -189,7 +188,7 @@ public class BankController {
         }
     }
 
-    void printBankStatement(Account account) {
+    public void printBankStatement(Account account) {
         if(account != null) {
             try {
                 account.printBankStatement();

@@ -5,12 +5,10 @@ import com.booleanuk.core.model.enumerations.TRANSACTION_TYPE;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 public class CurrentAccount extends Account {
-    private List<OverdraftRequest> overdraftRequests;
+    private final List<OverdraftRequest> overdraftRequests;
 
     CurrentAccount(BigDecimal amount, Customer customer) {
         super(amount, customer);

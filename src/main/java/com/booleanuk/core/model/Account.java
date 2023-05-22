@@ -4,16 +4,17 @@ import com.booleanuk.core.model.enumerations.TRANSACTION_TYPE;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public abstract class Account {
-    private String iban;
-    private String accountNumber;
-    private Customer customer;
-    private List<Transaction> transactions;
+    private final String iban;
+    private final String accountNumber;
+    private final Customer customer;
+    private final List<Transaction> transactions;
 
     Account(BigDecimal amount, Customer customer) {
         if (amount == null || customer == null)
@@ -87,6 +88,22 @@ public abstract class Account {
             System.out.printf("%11s || %11s || %11s || %11s\n", "date", "credit", "debit", "balance");
             transactions.forEach(System.out::println);
         }
+    }
+
+    public String getBankStatement() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        StringBuilder result = new StringBuilder();
+        if (transactions.size() == 0) {
+            result.append("No transactions have been made." + "\n");
+        } else {
+            for (Transaction transaction : transactions) {
+                result.append(formatter.format(transaction.getDate())).append(", ");
+                result.append(transaction.getType() == TRANSACTION_TYPE.DEPOSIT ? "Deposit: " : "Withdrawal: ");
+                result.append(transaction.getMoney()).append(", ");
+                result.append("Balance: ").append(transaction.getBalance()).append("\n");
+            }
+        }
+        return result.toString();
     }
 
     public String getAccountNumber() {

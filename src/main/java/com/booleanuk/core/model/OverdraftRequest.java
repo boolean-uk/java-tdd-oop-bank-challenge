@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 
 public class OverdraftRequest {
 
-    private Account account;
+    private final Account account;
     private OVERDRAFT_STATE state;
-    private BigDecimal amount;
+    private final BigDecimal amount;
 
     OverdraftRequest(BigDecimal amount, Account account) {
         if (amount == null || account == null)

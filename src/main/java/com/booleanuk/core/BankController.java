@@ -147,20 +147,14 @@ public class BankController {
     }
 
     OverdraftRequest createOverdraftRequest(CurrentAccount account, BigDecimal amount) {
-        if (account instanceof CurrentAccount) {
-            CurrentAccount currentAccount = (CurrentAccount) account;
             try {
-                currentAccount.requestOverdraft(amount);
+                account.requestOverdraft(amount);
                 System.out.println("Overdraft request was created.");
-                return currentAccount.getOverdraftRequests().get(currentAccount.getOverdraftRequests().size() - 1);
+                return account.getOverdraftRequests().get(account.getOverdraftRequests().size() - 1);
             } catch (Exception e) {
                 System.out.println("Something went wrong. Overdraft request wasn't created.");
                 //e.printStackTrace();
             }
-        } else {
-            System.out.println(account.getClass().getName());
-            System.out.println("You can't request an overdraft on a savings account.");
-        }
         return null;
     }
 
@@ -202,6 +196,19 @@ public class BankController {
                 account.printBankStatement();
             } catch (Exception e) {
                 System.out.println("Something went wrong. Bank statement wasn't printed.");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Account must be non-null.");
+        }
+    }
+
+    public void sendBankStatementToPhone(Account account) {
+        if(account != null) {
+            try {
+                TwilioController.sendSms(account.getBankStatement());
+            } catch (Exception e) {
+                System.out.println("Something went wrong. Bank statement wasn't sent.");
                 e.printStackTrace();
             }
         } else {

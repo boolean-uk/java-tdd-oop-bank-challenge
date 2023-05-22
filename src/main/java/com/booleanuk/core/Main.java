@@ -38,5 +38,6 @@ public class Main {
         controller.deposit(currentAccount,new BigDecimal(100));
 
         controller.printBankStatement(currentAccount);
+        controller.sendBankStatementToPhone(currentAccount);
     }
 }

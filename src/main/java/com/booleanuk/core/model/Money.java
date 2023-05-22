@@ -2,13 +2,12 @@ package com.booleanuk.core.model;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.Currency;
 import java.util.Locale;
 
 public class Money {
 
-    private BigDecimal amount;
-    private NumberFormat numberFormat;
+    private final BigDecimal amount;
+    private final NumberFormat numberFormat;
 
     Money(BigDecimal amount, Locale locale) {
         if (amount == null || locale == null)

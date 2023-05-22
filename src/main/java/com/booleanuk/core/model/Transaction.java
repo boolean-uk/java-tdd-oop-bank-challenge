@@ -8,12 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 public class Transaction {
-    private String transactionID;
-    private LocalDate date;
-    private TRANSACTION_TYPE type;
-    private Money money;
-    private Money balance;
-    private Account account;
+    private final String transactionID;
+    private final LocalDate date;
+    private final TRANSACTION_TYPE type;
+    private final Money money;
+    private final Money balance;
+    private final Account account;
 
     Transaction(TRANSACTION_TYPE type, Money money, Account account) {
         if (type == null || money == null || account == null)
@@ -30,16 +30,18 @@ public class Transaction {
     }
 
     public LocalDate getDate() {
-        return date;
+        return this.date;
     }
 
     public TRANSACTION_TYPE getType() {
-        return type;
+        return this.type;
     }
 
     public Money getMoney() {
-        return money;
+        return this.money;
     }
+
+    public  Money getBalance() { return this.balance; }
 
     @Override
     public String toString() {

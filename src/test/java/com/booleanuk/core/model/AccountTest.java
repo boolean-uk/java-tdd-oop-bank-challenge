@@ -1,6 +1,5 @@
 package com.booleanuk.core.model;
 
-import com.booleanuk.core.model.enumerations.TRANSACTION_TYPE;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

@@ -14,7 +14,7 @@ public class Main {
     }
 
     public static void generateSampleData() {
-        Locale locale = new Locale("el", "GR");
+        Locale locale = Locale.UK;//new Locale("el", "GR");
 
         BankController controller = new BankController("Alpha Bank", "140", locale);
         controller.createBankManager();
@@ -38,6 +38,6 @@ public class Main {
         controller.deposit(currentAccount,new BigDecimal(100));
 
         controller.printBankStatement(currentAccount);
-        controller.sendBankStatementToPhone(currentAccount);
+        //controller.sendBankStatementToPhone(currentAccount);
     }
 }

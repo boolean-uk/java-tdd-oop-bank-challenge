@@ -27,13 +27,19 @@ public class Account {
     }
 
     // withdraw method
-    public void withdraw(double formerDeposit) {
-        if (balance >= formerDeposit) {
-            balance -= formerDeposit;
-        } else {
-            System.out.println("There is not enough money on your account.");
-        }
+    public void withdraw(int withdraw) {
+        balance -= withdraw;
+        System.out.println("Your balance is: $" + balance);
+        System.out.println("You have successfully removed $" + withdraw + " from your account.");
+        System.out.println("The new balance of your checking account is: $" + balance);
     }
+//    public void withdraw(int formerDeposit) {
+//        if (balance >= formerDeposit) {
+//            balance -= formerDeposit;
+//        } else {
+//            System.out.println("There is not enough money on your account.");
+//        }
+//    }
 
     public String getAccountNumber() {
         return accountNumber;

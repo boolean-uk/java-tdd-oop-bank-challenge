@@ -12,11 +12,12 @@ public class AccountTest {
         Assertions.assertEquals(200, account.getBalance());
     }
 
-//    @Test
-//    void depositTest() {
-//        Account account = Account("1111", 1000.0, "Rose");
-//        account.deposit(500.0);
-//        Assertions.assertEquals(1500.0, account.getBalance(), 0.01);
-//    }
+    @Test
+    public void addWithdrawCheckingAccountTest(){
+        Account account = new Account("1111", 100, "Checking");
+        account.withdraw(100);
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
 
 }

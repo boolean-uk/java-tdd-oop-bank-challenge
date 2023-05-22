@@ -45,10 +45,9 @@ public class Branch {
     public Map<String, Account> getAllAccounts(){
         Map<String, Account> accountMap = new HashMap<>();
         List<Customer> customers = new ArrayList<>();
-        this.customers.values().stream().toList().forEach(customer -> {
+        this.customers.values().stream().collect(Collectors.toList()).forEach(customer -> {
             customer.getAccounts().values().forEach(account -> accountMap.put(account.getId(), account));
         });
-
         return accountMap;
     }
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Bank {
     private ArrayList<Account> accounts;
     private ArrayList<Customer> customers;
-//    public Customer customer;
+    public Customer customer;
 
 
     public Bank(){
@@ -32,9 +32,11 @@ public class Bank {
                 System.out.println("Customer has already a " + accountType + "account.");
                 return false;
             }
+//            getAccounts().add(new Account(accountNumber, formerDeposit, accountType));
+//            System.out.println("Successfully added new number " + accountNumber);
         }
         getAccounts().add(new Account(accountNumber, formerDeposit, accountType));
-        System.out.println("Successfully added new account number " + accountNumber);
+        System.out.println("Successfully added new number " + accountNumber);
         return true;
     }
 
@@ -48,7 +50,7 @@ public class Bank {
             }
         }
         getCustomers().add(new Customer(id));
-        System.out.println("Successfully added new Customer with id nr " + id + ".");
+        System.out.println("Successfully added new Customer with " + id + " number.");
         return true;
     }
 

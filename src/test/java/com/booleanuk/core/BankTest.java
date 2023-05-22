@@ -39,7 +39,7 @@ public class BankTest {
 //        Account account1 = new Account("1111", 100, "Savings");
 //        bank.addAccount("2222", 200, "Savings");
 //        Assertions.assertEquals("1111", bank.getAccounts().contains(account1));
-//        Assertions.assertTrue();
+//        Assertions.assertTrue(bank.getAccounts().contains(account1));
 //    }
 
 }

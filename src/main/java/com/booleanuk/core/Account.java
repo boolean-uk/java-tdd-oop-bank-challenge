@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.Map;
+
 public class Account {
     private String accountNumber;
     private double balance;
@@ -21,19 +23,19 @@ public class Account {
 
 //     formerDeposit method
     public void formerDeposit(double formerDeposit) {
-       if (formerDeposit > 0) {
+       if (formerDeposit > 0.0) {
            balance += formerDeposit;
            System.out.println("You have successfully added " + formerDeposit + " to your account.");
            System.out.println("The new balance of your checking account is: " + balance);
        } else {
-           balance = 0;
+           balance = 0.0;
        }
     }
 
     // withdraw method
     public boolean withdraw(double amount) {
         double newBalance = balance - amount;
-        if (newBalance < 0) {
+        if (newBalance < 0.0) {
             System.out.println("There is not enough money on your account.");
             return false;
         }
@@ -84,4 +86,6 @@ public class Account {
         this.id = id;
     }
 
+//    public Map<Object, Object> getTransactions() {
+//    }
 }

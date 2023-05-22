@@ -7,12 +7,18 @@ public class SavingsAccount implements BankAccount{
     private List<Transaction> transactions;
     private double balance;
 
+    // Constructors
     public SavingsAccount(){
         this.transactions = new ArrayList<>();
     }
 
     public SavingsAccount(double balance){
         this.transactions = new ArrayList<>();
+        setBalance(balance);
+    }
+
+    // Getters & Setters
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -24,6 +30,7 @@ public class SavingsAccount implements BankAccount{
         return this.balance;
     }
 
+    // Methods
     public void makeTransaction(Transaction transaction) {
 
     }

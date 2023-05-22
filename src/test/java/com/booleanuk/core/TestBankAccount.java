@@ -7,9 +7,7 @@ public class TestBankAccount {
     @Test
     public void TestForBalance(){
         BankAccount bankAccount = new BankAccount();
-        bankAccount.depositMoneyToCurrent(new UsDollar(200));
-        bankAccount.depositMoneyToSavings(new UsDollar(300));
-        Assertions.assertEquals(100, bankAccount.totalAmount);
+        Assertions.assertEquals(100, bankAccount.balance());
     }
     @Test
     public void TestForDepositMoneyToCurrent(){

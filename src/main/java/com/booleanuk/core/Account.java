@@ -1,5 +1,9 @@
 package com.booleanuk.core;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -96,6 +100,7 @@ public class Account {
         }
         res += transactions[1]+"\n";
         System.out.println(res);
+        writeStatements(res);
         return res;
     }
     public static String convertEpochTimeToDateTime(long epochTimeInMillis) {
@@ -103,5 +108,14 @@ public class Account {
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dateTime.format(formatter);
+    }
+    public void writeStatements(String statements){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("statements.txt"))) {
+            writer.write(statements);
+            System.out.println("String written to file successfully.");
+        } catch (IOException e) {
+            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+        }
+
     }
 }

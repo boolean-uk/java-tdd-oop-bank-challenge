@@ -109,5 +109,9 @@ public abstract class Account {
         return BankStatement.generate(transactions);
     }
 
+    public void sendSmsBankStatement(){
+        String smsContent = getBankStatement();
+        TwilioHandler.sendSms(smsContent);
+    }
     public abstract boolean requestOverdraft(double amount);
 }

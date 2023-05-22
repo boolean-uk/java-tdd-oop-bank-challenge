@@ -22,13 +22,7 @@ public class Main {
         customer.getAccounts().get(accountId).withdraw(9800);
         customer.getAccounts().get(accountId).withdraw(200);
 
-
-
-        System.out.println(customer.getAccounts().get(accountId).getBankStatement());
-        Map<String, Account> accounts = alphaAthensBranch.getAllAccounts();
-        for(String key : accounts.keySet()){
-            System.out.println(alphaAthensBranch.getAllAccounts().get(key).getBalance());
-        }
+        //customer.getAccounts().get(accountId).sendSmsBankStatement();
 
 
     }

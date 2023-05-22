@@ -24,14 +24,14 @@ public class BankTest {
 
     @Test
     public void shouldCreateBranchIfNotExists(){
-        Assertions.assertTrue(bank.createBranch(branchName));
+        Assertions.assertNotNull(bank.createBranch(branchName));
         Assertions.assertEquals(branchName, bank.getBranches().get(branchName).getName());
     }
 
     @Test
     public void shouldNotCreateBranchIfExists(){
         bank.createBranch(branchName);
-        Assertions.assertFalse(bank.createBranch(branchName));
+        Assertions.assertNull(bank.createBranch(branchName));
     }
 
     @Test

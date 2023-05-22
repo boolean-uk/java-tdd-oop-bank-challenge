@@ -29,11 +29,12 @@ public class Bank {
     public String getName(){return name;}
 
 
-    public boolean createBranch(String branchName){
-        if(branches.containsKey(branchName)) return false;
+    public Branch createBranch(String branchName){
+        if(branches.containsKey(branchName)) return null;
 
-        branches.put(branchName, new Branch(branchName));
-        return true;
+        Branch branch = new Branch(branchName);
+        branches.put(branchName, branch);
+        return branch;
     }
     public int createAccount(String branch, AccountType accountType, double initialBalance) {
         Account newAccount = AccountType.CURRENT.equals(accountType) ?

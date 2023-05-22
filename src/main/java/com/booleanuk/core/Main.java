@@ -7,6 +7,9 @@ public class Main {
 
     public static void main(String[] args){
         Bank alphaBank = new Bank("Alpha Bank");
+        Branch alphaAthensBranch = alphaBank.createBranch("Alpha Athens");
+
+
 
     }
 }

@@ -20,4 +20,8 @@ public class Branch {
     public Map<String, Customer> getCustomers() {
         return customers;
     }
+
+    public String createCustomer(){
+
+    }
 }

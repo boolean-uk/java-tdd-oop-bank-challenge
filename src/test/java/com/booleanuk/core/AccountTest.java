@@ -17,7 +17,7 @@ public class AccountTest {
         initialBalance = 2500.0;
         branchName = "Alpha Bank Athens";
         int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, initialBalance);
-        currentAccount = bank.getAccounts().get(accountId);
+        currentAccount = bank.getBranches().get(accountId);
     }
 
 

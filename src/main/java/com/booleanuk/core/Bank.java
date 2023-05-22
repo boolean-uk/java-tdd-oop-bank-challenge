@@ -1,35 +1,9 @@
 package com.booleanuk.core;
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 public class Bank {
 
-
-
-    public static void main(String[] args){
-        Bank bank = new Bank();
-        int savingsAccountId = bank.createAccount("Alpha Bank West Side", AccountType.SAVINGS, 10500.0);
-        int currentAccountId = bank.createAccount("Alpha Bank West Side", AccountType.CURRENT, 3200.0);
-
-        bank.getAccounts().get(savingsAccountId).withdraw(4700.0);
-        bank.getAccounts().get(currentAccountId).withdraw(3400);
-        bank.requestOverdraft(currentAccountId);
-
-        bank.getAccounts().get(currentAccountId).withdraw(4000);
-
-        bank.evaluateOverdraftRequest(currentAccountId, OverdraftStatus.ACCEPTED);
-        bank.getAccounts().get(currentAccountId).withdraw(5000);
-
-
-        bank.getAccounts().get(savingsAccountId).deposit(12200.0);
-
-        bank.requestOverdraft(savingsAccountId);
-
-        bank.getAccounts().get(savingsAccountId).withdraw(120000);
-
-
-    }
     public enum AccountType {
         CURRENT,
         SAVINGS
@@ -43,41 +17,48 @@ public class Bank {
         REJECTED
     }
 
-    private Map<Integer, Account> accounts;
+    private final Map<String, Branch> branches;
+    private String name;
 
-    public Bank(){
-        this.accounts = new HashMap<>();
+    public Bank(String name){
+        this.name = name;
+        this.branches = new HashMap<>();
     }
 
-    public Map<Integer, Account> getAccounts() {
-        return accounts;
+    public Map<String, Branch> getBranches(){return branches;}
+    public String getName(){return name;}
+
+
+    public boolean createBranch(String branchName){
+        if(branches.containsKey(branchName)) return false;
+
+        branches.put(branchName, new Branch(branchName));
+        return true;
     }
-
-
     public int createAccount(String branch, AccountType accountType, double initialBalance) {
         Account newAccount = AccountType.CURRENT.equals(accountType) ?
                 new CurrentAccount(branch, initialBalance) :
                 new SavingsAccount(branch, initialBalance);
-        accounts.put(newAccount.getId(), newAccount);
+        branches.put(newAccount.getId(), newAccount);
 
         return newAccount.getId();
     }
 
     public boolean requestOverdraft(int accountId){
-        if(!accounts.containsKey(accountId)) return false;
-        if(accounts.get(accountId).getOverdraftStatus().equals(OverdraftStatus.NON_APPLICABLE)) return false;
-        if(accounts.get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return false;
+        if(!branches.containsKey(accountId)) return false;
+        if(branches.get(accountId).getOverdraftStatus().equals(OverdraftStatus.NON_APPLICABLE)) return false;
+        if(branches.get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return false;
 
-        accounts.get(accountId).setOverdraftStatus(OverdraftStatus.PENDING);
+        branches.get(accountId).setOverdraftStatus(OverdraftStatus.PENDING);
         return true;
     }
 
     public void evaluateOverdraftRequest(int accountId, OverdraftStatus updatedStatus){
         if(updatedStatus.equals(OverdraftStatus.PENDING)) return;
-        if(!getAccounts().containsKey(accountId)) return;
-        if(!getAccounts().get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return;
+        if(!getBranches().containsKey(accountId)) return;
+        if(!getBranches().get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return;
 
-        getAccounts().get(accountId).setOverdraftStatus(updatedStatus);
+        getBranches().get(accountId).setOverdraftStatus(updatedStatus);
 
     }
 

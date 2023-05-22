@@ -22,6 +22,9 @@ public class Branch {
     }
 
     public String createCustomer(){
+        Customer customer = new Customer();
+        customers.put(customer.getId(), customer);
 
+        return customer.getId();
     }
 }

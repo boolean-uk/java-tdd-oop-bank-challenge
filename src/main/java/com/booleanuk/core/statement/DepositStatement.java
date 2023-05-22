@@ -12,10 +12,15 @@ public class DepositStatement extends BasicStatement {
     }
 
     @Override
-    public Cell cellData(int column) {
-        Cell cell = super.cellData(column);
+    public Cell cell(int column) {
+        Cell cell = super.cell(column);
         cell.updateColumn(2, Double.toString(deposit));
 
         return cell;
+    }
+
+    @Override
+    public double amount() {
+        return deposit;
     }
 }

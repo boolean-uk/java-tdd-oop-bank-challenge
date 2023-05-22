@@ -14,7 +14,7 @@ public class TestDepositStatement {
 
         Statement s = new DepositStatement(time, balance, deposit);
 
-        String r = s.cellData(4).asString(10);
+        String r = s.cell(4).asString(10);
         String expected = time + "||          " + "||      " + deposit + "||     " + 100.2 + "||";
 
         Assertions.assertEquals(expected, r);

@@ -12,10 +12,15 @@ public class CreditStatement extends BasicStatement {
     }
 
     @Override
-    public Cell cellData(int column) {
-        Cell cell = super.cellData(column);
+    public Cell cell(int column) {
+        Cell cell = super.cell(column);
         cell.updateColumn(1, Double.toString(credit));
 
         return cell;
+    }
+
+    @Override
+    public double amount() {
+        return -credit;
     }
 }

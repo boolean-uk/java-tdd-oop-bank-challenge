@@ -11,15 +11,10 @@ public class TestBasicStatement {
         LocalDate time = LocalDate.now();
         double balance = 100.20;
 
-        Statement s = new BasicStatement(time, balance);
+        Statement s = new DepositStatement(time, balance, 0);
 
-        String r = s.cellData(2).asString(1);
-        String expected = time + "||" + 100.20 + "||";
-
-        Assertions.assertEquals(expected, r);
-
-        r = s.cellData(4).asString(10);
-        expected = time + "||          " + "||          " + "||     " + 100.2 + "||";
+        String r = s.cell(4).asString(10);
+        String expected = time + "||          " + "||       0.0" + "||     " + 100.2 + "||";
 
         Assertions.assertEquals(expected, r);
     }

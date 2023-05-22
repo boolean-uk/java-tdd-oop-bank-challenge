@@ -14,7 +14,7 @@ public class TestCreditStatement {
 
         Statement s = new CreditStatement(time, balance, credit);
 
-        String r = s.cellData(4).asString(10);
+        String r = s.cell(4).asString(10);
         String expected = time + "||      " + credit + "||          " + "||     " + balance + "||";
 
         Assertions.assertEquals(expected, r);

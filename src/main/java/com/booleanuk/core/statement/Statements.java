@@ -22,8 +22,12 @@ public class Statements {
 
         StringBuilder result = new StringBuilder(topCell.asString(10) + "\n");
 
-        statements.forEach(s -> result.append(s.cellData(headers.size()).asString(10) + "\n"));
+        statements.forEach(s -> result.append(s.cell(headers.size()).asString(10) + "\n"));
 
         return result.toString();
+    }
+
+    public double balance() {
+        return statements.stream().reduce(0.0, (sum, s) -> sum + s.amount(), Double::sum);
     }
 }

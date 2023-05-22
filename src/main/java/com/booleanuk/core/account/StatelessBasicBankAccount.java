@@ -9,38 +9,33 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 
-public class BasicBankAccount implements BankAccount {
+public class StatelessBasicBankAccount implements BankAccount {
     private double maxDebt;
-    private double balance;
     private final Statements statements;
-    private Bank assosiatedBank;
+    private Bank bank;
 
-    public BasicBankAccount(double balance, Statements statements) {
-        this.balance = balance;
+    public StatelessBasicBankAccount(Statements statements) {
         this.statements = statements;
         maxDebt = 0;
-        this.assosiatedBank = null;
+        this.bank = null;
     }
 
     private double balance() {
-        return BigDecimal.valueOf(balance).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+        return BigDecimal.valueOf(statements.balance()).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
-
     @Override
     public double deposit(double amount) {
-        if (amount <= 0) return balance;
+        if (amount <= 0) return balance();
 
-        statements.add(new DepositStatement(LocalDate.now(), balance, amount));
-        balance += amount;
+        statements.add(new DepositStatement(LocalDate.now(), balance(), amount));
         return balance();
     }
 
     @Override
     public double withdraw(double amount) {
-        if (amount <= 0 || amount > balance) return balance;
+        if (amount <= 0 || amount > balance() + maxDebt) return balance();
 
-        statements.add(new CreditStatement(LocalDate.now(), balance, amount));
-        balance -= amount;
+        statements.add(new CreditStatement(LocalDate.now(), balance(), amount));
         return balance();
     }
 
@@ -58,11 +53,11 @@ public class BasicBankAccount implements BankAccount {
 
     @Override
     public void associateTo(Bank bank) {
-        this.assosiatedBank = bank;
+        this.bank = bank;
     }
 
     @Override
     public Bank branch() {
-        return this.assosiatedBank;
+        return this.bank;
     }
 }

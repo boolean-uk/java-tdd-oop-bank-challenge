@@ -1,5 +1,7 @@
 package com.booleanuk.core.statement;
 
 public interface Statement {
-    Cell cellData(int columns);
+    Cell cell(int columns);
+
+    double amount();
 }

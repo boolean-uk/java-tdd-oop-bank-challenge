@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class BasicStatement implements Statement {
+public abstract class BasicStatement implements Statement {
     private final LocalDate date;
     private final double balance;
 
@@ -14,7 +14,8 @@ public class BasicStatement implements Statement {
         this.balance = balance;
     }
 
-    public Cell cellData(int column) {
+    @Override
+    public Cell cell(int column) {
         ArrayList<String> data = new ArrayList<>(column) {{
             add(date.toString());
             add(Double.toString(balance));

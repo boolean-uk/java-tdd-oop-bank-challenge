@@ -27,7 +27,7 @@ public class BankAccount {
     }
 
     public double balance() {
-        return currentTotal - totalCurrent();
+        return currentTotal + savingsTotal;
     }
 
     public double depositMoneyToCurrent(Currency currentAmount) {

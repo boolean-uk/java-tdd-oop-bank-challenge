@@ -18,7 +18,8 @@ public class TestCustomer {
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
         Branch branch = new Branch(1);
         myself.setUpSavingsAccount(1,0,branch);
-        Assertions.assertEquals(0,myself.getAccounts().size());
+        myself.setUpCurrentAccount(branch,new Balance(150,0));
+        Assertions.assertEquals(1,myself.getAccounts().size());
         System.out.println(branch.getAccounts().get(0));//it exists
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
     }

@@ -36,7 +36,8 @@ public class CustomerTest {
     @Test
     public void testWithdraw(){
         Bank bank = new Bank();
-        Customer customer = new Customer(5);
+        bank.addCustomer(5);
+        Customer customer = bank.getCustomers().get(0);
 
         Assertions.assertTrue(customer.createCurrentAccount(5000));
         Assertions.assertTrue(customer.withdraw("current", 200));

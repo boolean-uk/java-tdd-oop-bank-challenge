@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Bank {
@@ -9,23 +10,26 @@ public class Bank {
     private static ArrayList<Account> accounts;
     private static ArrayList<OverdraftRequest> overdraftRequests;
 
+    private static String branches[];
+
     public Bank() {
         this.customers = new ArrayList<>();
         this.accounts = new ArrayList<>();
         this.overdraftRequests = new ArrayList<>();
+        this.branches = new String[]{"London Branch", "Athens Branch", "Liverpool Branch", "Coventry Branch", "Thessaloniki Branch", "Bucharest Branch", "Leeds Branch"};
     }
 
-    public ArrayList<Customer> getCustomers() {
-        return customers;
-    }
+    //Getters
+    public ArrayList<Customer> getCustomers() { return customers; }
 
-    public static ArrayList<Account> getAccounts() {
-        return accounts;
-    }
+    public static ArrayList<Account> getAccounts() { return accounts; }
 
     public static ArrayList<OverdraftRequest> getOverdraftRequests() { return overdraftRequests; }
 
+    public static String[] getBranches() { return branches; }
 
+
+    //adders to the specific arraylists
     public boolean addCustomer (int id) {
         for (Customer customer: getCustomers()) {
             if (customer.getId() == id) {
@@ -88,6 +92,16 @@ public class Bank {
             }
         }
         System.out.println("No more unevaluated requests.");
+    }
+
+
+    //Extension 2: User Story:6
+    public static String randomBranchAssigner () {
+        Random rand = new Random();
+        int upperbound = getBranches().length;
+        int x = rand.nextInt(upperbound);
+        String branch = getBranches()[x];
+        return branch;
     }
 
 }

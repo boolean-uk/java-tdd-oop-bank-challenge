@@ -8,12 +8,14 @@ public class Account {
     private String type;
     private int customerId;
     private ArrayList<Statement> statements;
+    private String branch;
 
     public Account(int id, int customerId, String type){
         this.id = id;
         this.customerId = customerId;
         this.type = type;
         this.statements = new ArrayList<>();
+        this.branch = Bank.randomBranchAssigner();
     }
 
     public int getId() {
@@ -31,6 +33,7 @@ public class Account {
     public ArrayList<Statement> getStatements() {
         return statements;
     }
+    public String getBranch() { return branch; }
 
     public static int getUniqueRandomAccountId () {
         Random rand = new Random();

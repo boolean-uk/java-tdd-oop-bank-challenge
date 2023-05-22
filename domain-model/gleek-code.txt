@@ -1,0 +1,58 @@
+Bank:class
+	-accounts:ArrayList<Account>
+	-customers:ArrayList<Customer>
+	-overdraftRequests:ArrayList<Request>
+	-branches:String[]
+	+addCustomer(int id):boolean
+	+addAccount(int id, int customerId, String accountType, int initalDeposit):void
+	+addOverdraft(int accountId, int ammountRequested):void
+	+evaluateOverdraft():void
+	+randomBranchAssigner():String
+
+Statement:class
+	-date:String
+	-credit:int
+	-debit:int
+	-customerId:int
+	-accountId:int
+	+getDateNow():String
+
+Account:class
+	-id:int
+	-customerId:int
+	-type:String
+	-statements:ArrayList<Statement>
+	-branch:String
+	+addDepositStatement(int ammount):void
+	+addWithdrawStatement(int ammount):void
+	+getUniqueRandomAccountId():int
+	+generateStatements():void
+	+calculateBalance():int
+
+Customer:class
+	-id:int
+	-accounts:Account[2]
+	+hasCurrentAccount():boolean
+	+hasSavingsAccount():boolean
+	+createCurrentAcoount(int initalDeposit):boolean
+	+createSavingsAcoount(int initalDeposit):boolean
+	+deposit(String accountType, int ammount):boolean
+	+withdraw(String accountType, int ammount):boolean
+	+generateCurrentAccountStatements():void
+	+generateSavingsAccountStatements():void
+	+requestOverdraft(int ammount):void
+	+getOverdraftStatus():String
+
+Request:class
+	-answer:Boolean
+	-accountId:int
+	-ammountRequested:int
+
+Bank -- Customer
+Bank -- Account
+Account-- Request
+Customer -- Account
+Account -- Statement
+
+//relationships should look a bit like this
+//not sure how to show it in gleek 

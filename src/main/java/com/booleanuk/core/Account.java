@@ -77,31 +77,33 @@ public abstract class Account {
         this.overdraftRequest = overdraftRequest;
     }
 
-    public boolean deposit(double amount){
-        if(amount <= 0) return false;
-        transactions.add(new Transaction(amount));
-
-        return true;
-    }
     public boolean deposit(LocalDateTime date, double amount){
         if(amount <= 0) return false;
+        if(monthlyTransactionLimit > 0 && transactions.size() >= monthlyTransactionLimit)
+            return false;
         transactions.add(new Transaction(date, amount));
 
         return true;
     }
+    public boolean deposit(double amount){
+        return deposit(LocalDateTime.now(), amount);
 
-    public boolean withdraw(double amount){
+    }
+
+
+    public boolean withdraw(LocalDateTime date, double amount){
         if(amount <= 0 ) return false;
+
+        if(monthlyTransactionLimit > 0 && transactions.size() >= monthlyTransactionLimit)
+            return false;
+
         if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
             BigDecimal dif = getBalance().subtract(BigDecimal.valueOf(amount));
-            System.out.printf("%f | %s\n", overdraftRequest.getCalculatedAllowedDebt(), overdraftRequest.getStatus());
-            if(dif.compareTo(overdraftRequest.getCalculatedAllowedDebt()) < 0) {
-                System.out.printf("%f is less than %f", dif, overdraftRequest.getCalculatedAllowedDebt());
+            if(dif.compareTo(overdraftRequest.getCalculatedAllowedDebt()) < 0)
                 return false;
-            }
             if(!overdraftRequest.getStatus().equals(Bank.OverdraftStatus.ACCEPTED)) return false;
 
-            transactions.add(new Transaction(-amount));
+            transactions.add(new Transaction(date, -amount));
 
             if(getOverdraftRequest().getStatus().equals(Bank.OverdraftStatus.ACCEPTED))
                 if(getBalance().compareTo(getOverdraftRequest().getCalculatedAllowedDebt()) == 0) overdraftRequest.setStatus(Bank.OverdraftStatus.NONE);
@@ -109,18 +111,12 @@ public abstract class Account {
             return true;
         }
 
-        transactions.add(new Transaction(-amount));
+        transactions.add(new Transaction(date, -amount));
         return true;
     }
 
-    public boolean withdraw(LocalDateTime date, double amount){
-        if(amount <= 0 ) return false;
-        if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
-            //if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
-        }
-
-        transactions.add(new Transaction(date, -amount));
-        return true;
+    public boolean withdraw(double amount){
+        return withdraw(LocalDateTime.now(), amount);
     }
 
 

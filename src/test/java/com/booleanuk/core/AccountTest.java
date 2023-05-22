@@ -107,4 +107,25 @@ public class AccountTest {
 
         Assertions.assertEquals(Bank.OverdraftStatus.NONE, currentAccount.getOverdraftRequest().getStatus());
     }
+
+    @Test
+    public void shouldNotWithdrawOrDepositMoreTimesThanMonthlyLimitInSavingsAccount(){
+        Bank bank = new Bank("BTC Bank");
+        Branch athensBranch = bank.createBranch("BTC Bank Athens");
+
+        String customerId = athensBranch.createCustomer();
+        Customer customer = athensBranch.getCustomers().get(customerId);
+        String accountId = athensBranch.createAccount(customerId, Bank.AccountType.SAVINGS, 100000);
+        Account savingsAccount = customer.getAccounts().get(accountId);
+        for(int i = 0; i < savingsAccount.getMonthlyTransactionLimit() +1 ; i++){
+            if(i < savingsAccount.getMonthlyTransactionLimit() / 2)
+                savingsAccount.withdraw(5000);
+            else
+                savingsAccount.deposit(10000);
+        }
+
+        Assertions.assertFalse(savingsAccount.deposit(10000));
+        Assertions.assertFalse(savingsAccount.withdraw(800));
+
+    }
 }

@@ -17,6 +17,15 @@ public class Bank {
         REJECTED
     }
 
+    public enum ErrorType {
+        ACCOUNT_EXISTS("Account Already Exists"),
+        CUSTOMER_NOT_EXISTS("Customer Does Not Exist");
+
+        public final String value;
+        ErrorType(String value) {
+            this.value = value;
+        }
+    }
     private final Map<String, Branch> branches;
     private String name;
 

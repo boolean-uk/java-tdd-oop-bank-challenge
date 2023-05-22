@@ -42,6 +42,14 @@ public class BranchTest {
         String customerId = branch.createCustomer();
         String accountId = branch.createAccount(customerId, Bank.AccountType.CURRENT, 2000.0);
 
-        Assertions.assertEquals(ErrorType.ACCOUNT_EXISTS, accountId);
+        Assertions.assertEquals(Bank.ErrorType.ACCOUNT_EXISTS.name(), accountId);
+    }
+
+    @Test
+    public void shouldNotCreateAccountIfCustomerDoesNotExist(){
+        String accountId = branch.createAccount("Non existent customer id", Bank.AccountType.CURRENT, 2000.0);
+
+        Assertions.assertEquals(Bank.ErrorType.CUSTOMER_NOT_EXISTS.name(), accountId);
+
     }
 }

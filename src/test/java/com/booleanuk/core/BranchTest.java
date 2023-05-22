@@ -36,4 +36,12 @@ public class BranchTest {
 
         Assertions.assertEquals(BigDecimal.valueOf(2000d), customer.getAccounts().get(accountId).getBalance());
     }
+
+    @Test
+    public void shouldNotCreateAccountIfAlreadyExists(){
+        String customerId = branch.createCustomer();
+        String accountId = branch.createAccount(customerId, Bank.AccountType.CURRENT, 2000.0);
+
+        Assertions.assertEquals(ErrorType.ACCOUNT_EXISTS, accountId);
+    }
 }

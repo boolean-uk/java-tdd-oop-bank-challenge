@@ -1,41 +1,64 @@
-package com.booleanuk.core;
-// Parent BankAccount Class (Super Class)
-public class BankAccount {
-    public double balance;
-
-    // constructor of class
-
-    public BankAccount(){
-        balance = 0;
-    }
-//    BankAccount() {
+//package com.booleanuk.core;
 //
+//public class BankAccount {
+//    private String accountNumber;
+//    private double balance;
+//    private String accountOwner;
+//
+//        // constructor
+//        public BankAccount(String accountNumber, double balance, String accountOwner) {
+//            this.accountNumber = accountNumber;
+//            this.balance = balance;
+//            this.accountOwner = accountOwner;
+//        }
+//
+//    // deposit method
+//    public void deposit(double amount) {
+//        balance += amount;
 //    }
-
-    BankAccount(double formerAmount){
-        balance = formerAmount;
-    }
-
-    // add money to the account
-    public void deposit(double amount) {
-        balance += amount;
-    }
-
-    public void withdraw(double amount) {
-        balance -= amount;
-    }
-
-    // remove money from the account
-//    public boolean withdraw(double amount) {
-//        if (balance - amount >= 0) {
+//
+//    // withdraw method
+//    public void withdraw(double amount) {
+//        if (balance >= amount) {
 //            balance -= amount;
-//            return true;
 //        } else {
-//            return false;
+//            System.out.println("There is not enough money on your account.");
 //        }
 //    }
-
-    public double getBalance() {
-        return balance;
-    }
-}
+//
+//        // getters and setters
+////        public String getAccountNumber() {
+////            return accountNumber;
+////        }
+////
+////        public void setAccountNumber(String accountNumber) {
+////            this.accountNumber = accountNumber;
+////        }
+//
+//        public double getBalance() {
+//            return balance;
+//        }
+//
+//        public void setBalance(double balance) {
+//            this.balance = balance;
+//        }
+//
+//        public String getAccountOwner() {
+//            return accountOwner;
+//        }
+//
+//        public void setAccountOwner(String ownerName) {
+//            this.accountOwner = ownerName;
+//        }
+//
+//
+//    // toString method
+////    @Override
+////    public String toString() {
+////        return "BankAccount{" +
+////                "accountNumber='" + accountNumber + '\'' +
+////                ", balance=" + balance +
+////                ", ownerName='" + ownerName + '\'' +
+////                '}';
+////    }
+//}

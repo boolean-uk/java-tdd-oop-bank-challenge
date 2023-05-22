@@ -20,9 +20,10 @@ I want to deposit and withdraw funds.
 # Bank Account 
 | US | Members                   | Methods                                        | Scenarios                                        | Output/Outcome                                                                                    |
 |----|---------------------------|------------------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------|
-|    | `ArrayList<transactions>` |                                                |                                                  |                                                                                                   |
+|    | `ArrayList<String> dates` |                                                |                                                  |                                                                                                   |
+|    | `                         |                                                |                                                  |                                                                                                   |
 |    |                           |                                                |                                                  |                                                                                                   |
-| 3  | `double balance`          |                                                |                                                  |                                                                                                   |
+| 3  | `int balance`             |                                                |                                                  |                                                                                                   |
 |    | `double transactions`     |                                                |                                                  |                                                                                                   |
 |    |                           | `double getCurrentAccount()`                   |                                                  |                                                                                                   |
 | 2  |                           | `double getSavings`                            |                                                  |                                                                                                   |
@@ -39,6 +40,7 @@ I want to deposit and withdraw funds.
 | 3  |                           | `double totalBalance()`                        |                                                  |                                                                                                   |
 | 4  |                           | `String returnDateTime()`                      |                                                  |                                                                                                   |
 |    |                           | `void printReceipt()`                          |                                                  |                                                                                                   |
+|    |                           | `toString()`                                   |                                                  |                                                                                                   |
 |    |                           | `@Override??`                                  |                                                  |                                                                                                   |
 
 # Current Account

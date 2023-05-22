@@ -11,13 +11,19 @@ public class AccountTest {
     private Account currentAccount;
     private double initialBalance;
     private String branchName;
+    private String bankName = "Eurobank";
+    private Customer customer;
     @BeforeEach
     public void setup(){
-        Bank bank = new Bank();
+        Bank bank = new Bank(bankName);
         initialBalance = 2500.0;
-        branchName = "Alpha Bank Athens";
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, initialBalance);
-        currentAccount = bank.getBranches().get(accountId);
+        branchName = "Eurobank Athens";
+        Branch athensBranch = bank.createBranch(branchName);
+        String customerId = athensBranch.createCustomer();
+        customer = athensBranch.getCustomers().get(customerId);
+        String accountId = athensBranch.createAccount(customerId, Bank.AccountType.CURRENT, initialBalance);
+
+        currentAccount = customer.getAccounts().get(accountId);
     }
 
 
@@ -48,8 +54,13 @@ public class AccountTest {
     @Test
     public void shouldWithdrawIfAmountIsGreaterThanBalanceAndOverdraftAccepted(){
         double withdrawAmount = 4000.0;
-        currentAccount.setOverdraftStatus(Bank.OverdraftStatus.ACCEPTED);
         double expectedBalance = initialBalance - withdrawAmount;
+
+        currentAccount.requestOverdraft(withdrawAmount);
+        BankManager.evaluateOverdraftRequest(currentAccount.getOverdraftRequest(), Bank.OverdraftStatus.ACCEPTED);
+
+        Assertions.assertEquals(Bank.OverdraftStatus.ACCEPTED, currentAccount.getOverdraftRequest().getStatus());
+
         currentAccount.withdraw(withdrawAmount);
 
         Assertions.assertEquals(BigDecimal.valueOf(expectedBalance), currentAccount.getBalance());
@@ -59,8 +70,20 @@ public class AccountTest {
     @Test
     public void shouldNotWithdrawIfOverdraftIsRejected(){
         double withdrawAmount = 7000.0;
-        currentAccount.setOverdraftStatus(Bank.OverdraftStatus.REJECTED);
+        currentAccount.requestOverdraft(withdrawAmount);
+        BankManager.evaluateOverdraftRequest(currentAccount.getOverdraftRequest(), Bank.OverdraftStatus.REJECTED);
         currentAccount.withdraw(withdrawAmount);
+
+        Assertions.assertEquals(BigDecimal.valueOf(initialBalance), currentAccount.getBalance());
+    }
+
+    @Test
+    public void shouldNotWithdrawIfAmountIsGreaterThanRequestedOverdraft(){
+        double withdrawAmount = 7000.0;
+        currentAccount.requestOverdraft(withdrawAmount);
+
+        BankManager.evaluateOverdraftRequest(currentAccount.getOverdraftRequest(), Bank.OverdraftStatus.ACCEPTED);
+        currentAccount.withdraw(7200);
 
         Assertions.assertEquals(BigDecimal.valueOf(initialBalance), currentAccount.getBalance());
     }
@@ -72,5 +95,16 @@ public class AccountTest {
 
         Assertions.assertTrue(currentAccount.withdraw(withdrawAmount));
         Assertions.assertEquals(BigDecimal.valueOf(balanceAfterWithdraw), currentAccount.getBalance());
+    }
+
+    @Test
+    public void shouldBeSetToNoneIfOverdraftAmountIsReached(){
+        double withdrawAmount = 7000.0;
+        currentAccount.requestOverdraft(withdrawAmount);
+        BankManager.evaluateOverdraftRequest(currentAccount.getOverdraftRequest(), Bank.OverdraftStatus.ACCEPTED);
+        currentAccount.withdraw(withdrawAmount/2);
+        currentAccount.withdraw(withdrawAmount/2);
+
+        Assertions.assertEquals(Bank.OverdraftStatus.NONE, currentAccount.getOverdraftRequest().getStatus());
     }
 }

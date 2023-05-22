@@ -4,11 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 public class BankTest {
 
     private Bank bank;
@@ -32,83 +27,5 @@ public class BankTest {
     public void shouldNotCreateBranchIfExists(){
         bank.createBranch(branchName);
         Assertions.assertNull(bank.createBranch(branchName));
-    }
-
-    @Test
-    public void shouldCreateCurrentAccount(){
-        String branchName = "Eurobank Sepolia";
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
-
-        Assertions.assertFalse(bank.getBranches().isEmpty());
-        Assertions.assertInstanceOf(CurrentAccount.class, bank.getBranches().get(accountId));
-    }
-
-    @Test
-    public void shouldIncrementAccountIdOnCreateAccount(){
-        String branchName = "Eurobank Sepolia";
-        String branchName2 = "Eurobank Thessaloniki";
-        int account1Id = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
-        int account2Id = bank.createAccount(branchName2, Bank.AccountType.CURRENT, 5000);
-        int expected = account1Id + 1;
-
-        Assertions.assertEquals(expected, bank.getBranches().get(account2Id).getId());
-    }
-    @Test
-    public void shouldSetInitialBalanceToZeroIfBalanceLessThanZero(){
-        String branchName = "Eurobank Sepolia";
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, -34);
-
-        Assertions.assertEquals(BigDecimal.ZERO, bank.getBranches().get(accountId).getBalance());
-    }
-
-    @Test
-    public void shouldPrintBankStatement(){
-        String branchName = "Eurobank Sepolia";
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
-        LocalDateTime withdrawDateTime = LocalDateTime.of(LocalDate.of(2023, 5, 27), LocalTime.now());
-        bank.getBranches().get(accountId).withdraw(withdrawDateTime, 1000.0);
-
-        LocalDateTime depositDateTime = LocalDateTime.of(LocalDate.of(2023, 7, 2), LocalTime.now());
-        bank.getBranches().get(accountId).deposit(depositDateTime, 500);
-
-        System.out.println(bank.getBranches().get(accountId).getBankStatement());
-    }
-
-    @Test
-    public void shouldReturnFalseOnIssueOverdraftForSavingsAccount(){
-        int accountId = bank.createAccount(branchName, Bank.AccountType.SAVINGS, 2000);
-
-        Assertions.assertFalse(bank.requestOverdraft(accountId));
-    }
-
-    @Test
-    public void shouldReturnFalseOnReIssueOverdraftForCurrentAccount(){
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2000);
-
-        bank.requestOverdraft(accountId);
-        Assertions.assertFalse(bank.requestOverdraft(accountId));
-    }
-
-
-    @Test
-    public void shouldReturnTrueAndPengingStatusOnOverdraftRequestForCurrentAccount(){
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
-
-        Assertions.assertTrue(bank.requestOverdraft(accountId));
-        Assertions.assertEquals(Bank.OverdraftStatus.PENDING, bank.getBranches().get(accountId).getOverdraftStatus());
-    }
-
-    @Test
-    public void shouldReturnFalseOnOverdraftRequestForNonExistentAccount(){
-        Assertions.assertFalse(bank.requestOverdraft(-4));
-    }
-
-    @Test
-    public void shouldReturnAcceptedStatusForAcceptedOverdraftRequest(){
-        int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 1300);
-        bank.requestOverdraft(accountId);
-        bank.evaluateOverdraftRequest(accountId, Bank.OverdraftStatus.ACCEPTED);
-
-        Assertions.assertEquals(Bank.OverdraftStatus.ACCEPTED, bank.getBranches().get(accountId).getOverdraftStatus());
     }
 }

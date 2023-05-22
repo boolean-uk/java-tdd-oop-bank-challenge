@@ -6,12 +6,15 @@ public class OverdraftRequest {
 
     private Account account;
     private BigDecimal amount;
+    private BigDecimal calculatedAllowedDebt;
     private Bank.OverdraftStatus status;
 
-    public OverdraftRequest(Account account, double amount) {
+    public OverdraftRequest(Account account, double amount, double currentBalance) {
         this.account = account;
         this.amount = BigDecimal.valueOf(amount);
         status = Bank.OverdraftStatus.PENDING;
+
+        calculatedAllowedDebt = BigDecimal.valueOf(currentBalance).subtract(this.amount);
     }
 
     public Account getAccount() {
@@ -37,4 +40,6 @@ public class OverdraftRequest {
     public void setStatus(Bank.OverdraftStatus status) {
         this.status = status;
     }
+
+    public BigDecimal getCalculatedAllowedDebt(){return calculatedAllowedDebt;}
 }

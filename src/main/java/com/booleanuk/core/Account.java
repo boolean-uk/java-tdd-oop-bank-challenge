@@ -17,8 +17,11 @@ public abstract class Account {
 
     protected Account(BigDecimal initialBalance){
         this.id = UUID.randomUUID().toString();
-        //this.overdraftStatus = Bank.OverdraftStatus.NONE;
         this.transactions = new ArrayList<>();
+        //this.overdraftStatus = Bank.OverdraftStatus.NONE;
+        overdraftRequest = new OverdraftRequest(this, 0, getBalance().doubleValue());
+        overdraftRequest.setStatus(Bank.OverdraftStatus.NONE);
+
         if(initialBalance.compareTo(BigDecimal.ZERO) > 0)
             transactions.add(new Transaction(initialBalance.doubleValue()));
     }
@@ -91,8 +94,19 @@ public abstract class Account {
         if(amount <= 0 ) return false;
         if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
             BigDecimal dif = getBalance().subtract(BigDecimal.valueOf(amount));
-            BigDecimal overDraftDebt = getBalance().subtract(overdraftRequest.getAmount());
-            //if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+            System.out.printf("%f | %s\n", overdraftRequest.getCalculatedAllowedDebt(), overdraftRequest.getStatus());
+            if(dif.compareTo(overdraftRequest.getCalculatedAllowedDebt()) < 0) {
+                System.out.printf("%f is less than %f", dif, overdraftRequest.getCalculatedAllowedDebt());
+                return false;
+            }
+            if(!overdraftRequest.getStatus().equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+
+            transactions.add(new Transaction(-amount));
+
+            if(getOverdraftRequest().getStatus().equals(Bank.OverdraftStatus.ACCEPTED))
+                if(getBalance().compareTo(getOverdraftRequest().getCalculatedAllowedDebt()) == 0) overdraftRequest.setStatus(Bank.OverdraftStatus.NONE);
+
+            return true;
         }
 
         transactions.add(new Transaction(-amount));

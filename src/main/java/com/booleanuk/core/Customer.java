@@ -23,9 +23,9 @@ public class Customer {
         return accounts;
     }
 
-    public boolean addAccount(Account account){
-        if(accounts.containsKey(account.getId())) return false;
+    public String addAccount(Account account) throws IllegalArgumentException{
+        if(accounts.containsKey(account.getId())) throw new IllegalArgumentException(Bank.ErrorType.ACCOUNT_EXISTS.value);
         accounts.put(account.getId(), account);
-        return true;
+        return account.getId();
     }
 }

@@ -12,20 +12,19 @@ public class BankStatement {
         sb.append(createFooter());
 
         BigDecimal initialBalance = BigDecimal.ZERO;
+        List<String> rows = new ArrayList<>();
         for(Transaction transaction : transactions){
             String[] info = transaction.toString().split(",");
             initialBalance = initialBalance.add(transaction.getAmount());
-
-            sb.append(
-                createRow(
+            rows.add(createRow(
                     createCell(info[0]),
                     createCell(info[1]),
                     createCell(info[2]),
                     createCell(String.format("%.2f", initialBalance))
-                )
-            );
-
+            ));
         }
+
+        for(int i = rows.size()-1; i >= 0; i--) sb.append(rows.get(i));
         return sb.toString();
     }
 

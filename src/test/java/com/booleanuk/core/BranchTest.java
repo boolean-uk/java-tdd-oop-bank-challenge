@@ -37,19 +37,15 @@ public class BranchTest {
         Assertions.assertEquals(BigDecimal.valueOf(2000d), customer.getAccounts().get(accountId).getBalance());
     }
 
-    @Test
-    public void shouldNotCreateAccountIfAlreadyExists(){
-        String customerId = branch.createCustomer();
-        String accountId = branch.createAccount(customerId, Bank.AccountType.CURRENT, 2000.0);
-
-        Assertions.assertEquals(Bank.ErrorType.ACCOUNT_EXISTS.name(), accountId);
-    }
 
     @Test
-    public void shouldNotCreateAccountIfCustomerDoesNotExist(){
-        String accountId = branch.createAccount("Non existent customer id", Bank.AccountType.CURRENT, 2000.0);
+    public void shouldNotCreateAccountIfCustomerDoesNotExistAndThrowException(){
 
-        Assertions.assertEquals(Bank.ErrorType.CUSTOMER_NOT_EXISTS.name(), accountId);
+        IllegalArgumentException thrown = Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> branch.createAccount("Non existent customer id", Bank.AccountType.CURRENT, 2000.0));
+        System.out.println(thrown.getMessage());
+        Assertions.assertEquals(Bank.ErrorType.CUSTOMER_NOT_EXISTS.value, thrown.getMessage());
 
     }
 }

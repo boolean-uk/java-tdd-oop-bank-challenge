@@ -12,9 +12,9 @@ public class CurrentAccount extends Account{
 
     @Override
     public boolean requestOverdraft(double amount) {
-        if(getOverdraftRequest() != null || !getOverdraftRequest().getStatus().equals(Bank.OverdraftStatus.NONE)) return false;
+        if(!getOverdraftRequest().getStatus().equals(Bank.OverdraftStatus.NONE)) return false;
 
-        setOverdraftRequest(new OverdraftRequest(this, amount));
-        return false;
+        setOverdraftRequest(new OverdraftRequest(this, amount,getBalance().doubleValue()));
+        return true;
     }
 }

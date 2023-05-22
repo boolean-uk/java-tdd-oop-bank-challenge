@@ -6,15 +6,13 @@ import java.util.Random;
 public class Account {
     private int id;
     private String type;
-    private int balance;
     private int customerId;
     private ArrayList<Statement> statements;
 
-    public Account(int id, int customerId, String type, int initalDeposit){
+    public Account(int id, int customerId, String type){
         this.id = id;
         this.customerId = customerId;
         this.type = type;
-        this.balance = initalDeposit;
         this.statements = new ArrayList<>();
     }
 
@@ -22,32 +20,12 @@ public class Account {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
     public int getCustomerId() {
         return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public ArrayList<Statement> getStatements() {
@@ -92,6 +70,21 @@ public class Account {
         for (int i = statementsMessages.size()-1; i >= 0 ; i--) {
             System.out.println(statementsMessages.get(i));
         }
+    }
+
+    public int calculateBalance () {
+        int balanceX = 0;
+
+        for (Statement statement: getStatements()) {
+            int credit = statement.getCredit();
+            int debit = statement.getDebit();
+            if ( debit == 0) {  //if debit is 0, then this statement is a deposit/credit one
+                balanceX += credit;
+            } else {
+                balanceX -= debit;
+            }
+        }
+        return balanceX;
     }
 
 }

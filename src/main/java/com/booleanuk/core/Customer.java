@@ -53,10 +53,10 @@ public class Customer {
             System.out.println("Customer already has a current account");
             return false;
         }
-        setCurrentAccount(new Account( Account.getUniqueRandomAccountId(),getId(), "current", initalDeposit));
+        setCurrentAccount(new Account( Account.getUniqueRandomAccountId(),getId(), "current"));
         getCurrentAccount().addDepositStatement(initalDeposit);
         //first id is account id, second is user id
-        Bank.addAccount(getCurrentAccount().getId(), getId(), "current", initalDeposit);
+        Bank.addAccount(getCurrentAccount().getId(), getId(), "current");
         return true;
     }
 
@@ -68,9 +68,9 @@ public class Customer {
             return false;
         }
 
-        setSavingsAccount(new Account(Account.getUniqueRandomAccountId(), getId(), "savings", initalDeposit));
+        setSavingsAccount(new Account(Account.getUniqueRandomAccountId(), getId(), "savings"));
         getSavingsAccount().addDepositStatement(initalDeposit);
-        Bank.addAccount(getSavingsAccount().getId(), getId(), "savings", initalDeposit);
+        Bank.addAccount(getSavingsAccount().getId(), getId(), "savings");
         return true;
     }
 
@@ -78,9 +78,9 @@ public class Customer {
 
         if (accountType.equals("current") && hasCurrentAccount()) {
 
-            int balance = getCurrentAccount().getBalance();
+            int balance = getCurrentAccount().calculateBalance();
             if (balance >= ammount) {
-                getCurrentAccount().setBalance(balance - ammount);
+//                getCurrentAccount().setBalance(balance - ammount);
                 getCurrentAccount().addWithdrawStatement(ammount);
                 return true;
             } else {
@@ -89,9 +89,9 @@ public class Customer {
 
         } else if (accountType.equals("savings") && hasSavingsAccount()) {
 
-            int balance = getSavingsAccount().getBalance();
+            int balance = getSavingsAccount().calculateBalance();
             if (balance >= ammount && ammount <= 200) {
-                getSavingsAccount().setBalance(balance - ammount);
+//                getSavingsAccount().setBalance(balance - ammount);
                 getSavingsAccount().addWithdrawStatement(ammount);
                 return true;
             } else {
@@ -105,14 +105,11 @@ public class Customer {
     public boolean deposit(@NotNull String accountType, int ammount) {
 
         if (accountType.equals("current") && hasCurrentAccount()) {
-
-            getCurrentAccount().setBalance(getCurrentAccount().getBalance() + ammount);
             getCurrentAccount().addDepositStatement(ammount);
             return true;
         }
-        else if (accountType.equals("savings") && hasSavingsAccount()) {
 
-            getSavingsAccount().setBalance(getSavingsAccount().getBalance() + ammount);
+        else if (accountType.equals("savings") && hasSavingsAccount()) {
             getSavingsAccount().addDepositStatement(ammount);
             return true;
         }
@@ -135,6 +132,42 @@ public class Customer {
         } else {
             System.out.println("You do not have a current account yet!");
         }
+    }
+
+
+    //OVERDRAFT
+    public void requestOverdraft (int ammountRequested) {
+        if (hasCurrentAccount()) {
+            if (getCurrentAccount().calculateBalance() >= ammountRequested) {
+                System.out.println("You have enough money deposited, no need to make overdraft request");
+            } else {
+                Bank.addOverdraft(getCurrentAccount().getId(), ammountRequested);
+                System.out.println("Overdraft Requested");
+            }
+        } else {
+            System.out.println("You do not have a current account yet.");
+        }
+    }
+
+    public String getOverdraftRequestStatus () {
+
+        String status = "You have not requested overdraft";
+
+        for (OverdraftRequest overdraftRequest: Bank.getOverdraftRequests()) {
+            if (overdraftRequest.getAccountId() == getCurrentAccount().getId()) {
+                if (overdraftRequest.getAnswer() == null) {
+                    status = "Not evaluated";
+                    return status;
+                } else if (overdraftRequest.getAnswer()) {
+                    status = "Accepted";
+                    return status;
+                } else {
+                    status = "Rejected";
+                    return status;
+                }
+            }
+        }
+        return status;
     }
 
 

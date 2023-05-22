@@ -1,5 +1,11 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Account {
     private String accountNumber;
     private String accountHolderFirstName;
@@ -7,12 +13,15 @@ public class Account {
     private String branchCode;
     private int balanceInCents = 0;
     private boolean approvedForOverdraft = false;
+    LocalDateTime dateTime;
+    Map<LocalDateTime, Integer> transactions;
 
     public Account(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
         this.setAccountNumber(accountNumber);
         this.setAccountHolderFirstName(accountHolderFirstName);
         this.setAccountHolderLastName(accountHolderLastName);
         this.setBranchCode(branchCode);
+        this.transactions = new HashMap<>();
     }
 
 
@@ -54,12 +63,14 @@ public class Account {
 
     public void setBalanceInCents(double AmountInDollars) {
             this.balanceInCents += (int) (AmountInDollars * 100.0);
+            this.dateTime = LocalDateTime.now();
+            this.transactions.put(this.dateTime, (int) (AmountInDollars * 100.0));
+
     }
 
     public double getBalanceInDollars() {
         return (getBalanceInCents() / 100.0);
     }
-
 
     public boolean isApprovedForOverdraft() {
         return approvedForOverdraft;

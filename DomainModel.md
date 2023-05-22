@@ -12,15 +12,17 @@
 
 ## Domain Model
 ### Account (Parent of CurrentAccount & SavingsAccount)
-| Members                         | Methods     | Scenarios | Outcomes | User Stories |
-|---------------------------------|-------------|-----------|----------|--------------|
-| `String accountNumber`          |             |           |          |              |
-| `String accountHolderFirstName` |             |           |          |              |
-| `String accountHolderLastName`  |             |           |          |              |
-| `String branchCode`             |             |           |          | 6            |
-| `int balanceInCents`            |             |           |          |              |
-| `boolean approvedForOverdraft`  |             |           |          | 7, 8         |
-|                                 | `Account()` |           |          |              |
+| Members                                        | Methods     | Scenarios | Outcomes | User Stories |
+|------------------------------------------------|-------------|-----------|----------|--------------|
+| `String accountNumber`                         |             |           |          |              |
+| `String accountHolderFirstName`                |             |           |          |              |
+| `String accountHolderLastName`                 |             |           |          |              |
+| `String branchCode`                            |             |           |          | 6            |
+| `int balanceInCents`                           |             |           |          |              |
+| `boolean approvedForOverdraft`                 |             |           |          | 7, 8         |
+| `LocalDateTime dateTime`                       |             |           |          |              |
+| `HashMap<LocalDateTime, Integer> transactions` |             |           |          |              |
+|                                                | `Account()` |           |          |              |
 
 
 ### CurrentAccount (Child of Account)
@@ -42,7 +44,6 @@
 ### AccountActions
 | Members                      | Methods                                                                                                                       | Scenarios                                                                         | Outcomes                                                      | User Stories |
 |------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------|--------------|
-| `List<Integer> transactions` |                                                                                                                               |                                                                                   |                                                               |              |
 | `List<Account> accounts`     |                                                                                                                               |                                                                                   |                                                               |              |
 |                              | `boolean createAccount(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode)` | accountNumber does not already exist                                              | print success message and return true                         | 1, 2         |
 |                              |                                                                                                                               | accountNumber already exists                                                      | print failure message and return false                        | 1, 2         |

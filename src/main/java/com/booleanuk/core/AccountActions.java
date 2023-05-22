@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountActions {
-    List<Integer> transactions = new ArrayList<>(); //Change to hashmap to also keep track of which account is changing?
     List<Account> accounts = new ArrayList<>();
 
     public boolean createAccount(String accountType, String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Cell {
     private List<String> data;
+    
     public Cell(List<String> data) {
         this.data = new ArrayList<>(data);
     }

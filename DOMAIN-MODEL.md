@@ -102,4 +102,4 @@ I want account balances to be calculated based on transaction history instead of
 
 
 ## Class Diagram
-![](./Bank_Account_Diagram.svg)
+![](./uml_diagram.svg)

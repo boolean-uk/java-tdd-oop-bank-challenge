@@ -16,7 +16,7 @@ public class StatelessBasicBankAccount implements BankAccount {
 
     public StatelessBasicBankAccount(Statements statements) {
         this.statements = statements;
-        maxDebt = 0;
+        this.maxDebt = 0;
         this.bank = null;
     }
 

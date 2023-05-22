@@ -14,6 +14,7 @@ import java.util.Arrays;
 public class Account {
     private Balance balance;
     private String statements;
+
     public Account(Balance balance){
         initialBalance(balance);
         this.statements +="\nAccount created at "+convertEpochTimeToDateTime(System.currentTimeMillis())+" with $"+balance+" \n";
@@ -117,4 +118,5 @@ public class Account {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
         }
     }
+
 }

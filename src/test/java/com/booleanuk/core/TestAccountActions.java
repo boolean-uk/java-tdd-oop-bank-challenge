@@ -34,6 +34,18 @@ public class TestAccountActions {
     }
 
     @Test
+    public void testBalanceFromTransactionHistory() {
+        AccountActions accountAction = new AccountActions();
+        accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
+        accountAction.deposit("NDBK-0000-0001", 100.76);
+        accountAction.deposit("NDBK-0000-0001", 94.21);
+        accountAction.withdraw("NDBK-0000-0001", 50);
+        accountAction.withdraw("NDBK-0000-0001", 26.36);
+
+        Assertions.assertEquals(118.61, accountAction.balanceFromTransactionHistory("NDBK-0000-0001"));
+    }
+
+    @Test
     public void testDeposit() {
         AccountActions accountAction = new AccountActions();
         accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");

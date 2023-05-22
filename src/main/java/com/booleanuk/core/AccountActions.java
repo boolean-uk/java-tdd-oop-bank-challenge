@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 public class AccountActions {
     List<Account> accounts = new ArrayList<>();
@@ -46,6 +45,14 @@ public class AccountActions {
         }
         System.out.println("Account could not be found");
         return null;
+    }
+
+    public double balanceFromTransactionHistory(String accountNumber) {
+        double returnBalance = 0.0;
+        for (LocalDateTime key : searchAccount(accountNumber).getTransactions().keySet()) {
+            returnBalance += (searchAccount(accountNumber).getTransactions().get(key) / 100.0);
+        }
+        return returnBalance;
     }
 
     public boolean deposit(String accountNumber, double amountInDollars) {
@@ -90,9 +97,9 @@ public class AccountActions {
             balance += (searchAccount(accountNumber).getTransactions().get(key) / 100.0);
             System.out.printf("%-10s %.2f %-2s %.2f \n", dtf.format(key) + "  || $", (searchAccount(accountNumber).getTransactions().get(key) / 100.0), "  || $", balance);
         }
-
-
     }
+
+
 
 
 

@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
-    public SavingsAccount() {super();};
+
+    private String branch;
+    public SavingsAccount(String branch) {super(branch);};
 }

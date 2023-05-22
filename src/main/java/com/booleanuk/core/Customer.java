@@ -11,8 +11,9 @@ public class Customer {
 
     private int identificationNumber;
 
-    public Customer(String fullName, String address, String dateBirth, int identificationNumber){
-        this. fullName = fullName;
+    public Customer(String fullName, String gender, String address, String dateBirth, int identificationNumber){
+        this.fullName = fullName;
+        this.gender = gender;
         this.address = address;
         this.dateOfBirth = dateBirth;
         this.identificationNumber = identificationNumber;
@@ -23,7 +24,11 @@ public class Customer {
         return this.fullName;
     }
 
-    public String address(){
+    public String getGender(){
+        return this.gender;
+    }
+
+    public String getAddress(){
         return this.address;
     }
 
@@ -35,19 +40,16 @@ public class Customer {
         return this.identificationNumber;
     }
 
-    public void setUpCurrentAccount(){
+    public void setUpCurrentAccount(String branch){
         System.out.println("Setting up account!");
-        CurrentAccount newCurrentAccount = new CurrentAccount();
+        CurrentAccount newCurrentAccount = new CurrentAccount(branch);
+        accounts.add(newCurrentAccount);
     }
 
-    public void setUpSavingsAccount(){
+    public void setUpSavingsAccount(String branch){
         System.out.println("Setting up savings account!");
-        SavingsAccount newSavingsAccount = new SavingsAccount();
+        SavingsAccount newSavingsAccount = new SavingsAccount(branch);
+        accounts.add(newSavingsAccount);
     }
-
-
-
-
-
 
 }

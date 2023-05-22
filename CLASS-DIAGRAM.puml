@@ -33,7 +33,7 @@ CurrentAccount o-- Transaction
 interface Account{
 + deposit(double: amount)
 + withdraw (double: amount): String
-+ generateStatement()
++ generateStatement():String
 }
 class SavingAccount{
 - int: balance
@@ -41,7 +41,7 @@ class SavingAccount{
 - boolean: overdraft
 + deposit(double: amount)
 + withdraw (double: amount): String
-+ generateStatement()
++ generateStatement(): String
 }
 class CurrentAccount{
 - int: balance
@@ -49,7 +49,7 @@ class CurrentAccount{
 - boolean: overdraft
 + deposit(double: amount)
 + withdraw (double: amount): String
-+ generateStatement()
++ generateStatement(): String
 }
 class Bank {
 - ArrayList<Account>: accounts

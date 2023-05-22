@@ -63,7 +63,10 @@ getters and setters are not included in the domain model.
 | TransactionType (Enum) | CREDIT                               |                                                     |                              |                       |
 |                        | DEBIT                                |                                                     |                              |                       |
 
-
+## Testing Twilio
+In order to use twilio (sending sms) you should do the following:
+1. Create the necessary environment variables
+2. Use the main method to send a message as testing was not possible with junit 
 
 
 

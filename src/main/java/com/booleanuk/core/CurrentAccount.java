@@ -42,4 +42,9 @@ public class CurrentAccount implements BankAccount{
             System.out.println("Insufficient funds");
         }
     }
+
+    public boolean printStatement(){
+        return true;
+    }
+
 }

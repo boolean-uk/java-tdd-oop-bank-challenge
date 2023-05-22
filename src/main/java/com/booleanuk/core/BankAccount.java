@@ -7,4 +7,5 @@ public interface BankAccount {
     double getBalance();
     void setBalance(double balance);
     void makeTransaction(Transaction transaction);
+    boolean printStatement();
 }

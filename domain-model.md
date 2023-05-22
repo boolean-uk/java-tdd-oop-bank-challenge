@@ -41,13 +41,13 @@ Getters & Setters are not included in the model
 
 BankAccount Class (interface)
 
-| Members                              | Methods                                  | Scenarios                                        | Outcome                                        | User story |
-|--------------------------------------|------------------------------------------|--------------------------------------------------|------------------------------------------------|------------|
-| double balance                       |                                          |                                                  |                                                |            |
-| String accountNumber                 |                                          |                                                  |                                                |            |
-| ArrayList<Transactions> transactions | makeTransaction(Transaction transaction) | to withdraw and deposit money                    | change the balance of the account with amount  | 4          |
-|                                      | printStatement()                         | create bank statement with date amount & balance | print String of statement                      | 3          |
-|                                      |                                          |                                                  |                                                |            |
+| Members                              | Methods                                  | Scenarios                                        | Outcome                                       | User story |
+|--------------------------------------|------------------------------------------|--------------------------------------------------|-----------------------------------------------|------------|
+| double balance                       |                                          |                                                  |                                               |            |
+| String accountNumber                 |                                          |                                                  |                                               |            |
+| ArrayList<Transactions> transactions | makeTransaction(Transaction transaction) | to withdraw and deposit money                    | change the balance of the account with amount | 4          |
+|                                      | printStatement()                         | create bank statement with date amount & balance | return true & print String of statement       | 3          |
+|                                      |                                          |                                                  |                                               |            |
 
 CurrentAccount Class (implements BankAccount)
 - User story: create a current account - 1

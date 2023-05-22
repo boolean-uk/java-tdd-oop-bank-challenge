@@ -12,17 +12,21 @@
 
 ## Domain Model
 ### Account (Parent of CurrentAccount & SavingsAccount)
-| Members                                        | Methods     | Scenarios | Outcomes | User Stories |
-|------------------------------------------------|-------------|-----------|----------|--------------|
-| `String accountNumber`                         |             |           |          |              |
-| `String accountHolderFirstName`                |             |           |          |              |
-| `String accountHolderLastName`                 |             |           |          |              |
-| `String branchCode`                            |             |           |          | 6            |
-| `int balanceInCents`                           |             |           |          |              |
-| `boolean approvedForOverdraft`                 |             |           |          | 7, 8         |
-| `LocalDateTime dateTime`                       |             |           |          |              |
-| `TreeMap<LocalDateTime, Integer> transactions` |             |           |          |              |
-|                                                | `Account()` |           |          |              |
+| Members                                        | Methods                                           | Scenarios | Outcomes                                                                                                                   | User Stories |
+|------------------------------------------------|---------------------------------------------------|-----------|----------------------------------------------------------------------------------------------------------------------------|--------------|
+| `String accountNumber`                         |                                                   |           |                                                                                                                            |              |
+| `String accountHolderFirstName`                |                                                   |           |                                                                                                                            |              |
+| `String accountHolderLastName`                 |                                                   |           |                                                                                                                            |              |
+| `String branchCode`                            |                                                   |           |                                                                                                                            | 6            |
+| `int balanceInCents`                           |                                                   |           |                                                                                                                            |              |
+| `boolean approvedForOverdraft`                 |                                                   |           |                                                                                                                            | 7, 8         |
+| `LocalDateTime dateTime`                       |                                                   |           |                                                                                                                            |              |
+| `TreeMap<LocalDateTime, Integer> transactions` |                                                   |           |                                                                                                                            |              |
+|                                                | `Account()`                                       |           |                                                                                                                            |              |
+|                                                | `getters/setters()`                               |           |                                                                                                                            |              |
+|                                                | `void setBalanceInCents(double AmountInDollars)`  |           | converts amount in dollars to cents, keeps record of current date and time and stores both in a SortedMap with a 1ms delay |              |
+|                                                |                                                   |           |                                                                                                                            |              |
+|                                                |                                                   |           |                                                                                                                            |              |
 
 
 ### CurrentAccount (Child of Account)

@@ -24,6 +24,7 @@ public class BankAccountTest {
         Transaction transaction = new Transaction("deposit", 500);
         currentAccount.makeTransaction(transaction);
         Assertions.assertEquals(1, currentAccount.getTransactions().size());
+        Assertions.assertEquals(500, currentAccount.getBalance());
     }
 
 }

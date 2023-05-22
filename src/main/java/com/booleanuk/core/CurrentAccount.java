@@ -32,6 +32,14 @@ public class CurrentAccount implements BankAccount{
 
     // Methods
     public void makeTransaction(Transaction transaction) {
-        getTransactions().add(transaction);
+        if(transaction.getType().equals("deposit")){
+            setBalance(getBalance() + transaction.getAmount());
+            getTransactions().add(0,transaction);
+        } else if(transaction.getType().equals("withdraw") && getBalance() >= transaction.getAmount()){
+            setBalance(getBalance() - transaction.getAmount());
+            getTransactions().add(0,transaction);
+        } else {
+            System.out.println("Insufficient funds");
+        }
     }
 }

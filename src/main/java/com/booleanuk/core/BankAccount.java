@@ -8,4 +8,8 @@ public interface BankAccount {
     double getBalance();
     void setBalance(double balance);
     int getAccountNumber();
+    boolean HasOverdraft();
+    double getOverdraft();
+    void setHasOverdraft(boolean bool);
+    void setOverdraft(double overdraft);
 }

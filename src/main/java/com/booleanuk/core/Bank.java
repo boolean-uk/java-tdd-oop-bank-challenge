@@ -1,19 +1,21 @@
 package com.booleanuk.core;
 
-public class Bank {
 
+public class Bank {
     public static void main(String[] args) {
-        BankAccount currentAccount = new CurrentAccount();
-        BankAccount savingsAccount = new SavingsAccount(1000);
+        Branch branchLondon = new Branch("New Bank", "London");
+        BankAccount currentAccount = new CurrentAccount(branchLondon, 100);
 
         new Transaction("deposit", 200, currentAccount);
         new Transaction("deposit", 250, currentAccount);
         new Transaction("withdraw", 100, currentAccount);
         new Transaction("withdraw", 250, currentAccount);
-        new Transaction("deposit", 1000, savingsAccount);
+        new Transaction("withdraw", 250, currentAccount);
+
+        currentAccount.setHasOverdraft(true);
+        currentAccount.setOverdraft(100.00);
+        new Transaction("withdraw", 250, currentAccount);
 
         currentAccount.printStatement();
-        savingsAccount.printStatement();
-
     }
 }

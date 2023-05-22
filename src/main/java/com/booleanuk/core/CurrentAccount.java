@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 public class CurrentAccount implements BankAccount{
     private static int ACCOUNT_NUMBER = 0;
@@ -11,10 +11,14 @@ public class CurrentAccount implements BankAccount{
     private final List<Transaction> transactions;
     private double startAmount;
     private double balance;
+    private Branch branch;
+    private boolean hasOverdraft;
+    private double overdraft;
 
     //Constructors
-    public CurrentAccount(double startAmount) {
+    public CurrentAccount(Branch branch, double startAmount) {
         this.accountNumber = ACCOUNT_NUMBER++;
+        this.branch = branch;
         this.accountNumber = this.getAccountNumber();
         this.startAmount = startAmount;
         this.transactions = new ArrayList<>();
@@ -55,8 +59,27 @@ public class CurrentAccount implements BankAccount{
         this.balance = balance;
     }
 
+    public boolean HasOverdraft() {
+        return this.hasOverdraft;
+    }
+
+    public void setHasOverdraft(boolean hasOverdraft) {
+        this.hasOverdraft = hasOverdraft;
+    }
+
+
+    public void setOverdraft(double overdraft) {
+      this.overdraft = overdraft;
+    }
+
+    public double getOverdraft() {
+        return this.overdraft;
+    }
+
+
     // Methods
     public boolean printStatement() {
+        System.out.println(branch.getName() + " " + branch.getLocation());
         System.out.println("Bank Statement Current Account");
         System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", "date", "credit", "debit", "balance");
 

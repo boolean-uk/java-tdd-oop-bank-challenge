@@ -41,13 +41,13 @@ Getters & Setters are not included in the model
 
 BankAccount Class (interface)
 
-| Members                              | Methods                                  | Scenarios                                        | Outcome                                       | User story |
-|--------------------------------------|------------------------------------------|--------------------------------------------------|-----------------------------------------------|------------|
-| double balance                       |                                          |                                                  |                                               |            |
-| String accountNumber                 |                                          |                                                  |                                               |            |
-| ArrayList<Transactions> transactions | makeTransaction(Transaction transaction) | to withdraw and deposit money                    | change the balance of the account with amount | 4          |
-|                                      | printStatement()                         | create bank statement with date amount & balance | return true & print String of statement       | 3          |
-|                                      |                                          |                                                  |                                               |            |
+| Members                              | Methods          | Scenarios                                        | Outcome                                 | User story |
+|--------------------------------------|------------------|--------------------------------------------------|-----------------------------------------|------------|
+| double balance                       |                  |                                                  |                                         |            |
+| String accountNumber                 |                  |                                                  |                                         |            |
+| ArrayList<Transactions> transactions |                  |                                                  |                                         |            |
+|                                      | printStatement() | create bank statement with date amount & balance | return true & print String of statement | 3          |
+|                                      |                  |                                                  |                                         |            |
 
 CurrentAccount Class (implements BankAccount)
 - User story: create a current account - 1
@@ -57,10 +57,22 @@ SavingsAccount Class (implements BankAccount)
 
 Transaction Class
 
-| Members       | Methods         | Scenarios                                           | Outcome               | User Story |
-|---------------|-----------------|-----------------------------------------------------|-----------------------|------------|
-| Date date     | makeDateStamp() | Get the date at the time of creation of transaction | return string of date | 3          |
-| double amount |                 |                                                     |                       |            |
-| String type   |                 |                                                     |                       |            |
-|               |                 |                                                     |                       |            |
+| Members       | Methods                      | Scenarios                                           | Outcome                                | User Story    |
+|---------------|------------------------------|-----------------------------------------------------|----------------------------------------|---------------|
+| Date date     | void makeDateStamp()         | Get the date at the time of creation of transaction | return string of date                  | 3             |
+| double amount |                              |                                                     |                                        |               |
+| String type   |                              |                                                     |                                        |               |
+|               | boolean executeTransaction() | withdraw and deposit money                          | return true if transaction successfull | 4             |
+|               |                              |                                                     | return false if insufficient funds     | 4 + extension |
+|               |                              |                                                     |                                        |               |
+
+Branch Class
+
+| Members         | Methods | Scenarios | Outcome | User Story |
+|-----------------|---------|-----------|---------|------------|
+| String name     |         |           |         |            |
+| String location |         |           |         |            |
+|                 |         |           |         |            |
+|                 |         |           |         |            |
+|                 |         |           |         |            |
 

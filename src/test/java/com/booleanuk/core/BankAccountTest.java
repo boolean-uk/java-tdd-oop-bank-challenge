@@ -3,11 +3,14 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.function.BooleanSupplier;
+
 public class BankAccountTest {
 
     @Test
     public void testGetBalance(){
-        BankAccount currentAccount = new CurrentAccount(500);
+        Branch branch = new Branch("Name", "Location");
+        BankAccount currentAccount = new CurrentAccount(branch, 500);
         Assertions.assertEquals(500, currentAccount.getBalance());
     }
 
@@ -34,6 +37,19 @@ public class BankAccountTest {
         BankAccount currentAccount1 = new CurrentAccount();
         Assertions.assertEquals(1, currentAccount.getAccountNumber());
         Assertions.assertEquals(2, currentAccount1.getAccountNumber());
+    }
+
+    @Test
+    public void testMakeWithdrawalWithoutOverdraft(){
+        BankAccount currentAccount = new CurrentAccount();
+        new Transaction("withdraw", 100, currentAccount);
+        Assertions.assertNotEquals(-100, currentAccount.getBalance());
+        Assertions.assertEquals(0, currentAccount.getTransactions().size());
+        currentAccount.setHasOverdraft(true);
+        currentAccount.setOverdraft(100);
+        new Transaction("withdraw", 100, currentAccount);
+        Assertions.assertEquals(-100, currentAccount.getBalance());
+        Assertions.assertEquals(1, currentAccount.getTransactions().size());
     }
 
 }

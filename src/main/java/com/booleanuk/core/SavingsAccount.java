@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class SavingsAccount implements BankAccount{
     private static int ACCOUNT_NUMBER = 0000;
-
     private int accountNumber;
     private List<Transaction> transactions;
     private double startAmount;
@@ -31,6 +30,26 @@ public class SavingsAccount implements BankAccount{
 
     public int getAccountNumber() {
         return this.accountNumber;
+    }
+
+    @Override
+    public boolean HasOverdraft() {
+        return false;
+    }
+
+    @Override
+    public double getOverdraft() {
+        return 0;
+    }
+
+    @Override
+    public void setHasOverdraft(boolean bool) {
+
+    }
+
+    @Override
+    public void setOverdraft(double overdraft) {
+
     }
 
     public void setAccountNumber(int accountNumber) {

@@ -56,16 +56,22 @@ public class Transaction {
         return dtf.format(now);
     }
 
-    public void executeTransaction(){
+    public boolean executeTransaction(){
         if(this.type.equals("deposit")){
             setBalance(getBalance() + getAmount());
             account.getTransactions().add(0,this);
-        } else if(this.type.equals("withdraw") && getBalance() >= getAmount()){
+            return true;
+        } else if(!account.HasOverdraft() && this.type.equals("withdraw") && getBalance() >= getAmount()) {
             setBalance(getBalance() - getAmount());
-            account.getTransactions().add(0,this);
-        } else {
-            System.out.println("Insufficient funds");
+            account.getTransactions().add(0, this);
+            return true;
+        } else if(account.HasOverdraft() && this.type.equals("withdraw") && (getBalance() + account.getOverdraft()) >= getAmount()){
+            setBalance(getBalance() - getAmount());
+            account.getTransactions().add(0, this);
+            return true;
         }
+        System.out.println("Insufficient funds");
+        return false;
     }
 }
 

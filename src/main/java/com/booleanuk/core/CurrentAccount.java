@@ -4,10 +4,9 @@ import java.math.BigDecimal;
 
 public class CurrentAccount extends Account{
 
-    public CurrentAccount(double initialBalance) throws IllegalArgumentException{
-
+    public CurrentAccount(Customer customer, double initialBalance) {
         super(-1, 0.25f, BigDecimal.valueOf(initialBalance));
-
+        setCustomer(customer);
     }
 
     @Override

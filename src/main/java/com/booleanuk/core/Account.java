@@ -10,15 +10,15 @@ public abstract class Account {
 
     private String id;
     private int monthlyTransactionLimit;
-    //private Bank.OverdraftStatus overdraftStatus;
-    private  OverdraftRequest overdraftRequest;
+    private OverdraftRequest overdraftRequest;
     private float interest;
     private List<Transaction> transactions;
+
+    private Customer customer;
 
     protected Account(BigDecimal initialBalance){
         this.id = UUID.randomUUID().toString();
         this.transactions = new ArrayList<>();
-        //this.overdraftStatus = Bank.OverdraftStatus.NONE;
         overdraftRequest = new OverdraftRequest(this, 0, getBalance().doubleValue());
         overdraftRequest.setStatus(Bank.OverdraftStatus.NONE);
 
@@ -39,25 +39,13 @@ public abstract class Account {
         return monthlyTransactionLimit;
     }
 
-    public void setMonthlyTransactionLimit(int monthlyTransactionLimit) {
-        this.monthlyTransactionLimit = monthlyTransactionLimit;
+    protected OverdraftRequest getOverdraftRequest(){
+        return overdraftRequest;
+    }
+    protected void setOverdraftRequest(OverdraftRequest overdraftRequest){
+        this.overdraftRequest = overdraftRequest;
     }
 
-//    public Bank.OverdraftStatus getOverdraftStatus() {
-//        return overdraftStatus;
-//    }
-
-//    protected void setOverdraftStatus(Bank.OverdraftStatus overdraftStatus) {
-//        this.overdraftStatus = overdraftStatus;
-//    }
-
-    public float getInterest() {
-        return interest;
-    }
-
-    public void setInterest(float interest) {
-        this.interest = interest;
-    }
 
     public BigDecimal getBalance() {
         return transactions.size() > 0 ?
@@ -66,15 +54,12 @@ public abstract class Account {
 
     }
 
-    public List<Transaction> getTransactions() {
-        return transactions;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    protected OverdraftRequest getOverdraftRequest(){
-        return overdraftRequest;
-    }
-    protected void setOverdraftRequest(OverdraftRequest overdraftRequest){
-        this.overdraftRequest = overdraftRequest;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public boolean deposit(LocalDateTime date, double amount){

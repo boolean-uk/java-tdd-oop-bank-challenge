@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Branch {
 
@@ -33,10 +36,20 @@ public class Branch {
         if(!customers.containsKey(customerId)) throw new IllegalArgumentException(Bank.ErrorType.CUSTOMER_NOT_EXISTS.value);
 
         Account newAccount = Bank.AccountType.CURRENT.equals(accountType) ?
-                new CurrentAccount(initialBalance) :
-                new SavingsAccount(initialBalance);
+                new CurrentAccount(customers.get(customerId), initialBalance) :
+                new SavingsAccount(customers.get(customerId), initialBalance);
 
         return customers.get(customerId).addAccount(newAccount);
+    }
+
+    public Map<String, Account> getAllAccounts(){
+        Map<String, Account> accountMap = new HashMap<>();
+        List<Customer> customers = new ArrayList<>();
+        this.customers.values().stream().toList().forEach(customer -> {
+            customer.getAccounts().values().forEach(account -> accountMap.put(account.getId(), account));
+        });
+
+        return accountMap;
     }
 
 }

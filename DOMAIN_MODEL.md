@@ -61,7 +61,10 @@
 
 ## Extension Requirements changes
 
-- Added `Branch`, `BankManager`, `OverdraftRequest`, `TwilioHanler` and `Customer` classes
+- Added `Main`,  `Branch`, `BankManager`, `OverdraftRequest`, `TwilioHanler` and `Customer` classes
+
+### Main
+Contains a main method with an example `account` with `transactions`
 
 ### Branch
 1. A `Bank` is consisted of a Map of `Branches` <br><br>
@@ -76,7 +79,6 @@
 ### Overdraft Request
 1. A `Customer` can request an overdraft for a specific `CurrentAccount` with a given amount
 <br><br>
-2. 
 2. The `BankManager` can `ACCEPT` or `REJECT` the request.
 <br><br>
 3. If a request gets accepted, the customer can withdraw money from his account until the debt amount is reached.
@@ -90,3 +92,6 @@ This class is responsible for creating and sending SMS to the customers regardin
 
 ### Customer
 Each `Customer` contains a Map of `Accounts`
+
+### Account
+1. In `SavingsAccounts` if the customer has reached the `monthlyTransactionLimit`, then he can no longer `deposit` or `withdraw` cash <br><br>

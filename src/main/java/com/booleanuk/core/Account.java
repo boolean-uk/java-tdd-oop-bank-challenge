@@ -101,4 +101,9 @@ public abstract class Account {
         return true;
     }
 
+
+    public String getBankStatement(){
+        return BankStatement.generate(transactions);
+    }
+
 }

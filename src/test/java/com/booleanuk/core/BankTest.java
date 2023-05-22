@@ -47,10 +47,6 @@ public class BankTest {
     }
 
     @Test
-    public void shouldReturnNullForBankStatementIfAccountDoesNotExist(){
-        Assertions.assertNull(bank.generateStatement(-20));
-    }
-    @Test
     public void shouldPrintBankStatement(){
         String branchName = "Eurobank Sepolia";
         int accountId = bank.createAccount(branchName, Bank.AccountType.CURRENT, 2500);
@@ -60,8 +56,7 @@ public class BankTest {
         LocalDateTime depositDateTime = LocalDateTime.of(LocalDate.of(2023, 7, 2), LocalTime.now());
         bank.getAccounts().get(accountId).deposit(depositDateTime, 500);
 
-        BankStatement bankStatement = bank.generateStatement(accountId);
-        bankStatement.print();
+        System.out.println(bank.getAccounts().get(accountId).getBankStatement());
     }
 
     @Test

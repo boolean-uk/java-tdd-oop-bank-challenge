@@ -7,46 +7,33 @@ import java.util.List;
 
 public class BankStatement {
 
-    private Account account;
+    public static String generate(List<Transaction> transactions){
+        StringBuilder sb = new StringBuilder();
+        sb.append(createFooter());
 
-    public BankStatement(Account account) {
-        this.account = account;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public void print(){
-        System.out.println(createFooter());
         BigDecimal initialBalance = BigDecimal.ZERO;
-        List<String> rows = new ArrayList<>();
-
-        for(Transaction transaction : account.getTransactions()){
+        for(Transaction transaction : transactions){
             String[] info = transaction.toString().split(",");
             initialBalance = initialBalance.add(transaction.getAmount());
-            rows.add(createRow(
+
+            sb.append(
+                createRow(
                     createCell(info[0]),
                     createCell(info[1]),
                     createCell(info[2]),
                     createCell(String.format("%.2f", initialBalance))
-            ));
+                )
+            );
+
         }
-        for(int i = rows.size()-1; i  >=0; i--) System.out.println(rows.get(i));
-    }
-    public void print(LocalDateTime fromDate, LocalDateTime toDate){
-
+        return sb.toString();
     }
 
-    private String createCell(String content){
+    private static String createCell(String content){
         return String.format("%-11.11s ", content);
     }
 
-    private String createRow(String ...cells){
+    private static String createRow(String... cells){
         StringBuilder row = new StringBuilder();
         for(int i = 0; i < cells.length - 1; i++){
             row.append(cells[i]);
@@ -58,7 +45,7 @@ public class BankStatement {
         return row.toString();
     }
 
-    private String createFooter(){
+    private static String createFooter(){
         return createRow(
                 createCell("Date"),
                 createCell("Credit"),

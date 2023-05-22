@@ -29,10 +29,6 @@ public class Bank {
         bank.getAccounts().get(savingsAccountId).withdraw(120000);
 
 
-        bank.generateStatement(currentAccountId).print();
-        System.out.println("\n\n");
-        bank.generateStatement(savingsAccountId).print();
-
     }
     public enum AccountType {
         CURRENT,
@@ -65,11 +61,6 @@ public class Bank {
         accounts.put(newAccount.getId(), newAccount);
 
         return newAccount.getId();
-    }
-
-    public BankStatement generateStatement(int accountId){
-        if(!accounts.containsKey(accountId)) return null;
-        return new BankStatement(accounts.get(accountId));
     }
 
     public boolean requestOverdraft(int accountId){

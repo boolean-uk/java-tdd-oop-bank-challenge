@@ -17,6 +17,23 @@ public class Account {
         this.setCustomerId(getCustomerId());
         //this.bankStatements = new ArrayList<>();
     }
+//    public void formerDeposit(int formerDeposit) {
+//    }
+//     formerDeposit method
+    public void formerDeposit(int formerDeposit) {
+        balance += formerDeposit;
+        System.out.println("You have successfully added " + formerDeposit + " to your account.");
+    }
+
+    // withdraw method
+    public void withdraw(double formerDeposit) {
+        if (balance >= formerDeposit) {
+            balance -= formerDeposit;
+        } else {
+            System.out.println("There is not enough money on your account.");
+
+        }
+    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -57,4 +74,5 @@ public class Account {
     public void setId(int id) {
         this.id = id;
     }
+
 }

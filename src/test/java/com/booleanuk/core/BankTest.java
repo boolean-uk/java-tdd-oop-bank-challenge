@@ -42,10 +42,4 @@ public class BankTest {
 //        Assertions.assertTrue();
 //    }
 
-//    @Test
-//    void depositTest() {
-//        BankAccount account = new BankAccount("1234567", 1000.0, "Rose");
-//        account.deposit(500.0);
-//        Assertions.assertEquals(1500.0, account.getBalance(), 0.01);
-//    }
 }

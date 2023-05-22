@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Bank {
     private ArrayList<Account> accounts;
     private ArrayList<Customer> customers;
-    public Customer customer;
+//    public Customer customer;
 
 
     public Bank(){

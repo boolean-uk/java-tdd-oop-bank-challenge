@@ -64,7 +64,7 @@ public class Account {
     }
     public boolean withdraw(Balance toWithdraw){
         if(this.getBalanceByStatements().getIntPart()>toWithdraw.getIntPart()){
-            System.out.println("Withdrew "+toWithdraw.toString()+" ");
+            System.out.println("Withdrew $"+toWithdraw.toString()+" ");
             this.balance.interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
             this.addToStatements(new Balance(-toWithdraw.getIntPart(), -toWithdraw.getDecimalPart()));
             this.balance = getBalanceByStatements();
@@ -74,7 +74,7 @@ public class Account {
     }
     public boolean deposit(Balance toDeposit){
         if(toDeposit.getDecimalPart()>=0 && toDeposit.getIntPart()>0){
-            System.out.println("Successfully deposited "+toDeposit);
+            System.out.println("Successfully deposited $"+toDeposit);
             this.balance.interact(new Balance(toDeposit.getIntPart(),toDeposit.getDecimalPart()));
             this.addToStatements(toDeposit);
             this.balance = getBalanceByStatements();
@@ -113,7 +113,7 @@ public class Account {
     public void writeStatements(String statements){
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("statements.txt"))) {
             writer.write(statements);
-            System.out.println("String written to file successfully.");
+            System.out.println("Statements are now in file format");
         } catch (IOException e) {
             System.err.println("An error occurred while writing to the file: " + e.getMessage());
         }

@@ -10,13 +10,13 @@ public class CurrentAccount extends Account{
     }
     public boolean withdraw(Balance toWithdraw){
         if(this.getBalanceByStatements().getIntPart()>toWithdraw.getIntPart()){
-            System.out.println("Withdrew "+toWithdraw.toString()+" ");
+            System.out.println("Withdrew $"+toWithdraw.toString()+" ");
             this.getBalance().interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
             this.addToStatements(new Balance(-toWithdraw.getIntPart(), -toWithdraw.getDecimalPart()));
             return true;
         }
         if(canOverdraft){
-            System.out.println("Withdrew "+toWithdraw.toString()+" ");
+            System.out.println("Withdrew $"+toWithdraw.toString()+" ");
             this.getBalance().interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
             this.addToStatements(new Balance(-toWithdraw.getIntPart(), -toWithdraw.getDecimalPart()));
             return true;
@@ -25,5 +25,8 @@ public class CurrentAccount extends Account{
     }
     public void requestOverdraft(Manager manager){
         this.canOverdraft = manager.getCanOverdraft();
+    }
+    public boolean getCanOverdraft(){
+        return this.canOverdraft;
     }
 }

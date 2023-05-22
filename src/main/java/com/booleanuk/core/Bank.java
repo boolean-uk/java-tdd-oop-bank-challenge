@@ -36,14 +36,7 @@ public class Bank {
         branches.put(branchName, branch);
         return branch;
     }
-    public int createAccount(String branch, AccountType accountType, double initialBalance) {
-        Account newAccount = AccountType.CURRENT.equals(accountType) ?
-                new CurrentAccount(branch, initialBalance) :
-                new SavingsAccount(branch, initialBalance);
-        branches.put(newAccount.getId(), newAccount);
 
-        return newAccount.getId();
-    }
 
     public boolean requestOverdraft(int accountId){
         if(!branches.containsKey(accountId)) return false;

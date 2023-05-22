@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public class CurrentAccount extends Account{
 
-    public CurrentAccount(String branch, double initialBalance) throws IllegalArgumentException{
+    public CurrentAccount(double initialBalance) throws IllegalArgumentException{
 
-        super(branch, -1, 0.25f, BigDecimal.valueOf(initialBalance));
+        super(-1, 0.25f, BigDecimal.valueOf(initialBalance));
     }
 
 }

@@ -27,4 +27,9 @@ public class Branch {
 
         return customer.getId();
     }
+
+    public String createAccount(String customerId, Bank.AccountType accountType, double initialBalance) {
+
+
+    }
 }

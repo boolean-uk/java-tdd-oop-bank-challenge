@@ -22,4 +22,10 @@ public class Customer {
     public Map<String, Account> getAccounts() {
         return accounts;
     }
+
+    public boolean addAccount(Account account){
+        if(accounts.containsKey(account.getId())) return false;
+        accounts.put(account.getId(), account);
+        return true;
+    }
 }

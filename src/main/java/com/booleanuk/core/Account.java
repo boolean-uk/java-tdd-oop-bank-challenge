@@ -4,33 +4,31 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class Account {
-    private static int ACCOUNT_ID = 0;
 
-    private int id;
+    private String id;
     private int monthlyTransactionLimit;
     private Bank.OverdraftStatus overdraftStatus;
     private float interest;
-    private String branch;
     private List<Transaction> transactions;
 
-    protected Account(String branch, BigDecimal initialBalance){
-        this.id = ACCOUNT_ID++;
+    protected Account(BigDecimal initialBalance){
+        this.id = UUID.randomUUID().toString();
         this.overdraftStatus = Bank.OverdraftStatus.NONE;
-        this.branch = branch;
         this.transactions = new ArrayList<>();
         if(initialBalance.compareTo(BigDecimal.ZERO) > 0)
             transactions.add(new Transaction(initialBalance.doubleValue()));
     }
 
-    protected Account(String branch, int monthlyTransactionLimit, float interest, BigDecimal initialBalance){
-        this(branch, initialBalance);
+    protected Account(int monthlyTransactionLimit, float interest, BigDecimal initialBalance){
+        this(initialBalance);
         this.monthlyTransactionLimit = monthlyTransactionLimit;
         this.interest = interest;
     }
 
-    public int getId(){
+    public String getId(){
         return id;
     }
     public int getMonthlyTransactionLimit() {

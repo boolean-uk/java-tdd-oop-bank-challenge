@@ -6,6 +6,7 @@ import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SavingAccount implements Account {
     private int balance;
@@ -72,8 +73,10 @@ public class SavingAccount implements Account {
 
     @Override
     public String generateStatement() {
+//        List<Transaction> sortedTransactions=this.transactions.stream()
+//            .sorted(Comparator.comparing(Transaction::getDate).reversed()).toList();
         List<Transaction> sortedTransactions=this.transactions.stream()
-            .sorted(Comparator.comparing(Transaction::getDate).reversed()).toList();
+             .sorted(Comparator.comparing(Transaction::getDate).reversed()).collect(Collectors.toList());
 
         StringBuilder strBuilder = new StringBuilder();
         strBuilder.append("date\t\t||");

@@ -2,44 +2,47 @@ package com.booleanuk.core;
 
 public class Account {
     private String accountNumber;
-    private int balance;
+    private double balance;
     private String accountType;
     private String customerId;
     private int id;
+
     //Arraylist<BankStatements> bankStatements;
 
 
     // constructor
-    public Account(String accountNumber, int formerDeposit, String accountType) {
+    public Account(String accountNumber, double formerDeposit, String accountType) {
         this.setAccountNumber(accountNumber);
         this.setBalance(formerDeposit);
         this.setAccountType(accountType);
         this.setCustomerId(getCustomerId());
         //this.bankStatements = new ArrayList<>();
     }
-//    public void formerDeposit(int formerDeposit) {
-//    }
+
 //     formerDeposit method
-    public void formerDeposit(int formerDeposit) {
-        balance += formerDeposit;
-        System.out.println("You have successfully added " + formerDeposit + " to your account.");
-        System.out.println("The new balance of your checking account is: " + balance);
+    public void formerDeposit(double formerDeposit) {
+       if (formerDeposit > 0) {
+           balance += formerDeposit;
+           System.out.println("You have successfully added " + formerDeposit + " to your account.");
+           System.out.println("The new balance of your checking account is: " + balance);
+       } else {
+           balance = 0;
+       }
     }
 
     // withdraw method
-    public void withdraw(int withdraw) {
-        balance -= withdraw;
-        System.out.println("Your balance is: $" + balance);
-        System.out.println("You have successfully removed $" + withdraw + " from your account.");
-        System.out.println("The new balance of your checking account is: $" + balance);
+    public boolean withdraw(double amount) {
+        double newBalance = balance - amount;
+        if (newBalance < 0) {
+            System.out.println("There is not enough money on your account.");
+            return false;
+        }
+        balance = newBalance;
+//        System.out.println("Your balance is: $" + balance);
+        System.out.println("You have successfully removed $" + amount + " from your account.");
+        System.out.println("The new balance of your checking account is: $" + getBalance());
+        return true;
     }
-//    public void withdraw(int formerDeposit) {
-//        if (balance >= formerDeposit) {
-//            balance -= formerDeposit;
-//        } else {
-//            System.out.println("There is not enough money on your account.");
-//        }
-//    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -49,11 +52,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

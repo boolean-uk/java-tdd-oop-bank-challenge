@@ -32,10 +32,6 @@ public class Bank {
                 System.out.println("Customer has already a " + accountType + "account.");
                 return false;
             }
-//            // This needs to be outside the for loop. Because the for loop stops running
-            // when it founds a customer that already exists.
-//            getAccounts().add(new Account(accountNumber, formerDeposit, accountType));
-//            System.out.println("Successfully added new number " + accountNumber);
         }
         getAccounts().add(new Account(accountNumber, formerDeposit, accountType));
         System.out.println("Successfully added new account number " + accountNumber);

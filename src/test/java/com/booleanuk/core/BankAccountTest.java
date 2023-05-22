@@ -32,15 +32,4 @@ public class BankAccountTest {
         Assertions.assertTrue(currentAccount.printStatement());
     }
 
-    @Test
-    public void testGetAccountNumber(){
-        Branch branch = new Branch("Name", "Location");
-        BankAccount currentAccount = new CurrentAccount(branch);
-        BankAccount currentAccount1 = new CurrentAccount(branch);
-        Assertions.assertEquals(1, currentAccount.getAccountNumber());
-        Assertions.assertEquals(2, currentAccount1.getAccountNumber());
-    }
-
-
-
 }

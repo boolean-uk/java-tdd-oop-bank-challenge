@@ -5,9 +5,7 @@ import java.util.List;
 
 
 public class CurrentAccount implements BankAccount{
-    private static int ACCOUNT_NUMBER = 0;
 
-    private int accountNumber;
     private final List<Transaction> transactions;
     private double startAmount;
     private double balance;
@@ -17,31 +15,19 @@ public class CurrentAccount implements BankAccount{
 
     //Constructors
     public CurrentAccount(Branch branch, double startAmount) {
-        this.accountNumber = ACCOUNT_NUMBER++;
         this.branch = branch;
-        this.accountNumber = this.getAccountNumber();
         this.startAmount = startAmount;
         this.transactions = new ArrayList<>();
     }
 
     public CurrentAccount(Branch branch){
         this.branch = branch;
-        this.accountNumber = ACCOUNT_NUMBER++;
-        this.accountNumber = this.getAccountNumber() + 1;
         this.transactions = new ArrayList<>();
     }
 
     // Getters & Setters
     public List<Transaction> getTransactions() {
         return this.transactions;
-    }
-
-    public int getAccountNumber() {
-        return this.accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public double getBalance() {

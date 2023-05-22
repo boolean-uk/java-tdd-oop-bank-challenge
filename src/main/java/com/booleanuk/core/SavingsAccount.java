@@ -2,34 +2,29 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SavingsAccount implements BankAccount{
-    private static int ACCOUNT_NUMBER = 0;
-    private int accountNumber;
+
     private List<Transaction> transactions;
+    private final Branch branch;
     private double startAmount;
     private double balance;
 
     //Constructors
-    public SavingsAccount(double startAmount) {
-        this.accountNumber = ACCOUNT_NUMBER++;
+    public SavingsAccount(Branch branch, double startAmount) {
+        this.branch = branch;
         this.startAmount = startAmount;
         this.transactions = new ArrayList<>();
     }
 
-    public SavingsAccount(){
-        this.accountNumber = ACCOUNT_NUMBER++;
+    public SavingsAccount(Branch branch){
+        this.branch = branch;
         this.transactions = new ArrayList<>();
     }
 
     // Getters & Setters
     public List<Transaction> getTransactions() {
         return this.transactions;
-    }
-
-    public int getAccountNumber() {
-        return this.accountNumber;
     }
 
     @Override
@@ -50,10 +45,6 @@ public class SavingsAccount implements BankAccount{
     @Override
     public void setOverdraft(double overdraft) {
 
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public double getBalance() {

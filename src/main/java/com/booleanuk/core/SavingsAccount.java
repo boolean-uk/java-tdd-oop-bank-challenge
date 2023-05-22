@@ -8,4 +8,8 @@ public class SavingsAccount extends Account{
         setOverdraftStatus(Bank.OverdraftStatus.NON_APPLICABLE);
     }
 
+    @Override
+    public boolean requestOverdraft(double amount) {
+        return false;
+    }
 }

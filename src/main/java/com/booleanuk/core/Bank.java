@@ -47,22 +47,22 @@ public class Bank {
     }
 
 
-    public boolean requestOverdraft(int accountId){
+    /*public boolean requestOverdraft(int accountId){
         if(!branches.containsKey(accountId)) return false;
         if(branches.get(accountId).getOverdraftStatus().equals(OverdraftStatus.NON_APPLICABLE)) return false;
         if(branches.get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return false;
 
         branches.get(accountId).setOverdraftStatus(OverdraftStatus.PENDING);
         return true;
-    }
+    }*/
 
-    public void evaluateOverdraftRequest(int accountId, OverdraftStatus updatedStatus){
+    /*public void evaluateOverdraftRequest(int accountId, OverdraftStatus updatedStatus){
         if(updatedStatus.equals(OverdraftStatus.PENDING)) return;
         if(!getBranches().containsKey(accountId)) return;
         if(!getBranches().get(accountId).getOverdraftStatus().equals(OverdraftStatus.PENDING)) return;
 
         getBranches().get(accountId).setOverdraftStatus(updatedStatus);
 
-    }
+    }*/
 
 }

@@ -10,13 +10,14 @@ public abstract class Account {
 
     private String id;
     private int monthlyTransactionLimit;
-    private Bank.OverdraftStatus overdraftStatus;
+    //private Bank.OverdraftStatus overdraftStatus;
+    private  OverdraftRequest overdraftRequest;
     private float interest;
     private List<Transaction> transactions;
 
     protected Account(BigDecimal initialBalance){
         this.id = UUID.randomUUID().toString();
-        this.overdraftStatus = Bank.OverdraftStatus.NONE;
+        //this.overdraftStatus = Bank.OverdraftStatus.NONE;
         this.transactions = new ArrayList<>();
         if(initialBalance.compareTo(BigDecimal.ZERO) > 0)
             transactions.add(new Transaction(initialBalance.doubleValue()));
@@ -39,13 +40,13 @@ public abstract class Account {
         this.monthlyTransactionLimit = monthlyTransactionLimit;
     }
 
-    public Bank.OverdraftStatus getOverdraftStatus() {
-        return overdraftStatus;
-    }
+//    public Bank.OverdraftStatus getOverdraftStatus() {
+//        return overdraftStatus;
+//    }
 
-    protected void setOverdraftStatus(Bank.OverdraftStatus overdraftStatus) {
-        this.overdraftStatus = overdraftStatus;
-    }
+//    protected void setOverdraftStatus(Bank.OverdraftStatus overdraftStatus) {
+//        this.overdraftStatus = overdraftStatus;
+//    }
 
     public float getInterest() {
         return interest;
@@ -66,6 +67,13 @@ public abstract class Account {
         return transactions;
     }
 
+    protected OverdraftRequest getOverdraftRequest(){
+        return overdraftRequest;
+    }
+    protected void setOverdraftRequest(OverdraftRequest overdraftRequest){
+        this.overdraftRequest = overdraftRequest;
+    }
+
     public boolean deposit(double amount){
         if(amount <= 0) return false;
         transactions.add(new Transaction(amount));
@@ -82,7 +90,9 @@ public abstract class Account {
     public boolean withdraw(double amount){
         if(amount <= 0 ) return false;
         if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
-            if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+            BigDecimal dif = getBalance().subtract(BigDecimal.valueOf(amount));
+            BigDecimal overDraftDebt = getBalance().subtract(overdraftRequest.getAmount());
+            //if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
         }
 
         transactions.add(new Transaction(-amount));
@@ -92,7 +102,7 @@ public abstract class Account {
     public boolean withdraw(LocalDateTime date, double amount){
         if(amount <= 0 ) return false;
         if(getBalance().compareTo(BigDecimal.valueOf(amount)) < 0){
-            if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
+            //if(!overdraftStatus.equals(Bank.OverdraftStatus.ACCEPTED)) return false;
         }
 
         transactions.add(new Transaction(date, -amount));
@@ -104,4 +114,5 @@ public abstract class Account {
         return BankStatement.generate(transactions);
     }
 
+    public abstract boolean requestOverdraft(double amount);
 }

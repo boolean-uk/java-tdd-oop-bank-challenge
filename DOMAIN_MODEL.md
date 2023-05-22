@@ -56,3 +56,37 @@
 |                                  | `account: Account`                |                                                                          |                                            |                                                                                                                                                                           |
 |                                  |                                   | `print(): void`                                                          | User Story 3                               | Prints the full bank statement for a specific account                                                                                                                     |
 |                                  |                                   | `print(LocalDateTime fromDate, LocalDateTime toDate): void`              | User Story 3                               | Prints the bank statement including transactions starting from `fromDate` until `toDate`                                                                                  |
+
+
+
+## Extension Requirements changes
+
+- Added `Branch`, `BankManager`, `OverdraftRequest`, `TwilioHanler` and `Customer` classes
+
+### Branch
+1. A `Bank` is consisted of a Map of `Branches` <br><br>
+2. A `Branch` contains a Map of `Customers` <br><br>
+3. Each `Branch` is responsible for creating `Customers` and `Accounts`
+
+
+### BankManager
+1. The `BankManager` class is responsible for evaluating `OverdraftRequests`, namely setting their status to `OverdraftStatus` enumerator values
+
+
+### Overdraft Request
+1. A `Customer` can request an overdraft for a specific `CurrentAccount` with a given amount
+<br><br>
+2. 
+2. The `BankManager` can `ACCEPT` or `REJECT` the request.
+<br><br>
+3. If a request gets accepted, the customer can withdraw money from his account until the debt amount is reached.
+<br> For example given a `CurrentAccount` with a balance of 2.000 euros and a request for 40.000 euros <br>
+the maximum debt the `Customer` can reach is -38.000 euros. If the debt is met, the `OverdraftRequest` for this account gets a status of `NONE` <br>
+so the user cannot withdraw any more money and can also make another `OverdraftRequest`
+
+### TwilioHandler
+This class is responsible for creating and sending SMS to the customers regarding their funds
+
+
+### Customer
+Each `Customer` contains a Map of `Accounts`

@@ -43,10 +43,27 @@ I want to deposit and withdraw funds.
 |    |                           | `toString()`                                   |                                                  |                                                                                                   |
 |    |                           | `@Override??`                                  |                                                  |                                                                                                   |
 
-# Current Account
+# Accounts
 // Maybe need this one later on
-# Savings
-## 
+
+| US | Members                | Methods                                                                   | Scenario | Outcome/Output |
+|----|------------------------|---------------------------------------------------------------------------|----------|----------------|
+|    | `String AccountNumber` |                                                                           |          |                |
+|    | `double balance`       |                                                                           |          |                |
+|    | `String accountType`   |                                                                           |          |                |
+|    | `String customerId`    |                                                                           |          |                |
+|    | `int id`               |                                                                           |          |                |
+|    |                        | `account(String accountNumber, double formerDeposit, String accountType)` |          |                |
+|    |                        | `boolean withdraw (double Amount)`                                        |          |                |
+|    |                        | `void formerDeposit(double formerDeposit)`                                |          |                |
+# Customer
+
+| US | Members                | Methods | Scenario | Outcome/Output |
+|----|------------------------|---------|----------|----------------|
+|    | `double balance`       |         |          |                |
+|    | `double transactions`  |         |          |                |
+|    | `String date and time` |         |          |                |
+|    |                        |         |          |                |
 
 # Bank Statements
 

@@ -19,32 +19,36 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
     //as a customer, you can use setUpAccount to create a new account under your name using the methods below.
-    public void setUpCurrentAccount(Balance balance){
+    public void setUpCurrentAccount(Branch branch,Balance balance){
         System.out.println("Setting up account....");
-        this.accounts.add(new CurrentAccount(balance));
+        Account add = new CurrentAccount(balance);
+        this.accounts.add(add);
+        branch.getAccounts().add(add);
         this.removeNullAccounts();
     }
-    public void setUpCurrentAccount(int intPart, int decimalPart){
+    public void setUpCurrentAccount(Branch branch,int intPart, int decimalPart){
         try{
             Thread.sleep(1000);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        setUpCurrentAccount(new Balance(intPart,decimalPart));
+        setUpCurrentAccount(branch,new Balance(intPart,decimalPart));
 
     }
-    public void setUpSavingsAccount(Balance balance){
+    public void setUpSavingsAccount(Branch branch, Balance balance){
         System.out.println("Setting up account....");
-        this.accounts.add(new SavingsAccount(balance));
+        Account add = new SavingsAccount(balance);
+        this.accounts.add(add);
+        branch.getAccounts().add(add);
         this.removeNullAccounts();
     }
-    public void setUpSavingsAccount(int intPart, int decimalPart){
+    public void setUpSavingsAccount(int intPart, int decimalPart, Branch branch){
         try{
             Thread.sleep(1000);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        setUpSavingsAccount(new Balance(intPart, decimalPart));
+        setUpSavingsAccount(branch,new Balance(intPart, decimalPart));
 
     }
     public ArrayList<Account> getAccounts() {

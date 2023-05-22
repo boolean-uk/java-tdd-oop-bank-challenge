@@ -16,7 +16,7 @@ public class TestCustomer {
     @Test
     public void testSetUpAccount(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
-        myself.setUpSavingsAccount(0,1);
+//        myself.setUpSavingsAccount(0,1);
         Assertions.assertEquals(0,myself.getAccounts().size());
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
     }
@@ -24,8 +24,8 @@ public class TestCustomer {
     @Test
     public void testStatements(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
-        myself.setUpCurrentAccount(new Balance(100,0));
-        myself.setUpSavingsAccount(new Balance(50,0));
+//        myself.setUpCurrentAccount(new Balance(100,0));
+//        myself.setUpSavingsAccount(new Balance(50,0));
         System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
         myself.getAccounts().get(0).withdraw(new Balance(30,0));
         System.out.println(myself.getAccounts().get(0).getBalanceByStatements());

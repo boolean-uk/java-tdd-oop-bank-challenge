@@ -16,16 +16,19 @@ public class TestCustomer {
     @Test
     public void testSetUpAccount(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
-//        myself.setUpSavingsAccount(0,1);
+        Branch branch = new Branch(1);
+        myself.setUpSavingsAccount(1,0,branch);
         Assertions.assertEquals(0,myself.getAccounts().size());
+        System.out.println(branch.getAccounts().get(0));//it exists
         //As a design choice, i don't want accounts with null balance for a user. so i made a function to remove all these accounts.
     }
     //these tests can also be done in the TestAccount class but since all of these things want to be done by the user, i decided to do them here.
     @Test
     public void testStatements(){
         Customer myself = new Customer("Dennis Voutos","Athens Greece","26/03/1998",12345);
-//        myself.setUpCurrentAccount(new Balance(100,0));
-//        myself.setUpSavingsAccount(new Balance(50,0));
+        Branch branch = new Branch(2);
+        myself.setUpCurrentAccount(branch,new Balance(100,0));
+        myself.setUpSavingsAccount(branch,new Balance(50,0));
         System.out.println(myself.getAccounts().get(0).getBalanceByStatements());
         myself.getAccounts().get(0).withdraw(new Balance(30,0));
         System.out.println(myself.getAccounts().get(0).getBalanceByStatements());

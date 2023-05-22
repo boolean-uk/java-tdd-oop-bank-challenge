@@ -73,9 +73,20 @@ public class TestAccountActions {
         Assertions.assertTrue(accountAction.withdraw("NDBK-0000-0001", 240.25));
 
         Assertions.assertEquals(-100, accountAction.accounts.get(0).getBalanceInDollars());
-
-
     }
+
+    @Test
+    public void testGenerateStatement() {
+        AccountActions accountAction = new AccountActions();
+        accountAction.createAccount("Current","NDBK-0000-0001", "Aidan", "van Geest", "ROT001");
+        accountAction.deposit("NDBK-0000-0001", 200.50);
+        accountAction.withdraw("NDBK-0000-0001", 50);
+        accountAction.withdraw("NDBK-0000-0001", 10.25);
+        accountAction.deposit("NDBK-0000-0001", 100.25);
+        accountAction.generateStatement("NDBK-0000-0001");
+        Assertions.assertEquals(240.50, accountAction.balance);
+    }
+
 
 
 

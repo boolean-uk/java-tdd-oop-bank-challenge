@@ -1,10 +1,14 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 
 public class AccountActions {
     List<Account> accounts = new ArrayList<>();
+    double balance = 0.00;
 
     public boolean createAccount(String accountType, String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
 
@@ -77,7 +81,18 @@ public class AccountActions {
         return true;
     }
 
+    public void generateStatement(String accountNumber) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        System.out.println("\nBank statement for: " + accountNumber + "\n");
+        System.out.println("Date          Amount       Balance");
+        for (LocalDateTime key : searchAccount(accountNumber).getTransactions().keySet()) {
+            balance += (searchAccount(accountNumber).getTransactions().get(key) / 100.0);
+            System.out.printf("%-10s %.2f %-2s %.2f \n", dtf.format(key) + "  || $", (searchAccount(accountNumber).getTransactions().get(key) / 100.0), "  || $", balance);
+        }
+
+
+    }
 
 
 

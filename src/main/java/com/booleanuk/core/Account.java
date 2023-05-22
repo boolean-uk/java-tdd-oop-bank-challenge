@@ -1,10 +1,11 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class Account {
     private String accountNumber;
@@ -13,15 +14,15 @@ public class Account {
     private String branchCode;
     private int balanceInCents = 0;
     private boolean approvedForOverdraft = false;
-    LocalDateTime dateTime;
-    Map<LocalDateTime, Integer> transactions;
+    private LocalDateTime dateTime;
+    private SortedMap<LocalDateTime, Integer> transactions;
 
     public Account(String accountNumber, String accountHolderFirstName, String accountHolderLastName, String branchCode) {
         this.setAccountNumber(accountNumber);
         this.setAccountHolderFirstName(accountHolderFirstName);
         this.setAccountHolderLastName(accountHolderLastName);
         this.setBranchCode(branchCode);
-        this.transactions = new HashMap<>();
+        this.setTransactions(new TreeMap<>());
     }
 
 
@@ -63,9 +64,13 @@ public class Account {
 
     public void setBalanceInCents(double AmountInDollars) {
             this.balanceInCents += (int) (AmountInDollars * 100.0);
-            this.dateTime = LocalDateTime.now();
-            this.transactions.put(this.dateTime, (int) (AmountInDollars * 100.0));
-
+            this.setDateTime(LocalDateTime.now());
+            this.getTransactions().put(this.getDateTime(), (int) (AmountInDollars * 100.0));
+        try {
+            TimeUnit.MILLISECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public double getBalanceInDollars() {
@@ -78,5 +83,21 @@ public class Account {
 
     public void setApprovedForOverdraft(boolean approvedForOverdraft) {
         this.approvedForOverdraft = approvedForOverdraft;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public SortedMap<LocalDateTime, Integer> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(SortedMap<LocalDateTime, Integer> transactions) {
+        this.transactions = transactions;
     }
 }

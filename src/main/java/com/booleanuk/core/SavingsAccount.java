@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class SavingsAccount implements BankAccount{
-    private static int ACCOUNT_NUMBER = 0000;
+    private static int ACCOUNT_NUMBER = 0;
     private int accountNumber;
     private List<Transaction> transactions;
     private double startAmount;
@@ -71,8 +71,6 @@ public class SavingsAccount implements BankAccount{
     public void setBalance(double balance){
         this.balance = balance;
     }
-
-
 
     // Methods
     public boolean printStatement() {

@@ -11,7 +11,7 @@ public class CurrentAccount implements BankAccount{
     private final List<Transaction> transactions;
     private double startAmount;
     private double balance;
-    private Branch branch;
+    private final Branch branch;
     private boolean hasOverdraft;
     private double overdraft;
 
@@ -24,7 +24,8 @@ public class CurrentAccount implements BankAccount{
         this.transactions = new ArrayList<>();
     }
 
-    public CurrentAccount(){
+    public CurrentAccount(Branch branch){
+        this.branch = branch;
         this.accountNumber = ACCOUNT_NUMBER++;
         this.accountNumber = this.getAccountNumber() + 1;
         this.transactions = new ArrayList<>();
@@ -76,7 +77,6 @@ public class CurrentAccount implements BankAccount{
         return this.overdraft;
     }
 
-
     // Methods
     public boolean printStatement() {
         System.out.println(branch.getName() + " " + branch.getLocation());
@@ -94,5 +94,4 @@ public class CurrentAccount implements BankAccount{
         System.out.println("\n");
         return true;
     }
-
 }

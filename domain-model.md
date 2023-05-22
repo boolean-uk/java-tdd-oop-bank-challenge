@@ -57,21 +57,21 @@ SavingsAccount Class (implements BankAccount)
 
 Transaction Class
 
-| Members       | Methods                      | Scenarios                                           | Outcome                                | User Story    |
-|---------------|------------------------------|-----------------------------------------------------|----------------------------------------|---------------|
-| Date date     | void makeDateStamp()         | Get the date at the time of creation of transaction | return string of date                  | 3             |
-| double amount |                              |                                                     |                                        |               |
-| String type   |                              |                                                     |                                        |               |
-|               | boolean executeTransaction() | withdraw and deposit money                          | return true if transaction successfull | 4             |
-|               |                              |                                                     | return false if insufficient funds     | 4 + extension |
-|               |                              |                                                     |                                        |               |
+| Members        | Methods                      | Scenarios                                           | Outcome                                | User Story    |
+|----------------|------------------------------|-----------------------------------------------------|----------------------------------------|---------------|
+| Date date      | void makeDateStamp()         | Get the date at the time of creation of transaction | return string of date                  | 3             |
+| double amount  |                              |                                                     |                                        |               |
+| String type    |                              |                                                     |                                        |               |
+|                | boolean executeTransaction() | withdraw and deposit money                          | return true if transaction successfull | 4             |
+| double balance |                              |                                                     | return false if insufficient funds     | 4 + extension |
+|                |                              |                                                     |                                        |               |
 
 Branch Class
 
 | Members         | Methods | Scenarios | Outcome | User Story |
 |-----------------|---------|-----------|---------|------------|
 | String name     |         |           |         |            |
-| String location |         |           |         |            |
+| String location |         |           |         | Extension  |
 |                 |         |           |         |            |
 |                 |         |           |         |            |
 |                 |         |           |         |            |

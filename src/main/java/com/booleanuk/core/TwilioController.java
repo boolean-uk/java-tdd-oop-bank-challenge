@@ -9,7 +9,7 @@ class TwilioController {
         public static void sendSms(String context) {
             Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
             Message message = Message.creator(
-                            new com.twilio.type.PhoneNumber("+306949469634"),
+                            new com.twilio.type.PhoneNumber("+306944444444"),
                             new com.twilio.type.PhoneNumber("+12543584255"),
                             context)
                     .create();

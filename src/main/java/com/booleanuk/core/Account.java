@@ -23,6 +23,7 @@ public class Account {
     public void formerDeposit(int formerDeposit) {
         balance += formerDeposit;
         System.out.println("You have successfully added " + formerDeposit + " to your account.");
+        System.out.println("The new balance of your checking account is: " + balance);
     }
 
     // withdraw method
@@ -31,7 +32,6 @@ public class Account {
             balance -= formerDeposit;
         } else {
             System.out.println("There is not enough money on your account.");
-
         }
     }
 

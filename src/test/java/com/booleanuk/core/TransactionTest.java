@@ -14,7 +14,7 @@ public class TransactionTest {
     @Test
     public void testMakeDateStamp(){
         Transaction transaction = new Transaction("deposit", 500);
-        Assertions.assertEquals("22-05-2023", transaction.getDate());
+        Assertions.assertEquals("22/05/2023", transaction.getDate());
     }
 
 

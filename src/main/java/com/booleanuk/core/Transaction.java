@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Transaction {
     private double amount;
     private String type;
@@ -39,7 +42,9 @@ public class Transaction {
 
     // Methods
     public String makeDateStamp(){
-        return "";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
     }
 
 }

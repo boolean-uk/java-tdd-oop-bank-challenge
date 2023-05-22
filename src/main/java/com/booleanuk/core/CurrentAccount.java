@@ -32,6 +32,6 @@ public class CurrentAccount implements BankAccount{
 
     // Methods
     public void makeTransaction(Transaction transaction) {
-
+        getTransactions().add(transaction);
     }
 }

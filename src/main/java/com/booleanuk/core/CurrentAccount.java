@@ -2,57 +2,73 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CurrentAccount implements BankAccount{
-    private List<Transaction> transactions;
+    private static int ACCOUNT_NUMBER = 0;
+
+    private int accountNumber;
+    private final List<Transaction> transactions;
+    private double startAmount;
     private double balance;
 
-    // Constructors
-    public CurrentAccount(){
+    //Constructors
+    public CurrentAccount(double startAmount) {
+        this.accountNumber = ACCOUNT_NUMBER++;
+        this.accountNumber = this.getAccountNumber();
+        this.startAmount = startAmount;
         this.transactions = new ArrayList<>();
     }
 
-    public CurrentAccount(double balance){
+    public CurrentAccount(){
+        this.accountNumber = ACCOUNT_NUMBER++;
+        this.accountNumber = this.getAccountNumber() + 1;
         this.transactions = new ArrayList<>();
-        setBalance(balance);
     }
 
     // Getters & Setters
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public List<Transaction> getTransactions() {
         return this.transactions;
     }
 
+    public int getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
     public double getBalance() {
-        return this.balance;
+        double balance = this.startAmount;
+        for (Transaction transaction : this.transactions) {
+            if (transaction.getType().equals("deposit")) {
+                balance += transaction.getAmount();
+            } else if (transaction.getType().equals("withdraw")) {
+                balance -= transaction.getAmount();
+            }
+        }
+        return this.balance = balance;
+    }
+
+    public void setBalance(double balance){
+        this.balance = balance;
     }
 
     // Methods
-    public void makeTransaction(Transaction transaction) {
-        if(transaction.getType().equals("deposit")){
-            setBalance(getBalance() + transaction.getAmount());
-            getTransactions().add(0,transaction);
-        } else if(transaction.getType().equals("withdraw") && getBalance() >= transaction.getAmount()){
-            setBalance(getBalance() - transaction.getAmount());
-            getTransactions().add(0,transaction);
-        } else {
-            System.out.println("Insufficient funds");
-        }
-    }
-
-    public boolean printStatement(){
+    public boolean printStatement() {
+        System.out.println("Bank Statement Current Account");
         System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", "date", "credit", "debit", "balance");
 
         for(Transaction transaction : getTransactions()) {
             if(transaction.getType().equals("deposit")) {
-                System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", transaction.getDate(),transaction.getAmount(), "", getBalance());
+                System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", transaction.getDate(),transaction.getAmount(), "", transaction.getBalance());
             } else if(transaction.getType().equals("withdraw")) {
-                System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", transaction.getDate(),"", transaction.getAmount(), getBalance());
+                System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", transaction.getDate(),"", transaction.getAmount(), transaction.getBalance());
             }
         }
+        System.out.printf("| %-10s | %-8s | %-8s | %4s |%n", "", "", "", startAmount);
+        System.out.println("\n");
         return true;
     }
 

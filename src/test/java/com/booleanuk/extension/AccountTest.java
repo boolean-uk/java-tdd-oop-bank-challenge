@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,9 +13,9 @@ public class AccountTest {
     void doubleToInt() {
         Account account1 = new CurrentAccount("Nick", "Giagk");
 
-        Assertions.assertEquals(0,account1.getCurrentBalance());
+        Assertions.assertEquals(0.0,account1.getCurrentBalance());
         Assertions.assertTrue(account1.deposit(100.5));
-        Assertions.assertEquals(10050,account1.getCurrentBalance());
+        Assertions.assertEquals(100.5,account1.getCurrentBalance());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class AccountTest {
         Assertions.assertFalse(account1.activated);
 
         Assertions.assertTrue(account1.deposit(100.5));
-        Assertions.assertEquals(10050,account1.getCurrentBalance());
+        Assertions.assertEquals(100.5,account1.getCurrentBalance());
         Assertions.assertTrue(account1.activated);
 
         LocalDate date = LocalDate.now();
@@ -48,8 +48,8 @@ public class AccountTest {
         Assertions.assertFalse(account1.withdraw(101.0));
         Assertions.assertTrue(account1.withdraw(1.5));
 
-        // 99.00 equals 9900 cents
-        Assertions.assertEquals(9900, account1.getCurrentBalance());
+
+        Assertions.assertEquals(99.0, account1.getCurrentBalance());
 
 
         LocalDate date = LocalDate.now();
@@ -63,5 +63,25 @@ public class AccountTest {
         Assertions.assertEquals(9900, account1.balanceHistory.get(1));
 
 
+    }
+
+    @Test
+    void branchTest() {
+        Account account1 = new CurrentAccount("Nick", "Giagk");
+        account1.setBranch("Piraeus branch");
+
+        Assertions.assertEquals("Piraeus branch", account1.getBranch());
+    }
+
+    @Test
+    void overDraftTest() {
+        Account account1 = new CurrentAccount("Nick", "Giagk");
+        account1.deposit(100.5);
+
+        Assertions.assertFalse(account1.withdraw(101.5));
+
+        ((CurrentAccount) account1).setOverDraftAbility(true);
+        Assertions.assertTrue(account1.withdraw(130.5));
+        Assertions.assertEquals(-30.0, account1.getCurrentBalance());
     }
 }

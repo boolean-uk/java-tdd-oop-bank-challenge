@@ -47,12 +47,12 @@ public class Account {
             return this.balance;
         }
         String[] parts = statements[statements.length-1].split("\\|\\|");
-        System.out.println(Arrays.toString(statements));
-        System.out.println(Arrays.toString(parts));
+//        System.out.println(Arrays.toString(statements));
+//        System.out.println(Arrays.toString(parts));
         String[] almostThere = parts[3].split("\\$");
-        System.out.println(Arrays.toString(almostThere));
+//        System.out.println(Arrays.toString(almostThere));
         String[] number = almostThere[1].split(",");
-        System.out.println(Arrays.toString(number));
+//        System.out.println(Arrays.toString(number));
         int intPart = Integer.parseInt(number[0]);
         int decimalPart = Integer.parseInt(number[1]);
         return new Balance(intPart,decimalPart);
@@ -62,9 +62,9 @@ public class Account {
             System.out.println("Withdrew "+toWithdraw.toString()+" ");
             this.balance.interact(new Balance(-toWithdraw.getIntPart(),-toWithdraw.getDecimalPart()));
             this.addToStatements(new Balance(-toWithdraw.getIntPart(), -toWithdraw.getDecimalPart()));
+            this.balance = getBalanceByStatements();
             return true;
         }
-
         return false;
     }
     public boolean deposit(Balance toDeposit){
@@ -72,6 +72,7 @@ public class Account {
             System.out.println("Successfully deposited "+toDeposit);
             this.balance.interact(new Balance(toDeposit.getIntPart(),toDeposit.getDecimalPart()));
             this.addToStatements(toDeposit);
+            this.balance = getBalanceByStatements();
             return true;
         }
 

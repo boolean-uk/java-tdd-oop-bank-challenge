@@ -10,7 +10,7 @@ public class TestAccount {
         Balance balance = new Balance(10,0);
         Account account = new Account(balance);
         Assertions.assertEquals(balance,account.getBalance());
-        Assertions.assertEquals("10,0",account.getBalance().toString());
+        Assertions.assertEquals("10,0",account.getBalanceByStatements().toString());
         Balance faultyBalance = new Balance(1,0);
         Balance anotherFaultyBalance = new Balance(-1,0);
         Account anotherAccount = new Account(faultyBalance);

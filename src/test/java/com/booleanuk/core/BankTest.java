@@ -15,15 +15,12 @@ public class BankTest {
         Customer customer3 = new Customer(3);
         bank.addCustomer(customer1.id);
         Assertions.assertTrue(bank.addCustomer(customer3.id));
-//        Customer customer4 = new Customer(4);
-//        bank.addCustomer(customer1.id);
-//        bank.addCustomer(customer2.id);
-//        Assertions.assertTrue(bank.addCustomer(customer3.id));
         Assertions.assertFalse(bank.getCustomers().contains(customer3.id));
     }
 
     @Test
     public void newAccountIsAddedTest() {
+        // same for Savings and Checkings
         Bank bank = new Bank ();
         Account account1 = new Account("1111", 100, "Savings");
         Account account2 = new Account("2222", 200, "Savings");
@@ -37,7 +34,7 @@ public class BankTest {
 //    public void accountIdAlreadyExistsTest() {
 //        Bank bank = new Bank();
 //        Account account1 = new Account("1111", 100, "Savings");
-//        bank.addAccount("2222", 200, "Savings");
+//        bank.addAccount("1111", 100, "Savings");
 //        Assertions.assertEquals("1111", bank.getAccounts().contains(account1));
 //        Assertions.assertTrue(bank.getAccounts().contains(account1));
 //    }

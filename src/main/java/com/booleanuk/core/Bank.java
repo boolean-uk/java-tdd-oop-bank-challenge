@@ -25,9 +25,9 @@ public class Bank {
 
 
     public boolean addAccount (String accountNumber, int formerDeposit, String accountType) {
-        System.out.println("Before for loop");
+//        System.out.println("Before for loop");
         for (Account account : getAccounts()) {
-            System.out.println("In for loop");
+//            System.out.println("In for loop");
             if (account.getAccountType().equals(accountType) && account.getAccountNumber().equals(accountNumber)) {
                 System.out.println("Customer has already a " + accountType + "account.");
                 return false;
@@ -41,9 +41,9 @@ public class Bank {
     }
 
     public boolean addCustomer (int id) {
-        System.out.println("Before for loop");
+//        System.out.println("Before for loop");
         for (Customer customer: getCustomers()){
-            System.out.println("Inside for loop");
+//            System.out.println("Inside for loop");
             if (customer.getId() == id) {
                 System.out.println("Customer with this " + id + " number already exists.");
                 return false;

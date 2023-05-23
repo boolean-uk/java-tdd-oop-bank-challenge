@@ -1,5 +1,9 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Account {
@@ -9,8 +13,7 @@ public class Account {
     private String customerId;
     private int id;
 
-    //Arraylist<BankStatements> bankStatements;
-
+    ArrayList<String> transactions;
 
     // constructor
     public Account(String accountNumber, double formerDeposit, String accountType) {
@@ -18,13 +21,15 @@ public class Account {
         this.setBalance(formerDeposit);
         this.setAccountType(accountType);
         this.setCustomerId(getCustomerId());
-        //this.bankStatements = new ArrayList<>();
+        this.transactions = new ArrayList<>();
     }
 
 //     formerDeposit method
-    public void formerDeposit(double formerDeposit) {
+    public void formerDeposit(double formerDeposit, LocalDate localDate) {
        if (formerDeposit > 0.0) {
            balance += formerDeposit;
+           String transaction = localDate + " || " + formerDeposit + " ||      || " + balance;
+           this.transactions.add(transaction);
            System.out.println("You have successfully added " + formerDeposit + " to your account.");
            System.out.println("The new balance of your checking account is: " + balance);
        } else {
@@ -33,17 +38,26 @@ public class Account {
     }
 
     // withdraw method
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount, LocalDate localDate) {
         double newBalance = balance - amount;
         if (newBalance < 0.0) {
             System.out.println("There is not enough money on your account.");
             return false;
         }
         balance = newBalance;
-//        System.out.println("Your balance is: $" + balance);
+        String transaction = localDate + " ||      || " + amount + " || "  + balance;
+        this.transactions.add(transaction);
         System.out.println("You have successfully removed $" + amount + " from your account.");
         System.out.println("The new balance of your checking account is: $" + getBalance());
         return true;
+    }
+
+    public String printStatement() {
+        String listTransactions = " date   ||  credit  ||  debit || balance " + "\n";
+      for (String transactionsValues : this.transactions) {
+          listTransactions += transactionsValues + "\n";
+      }
+      return listTransactions;
     }
 
     public String getAccountNumber() {

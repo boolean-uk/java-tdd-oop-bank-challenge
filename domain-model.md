@@ -70,16 +70,20 @@ I want statements to be sent as messages to my phone.
 
 ### Domain model (extending core)
 
-| Class                             | Fields                               | Methods                                    | Scenario                                                      | Output             |
-|-----------------------------------|--------------------------------------|--------------------------------------------|---------------------------------------------------------------|--------------------|
-| *Account*                         | BankBranch bankBranch                |                                            | When creating account it needs to have bank branch associated |                    |
-| CurrentAccount extends *Account*  | Overdraft overdraft                  | void requestOverdraft(Overdraft overdraft) | Customer requests overdraft                                   |                    |
-| BankBranch                        | List<Account> accounts               | void addAccount(Account account)           | Add account to the branch when creating                       |                    |
-|                                   |                                      |                                            | If account is not assigned to this branch                     | Throw an exception |
-|                                   |                                      |                                            | If account has been already added to this branch              | Do nothing         |
-| Overdraft                         | boolean pending<br/>boolean approved | void approve()                             | Manager approves overdraft                                    |                    |
-|                                   | boolean pending<br/>boolean approved | void reject()                              | Manager rejects overdraft                                     |                    |
-| BankStatement                     |                                      | void sendStatement(String phoneNumber)     | Customer requests bank statement to be delivered via SMS      |                    |
+| Class                                  | Fields                               | Methods                                          | Scenario                                                          | Output             |
+|----------------------------------------|--------------------------------------|--------------------------------------------------|-------------------------------------------------------------------|--------------------|
+| *Account*                              | BankBranch bankBranch                |                                                  | When creating account it needs to have bank branch associated     |                    |
+| CurrentAccount extends *Account*       | Overdraft overdraft                  | void requestOverdraft(Overdraft overdraft)       | Customer requests overdraft                                       |                    |
+| BankBranch                             | List<Account> accounts               | void addAccount(Account account)                 | Add account to the branch when creating                           |                    |
+|                                        |                                      |                                                  | If account is not assigned to this branch                         | Throw an exception |
+|                                        |                                      |                                                  | If account has been already added to this branch                  | Do nothing         |
+| Overdraft                              | boolean pending<br/>boolean approved | void approve()                                   | Manager approves overdraft                                        |                    |
+|                                        | boolean pending<br/>boolean approved | void reject()                                    | Manager rejects overdraft                                         |                    |
+| BankStatement                          | SmsService smsService                | void sendStatement(String phoneNumber)           | Customer requests bank statement to be delivered via SMS          |                    |
+| *SmsService*                           |                                      | void sendSms(String phoneNumber, String message) | Sends an SMS                                                      |                    |
+|                                        |                                      |                                                  | If SMS cannot be sent                                             | Throw an exception |
+| TwilioService implements *SmsService*  |                                      |                                                  | Uses Twilio as SMS backend                                        |                    |
+| MockSmsService implements *SmsService* |                                      |                                                  | Mocks sending SMS by outputting them to stdout (used for testing) |                    |
 
 ### Class diagram
 ![](class-diagram-extension.png)

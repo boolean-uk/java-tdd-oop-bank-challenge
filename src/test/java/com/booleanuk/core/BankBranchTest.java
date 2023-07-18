@@ -17,7 +17,7 @@ public class BankBranchTest {
         //When
         int accountNumber = bank.createAccount(true);
         //Then
-        Assertions.assertEquals(CurrentAccount.class, bank.getAccount(accountNumber));
+        Assertions.assertInstanceOf(CurrentAccount.class, bank.getAccount(accountNumber));
     }
 
     @Test

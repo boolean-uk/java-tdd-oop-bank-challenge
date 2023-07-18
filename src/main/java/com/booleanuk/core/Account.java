@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class Account {
-    private Customer customer;
+    private final Customer customer;
     private List<Transaction> transactions = new ArrayList<>();
-    private String accountNumber;
+    private final String accountNumber;
 
     Account(BigDecimal amount, Customer customer){
         this.customer = customer;

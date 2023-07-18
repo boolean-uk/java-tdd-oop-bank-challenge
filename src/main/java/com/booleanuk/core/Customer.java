@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Random;
 
 public class Customer {
-    private String ID;
-    private String name;
-    private String surname;
-    private LocalDate dateOfBirth;
+    private final String ID;
+    private final String name;
+    private final String surname;
+    private final LocalDate dateOfBirth;
     private List<Account> accounts;
 
     public Customer(String name, String surname, LocalDate dateOfBirth) {

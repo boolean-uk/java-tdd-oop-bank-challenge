@@ -6,11 +6,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Transaction {
-    private TRANSACTION_TYPE type;
-    private BigDecimal amount;
-    private Account account;
-    private LocalDate date;
-    private BigDecimal balance;
+    private final TRANSACTION_TYPE type;
+    private final BigDecimal amount;
+    private final Account account;
+    private final LocalDate date;
+    private final BigDecimal balance;
 
 
     public Transaction(TRANSACTION_TYPE type, BigDecimal amount, Account account) {

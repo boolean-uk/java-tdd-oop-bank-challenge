@@ -20,7 +20,11 @@ public class AccountTest {
     public void shouldOpenCurrentAccount() {
         Account current = new CurrentAccount(new BigDecimal("1000"), customer);
         Assertions.assertEquals(new BigDecimal("1000"),current.getBalance());
-
+    }
+    @Test
+    public void shouldOpenSavingsAccount() {
+        Account savings = new SavingsAccount(new BigDecimal("1000"), customer);
+        Assertions.assertEquals(new BigDecimal("1000"),savings.getBalance());
     }
 
 }

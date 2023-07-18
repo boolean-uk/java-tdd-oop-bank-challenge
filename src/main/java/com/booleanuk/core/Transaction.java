@@ -29,4 +29,5 @@ public class Transaction {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
+
 }

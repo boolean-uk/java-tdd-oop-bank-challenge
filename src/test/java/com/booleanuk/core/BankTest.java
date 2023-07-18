@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +15,14 @@ public class BankTest {
 
     @BeforeEach
     public void setUp() {
-        bank = new Bank();
+        bank = Bank.getInstance();
         savingsAccount = new SavingsAccount("1234 5678 8756 4321", 1);
         currentAccount = new CurrentAccount("8765 4321 1234 5678", 2);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        bank.reset();
     }
 
     @Test
@@ -36,7 +42,17 @@ public class BankTest {
 
     @Test
     public void testGenerateAccountNumber() {
-        Assertions.assertEquals(CHARACTERS_IN_ACCOUNT_NUMBER, Bank.generateAccountNumber().length());
+        String accountNumber = bank.generateAccountNumber();
+        System.out.println(accountNumber);
+        Assertions.assertEquals(CHARACTERS_IN_ACCOUNT_NUMBER, accountNumber.length());
+        Assertions.assertTrue(accountNumber.matches("\\d{4} \\d{4} \\d{4} \\d{4}"));
+    }
+
+    @Test
+    public void testGetAccountNumbers() {
+        bank.addAccount(savingsAccount);
+        bank.addAccount(currentAccount);
+        Assertions.assertEquals(List.of("1234 5678 8756 4321", "8765 4321 1234 5678"), bank.getAccountNumbers());
     }
 
 }

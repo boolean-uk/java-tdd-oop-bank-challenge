@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Account {
-    private ArrayList<Transaction> transactions;
+    protected ArrayList<Transaction> transactions;
 
     public Account() {
         this.transactions = new ArrayList<>();

@@ -4,6 +4,7 @@ public class OverdraftRequest {
     private String status;
     private final double amount;
 
+
     public OverdraftRequest(double amount) {
         this.amount = amount;
         this.status = "unchecked";

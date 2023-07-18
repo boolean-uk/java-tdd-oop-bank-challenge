@@ -41,3 +41,4 @@
 |         |                                           |                                                       | if credit and debit is empty                                                          | 0.00    |
 |         |                                           | generateAccountNumber(Client client)                  | if client is not null create account number                                           | String  |
 |         |                                           |                                                       | if client is null return empty String                                                 | String  |
+

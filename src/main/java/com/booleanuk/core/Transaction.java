@@ -10,7 +10,6 @@ public class Transaction {
     private final BigDecimal amount;
     private final Account account;
     private final LocalDate date;
-    private final BigDecimal balance;
 
 
     public Transaction(TRANSACTION_TYPE type, BigDecimal amount, Account account) {
@@ -18,7 +17,6 @@ public class Transaction {
         this.amount = amount;
         this.account = account;
         this.date = LocalDate.now();
-        this.balance = account.getBalance();
     }
 
     public TRANSACTION_TYPE getType() {
@@ -27,6 +25,10 @@ public class Transaction {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
 

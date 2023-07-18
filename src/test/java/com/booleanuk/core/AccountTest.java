@@ -15,11 +15,16 @@ public class AccountTest {
     public static void setup() {
         customer = new Customer("John", "Doe", LocalDate.parse("1990-01-01"));
     }
+    @Test
+    public void shouldOpenCurrentAccountWith0Balance() {
+        Account current = new CurrentAccount(customer);
+        Assertions.assertEquals(BigDecimal.ZERO,current.getBalance());
+    }
 
     @Test
     public void shouldOpenCurrentAccount() {
         Account current = new CurrentAccount(new BigDecimal("1000"), customer);
-        Assertions.assertEquals(new BigDecimal("1000"),current.getBalance());
+        Assertions.assertEquals(new BigDecimal("1000"), current.getBalance());
     }
     @Test
     public void shouldOpenSavingsAccount() {

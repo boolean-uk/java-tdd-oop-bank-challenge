@@ -6,13 +6,13 @@ public class CurrentAccount extends Account{
         super(accountNr, branch);
     }
 
-    public boolean overdraft() {
-        if (calculateBalance() < OVERDRAFTLIMIT) throw new IllegalStateException("Overdraft!");
+    public boolean overdraft(int amountOfMoney) {
+        if (calculateBalance() - amountOfMoney < 0 && Math.abs(calculateBalance() - amountOfMoney) > OVERDRAFTLIMIT) throw new IllegalStateException("Overdraft!");
         else return false;
     }
 
     @Override
     public void withdraw(int amountOfMoney) {
-        if (!overdraft()) super.withdraw(amountOfMoney);
+        if (!overdraft(amountOfMoney)) super.withdraw(amountOfMoney);
     }
 }

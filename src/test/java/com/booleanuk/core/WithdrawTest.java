@@ -30,10 +30,24 @@ public class WithdrawTest {
     }
 
     @Test
-    public void withdrawWithOverdraftShouldCreateAndAddDepositToTransfers() {
+    public void withdrawWithOverdraftShouldThrowException() {
         currentAccount.deposit(20000);
 
         Assertions.assertEquals(20000, currentAccount.calculateBalance());
         Assertions.assertThrows(IllegalStateException.class, () -> currentAccount.withdraw(80000));
+    }
+
+    @Test
+    public void withdrawWithOverdraftShouldThrowExceptionAtTheEnd() {
+        currentAccount.deposit(20000);
+        currentAccount.deposit(30000);
+        currentAccount.deposit(1000);
+        currentAccount.deposit(20000);
+        currentAccount.withdraw(20000);
+        currentAccount.deposit(32000);
+        currentAccount.withdraw(200);
+        System.out.println(currentAccount.calculateBalance());
+
+        Assertions.assertThrows(IllegalStateException.class, () -> currentAccount.withdraw(800000000));
     }
 }

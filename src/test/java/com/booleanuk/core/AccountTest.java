@@ -15,9 +15,9 @@ public class AccountTest {
     @Test
     public void testAccountNumber() {
 
-        myAccount.setAccountNumber(123456789);
+        myAccount.setAccountNumber("C123456789");
 
-        Assertions.assertEquals(123456789, myAccount.getAccountNumber());
+        Assertions.assertEquals("C123456789", myAccount.getAccountNumber());
     }
 
 }

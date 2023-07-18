@@ -1,7 +1,6 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.BankAccount;
-import com.booleanuk.core.Transaction;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class CurrentAccount implements BankAccount {
 
-    private List<com.booleanuk.core.Transaction> transactions;
+    private List<Transaction> transactions;
     private double balance;
     private boolean canBeOverdrafted;
 
@@ -28,7 +27,7 @@ public class CurrentAccount implements BankAccount {
         canBeOverdrafted = false;
     }
 
-    public List<com.booleanuk.core.Transaction> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
     public double getBalance() {
@@ -43,7 +42,7 @@ public class CurrentAccount implements BankAccount {
     public boolean deposit(double amount) {
         if(amount > 0) {
             balance += amount;
-            transactions.add(new com.booleanuk.core.Transaction(new Date(), "credit", amount,getBalance()));
+            transactions.add(new Transaction(new Date(), "credit", amount,getBalance()));
             return true;
         }else {
             System.out.println("Amount must be a positive number");
@@ -61,7 +60,7 @@ public class CurrentAccount implements BankAccount {
             if(canBeOverdrafted == false) {
                 if(getBalance() - amount >= 0) {
                     balance -= amount;
-                    transactions.add(new com.booleanuk.core.Transaction(new Date(), "debit", amount,getBalance()));
+                    transactions.add(new Transaction(new Date(), "debit", amount,getBalance()));
                     return true;
                 }else {
                     System.out.println("You can't withdraw more money than there is on the account");
@@ -72,7 +71,7 @@ public class CurrentAccount implements BankAccount {
             } else{
                 if(getBalance() - amount >= -500) {
                     balance -= amount;
-                    transactions.add(new com.booleanuk.core.Transaction(new Date(), "debit", amount,getBalance()));
+                    transactions.add(new Transaction(new Date(), "debit", amount,getBalance()));
                     return true;
                 }else {
                     System.out.println("Can't overdraft more that 500");
@@ -90,7 +89,7 @@ public class CurrentAccount implements BankAccount {
     public void generateBankStatement() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-        List<com.booleanuk.core.Transaction> transactionsSortedByDate = this.transactions.stream().sorted(Comparator.comparing(com.booleanuk.core.Transaction::getDate).
+        List<Transaction> transactionsSortedByDate = this.transactions.stream().sorted(Comparator.comparing(Transaction::getDate).
                 reversed()).collect(Collectors.toList());
 
         System.out.printf("%-10s || %-9s || %-9s || %4s %n", "date", "credit", "debit", "balance");

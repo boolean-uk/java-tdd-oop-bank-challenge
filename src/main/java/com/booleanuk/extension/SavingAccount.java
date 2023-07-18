@@ -1,7 +1,6 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.BankAccount;
-import com.booleanuk.core.Transaction;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -19,7 +19,7 @@ public class Bank {
     }
 
     public void register(String name, String lastName, String birthDate, String id) throws Exception{
-        if(birthDate.contains(".") && !checkIfClientRegistered(id)) clientsOfBank.add(new Client(name, lastName, birthDate, id)); //to correct with three dots
+        if(birthDate.contains(".") && !checkIfClientRegistered(id)) clientsOfBank.add(new Client(name, lastName, birthDate, id));
         else throw new Exception("Can not be registered");
     }
 

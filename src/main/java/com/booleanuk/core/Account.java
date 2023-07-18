@@ -13,6 +13,8 @@ public class Account {
     Bank bank;
     DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     double balance;
+    List<String> accounts;
+    String accountNumber;
 
     public HashMap<LocalDate, ArrayList<Double>> getDebitList() {
         return debit;
@@ -98,62 +100,6 @@ public class Account {
         } else return "No money to withdraw from deposit";
     }
 
-    public double countBalance(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList) {
-        double balance = 0.00;
-
-        do{
-            List<LocalDate> creditDates = creditList.keySet().stream().toList();
-            List<LocalDate> debitDates = debitList.keySet().stream().toList();
-
-            LocalDate minimumDateCredit = creditDates.stream().min(LocalDate::compareTo).orElse(null);
-            LocalDate minimumDateDebit = debitDates.stream().min(LocalDate::compareTo).orElse(null);
-//            System.out.println("min credit " + minimumDateCredit);
-//            System.out.println("min debit " + minimumDateDebit);
-//
-//            System.out.println("values credit " + creditList.values());
-//            System.out.println("values debit " + debitList.values());
-
-            if(minimumDateDebit != null && minimumDateCredit != null){
-                if(minimumDateCredit.isBefore(minimumDateDebit)){
-//                    System.out.println(creditList.get(minimumDateCredit));
-                    for (double d : creditList.get(minimumDateCredit)){
-                        balance += d;
-                    }
-                    creditList.remove(minimumDateCredit);
-                } else if (minimumDateDebit.isBefore(minimumDateCredit)) {
-                    for (double d : debitList.get(minimumDateDebit)){
-                        balance -= d;
-                    }
-                    debitList.remove(minimumDateDebit);
-                } else {
-                    for (double d : creditList.get(minimumDateCredit)){
-                        balance += d;
-                    }
-                    creditList.remove(minimumDateCredit);
-
-                    for (double d : debitList.get(minimumDateCredit)){
-                        balance -= d;
-                    }
-                    debitList.remove(minimumDateDebit);
-                }
-            } else if (minimumDateDebit == null && minimumDateCredit != null) {
-                for (double d : creditList.get(minimumDateCredit)){
-                    balance += d;
-                }
-                creditList.remove(minimumDateCredit);
-            } else if (minimumDateCredit == null && minimumDateDebit != null) {
-                for (double d : debitList.get(minimumDateDebit)){
-                    balance -= d;
-                }
-                debitList.remove(minimumDateDebit);
-            }
-
-//            System.out.println(balance);
-        } while (!creditList.isEmpty() || !debitList.isEmpty());
-
-        return balance;
-    }
-
     public double countBalanceTotal(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList){
         double balance = 0.00;
         for (List<Double> creditAmounts : creditList.values()) {
@@ -170,6 +116,7 @@ public class Account {
         return balance;
     }
 
+    //extension balance calculated based on transaction history
     public String generateBankStatements(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList) {
         HashMap<LocalDate, ArrayList<Double>> tmpCreditList = creditList;
         HashMap<LocalDate, ArrayList<Double>> tmpDebitList = debitList;
@@ -209,5 +156,45 @@ public class Account {
         }
 
         return sb.toString();
+    }
+
+    public boolean approveOverdraft(boolean isApproved) {
+        return isApproved;
+    }
+
+    public String requestOverdraft(boolean isApproved){
+        if (approveOverdraft(isApproved)) return "Overdraft approved";
+        else return "Overdraft rejected";
+    }
+
+    public String withdrawOverdraft(double amount, LocalDate date, boolean isApproved) {
+        ArrayList<Double> tmp = new ArrayList<>();
+        if(amount > 0){
+            if(countBalanceTotal(this.credit, this.debit) >= amount || approveOverdraft(isApproved)) {
+                if (!getDebitList().containsKey(date)) {
+                    tmp.add(amount);
+                    getDebitList().put(date, tmp);
+                } else {
+                    getDebitList().get(date).add(amount);
+                }
+            }
+            return requestOverdraft(isApproved);
+        } else return "No money to withdraw from deposit";
+    }
+
+    public String withdrawOverdraft(double amount, boolean isApproved) {
+        ArrayList<Double> tmp = new ArrayList<>();
+        if(amount > 0) {
+            if(countBalanceTotal(this.credit, this.debit) >= amount || approveOverdraft(isApproved)) {
+                this.date = LocalDate.now();
+                if (!getDebitList().containsKey(date)) {
+                    tmp.add(amount);
+                    getDebitList().put(this.date, tmp);
+                } else {
+                    getDebitList().get(date).add(amount);
+                }
+            }
+            return requestOverdraft(isApproved);
+        } else return "No money to withdraw from deposit";
     }
 }

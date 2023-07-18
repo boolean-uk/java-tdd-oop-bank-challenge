@@ -194,7 +194,7 @@ public class AccountTest {
         account.deposit(amountToDeposit, date1);
         account.withdraw(amountToWithdraw, date2);
 
-        Assertions.assertEquals(300.00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(300.00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
 
     @Test
@@ -213,7 +213,7 @@ public class AccountTest {
         account.withdraw(amountToWithdraw, date2); //1300
         account.deposit(amountToDeposit2, date3); //2800
 
-        Assertions.assertEquals(2800.00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(2800.00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
     @Test
     public void countBalanceTestExample3() {
@@ -229,7 +229,7 @@ public class AccountTest {
         account.withdraw(300, date2);
         account.withdraw(amountToWithdraw, date2);
 
-        Assertions.assertEquals(-700.00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(-700.00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
 
     @Test
@@ -244,7 +244,7 @@ public class AccountTest {
         account.deposit(amountToDeposit, date1);
         account.deposit(amountToDeposit, date2);
 
-        Assertions.assertEquals(3000.00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(3000.00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
 
     @Test
@@ -258,7 +258,7 @@ public class AccountTest {
         account.withdraw(amountToWithdraw, date1);
         account.withdraw(amountToWithdraw, date2);
 
-        Assertions.assertEquals(-1400.00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(-1400.00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
 
     @Test
@@ -266,7 +266,7 @@ public class AccountTest {
         Bank bank = new Bank();
         Account account = new Account(bank);
 
-        Assertions.assertEquals(00, account.countBalance(account.getCreditList(), account.getDebitList()));
+        Assertions.assertEquals(00, account.countBalanceTotal(account.getCreditList(), account.getDebitList()));
     }
 
     public double countBalanceTotal(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList){

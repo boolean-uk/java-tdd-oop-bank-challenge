@@ -1,4 +1,4 @@
 package com.booleanuk.extension;
 
-public class Branch {
+public record Branch(String city, String code, int overdraftLimit) {
 }

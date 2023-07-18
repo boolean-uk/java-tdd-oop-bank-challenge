@@ -47,10 +47,18 @@ public class BankTest {
     @Test
     public void testOverdrafting(){
         curr.requestOverdraft(new BigDecimal("1000.00"));
+        curr.deposit(new BigDecimal("500.00"),"2023-07-18", "Deposit");
         bank.approveOverdraft(curr);
         curr.withdraw(new BigDecimal("1000.00"),"2023-07-18", "Withdrawal");
-        Assertions.assertEquals(new BigDecimal("-1000.00"),curr.getBalance());
+        Assertions.assertEquals(new BigDecimal("-500.00"),curr.getBalance());
 
     }
 
+    @Test
+    public void testInterestRate(){
+        save.deposit(new BigDecimal("1000.00"),"2023-07-18", "Deposit");
+        save.withdraw(new BigDecimal("900.00"),"2023-07-18", "Withdrawal");
+        save.applyInterest("2023-07-18");
+        Assertions.assertEquals(new BigDecimal("105.00"),save.getBalance());
+    }
 }

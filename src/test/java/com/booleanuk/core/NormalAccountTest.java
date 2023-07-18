@@ -53,7 +53,7 @@ public class NormalAccountTest {
     public  void shouldReturnFalseWhenNotEnoughMoneyOnAccountToWithdraw()
     {
         NormalAccount normalAccount = new NormalAccount(12312312);
-        Assertions.assertTrue(normalAccount.withdraw(11));
+        Assertions.assertFalse(normalAccount.withdraw(11));
     }
     @Test
     public void shouldReturnTrueWhenEnoughMoneyOnDebitToWithdraw()

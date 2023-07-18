@@ -9,24 +9,27 @@ public abstract class BankAccount {
     private long accountNumber;
     private List<Transaction> transactions;
 
-    public BankAccount( long accountNumber) {
+    public BankAccount(long accountNumber) {
         this.balance = 0;
         this.accountNumber = accountNumber;
         transactions = new ArrayList<Transaction>();
     }
-
-    public boolean deposit(double amount)
-    {
+    public boolean deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            return true;
+        }
+        return false;
+    }
+    public boolean withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+            return true;
+        }
         return false;
     }
 
-    public boolean withdraw(double amount)
-    {
-        return false;
-    }
-
-    public StringBuilder generateStatement()
-    {
+    public StringBuilder generateStatement() {
         return new StringBuilder();
     }
 

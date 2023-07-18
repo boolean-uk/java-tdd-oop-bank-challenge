@@ -18,6 +18,11 @@ public class NormalAccount  extends  BankAccount{
 
     public boolean withdrawFromDebit(double amount)
     {
-        return false;
+        if(debit>=amount)
+        {
+         debit-=amount;
+         return true;
+        }
+        return  false;
     }
 }

@@ -10,6 +10,7 @@ import java.time.Instant;
 @Value
 public class BankTransaction {
     TransactionType transactionType;
+    TransactionResult transactionResult;
     BigDecimal balanceBefore;
     BigDecimal amount;
     BigDecimal balanceAfter;

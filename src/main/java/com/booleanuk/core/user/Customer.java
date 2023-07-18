@@ -64,14 +64,18 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public BankTransaction withdrawCurrentAccount(BigDecimal withdrawAmount) {
         if (Objects.isNull(currentAccount)) {
-            throw new BankAccountNotOpened("Saving Account not opened");
+            throw new BankAccountNotOpened("Current Account not opened");
         }
 
         return currentAccount.withdraw(withdrawAmount);
     }
 
     @Override
-    public BankTransaction withdrawSavingAccount(BigDecimal bigDecimal) {
-        return null;
+    public BankTransaction withdrawSavingAccount(BigDecimal withdrawAmount) {
+        if (Objects.isNull(savingAccount)) {
+            throw new BankAccountNotOpened("Saving Account not opened");
+        }
+
+        return savingAccount.withdraw(withdrawAmount);
     }
 }

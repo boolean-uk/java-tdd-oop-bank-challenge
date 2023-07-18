@@ -32,4 +32,12 @@ public class CurrentAccountTest {
         account.withdraw(BigDecimal.valueOf(500.00), LocalDate.of(2012, 1, 14));
         Assertions.assertEquals(BigDecimal.valueOf(2500.00), account.getBalance());
     }
+
+    @Test
+    void shouldThrowExceptionWhenNoMoney() {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> account.withdraw(BigDecimal.valueOf(500.00), LocalDate.of(2012, 1, 14))
+        );
+    }
 }

@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -39,5 +40,49 @@ public class CurrentAccountTest {
                 IllegalArgumentException.class,
                 () -> account.withdraw(BigDecimal.valueOf(500.00), LocalDate.of(2012, 1, 14))
         );
+    }
+
+    @Nested
+    class CurrentAccountWithOverdraftTest {
+        Overdraft overdraft;
+
+        @BeforeEach
+        void setUp() {
+            overdraft = new Overdraft(BigDecimal.valueOf(500.00));
+            account.requestOverdraft(overdraft);
+        }
+
+        @Test
+        void shouldThrowWithoutApprovedOverdraft() {
+            Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(BigDecimal.valueOf(500.00), LocalDate.now())
+            );
+
+            overdraft.reject();
+
+            Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(BigDecimal.valueOf(500.00), LocalDate.now())
+            );
+        }
+
+        @Test
+        void shouldWithdrawWithOverdraft() {
+            overdraft.approve();
+            account.withdraw(BigDecimal.valueOf(500.00), LocalDate.now());
+            Assertions.assertEquals(0, BigDecimal.valueOf(-500.00).compareTo(account.getBalance()));
+        }
+
+        @Test
+        void shouldThrowWhenOverdraftWouldRunOut() {
+            overdraft.approve();
+            account.withdraw(BigDecimal.valueOf(250.00), LocalDate.now());
+            Assertions.assertEquals(0, BigDecimal.valueOf(-250.00).compareTo(account.getBalance()));
+            Assertions.assertThrows(
+                    IllegalArgumentException.class,
+                    () -> account.withdraw(BigDecimal.valueOf(500.00), LocalDate.now())
+            );
+        }
     }
 }

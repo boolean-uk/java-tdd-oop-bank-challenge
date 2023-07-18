@@ -11,5 +11,9 @@ interface CustomerOperations {
 
     BankTransaction depositCurrentAccount(BigDecimal bigDecimal);
 
+    BankTransaction withdrawCurrentAccount(BigDecimal bigDecimal);
+
     BankTransaction depositSavingAccount(BigDecimal bigDecimal);
+
+    BankTransaction withdrawSavingAccount(BigDecimal bigDecimal);
 }

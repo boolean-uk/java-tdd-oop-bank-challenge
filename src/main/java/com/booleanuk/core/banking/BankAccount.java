@@ -15,12 +15,12 @@ import java.util.UUID;
 abstract class BankAccount implements BankOperations {
     private final UUID uuid;
     private BigDecimal balance;
-    private List<BankTransaction> transaction;
+    private List<BankTransaction> transactions;
 
     public BankAccount() {
         this.uuid = UUID.randomUUID();
         this.balance = BigDecimal.ZERO;
-        this.transaction = new ArrayList<>(0);
+        this.transactions = new ArrayList<>(0);
     }
 
     @Override
@@ -40,14 +40,47 @@ abstract class BankAccount implements BankOperations {
                         .transactionResult(TransactionResult.SUCCESSFUL)
                         .build();
 
-        getTransaction().add(transaction);
+        transactions.add(transaction);
 
         return transaction;
     }
 
     @Override
-    public BankTransaction withdraw(BigDecimal withdraw) {
-        return null;
+    public BankTransaction withdraw(BigDecimal withdrawAmount) {
+        if (isEnoughBalanceToWithdraw(withdrawAmount)) {
+            BigDecimal balanceBefore = getBalance();
+            this.balance = balanceBefore.subtract(withdrawAmount);
+
+            BankTransaction bankTransaction = BankTransaction.builder()
+                    .transactionType(TransactionType.WITHDRAW)
+                    .createdAt(Instant.now())
+                    .balanceBefore(balanceBefore)
+                    .balanceAfter(getBalance())
+                    .amount(withdrawAmount)
+                    .transactionResult(TransactionResult.SUCCESSFUL)
+                    .build();
+
+            transactions.add(bankTransaction);
+            return bankTransaction;
+        }
+        BankTransaction bankTransaction = BankTransaction.builder()
+                .transactionType(TransactionType.WITHDRAW)
+                .createdAt(Instant.now())
+                .balanceBefore(getBalance())
+                .balanceAfter(getBalance())
+                .amount(withdrawAmount)
+                .transactionResult(TransactionResult.REFUSED_INSUFFICIENT_FUNDS)
+                .build();
+
+        transactions.add(bankTransaction);
+
+        return bankTransaction;
+
+
+    }
+
+    private boolean isEnoughBalanceToWithdraw(BigDecimal withdrawAmount) {
+        return withdrawAmount.compareTo(getBalance()) <= 0;
     }
 
     @Override

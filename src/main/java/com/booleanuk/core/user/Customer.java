@@ -44,20 +44,34 @@ public class Customer extends User implements CustomerOperations {
     }
 
     @Override
-    public BankTransaction depositCurrentAccount(BigDecimal deposit) {
+    public BankTransaction depositCurrentAccount(BigDecimal depositAmount) {
         if (Objects.isNull(currentAccount)) {
             throw new BankAccountNotOpened("Current Account not opened");
         }
 
-        return currentAccount.deposit(deposit);
+        return currentAccount.deposit(depositAmount);
     }
 
     @Override
-    public BankTransaction depositSavingAccount(BigDecimal deposit) {
+    public BankTransaction depositSavingAccount(BigDecimal depositAmount) {
         if (Objects.isNull(savingAccount)) {
             throw new BankAccountNotOpened("Saving Account not opened");
         }
 
-        return savingAccount.deposit(deposit);
+        return savingAccount.deposit(depositAmount);
+    }
+
+    @Override
+    public BankTransaction withdrawCurrentAccount(BigDecimal withdrawAmount) {
+        if (Objects.isNull(currentAccount)) {
+            throw new BankAccountNotOpened("Saving Account not opened");
+        }
+
+        return currentAccount.withdraw(withdrawAmount);
+    }
+
+    @Override
+    public BankTransaction withdrawSavingAccount(BigDecimal bigDecimal) {
+        return null;
     }
 }

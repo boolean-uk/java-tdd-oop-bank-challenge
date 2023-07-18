@@ -15,7 +15,7 @@ public class AccountsTest {
         branch = new Branch("PLWAW1", "Poland", "Warsaw");
         account = new Account("12", branch);
         currentAccount = new CurrentAccount("12", branch);
-        savingsAccount = new SavingsAccount("12", branch);
+//        savingsAccount = new SavingsAccount("12", branch);
     }
 
     @Test

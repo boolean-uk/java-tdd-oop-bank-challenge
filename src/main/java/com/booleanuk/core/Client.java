@@ -13,6 +13,7 @@ public class Client {
         this.name = name;
         this.lastName = lastName;
         this.birthDate = birthDate;
+        this.id = id;
     }
 
     @Override

@@ -19,12 +19,18 @@ public class Bank {
     }
 
     public void register(String name, String lastName, String birthDate, String id) throws Exception{
-        if(birthDate.contains(".") || checkIfClientRegistered(id)) clientsOfBank.add(new Client(name, lastName, birthDate, id)); //to correct with three dots
+        if(birthDate.contains(".") && !checkIfClientRegistered(id)) clientsOfBank.add(new Client(name, lastName, birthDate, id)); //to correct with three dots
         else throw new Exception("Can not be registered");
     }
 
+    public Client getClientByID(String id){
+        return clientsOfBank.stream().filter(e -> (e.id.equals(id))).findFirst().orElse(null);
+    }
+
     public boolean checkIfClientRegistered(String id){
-        return false;
+        if(clientsOfBank.stream().anyMatch(e -> (e.id.equals(id)))){
+            return true;
+        }else return false;
     }
 
 

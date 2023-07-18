@@ -22,6 +22,8 @@
 | Bank    | List<Client> clientsOfBank | register(String name, String lastName, String birthDate, int id) | if birthDate doesn't contains dots | Exception |
 |         |                            | checkIfClientRegistered(Client client)                           | if client registered in bank       | true      |
 |         |                            |                                                                  | if client not registered in bank   | false     |
+|         |                            | getClientByID(String id)                                         | if client exists in bank           | Client    |
+|         |                            |                                                                  | if client does not exist in bank   | null      |
 
 | Classes | Members                        | Methods                                               | Scenario                                                                              | Outputs |
 |---------|--------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------|---------|

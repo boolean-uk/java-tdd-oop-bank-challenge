@@ -1,6 +1,6 @@
 # Bank Challenge
 
-## Domain model
+## Domain model - core
 
 ```
 As a customer,

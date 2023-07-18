@@ -25,17 +25,19 @@
 |         |                            | getClientByID(String id)                                         | if client exists in bank           | Client    |
 |         |                            |                                                                  | if client does not exist in bank   | null      |
 
-| Classes | Members                        | Methods                                               | Scenario                                                                              | Outputs |
-|---------|--------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------|---------|
-| Account | LocalDateAndTime date          | createAccount(Client client)                          | if client exists generate account number                                              | String  |
-|         | HashMap<String, double> credit |                                                       | if client does not exists return String "To create account you need to be registered" | String  |
-|         | HashMap<String, double>  debit | generateBankStatements(HashMap credit, HashMap debit) | create String statement                                                               | String  |
-|         |                                |                                                       |                                                                                       |         |
-|         |                                | deposit(double amount, LocalDateAndTime date)         | if amount and date given                                                              | HashMap |
-|         |                                |                                                       | if amount given and date not set current date                                         | HashMap |
-|         |                                |                                                       | if amount and date not given or date given without amount                             | HashMap |
-|         |                                | withdraw(double amount, LocalDateAndTime date)        | if amount and date given                                                              | HashMap |
-|         |                                |                                                       | if amount given and date not set current date                                         | HashMap |
-|         |                                |                                                       | if amount and date not given or date given without amount                             | HashMap |
-|         |                                | countBalance(HashMap credit, HashMap debit)           | if credit and debit is not empty                                                      | double  |
-|         |                                |                                                       | if credit and debit is empty                                                          | 0.00    |
+| Classes | Members                                   | Methods                                               | Scenario                                                                              | Outputs |
+|---------|-------------------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------|---------|
+| Account | LocalDate date                            | createAccount(Client client)                          | if client exists generate account number                                              | String  |
+|         | HashMap<String, ArrayList<Double>> credit |                                                       | if client does not exists return String "To create account you need to be registered" | String  |
+|         | HashMap<String, ArrayList<Double>> debit  | generateBankStatements(HashMap credit, HashMap debit) | create String statement                                                               | String  |
+|         | String accountNumber                      |                                                       |                                                                                       |         |
+|         | List<String> accounts                     | deposit(double amount, LocalDate date)                | if amount and date given                                                              | String  |
+|         |                                           |                                                       | if amount given and date not set current date                                         | String  |
+|         |                                           |                                                       | if amount and date not given or date given without amount                             | String  |
+|         |                                           | withdraw(double amount, LocalDate date)               | if amount and date given                                                              | String  |
+|         |                                           |                                                       | if amount given and date not set current date                                         | String  |
+|         |                                           |                                                       | if amount and date not given or date given without amount                             | String  |
+|         |                                           | countBalance(HashMap credit, HashMap debit)           | if credit and debit is not empty                                                      | double  |
+|         |                                           |                                                       | if credit and debit is empty                                                          | 0.00    |
+|         |                                           | generateAccountNumber(Client client)                  | if client is not null create account number                                           | String  |
+|         |                                           |                                                       | if client is null return empty String                                                 | String  |

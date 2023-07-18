@@ -1,13 +1,24 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
-    private Account[] accounts;
+    private List<Account> accounts;
     private int id;
     public Customer(int id) {
         this.id = id;
+        this.accounts = new ArrayList<>();
     }
     public int getId() {
         return id;
+    }
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void addAccount(Account account) {
+        accounts.add(account);
     }
     @Override
     public boolean equals(Object obj) {

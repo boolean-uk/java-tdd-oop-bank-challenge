@@ -12,8 +12,8 @@ public abstract class BankAccount {
     public void withdrawMoney(double amount){
     }
 
-    private double calculateBalance(){
-        return 0;
+    public double calculateBalance(){
+        return -1;
     }
 
     public void requestOverdraft(double amount){}

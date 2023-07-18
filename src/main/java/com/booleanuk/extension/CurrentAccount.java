@@ -14,7 +14,7 @@ public class CurrentAccount implements BankAccount {
     private List<Transaction> transactions;
     private double balance;
     private boolean canBeOverdrafted;
-
+    private Branch branch;
 
 
     public CurrentAccount() {
@@ -27,6 +27,13 @@ public class CurrentAccount implements BankAccount {
         canBeOverdrafted = false;
     }
 
+    public CurrentAccount(Branch branch) {
+        transactions = new ArrayList<>();
+        this.balance = 0;
+        canBeOverdrafted = false;
+        this.branch = branch;
+    }
+
     public List<Transaction> getTransactions() {
         return transactions;
     }
@@ -36,6 +43,10 @@ public class CurrentAccount implements BankAccount {
 
     public boolean getCanBeOverdrafted() {
         return canBeOverdrafted;
+    }
+
+    public String getBranch() {
+        return branch.getBranchName();
     }
 
     @Override

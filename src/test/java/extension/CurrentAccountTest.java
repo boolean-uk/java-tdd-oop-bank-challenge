@@ -1,13 +1,18 @@
 package extension;
 
+import com.booleanuk.extension.Branch;
 import com.booleanuk.extension.CurrentAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CurrentAccountTest {
     CurrentAccount account;
+    CurrentAccount accountWithBranch;
+    Branch branch;
     public CurrentAccountTest() {
         account = new CurrentAccount();
+        branch = new Branch("Warsaw ul. Marszalkowska 123", "Marszalkowska");
+        accountWithBranch = new CurrentAccount(branch);
     }
 
     @Test
@@ -98,6 +103,11 @@ public class CurrentAccountTest {
         account.withdraw(100.05);
         Assertions.assertEquals("300.01", account.balanceCalculation());
 
+    }
+
+    @Test
+    public void getBranchNameTest() {
+        Assertions.assertEquals("Marszalkowska", accountWithBranch.getBranch());
     }
 
 

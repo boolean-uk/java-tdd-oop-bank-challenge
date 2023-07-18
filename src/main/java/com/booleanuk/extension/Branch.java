@@ -9,4 +9,12 @@ public class Branch {
         this.address = address;
         this.branchName = branchName;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
 }

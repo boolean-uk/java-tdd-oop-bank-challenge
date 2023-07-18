@@ -2,6 +2,9 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AccountTest {
     private Account account;
@@ -18,7 +21,6 @@ public class AccountTest {
         float depositAmount1 = 1000F;
         float depositAmount2 = 1500F;
         float expectedResult = depositAmount1 + depositAmount2;
-
 
         //When
         account.deposit(depositAmount1);
@@ -74,7 +76,6 @@ public class AccountTest {
         float depositAmount = 1000F;
         float invalidWithdrawAmount = -400F;
 
-
         //When
         account.deposit(depositAmount);
         boolean withdrawResult = account.withdraw(invalidWithdrawAmount);
@@ -100,5 +101,33 @@ public class AccountTest {
         //Then
         Assertions.assertFalse(withdrawResult);
         Assertions.assertEquals(depositAmount, checkBalanceResult);
+    }
+
+    @Order(6)
+    @Test
+    public void testGenerateBankStatement_ShouldReturnGeneratedStatement(){
+        //Given
+        float depositAmount1 = 1000F;
+        float depositAmount2 = 2000F;
+        float withdrawAmount = 500F;
+        LocalDate localDate = LocalDate.now();
+        StringBuilder bankStatement = new StringBuilder();
+
+        bankStatement
+                .append("date      || credit  || debit  || balance\n")
+                .append(localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear() + " || " + "       " + " || " + "500.00" + " || " + "2500.00\n")
+                .append(localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear() + " || " + "2000.00" + " || " + "      " + " || " + "3000.00\n")
+                .append(localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear() + " || " + "1000.00" + " || " + "      " + " || " + "1000.00\n");
+
+        String expectedResult = bankStatement.toString();
+
+        //When
+        account.deposit(depositAmount1);
+        account.deposit(depositAmount2);
+        account.withdraw(withdrawAmount);
+        String generateBankStatementResult = account.generateBankStatement();
+
+        //Then
+        Assertions.assertEquals(expectedResult, generateBankStatementResult);
     }
 }

@@ -8,6 +8,8 @@ public class Account {
     }
 
     public boolean deposit(float amount){
+        if(amount < 0) return false;
+
         this.balance += amount;
         return true;
     }

@@ -14,6 +14,11 @@ public class Account {
         return true;
     }
 
+    public boolean withdraw(float amount){
+        this.balance -= amount;
+        return true;
+    }
+
     public float checkBalance() {
         return balance;
     }

@@ -1,5 +1,6 @@
 package com.booleanuk.core.banking;
 
+import com.booleanuk.core.exception.NegativeNumberException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,9 +25,13 @@ abstract class BankAccount implements BankOperations {
     }
 
     @Override
-    public BankTransaction deposit(BigDecimal deposit) {
+    public BankTransaction deposit(BigDecimal depositAmount) {
 
-        BigDecimal newCurrentBalance = getBalance().add(deposit);
+        if (depositAmount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new NegativeNumberException("Your deposit cannot be negative");
+        }
+
+        BigDecimal newCurrentBalance = getBalance().add(depositAmount);
         BigDecimal balanceBefore = getBalance();
         this.balance = newCurrentBalance;
 
@@ -35,7 +40,7 @@ abstract class BankAccount implements BankOperations {
                         .createdAt(Instant.now())
                         .transactionType(TransactionType.DEPOSIT)
                         .balanceBefore(balanceBefore)
-                        .amount(deposit)
+                        .amount(depositAmount)
                         .balanceAfter(newCurrentBalance)
                         .transactionResult(TransactionResult.SUCCESSFUL)
                         .build();
@@ -47,6 +52,11 @@ abstract class BankAccount implements BankOperations {
 
     @Override
     public BankTransaction withdraw(BigDecimal withdrawAmount) {
+        if (withdrawAmount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new NegativeNumberException("Your withdraw cannot be negative");
+        }
+
+
         if (isEnoughBalanceToWithdraw(withdrawAmount)) {
             BigDecimal balanceBefore = getBalance();
             this.balance = balanceBefore.subtract(withdrawAmount);

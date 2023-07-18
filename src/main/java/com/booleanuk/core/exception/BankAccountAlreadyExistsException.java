@@ -1,4 +1,4 @@
-package com.booleanuk.core.banking;
+package com.booleanuk.core.exception;
 
 public class BankAccountAlreadyExistsException extends RuntimeException {
     public BankAccountAlreadyExistsException(String message) {

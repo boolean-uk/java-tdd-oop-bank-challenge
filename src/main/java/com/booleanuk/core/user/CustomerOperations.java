@@ -21,4 +21,5 @@ interface CustomerOperations {
 
     String generateSavingAccountStatements();
 
+    void changeEmergencyFund(BigDecimal increaseAmount);
 }

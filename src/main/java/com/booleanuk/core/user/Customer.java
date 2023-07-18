@@ -1,10 +1,10 @@
 package com.booleanuk.core.user;
 
-import com.booleanuk.core.banking.BankAccountAlreadyExistsException;
-import com.booleanuk.core.banking.BankAccountNotOpened;
 import com.booleanuk.core.banking.BankTransaction;
 import com.booleanuk.core.banking.CurrentAccount;
 import com.booleanuk.core.banking.SavingAccount;
+import com.booleanuk.core.exception.BankAccountAlreadyExistsException;
+import com.booleanuk.core.exception.BankAccountNotOpenedException;
 import com.booleanuk.core.statement.BankStatementGenerator;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +19,7 @@ public class Customer extends User implements CustomerOperations {
     private final UUID uuid;
     private CurrentAccount currentAccount;
     private SavingAccount savingAccount;
+
 
     public Customer() {
         this.uuid = UUID.randomUUID();
@@ -47,7 +48,7 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public BankTransaction depositCurrentAccount(BigDecimal depositAmount) {
         if (Objects.isNull(currentAccount)) {
-            throw new BankAccountNotOpened("Current Account not opened");
+            throw new BankAccountNotOpenedException("Current Account not opened");
         }
 
         return currentAccount.deposit(depositAmount);
@@ -56,7 +57,7 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public BankTransaction depositSavingAccount(BigDecimal depositAmount) {
         if (Objects.isNull(savingAccount)) {
-            throw new BankAccountNotOpened("Saving Account not opened");
+            throw new BankAccountNotOpenedException("Saving Account not opened");
         }
 
         return savingAccount.deposit(depositAmount);
@@ -65,7 +66,7 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public BankTransaction withdrawCurrentAccount(BigDecimal withdrawAmount) {
         if (Objects.isNull(currentAccount)) {
-            throw new BankAccountNotOpened("Current Account not opened");
+            throw new BankAccountNotOpenedException("Current Account not opened");
         }
 
         return currentAccount.withdraw(withdrawAmount);
@@ -74,7 +75,7 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public BankTransaction withdrawSavingAccount(BigDecimal withdrawAmount) {
         if (Objects.isNull(savingAccount)) {
-            throw new BankAccountNotOpened("Saving Account not opened");
+            throw new BankAccountNotOpenedException("Saving Account not opened");
         }
 
         return savingAccount.withdraw(withdrawAmount);
@@ -91,4 +92,16 @@ public class Customer extends User implements CustomerOperations {
         BankStatementGenerator generator = new BankStatementGenerator();
         return generator.generateStatement(savingAccount.getTransactions());
     }
+
+    @Override
+    public void changeEmergencyFund(BigDecimal newEmergencyFund) {
+        if (Objects.isNull(currentAccount)) {
+            throw new BankAccountNotOpenedException("Current Account not opened");
+        }
+        if (newEmergencyFund.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Your emergency fund cannot be negative");
+        }
+        currentAccount.setEmergencyFund(newEmergencyFund);
+    }
+
 }

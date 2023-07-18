@@ -1,6 +1,6 @@
 package com.booleanuk.core.user;
 
-import com.booleanuk.core.banking.BankAccountAlreadyExistsException;
+import com.booleanuk.core.exception.BankAccountAlreadyExistsException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

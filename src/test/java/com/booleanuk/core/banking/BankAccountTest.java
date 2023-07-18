@@ -1,5 +1,6 @@
 package com.booleanuk.core.banking;
 
+import com.booleanuk.core.exception.BankAccountNotOpenedException;
 import com.booleanuk.core.user.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,8 @@ public class BankAccountTest {
 
     @Test
     public void shouldThrowBankAccountNotOpenedWhenTryingToDepositWithoutCurrentAccount() {
-        BankAccountNotOpened bankAccountNotOpened = Assertions.assertThrows(BankAccountNotOpened.class, () -> customer.depositCurrentAccount(BigDecimal.valueOf(1000)));
-        Assertions.assertEquals("Current Account not opened", bankAccountNotOpened.getMessage());
+        BankAccountNotOpenedException bankAccountNotOpenedException = Assertions.assertThrows(BankAccountNotOpenedException.class, () -> customer.depositCurrentAccount(BigDecimal.valueOf(1000)));
+        Assertions.assertEquals("Current Account not opened", bankAccountNotOpenedException.getMessage());
     }
 
     @Test
@@ -32,8 +33,8 @@ public class BankAccountTest {
 
     @Test
     public void shouldThrowBankAccountNotOpenedWhenTryingToDepositWithoutSavingAccount() {
-        BankAccountNotOpened bankAccountNotOpened = Assertions.assertThrows(BankAccountNotOpened.class, () -> customer.depositSavingAccount(BigDecimal.valueOf(1000)));
-        Assertions.assertEquals("Saving Account not opened", bankAccountNotOpened.getMessage());
+        BankAccountNotOpenedException bankAccountNotOpenedException = Assertions.assertThrows(BankAccountNotOpenedException.class, () -> customer.depositSavingAccount(BigDecimal.valueOf(1000)));
+        Assertions.assertEquals("Saving Account not opened", bankAccountNotOpenedException.getMessage());
     }
 
     @Test

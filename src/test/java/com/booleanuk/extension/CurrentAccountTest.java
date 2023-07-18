@@ -71,15 +71,35 @@ public class CurrentAccountTest {
 
     @Order(4)
     @Test
-    public void testWithdraw_WhenBalanceIsLessThanAmount_ShouldReturnTrueAndBalanceShouldBeLessThanZero(){
+    public void testWithdraw_WhenBalanceIsLessThanAmountAndBankManagerApproved_ShouldReturnTrueAndBalanceShouldBeLessThanZero(){
         //Given
         float depositAmount = 1000F;
         float withdrawAmount = 1001F;
+        boolean managerApproved = true;
         float expectedResult = depositAmount - withdrawAmount;
 
         //When
         currentAccount.deposit(depositAmount);
-        boolean withdrawResult = currentAccount.withdraw(withdrawAmount);
+        boolean withdrawResult = currentAccount.withdraw(withdrawAmount, managerApproved);
+        float checkBalanceResult = currentAccount.checkBalance();
+
+        //Then
+        Assertions.assertTrue(withdrawResult);
+        Assertions.assertEquals(expectedResult, checkBalanceResult);
+    }
+
+    @Order(5)
+    @Test
+    public void testWithdraw_WhenBalanceIsLessThanAmountAndBankManagerDidNotApprovedOverdraft_ShouldReturnTrueAndBalanceShouldBeLessThanZero(){
+        //Given
+        float depositAmount = 1000F;
+        float withdrawAmount = 1001F;
+        boolean managerApproved = false;
+        float expectedResult = depositAmount - withdrawAmount;
+
+        //When
+        currentAccount.deposit(depositAmount);
+        boolean withdrawResult = currentAccount.withdraw(withdrawAmount, managerApproved);
         float checkBalanceResult = currentAccount.checkBalance();
 
         //Then

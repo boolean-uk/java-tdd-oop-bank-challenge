@@ -7,4 +7,6 @@ public class Info {
     private int credit, debit;
     private int balance;
     private int customerId, accountId;
+    public Info(LocalDateTime transactionDate, int amount, int i, int newBalance, int customerId, int id) {
+    }
 }

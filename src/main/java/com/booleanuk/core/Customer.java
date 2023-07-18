@@ -49,10 +49,33 @@ public class Customer {
         }
         return false;
     }
+    public boolean withdraw(int amount, String accountType) {
+        Account account = getAccountByType(accountType);
+        if (account == null) {
+            return false;
+        }
+
+        if (amount > account.getBalance()) {
+            return false;
+        }
+
+        account.addWithdrawInfo(amount);
+        return true;
+    }
+
+    private Account getAccountByType(String accountType) {
+        for (Account account : accounts) {
+            if (account.getType().equalsIgnoreCase(accountType)) {
+                return account;
+            }
+        }
+        return null;
+    }
 
     private int getRandomAccountId() {
         return accounts.size() + 1;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

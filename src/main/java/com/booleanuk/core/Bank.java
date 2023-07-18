@@ -40,7 +40,7 @@ public class Bank {
     public HashMap<Integer, CurrentAccount> getCurrentAccounts() {
         return currentAccounts;
     }
-    
+
     public OverdraftRequest checkForOverdraftRequests(int accountNumber) {
         return getAccountById(accountNumber).getRequestHistory().stream()
                 .filter(request -> "unchecked".equals(request.getStatus()))

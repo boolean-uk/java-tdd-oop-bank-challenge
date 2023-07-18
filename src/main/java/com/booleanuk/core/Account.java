@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,7 +48,7 @@ public class Account {
             throw new RuntimeException("Amount cannot be negative!");
         }
         balance += amount;
-        Transaction transaction = new Transaction(LocalDate.now(), amount, "credit");
+        Transaction transaction = new Transaction(LocalDate.now(), amount, "credit", LocalTime.now(), balance);
         transactions.add(transaction);
     }
 
@@ -56,7 +57,7 @@ public class Account {
             throw new RuntimeException("You cannot withdraw more than you've got in your account!");
         }
         balance -= amount;
-        Transaction transaction = new Transaction(LocalDate.now(), amount, "debit");
+        Transaction transaction = new Transaction(LocalDate.now(), amount, "debit", LocalTime.now(), balance);
         transactions.add(transaction);
     }
 }

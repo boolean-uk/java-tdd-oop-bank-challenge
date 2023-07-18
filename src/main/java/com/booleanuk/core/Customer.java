@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Customer {
@@ -36,5 +38,20 @@ public class Customer {
         CurrentAccount currentAccount = new CurrentAccount();
         accounts.add(currentAccount);
         return currentAccount;
+    }
+
+    public void generateBankStatement() {
+        for (Account account : accounts) {
+            System.out.println("Your account number: " + account.getAccountNumber() + ", type of your account: " + account.getTypeOfAccount());
+            System.out.println("date       || credit || debit   || balance");
+            int size = account.getTransactions().size();
+            List<Transaction> transactions = account.getTransactions();
+            transactions.sort(Comparator.comparing(Transaction::getTime).thenComparing(Transaction::getDateOfTransaction));
+            Collections.reverse(transactions);
+            for (int i = 0; i < size; i++) {
+                System.out.println(transactions.get(i).toString());
+            }
+            System.out.println();
+        }
     }
 }

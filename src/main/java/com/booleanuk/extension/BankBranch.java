@@ -73,13 +73,16 @@ public class BankBranch {
         return "";
     }
 
-    public Request requestOverDraft(UUID customerId, UUID accountId, BigDecimal amount) {
+    public Request requestOverdraft(UUID customerId, UUID accountId, BigDecimal amount) {
         if (isCustomer(customerId) && isAccount(accountId)) {
-            Request request = new Request(customerId, accountId, amount);
-            List<Request> clientRequests = requests.getOrDefault(customerId, new ArrayList<>());
-            clientRequests.add(request);
-            requests.put(customerId, clientRequests);
-            return request;
+            Account account = accounts.get(accountId);
+            if (account instanceof CurrentAccount) {
+                Request request = new Request(customerId, accountId, amount);
+                List<Request> clientRequests = requests.getOrDefault(customerId, new ArrayList<>());
+                clientRequests.add(request);
+                requests.put(customerId, clientRequests);
+                return request;
+            }
         }
         return null;
     }

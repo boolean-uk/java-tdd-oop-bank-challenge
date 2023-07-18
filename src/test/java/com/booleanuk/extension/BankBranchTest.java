@@ -67,7 +67,7 @@ public class BankBranchTest {
 
         Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
 
-        bankBranch.requestOverDraft(customerId, accountId, BigDecimal.valueOf(500));
+        bankBranch.requestOverdraft(customerId, accountId, BigDecimal.valueOf(500));
         Request request = bankBranch.getRequests(customerId).get(0);
 
         Assertions.assertEquals(PENDING, request.getStatus());

@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 public class SavingAccountTest {
 
     SavingAccount account;
@@ -78,5 +80,29 @@ public class SavingAccountTest {
         account.withdraw(50);
         Assertions.assertEquals(0, account.getBalance());
         Assertions.assertEquals(2,account.getTransactions().size());
+    }
+
+    @Test
+    public void checkingIfInBankStatementDateIsSortedCorrectlyTest() {
+        Date date = new Date("10/01/2023");
+        Date date1 = new Date("15/01/2023");
+        Date date2 = new Date("01/01/2023");
+        Date date3 = new Date("24/01/2022");
+        account.deposit(100, date);
+        account.deposit(100, date1);
+
+        Assertions.assertEquals(
+                "date       || credit    || debit     || balance \n" +
+                        "01/03/2024 || 100.00    ||           || 200.00 \n" +
+                        "01/12/2023 || 100.00    ||           || 400.00 ",
+                "date       || credit    || debit     || balance \n" +
+                        "01/03/2024 || 100.00    ||           || 200.00 \n" +
+                        "01/12/2023 || 100.00    ||           || 400.00 ");
+
+
+        account.deposit(100, date2);
+        account.deposit(100, date3);
+
+        account.generateBankStatement();
     }
 }

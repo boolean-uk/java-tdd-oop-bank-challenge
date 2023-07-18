@@ -37,8 +37,18 @@ public class SavingAccount implements BankAccount{
         }
     }
 
-
-
+    //method created purely for testing purpose to check if
+    //bank statement is sorted by date correctly
+    public boolean deposit(double amount, Date date) {
+        if(amount > 0) {
+            balance += amount;
+            transactions.add(new Transaction(date, "credit", amount, getBalance()));
+            return true;
+        }else {
+            System.out.println("Amount must be a positive number");
+            return false;
+        }
+    }
 
     @Override
     public boolean withdraw(double amount) {

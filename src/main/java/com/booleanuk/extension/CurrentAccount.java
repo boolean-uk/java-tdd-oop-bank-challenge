@@ -9,6 +9,21 @@ public class CurrentAccount extends Account {
     public CurrentAccount(Branch branch) {
         super(branch);
     }
+    
+    @Override
+    public void withdraw(double amount) {
+        if (!overdraftAllowed) super.withdraw(amount);
+
+        if (amount < 0) {
+            throw new IllegalArgumentException("Amount must be a positive number");
+        }
+
+        if (getBalance() + OVERDRAFT < amount) {
+            throw new IllegalStateException("Amount must not exceed overdraft");
+        }
+
+        transactions.add(new Transaction(amount * -1));
+    }
 
     public boolean isOverdraftAllowed() {
         return overdraftAllowed;

@@ -79,8 +79,8 @@ public class Account {
         return s.toString();
     }
 
-    public void send() {
-        TwilioService twilioService = new TwilioService();
-        twilioService.send(generateBankStatements());
-    }
+//    public void send() {
+//        TwilioService twilioService = new TwilioService();
+//        twilioService.send(generateBankStatements());
+//    }
 }

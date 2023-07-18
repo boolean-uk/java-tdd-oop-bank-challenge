@@ -1,4 +1,4 @@
-package com.booleanuk.core.core;
+package com.booleanuk.core;
 
 import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +8,10 @@ import java.util.List;
 public class Account {
     AccountType type;
     List<Transaction> transactions = new ArrayList<>();
+
+    public Account(AccountType type) {
+        this.type = type;
+    }
 
     public void deposit(double amount) {
         if (amount < 0) {

@@ -1,4 +1,4 @@
-package com.booleanuk.core.core;
+package com.booleanuk.core;
 
 public enum AccountType {
     CURRENT, SAVINGS

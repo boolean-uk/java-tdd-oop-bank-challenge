@@ -59,7 +59,11 @@ public class AccountTest {
     }
     @Test
     public void shouldGetBalance(){
+        secondAccount = new CurrentAccount("POL54", user, manager);
         currentAccount.deposit(1000.00);
+        currentAccount.deposit(1500.00);
+        currentAccount.wire(100.00,secondAccount.getAccountNumber());
+        currentAccount.withdraw(700.00);
         assertEquals(1700.00, currentAccount.getBalance());
     }
 }

@@ -1,76 +1,128 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class BankStatementTest {
-    @Test
-    public void testCurrentAccountDepositAndWithdraw() {
+    private BankManager bankManager;
+    private Branch mainBranch;
 
-        Account currentAccount = new CurrentAccount("123456");
-
-        currentAccount.deposit(new BigDecimal("1000"));
-        currentAccount.deposit(new BigDecimal("2000"));
-        currentAccount.withdraw(new BigDecimal("500"));
-
-        List<Transaction> transactions = currentAccount.getTransactions();
-        Assertions.assertEquals(3, transactions.size());
-
-        Transaction firstTransaction = transactions.get(0);
-        Assertions.assertEquals(TransactionType.DEPOSIT, firstTransaction.getType());
-        Assertions.assertEquals(new BigDecimal("1000"), firstTransaction.getAmount());
-
-        Transaction secondTransaction = transactions.get(1);
-        Assertions.assertEquals(TransactionType.DEPOSIT, secondTransaction.getType());
-        Assertions.assertEquals(new BigDecimal("2000"), secondTransaction.getAmount());
-
-        Transaction thirdTransaction = transactions.get(2);
-        Assertions.assertEquals(TransactionType.WITHDRAWAL, thirdTransaction.getType());
-        Assertions.assertEquals(new BigDecimal("500"), thirdTransaction.getAmount());
+    @BeforeEach
+    public void setUp() {
+        bankManager = new BankManager();
+        mainBranch = new Branch("Main Branch");
+        bankManager.addBranch(mainBranch);
     }
 
     @Test
-    public void testSavingsAccountDepositAndWithdraw() {
-        Account savingsAccount = new SavingsAccount("987654");
+    public void testAddCurrentAccountToBranch() {
+        Client client = new Client("John Doe", "12345");
+        bankManager.addClient(client);
 
-        savingsAccount.deposit(new BigDecimal("5000"));
-        savingsAccount.deposit(new BigDecimal("1000"));
+        Account newAccount = new CurrentAccount("C123456", client);
+        mainBranch.addAccount(newAccount);
 
-        List<Transaction> transactions = savingsAccount.getTransactions();
-        Assertions.assertEquals(2, transactions.size());
-
-        Transaction firstTransaction = transactions.get(0);
-        Assertions.assertEquals(TransactionType.DEPOSIT, firstTransaction.getType());
-        Assertions.assertEquals(new BigDecimal("5000"), firstTransaction.getAmount());
-
-        Transaction secondTransaction = transactions.get(1);
-        Assertions.assertEquals(TransactionType.DEPOSIT, secondTransaction.getType());
-        Assertions.assertEquals(new BigDecimal("1000"), secondTransaction.getAmount());
+        assertEquals(1, mainBranch.getAccounts().size());
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
     }
 
     @Test
-    public void testBankStatement() {
-        Account currentAccount = new CurrentAccount("123456");
-        Account savingsAccount = new SavingsAccount("987654");
+    public void testAddSavingsAccountToBranch() {
+        Client client = new Client("John Doe", "12345");
+        bankManager.addClient(client);
 
-        currentAccount.deposit(new BigDecimal("1000"));
-        currentAccount.deposit(new BigDecimal("2000"));
-        currentAccount.withdraw(new BigDecimal("500"));
+        Account newAccount = new SavingsAccount("S987654", client);
+        mainBranch.addAccount(newAccount);
 
-        savingsAccount.deposit(new BigDecimal("5000"));
-        savingsAccount.deposit(new BigDecimal("1000"));
-
-        BankStatement bankStatement = new BankStatement();
-
-        System.out.println("Current Account Statement:");
-        bankStatement.printStatement(currentAccount);
-
-        System.out.println("\nSavings Account Statement:");
-        bankStatement.printStatement(savingsAccount);
-
+        assertEquals(1, mainBranch.getAccounts().size());
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
     }
+
+
+    @Test
+    public void testDepositToAccount() {
+        Client client = new Client("John Doe", "12345");
+        bankManager.addClient(client);
+
+        Account newAccount = new CurrentAccount("C123456", client);
+        mainBranch.addAccount(newAccount);
+
+        newAccount.deposit(new BigDecimal("1000"));
+
+        assertEquals(new BigDecimal("1000"), newAccount.getBalance());
+    }
+
+    @Test
+    public void testWithdrawFromAccount() {
+        Client client = new Client("John Doe", "12345");
+        bankManager.addClient(client);
+
+        Account newAccount = new CurrentAccount("C123456", client);
+        mainBranch.addAccount(newAccount);
+
+        newAccount.deposit(new BigDecimal("1000"));
+        newAccount.withdraw(new BigDecimal("500"));
+
+        assertEquals(new BigDecimal("500"), newAccount.getBalance());
+    }
+    @Test
+    public void testAddAccountWithOverdraftToBranch() {
+        Account newAccount = new CurrentAccount("C654321", new Client("Test Client", "98765"));
+        newAccount.setOverdraftLimit(new BigDecimal("1000"));
+
+        mainBranch.addAccount(newAccount);
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
+    }
+    @Test
+    public void testAddAccountWithZeroOverdraftToBranch() {
+        Account newAccount = new CurrentAccount("C654321", new Client("Test Client", "98765"));
+        newAccount.setOverdraftLimit(BigDecimal.ZERO);
+
+        mainBranch.addAccount(newAccount);
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
+    }
+
+    @Test
+    public void testAddAccountWithPositiveOverdraftToBranch() {
+        Account newAccount = new CurrentAccount("C654321", new Client("Test Client", "98765"));
+        newAccount.setOverdraftLimit(new BigDecimal("500"));
+
+        mainBranch.addAccount(newAccount);
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
+    }
+
+
+    @Test
+    public void testAddAccountWithOverdraftToMultipleBranches() {
+        Account newAccount = new CurrentAccount("C654321", new Client("Test Client", "98765"));
+        newAccount.setOverdraftLimit(new BigDecimal("1000"));
+
+        mainBranch.addAccount(newAccount);
+        assertTrue(mainBranch.getAccounts().contains(newAccount));
+
+        Branch secondBranch = new Branch("Second Branch");
+        bankManager.addBranch(secondBranch);
+        secondBranch.addAccount(newAccount);
+
+        assertTrue(secondBranch.getAccounts().contains(newAccount));
+    }
+    @Test
+    public void testRequestOverdraft() {
+        Account account = new CurrentAccount("C123456", new Client("John Doe", "12345"));
+        account.deposit(new BigDecimal("1000"));
+
+        account.requestOverdraft(new BigDecimal("500"));
+
+        assertTrue(((CurrentAccount) account).isOverdraftRequestPending());
+        assertEquals(new BigDecimal("500"), ((CurrentAccount) account).getRequestedOverdraftAmount());
+    }
+
+
 
 }

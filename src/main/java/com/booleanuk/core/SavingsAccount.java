@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 
 public class SavingsAccount extends Account {
 
-    public SavingsAccount(String accountNumber) {
-        super(accountNumber);
+
+    public SavingsAccount(String accountNumber,Client client) {
+        super(accountNumber,client);
+        this.overdraftLimit = BigDecimal.ZERO;
     }
 
     @Override
@@ -22,5 +24,13 @@ public class SavingsAccount extends Account {
         } else {
             System.out.println("Insufficient funds!");
         }
+    }
+    @Override
+    public BigDecimal getBalance() {
+        return balance;
+    }
+    @Override
+    public void requestOverdraft(BigDecimal amount) {
+        System.out.println("Savings accounts do not have debit functionality available.");
     }
 }

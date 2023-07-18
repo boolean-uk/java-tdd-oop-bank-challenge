@@ -18,12 +18,14 @@ public abstract class Account {
     private final String branchId;
     private final Customer holder;
     private final List<Transaction> transactions;
+    private BigDecimal acceptedOverdraft;
 
     public Account(Customer holder, String branchId) {
         this.id = generateAccountId(branchId);
         this.branchId = branchId;
         this.holder = holder;
         transactions = new ArrayList<>();
+        acceptedOverdraft = BigDecimal.ZERO;
     }
 
     private UUID generateAccountId(String branchId) {
@@ -73,6 +75,10 @@ public abstract class Account {
         return balance;
     }
 
+    public void requestOverDraft(BigDecimal amount) {
+        acceptedOverdraft = amount;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -83,5 +89,9 @@ public abstract class Account {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public BigDecimal getAcceptedOverdraft() {
+        return acceptedOverdraft;
     }
 }

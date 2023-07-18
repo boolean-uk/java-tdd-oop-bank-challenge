@@ -2,6 +2,7 @@ package com.booleanuk.extension;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -56,9 +57,11 @@ public class BankBranch {
     public boolean withdraw(UUID customerId, UUID accountId, BigDecimal funds) {
         if (isCustomer(customerId) && isAccount(accountId) && isPositive(funds)) {
             Account account = accounts.get(accountId);
-            if (isWithdrawable(account, funds)) ;
-            account.withdraw(funds);
-            return true;
+            if (isWithdrawable(account, funds)) {
+                account.withdraw(funds);
+                return true;
+            }
+            return false;
         }
         return false;
     }
@@ -71,8 +74,15 @@ public class BankBranch {
         return "";
     }
 
+    public void requestOverDraft(UUID customerId, UUID accountId, BigDecimal amount) {
+        if (isCustomer(customerId) && isAccount(accountId)) {
+            Account account = accounts.get(accountId);
+            account.requestOverDraft(amount);
+        }
+    }
+
     private boolean isWithdrawable(Account account, BigDecimal funds) {
-        return funds.compareTo(account.getBalance()) > 0;
+        return funds.compareTo(account.getBalance().add(account.getAcceptedOverdraft())) <= 0;
     }
 
     private boolean isCustomer(UUID customerId) {

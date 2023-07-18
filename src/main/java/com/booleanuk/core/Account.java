@@ -7,10 +7,12 @@ import java.util.List;
 public abstract class Account {
     private final ArrayList<Transaction> transactions;
     private final BankBranch branch;
+    private boolean overdraft;
 
     Account(BankBranch branch) {
-        transactions = new ArrayList<>(List.of(new Transaction(LocalDate.now(), 0, 0)));
+        this.transactions = new ArrayList<>(List.of(new Transaction(LocalDate.now(), 0, 0)));
         this.branch = branch;
+        this.overdraft = false;
     }
 
     public double getBalance() {
@@ -35,8 +37,12 @@ public abstract class Account {
         if (amount >= 0) {
             return false;
         } else {
-            transactions.add(new Transaction(LocalDate.now(), amount, getLastTransaction().balance + amount));
-            return true;
+            if (getLastTransaction().balance + amount < 0 && overdraft) {
+                transactions.add(new Transaction(LocalDate.now(), amount, getLastTransaction().balance + amount));
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -62,6 +68,16 @@ public abstract class Account {
             System.out.printf("%-" + width + "s", transaction.balance);
             System.out.println();
         });
+    }
+
+    public void requestOverdraft() {
+        if (!overdraft) {
+            BankManager.OVERDRAFT_REQUESTS.add(this);
+        }
+    }
+
+    public void setOverdraft() {
+        this.overdraft = !this.overdraft;
     }
 
     private Transaction getLastTransaction() {

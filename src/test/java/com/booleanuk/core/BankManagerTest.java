@@ -57,11 +57,12 @@ public class BankManagerTest {
         boolean result;
         // Act;
         account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
+        account.setOverdraft(); // We are going into a deficit in this test
         amount = 200.00;
         result = account.withdraw(amount);
         // Assert
         Assertions.assertTrue(result);
-        Assertions.assertEquals(-190.00, account.getBalance());
+        Assertions.assertEquals(-210.00, account.getBalance());
     }
 
     @Test
@@ -70,10 +71,24 @@ public class BankManagerTest {
         Account account;
         // Act;
         account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
-        account.withdraw(521);
-        account.withdraw(133);
+        account.setOverdraft();
+        account.withdraw(500);
+        account.setOverdraft();
+        account.withdraw(100);
         account.deposit(1000);
         // Assert (should be done manually by inspecting console result)
         account.printStatement();
+    }
+
+    @Test
+    public void shouldRespectOverdraft() {
+        // Arrange
+        Account account;
+        // Act and assert
+        account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
+        account.setOverdraft();
+        Assertions.assertTrue(account.withdraw(521));
+        account.setOverdraft();
+        Assertions.assertFalse(account.withdraw(100));
     }
 }

@@ -13,6 +13,6 @@ public class CurrentAccount extends Account {
 
     @Override
     public boolean withdraw(double amount) {
-        return super.withdraw(amount * 0.95);
+        return super.withdraw(amount * 1.05);
     }
 }

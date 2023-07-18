@@ -12,5 +12,12 @@ public class SavingsAccount extends  BankAccount {
     }
 
 
-
+    public void withdraw(BigDecimal amount, String date, String type) {
+        if(getBalance().subtract(amount).compareTo(BigDecimal.ZERO)<0){
+            System.out.println("Insufficient balance");
+        }
+        else{
+            super.withdraw(amount, date, type);
+        }
+    }
 }

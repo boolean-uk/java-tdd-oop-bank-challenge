@@ -21,5 +21,13 @@ public class Bank {
         return branches;
     }
 
+    public void approveOverdraft(CurrentAccount account) {
+        account.getOverdraft().setStatus("approved");
 
+    }
+
+    public void rejectOverdraft(CurrentAccount account) {
+        account.getOverdraft().setStatus("rejected");
+        account.getOverdraft().setLimit(new BigDecimal("0.00"));
+    }
 }

@@ -55,4 +55,9 @@ public class BankTest {
         Assertions.assertEquals(List.of("1234 5678 8756 4321", "8765 4321 1234 5678"), bank.getAccountNumbers());
     }
 
+    @Test
+    public void testGetAccountNumbersWhenNoAccounts() {
+        Assertions.assertEquals(List.of(), bank.getAccountNumbers());
+    }
+
 }

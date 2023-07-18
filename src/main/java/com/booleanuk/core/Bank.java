@@ -27,10 +27,11 @@ public class Bank {
         User user = new User(name);
         //branchID should be known by system that creates an account based on location
         //manager should be decided by un employee of th bank in my case it will be chosen by random
+        User manager = usersList.stream().filter(User::isManager).findAny().orElseThrow();
         if(isSaving) {
-            new SavingAccount("PL18",user,user);
+            new SavingAccount("PL18",user,manager);
         } else{
-            new CurrentAccount("PL18",user,user);
+            new CurrentAccount("PL18",user,manager);
         }
     }
 }

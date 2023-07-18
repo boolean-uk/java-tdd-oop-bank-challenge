@@ -9,9 +9,11 @@ import java.util.List;
 
 public class BankStatement {
     private final Account account;
+    private final SmsService smsService;
 
-    public BankStatement(Account account) {
+    public BankStatement(Account account, SmsService smsService) {
         this.account = account;
+        this.smsService = smsService;
     }
 
     public String print() {
@@ -66,6 +68,11 @@ public class BankStatement {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    public void sendStatement(String phoneNumber) {
+        String message = print();
+        smsService.sendSms(phoneNumber, message);
     }
 
     private List<String> alignColumn(List<String> column) {

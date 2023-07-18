@@ -2,9 +2,9 @@ package com.booleanuk.core;
 
 public class OverdraftRequest {
     private String status;
-    private String amount;
+    private final double amount;
 
-    public OverdraftRequest(String amount) {
+    public OverdraftRequest(double amount) {
         this.amount = amount;
         this.status = "unchecked";
     }
@@ -13,7 +13,7 @@ public class OverdraftRequest {
         return status;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 

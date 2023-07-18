@@ -40,8 +40,24 @@ public class Bank {
     public HashMap<Integer, CurrentAccount> getCurrentAccounts() {
         return currentAccounts;
     }
+    
+    public OverdraftRequest checkForOverdraftRequests(int accountNumber) {
+        return getAccountById(accountNumber).getRequestHistory().stream()
+                .filter(request -> "unchecked".equals(request.getStatus()))
+                .findAny().orElse(null);
+    }
 
-    public int getAccountsCounter() {
-        return accountsCounter;
+    public String approveOverdraftRequest(OverdraftRequest request) {
+        request.setStatus("approved");
+        return "You approved overdraft";
+    }
+
+    public String rejectOverdraftRequest(OverdraftRequest request) {
+        request.setStatus("rejected");
+        return "You rejected overdraft";
+    }
+
+    public String checkAccountBranch(int accountNumber){
+        return getAccountById(accountNumber).getBranchCode();
     }
 }

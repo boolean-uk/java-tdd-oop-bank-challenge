@@ -20,10 +20,18 @@ public class BankTest {
     }
 
     @Test
+    public void branchCodeTest(){
+        Bank bank = new Bank();
+        bank.openSavingsAccount("Jan Lisek","00003");
+        Assertions.assertEquals("00003",bank.checkAccountBranch(0));
+    }
+
+    @Test
     public void overdraftRequestsTest(){
         Bank bank = new Bank();
         bank.openSavingsAccount("Jan Lisek","00003");
         Assertions.assertNull(bank.checkForOverdraftRequests(0));
+        Account account = bank.getAccountById(0);
         account.createOverdraftRequest(100);
         OverdraftRequest request = bank.checkForOverdraftRequests(0);
         Assertions.assertEquals(100,request.getAmount());

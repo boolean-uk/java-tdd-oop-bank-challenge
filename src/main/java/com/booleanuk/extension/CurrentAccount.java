@@ -15,4 +15,8 @@ public class CurrentAccount extends Account {
     public boolean isOverdraftRequested() {
         return overdraftRequested;
     }
+
+    public void requestOverdraft() {
+        overdraftRequested = true;
+    }
 }

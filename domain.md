@@ -23,7 +23,7 @@
 ## Current Account
 | Class                              | Fields              | Methods                                               | Scenarios                          | Output                            |
 |------------------------------------|---------------------|-------------------------------------------------------|------------------------------------|-----------------------------------|
-| CurrentAccount extends BankAccount | Overdraft overdraft | requestOverdraft()                                    | user requests overdraft with limit | change overdraft limit and status |
+| CurrentAccount extends BankAccount | Overdraft overdraft | requestOverdraft(BigDecimal limit)                    | user requests overdraft with limit | change overdraft limit and status |
 |                                    |                     | withdraw(BigDecimal amount, String date, String type) | overdraft approved                 | invoke superclass withdraw        |
 |                                    |                     |                                                       | overdraft not approved             | print message                     |
 |                                    |                     |                                                       | overdraft limit reached            | print message                     |
@@ -35,12 +35,12 @@
 |           | BigDecimal limit |         |           |        |
 
 ## Branch
-| Class  | Fields                     | Methods                                 | Scenarios                        | Output      |
-|--------|----------------------------|-----------------------------------------|----------------------------------|-------------|
-| Branch | String name                | void addAccount(BankAccount account)    | bank adds account to branch      | void        |
-|        | String location            | void removeAccount(BankAccount account) | bank removes account to branch   | void        |
-|        | List<BankAccount> accounts | int branchSize()                        | bank wants to know branch's size | branch size |
-|        | Bank bank                  |                                         |                                  |             |
+| Class  | Fields                     | Methods                              | Scenarios                        | Output      |
+|--------|----------------------------|--------------------------------------|----------------------------------|-------------|
+| Branch | String name                | void addAccount(BankAccount account) | bank adds account to branch      | void        |
+|        | String location            |                                      |                                  |             |
+|        | List<BankAccount> accounts | int branchSize()                     | bank wants to know branch's size | branch size |
+|        | Bank bank                  |                                      |                                  |             |
 
 ## SmsSender
 | Class     | Fields | Methods              | Scenarios                       | Output    |

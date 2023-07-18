@@ -33,4 +33,20 @@ public class AccountTest {
         Assertions.assertFalse(depositResult);
         Assertions.assertEquals(1000, checkBalanceResult);
     }
+
+    @Test
+    public void testWithdraw_ShouldReturnTrueAndBalanceShouldBeCorrect(){
+        //Given
+        Account account = new Account();
+
+        //When
+        account.deposit(1000F);
+        account.withdraw(300F);
+        boolean withdrawResult = account.withdraw(400F);
+        float checkBalanceResult = account.checkBalance();
+
+        //Then
+        Assertions.assertTrue(withdrawResult);
+        Assertions.assertEquals(300, checkBalanceResult);
+    }
 }

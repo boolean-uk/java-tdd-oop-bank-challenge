@@ -63,4 +63,18 @@ public class SavingAccountTest {
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1,account.getTransactions().size());
     }
+
+    @Test
+    public void canIOverdraftSavingAccountTest() {
+        account.deposit(100);
+        account.withdraw(100);
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(2,account.getTransactions().size());
+        account.withdraw(0.01);
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(2,account.getTransactions().size());
+        account.withdraw(50);
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(2,account.getTransactions().size());
+    }
 }

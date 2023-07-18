@@ -9,12 +9,14 @@ import java.math.BigDecimal;
 public class CustomerTest {
 
     Customer customer;
+    Manager manager;
 
     @BeforeEach
     void setUp() {
         customer = new Customer("customer");
         customer.createCurrent(123);
         customer.createSavings(321);
+        manager = new Manager("manager");
     }
 
     @Test
@@ -41,14 +43,14 @@ public class CustomerTest {
     @Test
     void shouldDepositFundsOnTheAccount() {
         customer.depositFunds(123, BigDecimal.valueOf(500));
-        Assertions.assertEquals(customer.getCurrent().getBalance(), BigDecimal.valueOf(500));
+        Assertions.assertEquals(BigDecimal.valueOf(500), customer.getCurrent().getBalance());
 
         customer.depositFunds(321, BigDecimal.valueOf(125));
-        Assertions.assertEquals(customer.getSavings().getBalance(), BigDecimal.valueOf(125));
+        Assertions.assertEquals(BigDecimal.valueOf(125), customer.getSavings().getBalance());
 
         customer.depositFunds(111, BigDecimal.valueOf(125));
-        Assertions.assertEquals(customer.getCurrent().getBalance(), BigDecimal.valueOf(500));
-        Assertions.assertEquals(customer.getSavings().getBalance(), BigDecimal.valueOf(125));
+        Assertions.assertEquals(BigDecimal.valueOf(500), customer.getCurrent().getBalance());
+        Assertions.assertEquals(BigDecimal.valueOf(125), customer.getSavings().getBalance());
     }
 
     @Test
@@ -57,17 +59,50 @@ public class CustomerTest {
         customer.depositFunds(321, BigDecimal.valueOf(125));
 
         customer.withdrawFunds(111, BigDecimal.valueOf(100));
-        Assertions.assertEquals(customer.getCurrent().getBalance(), BigDecimal.valueOf(500));
-        Assertions.assertEquals(customer.getSavings().getBalance(), BigDecimal.valueOf(125));
+        Assertions.assertEquals(BigDecimal.valueOf(500), customer.getCurrent().getBalance());
+        Assertions.assertEquals(BigDecimal.valueOf(125), customer.getSavings().getBalance());
 
         customer.withdrawFunds(123, BigDecimal.valueOf(1000));
-        Assertions.assertEquals(customer.getCurrent().getBalance(), BigDecimal.valueOf(500));
+        Assertions.assertEquals(BigDecimal.valueOf(500), customer.getCurrent().getBalance());
 
         customer.withdrawFunds(123, BigDecimal.valueOf(100));
-        Assertions.assertEquals(customer.getCurrent().getBalance(), BigDecimal.valueOf(400));
+        Assertions.assertEquals(BigDecimal.valueOf(400), customer.getCurrent().getBalance());
 
         customer.withdrawFunds(321, BigDecimal.valueOf(100));
-        Assertions.assertEquals(customer.getSavings().getBalance(), BigDecimal.valueOf(25));
+        Assertions.assertEquals(BigDecimal.valueOf(25), customer.getSavings().getBalance());
+
+        customer.setOverCheck(true);
+        customer.requestOverdraft(BigDecimal.valueOf(100));
+        Assertions.assertEquals(true, customer.isOverCheck());
+        Assertions.assertEquals(BigDecimal.valueOf(100), customer.getOverAmount());
+        customer.withdrawFunds(123, BigDecimal.valueOf(410));
+        Assertions.assertEquals(BigDecimal.valueOf(90), customer.getOverAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(-10), customer.getCurrent().getBalance());
+        customer.withdrawFunds(123, BigDecimal.valueOf(100));
+        Assertions.assertEquals(BigDecimal.valueOf(-10), customer.getCurrent().getBalance());
+        customer.withdrawFunds(123, BigDecimal.valueOf(80));
+        Assertions.assertEquals(BigDecimal.valueOf(10), customer.getOverAmount());
+        Assertions.assertEquals(BigDecimal.valueOf(-90), customer.getCurrent().getBalance());
+    }
+
+    @Test
+    void shouldSetOverdraftAmount() {
+        Assertions.assertEquals(BigDecimal.ZERO, customer.getOverAmount());
+
+        manager.overdraftRequest(customer);
+        customer.requestOverdraft(BigDecimal.valueOf(500));
+        Assertions.assertEquals(BigDecimal.ZERO, customer.getOverAmount());
+
+        customer.depositFunds(123, BigDecimal.valueOf(500.00));
+        customer.withdrawFunds(123, BigDecimal.valueOf(100.00));
+        customer.depositFunds(123, BigDecimal.valueOf(250.00));
+        customer.depositFunds(123, BigDecimal.valueOf(500.00));
+        customer.withdrawFunds(123, BigDecimal.valueOf(100.00));
+        customer.depositFunds(123, BigDecimal.valueOf(250.00));
+
+        manager.overdraftRequest(customer);
+        customer.requestOverdraft(BigDecimal.valueOf(500));
+        Assertions.assertEquals(BigDecimal.valueOf(500), customer.getOverAmount());
     }
 
     @Test

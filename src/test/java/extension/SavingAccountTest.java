@@ -1,5 +1,8 @@
 package extension;
 
+
+import com.booleanuk.extension.Branch;
+import com.booleanuk.extension.CurrentAccount;
 import com.booleanuk.extension.SavingAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,8 +12,12 @@ import java.util.Date;
 public class SavingAccountTest {
 
     SavingAccount account;
+    SavingAccount accountWithBranch;
+    Branch branch;
     public SavingAccountTest() {
         account = new SavingAccount();
+        branch = new Branch("Warsaw ul. Marszalkowska 123", "Marszalkowska");
+        accountWithBranch = new SavingAccount(branch);
     }
 
     @Test
@@ -118,6 +125,10 @@ public class SavingAccountTest {
         Assertions.assertEquals("400.06", account.balanceCalculation());
         account.withdraw(100.05);
         Assertions.assertEquals("300.01", account.balanceCalculation());
+    }
 
+    @Test
+    public void getBranchNameTest() {
+        Assertions.assertEquals("Marszalkowska", accountWithBranch.getBranch());
     }
 }

@@ -14,9 +14,17 @@ public class SavingAccount implements BankAccount {
     private List<Transaction> transactions;
     private double balance;
 
+    Branch branch;
+
     public SavingAccount() {
         this.balance = 0;
         transactions = new ArrayList<>();
+    }
+
+    public SavingAccount(Branch branch) {
+        this.balance = 0;
+        transactions = new ArrayList<>();
+        this.branch = branch;
     }
 
     public List<Transaction> getTransactions() {
@@ -25,6 +33,10 @@ public class SavingAccount implements BankAccount {
 
     public double getBalance() {
         return Math.round(balance * 100.0) / 100.0;
+    }
+
+    public String getBranch() {
+        return branch.getBranchName();
     }
 
     @Override

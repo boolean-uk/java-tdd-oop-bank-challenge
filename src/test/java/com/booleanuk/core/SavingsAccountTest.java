@@ -18,6 +18,21 @@ public class SavingsAccountTest {
     }
 
     @Test
+    public  void shouldSetBalanceTo123()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(123);
+        Assertions.assertEquals(123,normalAccount.getBalance());
+    }
+    @Test
+    public  void shouldntChangeBalance()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(-123);
+        Assertions.assertEquals(0,normalAccount.getBalance());
+    }
+
+    @Test
     public void shouldReturnFalseWhenUserDepositNegativeValueOfMoneyOrNoMoney() {
         SavingsAccount savingsAccount = new SavingsAccount(12312312);
         Assertions.assertFalse(savingsAccount.deposit(-123));
@@ -34,6 +49,6 @@ public class SavingsAccountTest {
     @Test
     public void shouldReturnFalseWhenNotEnoughMoneyOnAccountToWithdraw() {
         SavingsAccount savingsAccount = new SavingsAccount(12312312);
-        Assertions.assertTrue(savingsAccount.withdraw(11));
+        Assertions.assertFalse(savingsAccount.withdraw(11));
     }
 }

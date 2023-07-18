@@ -18,7 +18,21 @@ public class NormalAccountTest {
     {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertTrue(normalAccount.deposit(123));
+    }
 
+    @Test
+    public  void shouldSetBalanceTo123()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(123);
+        Assertions.assertEquals(123,normalAccount.getBalance());
+    }
+    @Test
+    public  void shouldntChangeBalance()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(-123);
+        Assertions.assertEquals(0,normalAccount.getBalance());
     }
     @Test
     public  void shouldReturnFalseWhenUserDepositNegativeValueOfMoneyOrNoMoney()

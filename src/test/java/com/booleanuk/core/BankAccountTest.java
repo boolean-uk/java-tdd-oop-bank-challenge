@@ -16,6 +16,7 @@ public class BankAccountTest {
     public void whenCalculateBalanceIsCalledOnEmptyAccount_returns0(){
         Assertions.assertEquals(0, currentAccount.calculateBalance());
     }
+
     @Test
     public void whenDepositMoneyIsCalled_balanceIncreases(){
         //When
@@ -31,7 +32,7 @@ public class BankAccountTest {
         //When
         currentAccount.withdrawMoney(5);
         //Then
-        int expected = 10 - 5;
+        double expected = 10 - 5;
         Assertions.assertEquals(expected, currentAccount.calculateBalance());
     }
 

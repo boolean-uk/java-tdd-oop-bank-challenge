@@ -9,10 +9,19 @@ public abstract class BankAccount {
     private long accountNumber;
     private List<Transaction> transactions;
 
+    private String branch;
+
     public BankAccount(long accountNumber) {
         this.balance = 0;
         this.accountNumber = accountNumber;
         transactions = new ArrayList<Transaction>();
+    }
+
+    public BankAccount( long accountNumber, String branch) {
+        this.balance = 0;
+        this.accountNumber = accountNumber;
+        this.transactions = new ArrayList<Transaction>();
+        this.branch = branch;
     }
 
     public boolean deposit(double amount) {
@@ -79,5 +88,13 @@ public abstract class BankAccount {
 
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

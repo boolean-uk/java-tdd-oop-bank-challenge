@@ -8,6 +8,10 @@ public class NormalAccount extends BankAccount {
         super(accountNumber);
         this.debit = 500;
     }
+    public NormalAccount(long accountNumber,String branch) {
+        super(accountNumber,branch);
+        this.debit = 500;
+    }
 
     public double getDebit() {
         return debit;

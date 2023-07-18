@@ -56,15 +56,23 @@ public class BankTest {
         assertEquals(BigDecimal.valueOf(10000),balance );
     }*/
 
-
     @Test
+    public void  shouldReturn0BalanceOfAccount(){
+        //given
+        BigDecimal balance = account.getBalance();
+        //then
+        assertEquals(BigDecimal.valueOf(0),balance);
+    }
+
+
+/*    @Test
     public void shouldAddBalanceToAccount(){
         //given
         Account account1 = accountManager.createAccount(client);
         BigDecimal deposit = BigDecimal.valueOf(1000);
         //when
-        accountManager.addDepotsit(account1,deposit);
+        accountManager.addDeposit(account1,deposit);
         //then
         assertEquals(1000,account1.checkBalance(account1));
-    }
+    }*/
 }

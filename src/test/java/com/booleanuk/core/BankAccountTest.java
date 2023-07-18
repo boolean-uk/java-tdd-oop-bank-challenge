@@ -142,4 +142,36 @@ public class BankAccountTest {
         //Then
         Assertions.assertEquals(expectedResult.toString(), result);
     }
+
+    @Test
+    public void overDraftRequestTest() {
+        //Given
+        BankAccount bankAccount = new BankAccount();
+        LocalDate date = LocalDate.parse("2023-07-20", DateTimeFormatter.ISO_LOCAL_DATE);
+
+        //When
+        boolean result1 = bankAccount.requestOverDraft(1000);
+
+        //Then
+        Assertions.assertTrue(result1);
+    }
+
+    @Test
+    public void overDraftApproveTest() {
+        //Given
+        BankAccount bankAccount = new BankAccount();
+        LocalDate date = LocalDate.parse("2023-07-20", DateTimeFormatter.ISO_LOCAL_DATE);
+
+        //When
+        boolean result1 = bankAccount.requestOverDraft(1000);
+        boolean result2 = bankAccount.approveOverDraftAmount(1000);
+        boolean result3 = bankAccount.withdraw("main", 1000, date);
+        boolean result4 = bankAccount.withdraw("main", 100, date);
+
+        //Then
+        Assertions.assertTrue(result1);
+        Assertions.assertTrue(result2);
+        Assertions.assertTrue(result3);
+        Assertions.assertFalse(result4);
+    }
 }

@@ -1,12 +1,8 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.SavingsAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
 
 public class SavingsAccountTest {
     SavingsAccount savingsAccount;

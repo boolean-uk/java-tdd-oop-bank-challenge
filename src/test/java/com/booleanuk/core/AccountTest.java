@@ -35,6 +35,7 @@ public class AccountTest {
     public void shouldDepositMoney(){
         account.deposit(1000.00);
         assertEquals(1,account.getTransactions().size());
+        assertEquals(1000.00,account.getTransactions().get(0).getAmount());
     }
 
     @Test

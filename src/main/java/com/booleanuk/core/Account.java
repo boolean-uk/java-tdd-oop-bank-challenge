@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.booleanuk.core.TransactionType.*;
+
 public class Account {
     private String branchID;
     private List<Transaction> transactions;
@@ -42,7 +44,12 @@ public class Account {
 
     public double getBalance() {
         return transactions.stream()
-                .mapToDouble(transaction -> transaction.getType() == TransactionType.DEPOSIT ? transaction.getAmount() : transaction.getAmount() * -1 )
+                .mapToDouble(transaction -> transaction.getType() == DEPOSIT ? transaction.getAmount() : transaction.getAmount() * -1 )
                 .sum();
+    }
+
+    public void deposit(double amount) {
+        transactions.add(new Transaction(DEPOSIT,amount));
+        System.out.println("Money was successfully deposed");
     }
 }

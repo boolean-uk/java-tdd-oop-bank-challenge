@@ -58,4 +58,12 @@ public class Customer {
     public boolean checkIfAccountIsNull(Account account){
         return account == null;
     }
+
+    public SavingsAccount getSavingsAccount() {
+        return savingsAccount;
+    }
+
+    public CurrentAccount getCurrentAccount() {
+        return currentAccount;
+    }
 }

@@ -1,4 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.BankAccount;
+import com.booleanuk.core.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SavingAccount implements BankAccount{
+public class SavingAccount implements BankAccount {
 
     private List<Transaction> transactions;
     private double balance;
@@ -60,11 +63,10 @@ public class SavingAccount implements BankAccount{
             System.out.println("You can't withdraw more money than there is on the account");
             System.out.println("You tried to withdraw : " + amount);
             System.out.println("But you balance is only : " + getBalance());
-            return false;
         }else {
             System.out.println("Amount must be a positive number");
-            return false;
         }
+        return false;
     }
 
     @Override

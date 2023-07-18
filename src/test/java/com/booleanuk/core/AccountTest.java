@@ -28,4 +28,15 @@ public class AccountTest {
         Assertions.assertEquals(1000, myAccount.getBalance());
     }
 
+    @Test
+    public void testDeposit() {
+
+        myAccount.setBalance(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+
+        Assertions.assertEquals(4000, myAccount.getBalance());
+    }
+
 }

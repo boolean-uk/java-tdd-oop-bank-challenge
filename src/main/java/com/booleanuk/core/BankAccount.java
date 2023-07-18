@@ -19,7 +19,6 @@ public class BankAccount {
         return branch;
     }
 
-
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -43,12 +42,15 @@ public class BankAccount {
         System.out.println("Bank Statement for Account Number: " + accountNumber);
         BigDecimal balance = new BigDecimal("0.00");
         StringBuilder statement = new StringBuilder();
-        statement.append("Operation || Date || Amount || Balance");
+        statement.append(formatter("Operation",22)).append("|| ").
+                append(formatter("Date",15)).append("|| ").
+                append(formatter("Amount",10)).append("|| ").
+                append("Balance").append("\n");
         for (Transaction transaction : transactionHistory) {
             balance = balance.add(transaction.getAmount());
-            statement.append(transaction.getOperationType()).append("\t").
-                    append(transaction.getDate()).append("\t").
-                    append(transaction.getAmount().abs()).append("\t").
+            statement.append(formatter(transaction.getOperationType(),22)).append("|| ").
+                    append(formatter(transaction.getDate(),15)).append("|| ").
+                    append(formatter(transaction.getAmount().abs().toString(), 10)).append("|| ").
                     append(balance).append("\n");
         }
         return statement.toString();
@@ -56,5 +58,10 @@ public class BankAccount {
     public void sendSmsWithStatement(){
         SmsSender sms = new SmsSender();
         sms.sendSMS(generateBankStatement());
+    }
+    private String formatter(String x, int width){
+        StringBuilder pom = new StringBuilder(x);
+        pom.append(" ".repeat(Math.max(1, width - x.length())));
+        return pom.toString();
     }
 }

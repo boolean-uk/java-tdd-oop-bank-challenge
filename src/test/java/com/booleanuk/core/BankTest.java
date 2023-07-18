@@ -75,7 +75,19 @@ public class BankTest {
     public void testBranch(){
         Assertions.assertEquals(2,bank.getBranches().size());
         Assertions.assertEquals(1,branchGdansk.branchSize());
-
+        Assertions.assertEquals("Gdansk", branchGdansk.getBranchLocation());
+        Assertions.assertEquals("Branch nr 2", branchGdansk.getBranchName());
     }
+
+    @Test
+    public void testBankingStatement(){
+        curr.deposit(new BigDecimal("5000.00"),"2023-07-18", "Deposit");
+        curr.withdraw(new BigDecimal("1000.00"),"2023-07-18", "Withdrawal");
+        curr.requestOverdraft(new BigDecimal("1000.00"));
+        bank.approveOverdraft(curr);
+        curr.withdraw(new BigDecimal("5000.00"),"2023-07-18", "Withdrawal");
+        System.out.println(curr.generateBankStatement());
+    }
+
 
 }

@@ -1,7 +1,7 @@
 package com.booleanuk.core.users;
 
 import com.booleanuk.core.accounts.Account;
-import com.booleanuk.core.accounts.OverdraftRequest;
+import com.booleanuk.core.accounts.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class BankManager extends User{
         this.customers = new ArrayList<>();
     }
 
-    public boolean decideOverdraft(OverdraftRequest overdraftRequest){
+    public boolean decideOverdraft(Transaction overdraftRequest, boolean accept){
         return false;
     }
 

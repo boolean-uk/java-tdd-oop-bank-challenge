@@ -11,6 +11,7 @@ public abstract class Account {
     protected long id;
     protected List<Transaction> transactionHistory;
     protected Customer user;
+    protected double maxOverdraft = 0.0;
 
     public Account(Customer user) {
         this.user = user;
@@ -35,5 +36,9 @@ public abstract class Account {
 
     public Customer getUser() {
         return user;
+    }
+
+    public double getMaxOverdraft() {
+        return maxOverdraft;
     }
 }

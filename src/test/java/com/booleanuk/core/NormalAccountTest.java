@@ -12,7 +12,7 @@ public class NormalAccountTest {
         Assertions.assertEquals(0, normalAccount.getBalance());
         Assertions.assertEquals(0, normalAccount.getTransactions().size());
         Assertions.assertEquals(12312312, normalAccount.getAccountNumber());
-        Assertions.assertEquals(500, normalAccount.getDebit());
+        Assertions.assertEquals(-500, normalAccount.getDebit());
     }
 
     @Test
@@ -53,18 +53,6 @@ public class NormalAccountTest {
     public void shouldReturnFalseWhenNotEnoughMoneyOnAccountToWithdraw() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertFalse(normalAccount.withdraw(11));
-    }
-
-    @Test
-    public void shouldReturnTrueWhenEnoughMoneyOnDebitToWithdraw() {
-        NormalAccount normalAccount = new NormalAccount(12312312);
-        Assertions.assertTrue(normalAccount.withdrawFromDebit(25));
-    }
-
-    @Test
-    public void shouldReturnFalseWhenNotEnoughMoneyOnDebitToWithdraw() {
-        NormalAccount normalAccount = new NormalAccount(12312312);
-        Assertions.assertFalse(normalAccount.withdrawFromDebit(1111));
     }
 
     @Test
@@ -139,5 +127,29 @@ public class NormalAccountTest {
     public void shouldCreateAccountWithBranchWarsaw() {
         NormalAccount normalAccount = new NormalAccount(123123, "Warsaw");
         Assertions.assertEquals("Warsaw", normalAccount.getBranch());
+    }
+
+    @Test
+    public void shouldWithdrawFromDebitBeAcceptedAndDoneProperlyAndSetAccBalance()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312,"Warsaw");
+        Assertions.assertTrue(normalAccount.requestForOverdraft(300));
+        Assertions.assertEquals(-300,normalAccount.getBalance());
+        Assertions.assertEquals(-500, normalAccount.getDebit());
+
+    }
+
+    @Test
+    public void shouldWithdrawFromDebitBeAcceptedAndDoneProperlyTwoTimes()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312,"Warsaw");
+        Assertions.assertTrue(normalAccount.requestForOverdraft(300));
+        Assertions.assertEquals(-300,normalAccount.getBalance());
+        Assertions.assertEquals(-500, normalAccount.getDebit());
+        Assertions.assertTrue(normalAccount.requestForOverdraft(100));
+        Assertions.assertEquals(-400,normalAccount.getBalance());
+        Assertions.assertEquals(-500, normalAccount.getDebit());
+        Assertions.assertFalse(normalAccount.requestForOverdraft(300));
+        Assertions.assertEquals(-400,normalAccount.getBalance());
     }
 }

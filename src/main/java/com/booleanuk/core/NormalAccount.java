@@ -2,37 +2,31 @@ package com.booleanuk.core;
 
 public class NormalAccount extends BankAccount {
 
-    private double debit;
+    private double maxDebit;
 
     public NormalAccount(long accountNumber) {
         super(accountNumber);
-        this.setDebit(500);
+        this.setDebit(-500);
     }
 
     public NormalAccount(long accountNumber, String branch) {
         super(accountNumber, branch);
-        this.setDebit(500);
+        this.setDebit(-500);
     }
 
     public double getDebit() {
-        return debit;
+        return maxDebit;
     }
 
     public void setDebit(double debit) {
-        this.debit = debit;
+        this.maxDebit = debit;
     }
 
-    public boolean withdrawFromDebit(double amount) {
-        if (debit >= amount&& amount>0) {
+    public void withdrawFromDebit(double amount) {
 
-            this.getTransactions().add(new Transaction(amount, TransactionType.debit, this.getBalance() - amount));
-            this.setBalance(this.getBalance()-amount);
-            if(this.getBalance()<0) {
-                debit += this.getBalance();
-            }
-            return true;
-        }
-        return false;
+
+       this.setBalance(this.getBalance()-amount);
+        this.getTransactions().add(new Transaction(amount, TransactionType.debit, this.getBalance()));
     }
 
     public boolean requestForOverdraft(double amount)

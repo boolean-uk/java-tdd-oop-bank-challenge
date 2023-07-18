@@ -46,4 +46,26 @@ public class BankAccountTest {
         //Then
         Assertions.assertFalse(result1);
     }
+
+    @Test
+    public void showAccountHistoryTest() {
+        //Given
+        BankAccount bankAccount = new BankAccount();
+
+        LocalDate date = LocalDate.parse("2023-07-20", DateTimeFormatter.ISO_LOCAL_DATE);
+        Transaction transaction1 = new Transaction(date, 1000);
+        Transaction transaction2 = new Transaction(date, -500);
+        bankAccount.makeTransaction("main", transaction1);
+        bankAccount.makeTransaction("main", transaction2);
+
+        //When
+        String result = bankAccount.showAccountHistory("main");
+        StringBuilder expectedResult = new StringBuilder();
+        expectedResult.append("date       || credit  || debit  || balance\n");
+        expectedResult.append("2023-07-20 || 1000.0  ||        || 1000.0\n");
+        expectedResult.append("2023-07-20 ||         || 500.0  || 500.0");
+
+        //Then
+        Assertions.assertEquals(expectedResult.toString(), result);
+    }
 }

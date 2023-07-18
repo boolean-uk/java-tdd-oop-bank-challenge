@@ -40,4 +40,12 @@ public class Account {
         info.add(withdrawInfo);
         balance = newBalance;
     }
+
+    public void addDepositInfo(int amount) {
+        LocalDateTime transactionDate = LocalDateTime.now();
+        int newBalance = balance + amount;
+        Info depositInfo = new Info(transactionDate, 0, amount, newBalance, customerId, id);
+        info.add(depositInfo);
+        balance = newBalance;
+    }
 }

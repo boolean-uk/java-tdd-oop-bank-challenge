@@ -63,6 +63,16 @@ public class Customer {
         return true;
     }
 
+    public boolean deposit(int amount, String accountType) {
+        Account account = getAccountByType(accountType);
+        if (account == null) {
+            return false;
+        }
+
+        account.addDepositInfo(amount);
+        return true;
+    }
+
     private Account getAccountByType(String accountType) {
         for (Account account : accounts) {
             if (account.getType().equalsIgnoreCase(accountType)) {

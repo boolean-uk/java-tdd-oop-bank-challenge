@@ -58,6 +58,7 @@ I want statements to be sent as messages to my phone.
 | Class          | Method                                               | Field                                   | Outcome                                                |
 |----------------|------------------------------------------------------|-----------------------------------------|--------------------------------------------------------|
 | Account        |                                                      |                                         |                                                        |
+| Client         |                                                      |                                         |                                                        |
 | SavingAccount  |                                                      |                                         |                                                        |
 | Request        |                                                      |                                         |                                                        |
 | Transaction    |                                                      |                                         |                                                        |
@@ -71,6 +72,7 @@ I want statements to be sent as messages to my phone.
 |                | void addRequestToOverdraft(BigDecimal overdraft)     | `ArrayList<Request> overdraftRequests ` | it will add new overdraft request                      |
 |                | void  approveOverdraft(Account Account)              | `ArrayList<Request> overdraftRequests ` | it will accept overdraft request                       |
 |                | void  rejectOverdraft(Account Account)               | `ArrayList<Request> overdraftRequests ` | it will reject overdraft request                       |
+
 
 
 

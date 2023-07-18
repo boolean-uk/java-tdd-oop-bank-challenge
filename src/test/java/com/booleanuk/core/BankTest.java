@@ -12,15 +12,20 @@ public class BankTest {
 
     AccountManager accountManager;
 
+    @BeforeEach
+    public  void prepareForTests(){
+        accountManager = new AccountManager();
+    }
+
 
     @Test
     public void shouldCreateAccountForClient(){
         //given
         Client client1 = new Client("John","Smith");
         //when
-        Account account1 = accountManager.createAccount(Client);
+        Account account1 = accountManager.createAccount(client1);
         //then
-        assertEquals(accountManager.getAccounts.contains(account1),account1);
+        assertTrue(accountManager.getAccounts().contains(account1));
 
     }
 

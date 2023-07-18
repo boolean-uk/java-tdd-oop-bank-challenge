@@ -52,7 +52,7 @@ public class Customer extends User implements CustomerOperations {
             throw new BankAccountNotOpened("Current Account not opened");
         }
 
-        BigDecimal newBalance = currentAccount.getBalance().add(deposit);
+        BigDecimal newCurrentBalance = currentAccount.getBalance().add(deposit);
 
         BankTransaction transaction =
                 BankTransaction.builder()
@@ -60,21 +60,37 @@ public class Customer extends User implements CustomerOperations {
                         .transactionType(TransactionType.DEPOSIT)
                         .balanceBefore(currentAccount.getBalance())
                         .amount(deposit)
-                        .balanceAfter(newBalance)
+                        .balanceAfter(newCurrentBalance)
                         .transactionResult(TransactionResult.SUCCESSFUL)
                         .build();
 
-        currentAccount.setBalance(newBalance);
+        currentAccount.setBalance(newCurrentBalance);
         currentAccount.getTransaction().add(transaction);
 
         return transaction;
     }
 
     @Override
-    public BankTransaction depositSavingAccount(BigDecimal bigDecimal) {
+    public BankTransaction depositSavingAccount(BigDecimal deposit) {
         if (Objects.isNull(savingAccount)) {
             throw new BankAccountNotOpened("Saving Account not opened");
         }
-        return BankTransaction.builder().build();
+
+        BigDecimal newSavingBalance = savingAccount.getBalance().add(deposit);
+
+        BankTransaction transaction =
+                BankTransaction.builder()
+                        .createdAt(Instant.now())
+                        .transactionType(TransactionType.DEPOSIT)
+                        .balanceBefore(savingAccount.getBalance())
+                        .amount(deposit)
+                        .balanceAfter(newSavingBalance)
+                        .transactionResult(TransactionResult.SUCCESSFUL)
+                        .build();
+
+        savingAccount.setBalance(newSavingBalance);
+        savingAccount.getTransaction().add(transaction);
+
+        return transaction;
     }
 }

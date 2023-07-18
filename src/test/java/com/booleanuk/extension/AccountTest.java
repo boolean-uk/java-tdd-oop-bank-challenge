@@ -15,8 +15,9 @@ class AccountTest {
     @BeforeEach
     public void setUp() {
         Branch branch = new Branch("Bank Branch Warszawa-Srodmiescie", "Nowy Swiat 22/11, 01-412 Warszawa");
-        TwilioService twilioService = new TwilioService();
-        account = new SavingsAccount(branch, twilioService);
+//        TwilioService twilioService = new TwilioService();
+//        account = new SavingsAccount(branch, twilioService);
+        account = new SavingsAccount(branch);
     }
 
     @Test
@@ -68,12 +69,12 @@ class AccountTest {
                 .formatted(date, date, date), account.generateStatement());
     }
 
-    @Test
-    void sendStatementSendsStatement() {
-        account.deposit(19.99);
-        account.deposit(19.99);
-        account.withdraw(19.99);
-
-        account.sendStatement();
-    }
+//    @Test
+//    void sendStatementSendsStatement() {
+//        account.deposit(19.99);
+//        account.deposit(19.99);
+//        account.withdraw(19.99);
+//
+//        assertDoesNotThrow(() -> account.sendStatement());
+//    }
 }

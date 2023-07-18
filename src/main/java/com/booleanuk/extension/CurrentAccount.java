@@ -6,8 +6,8 @@ public class CurrentAccount extends Account {
     private boolean overdraftAllowed = false;
     private boolean overdraftRequested = false;
 
-    public CurrentAccount(Branch branch, TwilioService twilioService) {
-        super(branch, twilioService);
+    public CurrentAccount(Branch branch) {
+        super(branch);
     }
 
     @Override

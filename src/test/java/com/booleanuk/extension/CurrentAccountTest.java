@@ -12,8 +12,9 @@ class CurrentAccountTest {
     @BeforeEach
     public void setUp() {
         Branch branch = new Branch("Bank Branch Warszawa-Srodmiescie", "Nowy Swiat 22/11, 01-412 Warszawa");
-        TwilioService twilioService = new TwilioService();
-        account = new CurrentAccount(branch, twilioService);
+//        TwilioService twilioService = new TwilioService();
+//        account = new CurrentAccount(branch, twilioService);
+        account = new CurrentAccount(branch);
     }
 
     @Test

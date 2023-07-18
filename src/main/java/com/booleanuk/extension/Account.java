@@ -8,16 +8,16 @@ import java.util.List;
 public abstract class Account {
     List<Transaction> transactions = new ArrayList<>();
     Branch branch;
-    private final TwilioService twilioService;
+//    private final TwilioService twilioService;
 
-    public Account(Branch branch, TwilioService twilioService) {
-        this.branch = branch;
-        this.twilioService = twilioService;
-    }
-
-//    public Account(Branch branch) {
+//    public Account(Branch branch, TwilioService twilioService) {
 //        this.branch = branch;
+//        this.twilioService = twilioService;
 //    }
+
+    public Account(Branch branch) {
+        this.branch = branch;
+    }
 
     public void deposit(double amount) {
         if (amount < 0) {
@@ -65,4 +65,8 @@ public abstract class Account {
 
         return statementBuilder.toString();
     }
+
+//    public void sendStatement() {
+//        twilioService.send(generateStatement());
+//    }
 }

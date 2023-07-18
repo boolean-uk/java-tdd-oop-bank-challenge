@@ -3,7 +3,7 @@
 | BankAccount    |                                                                  | deposit(double amount)  |                                                                    |            |     
 |                |                                                                  | withdraw(double amount) |                                                                    |            |     
 |                |                                                                  | generateBankStatement() |                                                                    |            |     
-| CurrentAccount |                                                                  | deposit(double amount)  | amount > 0                                                         | true       |     
+| CurrentAccount | (Branch branch)                                                  | deposit(double amount)  | amount > 0                                                         | true       |     
 |                |                                                                  |                         | amount <= 0                                                        | false      |     
 |                |                                                                  | withdraw(double amount) | amount > 0 && balance - amount >=0 && canBeOverDrafted == false    | true       |     
 |                |                                                                  |                         | amount > 0 && balance - amount < 0 && canBeOverDrafted == false    | false      |
@@ -16,7 +16,7 @@
 |                |                                                                  |                         | if List<Transaction> !isEmpty                                      | String     |
 | Transaction    | Date date, String TypeOfOperation, double amount, double balance |                         |                                                                    |            |     
 | Bank           |                                                                  |                         |                                                                    |            |     
-| SavingAccount  |                                                                  | deposit(double amount)  | amount > 0                                                         | true       |     
+| SavingAccount  | (Branch branch)                                                  | deposit(double amount)  | amount > 0                                                         | true       |     
 |                |                                                                  |                         | amount < 0                                                         | false      |
 |                |                                                                  | withdraw(double amount) | amount <= 0                                                        | false      |
 |                |                                                                  |                         | amount > 0 && (getBalance() - amount) >= 0                         | true       |
@@ -24,4 +24,4 @@
 |                |                                                                  | generateBankStatement() |                                                                    |            |
 |                |                                                                  | balanceCalculation()    | if List<Transaction> isEmpty                                       | 0          |
 |                |                                                                  |                         | if List<Transaction> !isEmpty                                      | String     |                        |                                                                    |            |
-|                |                                                                  |                         |                                                                    |            |
+| Branch         | String address, String branchName                                |                         |                                                                    |            |

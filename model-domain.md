@@ -10,12 +10,18 @@
 | SavingsAccount |         |         |          |         |
 |                |         |         |          |         |
 
-| Classes | Members          | Methods                                                  | Scenario                           | Outputs   |
-|---------|------------------|----------------------------------------------------------|------------------------------------|-----------|
-| Client  | String name      | register(String name, String lastName, String birthDate) | if birthDate doesn't contains dots | Exception |
-|         | String lastName  |                                                          |                                    |           |
-|         | String birthDate |                                                          |                                    |           |
-|         |                  |                                                          |                                    |           |
+| Classes | Members          | Methods | Scenario | Outputs |
+|---------|------------------|---------|----------|---------|
+| Client  | String name      |         |          |         |
+|         | String lastName  |         |          |         |
+|         | String birthDate |         |          |         |
+|         |                  |         |          |         |
+
+| Classes | Members                    | Methods                                                  | Scenario                           | Outputs   |
+|---------|----------------------------|----------------------------------------------------------|------------------------------------|-----------|
+| Bank    | List<Client> clientsOfBank | register(String name, String lastName, String birthDate) | if birthDate doesn't contains dots | Exception |
+|         |                            | checkIfClientRegistered(Client client)                   | if client registered in bank       | true      |
+|         |                            |                                                          | if client not registered in bank   | false     |
 
 | Classes | Members                        | Methods                                               | Scenario                                                                              | Outputs |
 |---------|--------------------------------|-------------------------------------------------------|---------------------------------------------------------------------------------------|---------|

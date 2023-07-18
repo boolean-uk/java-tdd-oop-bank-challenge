@@ -7,10 +7,19 @@ import static com.booleanuk.core.TransactionType.*;
 
 public class Account {
     private String branchID;
-    private List<Transaction> transactions;
-    private String accountNumber;
-    private User owner;
+    private final List<Transaction> transactions;
+    private final String accountNumber;
+    private final User owner;
     private User manager;
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
+    }
+
     private static int DEFAULT_ACCOUNT_NUMBER = 999;
 
     public Account(String branchID, User owner, User manager) {
@@ -20,6 +29,7 @@ public class Account {
         this.accountNumber = String.valueOf(DEFAULT_ACCOUNT_NUMBER);
         this.owner = owner;
         this.manager = manager;
+        owner.getAccounts().add(this);
     }
 
     public String getBranchID() {

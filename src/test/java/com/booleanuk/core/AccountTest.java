@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.booleanuk.core.TransactionType.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,8 +24,8 @@ public class AccountTest {
     @BeforeEach
     public void setup(){
         currentAccount = new CurrentAccount("PL8",user,manager);
-        user = new User();
-        manager = new User();
+        user = new User("Wojtek");
+        manager = new User("Milena");
 //        transactions = new ArrayList<>();
 //        withdraw = new Transaction(WITHDRAW,100.00);
 //        deposit1 = new Transaction(DEPOSIT, 1000.00);
@@ -65,5 +67,16 @@ public class AccountTest {
         currentAccount.wire(100.00,secondAccount.getAccountNumber());
         currentAccount.withdraw(700.00);
         assertEquals(1700.00, currentAccount.getBalance());
+    }
+    @Test
+    public void shouldGetCorrectStatement(){
+        currentAccount.deposit(1000.00);
+        currentAccount.deposit(1500.00);
+        currentAccount.wire(100.00,secondAccount.getAccountNumber());
+        currentAccount.withdraw(700.00);
+        Map<String,List<Transaction>> expected = new HashMap<>();
+        expected.put(currentAccount.getAccountNumber(),currentAccount.getTransactions());
+
+        assertEquals(expected,user.generateStatement().getTransactions());
     }
 }

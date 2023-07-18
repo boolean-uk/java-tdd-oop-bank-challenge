@@ -19,10 +19,10 @@ public class Account {
 
     public Account(int accountNumber, String password) {
         this.accountNumber = accountNumber;
-        this.balance = 0;
+        balance = 0;
         this.password = password;
-        this.transactionHistory = new ArrayList<>();
-        this.transactionDate = new ArrayList<>();
+        transactionHistory = new ArrayList<>();
+        transactionDate = new ArrayList<>();
         this.isOverdraft = false;
     }
 
@@ -48,16 +48,16 @@ public class Account {
         balance = Balance();
         if (amount > 0) {
             if (balance >= amount) {
-                int negativeamount = -amount;
-                transactionHistory.add(negativeamount);
+                int negativeAmount = -amount;
+                transactionHistory.add(negativeAmount);
                 transactionDate.add(LocalDateTime.now());
                 System.out.println("You have successfully withdrew " + amount + "$.");
                 return true;
             }
             else if (isOverdraft) {
                 if (-(balance - amount) < OverdraftLimit){
-                    int negativeamount = -amount;
-                    transactionHistory.add(negativeamount);
+                    int negativeAmount = -amount;
+                    transactionHistory.add(negativeAmount);
                     transactionDate.add(LocalDateTime.now());
                     System.out.println("You have successfully withdrew " + amount + "$.");
                     return true;

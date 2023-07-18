@@ -25,11 +25,12 @@ public class AccountTest {
         account.deposit(1000);
         account.withdraw(500);
         account.deposit(1000);
-        Assertions.assertEquals(1500, account.Balance());
+        Assertions.assertEquals(1500, Account.Balance());
     }
 
     @Test
     public void TransactionDateTest() {
+        //added here CurrentAccount, but works for SavingsAccount and plain Account too.
         Account account = new CurrentAccount(123, "abc123");
         account.deposit(1000);
         Assertions.assertEquals(LocalDateTime.now().getHour(), account.getTransactionHour(0));
@@ -39,11 +40,12 @@ public class AccountTest {
     }
 
     @Test
-    public void OverdrafTest() {
-        Account account = new CurrentAccount(123, "abc123");
+    public void OverdraftTest() {
+        //added here CurrentAccount, but works for SavingsAccount and plain Account too.
+        Account account = new Account(123, "abc123");
         account.Overdraft(true);
         Assertions.assertFalse(account.withdraw(3000));
         Assertions.assertTrue(account.withdraw(1000));
-        Assertions.assertEquals(-1000, account.Balance());
+        Assertions.assertEquals(-1000, Account.Balance());
     }
 }

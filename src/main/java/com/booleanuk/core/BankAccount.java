@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,10 +15,20 @@ public class BankAccount {
         accounts.put("main", new ArrayList<>());
     }
 
-    public boolean makeTransaction(String accountName, Transaction transaction) {
-        if(!accounts.containsKey(accountName))
+    public boolean deposit(String accountName, float amount, LocalDate date) {
+        if(!accounts.containsKey(accountName) || amount <= 0)
             return false;
 
+        Transaction transaction = new Transaction(date, amount);
+        accounts.get(accountName).add(transaction);
+        return true;
+    }
+
+    public boolean withdraw(String accountName, float amount, LocalDate date) {
+        if(!accounts.containsKey(accountName) || amount <= 0)
+            return false;
+
+        Transaction transaction = new Transaction(date, -amount);
         accounts.get(accountName).add(transaction);
         return true;
     }

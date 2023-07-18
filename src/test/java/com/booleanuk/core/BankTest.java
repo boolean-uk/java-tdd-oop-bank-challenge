@@ -30,12 +30,12 @@ public class BankTest {
     }
 
 
-  /*  @Test
+    @Test
     public void shouldReturnBalanceForAccount(){
         //given
         //when
         BigDecimal balance  = accountManager.calculateAccountBalance(account);
         //then
         assertEquals(BigDecimal.valueOf(10000),balance );
-    }*/
+    }
 }

@@ -9,12 +9,32 @@ public class Customer {
     private CurrentAccount current;
     private SavingsAccount savings;
 
+    private boolean overCheck = false;
+
+    private BigDecimal overAmount = BigDecimal.ZERO;
+
     public Customer(String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isOverCheck() {
+        return overCheck;
+    }
+
+    public BigDecimal getOverAmount() {
+        return overAmount;
+    }
+
+    public void setOverCheck(boolean overCheck) {
+        this.overCheck = overCheck;
+    }
+
+    public void setOverAmount(BigDecimal overAmount) {
+        this.overAmount = overAmount;
     }
 
     public CurrentAccount getCurrent() {
@@ -61,7 +81,6 @@ public class Customer {
         if(account==null)
             return;
         account.getTransactionList().add(new Transaction(amount));
-        account.setBalance(account.getBalance().add(amount));
     }
 
     public void withdrawFunds(long number, BigDecimal amount) {
@@ -69,12 +88,28 @@ public class Customer {
         if(account==null)
             return;
 
-        if(!(account.getBalance().compareTo(amount)>=0)) {
+        if(!(account.getBalance().add(overAmount).compareTo(amount)>=0)) {
             System.out.println("Not enough funds for the withdrawal");
             return;
         }
+
+        BigDecimal toSubtract;
+        if (account.getBalance().compareTo(BigDecimal.ZERO)>0) {
+            toSubtract = amount.subtract(account.getBalance());
+        }
+        else
+            toSubtract = amount;
         account.getTransactionList().add(new Transaction(amount.multiply(BigDecimal.valueOf(-1))));
-        account.setBalance(account.getBalance().subtract(amount));
+        if(toSubtract.compareTo(BigDecimal.ZERO)>0)
+            this.overAmount = overAmount.subtract(toSubtract);
+    }
+
+    public void requestOverdraft(BigDecimal overAmount) {
+        if (overCheck) {
+            this.overAmount = overAmount;
+            return;
+        }
+        System.out.println("Overdraft request was not accepted yet");
     }
 
     public String generateBankStatement(long number) {

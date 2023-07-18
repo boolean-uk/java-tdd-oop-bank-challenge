@@ -6,12 +6,10 @@ import java.util.List;
 
 public abstract class BankAccount {
     private final long number;
-    private BigDecimal balance;
     private List<Transaction> transactionList;
 
     public BankAccount(long number) {
         this.number = number;
-        this.balance = BigDecimal.valueOf(0);
         transactionList = new ArrayList<>();
     }
 
@@ -20,11 +18,11 @@ public abstract class BankAccount {
     }
 
     public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+        BigDecimal b = BigDecimal.ZERO;
+        for(Transaction t : transactionList){
+            b=b.add(t.getAmount());
+        }
+        return b;
     }
 
     public List<Transaction> getTransactionList() {

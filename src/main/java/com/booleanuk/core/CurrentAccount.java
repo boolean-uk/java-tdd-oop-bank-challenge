@@ -10,4 +10,7 @@ public class CurrentAccount extends Account{
         if(this.getBalance() >= amount) this.getTransactions().add(new Transaction(WITHDRAW,amount));
         else throw new IllegalArgumentException("You can't wihtdraw more than you have. You can send a request ");
     }
+
+    public void wire(int i, String accountNumber) {
+    }
 }

@@ -13,6 +13,7 @@ public class AccountTest {
     CurrentAccount currentAccount;
     List<Transaction> transactions;
     User user;
+    CurrentAccount secondAccount;
     User manager;
     Transaction withdraw;
     Transaction deposit1;
@@ -27,7 +28,7 @@ public class AccountTest {
 //        withdraw = new Transaction(WITHDRAW,100.00);
 //        deposit1 = new Transaction(DEPOSIT, 1000.00);
 //        deposit2 = new Transaction(DEPOSIT, 800.00);
-        wire = new Transaction(WIRE,500.00);
+//        wire = new Transaction(WIRE_TO,500.00);
     }
 
     @Test
@@ -45,6 +46,16 @@ public class AccountTest {
         assertEquals(1000, currentAccount.getTransactions().get(1).getAmount());
 
         Assertions.assertThrows(IllegalArgumentException.class,()-> currentAccount.withdraw(1000));
+    }
+
+    @Test
+    public void shouldWireMoney(){
+        secondAccount = new CurrentAccount("POL54", user, manager);
+        currentAccount.deposit(1000);
+        currentAccount.wire(600.00,secondAccount.getAccountNumber());
+        assertEquals(400.00,currentAccount.getBalance());
+        assertEquals(60.000,secondAccount.getBalance());
+
     }
     @Test
     public void shouldGetBalance(){

@@ -11,7 +11,7 @@ public class Account {
     private String accountNumber;
     private User owner;
     private User manager;
-    private static int DEFAULT_ACCOUNT_NUMBER;
+    private static int DEFAULT_ACCOUNT_NUMBER = 999;
 
     public Account(String branchID, User owner, User manager) {
         DEFAULT_ACCOUNT_NUMBER++;
@@ -44,7 +44,7 @@ public class Account {
 
     public double getBalance() {
         return transactions.stream()
-                .mapToDouble(transaction -> transaction.getType() == DEPOSIT ? transaction.getAmount() : transaction.getAmount() * -1 )
+                .mapToDouble(transaction -> transaction.getType() == DEPOSIT || transaction.getType() == WIRE_FROM ? transaction.getAmount() : -transaction.getAmount() )
                 .sum();
     }
 

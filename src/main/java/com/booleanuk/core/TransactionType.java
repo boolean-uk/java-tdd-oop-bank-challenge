@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 public enum TransactionType {
     DEPOSIT,
-    WIRE,
+    WIRE_TO,
+    WIRE_FROM,
     WITHDRAW
 }

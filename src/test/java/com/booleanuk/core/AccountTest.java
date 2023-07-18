@@ -54,7 +54,7 @@ public class AccountTest {
     public void shouldThrowForInsufficientBalance() {
         Account current = new CurrentAccount(customer);
         Assertions.assertThrows(IllegalStateException.class, () -> current.withdraw(BigDecimal.ONE),
-                "Overdraft amount %s is lower than requested amount %s ");
+                "Insufficient funds, cannot withdraw");
     }
 
 }

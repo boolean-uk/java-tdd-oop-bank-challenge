@@ -14,7 +14,7 @@ public abstract class Account {
     private final List<Transaction> transactions = new ArrayList<>();
     private final String accountNumber;
     private Branch branch;
-    private OverdraftRequest request;
+    private OverdraftRequest request = null;
 
     Account(BigDecimal amount, Customer customer) {
         this.customer = customer;
@@ -55,6 +55,10 @@ public abstract class Account {
     public void withdraw(BigDecimal amount) throws IllegalAccessException {
 
         if(this.getBalance().compareTo(amount) < 0) {
+            if (this.request == null) {
+                throw new IllegalStateException(
+                String.format("Insufficient funds %s, cannot withdraw %s ", this.getBalance(), amount));
+            }
             if(this.request.getRequestState() != OVERDRAFT_STATE.APPROVED) {
                 throw new IllegalStateException(
                         String.format("Insufficient funds %s, cannot withdraw %s ", this.getBalance(), amount));

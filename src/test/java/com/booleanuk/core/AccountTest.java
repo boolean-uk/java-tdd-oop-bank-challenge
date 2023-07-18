@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -268,86 +269,60 @@ public class AccountTest {
         Assertions.assertEquals(00, account.countBalance(account.getCreditList(), account.getDebitList()));
     }
 
+    public double countBalanceTotal(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList){
+        double balance = 0.00;
+        for (List<Double> creditAmounts : creditList.values()) {
+            for (double credit : creditAmounts) {
+                balance += credit;
+            }
+        }
+
+        for (List<Double> debitAmounts : debitList.values()) {
+            for (double debit : debitAmounts) {
+                balance -= debit;
+            }
+        }
+        return balance;
+    }
+
     public String generateBankStatementsForTest(HashMap<LocalDate, ArrayList<Double>> creditList, HashMap<LocalDate, ArrayList<Double>> debitList){
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        double balance = 0.00;
+        HashMap<LocalDate, ArrayList<Double>> tmpCreditList = creditList;
+        HashMap<LocalDate, ArrayList<Double>> tmpDebitList = debitList;
+        double balance = countBalanceTotal(creditList, debitList);
+
         StringBuilder sb = new StringBuilder();
         sb.append("date       || ");
         sb.append("credit  || ");
         sb.append("debit  || ");
         sb.append("balance \n");
 
-        do {
-            List<LocalDate> creditDates = creditList.keySet().stream().toList();
-            List<LocalDate> debitDates = debitList.keySet().stream().toList();
+        List<LocalDate> allDates = new ArrayList<>();
+        allDates.addAll(tmpCreditList.keySet());
+        allDates.addAll(tmpDebitList.keySet());
+        Collections.sort(allDates, Collections.reverseOrder());
 
-            LocalDate minimumDateCredit = creditDates.stream().max(LocalDate::compareTo).orElse(null);
-            LocalDate minimumDateDebit = debitDates.stream().max(LocalDate::compareTo).orElse(null);
-
-            if (minimumDateDebit != null && minimumDateCredit != null) {
-                if (minimumDateDebit.isAfter(minimumDateCredit)) {
-                    sb.append(minimumDateDebit.format(dateFormat));
-                    sb.append(" || ");
-                    for (double d : debitList.get(minimumDateDebit)) {
-                        sb.append("        || ");
-                        sb.append(d + "  || ");
-                        balance -= d;
-                        sb.append(balance + "\n");
-                    }
-                    debitList.remove(minimumDateDebit);
-                } else if (minimumDateCredit.isAfter(minimumDateDebit)) {
-                    sb.append(minimumDateCredit.format(dateFormat));
-                    sb.append(" || ");
-                    for (double d : creditList.get(minimumDateCredit)) {
-                        sb.append(d);
-                        sb.append("  ||        || ");
-                        balance += d;
-                        sb.append(balance + "\n");
-                    }
-                    creditList.remove(minimumDateCredit);
-                }else {
-                    sb.append(minimumDateCredit.format(dateFormat));
-                    sb.append(" || ");
-                    for (double d : creditList.get(minimumDateCredit)){
-                        sb.append(d);
-                        sb.append("  ||        || ");
-                        balance += d;
-                        sb.append(balance + "\n");
-                    }
-
-                    sb.append(minimumDateDebit.format(dateFormat));
-                    sb.append(" || ");
-                    for (double d : debitList.get(minimumDateDebit)){
-                        sb.append("        || ");
-                        sb.append(d + "  || ");
-                        balance -= d;
-                        sb.append(balance + "\n");
-                    }
-                    creditList.remove(minimumDateCredit);
-                    debitList.remove(minimumDateDebit);
+        for (LocalDate date : allDates) {
+            double previousValue = balance;
+            sb.append(date.format(dateFormat));
+            sb.append(" || ");
+            if (tmpCreditList.containsKey(date)) {
+                for (double d : tmpCreditList.get(date)) {
+                    sb.append(d + "  ||        || ");
+                    balance -= d;
                 }
-            } else if (minimumDateDebit == null && minimumDateCredit != null) {
-                sb.append(minimumDateCredit.format(dateFormat));
-                sb.append(" || ");
-                for (double d : creditList.get(minimumDateCredit)){
-                    sb.append(d);
-                    sb.append("  ||        || ");
-                    balance += d;
-                    sb.append(balance + "\n");
-                }
-                creditList.remove(minimumDateCredit);
-            } else if (minimumDateCredit == null && minimumDateDebit != null) {
-                sb.append(minimumDateDebit.format(dateFormat));
-                sb.append(" || ");
-                for (double d : debitList.get(minimumDateDebit)){
+                tmpCreditList.remove(date);
+            }
+            if (tmpDebitList.containsKey(date)) {
+                for (double d : tmpDebitList.get(date)) {
                     sb.append("        || ");
                     sb.append(d + "  || ");
-                    balance -= d;
-                    sb.append(balance + "\n");
+                    balance += d;
                 }
-                debitList.remove(minimumDateDebit);
+                tmpDebitList.remove(date);
             }
-        } while (!creditList.isEmpty() || !debitList.isEmpty()) ;
+            sb.append(previousValue + "\n");
+        }
 
         return sb.toString();
     }

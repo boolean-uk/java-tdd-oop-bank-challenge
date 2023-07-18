@@ -37,7 +37,7 @@
 |         |                                           | withdraw(double amount, LocalDate date)               | if amount and date given                                                              | String  |
 |         |                                           |                                                       | if amount given and date not set current date                                         | String  |
 |         |                                           |                                                       | if amount and date not given or date given without amount                             | String  |
-|         |                                           | countBalance(HashMap credit, HashMap debit)           | if credit and debit is not empty                                                      | double  |
+|         |                                           | countBalanceTotal(HashMap credit, HashMap debit)      | if credit and debit is not empty                                                      | double  |
 |         |                                           |                                                       | if credit and debit is empty                                                          | 0.00    |
 |         |                                           | generateAccountNumber(Client client)                  | if client is not null create account number                                           | String  |
 |         |                                           |                                                       | if client is null return empty String                                                 | String  |

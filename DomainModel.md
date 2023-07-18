@@ -27,9 +27,9 @@ extension model:
 
 | Classes                 | Methods                        | Fields                         | Scenario                                                                                        |
 |-------------------------|--------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------|
-| Account                 |                                | AccountType type,              |                                                                                                 |
-|                         |                                | List<Transaction> transactions |                                                                                                 |
+| Account                 |                                | List<Transaction> transactions |
 |                         |                                | Branch branch                  |                                                                                                 |
+|                         |                                |                                |                                                                                                 |
 |                         |                                |                                |                                                                                                 |
 |                         | void deposit(double amount)    |                                | if amount is a positive number add new transaction to transaction list                          |
 |                         |                                |                                | otherwise throw exception                                                                       |
@@ -50,11 +50,11 @@ extension model:
 |                         | void approveOverdraftRequest() |                                | set overdraftAllowed to true, overdraftRequested to false                                       | 
 |                         | void rejectOverdraftRequest()  |                                | set overdraftAllowed to false, overdraftRequested to false                                      | 
 |                         |                                |                                |                                                                                                 | 
+| SavingsAccount: Account |                                |                                |                                                                                                 | 
+|                         |                                |                                |                                                                                                 | 
 | Branch                  |                                | String name                    |                                                                                                 | 
 |                         |                                | String address                 |                                                                                                 | 
 |                         |                                |                                |                                                                                                 | 
 | Transaction             |                                | LocalTimeDate date             |                                                                                                 | 
 |                         |                                | long amount                    |                                                                                                 | 
-|                         |                                |                                |                                                                                                 | 
-| AccountType enum        |                                | CURRENT, SAVINGS               |                                                                                                 | 
-|                         |                                |                                |                                                                                                 | 
+|                         |                                |                                |                                                                                                 |

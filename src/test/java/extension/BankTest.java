@@ -1,8 +1,8 @@
 package extension;
 
-import com.booleanuk.core.Bank;
-import com.booleanuk.core.CurrentAccount;
-import com.booleanuk.core.SavingAccount;
+import com.booleanuk.extension.Bank;
+import com.booleanuk.extension.CurrentAccount;
+import com.booleanuk.extension.SavingAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

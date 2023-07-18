@@ -1,6 +1,6 @@
 package extension;
 
-import com.booleanuk.core.SavingAccount;
+import com.booleanuk.extension.SavingAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

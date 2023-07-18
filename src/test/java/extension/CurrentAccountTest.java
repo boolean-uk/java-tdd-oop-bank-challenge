@@ -1,6 +1,6 @@
 package extension;
 
-import com.booleanuk.core.CurrentAccount;
+import com.booleanuk.extension.CurrentAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -84,6 +84,19 @@ public class CurrentAccountTest {
         Assertions.assertEquals(-500, account.getBalance());
         Assertions.assertEquals(4, account.getTransactions().size());
         account.generateBankStatement();
+
+    }
+    @Test
+    public void balanceCalculationTest() {
+        Assertions.assertEquals("0.00", account.balanceCalculation());
+        account.deposit(100);
+        Assertions.assertEquals("100.00", account.balanceCalculation());
+        account.deposit(100.01);
+        account.deposit(100.02);
+        account.deposit(100.03);
+        Assertions.assertEquals("400.06", account.balanceCalculation());
+        account.withdraw(100.05);
+        Assertions.assertEquals("300.01", account.balanceCalculation());
 
     }
 

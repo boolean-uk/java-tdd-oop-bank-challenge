@@ -105,6 +105,19 @@ public class CurrentAccount implements BankAccount {
     }
 
     public String balanceCalculation() {
-        return "0";
+        double totalBalance = 0;
+        if(transactions.isEmpty()) {
+            return "0.00";
+        }else {
+            for(Transaction transaction : transactions) {
+                if(transaction.getTypeOfOperation().equals("credit")) {
+                    totalBalance += Double.valueOf(transaction.getAmount());
+                }else if (transaction.getTypeOfOperation().equals("debit")) {
+                    totalBalance -= Double.valueOf(transaction.getAmount());
+                }
+
+            }
+            return String.format("%,.2f", totalBalance);
+        }
     }
 }

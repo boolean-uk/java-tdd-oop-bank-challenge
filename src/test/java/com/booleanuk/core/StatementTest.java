@@ -5,12 +5,48 @@ import org.junit.jupiter.api.Test;
 
 public class StatementTest {
 
-    Account myAccount = new CurrentAccount();
-    Statement myStatement = new Statement(myAccount);
+    CurrentAccount myAccount = new CurrentAccount("C123456789", 0);
 
     @Test
-    public void testStatement() {
-        Assertions.assertNotNull(myStatement);
+    public void testAddStatement() {
+
+        myAccount.deposit(1000);
+
+        Assertions.assertEquals(1, myAccount.getStatement().getTransactions().size());
+    }
+
+    @Test
+    public void testAddStatements() {
+
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+
+        myAccount.withdraw(390);
+
+        Assertions.assertEquals(4, myAccount.getStatement().getTransactions().size());
+    }
+
+    @Test
+    public void testPrintStatement() {
+
+        myAccount.setBalance(0);
+
+        myAccount.deposit(1000);
+
+        myAccount.withdraw(390);
+
+        myAccount.setOverdraftLimit(1000);
+
+        myAccount.withdraw(1000);
+
+        myAccount.deposit(780);
+
+        myAccount.deposit(200);
+
+        System.out.println(myAccount.getStatement().generateStatement());
+
+        Assertions.assertEquals(5, myAccount.getStatement().getTransactions().size());
     }
 
 }

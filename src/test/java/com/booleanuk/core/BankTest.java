@@ -198,5 +198,18 @@ public class BankTest {
 
     }
 
+    @Test
+    public void shouldNotLetWithdrawMoreMoneyThanOverdraftPlusBalance(){
+        Account account1 = accountManager.createAccount(client);
+        BigDecimal deposit = BigDecimal.valueOf(11000);
+        accountManager.addDeposit(account1, deposit);
+        BigDecimal withdraw = BigDecimal.valueOf(116000);
+        //when
+        accountManager.withdraw(account1, withdraw);
+        //then
+        assertEquals(BigDecimal.valueOf(11000), accountManager.calculateAccountBalance(account1));
+
+    }
+
 
 }

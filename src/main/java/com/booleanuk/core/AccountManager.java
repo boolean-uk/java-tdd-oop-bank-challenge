@@ -12,23 +12,6 @@ public class AccountManager {
 
     private static ArrayList<Overdraft> overdrafts;
 
-    public AccountManager() {
-        accounts = new ArrayList<>();
-        overdrafts = new ArrayList<Overdraft>();
-    }
-
-    public Account createAccount(Client client) {
-        Account account = new Account(client);
-        accounts.add(account);
-        return account;
-    }
-
-    public SavingAccount createSavingAccount(Client client) {
-        SavingAccount savingAccount = new SavingAccount(client);
-        accounts.add(savingAccount);
-        return savingAccount;
-    }
-
 
     public ArrayList<Account> getAccounts() {
         return accounts;
@@ -55,12 +38,17 @@ public class AccountManager {
         if(withdraw.doubleValue() < 0){
             System.out.println("You can't withdraw money below zero!");
         }else{
-            withdraw = withdraw.multiply(BigDecimal.valueOf(-1));
-            BigDecimal currentBalance = account.getBalance();
-            currentBalance = currentBalance.add(withdraw);
+            BigDecimal sum = account.getBalance().add(account.getOverdraft());
+            if( sum.doubleValue() > withdraw.doubleValue()) {
+                withdraw = withdraw.multiply(BigDecimal.valueOf(-1));
+                BigDecimal currentBalance = account.getBalance();
+                currentBalance = currentBalance.add(withdraw);
 
-            account.getStatements().add(new Transaction(withdraw,currentBalance));
-        }
+                account.getStatements().add(new Transaction(withdraw, currentBalance));
+            }else {
+                System.out.println("you don't have that amount of money");
+            }
+            }
     }
 
     public String generateBankStatement(Account account) {
@@ -105,6 +93,23 @@ public class AccountManager {
     public void approveOverdraft(Overdraft overDraft){
         overDraft.getAccount().setOverdraft(overDraft.getOverdraft());
         overdrafts.remove(overDraft);
+    }
+
+    public AccountManager() {
+        accounts = new ArrayList<>();
+        overdrafts = new ArrayList<Overdraft>();
+    }
+
+    public Account createAccount(Client client) {
+        Account account = new Account(client);
+        accounts.add(account);
+        return account;
+    }
+
+    public SavingAccount createSavingAccount(Client client) {
+        SavingAccount savingAccount = new SavingAccount(client);
+        accounts.add(savingAccount);
+        return savingAccount;
     }
 
 

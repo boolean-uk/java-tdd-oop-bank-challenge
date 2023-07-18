@@ -62,6 +62,7 @@ I want statements to be sent as messages to my phone.
 | SavingAccount  |                                                      |                                         |                                                        |
 | Request        |                                                      |                                         |                                                        |
 | Transaction    |                                                      |                                         |                                                        |
+| Overdraft      |                                                      |                                         |                                                        |
 | AccountManager | void generateBankStatement();                        | `ArrayList<Transaction> statements `    | It will print bank statement                           |
 |                | void deposit(BigDecimal deposit)                     | `ArrayList<Transaction> statements `    | It will add money to account balance                   |
 |                | void withdraw(BigDecimal withdraw)                   | `ArrayList<Transaction> statements `    | It subtract money from account balance                 |
@@ -75,7 +76,8 @@ I want statements to be sent as messages to my phone.
 
 
 
-
+## Class Model
+![BankDomainModel.png](BankDomainModel.png)
 
 
 

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,6 +40,15 @@ public class Account {
 
     public String getTypeOfAccount() {
         return typeOfAccount;
+    }
+
+    public void depositFunds(double amount){
+        if(amount < 0){
+            throw new RuntimeException("Amount cannot be negative!");
+        }
+        balance += amount;
+        Transaction transaction = new Transaction(LocalDate.now(), amount, "deposit");
+        transactions.add(transaction);
     }
 
 

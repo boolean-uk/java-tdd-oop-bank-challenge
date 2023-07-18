@@ -96,4 +96,11 @@ public class AccountManager {
         AccountManager.overDrafts = overDrafts;
     }
 
+    public OverDraft addRequestToOverdraft(Account account, BigDecimal overdraft) {
+        OverDraft overDraft1 = new OverDraft(account, overdraft);
+        overDrafts.add(overDraft1);
+        return overDraft1;
+    }
+
+
 }

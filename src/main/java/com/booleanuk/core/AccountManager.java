@@ -10,11 +10,11 @@ public class AccountManager {
     private static ArrayList<Account> accounts;
 
 
-    private static ArrayList<OverDraft> overDrafts;
+    private static ArrayList<Overdraft> overdrafts;
 
     public AccountManager() {
         accounts = new ArrayList<>();
-        overDrafts = new ArrayList<OverDraft>();
+        overdrafts = new ArrayList<Overdraft>();
     }
 
     public Account createAccount(Client client) {
@@ -88,18 +88,23 @@ public class AccountManager {
         account.setBranch(branch);
     }
 
-    public static ArrayList<OverDraft> getOverDrafts() {
-        return overDrafts;
+    public static ArrayList<Overdraft> getOverDrafts() {
+        return overdrafts;
     }
 
-    public static void setOverDrafts(ArrayList<OverDraft> overDrafts) {
-        AccountManager.overDrafts = overDrafts;
+    public static void setOverDrafts(ArrayList<Overdraft> overdrafts) {
+        AccountManager.overdrafts = overdrafts;
     }
 
-    public OverDraft addRequestToOverdraft(Account account, BigDecimal overdraft) {
-        OverDraft overDraft1 = new OverDraft(account, overdraft);
-        overDrafts.add(overDraft1);
-        return overDraft1;
+    public Overdraft addRequestToOverdraft(Account account, BigDecimal overdraft) {
+        Overdraft overdraft1 = new Overdraft(account, overdraft);
+        overdrafts.add(overdraft1);
+        return overdraft1;
+    }
+
+    public void approveOverdraft(Overdraft overDraft){
+        overDraft.getAccount().setOverdraft(overDraft.getOverdraft());
+        overdrafts.remove(overDraft);
     }
 
 

@@ -2,13 +2,13 @@ package com.booleanuk.core;
 
 import java.math.BigDecimal;
 
-public class OverDraft {
+public class Overdraft {
 
     private Account account;
     private BigDecimal overdraft;
 
 
-    public OverDraft(Account account, BigDecimal overdraft) {
+    public Overdraft(Account account, BigDecimal overdraft) {
         this.account = account;
         this.overdraft = overdraft;
     }

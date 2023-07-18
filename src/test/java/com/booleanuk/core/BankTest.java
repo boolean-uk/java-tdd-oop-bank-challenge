@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankTest {
 
@@ -163,23 +162,26 @@ public class BankTest {
         Account account1 = accountManager.createAccount(client);
 
         //then
-       OverDraft overDraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+       Overdraft overdraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
 
 
-        assertTrue(accountManager.getOverDrafts().contains(overDraft1));
+        assertTrue(accountManager.getOverDrafts().contains(overdraft1));
     }
 
     @Test
     public void shouldApproveOverdraft(){
-        //when
+        //given
         BigDecimal overdraft = BigDecimal.valueOf(1000);
         Account account1 = accountManager.createAccount(client);
-        OverDraft overDraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+        Overdraft overdraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+        //when
+        accountManager.approveOverdraft(overdraft1);
+
         //then
-        account.approveOverdraft(overdraft1);
-
-
-        assertEquals(overDraft1.getOverdraft(),account1.getOverdraft());
+        assertEquals(overdraft1.getOverdraft(),account1.getOverdraft());
+        assertFalse(AccountManager.getOverDrafts().contains(overdraft1));
 
     }
+
+
 }

@@ -46,22 +46,22 @@ I want statements to be sent as messages to my phone.
 ```
 
 
-| Class | Field                            | Method                        | Condition                             | Output |
-|-------|----------------------------------|-------------------------------|---------------------------------------|--------|
-| Bank  | HashMap<String, Branch> branches | Branch getBranch(String code) | if there is a branch with given code  | branch |
-|       |                                  |                               | if there is no branch with given code | null   |
+| Class | Field                            | Method                              | Condition                             | Output |
+|-------|----------------------------------|-------------------------------------|---------------------------------------|--------|
+| Bank  | HashMap<String, Branch> branches | Branch getBranch(String branchCode) | if there is a branch with given code  | branch |
+|       |                                  |                                     | if there is no branch with given code | null   |
 
 
-| Class   | Field                          | Method                                                    | Condition                            | Output |
-|---------|--------------------------------|-----------------------------------------------------------|--------------------------------------|--------|
-| Account | List<Transaction> transactions | boolean deposit(int amount)                               | if operation ended successfully      | true   |
-|         | String branchCode              |                                                           | if operation didn't end successfully | false  |
-|         | String userPhoneNumber         | boolean withdraw(int amount)                              | if operation ended successfully      | true   |
-|         |                                |                                                           | if operation didn't end successfully | false  |
-|         |                                | boolean sendDepositNotification(Transaction transaction)  | if operation ended successfully      | true   |
-|         |                                |                                                           | if operation didn't end successfully | false  |
-|         |                                | boolean sendWithdrawNotification(Transaction transaction) | if operation ended successfully      | true   |
-|         |                                |                                                           | if operation didn't end successfully | false  |
+| Class       | Field                          | Method                                                    | Condition                            | Output |
+|-------------|--------------------------------|-----------------------------------------------------------|--------------------------------------|--------|
+| BankAccount | List<Transaction> transactions | boolean deposit(int amount)                               | if operation ended successfully      | true   |
+|             | String branchCode              |                                                           | if operation didn't end successfully | false  |
+|             | String userPhoneNumber         | boolean withdraw(int amount)                              | if operation ended successfully      | true   |
+|             |                                |                                                           | if operation didn't end successfully | false  |
+|             |                                | boolean sendDepositNotification(Transaction transaction)  | if operation ended successfully      | true   |
+|             |                                |                                                           | if operation didn't end successfully | false  |
+|             |                                | boolean sendWithdrawNotification(Transaction transaction) | if operation ended successfully      | true   |
+|             |                                |                                                           | if operation didn't end successfully | false  |
 
 
 | Class          | Field | Method                       | Condition                            | Output |

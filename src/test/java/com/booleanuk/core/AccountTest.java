@@ -25,4 +25,25 @@ public class AccountTest {
         Assertions.assertTrue(statement.contains("10/01/2023 ||     500,00 ||            ||    2500,00"));
         Assertions.assertTrue(statement.contains("14/01/2012 ||            ||    1000,00 ||    1000,00"));
     }
+
+    @Test
+    public void testDepositingFunds() {
+        Bank bank = new Bank();
+        UUID customerId = bank.registerCustomer();
+        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
+        Account account = bank.getAccounts().get(accountId);
+        account.deposit(BigDecimal.valueOf(1_000));
+        Assertions.assertEquals(BigDecimal.valueOf(1_000), account.getBalance());
+    }
+
+    @Test
+    public void testWithdrawingFunds() {
+        Bank bank = new Bank();
+        UUID customerId = bank.registerCustomer();
+        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
+        Account account = bank.getAccounts().get(accountId);
+        account.deposit(BigDecimal.valueOf(1_000));
+        account.withdraw(BigDecimal.valueOf(500));
+        Assertions.assertEquals(BigDecimal.valueOf(500), account.getBalance());
+    }
 }

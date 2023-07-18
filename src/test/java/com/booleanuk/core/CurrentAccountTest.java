@@ -52,4 +52,14 @@ public class CurrentAccountTest {
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(4, account.getTransactions().size());
     }
+
+    @Test
+    public void withdrawWithZeroOrNegativeNumber() {
+        account.deposit(100);
+        account.withdraw(0);
+        account.withdraw(-0.01);
+        account.withdraw((-99));
+        Assertions.assertEquals(100, account.getBalance());
+        Assertions.assertEquals(1,account.getTransactions().size());
+    }
 }

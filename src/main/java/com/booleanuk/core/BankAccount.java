@@ -6,15 +6,7 @@ import java.util.List;
 
 public interface BankAccount {
 
-
-
-
-
-
-
-
     boolean deposit(double amount);
-
     public boolean withdraw(double amount);
 
 

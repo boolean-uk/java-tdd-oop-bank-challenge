@@ -45,6 +45,9 @@ public class CurrentAccount implements BankAccount{
             balance -= amount;
             transactions.add(new Transaction(new Date(), "debit", amount,getBalance()));
             return true;
+        }else if(amount <= 0) {
+            System.out.println("Amount must be a positive number");
+            return false;
         }
         return false;
     }

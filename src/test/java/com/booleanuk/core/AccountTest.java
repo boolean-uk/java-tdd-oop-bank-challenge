@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest {
 
-    Account myAccount = new Account();
+    CurrentAccount myAccount = new CurrentAccount();
 
     @Test
     public void testAccount() {
@@ -50,6 +50,56 @@ public class AccountTest {
         myAccount.withdraw(4000);
 
         Assertions.assertEquals(0, myAccount.getBalance());
+    }
+
+    @Test
+    public void testWithdrawWithNoMoney() {
+
+        myAccount.setBalance(1000);
+
+        myAccount.withdraw(4000);
+
+        Assertions.assertEquals(1000, myAccount.getBalance());
+    }
+
+    @Test
+    public void testCurrentWithdraw() {
+
+        myAccount.setBalance(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+
+        myAccount.withdraw(4000);
+
+        Assertions.assertEquals(0, myAccount.getBalance());
+    }
+
+    @Test
+    public void testCurrentWithdrawWithOverdraft() {
+
+        myAccount.setBalance(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+        myAccount.deposit(1000);
+
+        myAccount.setOverdraftLimit(1000);
+
+        myAccount.withdraw(5000);
+
+        Assertions.assertEquals(-1000, myAccount.getBalance());
+    }
+
+    @Test
+    public void testCurrentWithdrawWithOverdraft2() {
+
+        myAccount.setBalance(500);
+
+        myAccount.setOverdraftLimit(500);
+
+        myAccount.withdraw(1000);
+
+        Assertions.assertEquals(-500, myAccount.getBalance());
     }
 
 }

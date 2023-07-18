@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Account {
+public abstract class Account {
 
     private String accountNumber;
     private double balance;
@@ -40,7 +40,9 @@ public class Account {
     }
 
     public void withdraw(double amount) {
-        balance -= amount;
+        if (balance >= amount) {
+            balance -= amount;
+        }
     }
 
 }

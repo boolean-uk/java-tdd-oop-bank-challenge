@@ -29,6 +29,7 @@ public class BankManagementTest {
     @AfterEach
     public void clear(){
         Bank.getAccountList().clear();
+        Bank.getUsersList().clear();
     }
 
 

@@ -79,6 +79,16 @@ public class Bank {
         }
         return sb.toString().replace("null", " ".repeat(4));
     }
+public  void sendMessage(String recipientPhoneNumber){
+    var message = generateTransactionsSummary();
 
+    TwilioService.sendSmsMessage(recipientPhoneNumber, message);
+}
+
+    public static void main(String[] args) {
+        Bank bank=new Bank("WAR");
+        bank.makeNewTransaction(BigDecimal.valueOf(500), Transaction.accountType.DEBET);
+       // bank.sendMessage("48722362249");
+    }
 
 }

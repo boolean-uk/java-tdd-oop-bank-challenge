@@ -47,10 +47,10 @@ public class AccountTest {
     }
 
     @Test
-    void withdraw_shouldThrowForInsufficientBalanceAndNotAddTransactionToHistory() {
+    public void shouldThrowForInsufficientBalance() {
         Account current = new CurrentAccount(customer);
         Assertions.assertThrows(IllegalStateException.class, () -> current.withdraw(BigDecimal.ONE),
-                "Expected an IllegalStateException to be thrown for insufficient funds");
+                "Overdraft amount %s is lower than requested amount %s ");
     }
 
 }

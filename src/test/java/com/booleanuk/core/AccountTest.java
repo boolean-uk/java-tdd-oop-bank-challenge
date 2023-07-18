@@ -49,4 +49,37 @@ public class AccountTest {
         Assertions.assertEquals(500, thirdTransaction.getAmount());
         Assertions.assertEquals(2500, thirdTransaction.getBalance());
     }
+
+    @Test
+    public void testIfCalculateBalanceWorks(){
+        account = new Account(1, "Savings");
+        Assertions.assertEquals(0, account.calculateBalance());
+
+        LocalDateTime dateTime1 = LocalDateTime.of(2023, 7, 15, 10, 30);
+        account.addDepositWithoutCalc(1000, dateTime1);
+        Assertions.assertEquals(1000, account.calculateBalance());
+
+        LocalDateTime dateTime2 = LocalDateTime.of(2023, 7, 16, 11, 15);
+        account.addDepositWithoutCalc(500, dateTime2);
+        Assertions.assertEquals(1500, account.calculateBalance());
+    }
+
+    @Test
+    public void testIfCalculateBalanceWorks2(){
+        account = new Account(1, "Savings");
+        Assertions.assertEquals(0, account.calculateBalance());
+
+        LocalDateTime dateTime1 = LocalDateTime.of(2023, 7, 15, 10, 30);
+        account.addDepositWithoutCalc(2000, dateTime1);
+
+        LocalDateTime dateTime2 = LocalDateTime.of(2023, 7, 16, 11, 15);
+        account.addWithdrawalWithoutCalc(500, dateTime2);
+        Assertions.assertEquals(1500, account.calculateBalance());
+
+        LocalDateTime dateTime3 = LocalDateTime.of(2023, 7, 17, 14, 45);
+        account.addWithdrawalWithoutCalc(1000, dateTime3);
+        Assertions.assertEquals(500, account.calculateBalance());
+    }
+
+
 }

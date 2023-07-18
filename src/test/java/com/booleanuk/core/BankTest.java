@@ -59,6 +59,12 @@ public class BankTest {
 
     @Test
     public void shouldAddBalanceToAccount(){
-
+        //given
+        Account account1 = accountManager.createAccount(client);
+        BigDecimal deposit = BigDecimal.valueOf(1000);
+        //when
+        accountManager.addDepotsit(account1,deposit);
+        //then
+        assertEquals(1000,account1.checkBalance(account1));
     }
 }

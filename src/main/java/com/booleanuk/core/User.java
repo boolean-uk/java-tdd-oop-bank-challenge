@@ -45,6 +45,10 @@ public class User {
     public void printStatement(){
         System.out.println(this.generateStatement().toString());
     }
+    public void sendStatementViaSMS(){
+        TwilioService twilioService = new TwilioService();
+        twilioService.send(this.generateStatement().toString());
+    }
 
     public Request sendRequest(double amount, String accountNumber) {
         Account account = Bank.getAccount(accountNumber);

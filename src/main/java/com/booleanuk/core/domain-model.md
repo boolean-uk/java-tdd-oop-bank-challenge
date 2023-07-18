@@ -1,13 +1,23 @@
-| Classes    | Methods                                  | Scenario                               | Outputs                                           |
-|------------|------------------------------------------|----------------------------------------|---------------------------------------------------|
-| `Account`  | `addDeposit(BigDecimal addBalance)`      | Adds `addBalance` to balance           | Balance updated : `balance`                       |
-|            | `addDeposit(BigDecimal addBalance)`      | If `addBalance` is negative            | Throw Exception `You cannot add negative balance` |
-|            | `withdraw(BigDecimal removeFromBalance)` | Subtract balance - `removeFromBalance` | Balance updated : `balance`                       |
-|            | `withdraw(BigDecimal removeFromBalance)` | If `balance - removeFromBalance` < 0   | Throw Exception `You cannot overdraft`            |                                                   |
-| `Customer` | `createSavingsAccount()`                 | Create SavingsAccount                  | Savings account created                           |
-|            | `createSavingsAccount()`                 | If savingsAccount exist                | Throw Exception `You have savingsAccount`         |
-|            | `createCurrentAccount()`                 | Create CurrentAccount                  | Current account created                           |
-|            | `createCurrentAccount()`                 | If currentAccount exist                | Throw Exception `You have savingsAccount`         | 
+| Classes    | Methods                                  | Scenario                               | Outputs                                                     |
+|------------|------------------------------------------|----------------------------------------|-------------------------------------------------------------|
+| `Account`  | `addDeposit(BigDecimal addBalance)`      | Adds `addBalance` to balance           | Balance updated : `balance`                                 |
+|            | `addDeposit(BigDecimal addBalance)`      | If `addBalance` is negative            | Throw Exception `You cannot add negative balance`           |
+|            | `withdraw(BigDecimal removeFromBalance)` | Subtract balance - `removeFromBalance` | Balance updated : `balance`                                 |
+|            | `withdraw(BigDecimal removeFromBalance)` | If `balance - removeFromBalance` < 0   | Throw Exception `You cannot overdraft`                      |                                                   |
+| `Customer` | `createSavingsAccount()`                 | Create SavingsAccount                  | Savings account created                                     |
+|            | `createSavingsAccount()`                 | If savingsAccount exist                | Throw Exception `Savings account has already been created.` |
+|            | `createCurrentAccount()`                 | Create CurrentAccount                  | Current account created                                     |
+|            | `createCurrentAccount()`                 | If currentAccount exist                | Throw Exception `Current account has already been created.` |
+|            | `addBalanceToSavingsAccount`             | If savings Account Exist add balance   |                                                             | 
+|            | `addBalanceToSavingsAccount`             | If savings Account Does Not Exist      | Savings account does not exist                              | 
+|            | `addBalanceToCurrentAccount`             | If current Account Exist add balance   |                                                             | 
+|            | `addBalanceToCurrentAccount`             | If current Account Does Not Exist      | Current account does not exist                              |
+|            | `withDrawFromSavingsAccount`             | If savings Account Exist withdraw      |                                                             | 
+|            | `withDrawFromSavingsAccount`             | If savings Account Does Not Exist      | Savings account does not exist                              | 
+|            | `withDrawFromCurrentAccount`             | If current Account Exist withdraw      |                                                             | 
+|            | `withDrawFromCurrentAccount`             | If current Account Does Not Exist      | Current account does not exist                              |
+
+
 
 
 ~~~

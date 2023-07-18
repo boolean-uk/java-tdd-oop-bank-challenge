@@ -38,18 +38,29 @@ public class AccountTest {
     }
 
     @Test
-    public void testDepositFunds(){
+    public void testDepositFunds_afterPassing30ToMethod_ShouldReturnEquals(){
        SavingAccount savingAccount = customer.createSavingAccount();
        savingAccount.depositFunds(30.0);
        Assertions.assertEquals(30.0, savingAccount.getBalance());
     }
 
     @Test
-    public void testDepositFunds(){
+    public void testDepositFunds_afterCallingMethodTwiceWithDifferentAmount_ShouldReturnEquals(){
         CurrentAccount currentAccount = customer.createCurrentAccount();
         currentAccount.depositFunds(45.78);
         currentAccount.depositFunds(45.00);
         Assertions.assertEquals(90.78, currentAccount.getBalance());
+    }
+    @Test
+    public void testDepositFunds_newCreatedAccount_ShouldReturnNotEqual(){
+        CurrentAccount currentAccount = customer.createCurrentAccount();
+        Assertions.assertNotEquals(9.0, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testDepositFunds_addingNegativeNum_ShouldThrowException(){
+        CurrentAccount currentAccount = customer.createCurrentAccount();
+        Assertions.assertThrows(RuntimeException.class, () -> currentAccount.depositFunds(- 10.0));
     }
 
 }

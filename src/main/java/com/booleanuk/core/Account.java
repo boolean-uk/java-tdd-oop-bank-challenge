@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.OVERDRAFT_STATE;
 import com.booleanuk.core.enums.TRANSACTION_TYPE;
 
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public abstract class Account {
     private final List<Transaction> transactions = new ArrayList<>();
     private final String accountNumber;
     private Branch branch;
+    private OverdraftRequest request;
 
     Account(BigDecimal amount, Customer customer) {
         this.customer = customer;
@@ -51,10 +53,17 @@ public abstract class Account {
     }
 
     public void withdraw(BigDecimal amount) {
-        if(this.getBalance().compareTo(amount) < 0) {
-            throw new IllegalStateException(
-                    String.format("Insufficient funds %s, cannot withdraw %s ", this.getBalance(), amount));
 
+        if(this.getBalance().compareTo(amount) < 0) {
+            if(this.request.getRequestState() != OVERDRAFT_STATE.APPROVED) {
+                throw new IllegalStateException(
+                        String.format("Insufficient funds %s, cannot withdraw %s ", this.getBalance(), amount));
+            } else if (this.request.getRequestState() == OVERDRAFT_STATE.APPROVED && this.request.getAmount().compareTo(amount) == -1 ) {
+                throw new IllegalStateException(
+                        String.format("Overdraft amount %s is lower than requested amount %s ", this.request.getAmount(), amount));
+            } else {
+                createTransaction(amount, TRANSACTION_TYPE.DEBIT);
+            }
         } else {
             createTransaction(amount, TRANSACTION_TYPE.DEBIT);
         }
@@ -88,6 +97,18 @@ public abstract class Account {
             balance = prevBalance.subtract(transaction.getAmount());
         }
         return balance;
+    }
+
+    public void requestOverdraft(BigDecimal amount){
+        this.request = new OverdraftRequest(this, amount);
+    }
+
+    public OverdraftRequest getRequest(){
+        return this.request;
+    }
+
+    public OVERDRAFT_STATE getOverdraftStatus() {
+        return this.request.getRequestState();
     }
 
     public void printBankStatement() {

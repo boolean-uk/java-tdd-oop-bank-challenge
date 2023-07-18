@@ -35,14 +35,4 @@ public class Customer {
     }
 
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "ID='" + ID + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", accounts=" + accounts +
-                '}';
-    }
 }

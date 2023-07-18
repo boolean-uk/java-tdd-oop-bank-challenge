@@ -70,8 +70,8 @@ I want statements to be sent as messages to my phone.
 |                | BigDecimal calculateAccountBalance(Account account)  | `ArrayList<Transaction> statements `    | It Will return account balance depends on transactions |
 |                | boolean linkToBranch(Account account, Branch branch) |                                         | It will add account to selected branch                 |
 |                | void addRequestToOverdraft(BigDecimal overdraft)     | `ArrayList<Request> overdraftRequests ` | it will add new overdraft request                      |
-|                | void  approveOverdraft(Account Account)              | `ArrayList<Request> overdraftRequests ` | it will accept overdraft request                       |
-|                | void  rejectOverdraft(Account Account)               | `ArrayList<Request> overdraftRequests ` | it will reject overdraft request                       |
+|                | void  approveOverdraft(Overdraft overdraft)          | `ArrayList<Request> overdraftRequests ` | it will accept overdraft request                       |
+|                | void  rejectOverdraft(Overdraft overdraft)           | `ArrayList<Request> overdraftRequests ` | it will reject overdraft request                       |
 
 
 

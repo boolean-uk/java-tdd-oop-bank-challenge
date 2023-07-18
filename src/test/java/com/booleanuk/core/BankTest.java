@@ -183,5 +183,20 @@ public class BankTest {
 
     }
 
+    @Test
+    public void shouldRejectOverdraft(){
+        //given
+        BigDecimal overdraft = BigDecimal.valueOf(1000);
+        Account account1 = accountManager.createAccount(client);
+        Overdraft overdraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+        //when
+        accountManager.rejectOverdraft(overdraft1);
+
+        //then
+        assertNotEquals(overdraft1.getOverdraft(), account1.getOverdraft());
+        assertFalse(AccountManager.getOverDrafts().contains(overdraft1));
+
+    }
+
 
 }

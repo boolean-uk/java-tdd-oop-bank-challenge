@@ -31,6 +31,7 @@ public class BankAccountTest {
         Assertions.assertEquals(BigDecimal.ZERO, result.getBalanceBefore());
         Assertions.assertEquals(transactionAmount, result.getBalanceAfter());
         Assertions.assertEquals(TransactionType.DEPOSIT, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getCurrentAccount().getTransaction().size());
     }
 
     @Test
@@ -50,6 +51,6 @@ public class BankAccountTest {
         Assertions.assertEquals(BigDecimal.ZERO, result.getBalanceBefore());
         Assertions.assertEquals(transactionAmount, result.getBalanceAfter());
         Assertions.assertEquals(TransactionType.DEPOSIT, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getSavingAccount().getTransaction().size());
     }
-
 }

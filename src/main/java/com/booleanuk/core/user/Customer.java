@@ -5,13 +5,10 @@ import com.booleanuk.core.banking.BankAccountNotOpened;
 import com.booleanuk.core.banking.BankTransaction;
 import com.booleanuk.core.banking.CurrentAccount;
 import com.booleanuk.core.banking.SavingAccount;
-import com.booleanuk.core.banking.TransactionResult;
-import com.booleanuk.core.banking.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -52,22 +49,7 @@ public class Customer extends User implements CustomerOperations {
             throw new BankAccountNotOpened("Current Account not opened");
         }
 
-        BigDecimal newCurrentBalance = currentAccount.getBalance().add(deposit);
-
-        BankTransaction transaction =
-                BankTransaction.builder()
-                        .createdAt(Instant.now())
-                        .transactionType(TransactionType.DEPOSIT)
-                        .balanceBefore(currentAccount.getBalance())
-                        .amount(deposit)
-                        .balanceAfter(newCurrentBalance)
-                        .transactionResult(TransactionResult.SUCCESSFUL)
-                        .build();
-
-        currentAccount.setBalance(newCurrentBalance);
-        currentAccount.getTransaction().add(transaction);
-
-        return transaction;
+        return currentAccount.deposit(deposit);
     }
 
     @Override
@@ -76,21 +58,6 @@ public class Customer extends User implements CustomerOperations {
             throw new BankAccountNotOpened("Saving Account not opened");
         }
 
-        BigDecimal newSavingBalance = savingAccount.getBalance().add(deposit);
-
-        BankTransaction transaction =
-                BankTransaction.builder()
-                        .createdAt(Instant.now())
-                        .transactionType(TransactionType.DEPOSIT)
-                        .balanceBefore(savingAccount.getBalance())
-                        .amount(deposit)
-                        .balanceAfter(newSavingBalance)
-                        .transactionResult(TransactionResult.SUCCESSFUL)
-                        .build();
-
-        savingAccount.setBalance(newSavingBalance);
-        savingAccount.getTransaction().add(transaction);
-
-        return transaction;
+        return savingAccount.deposit(deposit);
     }
 }

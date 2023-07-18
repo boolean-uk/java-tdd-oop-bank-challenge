@@ -11,6 +11,16 @@ public class User {
     private String name;
     private List<Account> accounts;
 
+    private boolean isManager;
+
+    public boolean isManager() {
+        return isManager;
+    }
+
+    public void setManager(boolean manager) {
+        isManager = manager;
+    }
+
     public User(String name) {
         this.name = name;
         accounts = new ArrayList<>();
@@ -45,7 +55,7 @@ public class User {
         return request;
     }
 
-    private boolean approveRequest(Request request) {
+    public boolean approveRequest(Request request) {
         //Automatically approves all request but logic can be added to set isApproved
         boolean isApproved = true;
         if(isApproved) request.account().getTransactions().add(new Transaction(WITHDRAW, request.amount()));

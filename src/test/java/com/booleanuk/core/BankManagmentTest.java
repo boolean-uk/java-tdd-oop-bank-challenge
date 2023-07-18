@@ -22,6 +22,7 @@ public class BankManagmentTest {
         user = new User("Wojtek");
         secondUser = new User("Kuba");
         manager = new User("Milena");
+        manager.setManager(true);
         currentAccount = new CurrentAccount("PL8",user,manager);
     }
 
@@ -39,7 +40,7 @@ public class BankManagmentTest {
         assertEquals(2, currentAccount.getTransactions().size());
         assertEquals(1000, currentAccount.getTransactions().get(1).getAmount());
 
-        Assertions.assertThrows(IllegalArgumentException.class,()-> currentAccount.withdraw(1000));
+        assertThrows(IllegalArgumentException.class,()-> currentAccount.withdraw(1000));
     }
 
     @Test
@@ -83,5 +84,12 @@ public class BankManagmentTest {
 
         Request request = new Request(2000,currentAccount);
         assertEquals(request,user.sendRequest(2000,currentAccount.getAccountNumber()));
+    }
+
+    @Test
+    public void shouldApproveRequest(){
+        Request request = new Request(2000,currentAccount);
+        user.sendRequest(2000,currentAccount.getAccountNumber());
+        assertTrue(manager.approveRequest(request));
     }
 }

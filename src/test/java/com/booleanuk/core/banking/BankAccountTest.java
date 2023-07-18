@@ -1,6 +1,7 @@
 package com.booleanuk.core.banking;
 
 import com.booleanuk.core.exception.BankAccountNotOpenedException;
+import com.booleanuk.core.exception.NegativeNumberException;
 import com.booleanuk.core.user.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,22 @@ public class BankAccountTest {
     public void shouldThrowBankAccountNotOpenedWhenTryingToDepositWithoutSavingAccount() {
         BankAccountNotOpenedException bankAccountNotOpenedException = Assertions.assertThrows(BankAccountNotOpenedException.class, () -> customer.depositSavingAccount(BigDecimal.valueOf(1000)));
         Assertions.assertEquals("Saving Account not opened", bankAccountNotOpenedException.getMessage());
+    }
+
+    @Test
+    public void shouldThrowNegativeNumberWhenTryingToDepositNegative() {
+        Customer customer = new Customer();
+        customer.openCurrentAccount();
+        NegativeNumberException negativeNumberException = Assertions.assertThrows(NegativeNumberException.class, () -> customer.depositCurrentAccount(BigDecimal.valueOf(-1000)));
+        Assertions.assertEquals("Your deposit cannot be negative", negativeNumberException.getMessage());
+    }
+
+    @Test
+    public void shouldThrowNegativeNumberWhenTryingToWithdrawNegative() {
+        Customer customer = new Customer();
+        customer.openCurrentAccount();
+        NegativeNumberException negativeNumberException = Assertions.assertThrows(NegativeNumberException.class, () -> customer.withdrawCurrentAccount(BigDecimal.valueOf(-1000)));
+        Assertions.assertEquals("Your withdraw cannot be negative", negativeNumberException.getMessage());
     }
 
     @Test

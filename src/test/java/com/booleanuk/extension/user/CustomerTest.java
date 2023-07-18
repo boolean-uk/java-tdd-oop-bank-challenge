@@ -41,7 +41,6 @@ public class CustomerTest {
 
         EmergencyFundExceededException emergencyFundExceededException = Assertions.assertThrows(EmergencyFundExceededException.class, () -> customer.withdrawCurrentAccount(BigDecimal.valueOf(1000)));
         Assertions.assertEquals("Your emergency fund exceeded", emergencyFundExceededException.getMessage());
-
     }
 
 }

@@ -35,5 +35,22 @@ public class BankTest {
         Assertions.assertEquals(new BigDecimal("1000.00"),curr.getBalance());
     }
 
+    @Test
+    public void withdrawMoreThanBalance(){
+        curr.deposit(new BigDecimal("1000.00"),"2023-07-18", "Deposit");
+        curr.withdraw(new BigDecimal("5000.00"),"2023-07-18", "Withdrawal");
+        Assertions.assertEquals(new BigDecimal("1000.00"),curr.getBalance());
+        save.deposit(new BigDecimal("1000.00"),"2023-07-18", "Deposit");
+        save.withdraw(new BigDecimal("5000.00"),"2023-07-18", "Withdrawal");
+        Assertions.assertEquals(new BigDecimal("1000.00"),save.getBalance());
+    }
+    @Test
+    public void testOverdrafting(){
+        curr.requestOverdraft(new BigDecimal("1000.00"));
+        bank.approveOverdraft(curr);
+        curr.withdraw(new BigDecimal("1000.00"),"2023-07-18", "Withdrawal");
+        Assertions.assertEquals(new BigDecimal("-1000.00"),curr.getBalance());
+
+    }
 
 }

@@ -1,15 +1,24 @@
 package com.booleanuk.core.banking;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 
+@Getter
 abstract class BankAccount implements BankOperations {
-    private UUID uuid;
-    private BigDecimal balance;
+    private final UUID uuid;
+    private final BigDecimal balance;
+    private final List<BankTransaction> transaction;
 
-    private List<BankTransaction> transaction;
+    public BankAccount() {
+        this.uuid = UUID.randomUUID();
+        this.balance = BigDecimal.ZERO;
+        this.transaction = new ArrayList<>(0);
+    }
 
     @Override
     public Boolean deposit(BigDecimal deposit) {

@@ -25,36 +25,39 @@ base model:
 
 extension model:
 
-| Classes                 | Methods                        | Fields                         | Scenario                                                                                        |
-|-------------------------|--------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------|
+| Classes                 | Methods                        | Fields                         | Scenario                                                                                                                |
+|-------------------------|--------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------|
 | Account                 |                                | List<Transaction> transactions |
-|                         |                                | Branch branch                  |                                                                                                 |
-|                         |                                |                                |                                                                                                 |
-|                         |                                |                                |                                                                                                 |
-|                         | void deposit(double amount)    |                                | if amount is a positive number add new transaction to transaction list                          |
-|                         |                                |                                | otherwise throw exception                                                                       |
-|                         |                                |                                |                                                                                                 |
-|                         | void withdraw(double amount)   |                                | if amount is a positive number add new transaction to transaction list                          | 
-|                         |                                |                                | otherwise throw exception                                                                       | 
-|                         |                                |                                |                                                                                                 | 
-|                         | String generateStatement()     |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction | 
-|                         | void sendStatement()           |                                | send bank statement via sms                                                                     | 
-|                         |                                |                                |                                                                                                 | 
-|                         | double getBalance()            |                                | returns balance based on transactions                                                           |
-|                         |                                |                                |                                                                                                 | 
-| CurrentAccount: Account |                                |                                |                                                                                                 | 
-|                         |                                | boolean overdraftAllowed       |                                                                                                 | 
-|                         |                                | boolean overdraftRequested     |                                                                                                 | 
-|                         |                                |                                |                                                                                                 | 
-|                         | void requestOverdraft()        |                                | set overdraftRequested to true                                                                  | 
-|                         | void approveOverdraftRequest() |                                | set overdraftAllowed to true, overdraftRequested to false                                       | 
-|                         | void rejectOverdraftRequest()  |                                | set overdraftAllowed to false, overdraftRequested to false                                      | 
-|                         |                                |                                |                                                                                                 | 
-| SavingsAccount: Account |                                |                                |                                                                                                 | 
-|                         |                                |                                |                                                                                                 | 
-| Branch                  |                                | String name                    |                                                                                                 | 
-|                         |                                | String address                 |                                                                                                 | 
-|                         |                                |                                |                                                                                                 | 
-| Transaction             |                                | LocalTimeDate date             |                                                                                                 | 
-|                         |                                | long amount                    |                                                                                                 | 
-|                         |                                |                                |                                                                                                 |
+|                         |                                | Branch branch                  |                                                                                                                         |
+|                         |                                |                                |                                                                                                                         |
+|                         |                                |                                |                                                                                                                         |
+|                         | void deposit(double amount)    |                                | if amount is a positive number add new transaction to transaction list                                                  |
+|                         |                                |                                | otherwise throw exception                                                                                               |
+|                         |                                |                                |                                                                                                                         |
+|                         | void withdraw(double amount)   |                                | if amount is a positive number and is not more than balance add new transaction to transaction list                     | 
+|                         |                                |                                | otherwise throw exception                                                                                               | 
+|                         |                                |                                |                                                                                                                         | 
+|                         | String generateStatement()     |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction                         | 
+|                         | void sendStatement()           |                                | send bank statement via sms                                                                                             | 
+|                         |                                |                                |                                                                                                                         | 
+|                         | double getBalance()            |                                | returns balance based on transactions                                                                                   |
+|                         |                                |                                |                                                                                                                         | 
+| CurrentAccount: Account |                                |                                |                                                                                                                         | 
+|                         |                                | boolean overdraftAllowed       |                                                                                                                         | 
+|                         |                                | boolean overdraftRequested     |                                                                                                                         | 
+|                         |                                |                                |                                                                                                                         | 
+|                         | void withdraw(double amount)   |                                | if amount is a positive number and is not more than balance + allowed overdraft add new transaction to transaction list | 
+|                         |                                |                                | otherwise throw exception                                                                                               | 
+|                         |                                |                                |                                                                                                                         | 
+|                         | void requestOverdraft()        |                                | set overdraftRequested to true                                                                                          | 
+|                         | void approveOverdraftRequest() |                                | set overdraftAllowed to true, overdraftRequested to false                                                               | 
+|                         | void rejectOverdraftRequest()  |                                | set overdraftAllowed to false, overdraftRequested to false                                                              | 
+|                         |                                |                                |                                                                                                                         | 
+| SavingsAccount: Account |                                |                                |                                                                                                                         | 
+|                         |                                |                                |                                                                                                                         | 
+| Branch                  |                                | String name                    |                                                                                                                         | 
+|                         |                                | String address                 |                                                                                                                         | 
+|                         |                                |                                |                                                                                                                         | 
+| Transaction             |                                | LocalTimeDate date             |                                                                                                                         | 
+|                         |                                | long amount                    |                                                                                                                         | 
+|                         |                                |                                |                                                                                                                         |

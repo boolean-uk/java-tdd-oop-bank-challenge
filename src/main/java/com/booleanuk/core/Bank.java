@@ -3,8 +3,8 @@ package com.booleanuk.core;
 import java.util.HashMap;
 
 public class Bank {
-    private HashMap<Integer, SavingsAccount> savingsAccounts;
-    private HashMap<Integer, CurrentAccount> currentAccounts;
+    private final HashMap<Integer, SavingsAccount> savingsAccounts;
+    private final HashMap<Integer, CurrentAccount> currentAccounts;
     private int accountsCounter;
 
     public Bank() {
@@ -14,11 +14,13 @@ public class Bank {
     }
 
     public int openCurrentAccount(String ownerName){
-        return 0;
+        currentAccounts.put(accountsCounter++,new CurrentAccount(ownerName));
+        return accountsCounter;
     }
 
     public int openSavingsAccount(String ownerName){
-        return 0;
+        savingsAccounts.put(accountsCounter++,new SavingsAccount(ownerName));
+        return accountsCounter;
     }
 
     public HashMap<Integer, SavingsAccount> getSavingsAccounts() {

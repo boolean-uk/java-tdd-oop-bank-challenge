@@ -3,9 +3,9 @@ package com.booleanuk.core;
 import java.time.LocalDate;
 
 public class Transaction {
-    private LocalDate transactionDate;
-    private int amount;
-    private String type;
+    private final LocalDate transactionDate;
+    private final int amount;
+    private final String type;
 
     public Transaction(LocalDate transactionDate, int amount, String type) {
         this.transactionDate = transactionDate;

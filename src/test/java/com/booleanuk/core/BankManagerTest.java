@@ -63,4 +63,17 @@ public class BankManagerTest {
         Assertions.assertTrue(result);
         Assertions.assertEquals(800.00, account.getBalance());
     }
+
+    @Test
+    public void shouldPrintStatement() {
+        // Arrange
+        Account account;
+        // Act;
+        account = bankManager.createAccount(AccountType.CURRENT);
+        account.withdraw(500);
+        account.withdraw(100);
+        account.deposit(1000);
+        // Assert (should be done manually by inspecting console result)
+        account.printStatement();
+    }
 }

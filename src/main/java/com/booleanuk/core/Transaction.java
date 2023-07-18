@@ -3,15 +3,29 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static java.math.BigDecimal.*;
+
 public class Transaction {
 
     private LocalDateTime createdAt;
-    private BigDecimal value;
+    private BigDecimal debit;
+
+    private BigDecimal credit;
+
+    private BigDecimal currentBalance;
 
 
-    public Transaction( BigDecimal value) {
+
+    public Transaction( BigDecimal value, BigDecimal currentBalance) {
         createdAt = LocalDateTime.now();
-        this.value = value;
+        if(value.doubleValue() > ZERO.doubleValue()){
+            credit = value;
+            debit = ZERO;
+        } else if (value.doubleValue() < ZERO.doubleValue()) {
+            debit = value;
+            credit=ZERO;
+        }
+        this.currentBalance = currentBalance;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -22,12 +36,23 @@ public class Transaction {
         this.createdAt = createdAt;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getDebit() {
+        return debit;
     }
 
-    public void setValue(BigDecimal value) {
-        this.value = value;
+    public void setDebit(BigDecimal debit) {
+        this.debit = debit;
     }
 
+    public BigDecimal getCredit() {
+        return credit;
+    }
+
+    public void setCredit(BigDecimal credit) {
+        this.credit = credit;
+    }
+
+    public BigDecimal getCurrentBalance(){
+        return currentBalance;
+    }
 }

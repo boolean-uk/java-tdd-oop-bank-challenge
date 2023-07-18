@@ -127,9 +127,30 @@ public class BankTest {
         accountManager.addDeposit(account1, deposit);
         accountManager.addDeposit(account1, deposit);
         accountManager.addDeposit(account1, deposit);
+        accountManager.withdraw(account1,withdraw);
+        String howShouldLook =
+                "\ndate       || credit  || debit  || balance\n" +
+                "2023/JULY/18 || 11000 || 0 || 11000\n" +
+                "2023/JULY/18 || 11000 || 0 || 22000\n" +
+                "2023/JULY/18 || 11000 || 0 || 33000\n" +
+                "2023/JULY/18 || 0 || -1000 || 32000\n";
         //when
         String bankStatement = accountManager.generateBankStatement(account1);
+
         //then
-        assertEquals("",bankStatement);
+        assertEquals(howShouldLook,bankStatement);
+    }
+
+
+    @Test
+    public void shouldLinkAccountToBranch(){
+        //given
+        Account account1 = accountManager.createAccount(client);
+        Branch branch = new Branch("1234","Warsaw");
+        //when
+        accountManager.addAccountToBranch(account,branch);
+
+        //then
+        assertEquals(branch,account1.getBranch());
     }
 }

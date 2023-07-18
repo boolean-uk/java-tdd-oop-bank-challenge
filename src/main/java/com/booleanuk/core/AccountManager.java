@@ -31,7 +31,9 @@ public class AccountManager {
 
     public void addDeposit(Account account, BigDecimal deposit) {
         if(deposit.doubleValue() > 0) {
-            account.getStatements().add(new Transaction(deposit));
+            BigDecimal currentBalance = account.getBalance();
+            currentBalance = currentBalance.add(deposit);
+            account.getStatements().add(new Transaction(deposit,currentBalance));
         }else{
             System.out.println("You can not deposit money below zero!");
         }
@@ -43,11 +45,38 @@ public class AccountManager {
     }
 
     public void withdraw(Account account, BigDecimal withdraw) {
+
+
         if(withdraw.doubleValue() < 0){
             System.out.println("You can't withdraw money below zero!");
         }else{
             withdraw = withdraw.multiply(BigDecimal.valueOf(-1));
-            account.getStatements().add(new Transaction(withdraw));
+            BigDecimal currentBalance = account.getBalance();
+            currentBalance = currentBalance.add(withdraw);
+
+            account.getStatements().add(new Transaction(withdraw,currentBalance));
         }
     }
+
+    public String generateBankStatement(Account account) {
+        StringBuilder bankStatement = new StringBuilder("\ndate       || credit  || debit  || balance\n");
+        account.getStatements().forEach(transaction -> {
+            bankStatement.append(transaction.getCreatedAt().getYear())
+                    .append("/")
+                    .append(transaction.getCreatedAt().getMonth())
+                    .append("/")
+                    .append(transaction.getCreatedAt().getDayOfMonth())
+                    .append(" || ")
+                    .append(transaction.getCredit())
+                    .append(" || ")
+                    .append(transaction.getDebit())
+                    .append(" || ")
+                    .append(transaction.getCurrentBalance())
+                    .append("\n");
+        });
+
+        return bankStatement.toString();
+    }
+
+
 }

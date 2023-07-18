@@ -10,6 +10,7 @@ public class Account {
 
     private Client client;
     private String accountNumber;
+    private BigDecimal debit;
 
 
     private ArrayList<Transaction> statements;
@@ -20,21 +21,20 @@ public class Account {
         this.client = client;
         accountNumber = ((int)(Math.random()*999999) +100000)+"";
         statements = new ArrayList<>();
+        debit = BigDecimal.ZERO;
     }
     public Account(Client client, String accountNumber) {
         this.client = client;
         this.accountNumber = accountNumber;
         statements = new ArrayList<>();
+        debit = BigDecimal.ZERO;
     }
 
 
     public BigDecimal getBalance() {
-        BigDecimal balance = statements.stream()
-                .map(Transaction::getValue)
+        return getStatements().stream()
+                .map(transaction -> transaction.getCredit().equals(BigDecimal.ZERO) ? transaction.getDebit() : transaction.getCredit())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-
-        return balance;
     }
 
 
@@ -60,5 +60,13 @@ public class Account {
 
     public void setStatements(ArrayList<Transaction> statements) {
         this.statements = statements;
+    }
+
+    public BigDecimal getDebit() {
+        return debit;
+    }
+
+    public void setDebit(BigDecimal debit) {
+        this.debit = debit;
     }
 }

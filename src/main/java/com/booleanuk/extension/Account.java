@@ -18,27 +18,21 @@ public abstract class Account {
     private final UUID id;
     private final Customer holder;
     private final List<Transaction> transactions;
-    private BigDecimal balance;
 
     public Account(Customer holder) {
         this.id = UUID.randomUUID();
         this.holder = holder;
-        balance = BigDecimal.ZERO;
         transactions = new ArrayList<>();
     }
 
-    protected BigDecimal deposit(BigDecimal funds) {
-        Transaction transaction = new Transaction(LocalDateTime.now(), funds, null, balance.add(funds));
+    protected void deposit(BigDecimal funds) {
+        Transaction transaction = new Transaction(LocalDateTime.now(), funds, null);
         transactions.add(transaction);
-        balance = transaction.balance();
-        return balance;
     }
 
-    protected BigDecimal withdraw(BigDecimal funds) {
-        Transaction transaction = new Transaction(LocalDateTime.now(), null, funds, balance.subtract(funds));
+    protected void withdraw(BigDecimal funds) {
+        Transaction transaction = new Transaction(LocalDateTime.now(), null, funds);
         transactions.add(transaction);
-        balance = transaction.balance();
-        return balance;
     }
 
 
@@ -48,19 +42,28 @@ public abstract class Account {
         }
 
         StringBuilder statement = new StringBuilder(HEADER_ROW);
-        transactions.stream()
-                .sorted(Comparator.comparing(Transaction::date).reversed())
-                .forEach(transaction -> {
-                    statement.append(
-                            String.format(ROW_FORMAT,
-                                    transaction.date().format(DATE_FORMATTER),
-                                    transaction.credit() == null ? "" : AMOUNT_FORMATTER.format(transaction.credit()),
-                                    transaction.debit() == null ? "" : AMOUNT_FORMATTER.format(transaction.debit()),
-                                    AMOUNT_FORMATTER.format(transaction.balance())
-                            )
-                    );
-                });
+        BigDecimal balance = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            balance = transaction.credit() != null ? balance.add(transaction.credit()) : balance.subtract(transaction.debit());
+            statement.append(
+                    String.format(ROW_FORMAT,
+                            transaction.date().format(DATE_FORMATTER),
+                            transaction.credit() == null ? "" : AMOUNT_FORMATTER.format(transaction.credit()),
+                            transaction.debit() == null ? "" : AMOUNT_FORMATTER.format(transaction.debit()),
+                            AMOUNT_FORMATTER.format(balance)
+                    )
+            );
+        }
+
         return statement.toString();
+    }
+
+    private BigDecimal calculateBalance() {
+        BigDecimal balance = BigDecimal.ZERO;
+        for (Transaction transaction : transactions) {
+            balance = transaction.credit() == null ? balance.subtract(transaction.debit()) : balance.add(transaction.credit());
+        }
+        return balance;
     }
 
     public UUID getId() {
@@ -68,7 +71,7 @@ public abstract class Account {
     }
 
     public BigDecimal getBalance() {
-        return balance;
+        return calculateBalance();
     }
 
     public List<Transaction> getTransactions() {

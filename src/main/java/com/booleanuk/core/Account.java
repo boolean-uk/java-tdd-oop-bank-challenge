@@ -38,6 +38,7 @@ public class Account {
         if (amount > 0) {
             transactionHistory.add(amount);
             transactionDate.add(LocalDateTime.now());
+            System.out.println("Successfully deposited " + amount + "$.");
             return true;
         }
         System.out.println("You can't deposit a negative balance!");

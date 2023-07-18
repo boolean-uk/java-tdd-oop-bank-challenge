@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.accounts.SavingsAccount;
 import com.booleanuk.core.accounts.StandardAccount;
 import com.booleanuk.core.users.Bank;
 import com.booleanuk.core.users.BankManager;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class UserTest {
     private Customer customer;
@@ -103,5 +105,17 @@ public class UserTest {
         Assertions.assertTrue(statements.contains("12/12/2000   ||            || -50.00     || 1050.00"));
         Assertions.assertTrue(statements.contains("12/12/2000   || 22.00      ||            || 22.00"));
     }
+
+    @Test
+    public void earnInterest(){
+        customer.createSavingsAccount(12.0);
+        customer.deposit(2000, 1);
+        customer.deposit(1000, 1);
+        ((SavingsAccount) customer.getAccounts().get(0)).earnInterest();
+        Assertions.assertEquals(customer.getAccounts().get(0).getTransactionHistory().size(), 3);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        Assertions.assertEquals(3030, customer.getAccounts().get(0).calculateBalance(LocalDateTime.parse("2024-12-12"+ "T00:00:00", formatter)) );
+    }
+
 
 }

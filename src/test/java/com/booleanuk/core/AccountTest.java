@@ -99,8 +99,6 @@ public class AccountTest {
         customer.getAccounts().get(0).addTransaction(new Transaction(200.00));
         customer.getAccounts().get(0).addTransaction(new Transaction(-50.00));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-
         Assertions.assertEquals(customer.getAccounts().get(0).calculateBalance(LocalDateTime.parse("2024-12-12"+ "T00:00:00", formatter)), 250.00);
     }
 

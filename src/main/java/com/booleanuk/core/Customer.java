@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Customer {
@@ -11,8 +12,8 @@ public class Customer {
     private static int nextId = 0;
     private String phoneNumber;
     private String email;
-    private String firstName;
-    private String lastName;
+    private final String firstName;
+    private final String lastName;
 
     public Customer(String phoneNumber, String email, String firstName, String lastName) {
         this.id = nextId++;
@@ -30,4 +31,36 @@ public class Customer {
     public void deposit(String accountNumber, double amount) throws IllegalArgumentException {} // TODO
 
     public void withdraw(String accountNumber, double amount) throws IllegalArgumentException {} // TODO
+
+    public List<BankAccount> getAccounts() {
+        return accounts;
+    }
+
+    public List<BankStatement> getStatements() {
+        return statements;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public static int getNextId() {
+        return nextId;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 }

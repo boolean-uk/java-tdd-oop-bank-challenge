@@ -13,7 +13,7 @@ public class CurrentAccount extends BankAccount {
     private BigDecimal emergencyFund = BigDecimal.ZERO;
 
     @Override
-    public BankTransaction withdraw(BigDecimal withdrawAmount) {
+    public TransactionDetails withdraw(BigDecimal withdrawAmount) {
         BigDecimal newBalance = getBalance().subtract(withdrawAmount);
         if (isEmergencyFundActive() && willEmergencyFundBeExceeded(newBalance)) {
             throw new EmergencyFundExceededException("Your emergency fund exceeded");

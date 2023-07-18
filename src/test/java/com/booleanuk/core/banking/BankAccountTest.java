@@ -22,7 +22,7 @@ public class BankAccountTest {
     public void shouldSuccessfullyDepositCurrentAccount() {
         customer.openCurrentAccount();
         BigDecimal depositAmount = BigDecimal.valueOf(1000);
-        BankTransaction result = customer.depositCurrentAccount(depositAmount);
+        TransactionDetails result = customer.depositCurrentAccount(depositAmount);
 
         Assertions.assertEquals(depositAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
@@ -58,7 +58,7 @@ public class BankAccountTest {
     public void shouldSuccessfullyDeposit() {
         customer.openSavingAccount();
         BigDecimal depositAmount = BigDecimal.valueOf(2000);
-        BankTransaction result = customer.depositSavingAccount(depositAmount);
+        TransactionDetails result = customer.depositSavingAccount(depositAmount);
 
         Assertions.assertEquals(depositAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
@@ -76,7 +76,7 @@ public class BankAccountTest {
         customer.openCurrentAccount();
         customer.getCurrentAccount().setBalance(balanceBefore);
 
-        BankTransaction result = customer.withdrawCurrentAccount(withdrawAmount);
+        TransactionDetails result = customer.withdrawCurrentAccount(withdrawAmount);
 
         Assertions.assertEquals(withdrawAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
@@ -93,7 +93,7 @@ public class BankAccountTest {
         customer.openCurrentAccount();
         customer.getCurrentAccount().setBalance(balanceBefore);
 
-        BankTransaction result = customer.withdrawCurrentAccount(withdrawAmount);
+        TransactionDetails result = customer.withdrawCurrentAccount(withdrawAmount);
 
         Assertions.assertEquals(withdrawAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.REFUSED_INSUFFICIENT_FUNDS, result.getTransactionResult());
@@ -111,7 +111,7 @@ public class BankAccountTest {
         customer.openSavingAccount();
         customer.getSavingAccount().setBalance(balanceBefore);
 
-        BankTransaction result = customer.withdrawSavingAccount(withdrawAmount);
+        TransactionDetails result = customer.withdrawSavingAccount(withdrawAmount);
 
         Assertions.assertEquals(withdrawAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
@@ -128,7 +128,7 @@ public class BankAccountTest {
         customer.openSavingAccount();
         customer.getSavingAccount().setBalance(balanceBefore);
 
-        BankTransaction result = customer.withdrawSavingAccount(withdrawAmount);
+        TransactionDetails result = customer.withdrawSavingAccount(withdrawAmount);
 
         Assertions.assertEquals(withdrawAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.REFUSED_INSUFFICIENT_FUNDS, result.getTransactionResult());

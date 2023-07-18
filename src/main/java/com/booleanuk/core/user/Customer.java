@@ -1,6 +1,6 @@
 package com.booleanuk.core.user;
 
-import com.booleanuk.core.banking.BankTransaction;
+import com.booleanuk.core.banking.TransactionDetails;
 import com.booleanuk.core.banking.CurrentAccount;
 import com.booleanuk.core.banking.SavingAccount;
 import com.booleanuk.core.exception.BankAccountAlreadyExistsException;
@@ -50,7 +50,7 @@ public class Customer extends User implements CustomerOperations {
     }
 
     @Override
-    public BankTransaction depositCurrentAccount(BigDecimal depositAmount) {
+    public TransactionDetails depositCurrentAccount(BigDecimal depositAmount) {
         if (Objects.isNull(currentAccount)) {
             throw new BankAccountNotOpenedException("Current Account not opened");
         }
@@ -59,7 +59,7 @@ public class Customer extends User implements CustomerOperations {
     }
 
     @Override
-    public BankTransaction depositSavingAccount(BigDecimal depositAmount) {
+    public TransactionDetails depositSavingAccount(BigDecimal depositAmount) {
         if (Objects.isNull(savingAccount)) {
             throw new BankAccountNotOpenedException("Saving Account not opened");
         }
@@ -68,7 +68,7 @@ public class Customer extends User implements CustomerOperations {
     }
 
     @Override
-    public BankTransaction withdrawCurrentAccount(BigDecimal withdrawAmount) {
+    public TransactionDetails withdrawCurrentAccount(BigDecimal withdrawAmount) {
         if (Objects.isNull(currentAccount)) {
             throw new BankAccountNotOpenedException("Current Account not opened");
         }
@@ -77,7 +77,7 @@ public class Customer extends User implements CustomerOperations {
     }
 
     @Override
-    public BankTransaction withdrawSavingAccount(BigDecimal withdrawAmount) {
+    public TransactionDetails withdrawSavingAccount(BigDecimal withdrawAmount) {
         if (Objects.isNull(savingAccount)) {
             throw new BankAccountNotOpenedException("Saving Account not opened");
         }

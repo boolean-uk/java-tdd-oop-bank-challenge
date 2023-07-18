@@ -1,6 +1,6 @@
 package com.booleanuk.core.statement;
 
-import com.booleanuk.core.banking.BankTransaction;
+import com.booleanuk.core.banking.TransactionDetails;
 import lombok.Getter;
 
 import java.time.ZoneId;
@@ -34,13 +34,13 @@ public class BankStatementGenerator {
         result.append(LINE_BREAK);
     }
 
-    public String generateStatement(List<BankTransaction> transactions) {
-        transactions.sort(Comparator.comparing(BankTransaction::getCreatedAt).reversed());
+    public String generateStatement(List<TransactionDetails> transactions) {
+        transactions.sort(Comparator.comparing(TransactionDetails::getCreatedAt).reversed());
 
         StringBuilder result = new StringBuilder();
         setHeaders(result);
 
-        for (BankTransaction transaction : transactions) {
+        for (TransactionDetails transaction : transactions) {
             result.append(String.format("%10s", formatter.format(transaction.getCreatedAt())));
             result.append(String.format("%15s", transaction.getTransactionType()));
             result.append(String.format("%30s", transaction.getTransactionResult()));

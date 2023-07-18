@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Builder
 @Value
-public class BankTransaction {
+public class TransactionDetails {
     TransactionType transactionType;
     TransactionResult transactionResult;
     BigDecimal balanceBefore;

@@ -3,9 +3,9 @@ package com.booleanuk.core.banking;
 import java.math.BigDecimal;
 
 interface BankOperations {
-    BankTransaction deposit(BigDecimal deposit);
+    TransactionDetails deposit(BigDecimal deposit);
 
-    BankTransaction withdraw(BigDecimal withdraw);
+    TransactionDetails withdraw(BigDecimal withdraw);
 
     String generateBankStatements();
 

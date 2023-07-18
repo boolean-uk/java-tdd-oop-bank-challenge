@@ -16,7 +16,7 @@ import java.util.UUID;
 abstract class BankAccount implements BankOperations {
     private final UUID uuid;
     private BigDecimal balance;
-    private List<BankTransaction> transactions;
+    private List<TransactionDetails> transactions;
 
     public BankAccount() {
         this.uuid = UUID.randomUUID();
@@ -25,7 +25,7 @@ abstract class BankAccount implements BankOperations {
     }
 
     @Override
-    public BankTransaction deposit(BigDecimal depositAmount) {
+    public TransactionDetails deposit(BigDecimal depositAmount) {
 
         if (depositAmount.compareTo(BigDecimal.ZERO) < 0) {
             throw new NegativeNumberException("Your deposit cannot be negative");
@@ -35,8 +35,8 @@ abstract class BankAccount implements BankOperations {
         BigDecimal balanceBefore = getBalance();
         this.balance = newCurrentBalance;
 
-        BankTransaction transaction =
-                BankTransaction.builder()
+        TransactionDetails transaction =
+                TransactionDetails.builder()
                         .createdAt(Instant.now())
                         .transactionType(TransactionType.DEPOSIT)
                         .balanceBefore(balanceBefore)
@@ -51,7 +51,7 @@ abstract class BankAccount implements BankOperations {
     }
 
     @Override
-    public BankTransaction withdraw(BigDecimal withdrawAmount) {
+    public TransactionDetails withdraw(BigDecimal withdrawAmount) {
         if (withdrawAmount.compareTo(BigDecimal.ZERO) < 0) {
             throw new NegativeNumberException("Your withdraw cannot be negative");
         }
@@ -61,7 +61,7 @@ abstract class BankAccount implements BankOperations {
             BigDecimal balanceBefore = getBalance();
             this.balance = balanceBefore.subtract(withdrawAmount);
 
-            BankTransaction bankTransaction = BankTransaction.builder()
+            TransactionDetails transactionDetails = TransactionDetails.builder()
                     .transactionType(TransactionType.WITHDRAW)
                     .createdAt(Instant.now())
                     .balanceBefore(balanceBefore)
@@ -70,10 +70,10 @@ abstract class BankAccount implements BankOperations {
                     .transactionResult(TransactionResult.SUCCESSFUL)
                     .build();
 
-            transactions.add(bankTransaction);
-            return bankTransaction;
+            transactions.add(transactionDetails);
+            return transactionDetails;
         }
-        BankTransaction bankTransaction = BankTransaction.builder()
+        TransactionDetails transactionDetails = TransactionDetails.builder()
                 .transactionType(TransactionType.WITHDRAW)
                 .createdAt(Instant.now())
                 .balanceBefore(getBalance())
@@ -82,9 +82,9 @@ abstract class BankAccount implements BankOperations {
                 .transactionResult(TransactionResult.REFUSED_INSUFFICIENT_FUNDS)
                 .build();
 
-        transactions.add(bankTransaction);
+        transactions.add(transactionDetails);
 
-        return bankTransaction;
+        return transactionDetails;
 
 
     }

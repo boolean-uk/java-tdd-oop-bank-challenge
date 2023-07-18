@@ -1,6 +1,6 @@
 package com.booleanuk.core.user;
 
-import com.booleanuk.core.banking.BankTransaction;
+import com.booleanuk.core.banking.TransactionDetails;
 
 import java.math.BigDecimal;
 
@@ -9,13 +9,13 @@ interface CustomerOperations {
 
     Boolean openSavingAccount();
 
-    BankTransaction depositCurrentAccount(BigDecimal bigDecimal);
+    TransactionDetails depositCurrentAccount(BigDecimal depositAmount);
 
-    BankTransaction withdrawCurrentAccount(BigDecimal bigDecimal);
+    TransactionDetails withdrawCurrentAccount(BigDecimal bigDecimal);
 
-    BankTransaction depositSavingAccount(BigDecimal bigDecimal);
+    TransactionDetails depositSavingAccount(BigDecimal bigDecimal);
 
-    BankTransaction withdrawSavingAccount(BigDecimal bigDecimal);
+    TransactionDetails withdrawSavingAccount(BigDecimal bigDecimal);
 
     String generateCurrentAccountStatements();
 

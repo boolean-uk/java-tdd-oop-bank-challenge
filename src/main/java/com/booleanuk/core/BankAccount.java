@@ -9,8 +9,13 @@ public class BankAccount {
     }
 
     public boolean deposit(double amount) {
-
-        return true;
+        if(amount > 0) {
+            accountBalance += amount;
+            return true;
+        }else {
+            System.out.println("Amount must be a positive number");
+            return false;
+        }
     }
 
     public boolean withdraw(double amount) {

@@ -24,7 +24,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void depositeWith0OrNegativeAmountTest() {
+    public void depositWith0OrNegativeAmountTest() {
         account.deposit(100.11);
         Assertions.assertEquals(100.11, account.getBalance());
         Assertions.assertEquals(1, account.getTransactions().size());
@@ -33,5 +33,14 @@ public class CurrentAccountTest {
         account.deposit(-100.11);
         Assertions.assertEquals(100.11, account.getBalance());
         Assertions.assertEquals(1, account.getTransactions().size());
+    }
+
+    @Test
+    public void withdrawWithPositiveAmountTest() {
+        account.deposit(1000);
+
+        account.withdraw(100);
+        Assertions.assertEquals(900, account.getBalance());
+        Assertions.assertEquals(2, account.getTransactions().size());
     }
 }

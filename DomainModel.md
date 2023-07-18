@@ -17,8 +17,8 @@ base model:
 |                  |                              |                                |                                                                                                 | 
 |                  | double getBalance()          |                                | returns balance based on transactions                                                           | 
 |                  |                              |                                |                                                                                                 | 
-| Transaction      |                              | LocalTimeDate date             |                                                                                                 | 
-|                  |                              | long amount                    |                                                                                                 | 
+| Transaction      |                              | LocalTimeDate dateTime         |                                                                                                 | 
+|                  |                              | double amount                  |                                                                                                 | 
 |                  |                              |                                |                                                                                                 | 
 | AccountType enum |                              | CURRENT, SAVINGS               |                                                                                                 | 
 |                  |                              |                                |                                                                                                 | 

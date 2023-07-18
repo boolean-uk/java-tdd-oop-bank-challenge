@@ -4,14 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.booleanuk.core.TransactionType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
-    Account account;
+    CurrentAccount currentAccount;
     List<Transaction> transactions;
     User user;
     User manager;
@@ -21,7 +20,7 @@ public class AccountTest {
     Transaction wire;
     @BeforeEach
     public void setup(){
-        account = new CurrentAccount("PL8",user,manager);
+        currentAccount = new CurrentAccount("PL8",user,manager);
         user = new User();
         manager = new User();
 //        transactions = new ArrayList<>();
@@ -33,23 +32,23 @@ public class AccountTest {
 
     @Test
     public void shouldDepositMoney(){
-        account.deposit(1000.00);
-        assertEquals(1,account.getTransactions().size());
-        assertEquals(1000.00,account.getTransactions().get(0).getAmount());
+        currentAccount.deposit(1000.00);
+        assertEquals(1, currentAccount.getTransactions().size());
+        assertEquals(1000.00, currentAccount.getTransactions().get(0).getAmount());
     }
 
     @Test
     public void shouldWithdrawMoney(){
-        account.deposit(1500.00);
-        account.withdraw(1000.00);
-        assertEquals(2,account.getTransactions().size());
-        assertEquals(1000,account.getTransactions().get(1).getAmount());
+        currentAccount.deposit(1500.00);
+        currentAccount.withdraw(1000.00);
+        assertEquals(2, currentAccount.getTransactions().size());
+        assertEquals(1000, currentAccount.getTransactions().get(1).getAmount());
 
-        Assertions.assertThrows(IllegalArgumentException.class,()->account.withdraw(1000));
+        Assertions.assertThrows(IllegalArgumentException.class,()-> currentAccount.withdraw(1000));
     }
     @Test
     public void shouldGetBalance(){
-        account.deposit(1000.00);
-        assertEquals(1700.00,account.getBalance());
+        currentAccount.deposit(1000.00);
+        assertEquals(1700.00, currentAccount.getBalance());
     }
 }

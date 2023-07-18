@@ -11,7 +11,7 @@
 |                 |                                             |                                |                                         |                            |
 |                 |                                             |                                |                                         |                            |
 | User            | sendRequest(Request)                        | String name                    |                                         |                            |
-|                 | approveRequest()                            | boolean isManager              | true if approved, false if not approved | boolean                    |
+|                 | approveRequest(Request)                     | boolean isManager              | true if approved, false if not approved | boolean                    |
 |                 |                                             | boolean isEngineer             |                                         |                            |
 |                 |                                             |                                |                                         |                            |
 |                 |                                             |                                |                                         |                            |

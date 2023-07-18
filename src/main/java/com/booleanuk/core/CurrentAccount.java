@@ -11,7 +11,7 @@ public class CurrentAccount extends BankAccount{
     }
 
     public void withdraw(BigDecimal amount, String date, String type) {
-        if(getBalance().subtract(amount).compareTo(BigDecimal.ZERO)<0){
+        if(getBalance().compareTo(amount)<0){
             if(overdraft.getStatus().equals("approved")){
                 if(getBalance().subtract(amount).abs().compareTo(overdraft.getLimit()) > 0) System.out.println("overdraft limit reached");
                 else super.withdraw(amount,date,"Overdraft Withdrawal");

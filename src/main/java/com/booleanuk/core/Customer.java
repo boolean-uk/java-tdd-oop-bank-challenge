@@ -17,8 +17,8 @@ public class Customer {
         return accounts;
     }
 
-    public List<Account> getAccountsByType(String accountType){
-        if(!accountType.equalsIgnoreCase("saving") && !accountType.equalsIgnoreCase("current")){
+    public List<Account> getAccountsByType(String accountType) {
+        if (!accountType.equalsIgnoreCase("saving") && !accountType.equalsIgnoreCase("current")) {
             throw new RuntimeException("We don't have this type of account!");
         }
         return accounts.stream()
@@ -26,13 +26,15 @@ public class Customer {
                 .toList();
     }
 
-    public void createSavingAccount(){
-            SavingAccount savingAccount = new SavingAccount();
-            accounts.add(savingAccount);
+    public SavingAccount createSavingAccount() {
+        SavingAccount savingAccount = new SavingAccount();
+        accounts.add(savingAccount);
+        return savingAccount;
     }
 
-    public void createCurrentAccount(){
+    public CurrentAccount createCurrentAccount() {
         CurrentAccount currentAccount = new CurrentAccount();
         accounts.add(currentAccount);
+        return currentAccount;
     }
 }

@@ -8,20 +8,24 @@ public abstract class BankAccount {
     private double balance;
     private long accountNumber;
     private List<Transaction> transactions;
+    private Manager manager;
 
     private String branch;
 
     public BankAccount(long accountNumber) {
-        this.balance = 0;
-        this.accountNumber = accountNumber;
-        transactions = new ArrayList<Transaction>();
+        this.setBalance(0);
+        this.setAccountNumber(accountNumber);
+        this.setTransactions(new ArrayList<>());
     }
 
-    public BankAccount( long accountNumber, String branch) {
-        this.balance = 0;
-        this.accountNumber = accountNumber;
-        this.transactions = new ArrayList<Transaction>();
-        this.branch = branch;
+    public BankAccount(long accountNumber, String branch) {
+        this.setBalance(0);
+        this.setAccountNumber(accountNumber);
+        this.setTransactions(new ArrayList<>());
+        this.setBranch(branch);
+        Manager manager = new Manager("Manager of " + branch);
+        this.setManager(manager);
+
     }
 
     public boolean deposit(double amount) {
@@ -44,19 +48,17 @@ public abstract class BankAccount {
 
     public StringBuilder generateStatement() {
         StringBuilder statement = new StringBuilder();
-        if(transactions.size()>0) {
+        if (transactions.size() > 0) {
             statement.append("|").append(String.format("%-12s|| %15s || %15s || %15s|\n", "    date", "credit     ", "debit     ", "balance    "));
             statement.append("|").append("--------------------------------------------------------------------").append("|").append("\n");
-            for (Transaction transaction : transactions
-            ) {
+            for (Transaction transaction : transactions) {
                 if (transaction.getTransactionType() == TransactionType.debit) {
                     statement.append("|").append(String.format("%-12s|| %15s || %15.2f || %15.2f|\n", transaction.getDate().toString(), "", transaction.getAmount(), transaction.getBalance()));
                     continue;
                 }
                 statement.append("|").append(String.format("%-12s|| %15.2f || %15.2s || %15.2f|\n", transaction.getDate().toString(), transaction.getAmount(), " ", transaction.getBalance()));
             }
-        }
-        else {
+        } else {
             statement.append("No Transactions done before");
         }
 
@@ -96,5 +98,13 @@ public abstract class BankAccount {
 
     public void setBranch(String branch) {
         this.branch = branch;
+    }
+
+    public Manager getManager() {
+        return manager;
+    }
+
+    public void setManager(Manager manager) {
+        this.manager = manager;
     }
 }

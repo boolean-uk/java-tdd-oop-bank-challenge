@@ -18,18 +18,17 @@ public class SavingsAccountTest {
     }
 
     @Test
-    public  void shouldSetBalanceTo123()
-    {
+    public void shouldSetBalanceTo123() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(123);
-        Assertions.assertEquals(123,normalAccount.getBalance());
+        Assertions.assertEquals(123, normalAccount.getBalance());
     }
+
     @Test
-    public  void shouldntChangeBalance()
-    {
+    public void shouldntChangeBalance() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(-123);
-        Assertions.assertEquals(0,normalAccount.getBalance());
+        Assertions.assertEquals(0, normalAccount.getBalance());
     }
 
     @Test

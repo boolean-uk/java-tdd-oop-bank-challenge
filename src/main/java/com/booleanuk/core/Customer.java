@@ -6,10 +6,11 @@ public class Customer {
     private NormalAccount normalAccount;
     private SavingsAccount savingsAccount;
     public Customer(String fullName, NormalAccount normalAccount, SavingsAccount savingsAccount) {
-        this.fullName = fullName;
-        this.normalAccount = normalAccount;
-        this.savingsAccount = savingsAccount;
+        this.setFullName(fullName);
+       this.setNormalAccount(normalAccount);
+        this.setSavingsAccount(savingsAccount);
     }
+
 
     public String getFullName() {
         return fullName;

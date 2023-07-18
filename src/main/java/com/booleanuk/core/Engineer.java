@@ -3,11 +3,12 @@ package com.booleanuk.core;
 import java.util.List;
 
 public class Engineer {
-    private String fullname;
+    private String fullName;
 
-    public Engineer(String fullname) {
-        this.fullname = fullname;
+    public Engineer(String fullName) {
+        this.setFullName(fullName);
     }
+
 
     public double getAccountBalance(BankAccount bankAccount)
     {
@@ -24,11 +25,11 @@ public class Engineer {
         return sum;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

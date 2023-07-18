@@ -7,23 +7,21 @@ public class CustomerTest {
 
 
     @Test
-    public void shouldCreateCustomerWithfullNameUSER()
-    {
+    public void shouldCreateCustomerWithfullNameUSER() {
         NormalAccount normalAccount = new NormalAccount(123123);
         SavingsAccount savingsAccount = new SavingsAccount(321321);
-        Customer customer = new Customer("USER",normalAccount,savingsAccount);
-        Assertions.assertEquals("USER",customer.getFullName());
+        Customer customer = new Customer("USER", normalAccount, savingsAccount);
+        Assertions.assertEquals("USER", customer.getFullName());
     }
+
     @Test
-    public void shouldCreateCustomerWithNewAccountsProvided()
-    {
+    public void shouldCreateCustomerWithNewAccountsProvided() {
         NormalAccount normalAccount = new NormalAccount(123123);
         SavingsAccount savingsAccount = new SavingsAccount(321321);
-        Customer customer = new Customer("USER",normalAccount,savingsAccount);
-        Assertions.assertEquals("USER",customer.getFullName());
-
-        Assertions.assertEquals(normalAccount,customer.getNormalAccount());
-        Assertions.assertEquals(savingsAccount,customer.getSavingsAccount());
+        Customer customer = new Customer("USER", normalAccount, savingsAccount);
+        Assertions.assertEquals("USER", customer.getFullName());
+        Assertions.assertEquals(normalAccount, customer.getNormalAccount());
+        Assertions.assertEquals(savingsAccount, customer.getSavingsAccount());
     }
 
 }

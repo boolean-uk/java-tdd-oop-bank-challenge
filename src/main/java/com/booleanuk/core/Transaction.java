@@ -10,10 +10,10 @@ public class Transaction {
     private double balance;
 
     public Transaction(double amount, TransactionType transactionType, double balance) {
-        this.date=LocalDate.now();
-        this.amount = amount;
-        this.transactionType = transactionType;
-        this.balance = balance;
+        this.setDate(LocalDate.now());
+        this.setAmount(amount);
+        this.setTransactionType(transactionType);
+        this.setBalance(balance);
     }
 
     public LocalDate getDate() {

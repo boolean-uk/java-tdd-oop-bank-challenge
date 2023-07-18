@@ -19,6 +19,12 @@ public class Account {
         this.info = new ArrayList<>();
     }
 
+    public Account(int accountId, String accountType){
+        this.id = accountId;
+        this.type = accountType;
+        this.info = new ArrayList<>();
+    }
+
     public int getId() {
         return id;
     }
@@ -62,6 +68,23 @@ public class Account {
         info.add(withdrawalInfo);
         balance = newBalance;
     }
+    public void addDepositWithoutCalc(int amount, LocalDateTime dateTime) {
+        int newBalance = getBalance() + amount;
+        Info depositInfo = new Info(dateTime, amount, newBalance, customerId, id, TransactionType.DEBIT);
+        info.add(depositInfo);
+        balance = newBalance;
+    }
+
+    public void addWithdrawalWithoutCalc(int amount, LocalDateTime dateTime) {
+        int newBalance = getBalance() - amount;
+        if (newBalance < 0) {
+            System.out.println("Insufficient funds.");
+            return;
+        }
+        Info withdrawalInfo = new Info(dateTime, amount, newBalance, customerId, id, TransactionType.CREDIT);
+        info.add(withdrawalInfo);
+        balance = newBalance;
+    }
 
     public void generateInfo(int amount, LocalDateTime dateTime, String transactionType) {
         if (transactionType.equalsIgnoreCase("debit")) {
@@ -86,5 +109,16 @@ public class Account {
                     debit,
                     (double) transaction.getBalance());
         }
+    }
+    public int calculateBalance() {
+        int balance = 0;
+        for (Info transaction : info) {
+            if (transaction.getTransactionType() == TransactionType.DEBIT) {
+                balance += transaction.getAmount();
+            } else if (transaction.getTransactionType() == TransactionType.CREDIT) {
+                balance -= transaction.getAmount();
+            }
+        }
+        return balance;
     }
 }

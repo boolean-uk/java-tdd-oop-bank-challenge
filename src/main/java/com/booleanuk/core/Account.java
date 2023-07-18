@@ -28,7 +28,7 @@ public abstract class Account {
         return transactions;
     }
 
-    private void addTransaction(BigDecimal amount, LocalDate date) {
+    protected void addTransaction(BigDecimal amount, LocalDate date) {
         Transaction transaction = new Transaction(amount, date);
         transactions.add(transaction);
     }

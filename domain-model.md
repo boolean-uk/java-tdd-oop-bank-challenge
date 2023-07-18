@@ -38,10 +38,16 @@ I want to deposit and withdraw funds.
 |             | int amount                |        |           |        |
 |             | String type               |        |           |        |
 
-| Class | Field                                            | Method                                   | Condition | Output                |
-|-------|--------------------------------------------------|------------------------------------------|-----------|-----------------------|
-| Bank  | Hashmap<Integer, SavingsAccount> savingsAccounts | int openSavingsAccount(String ownerName) | always    | int newAccountNumber  |
-|       | Hashmap<Integer, CurrentAccount> currentAccounts | int openCurrentAccount(String ownerName) | always    | int newAccountNumber  |
-|       | int currentAccountsCounter                       |                                          |           |                       |
-|       | int savingsAccountsCounter                       |                                          |           |                       |
+| Class | Field                                            | Method                                   | Condition | Output               |
+|-------|--------------------------------------------------|------------------------------------------|-----------|----------------------|
+| Bank  | Hashmap<Integer, SavingsAccount> savingsAccounts | int openSavingsAccount(String ownerName) | always    | int newAccountNumber |
+|       | Hashmap<Integer, CurrentAccount> currentAccounts | int openCurrentAccount(String ownerName) | always    | int newAccountNumber |
+|       | int currentAccountsCounter                       |                                          |           |                      |
+|       | int savingsAccountsCounter                       | Account getAccountById(int id)           | always    | Account account      |
 
+
+| Class                  | Field | Method                         | Condition | Output               |
+|------------------------|-------|--------------------------------|-----------|----------------------|
+| BankStatementGenerator |       | String generateBankStatement() | always    | String bankStatement |
+|                        |       |                                |           |                      |
+|                        |       |                                |           |                      |

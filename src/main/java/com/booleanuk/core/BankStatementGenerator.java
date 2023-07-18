@@ -7,15 +7,6 @@ import java.util.List;
 
 public class BankStatementGenerator {
 
-    public static void main(String[] args){
-        BankStatementGenerator bankStatementGenerator = new BankStatementGenerator();
-        Account account = new Account("Jan Lisek");
-        account.depositMoney(1000);
-        account.withdrawMoney(300);
-        account.depositMoney(4000);
-        System.out.print(bankStatementGenerator.generateBankStatement(account));
-    }
-
     public String generateBankStatement(Account account){
         String dateHeader = "date       ";
         String creditHeader = " credit  ";

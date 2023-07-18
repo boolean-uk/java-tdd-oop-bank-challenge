@@ -6,9 +6,12 @@ public class Account {
     String accountOwner;
     ArrayList<Transaction> transactionHistory;
 
-    public Account(String accountOwner) {
+    String branchCode;
+
+    public Account(String accountOwner, String branchCode) {
         this.accountOwner = accountOwner;
         this.transactionHistory = new ArrayList<>();
+        this.branchCode = branchCode;
     }
 
     public void depositMoney(double amountDeposited){

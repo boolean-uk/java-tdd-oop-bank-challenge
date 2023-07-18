@@ -23,6 +23,16 @@ public class Bank {
         return accountsCounter;
     }
 
+    public Account getAccountById(int id){
+        if (id>accountsCounter-1)
+            return null;
+
+        if(savingsAccounts.containsKey(id))
+            return savingsAccounts.get(id);
+        else
+            return currentAccounts.get(id);
+    }
+
     public HashMap<Integer, SavingsAccount> getSavingsAccounts() {
         return savingsAccounts;
     }

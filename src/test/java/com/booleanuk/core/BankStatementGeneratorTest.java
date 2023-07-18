@@ -11,19 +11,18 @@ public class BankStatementGeneratorTest {
     @Test
     public void bankStatementGeneratorTest(){
         BankStatementGenerator bankStatementGenerator = new BankStatementGenerator();
-        Account account = new Account("Jan Lisek");
+        Account account = new Account("Jan Lisek","00003");
         account.depositMoney(1000);
         account.withdrawMoney(300);
         account.depositMoney(4000);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = LocalDate.now().format(formatter);
-        StringBuilder expectedStatementBuilder = new StringBuilder();
-        expectedStatementBuilder.append("date       || credit  || debit  || balance \n");
-        expectedStatementBuilder.append(date).append(" || 1000,00 ||        || 1000,00\n");
-        expectedStatementBuilder.append(date).append(" ||         || 300,00 ||  700,00\n");
-        expectedStatementBuilder.append(date).append(" || 4000,00 ||        || 4700,00\n");
+        String expectedStatement = "date       || credit  || debit  || balance \n" +
+                date + " || 1000,00 ||        || 1000,00\n" +
+                date + " ||         || 300,00 ||  700,00\n" +
+                date + " || 4000,00 ||        || 4700,00\n";
 
-        Assertions.assertEquals(expectedStatementBuilder.toString(), bankStatementGenerator.generateBankStatement(account));
+        Assertions.assertEquals(expectedStatement, bankStatementGenerator.generateBankStatement(account));
     }
 }

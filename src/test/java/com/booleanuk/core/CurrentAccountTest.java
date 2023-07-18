@@ -59,6 +59,7 @@ public class CurrentAccountTest {
         account.withdraw(0);
         account.withdraw(-0.01);
         account.withdraw((-99));
+
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1,account.getTransactions().size());
     }

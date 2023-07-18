@@ -1,4 +1,4 @@
 package com.booleanuk.core;
 
-public class SavingsAccount {
+public class SavingsAccount extends BankAccount{
 }

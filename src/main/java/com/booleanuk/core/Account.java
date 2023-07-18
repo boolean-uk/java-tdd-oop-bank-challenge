@@ -12,25 +12,23 @@ public class Account {
     }
 
     public void depositMoney(double amountDeposited){
-        int deposit = (int) (amountDeposited*100);
-        transactionHistory.add(new Transaction(deposit, "deposit"));
+        transactionHistory.add(new Transaction(amountDeposited, "deposit"));
     }
 
     public boolean withdrawMoney(double amountWithdrawn){
         if(amountWithdrawn > calculateBalance())
             return false;
 
-        int withdrawal = (int) (amountWithdrawn*100);
-        transactionHistory.add(new Transaction(withdrawal, "withdrawal"));
+        transactionHistory.add(new Transaction(amountWithdrawn, "withdrawal"));
         return true;
     }
 
     public double calculateBalance(){
-        int balance = 0;
+        double balance = 0;
         for (Transaction transaction : transactionHistory){
             balance += transaction.getType().equals("deposit") ? transaction.getAmount() : -transaction.getAmount();
         }
-        return (double) balance/100;
+        return balance;
     }
 
     public String getAccountOwner() {

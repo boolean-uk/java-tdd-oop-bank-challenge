@@ -10,7 +10,7 @@ public class AccountTest {
         Account account = new Account("Jan Lisek");
         Assertions.assertEquals(0,account.getTransactionHistory().size());
         account.depositMoney(500);
-        Assertions.assertEquals(50000,account.getTransactionHistory().get(0).getAmount());
+        Assertions.assertEquals(500,account.getTransactionHistory().get(0).getAmount());
     }
 
     @Test
@@ -19,7 +19,7 @@ public class AccountTest {
         Assertions.assertEquals(0,account.getTransactionHistory().size());
         account.depositMoney(1000);
         Assertions.assertTrue(account.withdrawMoney(300));
-        Assertions.assertEquals(30000,account.getTransactionHistory().get(1).getAmount());
+        Assertions.assertEquals(300,account.getTransactionHistory().get(1).getAmount());
         Assertions.assertFalse(account.withdrawMoney(2000));
     }
 

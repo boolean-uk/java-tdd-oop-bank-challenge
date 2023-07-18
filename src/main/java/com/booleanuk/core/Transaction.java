@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class Transaction {
     private final LocalDate transactionDate;
-    private final int amount;
+    private final double amount;
     private final String type;
 
-    public Transaction(LocalDate transactionDate, int amount, String type) {
+    public Transaction(LocalDate transactionDate, double amount, String type) {
         this.transactionDate = transactionDate;
         this.amount = amount;
         this.type = type;
     }
 
-    public Transaction(int amount, String type) {
+    public Transaction(double amount, String type) {
         this.amount = amount;
         this.type = type;
         this.transactionDate = LocalDate.now();
@@ -23,7 +23,7 @@ public class Transaction {
         return transactionDate;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 

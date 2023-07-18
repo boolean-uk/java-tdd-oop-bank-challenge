@@ -1,7 +1,6 @@
 ### Bank Challenge
 
 ## User Stories 
-
 1.  ```
     As a customer,
     So I can safely store and use my money,

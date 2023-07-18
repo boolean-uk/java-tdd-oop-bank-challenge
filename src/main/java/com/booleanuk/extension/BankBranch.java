@@ -5,14 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Bank {
+public class BankBranch {
 
     private final Map<UUID, Account> accounts;
     private final Map<UUID, Customer> customers;
+    private final String branchId;
 
-    public Bank() {
+    public BankBranch(String branchId) {
         this.accounts = new HashMap<>();
         this.customers = new HashMap<>();
+        this.branchId = branchId;
     }
 
     private static boolean isPositive(BigDecimal funds) {
@@ -29,10 +31,13 @@ public class Bank {
         if (isCustomer(customerId)) {
             try {
                 Customer customer = customers.get(customerId);
-                T account = accountType.getDeclaredConstructor(Customer.class).newInstance(customer);
+                T account = accountType
+                        .getDeclaredConstructor(Customer.class, String.class)
+                        .newInstance(customer, branchId);
                 accounts.put(account.getId(), account);
                 return account.getId();
             } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
         }

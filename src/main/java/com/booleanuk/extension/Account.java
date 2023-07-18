@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,13 +15,21 @@ public abstract class Account {
     private static final String HEADER_ROW = String.format(ROW_FORMAT, "date", "credit", "debit", "balance");
 
     private final UUID id;
+    private final String branchId;
     private final Customer holder;
     private final List<Transaction> transactions;
 
-    public Account(Customer holder) {
-        this.id = UUID.randomUUID();
+    public Account(Customer holder, String branchId) {
+        this.id = generateAccountId(branchId);
+        this.branchId = branchId;
         this.holder = holder;
         transactions = new ArrayList<>();
+    }
+
+    private UUID generateAccountId(String branchId) {
+        String uuid = UUID.randomUUID().toString();
+        uuid = uuid.substring(0, uuid.length() - branchId.length()) + branchId;
+        return UUID.fromString(uuid);
     }
 
     protected void deposit(BigDecimal funds) {

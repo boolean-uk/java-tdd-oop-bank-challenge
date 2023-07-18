@@ -18,10 +18,10 @@ public class AccountTest {
 
     @Test
     public void testCreatingStatement() {
-        Bank bank = new Bank();
-        UUID customerId = bank.registerCustomer();
-        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
-        Account account = bank.getAccounts().get(accountId);
+        BankBranch branchBranch = (new BankHQ()).openBranch();
+        UUID customerId = branchBranch.registerCustomer();
+        UUID accountId = branchBranch.openAccount(customerId, CurrentAccount.class);
+        Account account = branchBranch.getAccounts().get(accountId);
         List<Transaction> transactions = account.getTransactions();
         transactions.add(new Transaction(LocalDateTime.of(2012, 1, 14, 0, 0, 0), BigDecimal.valueOf(1_000), null));
         transactions.add(new Transaction(LocalDateTime.of(2012, 1, 13, 0, 0, 0), BigDecimal.valueOf(2_000), null));
@@ -36,20 +36,20 @@ public class AccountTest {
 
     @Test
     public void testDepositingFunds() {
-        Bank bank = new Bank();
-        UUID customerId = bank.registerCustomer();
-        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
-        Account account = bank.getAccounts().get(accountId);
+        BankBranch bankBranch = (new BankHQ()).openBranch();
+        UUID customerId = bankBranch.registerCustomer();
+        UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
+        Account account = bankBranch.getAccounts().get(accountId);
         account.deposit(BigDecimal.valueOf(1_000));
         Assertions.assertEquals(BigDecimal.valueOf(1_000), account.getBalance());
     }
 
     @Test
     public void testWithdrawingFunds() {
-        Bank bank = new Bank();
-        UUID customerId = bank.registerCustomer();
-        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
-        Account account = bank.getAccounts().get(accountId);
+        BankBranch bankBranch = (new BankHQ()).openBranch();
+        UUID customerId = bankBranch.registerCustomer();
+        UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
+        Account account = bankBranch.getAccounts().get(accountId);
         account.deposit(BigDecimal.valueOf(1_000));
         account.withdraw(BigDecimal.valueOf(500));
         Assertions.assertEquals(BigDecimal.valueOf(500), account.getBalance());
@@ -57,13 +57,13 @@ public class AccountTest {
 
     @Test
     public void testCalculatingBalanceViaTransactionHistory() {
-        Bank bank = new Bank();
-        UUID customerId = bank.registerCustomer();
-        UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
-        bank.deposit(accountId, BigDecimal.valueOf(1_000));
-        bank.deposit(accountId, BigDecimal.valueOf(2_000));
-        bank.withdraw(customerId, accountId, BigDecimal.valueOf(2_500));
-        Account account = bank.getAccounts().get(accountId);
+        BankBranch bankBranch = (new BankHQ()).openBranch();
+        UUID customerId = bankBranch.registerCustomer();
+        UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
+        bankBranch.deposit(accountId, BigDecimal.valueOf(1_000));
+        bankBranch.deposit(accountId, BigDecimal.valueOf(2_000));
+        bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(2_500));
+        Account account = bankBranch.getAccounts().get(accountId);
 
         Assertions.assertEquals(BigDecimal.valueOf(500), account.getBalance());
     }

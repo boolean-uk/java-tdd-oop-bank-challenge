@@ -27,6 +27,10 @@ public class CurrentAccount implements BankAccount{
         return Math.round(balance * 100.0) / 100.0;
     }
 
+    public boolean getCanBeOverdrafted() {
+        return canBeOverdrafted;
+    }
+
     @Override
     public boolean deposit(double amount) {
         if(amount > 0) {
@@ -45,10 +49,23 @@ public class CurrentAccount implements BankAccount{
             balance -= amount;
             transactions.add(new Transaction(new Date(), "debit", amount,getBalance()));
             return true;
+        }else if(amount > 0 && (getBalance() - amount) < 0 && canBeOverdrafted == false){
+            System.out.println("You can't withdraw more money than there is on the account");
+            System.out.println("You tried to withdraw : " + amount);
+            System.out.println("But you balance is only : " + getBalance());
+            return false;
         }else if(amount <= 0) {
             System.out.println("Amount must be a positive number");
             return false;
+        }else if(amount > 0 &&(getBalance() - amount >= -500) && canBeOverdrafted == true) {
+            balance -= amount;
+            transactions.add(new Transaction(new Date(), "debit", amount,getBalance()));
+            return true;
         }
         return false;
+    }
+
+    public void overdraftRequest() {
+         canBeOverdrafted = !canBeOverdrafted;
     }
 }

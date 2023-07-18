@@ -63,4 +63,25 @@ public class CurrentAccountTest {
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1,account.getTransactions().size());
     }
+
+    @Test
+    public void withdrawWithOverdraftAllowedTo500Test() {
+        account.deposit(100);
+        account.withdraw(100);
+        Assertions.assertFalse(account.getCanBeOverdrafted());
+        account.overdraftRequest();
+        Assertions.assertTrue(account.getCanBeOverdrafted());
+        Assertions.assertEquals(2, account.getTransactions().size());
+        Assertions.assertEquals(0, account.getBalance());
+        account.withdraw(499.99);
+        Assertions.assertEquals(3, account.getTransactions().size());
+        Assertions.assertEquals(-499.99, account.getBalance());
+        account.withdraw(0.01);
+        Assertions.assertEquals(4, account.getTransactions().size());
+        Assertions.assertEquals(-500, account.getBalance());
+        account.withdraw(0.01);
+        Assertions.assertEquals(-500, account.getBalance());
+        Assertions.assertEquals(4, account.getTransactions().size());
+
+    }
 }

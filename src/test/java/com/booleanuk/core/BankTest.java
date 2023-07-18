@@ -60,4 +60,21 @@ public class BankTest {
         Assertions.assertEquals(List.of(), bank.getAccountNumbers());
     }
 
+    @Test
+    public void testBankShouldBeSingleton() {
+        Bank bank2 = Bank.getInstance();
+        Assertions.assertEquals(bank, bank2);
+    }
+
+    @Test
+    public void testAddStatement() {
+        bank.addAccount(savingsAccount);
+        bank.addAccount(currentAccount);
+        BankStatement statement1 = new BankStatement("1234 5678 8756 4321");
+        BankStatement statement2 = new BankStatement("8765 4321 1234 5678");
+        bank.addStatement(statement1);
+        bank.addStatement(statement2);
+        Assertions.assertEquals(List.of(statement1, statement2), bank.getStatements());
+    }
+
 }

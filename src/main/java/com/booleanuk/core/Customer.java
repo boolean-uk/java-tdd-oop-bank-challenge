@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 public class Customer {
@@ -26,11 +29,57 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public void createAccount(AccountType accountType) {} // TODO
+    public BankAccount createAccount(AccountType accountType) {
+        Bank bank = Bank.getInstance();
+        String accountNumber = bank.generateAccountNumber();
+        BankAccount account = switch (accountType) {
+            case CURRENT -> new CurrentAccount(accountNumber, id);
+            case SAVINGS -> new SavingsAccount(accountNumber, id);
+        };
+        accounts.add(account);
+        bank.addAccount(account);
+        BankStatement statement = new BankStatement(accountNumber);
+        statements.add(statement);
+        bank.addStatement(statement);
+        return account;
+    }
 
-    public void deposit(String accountNumber, double amount) throws IllegalArgumentException {} // TODO
+    public void deposit(String accountNumber, double amount) throws IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
+        BankAccount account = accounts.stream()
+                .filter(a -> a.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account number"));
+        account.deposit(amount);
+        LocalDateTime today = LocalDateTime.now();
+        Transaction transaction = new Transaction(account.getBalance(), today, TransactionType.CREDIT, amount);
+        statements.stream()
+                .filter(s -> s.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account number"))
+                .addTransaction(transaction);
+    }
 
-    public void withdraw(String accountNumber, double amount) throws IllegalArgumentException {} // TODO
+    public void withdraw(String accountNumber, double amount) throws IllegalArgumentException {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Invalid amount");
+        }
+        BankAccount account = accounts.stream()
+                .filter(a -> a.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account number"));
+        account.withdraw(amount);
+
+        LocalDateTime today = LocalDateTime.now();
+        Transaction transaction = new Transaction(account.getBalance(), today, TransactionType.DEBIT, amount);
+        statements.stream()
+                .filter(s -> s.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invalid account number"))
+                .addTransaction(transaction);
+    }
 
     public List<BankAccount> getAccounts() {
         return accounts;

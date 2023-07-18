@@ -76,23 +76,24 @@ public class CustomerTest {
         BankAccount account = customer.createAccount(AccountType.CURRENT);
         customer.deposit(account.getAccountNumber(), 100.0d);
         customer.withdraw(account.getAccountNumber(), 50.0d);
-        Assertions.assertEquals(2, customer.getStatements().size());
+        Assertions.assertEquals(2, customer.getStatements().get(0).getTransactions().size());
     }
 
     @Test
-    public void shouldCreateConcreteStatements() {
+    public void shouldCreateConcreteStatements() throws InterruptedException {
         BankAccount account = customer.createAccount(AccountType.CURRENT);
         customer.deposit(account.getAccountNumber(), 100.0d);
+        Thread.sleep(1000);
         customer.withdraw(account.getAccountNumber(), 50.0d);
         String actual = customer.getStatements().get(0).toString();
 
         String todayDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
-        String expected =
+        String expected = "Statement for account number: " + account.getAccountNumber() + System.lineSeparator() +
                 "date       || credit || debit || balance" + System.lineSeparator() +
                 todayDate + " ||        || 50.00 || 50.00" + System.lineSeparator() +
                 todayDate + " || 100.00 ||       || 100.00" + System.lineSeparator();
-  
+
         Assertions.assertEquals(expected, actual);
     }
 }

@@ -7,8 +7,10 @@ import java.util.Random;
 public class Bank {
     private static Bank instance;
     private List<BankAccount> accounts;
+    private List<BankStatement> statements;
     private Bank() {
         accounts = new ArrayList<>();
+        statements = new ArrayList<>();
     }
 
     public static Bank getInstance() {
@@ -27,6 +29,10 @@ public class Bank {
             throw new IllegalArgumentException("Account number already exists");
         }
         accounts.add(account);
+    }
+
+    public void addStatement(BankStatement statement) {
+        statements.add(statement);
     }
 
     public String generateAccountNumber() {
@@ -59,4 +65,7 @@ public class Bank {
         accounts.clear();
     }
 
+    public List<BankStatement> getStatements() {
+        return statements;
+    }
 }

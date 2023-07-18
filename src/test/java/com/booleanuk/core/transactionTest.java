@@ -5,14 +5,18 @@ import org.junit.jupiter.api.Test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class transactionTest {
+    private final LocalDateTime date = LocalDateTime.of(2021, 1, 1, 0, 0, 0);
+
     @Test
     public void assertTransactionIsCreated() {
-        Transaction transaction = new Transaction(100, "01/01/2021", TransactionType.CREDIT, 100);
+        Transaction transaction = new Transaction(100, date, TransactionType.CREDIT, 100);
         Assertions.assertEquals(100, transaction.balanceAfter());
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Assertions.assertEquals("01/01/2021", dateFormat.format(transaction.transactionDate()));
+        String actualDate = transaction.transactionDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        Assertions.assertEquals("01/01/2021", actualDate);
         Assertions.assertEquals(TransactionType.CREDIT, transaction.type());
         Assertions.assertEquals(100, transaction.amount());
     }
@@ -20,49 +24,15 @@ public class transactionTest {
     @Test
     public void assertTransactionWithNegativeBalanceThrows() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(-100, "01/01/2021", TransactionType.CREDIT, 100);
+            new Transaction(-100, date, TransactionType.CREDIT, 100);
         });
     }
 
-    @Test
-    public void assertTransactionWithInvalidDateThrows1() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01/01/21", TransactionType.CREDIT, 100);
-        });
-    }
 
     @Test
-    public void assertTransactionWithInvalidDateThrows2() {
+    public void assertTransactionWithInvalidAmountThrows() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01/101/2021", TransactionType.CREDIT, 100);
-        });
-    }
-
-    @Test
-    public void assertTransactionWithInvalidDateThrows3() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01/01/2a21", TransactionType.CREDIT, 100);
-        });
-    }
-
-    @Test
-    public void assertTransactionWithInvalidDateThrows4() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01-01-2021", TransactionType.CREDIT, 100);
-        });
-    }
-
-    @Test
-    public void assertTransactionWithInvalidDateThrows5() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01/01/2021/01", TransactionType.CREDIT, 100);
-        });
-    }
-
-    @Test
-    public void assertTransactionWithInvalidAmmountThrows() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new Transaction(100, "01/01/2021", TransactionType.CREDIT, -100);
+            new Transaction(100, date, TransactionType.CREDIT, -100);
         });
     }
 

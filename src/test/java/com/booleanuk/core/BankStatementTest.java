@@ -5,16 +5,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 
 public class BankStatementTest {
     private final String accountNumber = "1234 5678 9012 3456";
     private BankStatement bankStatement;
+    private final List<LocalDateTime> dates = List.of(
+        LocalDateTime.of(2012, 1, 10, 0, 0),
+        LocalDateTime.of(2012, 1, 13, 0, 0),
+        LocalDateTime.of(2012, 1, 14, 0, 0)
+    );
 
     private final List<Transaction> transactions = List.of(
-        new Transaction(1000.00d, "10/01/2012", TransactionType.CREDIT, 1000.0d),
-        new Transaction(3000.00d, "13/01/2012", TransactionType.CREDIT, 2000.0d),
-        new Transaction(2500.00d, "14/01/2012", TransactionType.DEBIT, 500.0d)
+        new Transaction(1000.00d, dates.get(0), TransactionType.CREDIT, 1000.0d),
+        new Transaction(3000.00d, dates.get(1), TransactionType.CREDIT, 2000.0d),
+        new Transaction(2500.00d, dates.get(2), TransactionType.DEBIT, 500.0d)
     );
 
     @BeforeEach
@@ -42,7 +49,7 @@ public class BankStatementTest {
         }
 
         String actual = bankStatement.toString();
-        String expected =
+        String expected = "Statement for account number: " + accountNumber + System.lineSeparator() +
                 "date       || credit  || debit  || balance" + System.lineSeparator() +
                 "14/01/2012 ||         || 500.00 || 2500.00" + System.lineSeparator() +
                 "13/01/2012 || 2000.00 ||        || 3000.00" + System.lineSeparator() +

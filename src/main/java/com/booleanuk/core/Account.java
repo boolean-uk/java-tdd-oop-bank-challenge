@@ -1,20 +1,20 @@
 package com.booleanuk.core;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public abstract class Account {
-    String firstname;
-    String lastname;
-    int currentBalance; // Balance in cents (int)
-    boolean activated;
-    String type;
+    protected String firstname;
+    protected String lastname;
+    protected int currentBalance; // Balance in cents (int)
+    protected boolean activated;
 
-    ArrayList<Integer> balanceHistory;
-    ArrayList<String> dateHistory;
-    ArrayList<Double> balanceMoveHistory;
+    protected ArrayList<Integer> balanceHistory;
+    protected ArrayList<String> dateHistory;
+    protected ArrayList<Double> balanceMoveHistory;
+
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Account(String firstname, String lastname) {
         this.firstname = firstname;
@@ -22,54 +22,58 @@ public abstract class Account {
         this.currentBalance = 0;
         this.activated = false;
 
-        balanceHistory = new ArrayList<>();
-        dateHistory = new ArrayList<>();
-        balanceMoveHistory = new ArrayList<>();
+        this.balanceHistory = new ArrayList<>();
+        this.dateHistory = new ArrayList<>();
+        this.balanceMoveHistory = new ArrayList<>();
     }
 
     public boolean deposit(double balance) {
         if (balance <= 0) {
-            System.out.println("Cannot deposit 0 or negative balance!");
             return false;
         }
 
-        if (!activated) {
-            activated = true;
-        }
-
-        currentBalance += doubleToIntBalance(balance);
-        balanceHistory.add(currentBalance);
-        balanceMoveHistory.add(balance);
-        dateHistory.add(getDate());
+        this.activated = true;
+        this.currentBalance += doubleToIntBalance(balance);
+        this.balanceHistory.add(this.currentBalance);
+        this.balanceMoveHistory.add(balance);
+        this.dateHistory.add(getCurrentDate());
         return true;
     }
 
     public boolean withdraw(double balance) {
-        if (doubleToIntBalance(balance) > currentBalance) {
-            System.out.println("Cannot withdraw more than your current balance!");
+        if (doubleToIntBalance(balance) > this.currentBalance) {
             return false;
         }
 
-        currentBalance -= doubleToIntBalance(balance);
-        balanceHistory.add(currentBalance);
-        balanceMoveHistory.add(-balance);
-        dateHistory.add(getDate());
+        this.currentBalance -= doubleToIntBalance(balance);
+        this.balanceHistory.add(this.currentBalance);
+        this.balanceMoveHistory.add(-balance);
+        this.dateHistory.add(getCurrentDate());
         return true;
     }
 
     private int doubleToIntBalance(double balance) {
         return (int) (balance * 100);
     }
-    public String getFirstname() { return firstname; }
+
+    public String getFirstname() {
+        return this.firstname;
+    }
+
     public int getCurrentBalance() {
-        return currentBalance;
+        return this.currentBalance;
     }
-    public String getLastname() { return lastname; }
 
-    private String getDate() {
+    public String getLastname() {
+        return this.lastname;
+    }
+
+    public boolean isActivated() {
+        return this.activated;
+    }
+
+    private String getCurrentDate() {
         LocalDate date = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        return formatter.format(date);
+        return DATE_FORMATTER.format(date);
     }
-
 }

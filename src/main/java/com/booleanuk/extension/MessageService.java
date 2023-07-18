@@ -14,7 +14,7 @@ public class MessageService {
         Message message = Message.creator(
                         new com.twilio.type.PhoneNumber(customer.getPhoneNumber()),
                         new com.twilio.type.PhoneNumber(FROM_PHONE_NUMBER),
-                        "Bank statement:\n" + messageText)
+                        messageText)
                 .create();
         return message.getStatus().toString();
     }

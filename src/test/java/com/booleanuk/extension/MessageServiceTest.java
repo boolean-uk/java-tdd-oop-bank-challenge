@@ -1,6 +1,5 @@
 package com.booleanuk.extension;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -24,5 +23,6 @@ public class MessageServiceTest {
 
         Customer customer = bankBranch.getCustomers().get(customerId);
 //        Assertions.assertEquals("queued", MessageService.send(statement, customer));
+//        Assertions.assertEquals("queued", bankBranch.sendStatement(statement, customerId));
     }
 }

@@ -17,10 +17,6 @@ public class BankBranch {
         this.requests = new HashMap<>();
     }
 
-    private static boolean isPositive(BigDecimal funds) {
-        return funds.compareTo(BigDecimal.ZERO) > 0;
-    }
-
     public UUID registerCustomer() {
         Customer customer = new Customer();
         customers.put(customer.getId(), customer);
@@ -66,7 +62,6 @@ public class BankBranch {
                 account.withdraw(funds);
                 return true;
             }
-            return false;
         }
         return false;
     }
@@ -105,14 +100,18 @@ public class BankBranch {
         clientRequests.remove(request);
     }
 
-    public String sendStatement(String message, UUID customerId) {
+    public String sendStatement(String statement, UUID customerId) {
         if (customers.containsKey(customerId)) {
             Customer customer = customers.get(customerId);
             if (customer.getPhoneNumber() != null) {
-                return MessageService.send(message, customer);
+                return MessageService.send("Bank statement:\n" + statement, customer);
             }
         }
-        return String.format("Message: %s%nTo customer id: %s not sent.", message, customerId);
+        return String.format("Message: %s%nTo customer id: %s not sent.", statement, customerId);
+    }
+
+    private static boolean isPositive(BigDecimal funds) {
+        return funds.compareTo(BigDecimal.ZERO) > 0;
     }
 
     private boolean isWithdrawable(Account account, BigDecimal funds) {

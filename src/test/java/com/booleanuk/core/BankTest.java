@@ -22,20 +22,16 @@ public class BankTest {
         Bank bank = new Bank();
         UUID customerId = bank.registerCustomer();
         UUID accountId = bank.openAccount(customerId, CurrentAccount.class);
-        bank.deposit(accountId, BigDecimal.valueOf(1_000));
-        bank.withdraw(customerId, accountId, BigDecimal.valueOf(500));
+        Assertions.assertTrue(bank.deposit(accountId, BigDecimal.valueOf(1_000)));
+        Assertions.assertTrue(bank.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
         String statement = bank.generateStatement(customerId, accountId);
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = LocalDate.now().format(dateFormatter);
 
-        Assertions.assertTrue(statement.contains("      date ||     credit ||      debit ||    balance"));
-        Assertions.assertTrue(
-                statement.contains(String.format("%s ||            ||     500.00 ||     500.00", date))
-        );
-        Assertions.assertTrue(
-                statement.contains(String.format("%s ||    1000.00 ||            ||    1000.00", date))
-        );
+        Assertions.assertTrue(statement.contains((("      date ||     credit ||      debit ||    balance"))));
+        Assertions.assertTrue(statement.contains(String.format("%s ||            ||     500.00 ||     500.00", date)));
+        Assertions.assertTrue(statement.contains(String.format("%s ||    1000.00 ||            ||    1000.00", date)));
     }
 
     @Test

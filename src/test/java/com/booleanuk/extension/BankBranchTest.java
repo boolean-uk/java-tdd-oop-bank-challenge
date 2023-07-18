@@ -33,12 +33,8 @@ public class BankBranchTest {
         String date = LocalDate.now().format(dateFormatter);
 
         Assertions.assertTrue(statement.contains("      date ||     credit ||      debit ||    balance"));
-        Assertions.assertTrue(
-                statement.contains(String.format("%s ||            ||     500.00 ||     500.00", date))
-        );
-        Assertions.assertTrue(
-                statement.contains(String.format("%s ||    1000.00 ||            ||    1000.00", date))
-        );
+        Assertions.assertTrue(statement.contains(String.format("%s ||            ||     500.00 ||     500.00", date)));
+        Assertions.assertTrue(statement.contains(String.format("%s ||    1000.00 ||            ||    1000.00", date)));
     }
 
     @Test

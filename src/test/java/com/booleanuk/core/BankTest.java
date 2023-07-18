@@ -58,10 +58,23 @@ public class BankTest {
 
     @Test
     public void  shouldReturn0BalanceOfAccount(){
-        //given
+        //when
         BigDecimal balance = account.getBalance();
         //then
         assertEquals(BigDecimal.valueOf(0),balance);
+    }
+
+    @Test
+    public void  shouldReturn10000BalanceOfAccount(){
+        //given
+        BigDecimal deposit = BigDecimal.valueOf(5000);
+        accountManager.addDeposit(account,deposit);
+        accountManager.addDeposit(account,deposit);
+
+        //when
+        BigDecimal balance = account.getBalance();
+        //then
+        assertEquals(BigDecimal.valueOf(5000),balance);
     }
 
 

@@ -35,4 +35,24 @@ public class SavingAccountTest {
         Assertions.assertEquals(100.11, account.getBalance());
         Assertions.assertEquals(1, account.getTransactions().size());
     }
+
+    @Test
+    public void withdrawWithPositiveAmountTest() {
+        account.deposit(1000);
+
+        account.withdraw(100);
+        Assertions.assertEquals(900, account.getBalance());
+        Assertions.assertEquals(2, account.getTransactions().size());
+        account.withdraw(899.99);
+        Assertions.assertEquals(0.01, account.getBalance());
+        Assertions.assertEquals(3, account.getTransactions().size());
+        account.withdraw(0.01);
+        Assertions.assertEquals(0.00, account.getBalance());
+        Assertions.assertEquals(4, account.getTransactions().size());
+        account.withdraw(100);
+        Assertions.assertEquals(0.00, account.getBalance());
+        Assertions.assertEquals(4, account.getTransactions().size());
+    }
+
+
 }

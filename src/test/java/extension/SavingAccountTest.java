@@ -106,4 +106,18 @@ public class SavingAccountTest {
 
         account.generateBankStatement();
     }
+
+    @Test
+    public void balanceCalculationTest() {
+        Assertions.assertEquals("0.00", account.balanceCalculation());
+        account.deposit(100);
+        Assertions.assertEquals("100.00", account.balanceCalculation());
+        account.deposit(100.01);
+        account.deposit(100.02);
+        account.deposit(100.03);
+        Assertions.assertEquals("400.06", account.balanceCalculation());
+        account.withdraw(100.05);
+        Assertions.assertEquals("300.01", account.balanceCalculation());
+
+    }
 }

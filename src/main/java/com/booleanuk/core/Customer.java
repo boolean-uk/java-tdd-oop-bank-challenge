@@ -65,4 +65,7 @@ public class Customer {
             overdraftRequests.put(account,amount);
     }
 
+    public HashMap<Account, Integer> getOverdraftRequests() {
+        return overdraftRequests;
+    }
 }

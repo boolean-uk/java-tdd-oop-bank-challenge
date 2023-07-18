@@ -57,6 +57,6 @@ class CustomerTest {
         customer.withdrawMoney(customer.getAccountsList().get(0),20000 );
         HashMap<Account,Integer> overdraftRequests = new HashMap<Account, Integer>();
         overdraftRequests.put(customer.getAccountsList().get(0),20000);
-        Assertions.assertEquals(overdraftRequests,customer.getAccountsList().get(0).getOverdraftRequests());
+        Assertions.assertEquals(overdraftRequests,customer.getOverdraftRequests());
     }
 }

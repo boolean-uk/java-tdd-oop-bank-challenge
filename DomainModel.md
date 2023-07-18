@@ -6,7 +6,7 @@
 |                          | deposit(int amountOfMoney)  |                                                           | deposit money to account                            |        |
 |                          | withdraw(int amountOfMoney) |                                                           | withdraw money from account                         |        |
 |                          | generateBankStatements()    |                                                           | generate nicely formatted bank statements           | String |
-|                          | calculateBalance()          |                                                           | calculates current balance                          | double |
+|                          | calculateBalance()          |                                                           | calculates current balance                          | int    |
 |                          |                             |                                                           |                                                     |        |
 | CurrentAccount : Account |                             |                                                           |                                                     |        |
 |                          | overdraft()                 |                                                           | throws an IllegalStateException if overdraft occurs |        |

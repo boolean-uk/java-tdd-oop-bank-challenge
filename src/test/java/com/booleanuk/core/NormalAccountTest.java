@@ -118,14 +118,26 @@ public class NormalAccountTest {
     public void shouldReturnNoTransactionsStatementWhenTransactionsIsEmpty()
     {
         NormalAccount normalAccount = new NormalAccount(123123123);
-        Assertions.assertEquals("No Transactions done before",normalAccount.getTransactions());
+        Assertions.assertEquals("No Transactions done before",normalAccount.generateStatement().toString());
     }
     @Test
     public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmpty()
     {
         NormalAccount normalAccount = new NormalAccount(123123123);
         normalAccount.deposit(123);
-        Assertions.assertNotEquals("No Transactions done before",normalAccount.getTransactions());
+        System.out.println(normalAccount.generateStatement());
+        Assertions.assertNotEquals("No Transactions done before",normalAccount.generateStatement());
+    }
+    @Test
+    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmptyMoreTransactions()
+    {
+        NormalAccount normalAccount = new NormalAccount(123123123);
+        normalAccount.deposit(1000);
+        normalAccount.deposit(2000);
+        normalAccount.withdraw(500);
+
+        System.out.println(normalAccount.generateStatement());
+        Assertions.assertNotEquals("No Transactions done before",normalAccount.generateStatement());
     }
 
 

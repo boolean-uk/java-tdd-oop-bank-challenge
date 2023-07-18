@@ -37,3 +37,49 @@ I want to deposit and withdraw funds.
 ### Class diagram
 ![](class-diagram-core.png)
 
+## Extensions
+
+```
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+```
+
+*^ Already covered in core*
+
+```
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+```
+```
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+```
+```
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+```
+```
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```
+
+### Domain model (extending core)
+
+| Class                             | Fields                               | Methods                                    | Scenario                                                      | Output             |
+|-----------------------------------|--------------------------------------|--------------------------------------------|---------------------------------------------------------------|--------------------|
+| *Account*                         | BankBranch bankBranch                |                                            | When creating account it needs to have bank branch associated |                    |
+| CurrentAccount extends *Account*  | Overdraft overdraft                  | void requestOverdraft(Overdraft overdraft) | Customer requests overdraft                                   |                    |
+| BankBranch                        | List<Account> accounts               | void addAccount(Account account)           | Add account to the branch when creating                       |                    |
+|                                   |                                      |                                            | If account is not assigned to this branch                     | Throw an exception |
+|                                   |                                      |                                            | If account has been already added to this branch              | Do nothing         |
+| Overdraft                         | boolean pending<br/>boolean approved | void approve()                             | Manager approves overdraft                                    |                    |
+|                                   | boolean pending<br/>boolean approved | void reject()                              | Manager rejects overdraft                                     |                    |
+| BankStatement                     |                                      | void sendStatement(String phoneNumber)     | Customer requests bank statement to be delivered via SMS      |                    |
+
+### Class diagram
+![](class-diagram-extension.png)

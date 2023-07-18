@@ -28,12 +28,11 @@ I want to deposit and withdraw funds.
 | *Account*                        | List<Transaction> transactions                             | void deposit(BigDecimal amount, LocalDate date)  | Customer is making a deposit             |                                                             |
 |                                  | List<Transaction> transactions                             | void withdraw(BigDecimal amount, LocalDate date) | Customer is making a withdrawal          |                                                             |
 |                                  | List<Transaction> transactions                             | BigDecimal getBalance()                          | Customer checks their balance            | Current balance                                             |
-|                                  |                                                            |                                                  |                                          |                                                             |
 | CurrentAccount extends *Account* |                                                            |                                                  |                                          |                                                             |
-|                                  |                                                            |                                                  |                                          |                                                             |
 | SavingAccount extends *Account*  | BigDecimal interestRate<br/>List<Transaction> transactions | void addInterests(LocalDate date)                | Banking system adds interests to account |                                                             |
-|                                  |                                                            |                                                  |                                          |                                                             |
 | BankStatement                    | Account account                                            | String print()                                   | Customer requests bank statement         | String representation of all transactions in a table format |
-|                                  |                                                            |                                                  |                                          |                                                             |
 | Transaction                      |                                                            |                                                  |                                          |                                                             |
-|                                  |                                                            |                                                  |                                          |                                                             |
+
+### Class diagram
+![](class-diagram-core.png)
+

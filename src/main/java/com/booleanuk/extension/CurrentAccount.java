@@ -1,8 +1,8 @@
 package com.booleanuk.extension;
 
 public class CurrentAccount extends Account {
-    boolean overdraftAllowed = false;
-    boolean overdraftRequested = false;
+    private boolean overdraftAllowed = false;
+    private boolean overdraftRequested = false;
 
     public CurrentAccount(Branch branch) {
         super(branch);

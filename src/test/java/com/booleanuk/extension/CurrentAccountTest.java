@@ -26,7 +26,15 @@ class CurrentAccountTest {
     void approveOverdraftRequestApprovesOverdraft() {
         account.approveOverdraft();
 
-        assertTrue(account.overdraftAllowed);
-        assertFalse(account.overdraftRequested);
+        assertTrue(account.isOverdraftAllowed());
+        assertFalse(account.isOverdraftRequested());
+    }
+
+    @Test
+    void rejectOverdraftRequestRejectsOverdraft() {
+        account.rejectOverdraft();
+
+        assertFalse(account.isOverdraftAllowed());
+        assertFalse(account.isOverdraftRequested());
     }
 }

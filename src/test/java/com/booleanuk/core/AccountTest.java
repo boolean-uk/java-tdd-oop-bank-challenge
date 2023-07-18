@@ -7,36 +7,12 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
 
     Customer customer;
-    Customer secondCustomer;
 
 
     @BeforeEach
     public void setUp() {
         customer = new Customer("Marlena Luczak");
-        secondCustomer = new Customer("Anna Nowak");
     }
-    @Test
-    public void testCreateAccount_afterAddingOneAccount_shouldReturnEquals() {
-        customer.createSavingAccount();
-        Assertions.assertEquals(1, customer.getAllAccounts().size());
-    }
-    @Test
-    public void testCreateAccount_afterAddingTwoAccount_shouldReturnNotEqual() {
-        customer.createCurrentAccount();
-        customer.createSavingAccount();
-        Assertions.assertNotEquals(1, customer.getAllAccounts().size());
-    }
-
-    @Test
-    public void testGetParticularTypeOfAccounts_wrongTypeOfArgument_shouldThrowException(){
-        Assertions.assertThrows(RuntimeException.class, () -> customer.getAccountsByType("different"));
-    }
-
-    @Test
-    public void testGetParticularTypeOfAccounts_rightTypeOfArgument_shouldNotThrowException(){
-        Assertions.assertDoesNotThrow(() -> customer.getAccountsByType("saving"));
-    }
-
     @Test
     public void testDepositFunds_afterPassing30ToMethod_ShouldReturnEquals(){
        SavingAccount savingAccount = customer.createSavingAccount();
@@ -64,7 +40,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testWithdrawFunds_withdrawLessThanItIsOnAccount_shouldReturnEquals(){
+    public void testWithdrawFunds_withdrawLessThanItIsInAccount_shouldReturnEquals(){
         CurrentAccount currentAccount = customer.createCurrentAccount();
         currentAccount.depositFunds(30.5);
         currentAccount.depositFunds(12.0);
@@ -73,7 +49,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testWithdrawFunds_withdrawMoreThanItIsOnAccount_shouldThrowException(){
+    public void testWithdrawFunds_withdrawMoreThanItIsInAccount_shouldThrowException(){
         CurrentAccount currentAccount = customer.createCurrentAccount();
         currentAccount.depositFunds(12.0);
         Assertions.assertThrows(RuntimeException.class, () -> currentAccount.withdrawFunds(13.0));

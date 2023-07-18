@@ -2,27 +2,26 @@
 
 base model:
 
-| Classes          | Methods                      | Fields                         | Scenario                                                                                        |
-|------------------|------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------|
-| Account          |                              | AccountType type,              |                                                                                                 |
-|                  |                              | List<Transaction> transactions |                                                                                                 |
-|                  |                              |                                |                                                                                                 |
-|                  | void deposit(double amount)  |                                | if amount is a positive number add new transaction to transaction list                          |
-|                  |                              |                                | otherwise throw exception                                                                       |
-|                  |                              |                                |                                                                                                 |
-|                  | void withdraw(double amount) |                                | if amount is a positive number add new transaction to transaction list                          | 
-|                  |                              |                                | otherwise throw exception                                                                       | 
-|                  |                              |                                |                                                                                                 | 
-|                  | String generateStatement()   |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction | 
-|                  |                              |                                |                                                                                                 | 
-|                  | double getBalance()          |                                | returns balance based on transactions                                                           | 
-|                  |                              |                                |                                                                                                 | 
-| Transaction      |                              | LocalTimeDate dateTime         |                                                                                                 | 
-|                  |                              | double amount                  |                                                                                                 | 
-|                  |                              |                                |                                                                                                 | 
-| AccountType enum |                              | CURRENT, SAVINGS               |                                                                                                 | 
-|                  |                              |                                |                                                                                                 | 
-
+| Classes          | Methods                      | Fields                         | Scenario                                                                                         |
+|------------------|------------------------------|--------------------------------|--------------------------------------------------------------------------------------------------|
+| Account          |                              | AccountType type,              |                                                                                                  |
+|                  |                              | List<Transaction> transactions |                                                                                                  |
+|                  |                              |                                |                                                                                                  |
+|                  | void deposit(double amount)  |                                | if amount is a positive number add new transaction to transaction list                           |
+|                  |                              |                                | otherwise throw exception                                                                        |
+|                  |                              |                                |                                                                                                  |
+|                  | void withdraw(double amount) |                                | if amount is a positive number and balance is sufficient add new transaction to transaction list | 
+|                  |                              |                                | otherwise throw exception                                                                        | 
+|                  |                              |                                |                                                                                                  | 
+|                  | String generateStatement()   |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction  | 
+|                  |                              |                                |                                                                                                  | 
+|                  | double getBalance()          |                                | returns balance based on transactions                                                            | 
+|                  |                              |                                |                                                                                                  | 
+| Transaction      |                              | LocalTimeDate dateTime         |                                                                                                  | 
+|                  |                              | double amount                  |                                                                                                  | 
+|                  |                              |                                |                                                                                                  | 
+| AccountType enum |                              | CURRENT, SAVINGS               |                                                                                                  | 
+|                  |                              |                                |                                                                                                  | 
 
 extension model:
 

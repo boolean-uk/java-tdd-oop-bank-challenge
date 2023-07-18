@@ -15,7 +15,7 @@ class AccountTest {
     }
 
     @Test
-    public void depositAddsTransaction() {
+    void depositAddsTransaction() {
         account.deposit(19.99);
         account.deposit(19.99);
 
@@ -23,7 +23,27 @@ class AccountTest {
     }
 
     @Test
-    void depositThrowsErrorForNegativeAmount() {
+    void depositThrowsExceptionForNegativeAmount() {
         assertThrows(IllegalArgumentException.class, () -> account.deposit(-20));
+    }
+
+    @Test
+    void withdrawAddsTransaction() {
+        account.deposit(19.99);
+        account.deposit(19.99);
+
+        account.withdraw(19.99);
+
+        assertEquals(19.99, account.getBalance());
+    }
+
+    @Test
+    void withdrawThrowsExceptionWhenBalanceIsInsufficient() {
+        assertThrows(IllegalStateException.class, () -> account.withdraw(19.99));
+    }
+
+    @Test
+    void withdrawThrowsExceptionForNegativeAmount() {
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(-20));
     }
 }

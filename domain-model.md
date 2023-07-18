@@ -33,7 +33,7 @@
 |           |                                        | `withdraw(float amount)`     | withdraws given amount of money if amount > 0 and balance >= amount       | true    |
 |           |                                        |                              | does not withdraw given amount of money if amount < 0 or balance < amount | false   |
 |           |                                        | `generateBankStatement()`    | generates bank statement                                                  | String  |
-|           |                                        | `checkBalance()`             | returns balance                                                           | float   |
+|           |                                        | `checkBalance()`             | returns balance based on list of transactions                             | float   |
 |           |                                        | `sendBankStatementViaSms()`  | sends bank statement via sms                                              | void    |
 
 | Class         | Members   |
@@ -43,9 +43,9 @@
 |               | `debit`   |
 |               | `balance` |
 
-| Class                            |
-|----------------------------------|
-| `CurrentAccount extends Account` |
+| Class                            | Methods                                            |
+|----------------------------------|----------------------------------------------------|
+| `CurrentAccount extends Account` | `withdraw(float amount, boolean managerApproved)`  |
 
 | Class                            |
 |----------------------------------|

@@ -15,6 +15,7 @@ base model:
 |                  |                              |                                |                                                                                                 | 
 |                  | String generateStatement()   |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction | 
 |                  |                              |                                |                                                                                                 | 
+|                  | double getBalance()          |                                | returns balance based on transactions                                                           | 
 |                  |                              |                                |                                                                                                 | 
 | Transaction      |                              | LocalTimeDate date             |                                                                                                 | 
 |                  |                              | long amount                    |                                                                                                 | 
@@ -39,6 +40,8 @@ extension model:
 |                         |                                |                                |                                                                                                 | 
 |                         | String generateStatement()     |                                | generate bank statement with transaction dates, amounts, and balance at the time of transaction | 
 |                         | void sendStatement()           |                                | send bank statement via sms                                                                     | 
+|                         |                                |                                |                                                                                                 | 
+|                         | double getBalance()            |                                | returns balance based on transactions                                                           |
 |                         |                                |                                |                                                                                                 | 
 | CurrentAccount: Account |                                |                                |                                                                                                 | 
 |                         |                                | boolean overdraftAllowed       |                                                                                                 | 

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Bank {
@@ -50,5 +51,36 @@ public class Bank {
     }
     private int getRandomAccountId() {
         return accounts.size() + 1;
+    }
+
+    public Account getAccountById(int accountId) {
+        for (Account account : accounts) {
+            if (account.getId() == accountId) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public void evaluateOverdraft(int accountId, boolean approve) {
+        Account account = getAccountById(accountId);
+        if (account == null) {
+            System.out.println("Account not found.");
+            return;
+        }
+
+        for (OverdraftRequest request : account.getOverdraftRequests()) {
+            if (request.getAccountId() == accountId) {
+                if (approve) {
+                    request.approve();
+                    int amountRequested = request.getAmountRequested();
+                    account.addDepositWithoutCalc(amountRequested, LocalDateTime.now());
+                } else {
+                    request.reject();
+                }
+                return;
+            }
+        }
+        System.out.println("Overdraft request not found for the account.");
     }
 }

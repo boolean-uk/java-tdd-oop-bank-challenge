@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Account {
@@ -11,12 +10,14 @@ public class Account {
     private int balance;
 
     private int customerId;
+    private ArrayList<OverdraftRequest> overdraftRequests;
 
     public Account(int accountId, String accountType, int initDeposit) {
         this.id = accountId;
         this.type = accountType;
         this.balance = initDeposit;
         this.info = new ArrayList<>();
+        this.overdraftRequests = new ArrayList<>();
     }
 
     public Account(int accountId, String accountType){
@@ -27,6 +28,10 @@ public class Account {
 
     public int getId() {
         return id;
+    }
+
+    public ArrayList<OverdraftRequest> getOverdraftRequests() {
+        return overdraftRequests;
     }
 
     public String getType() {
@@ -120,5 +125,10 @@ public class Account {
             }
         }
         return balance;
+    }
+
+    public void addOverdraft(int amountRequested) {
+        OverdraftRequest overdraftRequest = new OverdraftRequest(id, amountRequested);
+        overdraftRequests.add(overdraftRequest);
     }
 }

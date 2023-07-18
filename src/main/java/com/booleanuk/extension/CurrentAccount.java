@@ -22,6 +22,11 @@ public class CurrentAccount extends Account {
 
     public void approveOverdraft() {
         overdraftAllowed = true;
-        overdraftRequested = true;
+        overdraftRequested = false;
+    }
+
+    public void rejectOverdraft() {
+        overdraftAllowed = false;
+        overdraftRequested = false;
     }
 }

@@ -132,12 +132,12 @@ public class CurrentAccountTest {
         account.deposit(amountToDeposit, depositDate);
         String message = account.withdraw(amountToWithdraw, withdrawDate);
 
-        Assertions.assertEquals("Overdraft has been used. Your balance is: -400"+ POUND, message);
+        Assertions.assertEquals("Overdraft has been used. Your balance is: -400.0"+ POUND, message);
         Assertions.assertEquals(-400, account.countTheBalance());
         Assertions.assertEquals(2, account.getTransactionsHistory().size());
         Assertions.assertEquals(amountToDeposit, account.getTransactionsHistory().get(0).getAmount());
         Assertions.assertEquals(depositDate, account.getTransactionsHistory().get(0).getDate());
-        Assertions.assertEquals(amountToWithdraw, account.getTransactionsHistory().get(1).getAmount());
+        Assertions.assertEquals(amountToWithdraw*(-1), account.getTransactionsHistory().get(1).getAmount());
         Assertions.assertEquals(withdrawDate, account.getTransactionsHistory().get(1).getDate());
     }
 

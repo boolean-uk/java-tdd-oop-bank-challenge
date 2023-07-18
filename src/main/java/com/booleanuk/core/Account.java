@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -53,5 +54,28 @@ public class Account {
 
     public void withdraw(int amountOfMoney) {
         transfers.add(new Withdraw(amountOfMoney, LocalDate.now()));
+    }
+
+    public String generateBankStatements() {
+        int balance = 0;
+        StringBuilder s = new StringBuilder();
+        s.append(String.format("\n%-17s%-17s%-17s%-17s\n", "Date", "Credit", "Debit", "Balance"));
+        s.append(String.format("============================================================\n"));
+
+        for (Transfer transfer : transfers) {
+            balance += transfer.getAmountOfMoney();
+            s.append(String.format("%-17s", transfer.getDate()));
+            if (transfer instanceof Withdraw) {
+                s.append(String.format("%-17s", ""));
+                s.append(String.format("%-17s", transfer.getAmountOfMoney() / 100.0));
+            } else {
+                s.append(String.format("%-17s", transfer.getAmountOfMoney() / 100.0));
+                s.append(String.format("%-17s", ""));
+            }
+            s.append(String.format("%-17s", balance / 100.0));
+            s.append("\n");
+        }
+
+        return s.toString();
     }
 }

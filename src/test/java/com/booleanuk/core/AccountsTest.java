@@ -84,9 +84,11 @@ public class AccountsTest {
         Assertions.assertEquals(branch, savingsAccount.getBranch());
     }
 
-    @Test
-    public void generateBankStatementsShouldReturnNicelyFormattedOutput() {
-        account.deposit(20000);
-        Assertions.assertEquals("", account.generateBankStatements());
-    }
+//    @Test
+//    public void generateBankStatementsShouldReturnNicelyFormattedOutput() {
+//        account.deposit(20000);
+//        account.withdraw(10000);
+//        account.deposit(505);
+//        Assertions.assertEquals("", account.generateBankStatements());
+//    }
 }

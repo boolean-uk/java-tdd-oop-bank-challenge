@@ -55,7 +55,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void shouldSuccessfullyWithdrawFromAccount() {
+    public void shouldSuccessfullyWithdrawFromCurrentAccount() {
         BigDecimal withdrawAmount = BigDecimal.valueOf(500);
         BigDecimal balanceBefore = BigDecimal.valueOf(1000);
         BigDecimal balanceAfter = balanceBefore.subtract(withdrawAmount);
@@ -73,7 +73,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void shouldFailedWithdrawFromWhenNotEnoughFunds() {
+    public void shouldFailedWithdrawFromCurrentAccountWhenNotEnoughFunds() {
         BigDecimal withdrawAmount = BigDecimal.valueOf(1500);
         BigDecimal balanceBefore = BigDecimal.valueOf(1000);
         customer.openCurrentAccount();
@@ -87,5 +87,40 @@ public class BankAccountTest {
         Assertions.assertEquals(balanceBefore, result.getBalanceAfter());
         Assertions.assertEquals(TransactionType.WITHDRAW, result.getTransactionType());
         Assertions.assertEquals(1, customer.getCurrentAccount().getTransactions().size());
+    }
+
+    @Test
+    public void shouldSuccessfullyWithdrawFromSavingAccount() {
+        BigDecimal withdrawAmount = BigDecimal.valueOf(500);
+        BigDecimal balanceBefore = BigDecimal.valueOf(1000);
+        BigDecimal balanceAfter = balanceBefore.subtract(withdrawAmount);
+        customer.openSavingAccount();
+        customer.getSavingAccount().setBalance(balanceBefore);
+
+        BankTransaction result = customer.withdrawSavingAccount(withdrawAmount);
+
+        Assertions.assertEquals(withdrawAmount, result.getAmount());
+        Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
+        Assertions.assertEquals(balanceBefore, result.getBalanceBefore());
+        Assertions.assertEquals(balanceAfter, result.getBalanceAfter());
+        Assertions.assertEquals(TransactionType.WITHDRAW, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getSavingAccount().getTransactions().size());
+    }
+
+    @Test
+    public void shouldFailedWithdrawFromSavingAccountWhenNotEnoughFunds() {
+        BigDecimal withdrawAmount = BigDecimal.valueOf(1500);
+        BigDecimal balanceBefore = BigDecimal.valueOf(1000);
+        customer.openSavingAccount();
+        customer.getSavingAccount().setBalance(balanceBefore);
+
+        BankTransaction result = customer.withdrawSavingAccount(withdrawAmount);
+
+        Assertions.assertEquals(withdrawAmount, result.getAmount());
+        Assertions.assertEquals(TransactionResult.REFUSED_INSUFFICIENT_FUNDS, result.getTransactionResult());
+        Assertions.assertEquals(balanceBefore, result.getBalanceBefore());
+        Assertions.assertEquals(balanceBefore, result.getBalanceAfter());
+        Assertions.assertEquals(TransactionType.WITHDRAW, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getSavingAccount().getTransactions().size());
     }
 }

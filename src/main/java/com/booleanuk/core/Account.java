@@ -19,12 +19,12 @@ public class Account {
     {
         transactions.add(new Transaction(date,amount));
     }
-    public int getCurrentBalance()
+    public double getCurrentBalance()
     {
-        int currentBalance = 0;
+        double currentBalance = 0;
         for (Transaction transaction : transactions)
         {
-            currentBalance+=transaction.getAmount();
+            currentBalance+=(double)transaction.getAmount()/100;
         }
         return  currentBalance;
     }
@@ -45,24 +45,27 @@ public class Account {
                 //Credit
                 bankStatement+=" ||         ||";
                 //Debit
-                String amountString ="" +transaction.getAmount();
-                bankStatement+=insertSpaces(5-amountString.length());
-                bankStatement+=abs(transaction.getAmount())+".00 ";
+                double amountDouble = (double)transaction.getAmount()/100;
+                String amountString ="" +String.format("%.2f",amountDouble);
+                bankStatement+=insertSpaces(7-amountString.length());
+                bankStatement+=amountString+" ";
             }
             else
             {
                 //Credit
                 bankStatement+=" ||";
-                String amountString =""+abs(transaction.getAmount());
-                bankStatement+=insertSpaces(5-amountString.length());
-                bankStatement+=amountString+".00 ||";
+                double amountDouble = abs((double)transaction.getAmount()/100);
+                String amountString ="" +String.format("%.2f",amountDouble);
+                bankStatement+=insertSpaces(7-amountString.length());
+                bankStatement+=amountString+" ||";
                 //Debit
                 bankStatement+="         ";
             }
             //Balance
-            String balanceString =""+balance;
-            bankStatement+="||"+insertSpaces(5-balanceString.length());
-            bankStatement+= balance+".00\n";
+            double balanceDouble = (double)balance/100;
+            String balanceString =""+String.format("%.2f",balanceDouble);;
+            bankStatement+="||"+insertSpaces(7-balanceString.length());
+            bankStatement+= balanceString+"\n";
         }
         return bankStatement;
     }

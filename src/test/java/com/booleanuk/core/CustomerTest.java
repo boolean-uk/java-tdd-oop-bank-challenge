@@ -22,16 +22,30 @@ class CustomerTest {
     public void customerWithdrawMoney_notEnoughMoney()
     {
         customer.createAccount("currentAccount");
-        boolean result = customer.withdrawMoney(0,200);
+        boolean result = customer.withdrawMoney(customer.getAccountsList().get(0),200);
         Assertions.assertFalse(result);
     }
     @Test
     public void customerWithdrawMoney_EnoughMoney()
     {
         customer.createAccount("currentAccount");
-        customer.depositMoney(0,200);
-        boolean result = customer.withdrawMoney(0,200);
+        customer.depositMoney(customer.getAccountsList().get(0),20000);
+        boolean result = customer.withdrawMoney(customer.getAccountsList().get(0),200);
         Assertions.assertTrue(result);
     }
-
+    @Test
+    public void customerDepositMoney_shouldBeAddedToAccountBalance()
+    {
+        customer.createAccount("currentAccount");
+        customer.depositMoney(customer.getAccountsList().get(0),20000);
+        Assertions.assertEquals(200,customer.getAccountsList().get(0).getCurrentBalance());
+    }
+    @Test
+    public void customerCheckAccountBalanceTest()
+    {
+        customer.createAccount("currentAccount");
+        customer.depositMoney(customer.getAccountsList().get(0),20000);
+        double result = customer.checkAccountBalance(customer.getAccountsList().get(0));
+        Assertions.assertEquals(200.00,result);
+    }
 }

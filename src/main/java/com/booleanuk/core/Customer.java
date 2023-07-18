@@ -23,27 +23,35 @@ public class Customer {
         return accountsList;
     }
 
-    public void depositMoney(int account,int amount)
+    public void depositMoney(Account account,int amount)
     {
         //Format Date of transaction
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
 
-        accountsList.get(account).addTransaction(formattedDateTimeNow,amount);
+        account.addTransaction(formattedDateTimeNow,amount);
     }
 
-    public boolean withdrawMoney(int account,int amount)
+    public boolean withdrawMoney(Account account,int amount)
     {
         //Format Date of transaction
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
 
-        if(accountsList.get(account).getCurrentBalance() >= amount)
+        if(account.getCurrentBalance() >= amount)
         {
-            accountsList.get(account).addTransaction(formattedDateTimeNow,-amount);
+            account.addTransaction(formattedDateTimeNow,-amount);
             return true;
         }
         return false;
+    }
+    public double checkAccountBalance(Account account)
+    {
+        return account.getCurrentBalance();
+    }
+    public String generateAccountStatement(Account account)
+    {
+        return  account.generateBankStatement();
     }
 
 }

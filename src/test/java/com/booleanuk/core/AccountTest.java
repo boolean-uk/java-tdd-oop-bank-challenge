@@ -37,6 +37,11 @@ class AccountTest {
         account.addTransaction("Date",-100);
         Assertions.assertEquals(100,account.getCurrentBalance());
     }
+    @Test
+    public void getCurrentBalanceTest_noTransactions()
+    {
+        Assertions.assertEquals(0,account.getCurrentBalance());
+    }
 
 
 
@@ -47,5 +52,13 @@ class AccountTest {
         Assertions.assertEquals("date       || credit  || debit  || balance\n",result);
 
     }
+    @Test
+    public void generateBankStatementTest_isPrintingCorrectlyWithAddedTransaction()
+    {
+        account.addTransaction("15-04-21",20000);
+        String result = account.generateBankStatement();
 
+        Assertions.assertEquals("date       || credit  || debit  || balance\n15-04-21 ||         || 200.00 || 200.00\n",result);
+
+    }
 }

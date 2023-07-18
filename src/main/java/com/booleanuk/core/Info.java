@@ -12,14 +12,6 @@ public class Info {
 
     public Info(LocalDateTime transactionDate, int amount, int i, int newBalance, int customerId, int id) {
     }
-    public Info(LocalDateTime dateTime, int amount, int balance, int customerId, int accountId) {
-        this.dateTime = dateTime;
-        this.amount = amount;
-        this.balance = balance;
-        this.customerId = customerId;
-        this.accountId = accountId;
-    }
-
     public Info(LocalDateTime dateTime, int amount, int balance, int customerId, int accountId, TransactionType transactionType) {
         this.dateTime = dateTime;
         this.amount = amount;
@@ -37,14 +29,7 @@ public class Info {
     public int getBalance() {
         return balance;
     }
-    public int getCustomerId() {
-        return customerId;
-    }
     public TransactionType getTransactionType() {
         return transactionType;
-    }
-
-    public int getAccountId() {
-        return accountId;
     }
 }

@@ -15,10 +15,16 @@ public class BankBranchTest {
 
     @Test
     void shouldIncreaseNumberOfAccounts() {
-        Account account = new CurrentAccount();
+        Account account = new CurrentAccount(branch);
         branch.add(account);
         Assertions.assertEquals(1, branch.getAccounts().size());
         branch.add(account);
         Assertions.assertEquals(1, branch.getAccounts().size());
+    }
+
+    @Test
+    void shouldThrowWhenAccountIsNotAssignedToBranch() {
+        Account account = new CurrentAccount(new BankBranch());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> branch.add(account));
     }
 }

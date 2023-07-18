@@ -168,4 +168,18 @@ public class BankTest {
 
         assertTrue(accountManager.getOverDrafts().contains(overDraft1));
     }
+
+    @Test
+    public void shouldApproveOverdraft(){
+        //when
+        BigDecimal overdraft = BigDecimal.valueOf(1000);
+        Account account1 = accountManager.createAccount(client);
+        OverDraft overDraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+        //then
+        account.approveOverdraft(overdraft1);
+
+
+        assertEquals(overDraft1.getOverdraft(),account1.getOverdraft());
+
+    }
 }

@@ -12,4 +12,21 @@ public class OverDraft {
         this.account = account;
         this.overdraft = overdraft;
     }
+
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public BigDecimal getOverdraft() {
+        return overdraft;
+    }
+
+    public void setOverdraft(BigDecimal overdraft) {
+        this.overdraft = overdraft;
+    }
 }

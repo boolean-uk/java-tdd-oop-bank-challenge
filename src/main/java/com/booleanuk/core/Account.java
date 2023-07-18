@@ -92,4 +92,12 @@ public class Account {
     public Branch getBranch() {
         return branch;
     }
+
+    public BigDecimal getOverdraft() {
+        return overdraft;
+    }
+
+    public void setOverdraft(BigDecimal overdraft) {
+        this.overdraft = overdraft;
+    }
 }

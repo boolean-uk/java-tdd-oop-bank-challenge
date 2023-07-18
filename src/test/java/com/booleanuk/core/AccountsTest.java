@@ -76,4 +76,14 @@ public class AccountsTest {
         Assertions.assertEquals(15000, account.calculateBalance());
     }
 
+    @Test
+    public void withdrawWithOverdraftShouldCreateAndAddDepositToTransfers() {
+        account.deposit(20000);
+
+        Assertions.assertEquals(20000, account.calculateBalance());
+
+        Assertions.assertThrows(IllegalStateException, account.withdraw(80000));
+
+    }
+
 }

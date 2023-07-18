@@ -6,11 +6,12 @@ public class NormalAccount extends BankAccount {
 
     public NormalAccount(long accountNumber) {
         super(accountNumber);
-        this.debit = 500;
+        this.setDebit(500);
     }
-    public NormalAccount(long accountNumber,String branch) {
-        super(accountNumber,branch);
-        this.debit = 500;
+
+    public NormalAccount(long accountNumber, String branch) {
+        super(accountNumber, branch);
+        this.setDebit(500);
     }
 
     public double getDebit() {
@@ -22,19 +23,27 @@ public class NormalAccount extends BankAccount {
     }
 
     public boolean withdrawFromDebit(double amount) {
-        if (debit >= amount) {
-            this.getTransactions().add(new Transaction(amount, TransactionType.credit, this.getBalance() - debit));
-            debit -= amount;
-            this.setBalance(this.getBalance() - amount);
+        if (debit >= amount&& amount>0) {
+
+            this.getTransactions().add(new Transaction(amount, TransactionType.debit, this.getBalance() - amount));
+            this.setBalance(this.getBalance()-amount);
+            if(this.getBalance()<0) {
+                debit += this.getBalance();
+            }
             return true;
         }
         return false;
     }
 
-    public static void main(String[] args)
+    public boolean requestForOverdraft(double amount)
     {
-        NormalAccount normalAccount = new NormalAccount(123123);
-        normalAccount.deposit(123);
-        normalAccount.generateStatement();
+        if(this.getManager().ApproveOverdraftRequest(this,amount))
+        {
+            withdrawFromDebit(amount);
+            return true;
+        }
+        return false;
     }
+
+
 }

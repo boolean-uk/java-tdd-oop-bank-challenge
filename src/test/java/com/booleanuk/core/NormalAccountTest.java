@@ -6,145 +6,138 @@ import org.junit.jupiter.api.Test;
 public class NormalAccountTest {
 
     @Test
-    public void shouldCreateNormalAccountWithBalanceEquals0AndTransactionsListEmpty()
-    {
+    public void shouldCreateNormalAccountWithBalanceEquals0AndTransactionsListEmpty() {
         NormalAccount normalAccount = new NormalAccount(12312312);
 
-        Assertions.assertEquals(0,normalAccount.getBalance());
-        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+        Assertions.assertEquals(0, normalAccount.getBalance());
+        Assertions.assertEquals(0, normalAccount.getTransactions().size());
+        Assertions.assertEquals(12312312, normalAccount.getAccountNumber());
+        Assertions.assertEquals(500, normalAccount.getDebit());
     }
+
     @Test
-    public  void shouldReturnTrueWhenUserDepositPositiveValueOfMoney()
-    {
+    public void shouldReturnTrueWhenUserDepositPositiveValueOfMoney() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertTrue(normalAccount.deposit(123));
     }
 
     @Test
-    public  void shouldSetBalanceTo123()
-    {
+    public void shouldSetBalanceTo123() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(123);
-        Assertions.assertEquals(123,normalAccount.getBalance());
+        Assertions.assertEquals(123, normalAccount.getBalance());
     }
+
     @Test
-    public  void shouldntChangeBalance()
-    {
+    public void shouldntChangeBalance() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(-123);
-        Assertions.assertEquals(0,normalAccount.getBalance());
+        Assertions.assertEquals(0, normalAccount.getBalance());
     }
+
     @Test
-    public  void shouldReturnFalseWhenUserDepositNegativeValueOfMoneyOrNoMoney()
-    {
+    public void shouldReturnFalseWhenUserDepositNegativeValueOfMoneyOrNoMoney() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertFalse(normalAccount.deposit(-123));
         Assertions.assertFalse(normalAccount.deposit(0));
     }
 
     @Test
-    public  void shouldReturnTrueWhenEnoughMoneyOnAccountToWithdraw()
-    {
+    public void shouldReturnTrueWhenEnoughMoneyOnAccountToWithdraw() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(123);
         Assertions.assertTrue(normalAccount.withdraw(11));
     }
+
     @Test
-    public  void shouldReturnFalseWhenNotEnoughMoneyOnAccountToWithdraw()
-    {
+    public void shouldReturnFalseWhenNotEnoughMoneyOnAccountToWithdraw() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertFalse(normalAccount.withdraw(11));
     }
+
     @Test
-    public void shouldReturnTrueWhenEnoughMoneyOnDebitToWithdraw()
-    {
+    public void shouldReturnTrueWhenEnoughMoneyOnDebitToWithdraw() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertTrue(normalAccount.withdrawFromDebit(25));
     }
+
     @Test
-    public void shouldReturnFalseWhenNotEnoughMoneyOnDebitToWithdraw()
-    {
+    public void shouldReturnFalseWhenNotEnoughMoneyOnDebitToWithdraw() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertFalse(normalAccount.withdrawFromDebit(1111));
     }
 
     @Test
-    public void shouldAddNewTransactionToTransactionsListAfterCorrectDeposit()
-    {
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectDeposit() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(123);
-        Assertions.assertEquals(1,normalAccount.getTransactions().size());
-    }
-    @Test
-    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawal()
-    {
-        NormalAccount normalAccount = new NormalAccount(12312312);
-        normalAccount.deposit(123);
-        normalAccount.withdraw(123);
-        Assertions.assertEquals(2,normalAccount.getTransactions().size());
+        Assertions.assertEquals(1, normalAccount.getTransactions().size());
     }
 
     @Test
-    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectDeposit()
-    {
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawal() {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(123);
+        normalAccount.withdraw(123);
+        Assertions.assertEquals(2, normalAccount.getTransactions().size());
+    }
+
+    @Test
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectDeposit() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.deposit(-123);
-        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+        Assertions.assertEquals(0, normalAccount.getTransactions().size());
     }
+
     @Test
-    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawal()
-    {
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawal() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.withdraw(123);
-        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+        Assertions.assertEquals(0, normalAccount.getTransactions().size());
     }
 
     @Test
-    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawalFromDebit()
-    {
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawalFromDebit() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.withdrawFromDebit(123);
-        Assertions.assertEquals(1,normalAccount.getTransactions().size());
+        Assertions.assertEquals(1, normalAccount.getTransactions().size());
     }
 
     @Test
-    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawalFromDebit()
-    {
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawalFromDebit() {
         NormalAccount normalAccount = new NormalAccount(12312312);
         normalAccount.withdrawFromDebit(600);
-        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+        Assertions.assertEquals(0, normalAccount.getTransactions().size());
     }
+
     @Test
-    public void shouldReturnNoTransactionsStatementWhenTransactionsIsEmpty()
-    {
+    public void shouldReturnNoTransactionsStatementWhenTransactionsIsEmpty() {
         NormalAccount normalAccount = new NormalAccount(123123123);
-        Assertions.assertEquals("No Transactions done before",normalAccount.generateStatement().toString());
+        Assertions.assertEquals("No Transactions done before", normalAccount.generateStatement().toString());
     }
+
     @Test
-    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmpty()
-    {
+    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmpty() {
         NormalAccount normalAccount = new NormalAccount(123123123);
         normalAccount.deposit(123);
         System.out.println(normalAccount.generateStatement());
-        Assertions.assertNotEquals("No Transactions done before",normalAccount.generateStatement());
+        Assertions.assertNotEquals("No Transactions done before", normalAccount.generateStatement().toString());
     }
+
     @Test
-    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmptyMoreTransactions()
-    {
+    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmptyMoreTransactions() {
         NormalAccount normalAccount = new NormalAccount(123123123);
         normalAccount.deposit(1000);
         normalAccount.deposit(2000);
         normalAccount.withdraw(500);
 
         System.out.println(normalAccount.generateStatement());
-        Assertions.assertNotEquals("No Transactions done before",normalAccount.generateStatement());
+        Assertions.assertNotEquals("No Transactions done before", normalAccount.generateStatement().toString());
     }
 
-
     @Test
-    public void shouldCreateAccountWithBranchWarsaw()
-    {
-        NormalAccount normalAccount = new NormalAccount(123123,"Warsaw");
-        Assertions.assertEquals("Warsaw",normalAccount.getBranch());
+    public void shouldCreateAccountWithBranchWarsaw() {
+        NormalAccount normalAccount = new NormalAccount(123123, "Warsaw");
+        Assertions.assertEquals("Warsaw", normalAccount.getBranch());
     }
 }

@@ -1,7 +1,5 @@
 package com.booleanuk.extension;
 
-import com.booleanuk.core.Account;
-import com.booleanuk.core.AccountType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AccountTest {
-    private com.booleanuk.core.Account account;
+    private Account account;
 
     @BeforeEach
     public void setUp() {
-        account = new Account(AccountType.CURRENT);
+        Branch branch = new Branch("Bank Branch Warszawa-Srodmiescie", "Nowy Swiat 22/11, 01-412 Warszawa");
+        account = new SavingsAccount(branch);
     }
 
     @Test

@@ -5,12 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
-    AccountType type;
+public abstract class Account {
     List<Transaction> transactions = new ArrayList<>();
+    Branch branch;
 
-    public Account(AccountType type) {
-        this.type = type;
+    public Account(Branch branch) {
+        this.branch = branch;
     }
 
     public void deposit(double amount) {

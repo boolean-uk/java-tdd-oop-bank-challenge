@@ -51,5 +51,9 @@ public class AccountsTest {
         Assertions.assertEquals(branch, savingsAccount.getBranch());
     }
 
+    @Test
+    public void calculateBalanceShoudldReturn0() {
+        Assertions.assertEquals(0, account.calculateBalance());
+    }
 
 }

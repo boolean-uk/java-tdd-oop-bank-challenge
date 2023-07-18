@@ -3,12 +3,16 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class transactionTest {
     @Test
     public void assertTransactionIsCreated() {
         Transaction transaction = new Transaction(100, "01/01/2021", TransactionType.CREDIT, 100);
         Assertions.assertEquals(100, transaction.balanceAfter());
-        Assertions.assertEquals("01/01/2021", transaction.transactionDate());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Assertions.assertEquals("01/01/2021", dateFormat.format(transaction.transactionDate()));
         Assertions.assertEquals(TransactionType.CREDIT, transaction.type());
         Assertions.assertEquals(100, transaction.amount());
     }

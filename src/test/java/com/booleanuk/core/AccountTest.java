@@ -27,12 +27,29 @@ public class AccountTest {
         Assertions.assertNotEquals(1, customer.getAllAccounts().size());
     }
 
-    @Test void testGetParticularTypeOfAccounts_wrongTypeOfArgument_shouldThrowException(){
+    @Test
+    public void testGetParticularTypeOfAccounts_wrongTypeOfArgument_shouldThrowException(){
         Assertions.assertThrows(RuntimeException.class, () -> customer.getAccountsByType("different"));
     }
 
-    @Test void testGetParticularTypeOfAccounts_rightTypeOfArgument_shouldNotThrowException(){
+    @Test
+    public void testGetParticularTypeOfAccounts_rightTypeOfArgument_shouldNotThrowException(){
         Assertions.assertDoesNotThrow(() -> customer.getAccountsByType("saving"));
+    }
+
+    @Test
+    public void testDepositFunds(){
+       SavingAccount savingAccount = customer.createSavingAccount();
+       savingAccount.depositFunds(30.0);
+       Assertions.assertEquals(30.0, savingAccount.getBalance());
+    }
+
+    @Test
+    public void testDepositFunds(){
+        CurrentAccount currentAccount = customer.createCurrentAccount();
+        currentAccount.depositFunds(45.78);
+        currentAccount.depositFunds(45.00);
+        Assertions.assertEquals(90.78, currentAccount.getBalance());
     }
 
 }

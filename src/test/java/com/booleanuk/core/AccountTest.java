@@ -6,6 +6,7 @@ import com.booleanuk.core.accounts.Transaction;
 import com.booleanuk.core.users.Bank;
 import com.booleanuk.core.users.BankManager;
 import com.booleanuk.core.users.Customer;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,15 +17,21 @@ import java.time.format.DateTimeFormatter;
 public class AccountTest {
     private Customer customer;
     private BankManager bankManager;
-    private Bank bank = new Bank();
+    private Bank bank;
 
 
     @BeforeEach
     public void init(){
+        bank = new Bank();
         bank.addBankManager("man", "man", "manman", "1234", "Warsaw1");
         bank.addCustomer("Karolina", "M", "KarolinaM", "1234", "Warsaw1");
         bankManager = Bank.getBankManagerList().get(0);
         customer = Bank.getCustomerList().get(0);
+    }
+
+    @AfterEach
+    public void after(){
+        Bank.reset();
     }
     @Test
     public void createAccount(){
@@ -99,7 +106,9 @@ public class AccountTest {
         customer.getAccounts().get(0).addTransaction(new Transaction(200.00));
         customer.getAccounts().get(0).addTransaction(new Transaction(-50.00));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        Assertions.assertEquals(customer.getAccounts().get(0).calculateBalance(LocalDateTime.parse("2024-12-12"+ "T00:00:00", formatter)), 250.00);
+        double balance = customer.getAccounts().get(0).calculateBalance(LocalDateTime.parse("2024-12-12"+ "T00:00:00", formatter));
+        System.out.println(customer.getAccounts().get(0).getTransactionHistory().get(2).isAccepted());
+        Assertions.assertEquals(250.00, balance);
     }
 
     @Test

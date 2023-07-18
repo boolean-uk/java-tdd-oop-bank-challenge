@@ -99,4 +99,7 @@ public abstract class Account {
         return s;
     }
 
+    public static void setAccountCount(long accountCount) {
+        Account.accountCount = accountCount;
+    }
 }

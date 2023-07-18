@@ -1,5 +1,7 @@
 package com.booleanuk.core.users;
 
+import com.booleanuk.core.accounts.Account;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,5 +39,14 @@ public class Bank {
 
     public static List<BankManager> getBankManagerList() {
         return bankManagerList;
+    }
+
+    public static void reset(){
+        customerList.clear();
+        bankManagerList.clear();
+        Customer.customerCount = 0;
+        BankManager.managerCount = 0;
+        Account.setAccountCount(0);
+
     }
 }

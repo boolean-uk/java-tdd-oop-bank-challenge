@@ -45,7 +45,7 @@ public class BankTest {
         Assertions.assertEquals(new BigDecimal("1000.00"),save.getBalance());
     }
     @Test
-    public void testOverdrafting(){
+    public void testOverdraftingApproved(){
         curr.requestOverdraft(new BigDecimal("1000.00"));
         curr.deposit(new BigDecimal("500.00"),"2023-07-18", "Deposit");
         bank.approveOverdraft(curr);
@@ -55,10 +55,27 @@ public class BankTest {
     }
 
     @Test
+    public void testOverdraftingReject(){
+        curr.requestOverdraft(new BigDecimal("1000.00"));
+        curr.deposit(new BigDecimal("500.00"),"2023-07-18", "Deposit");
+        bank.rejectOverdraft(curr);
+        curr.withdraw(new BigDecimal("1000.00"),"2023-07-18", "Withdrawal");
+        Assertions.assertEquals(new BigDecimal("500.00"),curr.getBalance());
+        Assertions.assertEquals("rejected", curr.getOverdraft().getStatus());
+    }
+    @Test
     public void testInterestRate(){
         save.deposit(new BigDecimal("1000.00"),"2023-07-18", "Deposit");
         save.withdraw(new BigDecimal("900.00"),"2023-07-18", "Withdrawal");
         save.applyInterest("2023-07-18");
         Assertions.assertEquals(new BigDecimal("105.00"),save.getBalance());
     }
+
+    @Test
+    public void testBranch(){
+        Assertions.assertEquals(2,bank.getBranches().size());
+        Assertions.assertEquals(1,branchGdansk.branchSize());
+
+    }
+
 }

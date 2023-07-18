@@ -19,6 +19,7 @@ public class BankAccount {
         return branch;
     }
 
+
     public String getAccountNumber() {
         return accountNumber;
     }

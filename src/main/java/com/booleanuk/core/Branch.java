@@ -29,9 +29,6 @@ public class Branch {
         accounts.add(account);
     }
 
-    public void removeAccount(BankAccount account) {
-        accounts.remove(account);
-    }
 
     public List<BankAccount> getAccounts() {
         return accounts;

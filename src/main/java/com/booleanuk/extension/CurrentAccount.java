@@ -14,6 +14,7 @@ public class CurrentAccount implements BankAccount {
     private List<Transaction> transactions;
     private double balance;
     private boolean canBeOverdrafted;
+    private boolean overdraftRequest;
     private Branch branch;
 
 
@@ -25,12 +26,14 @@ public class CurrentAccount implements BankAccount {
         //account can't be overdrafted on creation but can be later
         //be allowed to be overdrafted but maximum amount of overdraft is equal 500
         canBeOverdrafted = false;
+        overdraftRequest = false;
     }
 
     public CurrentAccount(Branch branch) {
         transactions = new ArrayList<>();
         this.balance = 0;
         canBeOverdrafted = false;
+        overdraftRequest = false;
         this.branch = branch;
     }
 
@@ -92,8 +95,21 @@ public class CurrentAccount implements BankAccount {
 
         return false;
     }
+
     public void overdraftRequest() {
-         canBeOverdrafted = !canBeOverdrafted;
+        overdraftRequest = true;
+    }
+
+    public boolean getOverdraftRequest() {
+        return overdraftRequest;
+    }
+    public void overdraftRequestApproved() {
+         canBeOverdrafted = true;
+        overdraftRequest = false;
+    }
+    public void overdraftRequestRejected() {
+        canBeOverdrafted = false;
+        overdraftRequest = false;
     }
 
     @Override
@@ -130,4 +146,6 @@ public class CurrentAccount implements BankAccount {
             return String.format("%,.2f", totalBalance);
         }
     }
+
+
 }

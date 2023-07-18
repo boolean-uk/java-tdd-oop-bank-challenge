@@ -111,4 +111,16 @@ public class CurrentAccountTest {
     }
 
 
+    @Test
+    public void approveOverdraftRequestTest() {
+        account.overdraftRequest();
+
+        Assertions.assertTrue(account.getOverdraftRequest());
+        account.overdraftRequestApproved();
+
+        Assertions.assertFalse(account.getOverdraftRequest());
+        Assertions.assertTrue(account.getCanBeOverdrafted());
+    }
+
+
 }

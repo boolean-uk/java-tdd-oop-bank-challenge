@@ -88,17 +88,13 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public String generateCurrentAccountStatements() {
         BankStatementGenerator generator = new BankStatementGenerator();
-        String result = generator.generateStatement(currentAccount.getTransactions());
-        twillioService.sendSmsMessage(phoneNumber, result);
-        return result;
+        return generator.generateStatement(currentAccount.getTransactions());
     }
 
     @Override
     public String generateSavingAccountStatements() {
         BankStatementGenerator generator = new BankStatementGenerator();
-        String result = generator.generateStatement(savingAccount.getTransactions());
-        twillioService.sendSmsMessage(phoneNumber, result);
-        return result;
+        return generator.generateStatement(savingAccount.getTransactions());
     }
 
     @Override

@@ -63,4 +63,20 @@ public class AccountTest {
         Assertions.assertThrows(RuntimeException.class, () -> currentAccount.depositFunds(- 10.0));
     }
 
+    @Test
+    public void testWithdrawFunds_withdrawLessThanItIsOnAccount_shouldReturnEquals(){
+        CurrentAccount currentAccount = customer.createCurrentAccount();
+        currentAccount.depositFunds(30.5);
+        currentAccount.depositFunds(12.0);
+        currentAccount.withdrawFunds(12.0);
+        Assertions.assertEquals(30.5, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testWithdrawFunds_withdrawMoreThanItIsOnAccount_shouldThrowException(){
+        CurrentAccount currentAccount = customer.createCurrentAccount();
+        currentAccount.depositFunds(12.0);
+        Assertions.assertThrows(RuntimeException.class, () -> currentAccount.withdrawFunds(13.0));
+    }
+
 }

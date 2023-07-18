@@ -23,10 +23,10 @@
 |                 |                                             |                                                       |                                         |                            |
 | BankStatement   |                                             | Map<String,List<Transaction> transactions, User owner |                                         | String formatted statement |
 |                 |                                             |                                                       |                                         |                            |
-| Bank            | createAccount(Account account)              | List<Account> accounts                                | create a new account                    | Account created            |
+| Bank            | getBranchAccounts(branchId: String)         | List<Account> accounts                                | get all accounts associated with        | List<Account> accounts     |
 |                 | getAccount(accountNumber: String)           |                                                       | get account by account ID               | Account object             |
-|                 | getBranchAccounts(branchId: String)         |                                                       | get all accounts associated with        | List<Account> accounts     |
-|                 |                                             |                                                       | a specific branch                       |                            |
+|                 |                                             |                                                       |                                         |                            |
+|                 |                                             |                                                       |                                         |                            |
 |                 |                                             |                                                       |                                         |                            |
 | TransactionType |                                             |                                                       |                                         |                            |
 |                 |                                             |                                                       |                                         |                            |

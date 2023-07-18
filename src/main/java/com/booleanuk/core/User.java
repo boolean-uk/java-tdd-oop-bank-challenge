@@ -56,10 +56,15 @@ public class User {
     }
 
     public boolean approveRequest(Request request) {
-        //Automatically approves all request but logic can be added to set isApproved
-        boolean isApproved = true;
-        if(isApproved) request.account().getTransactions().add(new Transaction(WITHDRAW, request.amount()));
-        else return false;
-        return true;
+        if(isManager){
+            //Automatically approves all request but logic can be added to set isApproved
+            boolean isApproved = true;
+            if(isApproved) request.account().getTransactions().add(new Transaction(WITHDRAW, request.amount()));
+            else return false;
+            return true;
+        }
+        return false;
     }
+
+
 }

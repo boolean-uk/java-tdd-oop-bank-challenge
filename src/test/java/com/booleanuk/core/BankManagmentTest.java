@@ -92,6 +92,12 @@ public class BankManagmentTest {
         user.sendRequest(2000,currentAccount.getAccountNumber());
         assertEquals(-2000,currentAccount.getBalance());
         assertTrue(manager.approveRequest(request));
+    }
 
+    @Test
+    public void shouldGetAccountsByBranch(){
+        CurrentAccount account2 = new CurrentAccount("PL14",user,manager);
+        SavingAccount account3 = new SavingAccount("PL8",user,manager);
+        assertEquals(2,user.getAccountsByBranch("PL8").size());
     }
 }

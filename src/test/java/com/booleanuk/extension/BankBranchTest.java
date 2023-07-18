@@ -10,6 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.UUID;
 
+import static com.booleanuk.extension.Request.Status.ACCEPTED;
+import static com.booleanuk.extension.Request.Status.PENDING;
+
 public class BankBranchTest {
 
     @BeforeEach
@@ -61,7 +64,7 @@ public class BankBranchTest {
     }
 
     @Test
-    public void testRequestingOverdraft() {
+    public void testRequestingOverdraftProcedure() {
         BankBranch bankBranch = (new BankHQ()).openBranch();
         UUID customerId = bankBranch.registerCustomer();
         UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
@@ -69,8 +72,16 @@ public class BankBranchTest {
         Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
 
         bankBranch.requestOverDraft(customerId, accountId, BigDecimal.valueOf(500));
+        Request request = bankBranch.getRequests(customerId).get(0);
+
+        Assertions.assertEquals(PENDING, request.getStatus());
+        Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
+
+
+        bankBranch.reviewOverdraftRequest(request, ACCEPTED);
+        Assertions.assertEquals(ACCEPTED, request.getStatus());
 
         Assertions.assertTrue(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
-        Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
     }
+
 }

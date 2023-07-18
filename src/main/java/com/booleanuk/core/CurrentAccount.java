@@ -9,4 +9,7 @@ public class CurrentAccount extends Account {
     CurrentAccount(Customer customer) {
         super(customer);
     }
+    CurrentAccount(Customer customer, Branch branch){
+        super(customer, branch);
+    }
 }

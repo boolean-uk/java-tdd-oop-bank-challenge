@@ -1,10 +1,8 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.enums.BANK_NAMES;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

@@ -9,4 +9,8 @@ public class SavingsAccount extends Account {
     SavingsAccount(Customer customer){
         super(customer);
     }
+
+    SavingsAccount(Customer customer, Branch branch){
+        super(customer, branch);
+    }
 }

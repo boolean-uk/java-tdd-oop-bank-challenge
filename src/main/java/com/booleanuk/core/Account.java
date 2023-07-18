@@ -3,7 +3,6 @@ package com.booleanuk.core;
 import com.booleanuk.core.enums.TRANSACTION_TYPE;
 
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,8 @@ import java.util.Random;
 public abstract class Account {
     private final Customer customer;
     private final List<Transaction> transactions = new ArrayList<>();
-    private String accountNumber;
+    private final String accountNumber;
+    private Branch branch;
 
     Account(BigDecimal amount, Customer customer) {
         this.customer = customer;
@@ -23,6 +23,16 @@ public abstract class Account {
     Account(Customer customer) {
         this.customer = customer;
         this.accountNumber = createAccountNumber();
+    }
+
+    Account(Customer customer, Branch branch){
+        this.customer = customer;
+        this.accountNumber = createAccountNumber();
+        this.branch = branch;
+    }
+
+    public Branch getBranch() {
+        return branch;
     }
 
     private String createAccountNumber() {
@@ -41,7 +51,13 @@ public abstract class Account {
     }
 
     public void withdraw(BigDecimal amount) {
-        createTransaction(amount, TRANSACTION_TYPE.DEBIT);
+        if(this.getBalance().compareTo(amount) < 0) {
+            throw new IllegalStateException(
+                    String.format("Insufficient funds %s, cannot withdraw %s ", this.getBalance(), amount));
+
+        } else {
+            createTransaction(amount, TRANSACTION_TYPE.DEBIT);
+        }
     }
 
 
@@ -63,7 +79,7 @@ public abstract class Account {
         return balance;
     }
 
-    public BigDecimal getBalance(Transaction transaction, BigDecimal prevBalance) {
+    private BigDecimal getBalance(Transaction transaction, BigDecimal prevBalance) {
         BigDecimal balance = BigDecimal.ZERO;
         if (transaction.getType() == TRANSACTION_TYPE.CREDIT) {
             balance = prevBalance.add(transaction.getAmount());

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class AccountTest {
 
@@ -17,11 +18,11 @@ public class AccountTest {
 
     @Test
     void depositTest_depositValidAmount(){
-        double amount = 100;
+        float amount = 100;
         LocalDate date = LocalDate.of(2023, 7, 18);
         String message = account.deposit(amount, date);
 
-        Assertions.assertEquals("100" + pound + "deposited into your account.", message);
+        Assertions.assertEquals("100.0" + pound + " deposited into your account.", message);
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1, account.getTransactionsHistory().size());
         Assertions.assertEquals(100, account.getTransactionsHistory().get(0).getAmount());
@@ -30,13 +31,13 @@ public class AccountTest {
 
     @Test
     void depositTest_depositValidAmountAndInvalidDate(){
-        double amount = 100;
+        float amount = 100;
         LocalDate date = LocalDate.of(2023, 7, 18);
         LocalDate date2 = LocalDate.of(2023, 7, 15);
         account.deposit(amount, date);
         String message = account.deposit(amount, date2);
 
-        Assertions.assertEquals("You cannot deposit any money before the date of the first transaction.", message);
+        Assertions.assertEquals("You cannot deposit any money before the last date in transactions history.", message);
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1, account.getTransactionsHistory().size());
         Assertions.assertEquals(100, account.getTransactionsHistory().get(0).getAmount());
@@ -45,7 +46,7 @@ public class AccountTest {
 
     @Test
     void depositTest_depositInvalidAmount(){
-        double amount = -100;
+        float amount = -100;
         LocalDate date = LocalDate.of(2023, 7, 18);
         String message = account.deposit(amount, date);
 
@@ -56,14 +57,14 @@ public class AccountTest {
 
     @Test
     void withdrawTest_withdrawValidAmountAndValidDate(){
-        double amountToDeposit = 100;
-        double amountToWithdraw = 50;
+        float amountToDeposit = 100;
+        float amountToWithdraw = 50;
         LocalDate depositDate = LocalDate.of(2023, 7, 18);
         LocalDate withdrawDate = LocalDate.of(2023, 7, 18);
         account.deposit(amountToDeposit, depositDate);
         String message = account.withdraw(amountToWithdraw, withdrawDate);
 
-        Assertions.assertEquals("100" + pound + "withdrawn from your account.", message);
+        Assertions.assertEquals("50.0" + pound + " withdrawn from your account.", message);
         Assertions.assertEquals(50, account.getBalance());
         Assertions.assertEquals(2, account.getTransactionsHistory().size());
 
@@ -74,14 +75,14 @@ public class AccountTest {
 
     @Test
     void withdrawTest_withdrawValidAmountAndInvalidDate(){
-        double amountToDeposit = 100;
-        double amountToWithdraw = 50;
+        float amountToDeposit = 100;
+        float amountToWithdraw = 50;
         LocalDate depositDate = LocalDate.of(2023, 7, 18);
         LocalDate withdrawDate = LocalDate.of(2023, 7, 15);
         account.deposit(amountToDeposit, depositDate);
         String message = account.withdraw(amountToWithdraw, withdrawDate);
 
-        Assertions.assertEquals("You cannot withdraw any money before the date of the first transaction.", message);
+        Assertions.assertEquals("You cannot withdraw any money before the last date in transactions history.", message);
         Assertions.assertEquals(100, account.getBalance());
         Assertions.assertEquals(1, account.getTransactionsHistory().size());
         Assertions.assertEquals(amountToDeposit, account.getTransactionsHistory().get(0).getAmount());
@@ -90,8 +91,8 @@ public class AccountTest {
 
     @Test
     void withdrawTest_withdrawInvalidAmount(){
-        double amountToDeposit = 100;
-        double amountToWithdraw = -50;
+        float amountToDeposit = 100;
+        float amountToWithdraw = -50;
         LocalDate depositDate = LocalDate.of(2023, 7, 18);
         LocalDate withdrawDate = LocalDate.of(2023, 7, 18);
         account.deposit(amountToDeposit, depositDate);
@@ -106,8 +107,8 @@ public class AccountTest {
 
     @Test
     void withdrawTest_withdrawMoreAmountThanIsInTheAccount(){
-        double amountToDeposit = 100;
-        double amountToWithdraw = 500;
+        float amountToDeposit = 100;
+        float amountToWithdraw = 500;
         LocalDate depositDate = LocalDate.of(2023, 7, 15);
         LocalDate withdrawDate = LocalDate.of(2023, 7, 18);
         account.deposit(amountToDeposit, depositDate);
@@ -118,6 +119,29 @@ public class AccountTest {
         Assertions.assertEquals(1, account.getTransactionsHistory().size());
         Assertions.assertEquals(amountToDeposit, account.getTransactionsHistory().get(0).getAmount());
         Assertions.assertEquals(depositDate, account.getTransactionsHistory().get(0).getDate());
+    }
+
+    @Test
+    void generateBankStatementTest(){
+        float amountToDeposit = 100;
+        float amountToDeposit2 = 200;
+        float amountToWithdraw = 50;
+        LocalDate depositDate = LocalDate.of(2023, 7, 10);
+        LocalDate depositDate2 = LocalDate.of(2023, 7, 15);
+        LocalDate withdrawDate = LocalDate.of(2023, 7, 18);
+        account.deposit(amountToDeposit, depositDate);
+        account.deposit(amountToDeposit2, depositDate2);
+        account.withdraw(amountToWithdraw, withdrawDate);
+        String result = account.generateBankStatement();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        StringBuilder expected = new StringBuilder();
+        expected.append(String.format("%-13s || %-10s || %-10s || %-10s\n",  " date", "credit", "debit", "balance"));
+        expected.append(String.format(" %-12s || %-10s || %-10.2f || %.2f\n",  withdrawDate.format(formatter), " ", amountToWithdraw, amountToDeposit + amountToDeposit2 - amountToWithdraw));
+        expected.append(String.format(" %-12s || %-10.2f || %-10s || %.2f\n",  depositDate2.format(formatter), amountToDeposit2, " ", amountToDeposit + amountToDeposit2));
+        expected.append(String.format(" %-12s || %-10.2f || %-10s || %.2f\n",  depositDate.format(formatter), amountToDeposit, " ", amountToDeposit));
+
+        Assertions.assertEquals(expected.toString(), result);
     }
 
 }

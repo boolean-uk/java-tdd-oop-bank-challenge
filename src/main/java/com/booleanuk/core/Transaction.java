@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class Transaction {
     private LocalDate date;
-    private double amount;
+    private float amount;
 
-    public Transaction(LocalDate date, double amount) {
+    public Transaction(LocalDate date, float amount) {
         this.date = date;
         this.amount = amount;
     }
@@ -15,7 +15,7 @@ public class Transaction {
         return date;
     }
 
-    public double getAmount() {
+    public float getAmount() {
         return amount;
     }
 }

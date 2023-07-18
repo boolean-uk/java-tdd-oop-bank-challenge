@@ -10,7 +10,7 @@ public class TransactionTest {
     @Test
     public void createTransaction_withValidData(){
         LocalDate date = LocalDate.of(2023, 7, 18);
-        double amount = 12.5;
+        float amount = 12.5f;
         Transaction transaction = new Transaction(date, amount);
 
         Assertions.assertEquals(date, transaction.getDate());

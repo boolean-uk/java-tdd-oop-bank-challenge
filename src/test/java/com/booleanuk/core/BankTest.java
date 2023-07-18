@@ -11,4 +11,12 @@ public class BankTest {
         Assertions.assertTrue(bank.getCustomers().isEmpty());
         Assertions.assertTrue(bank.getAccounts().isEmpty());
     }
+
+    @Test
+    public void shouldAddCustomerToBank() {
+        Bank bank = new Bank();
+        int customerId = 123;
+        Assertions.assertTrue(bank.addCustomer(customerId));
+        Assertions.assertEquals(1, bank.getCustomers().size());
+    }
 }

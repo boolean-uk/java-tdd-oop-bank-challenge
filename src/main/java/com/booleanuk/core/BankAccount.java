@@ -52,5 +52,8 @@ public class BankAccount {
         }
         return statement.toString();
     }
-   
+    public void sendSmsWithStatement(){
+        SmsSender sms = new SmsSender();
+        sms.sendSMS(generateBankStatement());
+    }
 }

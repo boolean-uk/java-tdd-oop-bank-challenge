@@ -17,6 +17,10 @@ public class BankManager {
         return true;
     }
 
+    public Account getAccount(String accountNumber) {
+        return accounts.get(accountNumber);
+    }
+
     public HashMap<String, Account> getAccounts() {
         return accounts;
     }

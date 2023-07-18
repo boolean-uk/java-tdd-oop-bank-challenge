@@ -10,21 +10,40 @@ public class BankManagerTest {
     @BeforeEach
     public void initializeTest() {
         bankManager = new BankManager();
-        bankManager.createAccount(AccountType.CURRENT);
-        bankManager.createAccount(AccountType.SAVINGS);
     }
 
     @Test
     public void shouldCreateNewCurrentAccount() {
-        boolean result = bankManager.createAccount(AccountType.CURRENT);
+        // Arrange
+        boolean result;
+        // Act
+        result = bankManager.createAccount(AccountType.CURRENT);
+        // Assert
         Assertions.assertTrue(result);
-        Assertions.assertTrue(bankManager.getAccounts().containsKey("CUR2"));
+        Assertions.assertNotNull(bankManager.getAccount("CUR0"));
     }
 
     @Test
     public void shouldCreateNewSavingsAccount() {
-        boolean result = bankManager.createAccount(AccountType.SAVINGS);
+        // Arrange
+        boolean result;
+        // Act
+        result = bankManager.createAccount(AccountType.SAVINGS);
+        // Assert
         Assertions.assertTrue(result);
-        Assertions.assertTrue(bankManager.getAccounts().containsKey("SAV2"));
+        Assertions.assertNotNull(bankManager.getAccount("SAV0"));
     }
+
+    @Test
+    public void shouldDeposit() {
+
+        bankManager.createAccount(AccountType.CURRENT);
+        Account account = bankManager.getAccount()
+    }
+
+//    @Test
+//    public void shouldGenerateBankStatements() {
+//        bankManager.createAccount(AccountType.CURRENT);
+//        bankManager.getAccounts().get("CUR0").printStatement();
+//    }
 }

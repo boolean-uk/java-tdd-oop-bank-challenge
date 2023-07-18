@@ -9,10 +9,14 @@ import java.util.stream.Collectors;
 
 public class BankAccount {
     LinkedHashMap<String, List<Transaction>> accounts;
+    private float overDraftAmount;
+    private float overDraftRequestedAmount;
 
     public BankAccount() {
         accounts = new LinkedHashMap<>();
         accounts.put("main", new ArrayList<>());
+        accounts.put("savings", new ArrayList<>());
+        overDraftAmount = 0;
     }
 
     public boolean deposit(String accountName, float amount, LocalDate date) {
@@ -33,7 +37,7 @@ public class BankAccount {
         transactions.stream().forEach(
                 transaction -> balance.updateAndGet(currentBalance -> currentBalance + transaction.amount));
 
-        if(amount > balance.get())
+        if(balance.get() + overDraftAmount < amount)
             return false;
 
         Transaction transaction = new Transaction(date, -amount);
@@ -62,7 +66,26 @@ public class BankAccount {
         result.append(transactionsString);
         return result.toString();
     }
-
-    private String leftPad(String text, int length) { return String.format("%" + length + "." + length + "s", text); }
     private String rightPad(String text, int length) { return String.format("%-" + length + "." + length + "s", text); }
+
+    public boolean requestOverDraft(float amount) {
+        if(amount < 0)
+            return false;
+
+        overDraftRequestedAmount = amount;
+        return true;
+    }
+
+    public float getOverDraftRequestedAmount() {
+        return overDraftRequestedAmount;
+    }
+
+    public boolean approveOverDraftAmount(float amount) {
+        if(amount < 0 || amount != overDraftRequestedAmount)
+            return false;
+
+        overDraftAmount = overDraftRequestedAmount;
+        overDraftRequestedAmount = 0;
+        return true;
+    }
 }

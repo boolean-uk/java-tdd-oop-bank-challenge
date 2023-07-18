@@ -19,7 +19,7 @@ public abstract class Account {
     }
 
     public void withdraw(BigDecimal amount, LocalDate date) {
-        if(getBalance().compareTo(amount) < 0)
+        if(!canWithdraw(amount))
             throw new IllegalArgumentException("You don't have that much money.");
         addTransaction(amount.negate(), date);
     }
@@ -41,5 +41,9 @@ public abstract class Account {
     protected void addTransaction(BigDecimal amount, LocalDate date) {
         Transaction transaction = new Transaction(amount, date);
         transactions.add(transaction);
+    }
+
+    protected boolean canWithdraw(BigDecimal amount) {
+        return getBalance().compareTo(amount) < 0;
     }
 }

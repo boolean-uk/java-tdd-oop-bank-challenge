@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.booleanuk.core.TransactionType.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
     Account account;
@@ -20,21 +21,25 @@ public class AccountTest {
     Transaction wire;
     @BeforeEach
     public void setup(){
-        account = new Account();
+        account = new CurrentAccount("PL8",user,manager);
         user = new User();
         manager = new User();
-        transactions = new ArrayList<>();
-        withdraw = new Transaction(WITHDRAW,100);
-        deposit1 = new Transaction(DEPOSIT, 1000);
-        deposit2 = new Transaction(DEPOSIT, 800);
-        wire = new Transaction(WIRE,500);
+//        transactions = new ArrayList<>();
+//        withdraw = new Transaction(WITHDRAW,100.00);
+//        deposit1 = new Transaction(DEPOSIT, 1000.00);
+//        deposit2 = new Transaction(DEPOSIT, 800.00);
+        wire = new Transaction(WIRE,500.00);
+    }
+
+    @Test
+    public void shouldDepositMoney(){
+        account.deposit(1000.00);
+        assertEquals(1,account.getTransactions().size());
     }
 
     @Test
     public void shouldGetBalance(){
-        transactions.add(deposit1);
-        transactions.add(deposit2);
-        transactions.add(withdraw);
-        Assertions.assertEquals(1700,account.getBalance());
+
+        assertEquals(1700.00,account.getBalance());
     }
 }

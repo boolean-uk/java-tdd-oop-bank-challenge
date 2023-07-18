@@ -15,6 +15,10 @@ public class Bank {
         this.customers = new HashMap<>();
     }
 
+    private static boolean isPositive(BigDecimal funds) {
+        return funds.compareTo(BigDecimal.ZERO) > 0;
+    }
+
     public UUID registerCustomer() {
         Customer customer = new Customer();
         customers.put(customer.getId(), customer);
@@ -47,7 +51,7 @@ public class Bank {
     public boolean withdraw(UUID customerId, UUID accountId, BigDecimal funds) {
         if (isCustomer(customerId) && isAccount(accountId) && isPositive(funds)) {
             Account account = accounts.get(accountId);
-            if (isWithdrawable(account, funds));
+            if (isWithdrawable(account, funds)) ;
             account.withdraw(funds);
             return true;
         }
@@ -60,10 +64,6 @@ public class Bank {
             return account.generateStatement();
         }
         return "";
-    }
-
-    private static boolean isPositive(BigDecimal funds) {
-        return funds.compareTo(BigDecimal.ZERO) > 0;
     }
 
     private boolean isWithdrawable(Account account, BigDecimal funds) {

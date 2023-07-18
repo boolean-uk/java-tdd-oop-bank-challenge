@@ -17,8 +17,8 @@ public abstract class Account {
 
     private final UUID id;
     private final Customer holder;
-    private BigDecimal balance;
     private final List<Transaction> transactions;
+    private BigDecimal balance;
 
     public Account(Customer holder) {
         this.id = UUID.randomUUID();
@@ -40,7 +40,6 @@ public abstract class Account {
         balance = transaction.balance();
         return balance;
     }
-
 
 
     public String generateStatement() {

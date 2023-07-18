@@ -1,4 +1,4 @@
 package com.booleanuk.core;
 
-public class CurrentAccount {
+public class Transfer {
 }

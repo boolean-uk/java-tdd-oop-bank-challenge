@@ -1,2 +1,4 @@
-package com.booleanuk.core;public class SavingsAccount {
+package com.booleanuk.core;
+
+public class SavingsAccount {
 }

@@ -6,14 +6,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
+    private Branch branch;
+    private Account account;
+
     @BeforeEach
-    static void setup() {
-        Branch branch = new Branch("PLWAW1", "Poland", "Warsaw");
-        Account account = new Account(12);
+    public void setup() {
+        branch = new Branch("PLWAW1", "Poland", "Warsaw");
+        account = new Account("12", branch);
+
     }
 
     @Test
     public void accountGetterAndSetterShouldReturnProperValue() {
-        Assertions.assertEquals(12, account.getAccountNr());
+        Assertions.assertEquals("12", account.getAccountNr());
     }
 }

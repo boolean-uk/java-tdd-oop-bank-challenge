@@ -34,7 +34,26 @@ public abstract class BankAccount {
     }
 
     public StringBuilder generateStatement() {
-        return new StringBuilder();
+        StringBuilder statement = new StringBuilder();
+        if(transactions.size()>0) {
+            statement.append("|").append(String.format("%-12s|| %15s || %15s || %15s|\n", "    date", "credit     ", "debit     ", "balance    "));
+            statement.append("|").append("--------------------------------------------------------------------").append("|").append("\n");
+            for (Transaction transaction : transactions
+            ) {
+                if (transaction.getTransactionType() == TransactionType.debit) {
+                    statement.append("|").append(String.format("%-12s|| %15s || %15.2f || %15.2f|\n", transaction.getDate().toString(), "", transaction.getAmount(), transaction.getBalance()));
+                    continue;
+                }
+                statement.append("|").append(String.format("%-12s|| %15.2f || %15.2s || %15.2f|\n", transaction.getDate().toString(), transaction.getAmount(), " ", transaction.getBalance()));
+            }
+        }
+        else {
+            statement.append("No Transactions done before");
+        }
+
+
+        return statement;
+
     }
 
 

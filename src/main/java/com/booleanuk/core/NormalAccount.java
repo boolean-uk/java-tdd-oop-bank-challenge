@@ -1,11 +1,12 @@
 package com.booleanuk.core;
 
-public class NormalAccount  extends  BankAccount{
+public class NormalAccount extends BankAccount {
 
     private double debit;
-    public NormalAccount( long accountNumber) {
+
+    public NormalAccount(long accountNumber) {
         super(accountNumber);
-        this.debit =500;
+        this.debit = 500;
     }
 
     public double getDebit() {
@@ -16,13 +17,20 @@ public class NormalAccount  extends  BankAccount{
         this.debit = debit;
     }
 
-    public boolean withdrawFromDebit(double amount)
-    {
-        if(debit>=amount)
-        {
-         debit-=amount;
-         return true;
+    public boolean withdrawFromDebit(double amount) {
+        if (debit >= amount) {
+            this.getTransactions().add(new Transaction(amount, TransactionType.credit, this.getBalance() - debit));
+            debit -= amount;
+            this.setBalance(this.getBalance() - amount);
+            return true;
         }
-        return  false;
+        return false;
+    }
+
+    public static void main(String[] args)
+    {
+        NormalAccount normalAccount = new NormalAccount(123123);
+        normalAccount.deposit(123);
+        normalAccount.generateStatement();
     }
 }

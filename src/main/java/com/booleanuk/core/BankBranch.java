@@ -20,19 +20,19 @@ public class BankBranch {
     }
 
     public String getBankStatement(int accountNumber){
-        return "";
+        return allAccounts.get(accountNumber).generateBankStatement();
     }
 
     public void depositMoney(int accountNumber, double amount){
-
+        allAccounts.get(accountNumber).depositMoney(amount);
     }
 
     public void withdrawMoney(int accountNumber, double amount){
-
+        allAccounts.get(accountNumber).withdrawMoney(amount);
     }
 
     public void requestOverdraft(int accountNumber, double amount) {
-
+        allAccounts.get(accountNumber).requestOverdraft(amount);
     }
 
     public BankAccount getAccount(int accountNumber){

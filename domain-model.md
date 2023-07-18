@@ -59,17 +59,20 @@ I want statements to be sent as messages to my phone.
 |----------------|------------------------------------------------------|-----------------------------------------|--------------------------------------------------------|
 | Account        |                                                      |                                         |                                                        |
 | SavingAccount  |                                                      |                                         |                                                        |
+| Request        |                                                      |                                         |                                                        |
 | Transaction    |                                                      |                                         |                                                        |
 | AccountManager | void generateBankStatement();                        | `ArrayList<Transaction> statements `    | It will print bank statement                           |
 |                | void deposit(BigDecimal deposit)                     | `ArrayList<Transaction> statements `    | It will add money to account balance                   |
 |                | void withdraw(BigDecimal withdraw)                   | `ArrayList<Transaction> statements `    | It subtract money from account balance                 |
 |                | Account createAccount()                              |                                         | It will return new account for Client                  |
 |                | Account createSavingAccount()                        |                                         | It will return new saving account for Client           |
-|                | BigDecimal calculateAccountBalance()                 | `ArrayList<Transaction> statements `    | It Will return account balance depends on transactions |
+|                | BigDecimal calculateAccountBalance(Account account)  | `ArrayList<Transaction> statements `    | It Will return account balance depends on transactions |
 |                | boolean linkToBranch(Account account, Branch branch) |                                         | It will add account to selected branch                 |
 |                | void addRequestToOverdraft(BigDecimal overdraft)     | `ArrayList<Request> overdraftRequests ` | it will add new overdraft request                      |
 |                | void  approveOverdraft(Account Account)              | `ArrayList<Request> overdraftRequests ` | it will accept overdraft request                       |
 |                | void  rejectOverdraft(Account Account)               | `ArrayList<Request> overdraftRequests ` | it will reject overdraft request                       |
+
+
 
 
 

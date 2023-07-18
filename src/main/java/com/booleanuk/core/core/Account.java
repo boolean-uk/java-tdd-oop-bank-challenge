@@ -1,6 +1,7 @@
 package com.booleanuk.core.core;
 
 import java.math.BigDecimal;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +35,24 @@ public class Account {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         return sum.doubleValue();
+    }
+
+    public String generateStatement() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        StringBuilder statementBuilder = new StringBuilder();
+
+        double balance = 0;
+        for (Transaction transaction : transactions) {
+            balance += transaction.amount;
+            String formattedAmount = String.format("%.2f", Math.abs(transaction.amount));
+            String formattedBalance = String.format("%.2f", balance);
+            String transactionLine = transaction.dateTime.format(formatter) + " || "
+                    + (transaction.amount >= 0 ? formattedAmount + "  ||        || " : "       || "
+                    + formattedAmount + "  || ") + formattedBalance;
+            statementBuilder.insert(0, transactionLine).insert(0, "\n");
+        }
+        statementBuilder.insert(0, "date || credit || debit || balance");
+
+        return statementBuilder.toString();
     }
 }

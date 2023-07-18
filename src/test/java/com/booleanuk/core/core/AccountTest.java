@@ -59,10 +59,10 @@ class AccountTest {
         account.withdraw(19.99);
 
         assertEquals("""
-                date || credit || debit  || balance
-                %s   ||        || 19.99  || 19.99
-                %s   || 19.99  ||        || 39.98
-                %s   || 19.99  ||        || 19.99
-                """.formatted(date, date, date), account.generateStatement());
+                date || credit || debit || balance
+                %s ||        || 19.99  || 19.99
+                %s || 19.99  ||        || 39.98
+                %s || 19.99  ||        || 19.99"""
+                .formatted(date, date, date), account.generateStatement());
     }
 }

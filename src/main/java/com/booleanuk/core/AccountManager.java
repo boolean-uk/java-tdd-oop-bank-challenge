@@ -11,8 +11,8 @@ public class AccountManager {
       accounts = new ArrayList<>();
     }
 
-    public Account createAccount(Client client1) {
-        Account account = new Account(client1);
+    public Account createAccount(Client client) {
+        Account account = new Account(client);
         accounts.add(account);
         return account;
     }

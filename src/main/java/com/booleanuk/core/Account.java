@@ -7,6 +7,7 @@ public class Account {
     private String accountNumber;
 
 
+
     public Account(Client client) {
         this.client = client;
         accountNumber = ((int)(Math.random()*999999) +100000)+"";

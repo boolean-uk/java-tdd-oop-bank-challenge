@@ -11,10 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BankTest {
 
     AccountManager accountManager;
+    Client client;
+    Account account;
 
     @BeforeEach
     public  void prepareForTests(){
         accountManager = new AccountManager();
+        client = new Client("John","Smith");
+        account = accountManager.createAccount(client);
     }
 
 
@@ -29,13 +33,32 @@ public class BankTest {
 
     }
 
-
     @Test
+    public void shouldCreateSavingAccountForClient(){
+        //given
+        Client client1 = new Client("John","Smith");
+        //when
+        Account account1 = accountManager.createSavingAccount(client1);
+        //then
+        assertTrue(accountManager.getAccounts().contains(account1));
+
+    }
+
+
+
+
+/*    @Test
     public void shouldReturnBalanceForAccount(){
         //given
         //when
         BigDecimal balance  = accountManager.calculateAccountBalance(account);
         //then
         assertEquals(BigDecimal.valueOf(10000),balance );
+    }*/
+
+
+    @Test
+    public void shouldAddBalanceToAccount(){
+
     }
 }

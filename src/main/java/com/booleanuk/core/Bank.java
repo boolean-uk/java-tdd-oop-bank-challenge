@@ -24,14 +24,18 @@ public class Bank {
     }
 
     public static void createAccount(String name, boolean isSaving){
-        User user = new User(name);
+        User owner;
+        if(usersList.stream().noneMatch(user -> user.getName().equals(name))) {
+            owner = new User(name);
+        }
+        else owner = usersList.stream().filter(user -> user.getName().equals(name)).findFirst().orElseThrow();
         //branchID should be known by system that creates an account based on location
         //manager should be decided by un employee of th bank in my case it will be chosen by random
         User manager = usersList.stream().filter(User::isManager).findAny().orElseThrow();
         if(isSaving) {
-            new SavingAccount("PL18",user,manager);
+            new SavingAccount("PL18",owner,manager);
         } else{
-            new CurrentAccount("PL18",user,manager);
+            new CurrentAccount("PL18",owner,manager);
         }
     }
 }

@@ -111,8 +111,11 @@ public class BankManagementTest {
 
     @Test
     public void shouldCreateAccount(){
-        Bank.createAccount("Wojtek",true);
+        Bank.createAccount("Mateusz",true);
         assertEquals(4,Bank.getUsersList().size());
         assertEquals(2,Bank.getAccountList().size());
+        Bank.createAccount("Mateusz",true);
+        assertEquals(4,Bank.getUsersList().size());
+        assertEquals(3,Bank.getAccountList().size());
     }
 }

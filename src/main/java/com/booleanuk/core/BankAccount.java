@@ -11,8 +11,33 @@ public abstract class BankAccount {
         this.balance = 0.0d;
     }
 
-    public void deposit(double amount) throws IllegalArgumentException {} // TODO
+    public void deposit(double amount) throws IllegalArgumentException {
+        if (amount < 0.0d) {
+            throw new IllegalArgumentException("Cannot deposit a negative amount");
+        }
+        this.balance += amount;
+    }
 
-    public void withdraw(double amount) throws IllegalArgumentException {} // TODO
+    public void withdraw(double amount) throws IllegalArgumentException {
+        if (amount < 0.0d) {
+            throw new IllegalArgumentException("Cannot withdraw a negative amount");
+        }
+        if (amount > this.balance) {
+            throw new IllegalArgumentException("Cannot withdraw more than the balance");
+        }
+        this.balance -= amount;
+    }
+
+    public double getBalance() {
+        return this.balance;
+    }
+
+    public String getAccountNumber() {
+        return this.accountNumber;
+    }
+
+    public int getAccountHolderID() {
+        return this.accountHolderID;
+    }
 
 }

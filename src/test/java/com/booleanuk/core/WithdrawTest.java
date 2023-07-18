@@ -30,7 +30,7 @@ public class WithdrawTest {
     }
 
     @Test
-    public void withdrawWithOverdraftShouldThrowException() {
+    public void withdrawWithOverdraftShouldThrowExceptionFromCurrentAccount() {
         currentAccount.deposit(20000);
 
         Assertions.assertEquals(20000, currentAccount.calculateBalance());
@@ -38,7 +38,7 @@ public class WithdrawTest {
     }
 
     @Test
-    public void withdrawWithOverdraftShouldThrowExceptionAtTheEnd() {
+    public void withdrawWithOverdraftShouldThrowExceptionAtTheEndFromCurrentAccount() {
         currentAccount.deposit(20000);
         currentAccount.deposit(30000);
         currentAccount.deposit(1000);
@@ -49,5 +49,36 @@ public class WithdrawTest {
         System.out.println(currentAccount.calculateBalance());
 
         Assertions.assertThrows(IllegalStateException.class, () -> currentAccount.withdraw(800000000));
+    }
+
+    @Test
+    public void withdrawWithOverdraftShouldAllowToWithdrawMoneyFromCurrentAccount() {
+        currentAccount.withdraw(20000);
+
+        Assertions.assertEquals(-20000, currentAccount.calculateBalance());
+
+        currentAccount.withdraw(20000);
+
+        Assertions.assertEquals(-40000, currentAccount.calculateBalance());
+    }
+
+    @Test
+    public void withdrawWithOverdraftShouldAllowToWithdrawMoneyFromSavingsAccount() {
+        savingsAccount.deposit(40000);
+        savingsAccount.withdraw(20000);
+
+        Assertions.assertEquals(20000, savingsAccount.calculateBalance());
+
+        savingsAccount.withdraw(20000);
+
+        Assertions.assertEquals(0, savingsAccount.calculateBalance());
+
+    }
+
+    @Test
+    public void withdrawShouldNotAllowToWithdrawMoneyFromSavingsAccount() {
+        savingsAccount.deposit(40000);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> savingsAccount.withdraw(40001));
     }
 }

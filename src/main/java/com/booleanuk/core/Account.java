@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Account {
@@ -47,5 +48,43 @@ public class Account {
         Info depositInfo = new Info(transactionDate, 0, amount, newBalance, customerId, id);
         info.add(depositInfo);
         balance = newBalance;
+    }
+    public void addDeposit(int amount, LocalDateTime dateTime) {
+        int newBalance = balance + amount;
+        Info depositInfo = new Info(dateTime, amount, newBalance, customerId, id, TransactionType.DEBIT);
+        info.add(depositInfo);
+        balance = newBalance;
+    }
+
+    public void addWithdrawal(int amount, LocalDateTime dateTime) {
+        int newBalance = balance - amount;
+        Info withdrawalInfo = new Info(dateTime, amount, newBalance, customerId, id, TransactionType.CREDIT);
+        info.add(withdrawalInfo);
+        balance = newBalance;
+    }
+
+    public void generateInfo(int amount, LocalDateTime dateTime, String transactionType) {
+        if (transactionType.equalsIgnoreCase("debit")) {
+            addDeposit(amount, dateTime);
+        } else if (transactionType.equalsIgnoreCase("credit")) {
+            addWithdrawal(amount, dateTime);
+        } else {
+            System.out.println("Invalid transaction type. Use 'debit' or 'credit'.");
+        }
+    }
+
+    public void printBankStatement() {
+        System.out.println(" date      || credit        || debit      || balance");
+        System.out.println("------------------------------------------------------");
+        for (Info transaction : info) {
+            String credit = (transaction.getTransactionType() == TransactionType.DEBIT) ? String.format("%.2f", (double) transaction.getAmount()) : "";
+            String debit = (transaction.getTransactionType() == TransactionType.CREDIT) ? String.format("%.2f", (double) transaction.getAmount()) : "";
+
+            System.out.printf("%s || %13s || %10s || %.2f%n",
+                    transaction.getDateTime().toLocalDate(),
+                    credit,
+                    debit,
+                    (double) transaction.getBalance());
+        }
     }
 }

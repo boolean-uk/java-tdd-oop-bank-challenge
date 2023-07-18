@@ -25,7 +25,7 @@ I want to deposit and withdraw funds.
 | Class   | Field                                      | Method                                        | Condition                                                | Output                |
 |---------|--------------------------------------------|-----------------------------------------------|----------------------------------------------------------|-----------------------|
 | Account | ArrayList<Transaction> transactionHistory; | void depositMoney(double amountDeposited)     |                                                          |                       |
-|         | int accountNumber                          |                                               |                                                          |                       |
+|         |                                            |                                               |                                                          |                       |
 |         | String accountOwner                        | boolean withdrawMoney(double amountWithdrawn) | if the amount of money in the account >= amountWithdrawn | true                  |
 |         |                                            |                                               | if the amount of money in the account < amountWithdrawn  | false                 |
 |         |                                            |                                               |                                                          |                       |
@@ -42,5 +42,6 @@ I want to deposit and withdraw funds.
 |-------|--------------------------------------------------|------------------------------------------|-----------|-----------------------|
 | Bank  | Hashmap<Integer, SavingsAccount> savingsAccounts | int openSavingsAccount(String ownerName) | always    | int newAccountNumber  |
 |       | Hashmap<Integer, CurrentAccount> currentAccounts | int openCurrentAccount(String ownerName) | always    | int newAccountNumber  |
-|       |                                                  |                                          |           |                       |
+|       | int currentAccountsCounter                       |                                          |           |                       |
+|       | int savingsAccountsCounter                       |                                          |           |                       |
 

@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'io.freefair.lombok' version '8.0.1'
+    id 'jacoco'
 }
 
 group 'com.booleanuk'
@@ -10,10 +12,20 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    // Testing
+    testImplementation(
+            'org.junit.jupiter:junit-jupiter-api:5.8.1',
+            'org.assertj:assertj-core:3.24.2'
+    )
+
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
 }

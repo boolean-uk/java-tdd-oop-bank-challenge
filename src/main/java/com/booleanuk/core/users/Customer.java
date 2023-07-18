@@ -44,6 +44,16 @@ public class Customer extends User{
         this.accounts.stream().filter(a -> a.getId() == accountId).findFirst().get().addTransaction(new Transaction(amount, LocalDateTime.parse("2000-12-12"+ "T00:00:00", formatter)));
     }
 
+    public String printStatements(){
+        String s = "";
+        for(Account a: accounts){
+            s += "Account: "+ a.getId() +"\n \n";
+            s += a.printAccountStatement();
+            s += "\n";
+        }
+        return s;
+    }
+
     public static int getCustomerCount() {
         return customerCount;
     }

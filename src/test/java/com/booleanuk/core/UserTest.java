@@ -89,4 +89,19 @@ public class UserTest {
         Assertions.assertEquals(customer.getAccounts().get(0).getTransactionHistory().size(), 2);
         Assertions.assertEquals(0.0, customer.getAccounts().get(0).getMaxOverdraft());
     }
+
+    @Test
+    public void printStatements() {
+        customer.createStandardAccount();
+        customer.createStandardAccount();
+        customer.deposit(100.00, 1);
+        customer.deposit(1000.00, 1);
+        customer.withdraw(50.00, 1);
+        customer.deposit(22,2);
+        String statements = customer.printStatements();
+        System.out.println(statements);
+        Assertions.assertTrue(statements.contains("12/12/2000   ||            || -50.00     || 1050.00"));
+        Assertions.assertTrue(statements.contains("12/12/2000   || 22.00      ||            || 22.00"));
+    }
+
 }

@@ -6,6 +6,8 @@ import com.booleanuk.core.users.Customer;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+
 
 public abstract class Account {
     protected static long accountCount = 0;
@@ -68,4 +70,33 @@ public abstract class Account {
     public double getMaxOverdraft() {
         return maxOverdraft;
     }
+
+    public String printAccountStatement() {
+        String s = "";
+        s+= String.format("%-12s || %-10s || %-10s || %-10s%n", "Date", "Credit", "Debit", "Balance");
+        s+="============================================== \n";
+
+        double balance = 0.0;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        for (Transaction transaction : transactionHistory) {
+            LocalDateTime date = transaction.getDate();
+            String formattedDate = date.format(formatter);
+
+            String credit = "";
+            String debit = "";
+
+            if (transaction.getAmount() > 0) {
+                credit = String.format("%.2f", transaction.getAmount());
+            } else {
+                debit = String.format("%.2f", transaction.getAmount());
+            }
+
+            balance += transaction.getAmount();
+
+            s += String.format("%-12s || %-10s || %-10s || %-10s%n", formattedDate, credit, debit, String.format("%.2f", balance));
+        }
+        return s;
+    }
+
 }

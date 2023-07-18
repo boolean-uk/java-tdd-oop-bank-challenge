@@ -104,5 +104,18 @@ public class AccountTest {
         Assertions.assertEquals(customer.getAccounts().get(0).calculateBalance(LocalDateTime.parse("2024-12-12"+ "T00:00:00", formatter)), 250.00);
     }
 
+    @Test
+    public void printStatement(){
+        customer.createStandardAccount();
+        customer.getAccounts().get(0).addTransaction(new Transaction(100.00));
+        customer.getAccounts().get(0).addTransaction(new Transaction(200.00));
+        customer.getAccounts().get(0).addTransaction(new Transaction(-50.00));
+        String statement = customer.getAccounts().get(0).printAccountStatement();
+        System.out.println(statement);
+        Assertions.assertTrue(statement.contains("18/07/2023   ||            || -50.00     || 250.00"));
+        Assertions.assertTrue(statement.contains("18/07/2023   || 200.00     ||            || 300.00"));
+
+    }
+
 
 }

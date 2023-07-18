@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.booleanuk.core.TransactionType.*;
+
 public class User {
     private String name;
     private List<Account> accounts;
@@ -34,5 +36,20 @@ public class User {
     }
     public void printStatement(){
         System.out.println(this.generateStatement().toString());
+    }
+
+    public Request sendRequest(double amount, String accountNumber) {
+        Account account = Bank.getAccount(accountNumber);
+        Request request = new Request(amount,account);
+        account.getManager().approveRequest(request);
+        return request;
+    }
+
+    private boolean approveRequest(Request request) {
+        //Automatically approves all request but logic can be added to set isApproved
+        boolean isApproved = true;
+        if(isApproved) request.account().getTransactions().add(new Transaction(WITHDRAW, request.amount()));
+        else return false;
+        return true;
     }
 }

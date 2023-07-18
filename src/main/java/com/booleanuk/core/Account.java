@@ -30,6 +30,7 @@ public class Account {
         this.owner = owner;
         this.manager = manager;
         this.owner.getAccounts().add(this);
+        Bank.getAccountList().add(this);
     }
 
     public String getBranchID() {

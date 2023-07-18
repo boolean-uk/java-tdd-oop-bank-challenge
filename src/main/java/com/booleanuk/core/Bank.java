@@ -38,4 +38,7 @@ public class Bank {
         return null;
     }
 
+    public Map<UUID, Account> getAccounts() {
+        return accounts;
+    }
 }

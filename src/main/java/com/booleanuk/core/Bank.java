@@ -10,9 +10,9 @@ public class Bank {
     SavingAccount savingAccount;
     List<Transaction> transactions;
 
-    public Bank() {
-        this.currentAccount = new CurrentAccount(BigDecimal.valueOf(0));
-        this.savingAccount = new SavingAccount(BigDecimal.valueOf(0));
+    public Bank(String branchID) {
+        this.currentAccount = new CurrentAccount(BigDecimal.valueOf(0),branchID);
+        this.savingAccount = new SavingAccount(BigDecimal.valueOf(0),branchID);
         transactions = new ArrayList<>();
     }
 
@@ -80,14 +80,5 @@ public class Bank {
         return sb.toString().replace("null", " ".repeat(4));
     }
 
-    public static void main(String[] args) {
-        List<Transaction> transactions = new ArrayList<>();
-        transactions.add(new Transaction(BigDecimal.valueOf(200), Transaction.accountType.CREDIT));
-        transactions.add(new Transaction(BigDecimal.valueOf(500), Transaction.accountType.DEBET));
-        Bank bank=new Bank();
-        bank.makeNewTransaction(BigDecimal.valueOf(400), Transaction.accountType.CREDIT);
-        bank.makeNewTransaction(BigDecimal.valueOf(-500), Transaction.accountType.CREDIT);
-        bank.makeNewTransaction(BigDecimal.valueOf(200), Transaction.accountType.DEBET);
 
-    }
 }

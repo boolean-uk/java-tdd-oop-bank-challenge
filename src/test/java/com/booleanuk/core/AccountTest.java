@@ -9,26 +9,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AccountTest {
     @Test
     public void depositSaving(){
-        Account account=new SavingAccount(BigDecimal.ZERO);
+        Account account=new SavingAccount(BigDecimal.ZERO,"KRK");
         account.deposit(BigDecimal.valueOf(800));
         assertEquals(BigDecimal.valueOf(800),account.amount);
     }
     @Test
     public void depositCurrent(){
-        Account account=new CurrentAccount(BigDecimal.ZERO);
+        Account account=new CurrentAccount(BigDecimal.ZERO,"WRO");
         account.deposit(BigDecimal.valueOf(800));
         assertEquals(BigDecimal.valueOf(800),account.amount);
     }
     @Test
     public void withdrawCurrent(){
-        Account account=new CurrentAccount(BigDecimal.ZERO);
+        Account account=new CurrentAccount(BigDecimal.ZERO,"WAR");
         account.deposit(BigDecimal.valueOf(800));
         account.withdraw(BigDecimal.valueOf(300));
         assertEquals(BigDecimal.valueOf(500),account.amount);
     }
     @Test
     public void withdrawSaving(){
-        Account account=new SavingAccount(BigDecimal.ZERO);
+        Account account=new SavingAccount(BigDecimal.ZERO,"WRO");
         account.deposit(BigDecimal.valueOf(800));
         account.withdraw(BigDecimal.valueOf(300));
         assertEquals(BigDecimal.valueOf(500),account.amount);

@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 
 public class Account {
     BigDecimal amount;
+    String branchID;
 
-    public Account(BigDecimal amount) {
+    public Account(BigDecimal amount,String branchID) {
         this.amount = amount;
+        this.branchID=branchID;
     }
 
     void deposit(BigDecimal deposit){

@@ -16,4 +16,10 @@ interface CustomerOperations {
     BankTransaction depositSavingAccount(BigDecimal bigDecimal);
 
     BankTransaction withdrawSavingAccount(BigDecimal bigDecimal);
+
+    String generateCurrentAccountStatements();
+
+    String generateSavingAccountStatements();
+
+    String generateAllAccountsStatements();
 }

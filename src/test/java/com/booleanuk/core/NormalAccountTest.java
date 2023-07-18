@@ -111,8 +111,21 @@ public class NormalAccountTest {
     public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawalFromDebit()
     {
         NormalAccount normalAccount = new NormalAccount(12312312);
-        normalAccount.withdrawFromDebit(123);
+        normalAccount.withdrawFromDebit(600);
         Assertions.assertEquals(0,normalAccount.getTransactions().size());
+    }
+    @Test
+    public void shouldReturnNoTransactionsStatementWhenTransactionsIsEmpty()
+    {
+        NormalAccount normalAccount = new NormalAccount(123123123);
+        Assertions.assertEquals("No Transactions done before",normalAccount.getTransactions());
+    }
+    @Test
+    public void shouldReturnTransactionsStatementWhenTransactionsIsNotEmpty()
+    {
+        NormalAccount normalAccount = new NormalAccount(123123123);
+        normalAccount.deposit(123);
+        Assertions.assertNotEquals("No Transactions done before",normalAccount.getTransactions());
     }
 
 

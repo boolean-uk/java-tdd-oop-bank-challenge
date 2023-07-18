@@ -99,4 +99,21 @@ public class NormalAccountTest {
         Assertions.assertEquals(0,normalAccount.getTransactions().size());
     }
 
+    @Test
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawalFromDebit()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.withdrawFromDebit(123);
+        Assertions.assertEquals(1,normalAccount.getTransactions().size());
+    }
+
+    @Test
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawalFromDebit()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.withdrawFromDebit(123);
+        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+    }
+
+
 }

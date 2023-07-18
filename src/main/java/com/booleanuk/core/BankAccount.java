@@ -28,8 +28,16 @@ public class BankAccount {
         if(!accounts.containsKey(accountName) || amount <= 0)
             return false;
 
+        AtomicReference<Float> balance = new AtomicReference<>(0f);
+        List<Transaction> transactions = accounts.get(accountName);
+        transactions.stream().forEach(
+                transaction -> balance.updateAndGet(currentBalance -> currentBalance + transaction.amount));
+
+        if(amount > balance.get())
+            return false;
+
         Transaction transaction = new Transaction(date, -amount);
-        accounts.get(accountName).add(transaction);
+        transactions.add(transaction);
         return true;
     }
 

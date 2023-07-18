@@ -1,3 +1,4 @@
+### Core
 | Class         | Members        | Methods | Scenarios | Outputs |
 |---------------|----------------|---------|-----------|---------|
 | `Transaction` | `Date date`    |         |           |         |
@@ -13,3 +14,4 @@
 |               |                                               | `withdraw(String accountName, int ammount)`                    | account with given accountName exists and amount is valid   | float   |
 |               |                                               |                                                                | account with given accountName not exists                   | float   |
 |               |                                               |                                                                | amount is invalid                                           | float   |
+### Extension

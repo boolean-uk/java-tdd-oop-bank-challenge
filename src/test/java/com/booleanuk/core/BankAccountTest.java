@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -59,7 +58,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void withdrawTest_WhenEverythingIsCorrect_ShouldReturnTrue () {
+    public void withdrawTest_WhenNoMoneyToWithdraw_ShouldReturnFalse () {
         //Given
         BankAccount bankAccount = new BankAccount();
 
@@ -70,9 +69,28 @@ public class BankAccountTest {
         boolean result2 = bankAccount.withdraw("main", 2000, date);
 
         //Then
+        Assertions.assertFalse(result1);
+        Assertions.assertFalse(result2);
+    }
+
+    @Test
+    public void withdrawTest_WhenEverythingIsOk_ShouldReturnTrue () {
+        //Given
+        BankAccount bankAccount = new BankAccount();
+
+        LocalDate date = LocalDate.parse("2023-07-20", DateTimeFormatter.ISO_LOCAL_DATE);
+        bankAccount.deposit("main", 1000, date);
+        bankAccount.deposit("main", 2000, date);
+
+        //When
+        boolean result1 = bankAccount.withdraw("main", 1000, date);
+        boolean result2 = bankAccount.withdraw("main", 2000, date);
+
+        //Then
         Assertions.assertTrue(result1);
         Assertions.assertTrue(result2);
     }
+
 
     @Test
     public void withdrawTest_WhenAccountNameIsInvalid_ShouldReturnFalse () {

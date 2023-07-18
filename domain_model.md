@@ -6,7 +6,7 @@
 | BankAccount                        | double balance                  | deposit(double amount):boolean                    | deposit done correctly,transaction added to transactions list   | true          |
 |                                    | long accountNumber              |                                                   | deposit done incorrectly                                        | false         |
 |                                    | List<Transaction> transactions  | withdraw(double amount):boolean                   | withdraw done correctly, transaction added to transactions list | true          |
-|                                    |                                 |                                                   | withdraw done incorrectly                                       | false         |
+|                                    | String branch                   |                                                   | withdraw done incorrectly                                       | false         |
 |                                    |                                 | generateStatement(): StringBuilder                | generates bank statement                                        | StringBuilder |
 |                                    |                                 |                                                   |                                                                 |               |
 | NormalAccount expends BankAccount  | double balance                  | deposit(double amount):boolean                    | deposit done correctly,transaction added to transactions list   | true          |

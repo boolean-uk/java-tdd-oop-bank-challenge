@@ -77,9 +77,9 @@ I want statements to be sent as messages to my phone.
 |             | boolean deposit    |        |           |        |
 
 
-| Class                  | Field | Method                                                       | Condition | Output |
-|------------------------|-------|--------------------------------------------------------------|-----------|--------|
-| BankStatementGenerator |       | String generateBankStatement(List<Transaction> transactions) |           |        |
+| Class                  | Field | Method                                                       | Condition | Output         |
+|------------------------|-------|--------------------------------------------------------------|-----------|----------------|
+| BankStatementGenerator |       | String generateBankStatement(List<Transaction> transactions) |           | bank statement |
 
 
 | Class  | Field              | Method | Condition | Output |

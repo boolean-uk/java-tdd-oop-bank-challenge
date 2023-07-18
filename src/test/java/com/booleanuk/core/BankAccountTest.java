@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -173,5 +174,18 @@ public class BankAccountTest {
         Assertions.assertTrue(result2);
         Assertions.assertTrue(result3);
         Assertions.assertFalse(result4);
+    }
+
+    @Test
+        public void sendSMSTest() throws IOException {
+        BankAccount bankAccount = new BankAccount();
+
+        LocalDate date = LocalDate.parse("2023-07-20", DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate date1 = LocalDate.parse("2023-07-21", DateTimeFormatter.ISO_LOCAL_DATE);
+        bankAccount.deposit("main", 1000, date);
+        bankAccount.withdraw("main", 500, date);
+        bankAccount.deposit("main", 1000, date1);
+
+        bankAccount.sendSMS("main");
     }
 }

@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 public class Functions {
     public static String padLeftSpaces(String inputString, int length) {

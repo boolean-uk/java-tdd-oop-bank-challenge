@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 public class SavingsAccount extends BankAccount {
     private final double interest;
@@ -9,6 +9,10 @@ public class SavingsAccount extends BankAccount {
         super(initialBalance);
         interest = 2.0;
     }
+    public SavingsAccount(double initialBalance, Branch branch) {
+        super(initialBalance, branch);
+        interest = 2.0;
+    }
     public SavingsAccount(double initialBalance, double interest) {
         super(initialBalance);
         this.interest = interest;
@@ -16,13 +20,12 @@ public class SavingsAccount extends BankAccount {
     @Override
     public boolean withdraw(double amount) {
         //withdrawing from savings account usually is associated with some fee
-        if(balance < amount + 5.0)
+        if(getBalance() < amount + 5.0)
             return false;
         transactionHistory.add(new Transaction(-amount, 5.0));
-        balance -= (amount + 5.0);
         return true;
     }
     public double calculateInterestGain() {
-        return balance * (100.0 + interest) / 100.0;
+        return getBalance() * (100.0 + interest) / 100.0;
     }
 }

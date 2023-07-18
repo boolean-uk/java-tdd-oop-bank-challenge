@@ -1,2 +1,7 @@
-package com.booleanuk.extension;public class AcceptanceStatus {
+package com.booleanuk.extension;
+
+public enum AcceptanceStatus {
+    Accepted(),
+    Declined(),
+    Pending()
 }

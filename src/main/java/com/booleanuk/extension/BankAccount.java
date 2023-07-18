@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,39 +6,49 @@ import java.util.LinkedList;
 
 public class BankAccount {
     protected final LinkedList<Transaction> transactionHistory;
-    protected double balance;
     protected final LocalDateTime openDate;
     protected String number;
-
+    private final Branch branch;
     public BankAccount() {
-        transactionHistory = new LinkedList<Transaction>();
-        balance = 0.0;
-        openDate = LocalDateTime.now();
-        number = "";
+        this.transactionHistory = new LinkedList<Transaction>();
+        this.openDate = LocalDateTime.now();
+        this.number = "";
+        this.branch = null;
     }
     public BankAccount(double initialBalance) {
-        transactionHistory = new LinkedList<Transaction>();
-        transactionHistory.add(new Transaction(initialBalance));
-        balance = initialBalance;
-        openDate = LocalDateTime.now();
-        number = "";
+        this.transactionHistory = new LinkedList<Transaction>();
+        this.transactionHistory.add(new Transaction(initialBalance));
+        this.openDate = LocalDateTime.now();
+        this.number = "";
+        this.branch = null;
+    }
+    public BankAccount(double initialBalance, Branch branch) {
+        this.transactionHistory = new LinkedList<Transaction>();
+        this.transactionHistory.add(new Transaction(initialBalance));
+        this.openDate = LocalDateTime.now();
+        this.number = "";
+        this.branch = branch;
     }
     public double getBalance() {
+        double balance = 0.0;
+        for(Transaction transaction : transactionHistory)
+            balance += transaction.getAmount() - transaction.getFee();
         return balance;
     }
     public LocalDateTime getOpenDate() {
         return openDate;
     }
+    public Branch getBranch() {
+        return branch;
+    }
     public boolean withdraw(double amount) {
-        if(balance < amount)
+        if(getBalance() < amount)
             return false;
         transactionHistory.add(new Transaction(-amount));
-        balance -= amount;
         return true;
     }
     public void deposit(double amount) {
         transactionHistory.add(new Transaction(amount, 0.0));
-        balance += amount;
     }
     public String generateStatement() {
         int maxCreditLength = 0;
@@ -51,7 +61,7 @@ public class BankAccount {
                 maxCreditLength = Math.max(maxCreditLength, String.format("%.2f", credit).length());
             }
             else if (transaction.getAmount() < 0.0) {
-                double debit = Math.round(transaction.getAmount() * 100.0) / 100.0;
+                double debit = Math.round((transaction.getAmount() - transaction.getFee()) * 100.0) / 100.0;
                 maxDebitLength = Math.max(maxDebitLength, String.format("%.2f", debit).length());
             }
             balance += transaction.getAmount();
@@ -68,14 +78,15 @@ public class BankAccount {
         balance = 0.0;
         for(Transaction transaction : transactionHistory) {
             double amount = transaction.getAmount();
-            balance += amount;
+            double fee = transaction.getFee();
+            balance += amount - fee;
             double roundedBalance = Math.round(balance * 100.0) / 100.0;
             sb.append(transaction.getDate().format(formatter));
             sb.append(" || ");
             sb.append(Functions.padLeftSpaces(amount >= 0.0 ? String.format("%.2f", amount) :
                     "", maxCreditLength));
             sb.append(" || ");
-            sb.append(Functions.padLeftSpaces(amount < 0.0 ? String.format("%.2f", amount) :
+            sb.append(Functions.padLeftSpaces(amount < 0.0 ? String.format("%.2f", amount - fee) :
                     "", maxDebitLength));
             sb.append(" || ");
             sb.append(Functions.padLeftSpaces(String.format("%.2f", roundedBalance), maxBalanceLength));

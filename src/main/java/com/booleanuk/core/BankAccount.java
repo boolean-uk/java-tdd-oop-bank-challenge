@@ -38,6 +38,19 @@ public class BankAccount {
         }
         return balance;
     }
-
-
+    public String generateBankStatement() {
+        System.out.println("Bank Statement for Account Number: " + accountNumber);
+        BigDecimal balance = new BigDecimal("0.00");
+        StringBuilder statement = new StringBuilder();
+        statement.append("Operation || Date || Amount || Balance");
+        for (Transaction transaction : transactionHistory) {
+            balance = balance.add(transaction.getAmount());
+            statement.append(transaction.getOperationType()).append("\t").
+                    append(transaction.getDate()).append("\t").
+                    append(transaction.getAmount().abs()).append("\t").
+                    append(balance).append("\n");
+        }
+        return statement.toString();
+    }
+   
 }

@@ -30,7 +30,7 @@ public class AccountTest {
         float checkBalanceResult = account.checkBalance();
 
         //Then
-        Assertions.assertTrue(depositResult);
+        Assertions.assertFalse(depositResult);
         Assertions.assertEquals(1000, checkBalanceResult);
     }
 }

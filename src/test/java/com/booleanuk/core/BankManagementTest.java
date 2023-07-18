@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BankManagmentTest {
+public class BankManagementTest {
     CurrentAccount currentAccount;
     User user;
     User secondUser;
@@ -108,5 +107,12 @@ public class BankManagmentTest {
         SavingAccount account3 = new SavingAccount("PL8",user,manager);
         assertEquals(2,manager.getAccountsByBranch("PL8").size());
         assertThrows(IllegalArgumentException.class,()->user.getAccountsByBranch("PL8"));
+    }
+
+    @Test
+    public void shouldCreateAccount(){
+        Bank.createAccount("Wojtek",true);
+        assertEquals(4,Bank.getUsersList().size());
+        assertEquals(2,Bank.getAccountList().size());
     }
 }

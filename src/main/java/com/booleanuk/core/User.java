@@ -24,6 +24,7 @@ public class User {
     public User(String name) {
         this.name = name;
         accounts = new ArrayList<>();
+        Bank.getUsersList().add(this);
     }
 
     public String getName() {

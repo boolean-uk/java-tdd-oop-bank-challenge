@@ -56,10 +56,14 @@ public class AccountsTest {
         Assertions.assertEquals(0, account.calculateBalance());
     }
 
-//    @Test
-//    public void depositShouldCreateAndAddDepositToTransfers() {
-//        Assertions.assertEquals(0, account.calculateBalance());
-//
-//    }
+    @Test
+    public void depositShouldCreateAndAddDepositToTransfers() {
+        Assertions.assertEquals(0, account.calculateBalance());
+
+        account.deposit(20000);
+
+        Assertions.assertEquals(20000, account.calculateBalance());
+
+    }
 
 }

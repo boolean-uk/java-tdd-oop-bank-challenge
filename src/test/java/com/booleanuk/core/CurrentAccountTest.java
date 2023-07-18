@@ -4,10 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CurrentAccountTest {
+    CurrentAccount account;
+    public CurrentAccountTest() {
+        account = new CurrentAccount();
+    }
 
     @Test
     public void depositWithPositiveAmountTest() {
-        CurrentAccount account = new CurrentAccount();
+
         account.deposit(100);
 
         Assertions.assertEquals(100.00, account.getBalance());
@@ -17,5 +21,17 @@ public class CurrentAccountTest {
         account.deposit(100.44);
         Assertions.assertEquals(300.99, account.getBalance());
         Assertions.assertEquals(3,account.getTransactions().size());
+    }
+
+    @Test
+    public void depositeWith0OrNegativeAmountTest() {
+        account.deposit(100.11);
+        Assertions.assertEquals(100.11, account.getBalance());
+        Assertions.assertEquals(1, account.getTransactions().size());
+
+        account.deposit(0);
+        account.deposit(-100.11);
+        Assertions.assertEquals(100.11, account.getBalance());
+        Assertions.assertEquals(1, account.getTransactions().size());
     }
 }

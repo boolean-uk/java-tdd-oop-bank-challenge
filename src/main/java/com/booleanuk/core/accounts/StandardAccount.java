@@ -9,6 +9,6 @@ public class StandardAccount extends Account{
     }
 
     public void setMaxOverdraft(double maxOverdraft) {
-        this.maxOverdraft = maxOverdraft;
+        this.maxOverdraft = Math.min(maxOverdraft, 0.0);
     }
 }

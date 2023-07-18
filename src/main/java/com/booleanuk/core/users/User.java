@@ -1,7 +1,7 @@
 package com.booleanuk.core.users;
 
 public class User {
-    protected long id;
+    protected String id;
     protected String name;
     protected String surname;
     protected String login;
@@ -15,5 +15,30 @@ public class User {
         this.login = login;
         this.password = password;
         this.branchID = branchID;
+
+    }
+
+    protected void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getBranchID() {
+        return branchID;
     }
 }

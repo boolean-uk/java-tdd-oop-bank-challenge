@@ -13,4 +13,9 @@ public class SavingsAccount extends Account {
     SavingsAccount(Customer customer, Branch branch){
         super(customer, branch);
     }
+
+    @Override
+    public void withdraw(BigDecimal amount) throws IllegalAccessException {
+        throw new IllegalAccessException("You can't withdraw from a savings account");
+    }
 }

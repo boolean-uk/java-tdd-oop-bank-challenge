@@ -10,11 +10,10 @@ public class Customer {
     private final String name;
     private final String surname;
     private final LocalDate dateOfBirth;
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public Customer(String name, String surname, LocalDate dateOfBirth) {
-        String randomID = generateCustomRandomID(10);
-        this.ID = randomID;
+        this.ID = generateCustomRandomID(10);
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;

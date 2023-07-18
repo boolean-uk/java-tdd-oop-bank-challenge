@@ -52,7 +52,7 @@ public abstract class Account {
         createTransaction(amount, TRANSACTION_TYPE.CREDIT);
     }
 
-    public void withdraw(BigDecimal amount) {
+    public void withdraw(BigDecimal amount) throws IllegalAccessException {
 
         if(this.getBalance().compareTo(amount) < 0) {
             if(this.request.getRequestState() != OVERDRAFT_STATE.APPROVED) {
@@ -74,7 +74,7 @@ public abstract class Account {
         Transaction transaction = new Transaction(transactionType, amount, this);
         this.transactions.add(transaction);
     }
-
+    //core
     public BigDecimal getBalance() {
         BigDecimal balance = BigDecimal.ZERO;
         for (Transaction transaction : transactions) {
@@ -87,7 +87,7 @@ public abstract class Account {
         }
         return balance;
     }
-
+    //extension
     private BigDecimal getBalance(Transaction transaction, BigDecimal prevBalance) {
         BigDecimal balance = BigDecimal.ZERO;
         if (transaction.getType() == TRANSACTION_TYPE.CREDIT) {

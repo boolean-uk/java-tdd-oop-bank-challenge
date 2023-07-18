@@ -11,14 +11,13 @@ import java.time.LocalDate;
 
 public class AccountExtensionTests {
         private static Customer customer;
-        private static Bank bank;
         private static Branch branch;
         private static BankManager bankManager;
 
         @BeforeAll
         public static void setup() {
             bankManager = new BankManager("Jan", "Kowalski");
-            bank = new Bank(BANK_NAMES.SANTANDER, bankManager);
+            Bank bank = new Bank(BANK_NAMES.SANTANDER, bankManager);
             branch = new Branch("PLWAW01", "Poland", "Warsaw");
             bank.addBranch(branch);
             customer = new Customer("John", "Doe", LocalDate.parse("1990-01-01"));
@@ -55,7 +54,7 @@ public class AccountExtensionTests {
         }
 
     @Test
-    public void requestOverdraftOnMyAccountShouldBeApproved(){
+    public void requestOverdraftOnMyAccountShouldBeApproved() {
         Account current = new CurrentAccount(customer, branch);
         current.requestOverdraft(BigDecimal.valueOf(1000));
 
@@ -63,7 +62,11 @@ public class AccountExtensionTests {
 
         Assertions.assertEquals(OVERDRAFT_STATE.APPROVED,current.getOverdraftStatus());
         //should be able to withdraw
-        current.withdraw(BigDecimal.valueOf(1000));
+        try {
+            current.withdraw(BigDecimal.valueOf(1000));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

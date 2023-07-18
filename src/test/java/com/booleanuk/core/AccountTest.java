@@ -34,9 +34,13 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldBeAbleToWithDraw() {
+    public void shouldBeAbleToWithDraw(){
         Account current = new CurrentAccount(new BigDecimal("1000"), customer);
-        current.withdraw(new BigDecimal("100"));
+        try {
+            current.withdraw(new BigDecimal("100"));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
         Assertions.assertEquals(new BigDecimal("900"), current.getBalance());
     }
     @Test

@@ -17,6 +17,12 @@ public class AccountManager {
         return account;
     }
 
+    public SavingAccount createSavingAccount(Client client) {
+        SavingAccount savingAccount = new SavingAccount(client);
+        accounts.add(savingAccount);
+        return savingAccount;
+    }
+
 
     public ArrayList<Account> getAccounts() {
         return accounts;

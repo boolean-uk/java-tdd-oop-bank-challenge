@@ -19,5 +19,11 @@ public class AccountTest {
     @Test
     public void accountGetterAndSetterShouldReturnProperValue() {
         Assertions.assertEquals("12", account.getAccountNr());
+        Assertions.assertEquals(branch, account.getBranch());
+
+        account.setAccountNr("123");
+
+        Assertions.assertEquals("123", account.getAccountNr());
+        Assertions.assertEquals(branch, account.getBranch());
     }
 }

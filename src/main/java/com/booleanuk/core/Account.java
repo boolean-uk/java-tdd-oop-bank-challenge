@@ -9,6 +9,8 @@ public class Account {
     protected static int balance;
     protected static ArrayList<Integer> transactionHistory;
     protected static ArrayList<LocalDateTime> transactionDate;
+    protected boolean isOverdraft;
+    protected int OverdraftLimit = 2000;
 
     public int getTransactionHour(int i) {
         LocalDateTime times = transactionDate.get(i);
@@ -21,6 +23,7 @@ public class Account {
         this.password = password;
         this.transactionHistory = new ArrayList<>();
         this.transactionDate = new ArrayList<>();
+        this.isOverdraft = false;
     }
 
     public static int Balance() {
@@ -51,10 +54,26 @@ public class Account {
                 System.out.println("You have successfully withdrew " + amount + "$.");
                 return true;
             }
+            else if (isOverdraft) {
+                if (-(balance - amount) < OverdraftLimit){
+                    int negativeamount = -amount;
+                    transactionHistory.add(negativeamount);
+                    transactionDate.add(LocalDateTime.now());
+                    System.out.println("You have successfully withdrew " + amount + "$.");
+                    return true;
+                }
+                System.out.println("You don't have enough balance to withdraw " + amount + "$.");
+                return false;
+            }
             System.out.println("You don't have enough balance to withdraw " + amount + "$.");
             return false;
         }
         System.out.println("You can't withdraw negative balance.");
         return false;
+    }
+
+    public boolean Overdraft(boolean request) {
+        isOverdraft = request;
+        return isOverdraft;
     }
 }

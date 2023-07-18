@@ -37,4 +37,13 @@ public class AccountTest {
         account.deposit(2000);
         Assertions.assertEquals(LocalDateTime.now().getHour(), account.getTransactionHour(2));
     }
+
+    @Test
+    public void OverdrafTest() {
+        Account account = new CurrentAccount(123, "abc123");
+        account.Overdraft(true);
+        Assertions.assertFalse(account.withdraw(3000));
+        Assertions.assertTrue(account.withdraw(1000));
+        Assertions.assertEquals(-1000, account.Balance());
+    }
 }

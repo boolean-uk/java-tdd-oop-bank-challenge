@@ -13,13 +13,13 @@ public class Bank {
         this.accountsCounter = 0;
     }
 
-    public int openCurrentAccount(String ownerName){
-        currentAccounts.put(accountsCounter++,new CurrentAccount(ownerName));
+    public int openCurrentAccount(String ownerName, String branchCode){
+        currentAccounts.put(accountsCounter++,new CurrentAccount(ownerName, branchCode));
         return accountsCounter;
     }
 
-    public int openSavingsAccount(String ownerName){
-        savingsAccounts.put(accountsCounter++,new SavingsAccount(ownerName));
+    public int openSavingsAccount(String ownerName, String branchCode){
+        savingsAccounts.put(accountsCounter++,new SavingsAccount(ownerName, branchCode));
         return accountsCounter;
     }
 

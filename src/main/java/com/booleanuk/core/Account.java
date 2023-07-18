@@ -14,8 +14,11 @@ public class Account {
         this.branchCode = branchCode;
     }
 
-    public void depositMoney(double amountDeposited){
+    public boolean depositMoney(double amountDeposited){
+        if(amountDeposited<0)
+            return false;
         transactionHistory.add(new Transaction(amountDeposited, "deposit"));
+        return true;
     }
 
     public boolean withdrawMoney(double amountWithdrawn){
@@ -34,6 +37,10 @@ public class Account {
         return balance;
     }
 
+    public String generateBankStatement(){
+        BankStatementGenerator bankStatementGenerator = new BankStatementGenerator();
+        return bankStatementGenerator.generateBankStatement(this);
+    }
     public String getAccountOwner() {
         return accountOwner;
     }
@@ -41,4 +48,5 @@ public class Account {
     public ArrayList<Transaction> getTransactionHistory() {
         return transactionHistory;
     }
+
 }

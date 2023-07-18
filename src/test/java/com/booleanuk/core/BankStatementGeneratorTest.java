@@ -10,7 +10,6 @@ public class BankStatementGeneratorTest {
 
     @Test
     public void bankStatementGeneratorTest(){
-        BankStatementGenerator bankStatementGenerator = new BankStatementGenerator();
         Account account = new Account("Jan Lisek","00003");
         account.depositMoney(1000);
         account.withdrawMoney(300);
@@ -23,6 +22,6 @@ public class BankStatementGeneratorTest {
                 date + " ||         || 300,00 ||  700,00\n" +
                 date + " || 4000,00 ||        || 4700,00\n";
 
-        Assertions.assertEquals(expectedStatement, bankStatementGenerator.generateBankStatement(account));
+        Assertions.assertEquals(expectedStatement, account.generateBankStatement());
     }
 }

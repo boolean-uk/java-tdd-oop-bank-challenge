@@ -7,12 +7,6 @@ public class Transaction {
     private final double amount;
     private final String type;
 
-    public Transaction(LocalDate transactionDate, double amount, String type) {
-        this.transactionDate = transactionDate;
-        this.amount = amount;
-        this.type = type;
-    }
-
     public Transaction(double amount, String type) {
         this.amount = amount;
         this.type = type;

@@ -9,8 +9,8 @@ public class Transaction {
     private BigDecimal value;
 
 
-    public Transaction(LocalDateTime createdAt, BigDecimal value) {
-        this.createdAt = createdAt;
+    public Transaction( BigDecimal value) {
+        createdAt = LocalDateTime.now();
         this.value = value;
     }
 

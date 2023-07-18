@@ -47,14 +47,15 @@ public class BankTest {
 
 
 
-/*    @Test
+    @Test
     public void shouldReturnBalanceForAccount(){
         //given
+        Account acc1 = accountManager.createAccount(client);
         //when
-        BigDecimal balance  = accountManager.calculateAccountBalance(account);
+        BigDecimal balance  = accountManager.calculateAccountBalance(acc1);
         //then
-        assertEquals(BigDecimal.valueOf(10000),balance );
-    }*/
+        assertEquals(BigDecimal.valueOf(0),balance );
+    }
 
     @Test
     public void  shouldReturn0BalanceOfAccount(){
@@ -74,11 +75,11 @@ public class BankTest {
         //when
         BigDecimal balance = account.getBalance();
         //then
-        assertEquals(BigDecimal.valueOf(5000),balance);
+        assertEquals(BigDecimal.valueOf(10000),balance);
     }
 
 
-/*    @Test
+    @Test
     public void shouldAddBalanceToAccount(){
         //given
         Account account1 = accountManager.createAccount(client);
@@ -86,6 +87,6 @@ public class BankTest {
         //when
         accountManager.addDeposit(account1,deposit);
         //then
-        assertEquals(1000,account1.checkBalance(account1));
-    }*/
+        assertEquals(BigDecimal.valueOf(1000),accountManager.calculateAccountBalance(account1));
+    }
 }

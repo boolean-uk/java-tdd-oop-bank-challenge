@@ -29,11 +29,36 @@ public class Account {
 
 
     public BigDecimal getBalance() {
-        BigDecimal balance = BigDecimal.valueOf(0);
-        statements.forEach(transaction -> {
-            balance.add(transaction.getValue());
-        });
+        BigDecimal balance = statements.stream()
+                .map(Transaction::getValue)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
 
         return balance;
+    }
+
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public ArrayList<Transaction> getStatements() {
+        return statements;
+    }
+
+    public void setStatements(ArrayList<Transaction> statements) {
+        this.statements = statements;
     }
 }

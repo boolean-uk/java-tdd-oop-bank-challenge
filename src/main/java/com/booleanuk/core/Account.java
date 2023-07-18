@@ -16,6 +16,7 @@ public class Account {
 
     public boolean withdraw(float amount){
         if(amount < 0) return false;
+        if(this.balance < amount) return false;
 
         this.balance -= amount;
         return true;

@@ -27,6 +27,7 @@ public class CurrentAccount extends Account {
     @Override
     public void withdraw(double amount) {
         if (getBalance() + overdraftLimit >= amount) {
+            super.addToTransaction("Withdraw", amount);
             setBalance(getBalance() - amount);
         }
     }

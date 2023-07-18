@@ -39,7 +39,6 @@ public class BankBranch {
                 accounts.put(account.getId(), account);
                 return account.getId();
             } catch (Exception e) {
-                e.printStackTrace();
                 return null;
             }
         }

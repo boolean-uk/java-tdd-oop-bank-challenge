@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,5 +67,9 @@ public class User {
         return false;
     }
 
-
+    public List<Account> getAccountsByBranch(String branch){
+        if(isManager){
+            return Bank.getAccountList().stream().filter(account -> account.getBranchID().equals(branch)).toList();
+        }else throw new IllegalArgumentException("Only managers have access to this method");
+    }
 }

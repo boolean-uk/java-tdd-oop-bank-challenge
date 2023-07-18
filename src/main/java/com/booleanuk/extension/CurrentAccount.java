@@ -1,6 +1,8 @@
 package com.booleanuk.extension;
 
 public class CurrentAccount extends Account {
+    public static final double OVERDRAFT = 500;
+
     private boolean overdraftAllowed = false;
     private boolean overdraftRequested = false;
 

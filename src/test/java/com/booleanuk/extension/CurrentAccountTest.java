@@ -3,8 +3,8 @@ package com.booleanuk.extension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.booleanuk.extension.CurrentAccount.OVERDRAFT;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CurrentAccountTest {
     private CurrentAccount account;
@@ -13,6 +13,20 @@ class CurrentAccountTest {
     public void setUp() {
         Branch branch = new Branch("Bank Branch Warszawa-Srodmiescie", "Nowy Swiat 22/11, 01-412 Warszawa");
         account = new CurrentAccount(branch);
+    }
+
+    @Test
+    void withdrawAllowsToWithdrawOverdraftWhenAllowed() {
+        account.approveOverdraft();
+
+        account.withdraw(OVERDRAFT);
+
+        assertEquals(OVERDRAFT * -1, account.getBalance());
+    }
+
+    @Test
+    void withdrawDoesNotAllowToWithdrawOverdraftWhenNotAllowed() {
+        assertThrows(IllegalStateException.class, () -> account.withdraw(OVERDRAFT));
     }
 
     @Test

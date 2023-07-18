@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class AccountTest {
+public class SavingsAccountTest {
 
-    Account account;
+    SavingsAccount account;
     final static String POUND = "\u00a3";
     @BeforeEach
     void setUp() {
-        account = new Account();
+        account = new SavingsAccount();
     }
 
     @Test
@@ -143,5 +143,4 @@ public class AccountTest {
 
         Assertions.assertEquals(expected.toString(), result);
     }
-
 }

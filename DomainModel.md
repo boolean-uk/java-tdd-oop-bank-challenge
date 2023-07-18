@@ -1,24 +1,34 @@
 
 # Domain Model
 
-| Classes         | Methods                                 | Fields                         | Scenario                                    | Output                                   |
-|-----------------|-----------------------------------------|--------------------------------|---------------------------------------------|------------------------------------------|
-| Account         | deposit(amount: double)                 | double balance                 | deposit funds                               |                                          |
-|                 |                                         |                                | withdraw funds                              |                                          |
-|                 | getBalance()                            |                                | get current balance                         | double balance                           |
-|                 |                                         |                                |                                             |                                          |
-| CurrentAccount  | withdraw(amount: double)                |                                | withdraw funds                              |                                          |
-| SavingsAccount  |                                         | int percentage                 |                                             |                                          |
-| Transaction     |                                         | double amount, LocalDate date  |                                             |                                          |
-|                 |                                         | TransactionType type           |                                             |                                          |
-|                 |                                         |                                |                                             |                                          |
-| BankStatement   | generateStatement()                     | List<Transaction> transactions | generate bank statement                     | String formatted statement               |
-|                 |                                         |                                |                                             |                                          |
-| Bank            | createAccount(accountType: AccountType) | List<Account> accounts         | create a new account                        | Account created                          |
-|                 | getAccount(accountId: String)           |                                | get account by account ID                   | Account object                           |
-|                 | getBranchAccounts(branchId: String)     |                                | get all accounts associated with            | List<Account> accounts                   |
-|                 |                                         |                                | a specific branch                           |                                          |
-|                 |                                         |                                |                                             |                                          |
-| TransactionType |                                         |                                |                                             |                                          |
-|                 |                                         |                                |                                             |                                          |
+| Classes         | Methods                             | Fields                         | Scenario                                | Output                     |
+|-----------------|-------------------------------------|--------------------------------|-----------------------------------------|----------------------------|
+| Account         | deposit(amount: double)             | List<Transaction> transactions | deposit funds                           |                            |
+|                 | getBalance()                        | String branchID                | get current balance                     | double balance             |
+|                 |                                     | String accountNumber           |                                         |                            |
+|                 |                                     | User owner                     |                                         |                            |
+|                 |                                     | User manager                   |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+| User            | sendRequest(Request)                | String name                    |                                         |                            |
+|                 | approveRequest()                    | boolean isManager              | true if approved, false if not approved | boolean                    |
+|                 |                                     | boolean isEngineer             |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+| CurrentAccount  | withdraw(amount: double)            |                                | withdraw funds                          |                            |
+| SavingsAccount  |                                     | int percentage                 |                                         |                            |
+| Transaction     |                                     | double amount, LocalDate date  |                                         |                            |
+|                 |                                     | TransactionType type           |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+| BankStatement   | generateStatement()                 | List<Transaction> transactions | generate bank statement                 | String formatted statement |
+|                 |                                     |                                |                                         |                            |
+| Bank            | createAccount(Account account)      | List<Account> accounts         | create a new account                    | Account created            |
+|                 | getAccount(accountNumber: String)   |                                | get account by account ID               | Account object             |
+|                 | getBranchAccounts(branchId: String) |                                | get all accounts associated with        | List<Account> accounts     |
+|                 |                                     |                                | a specific branch                       |                            |
+|                 |                                     |                                |                                         |                            |
+| TransactionType |                                     |                                |                                         |                            |
+|                 |                                     |                                |                                         |                            |
+| Request         |                                     | User user                      |                                         |                            |
+|                 |                                     | double amount                  |                                         |                            |
 

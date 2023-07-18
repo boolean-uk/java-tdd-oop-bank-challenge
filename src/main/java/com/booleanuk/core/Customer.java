@@ -20,6 +20,39 @@ public class Customer {
     public void addAccount(Account account) {
         accounts.add(account);
     }
+
+    public boolean createCurrentAccount(String accountType, int initMoney) {
+        if (hasAccountOfType(accountType)) {
+            return false;
+        }
+        int accountId = getRandomAccountId();
+        Account account = new Account(accountId, accountType, initMoney);
+        accounts.add(account);
+        return true;
+    }
+
+    public boolean createSavingsAccount(String accountType, int initMoney) {
+        if (hasAccountOfType(accountType)) {
+            return false;
+        }
+        int accountId = getRandomAccountId();
+        Account account = new Account(accountId, accountType, initMoney);
+        accounts.add(account);
+        return true;
+    }
+
+    private boolean hasAccountOfType(String accountType) {
+        for (Account account : accounts) {
+            if (account.getType().equalsIgnoreCase(accountType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getRandomAccountId() {
+        return accounts.size() + 1;
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

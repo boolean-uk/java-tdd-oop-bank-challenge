@@ -13,7 +13,7 @@ public class CurrentAccountTest {
 
     @BeforeEach
     void setUp() {
-        account = new CurrentAccount();
+        account = new CurrentAccount(new BankBranch());
     }
 
     @Test

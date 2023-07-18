@@ -6,7 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
+
+    private final BankBranch bankBranch;
     private final List<Transaction> transactions = new ArrayList<>();
+
+    protected Account(BankBranch bankBranch) {
+        this.bankBranch = bankBranch;
+    }
 
     public void deposit(BigDecimal amount, LocalDate date) {
         addTransaction(amount, date);
@@ -26,6 +32,10 @@ public abstract class Account {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public BankBranch getBankBranch() {
+        return bankBranch;
     }
 
     protected void addTransaction(BigDecimal amount, LocalDate date) {

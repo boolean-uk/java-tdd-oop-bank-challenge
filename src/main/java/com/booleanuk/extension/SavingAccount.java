@@ -7,7 +7,8 @@ import java.time.LocalDate;
 public class SavingAccount extends Account {
     private BigDecimal interestRate;
 
-    public SavingAccount(BigDecimal interestRate) {
+    public SavingAccount(BankBranch bankBranch, BigDecimal interestRate) {
+        super(bankBranch);
         this.interestRate = interestRate;
     }
 

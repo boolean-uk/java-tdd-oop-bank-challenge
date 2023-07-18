@@ -13,7 +13,7 @@ public class SavingAccountTest {
 
     @BeforeEach
     void setUp() {
-        account = new SavingAccount(BigDecimal.valueOf(2));
+        account = new SavingAccount(new BankBranch(), BigDecimal.valueOf(2));
     }
 
     @Test

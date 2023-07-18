@@ -10,7 +10,7 @@ public class BankStatementTest {
 
     @Test
     void shouldPrintBankStatement() {
-        Account account = new CurrentAccount();
+        Account account = new CurrentAccount(new BankBranch());
         account.deposit(BigDecimal.valueOf(1000.00), LocalDate.of(2012, 1, 10));
         account.deposit(BigDecimal.valueOf(2000.00), LocalDate.of(2012, 1, 13));
         account.withdraw(BigDecimal.valueOf(500.00), LocalDate.of(2012, 1, 14));

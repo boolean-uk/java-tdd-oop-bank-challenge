@@ -11,18 +11,17 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class Customer extends User implements CustomerOperations {
-    private final UUID uuid;
+
     private CurrentAccount currentAccount;
     private SavingAccount savingAccount;
 
 
     public Customer() {
-        this.uuid = UUID.randomUUID();
+        super();
         this.currentAccount = null;
         this.savingAccount = null;
     }

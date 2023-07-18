@@ -7,6 +7,8 @@ public class CurrentAccount extends Account {
 
     public CurrentAccount(BankBranch bankBranch) {
         super(bankBranch);
+        overdraft = new Overdraft(BigDecimal.ZERO);
+        overdraft.approve();
     }
 
     public void requestOverdraft(Overdraft overdraft) {

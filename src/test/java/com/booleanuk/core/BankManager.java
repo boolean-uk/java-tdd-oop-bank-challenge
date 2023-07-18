@@ -4,25 +4,24 @@ import java.util.HashMap;
 
 public class BankManager {
     private final HashMap<String, Account> accounts = new HashMap<>();
-    public boolean createAccount(AccountType accountType) {
+    public Account createAccount(AccountType accountType) {
         String accountNumber = generateAccountNumber(accountType);
+        Account account;
 
         if (accountType == AccountType.CURRENT) {
-            accounts.put(accountNumber, new CurrentAccount());
+            account = new CurrentAccount();
+            accounts.put(accountNumber, account);
         } else if (accountType == AccountType.SAVINGS) {
-            accounts.put(accountNumber, new SavingsAccount());
+            account = new SavingsAccount();
+            accounts.put(accountNumber, account);
         } else {
-            return false;
+            return null;
         }
-        return true;
+        return account;
     }
 
     public Account getAccount(String accountNumber) {
         return accounts.get(accountNumber);
-    }
-
-    public HashMap<String, Account> getAccounts() {
-        return accounts;
     }
 
     private String generateAccountNumber(AccountType accountType) {

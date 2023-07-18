@@ -15,35 +15,52 @@ public class BankManagerTest {
     @Test
     public void shouldCreateNewCurrentAccount() {
         // Arrange
-        boolean result;
+        Account result;
         // Act
         result = bankManager.createAccount(AccountType.CURRENT);
         // Assert
-        Assertions.assertTrue(result);
+        Assertions.assertNotNull(result);
         Assertions.assertNotNull(bankManager.getAccount("CUR0"));
     }
 
     @Test
     public void shouldCreateNewSavingsAccount() {
         // Arrange
-        boolean result;
+        Account result;
         // Act
         result = bankManager.createAccount(AccountType.SAVINGS);
         // Assert
-        Assertions.assertTrue(result);
+        Assertions.assertNotNull(result);
         Assertions.assertNotNull(bankManager.getAccount("SAV0"));
     }
 
     @Test
     public void shouldDeposit() {
-
-        bankManager.createAccount(AccountType.CURRENT);
-        Account account = bankManager.getAccount()
+        // Arrange
+        Account account;
+        double amount;
+        boolean result;
+        // Act;
+        account = bankManager.createAccount(AccountType.CURRENT);
+        amount = 200.00;
+        result = account.deposit(amount);
+        // Assert
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(1200.00, account.getBalance());
     }
 
-//    @Test
-//    public void shouldGenerateBankStatements() {
-//        bankManager.createAccount(AccountType.CURRENT);
-//        bankManager.getAccounts().get("CUR0").printStatement();
-//    }
+    @Test
+    public void shouldWithdraw() {
+        // Arrange
+        Account account;
+        double amount;
+        boolean result;
+        // Act;
+        account = bankManager.createAccount(AccountType.CURRENT);
+        amount = 200.00;
+        result = account.withdraw(amount);
+        // Assert
+        Assertions.assertTrue(result);
+        Assertions.assertEquals(800.00, account.getBalance());
+    }
 }

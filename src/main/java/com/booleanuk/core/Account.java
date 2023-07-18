@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-abstract class Account {
+public abstract class Account {
     String firstname;
     String lastname;
-    int currentBalance;
+    int currentBalance; // Balance in cents (int)
     boolean activated;
     String type;
 
@@ -19,7 +19,7 @@ abstract class Account {
     public Account(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-        this.currentBalance = 0;  // Integer for balance in cents.
+        this.currentBalance = 0;
         this.activated = false;
 
         balanceHistory = new ArrayList<>();
@@ -27,17 +27,12 @@ abstract class Account {
         balanceMoveHistory = new ArrayList<>();
     }
 
-    public int getCurrentBalance() {
-        return currentBalance;
-    }
-
     public boolean deposit(double balance) {
         if (balance <= 0) {
-            System.out.println("Can't deposit 0 or negative balance");
+            System.out.println("Cannot deposit 0 or negative balance!");
             return false;
         }
 
-        // Activate account so it can print statement, to have at least one move
         if (!activated) {
             activated = true;
         }
@@ -51,7 +46,7 @@ abstract class Account {
 
     public boolean withdraw(double balance) {
         if (doubleToIntBalance(balance) > currentBalance) {
-            System.out.println("Cant withdraw more than your current balance");
+            System.out.println("Cannot withdraw more than your current balance!");
             return false;
         }
 
@@ -65,6 +60,11 @@ abstract class Account {
     private int doubleToIntBalance(double balance) {
         return (int) (balance * 100);
     }
+    public String getFirstname() { return firstname; }
+    public int getCurrentBalance() {
+        return currentBalance;
+    }
+    public String getLastname() { return lastname; }
 
     private String getDate() {
         LocalDate date = LocalDate.now();

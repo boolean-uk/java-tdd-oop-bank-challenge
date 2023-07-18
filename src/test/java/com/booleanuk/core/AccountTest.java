@@ -43,10 +43,10 @@ public class AccountTest {
     void withdrawShouldUpdateAccountCorrectly() {
         account.deposit(100.5);
 
-        Assertions.assertFalse(account.withdraw(101.0), "Withdrawal should fail if the amount is greater than the balance");
-        Assertions.assertTrue(account.withdraw(1.5), "Withdrawal should succeed if the amount is less than the balance");
+        Assertions.assertFalse(account.withdraw(200.0), "Withdrawal should fail if the amount is greater than the balance");
+        Assertions.assertTrue(account.withdraw(10), "Withdrawal should succeed if the amount is less than the balance");
 
-        int remainingBalanceCents = 9900; // 100.5 * 100 - 1.5 * 100
+        int remainingBalanceCents = 9050; // 100.5 * 100 - 10 * 100
         Assertions.assertEquals(remainingBalanceCents, account.getCurrentBalance(), "Remaining balance should match expected value");
 
         Assertions.assertEquals(formatter.format(LocalDate.now()), account.dateHistory.get(1), "Current date should be recorded in date history after withdrawal");

@@ -23,15 +23,15 @@ public class BankAccountTest {
     @Test
     public void shouldSuccessfullyDepositCurrentAccount() {
         customer.openCurrentAccount();
-        BigDecimal transactionAmount = BigDecimal.valueOf(1000);
-        BankTransaction result = customer.depositCurrentAccount(transactionAmount);
+        BigDecimal depositAmount = BigDecimal.valueOf(1000);
+        BankTransaction result = customer.depositCurrentAccount(depositAmount);
 
-        Assertions.assertEquals(transactionAmount, result.getAmount());
+        Assertions.assertEquals(depositAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
         Assertions.assertEquals(BigDecimal.ZERO, result.getBalanceBefore());
-        Assertions.assertEquals(transactionAmount, result.getBalanceAfter());
+        Assertions.assertEquals(depositAmount, result.getBalanceAfter());
         Assertions.assertEquals(TransactionType.DEPOSIT, result.getTransactionType());
-        Assertions.assertEquals(1, customer.getCurrentAccount().getTransaction().size());
+        Assertions.assertEquals(1, customer.getCurrentAccount().getTransactions().size());
     }
 
     @Test
@@ -43,14 +43,49 @@ public class BankAccountTest {
     @Test
     public void shouldSuccessfullyDeposit() {
         customer.openSavingAccount();
-        BigDecimal transactionAmount = BigDecimal.valueOf(2000);
-        BankTransaction result = customer.depositSavingAccount(transactionAmount);
+        BigDecimal depositAmount = BigDecimal.valueOf(2000);
+        BankTransaction result = customer.depositSavingAccount(depositAmount);
 
-        Assertions.assertEquals(transactionAmount, result.getAmount());
+        Assertions.assertEquals(depositAmount, result.getAmount());
         Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
         Assertions.assertEquals(BigDecimal.ZERO, result.getBalanceBefore());
-        Assertions.assertEquals(transactionAmount, result.getBalanceAfter());
+        Assertions.assertEquals(depositAmount, result.getBalanceAfter());
         Assertions.assertEquals(TransactionType.DEPOSIT, result.getTransactionType());
-        Assertions.assertEquals(1, customer.getSavingAccount().getTransaction().size());
+        Assertions.assertEquals(1, customer.getSavingAccount().getTransactions().size());
+    }
+
+    @Test
+    public void shouldSuccessfullyWithdrawFromAccount() {
+        BigDecimal withdrawAmount = BigDecimal.valueOf(500);
+        BigDecimal balanceBefore = BigDecimal.valueOf(1000);
+        BigDecimal balanceAfter = balanceBefore.subtract(withdrawAmount);
+        customer.openCurrentAccount();
+        customer.getCurrentAccount().setBalance(balanceBefore);
+
+        BankTransaction result = customer.withdrawCurrentAccount(withdrawAmount);
+
+        Assertions.assertEquals(withdrawAmount, result.getAmount());
+        Assertions.assertEquals(TransactionResult.SUCCESSFUL, result.getTransactionResult());
+        Assertions.assertEquals(balanceBefore, result.getBalanceBefore());
+        Assertions.assertEquals(balanceAfter, result.getBalanceAfter());
+        Assertions.assertEquals(TransactionType.WITHDRAW, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getCurrentAccount().getTransactions().size());
+    }
+
+    @Test
+    public void shouldFailedWithdrawFromWhenNotEnoughFunds() {
+        BigDecimal withdrawAmount = BigDecimal.valueOf(1500);
+        BigDecimal balanceBefore = BigDecimal.valueOf(1000);
+        customer.openCurrentAccount();
+        customer.getCurrentAccount().setBalance(balanceBefore);
+
+        BankTransaction result = customer.withdrawCurrentAccount(withdrawAmount);
+
+        Assertions.assertEquals(withdrawAmount, result.getAmount());
+        Assertions.assertEquals(TransactionResult.REFUSED_INSUFFICIENT_FUNDS, result.getTransactionResult());
+        Assertions.assertEquals(balanceBefore, result.getBalanceBefore());
+        Assertions.assertEquals(balanceBefore, result.getBalanceAfter());
+        Assertions.assertEquals(TransactionType.WITHDRAW, result.getTransactionType());
+        Assertions.assertEquals(1, customer.getCurrentAccount().getTransactions().size());
     }
 }

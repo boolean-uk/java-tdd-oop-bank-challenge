@@ -103,4 +103,8 @@ public class CurrentAccount implements BankAccount {
             }
         }
     }
+
+    public String balanceCalculation() {
+        return "0";
+    }
 }

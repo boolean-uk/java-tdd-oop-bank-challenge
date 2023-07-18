@@ -86,4 +86,8 @@ public class SavingAccount implements BankAccount {
             }
         }
     }
+
+    public String balanceCalculation() {
+        return "0";
+    }
 }

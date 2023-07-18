@@ -50,4 +50,17 @@ public class AccountTest {
         Assertions.assertTrue(withdrawResult);
         Assertions.assertEquals(300, checkBalanceResult);
     }
+
+    @Order(4)
+    @Test
+    public void testWithdraw_WhenAmountNotValid_ShouldReturnFalseAndBalanceShouldNotChange(){
+        //When
+        account.deposit(1000F);
+        boolean withdrawResult = account.withdraw(-400F);
+        float checkBalanceResult = account.checkBalance();
+
+        //Then
+        Assertions.assertFalse(withdrawResult);
+        Assertions.assertEquals(1000, checkBalanceResult);
+    }
 }

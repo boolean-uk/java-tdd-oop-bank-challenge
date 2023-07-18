@@ -3,6 +3,7 @@ package com.booleanuk.extension;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CurrentAccountTest {
@@ -19,5 +20,13 @@ class CurrentAccountTest {
         account.requestOverdraft();
 
         assertTrue(account.isOverdraftRequested());
+    }
+
+    @Test
+    void approveOverdraftRequestApprovesOverdraft() {
+        account.approveOverdraft();
+
+        assertTrue(account.overdraftAllowed);
+        assertFalse(account.overdraftRequested);
     }
 }

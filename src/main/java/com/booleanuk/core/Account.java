@@ -41,7 +41,7 @@ public class Account {
     public int calculateBalance() {
         int sum = 0;
         for (Transfer transfer : transfers) {
-            if (transfer.getClass().isInstance(Withdraw.class)) sum -= transfer.getAmountOfMoney();
+            if (transfer instanceof Withdraw) sum -= transfer.getAmountOfMoney();
             else sum += transfer.getAmountOfMoney();
         }
         return sum;
@@ -49,5 +49,9 @@ public class Account {
 
     public void deposit(int amountOfMoney) {
         transfers.add(new Deposit(amountOfMoney, LocalDate.now()));
+    }
+
+    public void withdraw(int amountOfMoney) {
+        transfers.add(new Withdraw(amountOfMoney, LocalDate.now()));
     }
 }

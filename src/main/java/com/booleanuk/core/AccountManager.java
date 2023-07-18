@@ -108,4 +108,7 @@ public class AccountManager {
     }
 
 
+    public void rejectOverdraft(Overdraft overdraft) {
+        overdrafts.remove(overdraft);
+    }
 }

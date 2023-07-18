@@ -148,9 +148,24 @@ public class BankTest {
         Account account1 = accountManager.createAccount(client);
         Branch branch = new Branch("1234","Warsaw");
         //when
-        accountManager.addAccountToBranch(account,branch);
+        accountManager.linkAccountToBranch(account1,branch);
 
         //then
         assertEquals(branch,account1.getBranch());
+    }
+
+
+    @Test
+    public void shouldAddRequestToOverdraft(){
+        //when
+
+        BigDecimal overdraft = BigDecimal.valueOf(1000);
+        Account account1 = accountManager.createAccount(client);
+
+        //then
+       OverDraft overDraft1 = accountManager.addRequestToOverdraft(account1,overdraft);
+
+
+        assertTrue(accountManager.getOverDrafts().contains(overDraft1));
     }
 }

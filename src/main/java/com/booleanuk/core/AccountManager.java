@@ -3,13 +3,18 @@ package com.booleanuk.core;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+
 public class AccountManager {
 
 
-    private  ArrayList<Account> accounts;
+    private static ArrayList<Account> accounts;
+
+
+    private static ArrayList<OverDraft> overDrafts;
 
     public AccountManager() {
-      accounts = new ArrayList<>();
+        accounts = new ArrayList<>();
+        overDrafts = new ArrayList<OverDraft>();
     }
 
     public Account createAccount(Client client) {
@@ -78,5 +83,17 @@ public class AccountManager {
         return bankStatement.toString();
     }
 
+
+    public void linkAccountToBranch(Account account, Branch branch) {
+        account.setBranch(branch);
+    }
+
+    public static ArrayList<OverDraft> getOverDrafts() {
+        return overDrafts;
+    }
+
+    public static void setOverDrafts(ArrayList<OverDraft> overDrafts) {
+        AccountManager.overDrafts = overDrafts;
+    }
 
 }

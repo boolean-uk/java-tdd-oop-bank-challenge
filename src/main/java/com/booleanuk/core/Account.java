@@ -12,6 +12,10 @@ public class Account {
     private String accountNumber;
     private BigDecimal debit;
 
+    private BigDecimal overdraft;
+
+    private Branch branch;
+
 
     private ArrayList<Transaction> statements;
 
@@ -22,12 +26,23 @@ public class Account {
         accountNumber = ((int)(Math.random()*999999) +100000)+"";
         statements = new ArrayList<>();
         debit = BigDecimal.ZERO;
+        overdraft = BigDecimal.ZERO;
     }
-    public Account(Client client, String accountNumber) {
+    public Account(Client client,Branch branch) {
+        this.client = client;
+        accountNumber = ((int)(Math.random()*999999) +100000)+"";
+        statements = new ArrayList<>();
+        debit = BigDecimal.ZERO;
+        this.branch = branch;
+        overdraft = BigDecimal.ZERO;
+    }
+    public Account(Client client, String accountNumber,Branch branch) {
         this.client = client;
         this.accountNumber = accountNumber;
         statements = new ArrayList<>();
         debit = BigDecimal.ZERO;
+        this.branch = branch;
+        overdraft = BigDecimal.ZERO;
     }
 
 
@@ -68,5 +83,13 @@ public class Account {
 
     public void setDebit(BigDecimal debit) {
         this.debit = debit;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
+    public Branch getBranch() {
+        return branch;
     }
 }

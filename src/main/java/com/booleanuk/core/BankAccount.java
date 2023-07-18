@@ -23,6 +23,21 @@ public class BankAccount {
         return accountNumber;
     }
 
+    public void deposit(BigDecimal amount, String date, String type) {
+        transactionHistory.add(new Transaction(date, amount,type));
+    }
+
+    public void withdraw(BigDecimal amount, String date, String type) {
+        transactionHistory.add(new Transaction(date, amount.negate(),type));
+    }
+
+    public BigDecimal getBalance() {
+        BigDecimal balance = new BigDecimal("0.00");
+        for (Transaction transaction : transactionHistory) {
+            balance = balance.add(transaction.getAmount());
+        }
+        return balance;
+    }
 
 
 }

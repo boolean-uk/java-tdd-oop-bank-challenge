@@ -1,4 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.BankAccount;
+import com.booleanuk.core.Transaction;
+import com.booleanuk.core.TransactionType;
 
 import java.util.List;
 
@@ -16,7 +20,7 @@ public class Engineer {
         double sum=0;
         for (Transaction transaction:transactions
              ) {
-            if(transaction.getTransactionType()==TransactionType.debit)
+            if(transaction.getTransactionType()== TransactionType.debit)
             {
                 sum-= transaction.getAmount();
             }

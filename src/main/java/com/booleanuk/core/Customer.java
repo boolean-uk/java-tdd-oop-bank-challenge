@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.NormalAccount;
+
 public class Customer {
 
     private String fullName;

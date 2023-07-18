@@ -1,5 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
+import com.booleanuk.extension.NormalAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -86,15 +87,15 @@ public class NormalAccountTest {
 
     @Test
     public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawalFromDebit() {
-        NormalAccount normalAccount = new NormalAccount(12312312);
-        normalAccount.withdrawFromDebit(123);
+        NormalAccount normalAccount = new NormalAccount(12312312,"Warsaw");
+        normalAccount.requestForOverdraft(123);
         Assertions.assertEquals(1, normalAccount.getTransactions().size());
     }
 
     @Test
     public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawalFromDebit() {
-        NormalAccount normalAccount = new NormalAccount(12312312);
-        normalAccount.withdrawFromDebit(600);
+        NormalAccount normalAccount = new NormalAccount(12312312,"Warsaw");
+        normalAccount.requestForOverdraft(600);
         Assertions.assertEquals(0, normalAccount.getTransactions().size());
     }
 

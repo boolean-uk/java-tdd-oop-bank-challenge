@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.extension.Manager;
+
 import java.util.ArrayList;
 import java.util.List;
 

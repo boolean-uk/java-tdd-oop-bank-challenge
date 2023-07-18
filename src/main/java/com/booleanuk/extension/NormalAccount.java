@@ -1,4 +1,8 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
+
+import com.booleanuk.core.BankAccount;
+import com.booleanuk.core.Transaction;
+import com.booleanuk.core.TransactionType;
 
 public class NormalAccount extends BankAccount {
 
@@ -22,9 +26,7 @@ public class NormalAccount extends BankAccount {
         this.maxDebit = debit;
     }
 
-    public void withdrawFromDebit(double amount) {
-
-
+    private void withdrawFromDebit(double amount) {
        this.setBalance(this.getBalance()-amount);
         this.getTransactions().add(new Transaction(amount, TransactionType.debit, this.getBalance()));
     }

@@ -102,4 +102,16 @@ public class AccountTest {
         Assertions.assertEquals(-500, myAccount.getBalance());
     }
 
+    @Test
+    public void testCurrentWithdrawWithOverdraft3() {
+
+        myAccount.setBalance(500);
+
+        myAccount.setOverdraftLimit(500);
+
+        myAccount.withdraw(1100);
+
+        Assertions.assertEquals(500, myAccount.getBalance());
+    }
+
 }

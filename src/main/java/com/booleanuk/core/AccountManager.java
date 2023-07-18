@@ -30,11 +30,24 @@ public class AccountManager {
     }
 
     public void addDeposit(Account account, BigDecimal deposit) {
-        account.getStatements().add(new Transaction(deposit));
+        if(deposit.doubleValue() > 0) {
+            account.getStatements().add(new Transaction(deposit));
+        }else{
+            System.out.println("You can not deposit money below zero!");
+        }
     }
 
 
     public BigDecimal calculateAccountBalance(Account account) {
       return   account.getBalance();
+    }
+
+    public void withdraw(Account account, BigDecimal withdraw) {
+        if(withdraw.doubleValue() < 0){
+            System.out.println("You can't withdraw money below zero!");
+        }else{
+            withdraw = withdraw.multiply(BigDecimal.valueOf(-1));
+            account.getStatements().add(new Transaction(withdraw));
+        }
     }
 }

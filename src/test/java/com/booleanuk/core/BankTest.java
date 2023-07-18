@@ -104,4 +104,17 @@ public class BankTest {
 
 
     }
+
+    @Test
+    public  void shouldNotWithDrawMoneyBelowZero(){
+        //given
+        Account account1 = accountManager.createAccount(client);
+        BigDecimal deposit = BigDecimal.valueOf(11000);
+        accountManager.addDeposit(account1,deposit);
+        BigDecimal withdraw = BigDecimal.valueOf(-6000);
+        //when
+        accountManager.withdraw(account1,withdraw);
+        //then
+        assertEquals(BigDecimal.valueOf(11000),accountManager.calculateAccountBalance(account1));
+    }
 }

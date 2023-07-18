@@ -20,21 +20,21 @@ class AccountTest {
     @Test
     public void addTransactionTest_negativeAmount()
     {
-        account.addTransaction("Date",-200);
+        account.addTransaction("Date",-20000);
         Assertions.assertEquals(-200,account.getCurrentBalance());
     }
     @Test
     public void addTransactionTest_possitiveAmount()
     {
-        account.addTransaction("Date",200);
+        account.addTransaction("Date",20000);
         Assertions.assertEquals(200,account.getCurrentBalance());
     }
 
     @Test
     public void getCurrentBalanceTest_possitiveAndNegativeTransaction()
     {
-        account.addTransaction("Date",200);
-        account.addTransaction("Date",-100);
+        account.addTransaction("Date",20000);
+        account.addTransaction("Date",-10000);
         Assertions.assertEquals(100,account.getCurrentBalance());
     }
     @Test

@@ -38,6 +38,12 @@ public class SavingAccount implements BankAccount{
             balance -= amount;
             transactions.add(new Transaction(new Date(), "debit", amount, getBalance()));
             return true;
+        }else if(getBalance() - amount < 0) {
+            System.out.println("You can't withdraw more money than there is on the account");
+            System.out.println("You tried to withdraw : " + amount);
+            System.out.println("But you balance is only : " + getBalance());
+        }else {
+            System.out.println("Amount must be a positive number");
         }
         return false;
     }

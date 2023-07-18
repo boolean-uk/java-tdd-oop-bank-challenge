@@ -1,21 +1,20 @@
 package com.booleanuk.extension;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class BankBranch {
 
     private final Map<UUID, Account> accounts;
     private final Map<UUID, Customer> customers;
     private final String branchId;
+    private final Map<UUID, List<Request>> requests;
 
     public BankBranch(String branchId) {
         this.accounts = new HashMap<>();
         this.customers = new HashMap<>();
         this.branchId = branchId;
+        this.requests = new HashMap<>();
     }
 
     private static boolean isPositive(BigDecimal funds) {
@@ -74,11 +73,30 @@ public class BankBranch {
         return "";
     }
 
-    public void requestOverDraft(UUID customerId, UUID accountId, BigDecimal amount) {
+    public Request requestOverDraft(UUID customerId, UUID accountId, BigDecimal amount) {
         if (isCustomer(customerId) && isAccount(accountId)) {
-            Account account = accounts.get(accountId);
-            account.requestOverDraft(amount);
+            Request request = new Request(customerId, accountId, amount);
+            List<Request> clientRequests = requests.getOrDefault(customerId, new ArrayList<>());
+            clientRequests.add(request);
+            requests.put(customerId, clientRequests);
+            return request;
         }
+        return null;
+    }
+
+    public void reviewOverdraftRequest(Request request, Request.Status decision) {
+        switch (decision) {
+            case ACCEPTED -> {
+                request.accept();
+                Account account = accounts.get(request.getAccountId());
+                account.setAcceptedOverdraft(request.getOverdraftAmount());
+            }
+            case REJECTED -> {
+                request.reject();
+            }
+        }
+        List<Request> clientRequests = requests.get(request.getCustomerId());
+        clientRequests.remove(request);
     }
 
     private boolean isWithdrawable(Account account, BigDecimal funds) {
@@ -95,5 +113,9 @@ public class BankBranch {
 
     public Map<UUID, Account> getAccounts() {
         return accounts;
+    }
+
+    public List<Request> getRequests(UUID customerId) {
+        return requests.get(customerId);
     }
 }

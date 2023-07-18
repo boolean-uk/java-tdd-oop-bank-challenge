@@ -91,6 +91,10 @@ public abstract class Account {
         return transactions;
     }
 
+    public void setAcceptedOverdraft(BigDecimal acceptedOverdraft) {
+        this.acceptedOverdraft = acceptedOverdraft;
+    }
+
     public BigDecimal getAcceptedOverdraft() {
         return acceptedOverdraft;
     }

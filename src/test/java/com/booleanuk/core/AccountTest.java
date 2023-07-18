@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
 
     CurrentAccount myAccount = new CurrentAccount();
+    SavingsAccount mySavingsAccount = new SavingsAccount();
 
     @Test
     public void testAccount() {
@@ -112,6 +113,28 @@ public class AccountTest {
         myAccount.withdraw(1100);
 
         Assertions.assertEquals(500, myAccount.getBalance());
+    }
+
+    @Test
+    public void testSavingsAccount() {
+
+        mySavingsAccount.setAccountNumber("S123456789");
+
+        Assertions.assertEquals("S123456789", mySavingsAccount.getAccountNumber());
+
+        mySavingsAccount.setBalance(1000);
+
+        mySavingsAccount.withdraw(1100);
+
+        Assertions.assertEquals(1000, mySavingsAccount.getBalance());
+    }
+
+    @Test
+    public void testSavingsAccountInterestRate() {
+
+        mySavingsAccount.setInterestRate(0.1);
+
+        Assertions.assertEquals(0.1, mySavingsAccount.getInterestRate());
     }
 
 }

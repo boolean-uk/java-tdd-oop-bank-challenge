@@ -7,11 +7,13 @@ public class Transaction {
     private Date date;
     private double amount;
     private double balance;
+    private String typeOfOperation;
 
-    public Transaction(Date date, double amount, double balance) {
+    public Transaction(Date date, String typeOfOperation, double amount, double balance) {
         this.date = date;
         this.amount = amount;
         this.balance = balance;
+        this.typeOfOperation = typeOfOperation;
     }
 
     public Date getDate() {

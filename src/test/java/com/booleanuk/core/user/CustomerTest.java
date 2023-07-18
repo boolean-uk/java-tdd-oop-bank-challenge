@@ -1,12 +1,10 @@
-package com.booleanuk.core;
+package com.booleanuk.core.user;
 
 import com.booleanuk.core.banking.BankAccountAlreadyExistsException;
-import com.booleanuk.core.user.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class UserTest {
-
+public class CustomerTest {
     @Test
     public void shouldCreateCustomerWithSpecifiedData() {
         Customer customer = new Customer();

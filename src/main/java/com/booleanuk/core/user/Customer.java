@@ -5,7 +5,7 @@ import com.booleanuk.core.banking.BankAccountNotOpened;
 import com.booleanuk.core.banking.BankTransaction;
 import com.booleanuk.core.banking.CurrentAccount;
 import com.booleanuk.core.banking.SavingAccount;
-import com.booleanuk.core.statements.BankStatementGenerator;
+import com.booleanuk.core.statement.BankStatementGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -88,11 +88,7 @@ public class Customer extends User implements CustomerOperations {
 
     @Override
     public String generateSavingAccountStatements() {
-        return null;
-    }
-
-    @Override
-    public String generateAllAccountsStatements() {
-        return null;
+        BankStatementGenerator generator = new BankStatementGenerator();
+        return generator.generateStatement(savingAccount.getTransactions());
     }
 }

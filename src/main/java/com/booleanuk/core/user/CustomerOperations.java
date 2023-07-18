@@ -21,5 +21,4 @@ interface CustomerOperations {
 
     String generateSavingAccountStatements();
 
-    String generateAllAccountsStatements();
 }

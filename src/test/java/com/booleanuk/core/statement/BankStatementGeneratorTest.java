@@ -1,6 +1,5 @@
-package com.booleanuk.core;
+package com.booleanuk.core.statement;
 
-import com.booleanuk.core.statements.BankStatementGenerator;
 import com.booleanuk.core.user.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,6 @@ public class BankStatementGeneratorTest {
 
         BankStatementGenerator generator = new BankStatementGenerator();
         String result = generator.generateStatement(customer.getCurrentAccount().getTransactions());
-
 
         System.out.println(result);
 

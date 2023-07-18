@@ -1,4 +1,4 @@
-package com.booleanuk.core.statements;
+package com.booleanuk.core.statement;
 
 import com.booleanuk.core.banking.BankTransaction;
 import lombok.Getter;

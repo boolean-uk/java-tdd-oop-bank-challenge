@@ -1,10 +1,10 @@
-package core;
+package com.booleanuk.extension;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public abstract class Account {
+public class Account {
     protected String firstname;
     protected String lastname;
     protected int currentBalance; // Balance in cents (int)
@@ -13,7 +13,7 @@ public abstract class Account {
     public ArrayList<Integer> balanceHistory;
     public ArrayList<String> dateHistory;
     public ArrayList<Double> balanceMoveHistory;
-
+    String branch;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public Account(String firstname, String lastname) {
@@ -25,6 +25,18 @@ public abstract class Account {
         this.balanceHistory = new ArrayList<>();
         this.dateHistory = new ArrayList<>();
         this.balanceMoveHistory = new ArrayList<>();
+    }
+
+    // Extension user story:
+    // As a bank manager,
+    // So I can expand,
+    // I want accounts to be associated with specific branches.
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getBranch() {
+        return branch;
     }
 
     public boolean deposit(double balance) {
@@ -52,7 +64,7 @@ public abstract class Account {
         return true;
     }
 
-    private int doubleToIntBalance(double balance) {
+    int doubleToIntBalance(double balance) {
         return (int) (balance * 100);
     }
 
@@ -60,8 +72,18 @@ public abstract class Account {
         return this.firstname;
     }
 
-    public int getCurrentBalance() {
-        return this.currentBalance;
+    public double getCurrentBalance() {
+        if (balanceHistory.isEmpty()) {
+            return 0.0;
+        }
+        return balanceHistory.get(balanceHistory.size()-1) / 100.0; // Updated to handle negative balances
+    }
+
+    public int getCurrentBalanceInCents() {
+        if (balanceHistory.isEmpty()) {
+            return 0;
+        }
+        return balanceHistory.get(balanceHistory.size()-1);
     }
 
     public String getLastname() {
@@ -72,7 +94,7 @@ public abstract class Account {
         return this.activated;
     }
 
-    private String getCurrentDate() {
+    protected String getCurrentDate() {
         LocalDate date = LocalDate.now();
         return DATE_FORMATTER.format(date);
     }

@@ -1,8 +1,9 @@
-package core;
+package com.booleanuk.extension;
+
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
+
 public class Bank {
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.00");
     private ArrayList<Account> accounts;
@@ -11,9 +12,7 @@ public class Bank {
         accounts = new ArrayList<>();
     }
 
-    public List<Account> getAccounts() {
-        return this.accounts;
-    }
+
     public boolean createAccount(String firstname, String lastname) {
         if (accountExists(firstname, lastname, CurrentAccount.class)) {
             System.out.println("Failed to create an account. The user already has an account!");
@@ -24,6 +23,9 @@ public class Bank {
         accounts.add(account);
         System.out.println("New user created!");
         return true;
+    }
+    public ArrayList<Account> getAccounts() {
+        return accounts;
     }
 
     public boolean createAccount(String firstname, String lastname, String type) {

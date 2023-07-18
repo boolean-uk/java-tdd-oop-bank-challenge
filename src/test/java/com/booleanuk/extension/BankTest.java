@@ -1,4 +1,4 @@
-package core;
+package com.booleanuk.extension;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,7 +8,6 @@ public class BankTest {
 
     private Bank bank;
     private Account nonExistingAccount;
-
     @BeforeEach
     void setUp() {
         bank = new Bank();

@@ -1,4 +1,4 @@
-package extension;
+package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ public class AccountTest {
         boolean depositResult = account.deposit(depositAmount);
 
         Assertions.assertTrue(depositResult, "Deposit should succeed with valid amount");
-        Assertions.assertEquals(depositCents, account.getCurrentBalanceInCents(), "Account balance should match deposit amount");
+        Assertions.assertEquals(depositCents, account.getCurrentBalance(), "Account balance should match deposit amount");
         Assertions.assertTrue(account.activated, "Account should be activated after successful deposit");
 
         Assertions.assertEquals(formatter.format(LocalDate.now()), account.dateHistory.get(0), "Current date should be recorded in date history");
@@ -47,7 +47,7 @@ public class AccountTest {
         Assertions.assertTrue(account.withdraw(10), "Withdrawal should succeed if the amount is less than the balance");
 
         int remainingBalanceCents = 9050; // 100.5 * 100 - 10 * 100
-        Assertions.assertEquals(remainingBalanceCents, account.getCurrentBalanceInCents(), "Remaining balance should match expected value");
+        Assertions.assertEquals(remainingBalanceCents, account.getCurrentBalance(), "Remaining balance should match expected value");
 
         Assertions.assertEquals(formatter.format(LocalDate.now()), account.dateHistory.get(1), "Current date should be recorded in date history after withdrawal");
         Assertions.assertEquals(remainingBalanceCents, account.balanceHistory.get(1), "Remaining balance in cents should be recorded in balance history after withdrawal");
@@ -58,25 +58,6 @@ public class AccountTest {
         boolean depositResult = account.deposit(100.5);
 
         Assertions.assertTrue(depositResult, "Deposit should succeed with valid amount");
-        Assertions.assertEquals(10050, account.getCurrentBalanceInCents(), "Account balance should match deposit amount in cents");
-    }
-
-
-    @Test
-    void branchTest() {
-        account.setBranch("Super branch");
-
-        Assertions.assertEquals("Super branch", account.getBranch());
-    }
-
-    @Test
-    void overDraftTest() {
-        account.deposit(100.5);
-
-        Assertions.assertFalse(account.withdraw(101.5));
-
-        ((CurrentAccount) account).setOverDraftAbility(true);
-        Assertions.assertTrue(account.withdraw(130.5));
-        Assertions.assertEquals(-30.0, account.getCurrentBalance());
+        Assertions.assertEquals(10050, account.getCurrentBalance(), "Account balance should match deposit amount in cents");
     }
 }

@@ -1,9 +1,5 @@
-package extension;
+package com.booleanuk.core;
 
-import core.Account;
-import core.Bank;
-import core.CurrentAccount;
-import core.SavingAccount;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +7,12 @@ import org.junit.jupiter.api.Test;
 public class BankTest {
 
     private Bank bank;
-    private core.Account nonExistingAccount;
+    private Account nonExistingAccount;
+
     @BeforeEach
     void setUp() {
         bank = new Bank();
-        nonExistingAccount = new core.CurrentAccount("XXX", "YYY");
+        nonExistingAccount = new CurrentAccount("XXX", "YYY");
     }
 
     @Test
@@ -65,7 +62,7 @@ public class BankTest {
     void printStatementShouldSucceedForExistingAccountWithTransactions() {
         // Arrange
         bank.createAccount("Kinga", "Hernet");
-        core.Account nick = bank.getAccounts().get(0);
+        Account nick = bank.getAccounts().get(0);
         nick.deposit(1500.5);
         nick.withdraw(500.5);
         nick.deposit(200.0);

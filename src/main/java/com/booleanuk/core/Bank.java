@@ -1,41 +1,39 @@
-package extension;
-
-import core.Account;
-import core.CurrentAccount;
-import core.SavingAccount;
+package com.booleanuk.core;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+import java.util.List;
 public class Bank {
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.00");
-    private ArrayList<core.Account> accounts;
+    private ArrayList<Account> accounts;
 
     public Bank() {
         accounts = new ArrayList<>();
     }
 
-
+    public List<Account> getAccounts() {
+        return accounts;
+    }
     public boolean createAccount(String firstname, String lastname) {
-        if (accountExists(firstname, lastname, core.CurrentAccount.class)) {
+        if (accountExists(firstname, lastname, CurrentAccount.class)) {
             System.out.println("Failed to create an account. The user already has an account!");
             return false;
         }
 
-        core.Account account = new CurrentAccount(firstname, lastname);
+        Account account = new CurrentAccount(firstname, lastname);
         accounts.add(account);
         System.out.println("New user created!");
         return true;
     }
 
     public boolean createAccount(String firstname, String lastname, String type) {
-        Class<?> accountClass = type.equalsIgnoreCase("current") ? CurrentAccount.class : core.SavingAccount.class;
+        Class<?> accountClass = type.equalsIgnoreCase("current") ? CurrentAccount.class : SavingAccount.class;
         if (accountExists(firstname, lastname, accountClass)) {
             System.out.println("Failed to create an account. The user already has a " + type + " account!");
             return false;
         }
 
-        core.Account account = accountClass.equals(CurrentAccount.class)
+        Account account = accountClass.equals(CurrentAccount.class)
                 ? new CurrentAccount(firstname, lastname)
                 : new SavingAccount(firstname, lastname);
 
@@ -88,5 +86,4 @@ public class Bank {
                         && lastname.equals(account.getLastname())
                         && accountClass.equals(account.getClass()));
     }
-
 }

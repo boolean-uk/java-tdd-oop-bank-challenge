@@ -10,6 +10,7 @@ public class Account {
     public Account(String accountNr, Branch branch) {
         this.accountNr = accountNr;
         this.branch = branch;
+        this.transfers = new ArrayList<Transfer>();
     }
 
     public String getAccountNr() {
@@ -34,5 +35,14 @@ public class Account {
 
     public void setTransfers(ArrayList<Transfer> transfers) {
         this.transfers = transfers;
+    }
+
+    public int calculateBalance() {
+        int sum = 0;
+        for (Transfer transfer : transfers) {
+            if (transfer.getClass().isInstance(Withdraw.class)) sum -= transfer.getAmountOfMoney();
+            else sum += transfer.getAmountOfMoney();
+        }
+        return sum;
     }
 }

@@ -33,7 +33,7 @@
 |         | String accountNumber                      |                                                       |                                                                                       |         |
 |         | List<String> accounts                     | deposit(double amount, LocalDate date)                | if amount and date given                                                              | String  |
 |         |                                           |                                                       | if amount given and date not set current date                                         | String  |
-|         |                                           |                                                       | if amount and date not given or date given without amount                             | String  |
+|         |                                           |                                                       | if amount equals 0                                                                    | String  |
 |         |                                           | withdraw(double amount, LocalDate date)               | if amount and date given                                                              | String  |
 |         |                                           |                                                       | if amount given and date not set current date                                         | String  |
 |         |                                           |                                                       | if amount and date not given or date given without amount                             | String  |

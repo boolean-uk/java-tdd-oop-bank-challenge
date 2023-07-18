@@ -15,7 +15,7 @@ public class AccountsTest {
         branch = new Branch("PLWAW1", "Poland", "Warsaw");
         account = new Account("12", branch);
         currentAccount = new CurrentAccount("12", branch);
-//        savingsAccount = new SavingsAccount("12", branch);
+        savingsAccount = new SavingsAccount("12", branch);
     }
 
     @Test
@@ -38,6 +38,17 @@ public class AccountsTest {
 
         Assertions.assertEquals("123", currentAccount.getAccountNr());
         Assertions.assertEquals(branch, currentAccount.getBranch());
+    }
+
+    @Test
+    public void savingsAccountGetterAndSetterShouldReturnProperValue() {
+        Assertions.assertEquals("12", savingsAccount.getAccountNr());
+        Assertions.assertEquals(branch, savingsAccount.getBranch());
+
+        savingsAccount.setAccountNr("123");
+
+        Assertions.assertEquals("123", savingsAccount.getAccountNr());
+        Assertions.assertEquals(branch, savingsAccount.getBranch());
     }
 
 

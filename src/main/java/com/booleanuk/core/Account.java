@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Account {
@@ -44,5 +45,9 @@ public class Account {
             else sum += transfer.getAmountOfMoney();
         }
         return sum;
+    }
+
+    public void deposit(int amountOfMoney) {
+        transfers.add(new Deposit(amountOfMoney, LocalDate.now()));
     }
 }

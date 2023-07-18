@@ -63,7 +63,6 @@ public class AccountsTest {
         account.deposit(20000);
 
         Assertions.assertEquals(20000, account.calculateBalance());
-
     }
 
 }

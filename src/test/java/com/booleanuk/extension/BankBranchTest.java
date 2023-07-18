@@ -53,9 +53,24 @@ public class BankBranchTest {
         BankBranch bankBranch = (new BankHQ()).openBranch();
         UUID customerId = bankBranch.registerCustomer();
         UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
+        bankBranch.deposit(accountId, BigDecimal.valueOf(1_000));
+        bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500));
+
         Account account = bankBranch.getAccounts().get(accountId);
-        account.deposit(BigDecimal.valueOf(1_000));
-        account.withdraw(BigDecimal.valueOf(500));
         Assertions.assertEquals(BigDecimal.valueOf(500), account.getBalance());
+    }
+
+    @Test
+    public void testRequestingOverdraft() {
+        BankBranch bankBranch = (new BankHQ()).openBranch();
+        UUID customerId = bankBranch.registerCustomer();
+        UUID accountId = bankBranch.openAccount(customerId, CurrentAccount.class);
+
+        Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
+
+        bankBranch.requestOverDraft(customerId, accountId, BigDecimal.valueOf(500));
+
+        Assertions.assertTrue(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
+        Assertions.assertFalse(bankBranch.withdraw(customerId, accountId, BigDecimal.valueOf(500)));
     }
 }

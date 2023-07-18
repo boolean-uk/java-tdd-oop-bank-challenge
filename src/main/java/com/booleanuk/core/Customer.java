@@ -13,18 +13,26 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
 
-    public List<Account> getAccounts() {
+    public List<Account> getAllAccounts() {
         return accounts;
     }
 
-    public void createAccount(String typeOfAccount){
-        if(typeOfAccount.equalsIgnoreCase("saving")){
-            SavingAccount savingAccount = new SavingAccount(typeOfAccount);
-            accounts.add(savingAccount);
-        } else if(typeOfAccount.equalsIgnoreCase("current")){
-            CurrentAccount currentAccount = new CurrentAccount(typeOfAccount);
-            accounts.add(currentAccount);
+    public List<Account> getAccountsByType(String accountType){
+        if(!accountType.equalsIgnoreCase("saving") && !accountType.equalsIgnoreCase("current")){
+            throw new RuntimeException("We don't have this type of account!");
         }
-        throw new RuntimeException("We don't have this type of account, sorry!");
+        return accounts.stream()
+                .filter(account -> account.getTypeOfAccount().equalsIgnoreCase(accountType))
+                .toList();
+    }
+
+    public void createSavingAccount(){
+            SavingAccount savingAccount = new SavingAccount();
+            accounts.add(savingAccount);
+    }
+
+    public void createCurrentAccount(){
+        CurrentAccount currentAccount = new CurrentAccount();
+        accounts.add(currentAccount);
     }
 }

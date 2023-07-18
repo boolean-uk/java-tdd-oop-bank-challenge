@@ -11,11 +11,11 @@ public class Account {
     private List<Transaction> transactions;
     private String typeOfAccount;
 
-    public Account(String typeOfAccount) {
-        this.typeOfAccount = typeOfAccount;
+    public Account() {
         this.accountNumber = generateAccountNumber();
         this.balance = 0.0;
         this.transactions = new ArrayList<>();
+        this.typeOfAccount = "";
     }
 
     private String generateAccountNumber() {
@@ -40,4 +40,6 @@ public class Account {
     public String getTypeOfAccount() {
         return typeOfAccount;
     }
+
+
 }

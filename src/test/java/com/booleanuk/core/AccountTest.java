@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-
 public class AccountTest {
 
     Customer customer;
@@ -19,17 +17,22 @@ public class AccountTest {
     }
     @Test
     public void testCreateAccount_afterAddingOneAccount_shouldReturnEquals() {
-        customer.createAccount("saving");
-        Assertions.assertEquals(1, customer.getAccounts().size());
+        customer.createSavingAccount();
+        Assertions.assertEquals(1, customer.getAllAccounts().size());
     }
     @Test
     public void testCreateAccount_afterAddingTwoAccount_shouldReturnNotEqual() {
-        customer.createAccount("saving");
-        customer.createAccount("current");
-        Assertions.assertNotEquals(1, customer.getAccounts().size());
+        customer.createCurrentAccount();
+        customer.createSavingAccount();
+        Assertions.assertNotEquals(1, customer.getAllAccounts().size());
     }
 
-    @Test void testCreateAccount_wrongTypeOfArgument_shouldThrowException(){
-        Assertions.assertThrows(RuntimeException.class, () -> customer.createAccount("different"));
+    @Test void testGetParticularTypeOfAccounts_wrongTypeOfArgument_shouldThrowException(){
+        Assertions.assertThrows(RuntimeException.class, () -> customer.getAccountsByType("different"));
     }
+
+    @Test void testGetParticularTypeOfAccounts_rightTypeOfArgument_shouldNotThrowException(){
+        Assertions.assertDoesNotThrow(() -> customer.getAccountsByType("saving"));
+    }
+
 }

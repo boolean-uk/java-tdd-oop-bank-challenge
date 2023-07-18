@@ -1,7 +1,12 @@
 package com.booleanuk.core;
 
 public class CurrentAccount extends Account{
-    public CurrentAccount(String typeOfAccount) {
-        super(typeOfAccount);
+    private String typeOfAccount;
+    public CurrentAccount() {
+        this.typeOfAccount = "current";
+    }
+
+    public String getTypeOfAccount() {
+        return typeOfAccount;
     }
 }

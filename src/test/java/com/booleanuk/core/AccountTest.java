@@ -28,11 +28,21 @@ public class AccountTest {
         assertEquals(BigDecimal.valueOf(500),account.amount);
     }
     @Test
-    public void withdrawCurrentOverdraft(){
-        Account account=new CurrentAccount(BigDecimal.ZERO,"WAR");
+    public void withdrawCurrentOverdraftAccept(){
+        CurrentAccount account=new CurrentAccount(BigDecimal.ZERO,"WAR");
+        account.giveAcceptanceForOverdraft();
         account.deposit(BigDecimal.valueOf(800));
         account.withdraw(BigDecimal.valueOf(1000));
         assertEquals(BigDecimal.valueOf(-200),account.amount);
+    }
+    @Test
+    public void withdrawCurrentOverdraftDeny(){
+        CurrentAccount account=new CurrentAccount(BigDecimal.ZERO,"WAR");
+        account.denyOverdraft();
+        account.deposit(BigDecimal.valueOf(800));
+       // account.withdraw(BigDecimal.valueOf(1000));
+       // assertEquals(BigDecimal.valueOf(-200),account.amount);
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(BigDecimal.valueOf(1000)));
     }
     @Test
     public void withdrawCurrentOverdraftTooMuch(){

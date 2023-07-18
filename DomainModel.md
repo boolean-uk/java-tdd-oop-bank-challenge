@@ -12,8 +12,8 @@
 |                 |                                             |                                                       |                                         |                            |
 | User            | sendRequest(Request)                        | String name                                           |                                         |                            |
 |                 | approveRequest(Request)                     | boolean isManager                                     | true if approved, false if not approved | boolean                    |
-|                 |                                             | boolean isEngineer                                    |                                         |                            |
-|                 |                                             |                                                       |                                         |                            |
+|                 | generateStatement()                         | boolean isEngineer                                    | generate bank statement                 |                            |
+|                 | printStatement()                            |                                                       | printsStatement                         |                            |
 |                 |                                             |                                                       |                                         |                            |
 | CurrentAccount  | withdraw(amount: double)                    |                                                       | withdraw funds                          |                            |
 |                 | wire(amount: double, accountNumber: String) |                                                       | wires funds                             |                            |
@@ -21,7 +21,7 @@
 | Transaction     |                                             | double amount, LocalDate date                         |                                         |                            |
 |                 |                                             | TransactionType type                                  |                                         |                            |
 |                 |                                             |                                                       |                                         |                            |
-| BankStatement   | generateStatement()                         | Map<String,List<Transaction> transactions, User owner | generate bank statement                 | String formatted statement |
+| BankStatement   |                                             | Map<String,List<Transaction> transactions, User owner |                                         | String formatted statement |
 |                 |                                             |                                                       |                                         |                            |
 | Bank            | createAccount(Account account)              | List<Account> accounts                                | create a new account                    | Account created            |
 |                 | getAccount(accountNumber: String)           |                                                       | get account by account ID               | Account object             |

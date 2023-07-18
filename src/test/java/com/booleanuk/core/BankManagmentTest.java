@@ -8,10 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.booleanuk.core.TransactionType.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccountTest {
+public class BankManagmentTest {
     CurrentAccount currentAccount;
     User user;
     User secondUser;
@@ -64,13 +63,25 @@ public class AccountTest {
     @Test
     public void shouldGetCorrectStatement(){
         secondAccount = new CurrentAccount("POL86", secondUser, manager);
+        CurrentAccount thirdAccount = new CurrentAccount("PL145", user, manager);
         currentAccount.deposit(1000.00);
         currentAccount.deposit(1500.00);
         currentAccount.wire(100.00,secondAccount.getAccountNumber());
         currentAccount.withdraw(700.00);
-        Map<String,List<Transaction>> expected = new HashMap<>();
-        expected.put(currentAccount.getAccountNumber(),currentAccount.getTransactions());
-
+        thirdAccount.deposit(100);
+        thirdAccount.deposit(1500);
+        thirdAccount.withdraw(500);
+        Map<Account,List<Transaction>> expected = new HashMap<>();
+        expected.put(currentAccount,currentAccount.getTransactions());
+        expected.put(thirdAccount,thirdAccount.getTransactions());
+        System.out.println(user.generateStatement().toString());
         assertEquals(expected,user.generateStatement().getTransactions());
+    }
+
+    @Test
+    public void shouldSendARequest(){
+
+        Request request = new Request(2000,currentAccount);
+        assertEquals(request,user.sendRequest(2000,currentAccount.getAccountNumber()));
     }
 }

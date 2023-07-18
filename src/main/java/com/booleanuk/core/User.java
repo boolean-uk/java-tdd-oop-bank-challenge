@@ -27,9 +27,12 @@ public class User {
     }
 
     public BankStatement generateStatement() {
-        Map<String, List<Transaction>> transactionMap = this.getAccounts().stream()
-                .collect(Collectors.toMap(Account::getAccountNumber,Account::getTransactions));
+        Map<Account, List<Transaction>> transactionMap = this.getAccounts().stream()
+                .collect(Collectors.toMap(account -> account,Account::getTransactions));
         return new BankStatement(this,transactionMap);
 
+    }
+    public void printStatement(){
+        System.out.println(this.generateStatement().toString());
     }
 }

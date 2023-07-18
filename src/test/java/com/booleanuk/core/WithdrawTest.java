@@ -5,14 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WithdrawTest {
-    private Branch branch;
     private Account account;
     private CurrentAccount currentAccount;
     private SavingsAccount savingsAccount;
 
     @BeforeEach
     public void setup() {
-        branch = new Branch("PLWAW1", "Poland", "Warsaw");
+        Branch branch = new Branch("PLWAW1", "Poland", "Warsaw");
         account = new Account("12", branch);
         currentAccount = new CurrentAccount("12", branch);
         savingsAccount = new SavingsAccount("12", branch);
@@ -63,7 +62,7 @@ public class WithdrawTest {
     }
 
     @Test
-    public void withdrawWithOverdraftShouldAllowToWithdrawMoneyFromSavingsAccount() {
+    public void withdrawShouldAllowToWithdrawAllMoneyFromSavingsAccount() {
         savingsAccount.deposit(40000);
         savingsAccount.withdraw(20000);
 
@@ -72,11 +71,10 @@ public class WithdrawTest {
         savingsAccount.withdraw(20000);
 
         Assertions.assertEquals(0, savingsAccount.calculateBalance());
-
     }
 
     @Test
-    public void withdrawShouldNotAllowToWithdrawMoneyFromSavingsAccount() {
+    public void withdrawShouldNotAllowToWithdrawMoreMoneyFromSavingsAccountThanThereIs() {
         savingsAccount.deposit(40000);
 
         Assertions.assertThrows(IllegalStateException.class, () -> savingsAccount.withdraw(40001));

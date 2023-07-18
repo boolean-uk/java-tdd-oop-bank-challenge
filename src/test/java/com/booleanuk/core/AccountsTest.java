@@ -37,28 +37,6 @@ public class AccountsTest {
     }
 
     @Test
-    public void currentAccountGetterAndSetterShouldReturnProperValue() {
-        Assertions.assertEquals("12", currentAccount.getAccountNr());
-        Assertions.assertEquals(branch, currentAccount.getBranch());
-
-        currentAccount.setAccountNr("123");
-
-        Assertions.assertEquals("123", currentAccount.getAccountNr());
-        Assertions.assertEquals(branch, currentAccount.getBranch());
-    }
-
-    @Test
-    public void savingsAccountGetterAndSetterShouldReturnProperValue() {
-        Assertions.assertEquals("12", savingsAccount.getAccountNr());
-        Assertions.assertEquals(branch, savingsAccount.getBranch());
-
-        savingsAccount.setAccountNr("123");
-
-        Assertions.assertEquals("123", savingsAccount.getAccountNr());
-        Assertions.assertEquals(branch, savingsAccount.getBranch());
-    }
-
-    @Test
     public void calculateBalanceShouldReturn0() {
         Assertions.assertEquals(0, account.calculateBalance());
     }
@@ -84,4 +62,31 @@ public class AccountsTest {
 
     }
 
+    @Test
+    public void currentAccountGetterAndSetterShouldReturnProperValue() {
+        Assertions.assertEquals("12", currentAccount.getAccountNr());
+        Assertions.assertEquals(branch, currentAccount.getBranch());
+
+        currentAccount.setAccountNr("123");
+
+        Assertions.assertEquals("123", currentAccount.getAccountNr());
+        Assertions.assertEquals(branch, currentAccount.getBranch());
+    }
+
+    @Test
+    public void savingsAccountGetterAndSetterShouldReturnProperValue() {
+        Assertions.assertEquals("12", savingsAccount.getAccountNr());
+        Assertions.assertEquals(branch, savingsAccount.getBranch());
+
+        savingsAccount.setAccountNr("123");
+
+        Assertions.assertEquals("123", savingsAccount.getAccountNr());
+        Assertions.assertEquals(branch, savingsAccount.getBranch());
+    }
+
+    @Test
+    public void generateBankStatementsShouldReturnNicelyFormattedOutput() {
+        account.deposit(20000);
+        Assertions.assertEquals("", account.generateBankStatements());
+    }
 }

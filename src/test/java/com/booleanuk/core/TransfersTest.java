@@ -9,11 +9,13 @@ import java.time.LocalDate;
 public class TransfersTest {
     private Transfer transfer;
     private Deposit deposit;
+    private Withdraw withdraw;
 
     @BeforeEach
     public void setup() {
         transfer = new Transfer(30000, LocalDate.parse("2023-07-18"));
         deposit = new Deposit(30000, LocalDate.parse("2023-07-18"));
+        withdraw = new Withdraw(30000, LocalDate.parse("2023-07-18"));
     }
 
     @Test
@@ -46,5 +48,21 @@ public class TransfersTest {
         Assertions.assertEquals(2023, deposit.getDate().getYear());
         Assertions.assertEquals(8, deposit.getDate().getMonth().getValue());
         Assertions.assertEquals(19, deposit.getDate().getDayOfMonth());
+    }
+
+    @Test
+    public void withdrawGetterAndSetterShouldReturnProperValue() {
+        Assertions.assertEquals(30000, withdraw.getAmountOfMoney());
+        Assertions.assertEquals(2023, withdraw.getDate().getYear());
+        Assertions.assertEquals(7, withdraw.getDate().getMonth().getValue());
+        Assertions.assertEquals(18, withdraw.getDate().getDayOfMonth());
+
+        withdraw.setAmountOfMoney(40000);
+        withdraw.setDate(LocalDate.parse("2023-08-19"));
+
+        Assertions.assertEquals(40000, withdraw.getAmountOfMoney());
+        Assertions.assertEquals(2023, withdraw.getDate().getYear());
+        Assertions.assertEquals(8, withdraw.getDate().getMonth().getValue());
+        Assertions.assertEquals(19, withdraw.getDate().getDayOfMonth());
     }
 }

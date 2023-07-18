@@ -20,23 +20,22 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-| Class                                | Fields                         | Methods                               | Scenario                               | Output |
-|--------------------------------------|--------------------------------|---------------------------------------|----------------------------------------|--------|
-| Customer                             | String fullName                |                                       |                                        |        |
-|                                      | List<Account> accounts         |                                       |                                        |        |
-|                                      |                                | createCurrentAccount(Account account) | User wants to create a current account |        |
-|                                      |                                | createSavingAccount(Account account)  | User wants to create a saving account  |        |
-|                                      |                                |                                       |                                        |        |
-| Account                              | String accountNumber           |                                       |                                        |        |
-|                                      | double balance                 |                                       |                                        |        |
-|                                      | Customer customer              |                                       |                                        |        |
-|                                      | List<Transaction> transactions |                                       |                                        |        |
-|                                      |                                | depositFunds(double amount)           | User wants to deposit his funds        |        |
-|                                      |                                | withdrawFunds(double amount)          | User wants to withdraw his funds       |        |
-|                                      |                                |                                       |                                        |        |
-| CurrentAccount (subclass of Account) | String accountType             |                                       |                                        |        |
-| SavingAccount (subclass of Account)  | String accountType             |                                       |                                        |        |
-|                                      |                                |                                       |                                        |        |
-| Transaction                          | LocalDate dateOfTransaction    |                                       |                                        |        |
-|                                      | double amount                  |                                       |                                        |        |
-|                                      | String typeOfTransaction       |                                       |                                        |        |
+| Class                                | Fields                         | Methods                        | Scenario                                           | Output |
+|--------------------------------------|--------------------------------|--------------------------------|----------------------------------------------------|--------|
+| Customer                             | String fullName                |                                |                                                    |        |
+|                                      | List<Account> accounts         |                                |                                                    |        |
+|                                      |                                | createAccount(Account account) | User wants to create a current or a saving account |        |
+|                                      |                                |                                |                                                    |        |
+| Account                              | String accountNumber           |                                |                                                    |        |
+|                                      | double balance                 |                                |                                                    |        |
+|                                      | Customer customer              |                                |                                                    |        |
+|                                      | List<Transaction> transactions |                                |                                                    |        |
+|                                      |                                | depositFunds(double amount)    | User wants to deposit his funds                    |        |
+|                                      |                                | withdrawFunds(double amount)   | User wants to withdraw his funds                   |        |
+|                                      |                                |                                |                                                    |        |
+| CurrentAccount (subclass of Account) | String accountType             |                                |                                                    |        |
+| SavingAccount (subclass of Account)  | String accountType             |                                |                                                    |        |
+|                                      |                                |                                |                                                    |        |
+| Transaction                          | LocalDate dateOfTransaction    |                                |                                                    |        |
+|                                      | double amount                  |                                |                                                    |        |
+|                                      | String typeOfTransaction       |                                |                                                    |        |

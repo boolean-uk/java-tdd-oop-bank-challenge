@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,13 @@ public class BankManagmentTest {
         manager = new User("Milena");
         manager.setManager(true);
         currentAccount = new CurrentAccount("PL8",user,manager);
+
     }
+    @AfterEach
+    public void clear(){
+        Bank.getAccountList().clear();
+    }
+
 
     @Test
     public void shouldDepositMoney(){
@@ -92,6 +99,7 @@ public class BankManagmentTest {
         user.sendRequest(2000,currentAccount.getAccountNumber());
         assertEquals(-2000,currentAccount.getBalance());
         assertTrue(manager.approveRequest(request));
+        assertFalse(user.approveRequest(request));
     }
 
     @Test

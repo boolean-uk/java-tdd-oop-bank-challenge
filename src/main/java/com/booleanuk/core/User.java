@@ -1,16 +1,15 @@
 package com.booleanuk.core;
 
-import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.booleanuk.core.TransactionType.*;
+import static com.booleanuk.core.TransactionType.WITHDRAW;
 
 public class User {
-    private String name;
-    private List<Account> accounts;
+    private final String name;
+    private final List<Account> accounts;
 
     private boolean isManager;
 
@@ -31,9 +30,6 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Account> getAccounts() {
         return accounts;

@@ -15,10 +15,6 @@ public class BankStatement {
         this.transactions = transactions;
     }
 
-    public User getOwner() {
-        return owner;
-    }
-
     @Override
     public String toString() {
         StringBuilder statementBuilder = new StringBuilder();

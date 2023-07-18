@@ -27,6 +27,12 @@ public class BankBranch {
         return customer.getId();
     }
 
+    public UUID registerCustomer(String phoneNumber) {
+        Customer customer = new Customer(phoneNumber);
+        customers.put(customer.getId(), customer);
+        return customer.getId();
+    }
+
     public <T extends Account> UUID openAccount(UUID customerId, Class<T> accountType) {
         if (isCustomer(customerId)) {
             try {
@@ -99,6 +105,16 @@ public class BankBranch {
         clientRequests.remove(request);
     }
 
+    public String sendStatement(String message, UUID customerId) {
+        if (customers.containsKey(customerId)) {
+            Customer customer = customers.get(customerId);
+            if (customer.getPhoneNumber() != null) {
+                return MessageService.send(message, customer);
+            }
+        }
+        return String.format("Message: %s%nTo customer id: %s not sent.", message, customerId);
+    }
+
     private boolean isWithdrawable(Account account, BigDecimal funds) {
         return funds.compareTo(account.getBalance().add(account.getAcceptedOverdraft())) <= 0;
     }
@@ -113,6 +129,10 @@ public class BankBranch {
 
     public Map<UUID, Account> getAccounts() {
         return accounts;
+    }
+
+    public Map<UUID, Customer> getCustomers() {
+        return customers;
     }
 
     public List<Request> getRequests(UUID customerId) {

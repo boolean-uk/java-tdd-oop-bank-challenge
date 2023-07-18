@@ -17,7 +17,7 @@ public class BankManagerTest {
         // Arrange
         Account result;
         // Act
-        result = bankManager.createAccount(AccountType.CURRENT);
+        result = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
         // Assert
         Assertions.assertNotNull(result);
         Assertions.assertNotNull(bankManager.getAccount("CUR0"));
@@ -28,7 +28,7 @@ public class BankManagerTest {
         // Arrange
         Account result;
         // Act
-        result = bankManager.createAccount(AccountType.SAVINGS);
+        result = bankManager.createAccount(AccountType.SAVINGS, BankBranch.WARSAW_BANK);
         // Assert
         Assertions.assertNotNull(result);
         Assertions.assertNotNull(bankManager.getAccount("SAV0"));
@@ -41,12 +41,12 @@ public class BankManagerTest {
         double amount;
         boolean result;
         // Act;
-        account = bankManager.createAccount(AccountType.CURRENT);
+        account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
         amount = 200.00;
         result = account.deposit(amount);
         // Assert
         Assertions.assertTrue(result);
-        Assertions.assertEquals(1200.00, account.getBalance());
+        Assertions.assertEquals(190.00, account.getBalance());
     }
 
     @Test
@@ -56,12 +56,12 @@ public class BankManagerTest {
         double amount;
         boolean result;
         // Act;
-        account = bankManager.createAccount(AccountType.CURRENT);
+        account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
         amount = 200.00;
         result = account.withdraw(amount);
         // Assert
         Assertions.assertTrue(result);
-        Assertions.assertEquals(800.00, account.getBalance());
+        Assertions.assertEquals(-190.00, account.getBalance());
     }
 
     @Test
@@ -69,9 +69,9 @@ public class BankManagerTest {
         // Arrange
         Account account;
         // Act;
-        account = bankManager.createAccount(AccountType.CURRENT);
-        account.withdraw(500);
-        account.withdraw(100);
+        account = bankManager.createAccount(AccountType.CURRENT, BankBranch.WARSAW_BANK);
+        account.withdraw(521);
+        account.withdraw(133);
         account.deposit(1000);
         // Assert (should be done manually by inspecting console result)
         account.printStatement();

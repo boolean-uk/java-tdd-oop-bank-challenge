@@ -2,37 +2,40 @@ package com.booleanuk.core;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Account {
-    private double balance;
     private final ArrayList<Transaction> transactions;
+    private final BankBranch branch;
 
-    Account() {
-        this.balance = 1000.00;
-        transactions = new ArrayList<>();
+    Account(BankBranch branch) {
+        transactions = new ArrayList<>(List.of(new Transaction(LocalDate.now(), 0, 0)));
+        this.branch = branch;
     }
 
     public double getBalance() {
-        return balance;
+        return getLastTransaction().balance;
+    }
+
+    public String getBranch() {
+        return branch.toString();
     }
 
     public boolean deposit(double amount) {
-        if (amount < 0) {
+        if (amount <= 0) {
             return false;
         } else {
-            balance += amount;
-            transactions.add(new Transaction(LocalDate.now(), amount, balance));
+            transactions.add(new Transaction(LocalDate.now(), amount, getLastTransaction().balance + amount));
             return true;
         }
     }
 
     public boolean withdraw(double amount) {
         amount = -amount;
-        if (amount > 0) {
+        if (amount >= 0) {
             return false;
         } else {
-            balance += amount;
-            transactions.add(new Transaction(LocalDate.now(), amount, balance));
+            transactions.add(new Transaction(LocalDate.now(), amount, getLastTransaction().balance + amount));
             return true;
         }
     }
@@ -49,12 +52,19 @@ public abstract class Account {
             if (transaction.amount > 0) {
                 System.out.printf("%-" + width + "s", transaction.amount);
                 System.out.printf("%-" + width + "s", "");
-            } else {
+            } else if (transaction.amount < 0) {
                 System.out.printf("%-" + width + "s", "");
                 System.out.printf("%-" + width + "s", transaction.amount);
+            } else {
+                System.out.printf("%-" + width + "s", "");
+                System.out.printf("%-" + width + "s", "");
             }
             System.out.printf("%-" + width + "s", transaction.balance);
             System.out.println();
         });
+    }
+
+    private Transaction getLastTransaction() {
+        return transactions.get(transactions.size()-1);
     }
 }

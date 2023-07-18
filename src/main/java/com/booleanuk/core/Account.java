@@ -3,7 +3,7 @@ package com.booleanuk.core;
 public class Account {
 
     private String accountNumber;
-    private String balance;
+    private double balance;
 
     public Account() {
 
@@ -14,7 +14,7 @@ public class Account {
 
     }
 
-    public Account(String accountNumber, String balance) {
+    public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
     }
@@ -27,11 +27,11 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public String getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

@@ -20,4 +20,12 @@ public class AccountTest {
         Assertions.assertEquals("C123456789", myAccount.getAccountNumber());
     }
 
+    @Test
+    public void testGetAccountBalance() {
+
+        myAccount.setBalance(1000);
+
+        Assertions.assertEquals(1000, myAccount.getBalance());
+    }
+
 }

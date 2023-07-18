@@ -67,4 +67,35 @@ public class NormalAccountTest {
         NormalAccount normalAccount = new NormalAccount(12312312);
         Assertions.assertFalse(normalAccount.withdrawFromDebit(1111));
     }
+
+    @Test
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectDeposit()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(123);
+        Assertions.assertEquals(1,normalAccount.getTransactions().size());
+    }
+    @Test
+    public void shouldAddNewTransactionToTransactionsListAfterCorrectWithdrawal()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.withdraw(123);
+        Assertions.assertEquals(1,normalAccount.getTransactions().size());
+    }
+
+    @Test
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectDeposit()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.deposit(-123);
+        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+    }
+    @Test
+    public void shouldntAddNewTransactionToTransactionsListAfterIncorrectWithdrawal()
+    {
+        NormalAccount normalAccount = new NormalAccount(12312312);
+        normalAccount.withdraw(-123);
+        Assertions.assertEquals(0,normalAccount.getTransactions().size());
+    }
+
 }

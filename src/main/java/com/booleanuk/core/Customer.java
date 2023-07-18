@@ -5,18 +5,20 @@ import com.booleanuk.core.Account;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Customer {
     private ArrayList<Account> accountsList;
+    HashMap<Account,Integer> overdraftRequests = new HashMap<Account, Integer>();
 
     public Customer() {
         accountsList=new ArrayList<>();
     }
 
-    public void createAccount(String accountType)
+    public void createAccount(String accountType,String branch)
     {
-        accountsList.add(new Account(accountType));
+        accountsList.add(new Account(accountType,branch));
     }
     public ArrayList<Account> getAccountsList()
     {
@@ -43,7 +45,12 @@ public class Customer {
             account.addTransaction(formattedDateTimeNow,-amount);
             return true;
         }
-        return false;
+        else
+        {
+            requestOverdraft(account,amount);
+            return false;
+        }
+
     }
     public double checkAccountBalance(Account account)
     {
@@ -52,6 +59,10 @@ public class Customer {
     public String generateAccountStatement(Account account)
     {
         return  account.generateBankStatement();
+    }
+    private void requestOverdraft(Account account, int amount)
+    {
+            overdraftRequests.put(account,amount);
     }
 
 }

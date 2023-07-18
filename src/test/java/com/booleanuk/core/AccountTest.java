@@ -14,7 +14,7 @@ class AccountTest {
     Account account;
     @BeforeEach
     void setUp() {
-        account = new Account("currentAccount");
+        account = new Account("currentAccount","currentBranch");
     }
 
     @Test

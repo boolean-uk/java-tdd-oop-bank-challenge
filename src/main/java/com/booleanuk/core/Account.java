@@ -7,12 +7,17 @@ import static java.lang.Math.abs;
 
 public class Account {
     private String accountType;
+    private String branch;
     private ArrayList<Transaction> transactions;
-    private int balance;
 
-    public Account(String accountType) {
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public Account(String accountType,String branch) {
         this.accountType = accountType;
-        balance = 0;
+        this.branch = branch;
+
         transactions = new ArrayList<>();
     }
     public void addTransaction(String date, int amount)

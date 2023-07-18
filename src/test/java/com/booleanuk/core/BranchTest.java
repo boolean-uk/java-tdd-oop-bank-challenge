@@ -17,6 +17,13 @@ public class BranchTest {
         Assertions.assertEquals("PLWAW1", branch.getCode());
         Assertions.assertEquals("Poland", branch.getCountry());
         Assertions.assertEquals("Warsaw", branch.getCity());
+
+        branch.setCode("PLBIA23");
+        branch.setCity("Bialystok");
+
+        Assertions.assertEquals("PLBIA23", branch.getCode());
+        Assertions.assertEquals("Poland", branch.getCountry());
+        Assertions.assertEquals("Bialystok", branch.getCity());
     }
 
 }

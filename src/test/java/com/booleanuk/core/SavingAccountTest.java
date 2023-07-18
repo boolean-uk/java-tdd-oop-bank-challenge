@@ -22,7 +22,6 @@ public class SavingAccountTest {
         account.deposit(100.44);
         Assertions.assertEquals(300.99, account.getBalance());
         Assertions.assertEquals(3,account.getTransactions().size());
-
     }
 
     @Test
@@ -54,6 +53,7 @@ public class SavingAccountTest {
         account.withdraw(100);
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(4, account.getTransactions().size());
+        account.generateBankStatement();
     }
     @Test
     public void withdrawWithZeroOrNegativeNumber() {

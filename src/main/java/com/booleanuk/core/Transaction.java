@@ -19,24 +19,14 @@ public class Transaction {
     public Date getDate() {
         return date;
     }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public String getAmount() {
+        return String.format("%,.2f", amount);
+    }
+    public String getBalance() {
+        return String.format("%,.2f", balance);
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public String getTypeOfOperation() {
+        return typeOfOperation;
     }
 }

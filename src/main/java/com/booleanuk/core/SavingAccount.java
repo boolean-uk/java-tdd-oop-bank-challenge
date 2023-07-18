@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -54,9 +55,19 @@ public class SavingAccount implements BankAccount{
 
     @Override
     public void generateBankStatement() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
         List<Transaction> transactionsSortedByDate = this.transactions.stream().sorted(Comparator.comparing(Transaction::getDate).
                 reversed()).collect(Collectors.toList());
 
-        System.out.println("date       || credit  || debit  || balance");
+        System.out.printf("%-10s || %-9s || %-9s || %4s %n", "date", "credit", "debit", "balance");
+        for(Transaction transaction : transactionsSortedByDate) {
+            String strDate = formatter.format(transaction.getDate());
+            if(transaction.getTypeOfOperation().equals("credit")) {
+                System.out.printf("%-10s || %-9s || %-9s || %1s %n", strDate, transaction.getAmount(), "", transaction.getBalance());
+            }else {
+                System.out.printf("%-10s || %-9s || %-9s || %1s %n", strDate, "", transaction.getAmount(), transaction.getBalance());
+            }
+        }
     }
 }

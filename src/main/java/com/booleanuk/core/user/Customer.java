@@ -5,8 +5,10 @@ import com.booleanuk.core.banking.CurrentAccount;
 import com.booleanuk.core.banking.SavingAccount;
 import com.booleanuk.core.exception.BankAccountAlreadyExistsException;
 import com.booleanuk.core.exception.BankAccountNotOpenedException;
+import com.booleanuk.core.sms.TwillioService;
 import com.booleanuk.core.statement.BankStatementGenerator;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -14,16 +16,19 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class Customer extends User implements CustomerOperations {
 
+    private final TwillioService twillioService;
     private CurrentAccount currentAccount;
     private SavingAccount savingAccount;
-
+    private String phoneNumber;
 
     public Customer() {
         super();
         this.currentAccount = null;
         this.savingAccount = null;
+        this.twillioService = new TwillioService();
     }
 
     @Override
@@ -83,13 +88,17 @@ public class Customer extends User implements CustomerOperations {
     @Override
     public String generateCurrentAccountStatements() {
         BankStatementGenerator generator = new BankStatementGenerator();
-        return generator.generateStatement(currentAccount.getTransactions());
+        String result = generator.generateStatement(currentAccount.getTransactions());
+        twillioService.sendSmsMessage(phoneNumber, result);
+        return result;
     }
 
     @Override
     public String generateSavingAccountStatements() {
         BankStatementGenerator generator = new BankStatementGenerator();
-        return generator.generateStatement(savingAccount.getTransactions());
+        String result = generator.generateStatement(savingAccount.getTransactions());
+        twillioService.sendSmsMessage(phoneNumber, result);
+        return result;
     }
 
     @Override

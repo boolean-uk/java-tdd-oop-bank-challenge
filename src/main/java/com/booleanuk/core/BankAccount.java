@@ -14,15 +14,19 @@ public abstract class BankAccount {
         this.accountNumber = accountNumber;
         transactions = new ArrayList<Transaction>();
     }
+
     public boolean deposit(double amount) {
         if (amount > 0) {
+            transactions.add(new Transaction(amount, TransactionType.credit, balance + amount));
             balance += amount;
             return true;
         }
         return false;
     }
+
     public boolean withdraw(double amount) {
-        if (amount <= balance && amount>=0) {
+        if (amount <= balance && amount >= 0) {
+            transactions.add(new Transaction(amount, TransactionType.debit, balance - amount));
             balance -= amount;
             return true;
         }

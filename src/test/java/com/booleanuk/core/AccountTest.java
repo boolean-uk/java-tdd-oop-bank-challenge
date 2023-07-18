@@ -1,14 +1,21 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class AccountTest {
+    @BeforeEach
+    public void setup() {
+        Locale.setDefault(new Locale("en", "US"));
+    }
+
     @Test
     public void testCreatingStatement() {
         Bank bank = new Bank();
@@ -21,9 +28,9 @@ public class AccountTest {
         transactions.add(new Transaction(LocalDateTime.of(2023, 1, 10, 0, 0, 0), BigDecimal.valueOf(500), null, BigDecimal.valueOf(2_500)));
         String statement = account.generateStatement();
         Assertions.assertTrue(statement.contains("      date ||     credit ||      debit ||    balance"));
-        Assertions.assertTrue(statement.contains("13/01/2023 ||            ||    2000,00 ||    3000,00"));
-        Assertions.assertTrue(statement.contains("10/01/2023 ||     500,00 ||            ||    2500,00"));
-        Assertions.assertTrue(statement.contains("14/01/2012 ||            ||    1000,00 ||    1000,00"));
+        Assertions.assertTrue(statement.contains("13/01/2023 ||            ||    2000.00 ||    3000.00"));
+        Assertions.assertTrue(statement.contains("10/01/2023 ||     500.00 ||            ||    2500.00"));
+        Assertions.assertTrue(statement.contains("14/01/2012 ||            ||    1000.00 ||    1000.00"));
     }
 
     @Test

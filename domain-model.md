@@ -39,3 +39,28 @@ I want to deposit and withdraw funds.
 | extends BankAccount |                                   |                                               |                                                                                          |                                |
 | SavingsAccount      |                                   |                                               |                                                                                          |                                |
 | extends BankAccount |                                   |                                               |                                                                                          |                                |
+
+## Extensions
+
+```
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+```
+
+| Class       | Fields                | Methods                                 | Scenario                                            | Output                                                                           |
+|-------------|-----------------------|-----------------------------------------|-----------------------------------------------------|----------------------------------------------------------------------------------|
+| Customer    | BigDecimal overAmount | requestOverdraft(BigDecimal overAmount) | Manager accepted overdraft request                  | add certain overdraft amount, no output                                          |
+|             | boolean overCheck     |                                         | Manager rejected overdraft request                  | no overdraft added to the account, no output                                     |
+| Manager     | String name           | overdraftRequest(Customer customer)     | Customer had more than 5 transactions               | Manager accepts the request, no output                                           |
+|             |                       |                                         | Customer had 5 or less transactions                 | Manager rejected the request, no output                                          |
+| BankAccount |                       | BigDecimal getBalance()                 | Customer wants to check total balance of an account | returns BigDecimal balance of an account calculated based on transaction history |

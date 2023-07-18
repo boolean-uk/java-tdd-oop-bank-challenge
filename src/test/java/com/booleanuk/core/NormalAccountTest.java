@@ -141,4 +141,10 @@ public class NormalAccountTest {
     }
 
 
+    @Test
+    public void shouldCreateAccountWithBranchWarsaw()
+    {
+        NormalAccount normalAccount = new NormalAccount(123123,"Warsaw");
+        Assertions.assertEquals("Warsaw",normalAccount.getBranch());
+    }
 }

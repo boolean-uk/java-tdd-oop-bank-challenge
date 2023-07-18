@@ -29,7 +29,7 @@ public class Account {
         this.accountNumber = String.valueOf(DEFAULT_ACCOUNT_NUMBER);
         this.owner = owner;
         this.manager = manager;
-        owner.getAccounts().add(this);
+        this.owner.getAccounts().add(this);
     }
 
     public String getBranchID() {

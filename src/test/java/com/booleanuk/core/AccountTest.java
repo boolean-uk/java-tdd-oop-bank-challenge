@@ -13,24 +13,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
     CurrentAccount currentAccount;
-    List<Transaction> transactions;
     User user;
+    User secondUser;
     CurrentAccount secondAccount;
     User manager;
-    Transaction withdraw;
-    Transaction deposit1;
-    Transaction deposit2;
-    Transaction wire;
+
     @BeforeEach
     public void setup(){
-        currentAccount = new CurrentAccount("PL8",user,manager);
         user = new User("Wojtek");
+        secondUser = new User("Kuba");
         manager = new User("Milena");
-//        transactions = new ArrayList<>();
-//        withdraw = new Transaction(WITHDRAW,100.00);
-//        deposit1 = new Transaction(DEPOSIT, 1000.00);
-//        deposit2 = new Transaction(DEPOSIT, 800.00);
-//        wire = new Transaction(WIRE_TO,500.00);
+        currentAccount = new CurrentAccount("PL8",user,manager);
     }
 
     @Test
@@ -52,7 +45,7 @@ public class AccountTest {
 
     @Test
     public void shouldWireMoney(){
-        secondAccount = new CurrentAccount("POL54", user, manager);
+        secondAccount = new CurrentAccount("POL54", secondUser, manager);
         currentAccount.deposit(1000);
         currentAccount.wire(600.00,secondAccount.getAccountNumber());
         assertEquals(400.00,currentAccount.getBalance());
@@ -61,7 +54,7 @@ public class AccountTest {
     }
     @Test
     public void shouldGetBalance(){
-        secondAccount = new CurrentAccount("POL54", user, manager);
+        secondAccount = new CurrentAccount("POL54", secondUser, manager);
         currentAccount.deposit(1000.00);
         currentAccount.deposit(1500.00);
         currentAccount.wire(100.00,secondAccount.getAccountNumber());
@@ -70,6 +63,7 @@ public class AccountTest {
     }
     @Test
     public void shouldGetCorrectStatement(){
+        secondAccount = new CurrentAccount("POL86", secondUser, manager);
         currentAccount.deposit(1000.00);
         currentAccount.deposit(1500.00);
         currentAccount.wire(100.00,secondAccount.getAccountNumber());

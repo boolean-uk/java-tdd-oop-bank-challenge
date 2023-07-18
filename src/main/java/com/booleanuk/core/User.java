@@ -2,6 +2,8 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class User {
     private String name;
@@ -22,5 +24,12 @@ public class User {
 
     public List<Account> getAccounts() {
         return accounts;
+    }
+
+    public BankStatement generateStatement() {
+        Map<String, List<Transaction>> transactionMap = this.getAccounts().stream()
+                .collect(Collectors.toMap(Account::getAccountNumber,Account::getTransactions));
+        return new BankStatement(this,transactionMap);
+
     }
 }

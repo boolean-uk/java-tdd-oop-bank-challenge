@@ -47,9 +47,16 @@ public class Account {
             throw new RuntimeException("Amount cannot be negative!");
         }
         balance += amount;
-        Transaction transaction = new Transaction(LocalDate.now(), amount, "deposit");
+        Transaction transaction = new Transaction(LocalDate.now(), amount, "credit");
         transactions.add(transaction);
     }
 
-
+    public void withdrawFunds(double amount){
+        if(amount > balance){
+            throw new RuntimeException("You cannot withdraw more than you've got in your account!");
+        }
+        balance -= amount;
+        Transaction transaction = new Transaction(LocalDate.now(), amount, "debit");
+        transactions.add(transaction);
+    }
 }

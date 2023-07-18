@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package core;
 
 public class SavingAccount extends Account {
     String type = "Savings";

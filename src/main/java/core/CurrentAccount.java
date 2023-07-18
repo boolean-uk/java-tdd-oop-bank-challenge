@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package core;
 
 public class CurrentAccount extends Account {
     String type = "Current";

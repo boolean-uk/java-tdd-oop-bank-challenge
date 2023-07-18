@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package core;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

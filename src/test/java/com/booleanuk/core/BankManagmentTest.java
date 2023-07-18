@@ -90,6 +90,8 @@ public class BankManagmentTest {
     public void shouldApproveRequest(){
         Request request = new Request(2000,currentAccount);
         user.sendRequest(2000,currentAccount.getAccountNumber());
+        assertEquals(-2000,currentAccount.getBalance());
         assertTrue(manager.approveRequest(request));
+
     }
 }

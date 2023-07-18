@@ -36,4 +36,16 @@ public class CustomerTest {
         int actualBalance = customer.getAccounts().get(0).getBalance();
         Assertions.assertEquals(expectedBalance, actualBalance);
     }
+    @Test
+    public void shouldDepositFunds() {
+        int customerId = 123;
+        Customer customer = new Customer(customerId);
+        customer.createCurrentAccount("current", 1000);
+
+        Assertions.assertTrue(customer.deposit(500, "current"));
+
+        int expectedBalance = 1500;
+        int actualBalance = customer.getAccounts().get(0).getBalance();
+        Assertions.assertEquals(expectedBalance, actualBalance);
+    }
 }

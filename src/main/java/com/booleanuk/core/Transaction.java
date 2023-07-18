@@ -15,4 +15,5 @@ public class Transaction {
     public int getAmount() {
         return amount;
     }
+
 }

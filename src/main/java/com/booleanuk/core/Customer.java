@@ -26,7 +26,7 @@ public class Customer {
     public void depositMoney(int account,int amount)
     {
         //Format Date of transaction
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
 
         accountsList.get(account).addTransaction(formattedDateTimeNow,amount);
@@ -35,10 +35,10 @@ public class Customer {
     public boolean withdrawMoney(int account,int amount)
     {
         //Format Date of transaction
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDateTimeNow = LocalDateTime.now().format(formatter);
 
-        if(accountsList.get(account).getCurrentBalance()>amount)
+        if(accountsList.get(account).getCurrentBalance() >= amount)
         {
             accountsList.get(account).addTransaction(formattedDateTimeNow,-amount);
             return true;

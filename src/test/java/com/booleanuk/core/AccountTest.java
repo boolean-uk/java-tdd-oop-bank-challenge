@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccountTest {
     @Test
@@ -25,6 +26,19 @@ public class AccountTest {
         account.deposit(BigDecimal.valueOf(800));
         account.withdraw(BigDecimal.valueOf(300));
         assertEquals(BigDecimal.valueOf(500),account.amount);
+    }
+    @Test
+    public void withdrawCurrentOverdraft(){
+        Account account=new CurrentAccount(BigDecimal.ZERO,"WAR");
+        account.deposit(BigDecimal.valueOf(800));
+        account.withdraw(BigDecimal.valueOf(1000));
+        assertEquals(BigDecimal.valueOf(-200),account.amount);
+    }
+    @Test
+    public void withdrawCurrentOverdraftTooMuch(){
+        Account account=new CurrentAccount(BigDecimal.ZERO,"WAR");
+        account.deposit(BigDecimal.valueOf(800));
+        assertThrows(IllegalArgumentException.class, () -> account.withdraw(BigDecimal.valueOf(1400)));
     }
     @Test
     public void withdrawSaving(){

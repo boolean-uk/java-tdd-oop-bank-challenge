@@ -26,10 +26,10 @@ public class BankStatementGenerator {
         int debitAlign = getDebitAlign(transactions);
         int balanceAlign = getBalanceAlign(transactions);
 
-        return "%" + dateAlign + "s" + " || " +
-                "%" + creditAlign + "s" + " || " +
-                "%" + debitAlign + "s" + " || " +
-                "%" + balanceAlign + "s";
+        return "%-" + dateAlign + "s" + " || " +
+                "%-" + creditAlign + "s" + " || " +
+                "%-" + debitAlign + "s" + " || " +
+                "%-" + balanceAlign + "s";
     }
 
     private int getDateAlign(

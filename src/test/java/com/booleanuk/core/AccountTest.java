@@ -1,14 +1,19 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
+    private Account account;
+
+    @BeforeEach
+    public void beforeEachTestMethod(){
+        account = new Account();
+    }
+
     @Test
     public void testDeposit_ShouldReturnTrueAndBalanceShouldBeCorrect(){
-        //Given
-        Account account = new Account();
-
         //When
         account.deposit(1000F);
         boolean depositResult = account.deposit(1500F);
@@ -21,9 +26,6 @@ public class AccountTest {
 
     @Test
     public void testDeposit_WhenAmountNotValid_ShouldReturnFalseAndBalanceShouldNotChange(){
-        //Given
-        Account account = new Account();
-
         //When
         account.deposit(1000F);
         boolean depositResult = account.deposit(-1500F);
@@ -36,9 +38,6 @@ public class AccountTest {
 
     @Test
     public void testWithdraw_ShouldReturnTrueAndBalanceShouldBeCorrect(){
-        //Given
-        Account account = new Account();
-
         //When
         account.deposit(1000F);
         account.withdraw(300F);

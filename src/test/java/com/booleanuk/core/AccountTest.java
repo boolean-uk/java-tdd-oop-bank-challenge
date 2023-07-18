@@ -1,9 +1,8 @@
 package com.booleanuk.core;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AccountTest {
     private Account account;
 
@@ -12,6 +11,7 @@ public class AccountTest {
         account = new Account();
     }
 
+    @Order(1)
     @Test
     public void testDeposit_ShouldReturnTrueAndBalanceShouldBeCorrect(){
         //When
@@ -24,6 +24,7 @@ public class AccountTest {
         Assertions.assertEquals(2500, checkBalanceResult);
     }
 
+    @Order(2)
     @Test
     public void testDeposit_WhenAmountNotValid_ShouldReturnFalseAndBalanceShouldNotChange(){
         //When
@@ -36,6 +37,7 @@ public class AccountTest {
         Assertions.assertEquals(1000, checkBalanceResult);
     }
 
+    @Order(3)
     @Test
     public void testWithdraw_ShouldReturnTrueAndBalanceShouldBeCorrect(){
         //When

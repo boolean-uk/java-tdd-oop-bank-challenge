@@ -19,4 +19,9 @@ public class CurrentAccount extends Account {
     public void requestOverdraft() {
         overdraftRequested = true;
     }
+
+    public void approveOverdraft() {
+        overdraftAllowed = true;
+        overdraftRequested = true;
+    }
 }

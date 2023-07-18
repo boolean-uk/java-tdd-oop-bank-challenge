@@ -84,4 +84,21 @@ public class AccountTest {
         Assertions.assertFalse(withdrawResult);
         Assertions.assertEquals(depositAmount, checkBalanceResult);
     }
+
+    @Order(5)
+    @Test
+    public void testWithdraw_WhenBalanceIsLessThanAmount_ShouldReturnFalseAndBalanceShouldNotChange(){
+        //Given
+        float depositAmount = 1000F;
+        float withdrawAmount = 1001F;
+
+        //When
+        account.deposit(depositAmount);
+        boolean withdrawResult = account.withdraw(withdrawAmount);
+        float checkBalanceResult = account.checkBalance();
+
+        //Then
+        Assertions.assertFalse(withdrawResult);
+        Assertions.assertEquals(depositAmount, checkBalanceResult);
+    }
 }

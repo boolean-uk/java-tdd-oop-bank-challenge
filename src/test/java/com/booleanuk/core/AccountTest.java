@@ -39,8 +39,17 @@ public class AccountTest {
     }
 
     @Test
-    public void shouldGetBalance(){
+    public void shouldWithdrawMoney(){
+        account.deposit(1500.00);
+        account.withdraw(1000.00);
+        assertEquals(2,account.getTransactions().size());
+        assertEquals(1000,account.getTransactions().get(1).getAmount());
 
+        Assertions.assertThrows(IllegalArgumentException.class,()->account.withdraw(1000));
+    }
+    @Test
+    public void shouldGetBalance(){
+        account.deposit(1000.00);
         assertEquals(1700.00,account.getBalance());
     }
 }

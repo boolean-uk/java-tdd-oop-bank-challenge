@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 public class SavingAccountTest {
 
-    CurrentAccount account;
+    SavingAccount account;
     public SavingAccountTest() {
-        account = new CurrentAccount();
+        account = new SavingAccount();
     }
 
     @Test
@@ -22,6 +22,7 @@ public class SavingAccountTest {
         account.deposit(100.44);
         Assertions.assertEquals(300.99, account.getBalance());
         Assertions.assertEquals(3,account.getTransactions().size());
+
     }
 
     @Test
@@ -34,6 +35,7 @@ public class SavingAccountTest {
         account.deposit(-100.11);
         Assertions.assertEquals(100.11, account.getBalance());
         Assertions.assertEquals(1, account.getTransactions().size());
+
     }
 
     @Test

@@ -64,8 +64,12 @@ public class CurrentAccount implements BankAccount{
         }
         return false;
     }
-
     public void overdraftRequest() {
          canBeOverdrafted = !canBeOverdrafted;
+    }
+
+    @Override
+    public void generateBankStatement() {
+
     }
 }

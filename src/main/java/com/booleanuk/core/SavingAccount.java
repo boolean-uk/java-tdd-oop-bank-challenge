@@ -1,7 +1,10 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SavingAccount implements BankAccount{
 
@@ -10,6 +13,7 @@ public class SavingAccount implements BankAccount{
 
     public SavingAccount() {
         this.balance = 0;
+        transactions = new ArrayList<>();
     }
 
     public List<Transaction> getTransactions() {
@@ -17,7 +21,7 @@ public class SavingAccount implements BankAccount{
     }
 
     public double getBalance() {
-        return balance;
+        return Math.round(balance * 100.0) / 100.0;
     }
 
     @Override
@@ -46,5 +50,13 @@ public class SavingAccount implements BankAccount{
             System.out.println("Amount must be a positive number");
         }
         return false;
+    }
+
+    @Override
+    public void generateBankStatement() {
+        List<Transaction> transactionsSortedByDate = this.transactions.stream().sorted(Comparator.comparing(Transaction::getDate).
+                reversed()).collect(Collectors.toList());
+
+        System.out.println("date       || credit  || debit  || balance");
     }
 }

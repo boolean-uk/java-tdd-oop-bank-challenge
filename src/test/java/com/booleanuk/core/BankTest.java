@@ -89,4 +89,19 @@ public class BankTest {
         //then
         assertEquals(BigDecimal.valueOf(1000),accountManager.calculateAccountBalance(account1));
     }
+
+    @Test
+    public  void shouldReturn5000AfterWithdraw6000FromAccount(){
+        //given
+        Account account1 = accountManager.createAccount(client);
+        BigDecimal deposit = BigDecimal.valueOf(11000);
+        accountManager.addDeposit(account1,deposit);
+        BigDecimal withdraw = BigDecimal.valueOf(6000);
+        //when
+        accountManager.withdraw(account1,withdraw);
+        //then
+        assertEquals(BigDecimal.valueOf(5000),accountManager.calculateAccountBalance(account1));
+
+
+    }
 }

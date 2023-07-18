@@ -10,7 +10,7 @@ public class CurrentAccountTest {
 
     @BeforeEach
     void setUp() {
-        currentAccount = new CurrentAccount("1234-5678-9101-1121", 1);
+        currentAccount = new CurrentAccount("1234-5678-9101-1121", 1, "123");
     }
 
     @Test

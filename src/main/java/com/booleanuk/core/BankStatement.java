@@ -1,15 +1,11 @@
 package com.booleanuk.core;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.OptionalInt;
-import java.util.stream.Collectors;
 
 public class BankStatement {
     private final String accountNumber;
@@ -63,11 +59,22 @@ public class BankStatement {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append(formatHeader());
+
+        for (Transaction transaction : sortTransactions()) {
+            sb.append(formatTransaction(transaction));
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
+    }
+
+    private String formatHeader() {
+        StringBuilder sb = new StringBuilder();
         sb.append("Statement for account number: ").append(accountNumber).append(System.lineSeparator());
 
-        transactions.sort((t1, t2) -> t2.transactionDate().compareTo(t1.transactionDate()));
         int creditLineLength = getCreditLineLength();
         int debitLineLength = getDebitLineLength();
+
         sb.append("date").append(" ".repeat(7)).append("||");
         sb.append(" credit ")
                 .append(" ".repeat(Math.max(creditLineLength - " credit ".length(), 0)))
@@ -78,25 +85,40 @@ public class BankStatement {
         sb.append(" balance");
         sb.append(System.lineSeparator());
 
-        for (Transaction transaction : transactions) {
-            DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-            symbols.setDecimalSeparator('.'); // explicitly set decimal separator to period
-            String date = transaction.transactionDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            DecimalFormat df = new DecimalFormat("0.00", symbols);
-            sb.append(date).append(" || ");
-            String amount = df.format(transaction.amount());
-            if (transaction.type() == TransactionType.CREDIT) {
-                sb.append(amount).append(" ".repeat(creditLineLength - String.valueOf(amount).length() - 1));
-                sb.append("||").append(" ".repeat(debitLineLength));
-            }
-            else {
-                sb.append(" ".repeat(creditLineLength - 1)).append("|| ");
-                sb.append(amount).append(" ".repeat(debitLineLength - String.valueOf(amount).length() - 1));
-            }
-            sb.append("|| ");
-            sb.append(df.format(transaction.balanceAfter()));
-            sb.append(System.lineSeparator());
-        }
         return sb.toString();
     }
+
+    private List<Transaction> sortTransactions() {
+        transactions.sort((t1, t2) -> t2.transactionDate().compareTo(t1.transactionDate()));
+        return transactions;
+    }
+
+    private String formatTransaction(Transaction transaction) {
+        StringBuilder sb = new StringBuilder();
+
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator('.');
+        String date = transaction.transactionDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        DecimalFormat df = new DecimalFormat("0.00", symbols);
+
+        sb.append(date).append(" || ");
+        String amount = df.format(transaction.amount());
+
+        int creditLineLength = getCreditLineLength();
+        int debitLineLength = getDebitLineLength();
+
+        if (transaction.type() == TransactionType.CREDIT) {
+            sb.append(amount).append(" ".repeat(creditLineLength - String.valueOf(amount).length() - 1));
+            sb.append("||").append(" ".repeat(debitLineLength));
+        }
+        else {
+            sb.append(" ".repeat(creditLineLength - 1)).append("|| ");
+            sb.append(amount).append(" ".repeat(debitLineLength - String.valueOf(amount).length() - 1));
+        }
+        sb.append("|| ");
+        sb.append(df.format(transaction.balanceAfter()));
+
+        return sb.toString();
+    }
+
 }

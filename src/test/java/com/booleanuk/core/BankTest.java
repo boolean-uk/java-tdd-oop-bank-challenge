@@ -16,8 +16,9 @@ public class BankTest {
     @BeforeEach
     public void setUp() {
         bank = Bank.getInstance();
-        savingsAccount = new SavingsAccount("1234 5678 8756 4321", 1);
-        currentAccount = new CurrentAccount("8765 4321 1234 5678", 2);
+        String branchCode = "123";
+        savingsAccount = new SavingsAccount("1234 5678 8756 4321", 1, branchCode);
+        currentAccount = new CurrentAccount("8765 4321 1234 5678", 2, branchCode);
     }
 
     @AfterEach
@@ -36,7 +37,7 @@ public class BankTest {
     @Test
     public void testAddSameAccountShouldThrowException() {
         bank.addAccount(savingsAccount);
-        SavingsAccount savingsAccount2 = new SavingsAccount("1234 5678 8756 4321", 10);
+        SavingsAccount savingsAccount2 = new SavingsAccount("1234 5678 8756 4321", 10, "123");
         Assertions.assertThrows(IllegalArgumentException.class, () -> bank.addAccount(savingsAccount2));
     }
 

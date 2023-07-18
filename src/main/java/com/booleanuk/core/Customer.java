@@ -1,10 +1,7 @@
 package com.booleanuk.core;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 public class Customer {
@@ -29,12 +26,12 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public BankAccount createAccount(AccountType accountType) {
+    public BankAccount createAccount(AccountType accountType, String branchCode) {
         Bank bank = Bank.getInstance();
         String accountNumber = bank.generateAccountNumber();
         BankAccount account = switch (accountType) {
-            case CURRENT -> new CurrentAccount(accountNumber, id);
-            case SAVINGS -> new SavingsAccount(accountNumber, id);
+            case CURRENT -> new CurrentAccount(accountNumber, id, branchCode);
+            case SAVINGS -> new SavingsAccount(accountNumber, id, branchCode);
         };
         accounts.add(account);
         bank.addAccount(account);

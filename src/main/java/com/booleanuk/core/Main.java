@@ -1,15 +1,14 @@
 package com.booleanuk.core;
 
-import java.text.DecimalFormat;
-
 public class Main {
     public static void main(String[] args) {
         Bank bank = Bank.getInstance();
         Customer johnDoe = new Customer("0123456789", "john.doe@gmail.com", "John", "Doe");
         Customer janeDoe = new Customer("9876543210", "jane.doe@gmail.com", "Jane", "Doe");
-        BankAccount johnCurrentAccount = johnDoe.createAccount(AccountType.CURRENT);
-        BankAccount johnSavingsAccount = johnDoe.createAccount(AccountType.SAVINGS);
-        BankAccount janeCurrentAccount = janeDoe.createAccount(AccountType.CURRENT);
+        String mainBranchCode = "123456";
+        BankAccount johnCurrentAccount = johnDoe.createAccount(AccountType.CURRENT, mainBranchCode);
+        BankAccount johnSavingsAccount = johnDoe.createAccount(AccountType.SAVINGS, mainBranchCode);
+        BankAccount janeCurrentAccount = janeDoe.createAccount(AccountType.CURRENT, mainBranchCode);
 
         System.out.println("As we can see, the bank stores information about all accounts, " +
                         "and each customer stores information about their own accounts.");

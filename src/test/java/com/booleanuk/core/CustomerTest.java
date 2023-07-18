@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CustomerTest {
     private Customer customer;
+    private final String branchCode = "123";
 
     @BeforeEach
     public void setUp() {
@@ -19,26 +20,26 @@ public class CustomerTest {
 
     @Test
     public void shouldCreateCurrentAccount() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         Assertions.assertEquals(List.of(account), customer.getAccounts());
     }
 
     @Test
     public void shouldCreateSavingsAccount() {
-        BankAccount account = customer.createAccount(AccountType.SAVINGS);
+        BankAccount account = customer.createAccount(AccountType.SAVINGS, branchCode);
         Assertions.assertEquals(List.of(account), customer.getAccounts());
     }
 
     @Test
     public void depositShouldSucceed() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         customer.deposit(account.getAccountNumber(), 100.0d);
         Assertions.assertEquals(100.0d, account.getBalance());
     }
 
     @Test
     public void depositShouldFail1() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> customer.deposit(account.getAccountNumber(), -100.0d));
     }
@@ -51,7 +52,7 @@ public class CustomerTest {
 
     @Test
     public void withdrawShouldSucceed() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         customer.deposit(account.getAccountNumber(), 100.0d);
         customer.withdraw(account.getAccountNumber(), 50.0d);
         Assertions.assertEquals(50.0d, account.getBalance());
@@ -59,21 +60,21 @@ public class CustomerTest {
 
     @Test
     public void withdrawShouldFail1() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> customer.withdraw(account.getAccountNumber(), -100.0d));
     }
 
     @Test
     public void withdrawShouldFail2() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> customer.withdraw(account.getAccountNumber(), 100.0d));
     }
 
     @Test
     public void shouldCreateStatement() {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         customer.deposit(account.getAccountNumber(), 100.0d);
         customer.withdraw(account.getAccountNumber(), 50.0d);
         Assertions.assertEquals(2, customer.getStatements().get(0).getTransactions().size());
@@ -81,7 +82,7 @@ public class CustomerTest {
 
     @Test
     public void shouldCreateConcreteStatements() throws InterruptedException {
-        BankAccount account = customer.createAccount(AccountType.CURRENT);
+        BankAccount account = customer.createAccount(AccountType.CURRENT, branchCode);
         customer.deposit(account.getAccountNumber(), 100.0d);
         Thread.sleep(1000);
         customer.withdraw(account.getAccountNumber(), 50.0d);

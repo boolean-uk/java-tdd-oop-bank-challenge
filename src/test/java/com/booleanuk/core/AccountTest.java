@@ -12,4 +12,12 @@ public class AccountTest {
         Assertions.assertNotNull(myAccount);
     }
 
+    @Test
+    public void testAccountNumber() {
+
+        myAccount.setAccountNumber(123456789);
+
+        Assertions.assertEquals(123456789, myAccount.getAccountNumber());
+    }
+
 }

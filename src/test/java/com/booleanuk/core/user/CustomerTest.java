@@ -68,7 +68,6 @@ public class CustomerTest {
         customer.depositSavingAccount(BigDecimal.valueOf(1000));
 
         String result = customer.generateSavingAccountStatements();
-        System.out.println(result);
 
         Assertions.assertFalse(result.isBlank());
     }

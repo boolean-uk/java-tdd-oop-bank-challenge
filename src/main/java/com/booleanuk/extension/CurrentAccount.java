@@ -11,7 +11,7 @@ public class CurrentAccount extends BankAccount{
         int overdraftLimit = Bank.getBranch(getBranchCode())
                 .overdraftLimit();
 
-        if (amount <= 0 || Math.abs(getCurrentBalance() - amount) > overdraftLimit)
+        if (amount <= 0 || getCurrentBalance() - amount < -overdraftLimit)
             return false;
 
         transactions.add(new Transaction(amount, false));

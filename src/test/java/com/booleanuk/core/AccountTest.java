@@ -66,8 +66,8 @@ public class AccountTest {
         Account account = new Account(123456, 500.00);
         Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
 
-        Assertions.assertTrue(add.TotransactionHistory(transaction));
-        List<Transaction> transactionHistory = transactionHistory.getTransaction();
+        Assertions.assertTrue(account.addToTransactionHistory(transaction));
+        List<Transaction> transactionHistory = account.getTransactionHistory();
         assertEquals(1, transactionHistory.size());
         assertEquals(transaction, transactionHistory.get(0));
     }

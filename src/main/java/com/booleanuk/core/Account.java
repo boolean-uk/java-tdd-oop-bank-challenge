@@ -1,13 +1,19 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Account {
 
-    private double accountNumber;
+    private int accountNumber;
     private double balance;
 
-    public Account(double accountNumber, double balance) {
+    private List<Transaction> transactionHistory;
+
+    public Account(int accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.transactionHistory = new ArrayList<>();
     }
 
     public void setBalance(double newBalance) {

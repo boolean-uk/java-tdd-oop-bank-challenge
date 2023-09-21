@@ -31,7 +31,7 @@ public class TransactionTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = date + " || " + String.format("%.2f",1000.0) + " ||        || ";
+        String expected = date + " || " + String.format("%.2f",1000.0) + " ||         || ";
         Assertions.assertEquals(expected, transaction.printData());
     }
 
@@ -41,7 +41,7 @@ public class TransactionTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = date + " ||        || " + String.format("%.2f",1000.0) + " || ";
+        String expected = date + " ||         || " + String.format("%.2f",1000.0) + " || ";
         Assertions.assertEquals(expected, transaction.printData());
     }
 }

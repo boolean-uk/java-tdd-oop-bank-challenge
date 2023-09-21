@@ -18,8 +18,13 @@ public class Account {
         return this.balance;
     }
 
-    public void depositAmount(double deposit) {
-        double newBalance = this.getBalance() + deposit;
-        this.setBalance(newBalance);
+    public boolean depositAmount(double deposit) {
+        if (deposit >= 0.00) {
+            double newBalance = this.getBalance() + deposit;
+            this.setBalance(newBalance);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

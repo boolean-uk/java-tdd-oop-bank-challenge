@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class BankAccountTest {
     @Test
@@ -24,7 +25,7 @@ public class BankAccountTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = "date       || credit  || debit   || balance\n"+ date +" || " + String.format("%.2f",1000.0) + " ||         || "+"1000,00";
+        String expected = "date       || credit  || debit   || balance\n"+ date +" || " + String.format(Locale.US,"%.2f",1000.0) + " ||         || "+"1000.00";
         Assertions.assertEquals(expected, account.generateStatements());
     }
 
@@ -35,7 +36,7 @@ public class BankAccountTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = "date       || credit  || debit   || balance\n"+ date + " ||         || " + String.format("%.2f",1000.0) + " || "+"-1000,00";
+        String expected = "date       || credit  || debit   || balance\n"+ date + " ||         || " + String.format(Locale.US,"%.2f",1000.0) + " || "+"-1000.00";
         Assertions.assertEquals(expected, account.generateStatements());
     }
 

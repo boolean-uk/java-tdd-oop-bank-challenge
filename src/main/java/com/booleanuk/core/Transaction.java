@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class Transaction {
     private final String date;
@@ -25,6 +26,6 @@ public class Transaction {
     }
 
     public String printData() {
-        return this.date + " || " + (isDeposit? String.format("%.2f",this.amount) + " ||         || " : "        || " + String.format("%.2f",this.amount) + " || ");
+        return this.date + " || " + (isDeposit? String.format(Locale.US,"%.2f",this.amount) + " ||         || " : "        || " + String.format(Locale.US,"%.2f",this.amount) + " || ");
     }
 }

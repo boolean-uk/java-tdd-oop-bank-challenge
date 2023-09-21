@@ -23,7 +23,7 @@ public class BankAccountTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = "date       || credit  || debit   || balance\n"+ date +" || " + String.format("%.2f",1000.0) + " ||         || ";
+        String expected = "date       || credit  || debit   || balance\n"+ date +" || " + String.format("%.2f",1000.0) + " ||         || "+"1000,00";
         Assertions.assertEquals(expected, account.generateStatements());
     }
 
@@ -34,7 +34,18 @@ public class BankAccountTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = "date       || credit  || debit   || balance\n"+ date + " ||         || " + String.format("%.2f",1000.0) + " || ";
+        String expected = "date       || credit  || debit   || balance\n"+ date + " ||         || " + String.format("%.2f",1000.0) + " || "+"-1000,00";
         Assertions.assertEquals(expected, account.generateStatements());
+    }
+
+    @Test
+    void shouldGetTotalBalance(){
+        SavingsAccount account = new SavingsAccount();
+        account.withdraw(1000.0);
+        Assertions.assertEquals(-1000.0, account.getBalance());
+        account.deposit(4000.50);
+        account.deposit(2000.50);
+        account.withdraw(1001.0);
+        Assertions.assertEquals(4000.0, account.getBalance());
     }
 }

@@ -17,14 +17,14 @@ public class Transaction {
     }
 
     public double getAmount() {
-        return 0.0d;
+        return this.amount;
     }
 
     public boolean isDeposit() {
-        return true;
+        return this.isDeposit;
     }
 
     public String printData() {
-        return "";
+        return this.date + " || " + (isDeposit? String.format("%.2f",this.amount) + " ||        || " : "       || " + String.format("%.2f",this.amount) + " || ");
     }
 }

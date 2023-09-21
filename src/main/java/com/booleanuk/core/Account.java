@@ -10,7 +10,16 @@ public class Account {
         this.balance = balance;
     }
 
+    public void setBalance(double newBalance) {
+        this.balance = newBalance;
+    }
+
     public double getBalance() {
-        return balance;
+        return this.balance;
+    }
+
+    public void depositAmount(double deposit) {
+        double newBalance = this.getBalance() + deposit;
+        this.setBalance(newBalance);
     }
 }

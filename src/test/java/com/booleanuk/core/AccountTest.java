@@ -33,6 +33,7 @@ public class AccountTest {
     public void testDeposit() {
         currentAccount.deposit(25.30);
         Assertions.assertEquals(25.3, currentAccount.getBalance());
+        currentAccount.generateBankStatement();
     }
 
     @Test
@@ -46,6 +47,7 @@ public class AccountTest {
         currentAccount.deposit(50);
         currentAccount.withdraw(25.5);
         Assertions.assertEquals(24.5, currentAccount.getBalance());
+        currentAccount.generateBankStatement();
     }
 
     @Test
@@ -54,5 +56,7 @@ public class AccountTest {
         String expected = "Insufficient quantity. This transaction cannot be completed";
         Assertions.assertEquals(expected, currentAccount.withdraw(51.5));
         Assertions.assertEquals(50, currentAccount.getBalance());
+        currentAccount.generateBankStatement();
     }
+
 }

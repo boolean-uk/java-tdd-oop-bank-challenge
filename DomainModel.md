@@ -1,0 +1,27 @@
+
+
+| Classes                                | Methods                                                    | Member Variables                                   | Scenario                      | Results                             |
+|----------------------------------------|------------------------------------------------------------|----------------------------------------------------|-------------------------------|-------------------------------------|
+| Bank                                   | set BankAccount(int accountNumber, String accountType)     | Int accountNumber                                  | 1 create a current account    | bankAccount of type current created |
+|                                        |                                                            | String AccountType                                 | 2 create a savings account    | bankAccount of type savings created |
+|                                        |                                                            | Map <accountNumber, AccountType>                   |                               | update accounts List                |
+|                                        | get BankAccount(accountNumber)                             |                                                    |                               |                                     |
+|                                        |                                                            |                                                    |                               |                                     |
+| Account                                | getTransactionHistory(transactions)                        | Map bankAccount(accountNumber, String accountType) | 3. create a bankStatement     | return bankStatement                |
+|                                        |                                                            | double balance                                     |                               |                                     |
+|                                        | deposit(double amount, string date)                        | String Date                                        | 4. deposit and withdraw funds | update transactionHistory           |
+|                                        | withdraw(double amount, string date)                       |                                                    |                               | output success message              |
+|                                        |                                                            |                                                    |                               | return true (if succeeded)          |
+|                                        | getAccountNumber()   ????                                  |                                                    |                               |                                     |
+|                                        |                                                            |                                                    |                               |                                     |
+|                                        | getBalance()                                               |                                                    |                               |                                     |
+|                                        |                                                            |                                                    |                               |                                     |
+| SavingsAccount (inherits from Account) | setInterest(int interest) / getInterest(balance, interest) | int interest                                       |                               |                                     |
+| CurrentAccount (inherits from Account) |                                                            |                                                    |                               |                                     |
+|                                        |                                                            |                                                    |                               |                                     |
+| Transaction                            | getDate()                                                  | String date                                        |                               |                                     |
+|                                        | getBalance()                                               | double balance                                     |                               |                                     |
+|                                        | getCredit()                                                | double credit                                      |                               |                                     |
+|                                        | getDebt()                                                  | double debt                                        |                               |                                     |
+|                                        |                                                            | list<transactions>                                 |                               |                                     |
+

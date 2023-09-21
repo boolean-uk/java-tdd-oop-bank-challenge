@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class BankAccount {
-    private final ArrayList<Transaction> transactions;
+    protected final ArrayList<Transaction> transactions;
 
     public BankAccount(){
         transactions = new ArrayList<>();
@@ -18,6 +18,11 @@ public abstract class BankAccount {
     }
 
     public String generateStatements() {
-        return "";
+        StringBuilder result = new StringBuilder();
+        result.append("date       || credit  || debit   || balance\n");
+        for (Transaction transaction: this.transactions){
+            result.append(transaction.printData()).append("\n");
+        }
+        return String.valueOf(result).substring(0,result.length()-1);
     }
 }

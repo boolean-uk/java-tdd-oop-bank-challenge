@@ -8,6 +8,15 @@ import java.time.format.DateTimeFormatter;
 
 public class BankAccountTest {
     @Test
+    void shouldAddTransactions(){
+        SavingsAccount account = new SavingsAccount();
+        account.deposit(1000.0);
+        Assertions.assertEquals(1, account.transactions.size());
+        account.withdraw(1000.0);
+        Assertions.assertEquals(2, account.transactions.size());
+    }
+
+    @Test
     void shouldDepositMoney(){
         CurrentAccount account = new CurrentAccount();
         account.deposit(1000.0);

@@ -43,4 +43,15 @@ public class Account {
             return false;
         }
     }
+
+    public boolean addToTransactionHistory(Transaction transaction) {
+        transactionHistory.add(transaction);
+        return true;
+    }
+
+    public List<Transaction> getTransactionHistory() {
+        System.out.println("transaction history retrieved" + transactionHistory);
+        return transactionHistory;
+    }
 }
+

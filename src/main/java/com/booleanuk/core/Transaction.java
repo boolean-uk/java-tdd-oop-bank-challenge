@@ -14,6 +14,12 @@ public class Transaction {
         this.balance = balance;
     }
 
+    @Override
+    public String toString() {
+        // Customize the string representation of a single transaction
+        return "Date: " + date + ", Credit: " + credit + ", Debit: " + debit + ", Balance: " + balance;
+    }
+
     public String getDate() {
         return date;
     }

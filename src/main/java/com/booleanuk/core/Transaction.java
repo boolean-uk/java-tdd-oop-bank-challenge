@@ -25,6 +25,6 @@ public class Transaction {
     }
 
     public String printData() {
-        return this.date + " || " + (isDeposit? String.format("%.2f",this.amount) + " ||        || " : "       || " + String.format("%.2f",this.amount) + " || ");
+        return this.date + " || " + (isDeposit? String.format("%.2f",this.amount) + " ||         || " : "        || " + String.format("%.2f",this.amount) + " || ");
     }
 }

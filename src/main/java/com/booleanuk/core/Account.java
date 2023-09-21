@@ -27,4 +27,14 @@ public class Account {
             return false;
         }
     }
+
+    public boolean withdrawAmount(double withdraw) {
+        if (withdraw >= 0.00) {
+            double newBalance = this.getBalance() - withdraw;
+            this.setBalance(newBalance);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

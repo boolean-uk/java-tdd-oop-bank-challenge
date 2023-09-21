@@ -36,7 +36,7 @@ public class AccountTest {
         Account account = new Account(123456, 500.00);
 
         Assertions.assertFalse(account.depositAmount(-10.00));
-        Assertions.assertEquals(650.00, account.getBalance(), 0.01);
+        Assertions.assertEquals(500.00, account.getBalance(), 0.01);
     }
 
     @Test

@@ -34,10 +34,10 @@ public class TransactionTest {
     }
 
     @Test
-    public void testSetDebitWorks() {
+    public void testSetBalanceWorks() {
         Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
 
-        Assertions.assertEquals(10.00, transaction.getBalance());
+        Assertions.assertEquals(500.00, transaction.getBalance());
         transaction.setBalance(20.00);
         Assertions.assertEquals(20.00, transaction.getBalance());
     }

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public abstract class BankAccount {
     protected final ArrayList<Transaction> transactions;
+    Branch branch;
 
     public BankAccount(){
         transactions = new ArrayList<>();
+        branch = null;
     }
 
     public void deposit(double amount){
@@ -43,5 +45,17 @@ public abstract class BankAccount {
             }
         }
         return (double) balance/100;
+    }
+
+    public boolean setBranch(Branch branch) {
+        if (this.branch == null){
+            this.branch = branch;
+            return true;
+        }
+        return false;
+    }
+
+    public Branch getBranch() {
+        return this.branch;
     }
 }

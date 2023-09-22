@@ -53,22 +53,29 @@ I want to approve or reject overdraft requests.
 
 ### Domain Model
 
-| Class                  | Method                   | Attributes                                | Scenario                                          | Outcome          |
-|------------------------|--------------------------|-------------------------------------------|---------------------------------------------------|------------------|
-| Branch (Record)        |                          | String name, String Address, String phone |                                                   |                  |
-| BankAccount (Abstract) | deposit()                | ArrayList<Transaction> transactions       | 4.Deposit money to account                        | void             |
-|                        | abstract withdraw()      |                                           | 4.Withdraw money from account                     | boolean          |
-|                        | generateStatements()     |                                           | 3.Generate statements based on transactions' info | String           |
-|                        | getBalance()             |                                           | 5.Generate balance based on transactions          | double           |
-|                        | setBranch(Branch branch) | Branch branch                             | 6.Set the account's branch                        |                  |
-|                        |                          |                                           | - If branch doesn't exist:                        | true, Branch set |
-|                        |                          |                                           | - If branch exists:                               | false            |
-|                        | getBranch()              |                                           | Get the account's branch                          | Branch/null      |
-| CurrentAccount         |                          |                                           | 1,7,8.Inherit from BankAccount                    |                  |
-| SavingsAccount         |                          |                                           | 2.Inherit from BankAccount                        |                  |
-|                        |                          |                                           |                                                   |                  |
-| Transaction            | getAmount()              | double amount                             | Get the amount of the transaction                 | double           |
-|                        | isDeposit()              | boolean isDeposit                         | Differentiate deposits and withdrawals:           |                  |
-|                        |                          |                                           | - If deposit:                                     | true             |
-|                        |                          |                                           | - If withdrawal:                                  | false            |
-|                        | printData()              | String date                               | Generate transaction info (date + credit/debit)   | String           |
+| Class                  | Method                           | Attributes                                | Scenario                                                | Outcome                                        |
+|------------------------|----------------------------------|-------------------------------------------|---------------------------------------------------------|------------------------------------------------|
+| Branch (Record)        |                                  | String name, String Address, String phone |                                                         |                                                |
+| BankAccount (Abstract) | deposit(double amount)           | ArrayList<Transaction> transactions       | 4.Deposit money to account                              | void                                           |
+|                        | abstract withdraw(double amount) |                                           | 4.Withdraw money from account                           | boolean                                        |
+|                        | generateStatements()             |                                           | 3.Generate statements based on transactions' info       | String                                         |
+|                        | getBalance()                     |                                           | 5.Generate balance based on transactions                | double                                         |
+|                        | setBranch(Branch branch)         | Branch branch                             | 6.Set the account's branch                              |                                                |
+|                        |                                  |                                           | - If branch doesn't exist:                              | true, Branch set                               |
+|                        |                                  |                                           | - If branch exists:                                     | false                                          |
+|                        | getBranch()                      |                                           | Get the account's branch                                | Branch/null                                    |
+| CurrentAccount         |                                  |                                           | 1.Inherit from BankAccount                              |                                                |
+|                        | withdraw(double amount)          | boolean allowOverdraft                    | 7,8. Withdraw money from account:                       |                                                |
+|                        |                                  |                                           | - If overdraft attempt and allowOverdraft is true       | true, withdrawal + allowOverdraft set to false |
+|                        |                                  |                                           | - Otherwise                                             | false                                          |
+|                        | deposit(double amount)           |                                           | Deposit money to account:                               | void                                           |
+|                        |                                  |                                           | - If new balance is above 0 and allowOverdraft is false | void, allowOverdraft set to true               |
+| SavingsAccount         |                                  |                                           | 2.Inherit from BankAccount                              |                                                |
+|                        | withdraw(double amount)          |                                           | 7,8. Withdraw money from account:                       |                                                |
+|                        |                                  |                                           | - If overdraft attempt                                  | false                                          |
+|                        |                                  |                                           | - Otherwise                                             | true, withdrawal                               |
+| Transaction            | getAmount()                      | double amount                             | Get the amount of the transaction                       | double                                         |
+|                        | isDeposit()                      | boolean isDeposit                         | Differentiate deposits and withdrawals:                 |                                                |
+|                        |                                  |                                           | - If deposit:                                           | true                                           |
+|                        |                                  |                                           | - If withdrawal:                                        | false                                          |
+|                        | printData()                      | String date                               | Generate transaction info (date + credit/debit)         | String                                         |

@@ -49,4 +49,14 @@ public class Tests {
         Assertions.assertEquals(399.49d,account.getBalance());
     }
 
+    @Test
+    void overdraftTest() {
+        CurrentAccount account = new CurrentAccount("0004");
+        CurrentAccount account1 = new CurrentAccount("0005");
+        account.deposit(100.00d);
+        account1.deposit(100.00d);
+        Assertions.assertTrue(account.withdraw(108.00d));
+        Assertions.assertFalse(account1.withdraw(111.00d));
+    }
+
 }

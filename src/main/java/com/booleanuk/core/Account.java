@@ -41,12 +41,35 @@ public abstract class Account {
     }
 
     public boolean withdraw(double amount) {
-        if (this.balance > amount) {
-            this.balance -= (int) (amount * 100);
+        int balance = this.balance;
+        int amountInt = (int) (amount * 100);
+        if (balance > amountInt || overdraft(amountInt)) {
+            balance -= (int) (amount * 100);
             Statement statement = new Statement(-amount, balance);
             this.statements.put(statement.getDate(), statement);
+            setBalance();
             return true;
         } else {
+            return false;
+        }
+    }
+
+    /**
+     * User Stories 7,8 (Extensions) An overdraft will be allowed for amounts less than
+     * the 10% of the total of previous deposited statements.
+     * @param amountInt
+     * @return
+     */
+    public boolean overdraft(int amountInt) {
+        int depostitTotal = 0;
+        for (Statement statement: statements.values()) {
+            if (statement.getAmount() > 0) {
+                depostitTotal += (int) (statement.getAmount() * 100);
+            }
+        }
+        if (depostitTotal/10 >= amountInt - this.balance) {
+            return true;
+        }else {
             return false;
         }
     }

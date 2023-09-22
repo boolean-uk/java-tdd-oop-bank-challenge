@@ -1,4 +1,10 @@
 package com.booleanuk;
 
-public class SavingAccount extends Account{
+import com.booleanuk.core.Branch;
+import com.booleanuk.core.MessageService;
+
+public class SavingAccount extends Account {
+    public SavingAccount(Branch branch, String customerPhoneNumber, MessageService messageService) {
+        super(branch, customerPhoneNumber, messageService);
+    }
 }

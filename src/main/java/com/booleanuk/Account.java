@@ -1,5 +1,9 @@
 package com.booleanuk;
 
+import com.booleanuk.core.BankManager;
+import com.booleanuk.core.Branch;
+import com.booleanuk.core.MessageService;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,50 +11,74 @@ import java.util.Date;
 
 public abstract class Account {
 
-    private double balance;
     private ArrayList<Transaction> transactions = new ArrayList<>();
+    private Branch branch;
+    private boolean overdraftRequest = false;
+    private MessageService messageService;
+    private String customerPhoneNumber;
 
-    public Account() {}
-
-    public Account(double balance, ArrayList<Transaction> transactions) {
-        this.balance = balance;
-        this.transactions = new ArrayList<>(transactions);
+    public Account() {
     }
 
-    public double getBalance() {
-        return balance;
+    public Account(ArrayList<Transaction> transactions, Branch branch, MessageService messageService, String customerPhoneNumber) {
+        this.transactions = new ArrayList<>(transactions);
+        this.branch = branch;
+        this.messageService = messageService;
+        this.customerPhoneNumber = customerPhoneNumber;
+    }
+
+    public Account(Branch branch, String customerPhoneNumber, MessageService messageService) {
+        this.branch = branch;
+        this.customerPhoneNumber = customerPhoneNumber;
+        this.messageService = messageService;
+    }
+
+    public double getCurrentBalance() {
+        return transactions.isEmpty() ? 0.0 : transactions.get(transactions.size() - 1).getBalanceAtTime();
+    }
+
+    public Branch getBranch() {
+        return branch;
     }
 
     public ArrayList<Transaction> getTransactions() {
         return new ArrayList<>(transactions);
     }
 
-    public String deposit(double amount) {
+    public void deposit(double amount) {
         if (amount < 0.0) {
-            return "Please enter a valid number";
+            throw new IllegalArgumentException("Please insert a positive number");
         }
+        double balance = getCurrentBalance();
         balance += amount;
         transactions.add(new Transaction(new Date(), amount, balance, TransactionType.DEPOSIT));
-        return "Deposited " + amount;
-
+        System.out.println("Deposited " + amount);
     }
 
-    public String withdraw(double amount) {
+    public void withdraw(double amount) {
         if (amount < 0.0) {
-            return "Please enter a valid number";
-        } else if (amount > balance) {
-            return "Insufficient quantity. This transaction cannot be completed";
+            throw new IllegalArgumentException("Please insert a positive number");
         }
-        balance -= amount;
-        transactions.add(new Transaction(new Date(), amount, balance, TransactionType.WITHDRAW));
-        return "Withdrew " + amount;
+        double balance = getCurrentBalance();
+        if (amount > balance && !overdraftRequest) {
+            throw new IllegalArgumentException("Insufficient funds. This transaction cannot be completed");
+        }
+        if (overdraftRequest) {
+            double newBalance = balance - amount;
+            transactions.add(new Transaction(new Date(), amount, newBalance, TransactionType.WITHDRAW));
+            System.out.println("Withdrew " + amount);
+        }
+        double newBalance = balance - amount;
+        transactions.add(new Transaction(new Date(), amount, newBalance, TransactionType.WITHDRAW));
+        System.out.println("Withdrew " + amount);
     }
 
     public void generateBankStatement() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         System.out.printf("%-10s || %-10s || %-10s || %-10s%n", "date", "credit", "debit", "balance");
-        Collections.reverse(transactions);
-        for (Transaction transaction : transactions) {
+        ArrayList<Transaction> reversedTransactions = new ArrayList<>(transactions);
+        Collections.reverse(reversedTransactions);
+        for (Transaction transaction : reversedTransactions) {
             String formattedDate = sdf.format(transaction.getTransactionDate());
             double amount = transaction.getAmount();
             double balanceAtTime = transaction.getBalanceAtTime();
@@ -65,5 +93,19 @@ public abstract class Account {
                     debitAmount,
                     balanceAtTime);
         }
+        String message = "Your bank statement has been generated. Check your phone!";
+        messageService.sendSMS(customerPhoneNumber, message);
     }
+
+    public boolean requestAnOverdraftAndWithdraw(double amount) {
+       boolean isApproved = BankManager.evaluateRequest(amount, transactions);
+       if (isApproved) {
+           this.overdraftRequest = true;
+           withdraw(amount);
+           this.overdraftRequest = false;
+       }
+       return isApproved;
+    }
+
+
 }

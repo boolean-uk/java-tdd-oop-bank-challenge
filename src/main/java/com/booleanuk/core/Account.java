@@ -41,7 +41,7 @@ public class Account {
             this.setBalance(newBalance);
             Transaction transaction = new Transaction(this.date, deposit, 0.00, newBalance);
             addToTransactionHistory(transaction);
-            System.out.println("checking if deposit works" + transaction.toString());
+            System.out.println("checking if deposit works" + transaction);
             return true;
         } else {
             return false;
@@ -54,7 +54,7 @@ public class Account {
             this.setBalance(newBalance);
             Transaction transaction = new Transaction(this.date, withdraw, 0.00, newBalance);
             addToTransactionHistory(transaction);
-            System.out.println("checking if withdraw works" + transaction.toString());
+            System.out.println("checking if withdraw works" + transaction);
             return true;
         } else {
             return false;

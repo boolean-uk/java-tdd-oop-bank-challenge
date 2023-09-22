@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public class BankAccountTest {
@@ -60,24 +59,18 @@ public class BankAccountTest {
     @Test
     void shouldSetBranchIfNull() {
         CurrentAccount account = new CurrentAccount();
-        ArrayList<BankAccount> accounts = new ArrayList<>();
-        Branch branch = new Branch("Athens", "University St. 12", "210-7778100", accounts);
-        Assertions.assertTrue(branch.addAccount(account));
-        Assertions.assertEquals(1, branch.accounts().size());
+        Branch branch = new Branch("Athens", "University St. 12", "210-7778100");
+        Assertions.assertTrue(account.setBranch(branch));
         Assertions.assertEquals(branch, account.getBranch());
     }
 
     @Test
     void shouldReturnFalseIfBranchAlreadyAdded(){
         CurrentAccount account = new CurrentAccount();
-        ArrayList<BankAccount> accounts = new ArrayList<>();
-        Branch branch = new Branch("Athens", "University St. 12", "210-7778100", accounts);
-        Assertions.assertTrue(branch.addAccount(account));
-        ArrayList<BankAccount> otherAccounts = new ArrayList<>();
-        Branch otherBranch = new Branch("Patra", "Hero St. 45", "2113-778899", otherAccounts);
-        Assertions.assertFalse(otherBranch.addAccount(account));
-        Assertions.assertEquals(1, branch.accounts().size());
-        Assertions.assertEquals(0, otherBranch.accounts().size());
+        Branch branch = new Branch("Athens", "University St. 12", "210-7778100");
+        Assertions.assertTrue(account.setBranch(branch));
+        Branch otherBranch = new Branch("Patra", "Hero St. 45", "2113-778899");
+        Assertions.assertFalse(account.setBranch(otherBranch));
         Assertions.assertEquals(branch, account.getBranch());
     }
 

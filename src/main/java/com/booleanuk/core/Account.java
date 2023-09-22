@@ -5,14 +5,17 @@ import java.util.List;
 
 public class Account {
 
-    private int accountNumber;
+    private String accountNumber;
     private double balance;
+
+    private String accountType;
 
     private List<Transaction> transactionHistory;
 
-    public Account(int accountNumber, double balance) {
+    public Account(String accountNumber, double balance, String accountType) {
         this.accountNumber = accountNumber;
         this.balance = balance;
+        this.accountType = accountType;
         this.transactionHistory = new ArrayList<>();
     }
 
@@ -52,6 +55,14 @@ public class Account {
     public List<Transaction> getTransactionHistory() {
         System.out.println("transaction history retrieved" + transactionHistory);
         return transactionHistory;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 }
 

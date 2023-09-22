@@ -4,18 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bank {
-
-    private String accountNumber;
-    private double balance;
-    private String accountType;
-    private List<Bank> accounts;
+    public List<Account> accounts;
 
     public Bank() {
-        this.accountType = accountType;
-        this.balance = balance;
-        this.accountNumber = accountNumber;
         this.accounts = new ArrayList<>();
     }
 
 
+    public boolean createAccount(String accountNumber, double balance, String accountType) {
+        if (accountType.equalsIgnoreCase("SavingsAccount")) {
+            SavingsAccount savingsAccount = new SavingsAccount(accountNumber, balance, "SavingsAccount");
+            accounts.add(savingsAccount);
+            return true;
+        } else if (accountType.equalsIgnoreCase("CurrentAccount")) {
+            CurrentAccount currentAccount = new CurrentAccount(accountNumber, balance, "CurrentAccount");
+            accounts.add(currentAccount);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public String getAccountType(String accountNumber) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                return account.getAccountType();
+            }
+        }
+        return null;
+    }
 }
+
+

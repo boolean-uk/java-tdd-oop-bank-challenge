@@ -11,7 +11,7 @@ public class AccountTest {
 
     @Test
     public void testGetBalanceWorks() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         assertEquals(500.00, account.getBalance());
 
@@ -19,7 +19,7 @@ public class AccountTest {
 
     @Test
     public void testSetBalanceWorks() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         assertEquals(500.00, account.getBalance());
         account.setBalance(750.00);
@@ -28,7 +28,7 @@ public class AccountTest {
 
     @Test
     public void testDepositAmountWorks() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         assertEquals(500.00, account.getBalance(), 0.01);
         Assertions.assertTrue(account.depositAmount(150));
@@ -37,7 +37,7 @@ public class AccountTest {
 
     @Test
     public void testDepositAmountFails() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         Assertions.assertFalse(account.depositAmount(-10.00));
         assertEquals(500.00, account.getBalance(), 0.01);
@@ -45,7 +45,7 @@ public class AccountTest {
 
     @Test
     public void testWithdrawAmountWorks() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         assertEquals(500.00, account.getBalance(), 0.01);
         Assertions.assertTrue(account.withdrawAmount(150));
@@ -54,7 +54,7 @@ public class AccountTest {
 
     @Test
     public void testWithdrawAmountFails() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
 
         assertEquals(500.00, account.getBalance(), 0.01);
         Assertions.assertFalse(account.withdrawAmount(-10));
@@ -63,7 +63,7 @@ public class AccountTest {
 
     @Test
     public void testAddTransactionHistory() {
-        Account account = new Account(123456, 500.00);
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
         Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
 
         Assertions.assertTrue(account.addToTransactionHistory(transaction));

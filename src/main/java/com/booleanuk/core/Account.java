@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +14,17 @@ public class Account {
 
     private List<Transaction> transactionHistory;
 
+    private String date;
+
     public Account(String accountNumber, double balance, String accountType) {
         this.accountNumber = accountNumber;
         this.balance = balance;
         this.accountType = accountType;
         this.transactionHistory = new ArrayList<>();
-        StringBuilder stringBuilder = new StringBuilder();
+        ZonedDateTime zdt = ZonedDateTime.now();
+        DateTimeFormatter createDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        this.date = createDate.format(zdt);
+
     }
 
     public void setBalance(double newBalance) {
@@ -32,6 +39,9 @@ public class Account {
         if (deposit >= 0.00) {
             double newBalance = this.getBalance() + deposit;
             this.setBalance(newBalance);
+            Transaction transaction = new Transaction(this.date, deposit, 0.00, newBalance);
+            addToTransactionHistory(transaction);
+            System.out.println("checking if deposit works" + transaction.toString());
             return true;
         } else {
             return false;
@@ -42,6 +52,9 @@ public class Account {
         if (withdraw >= 0.00) {
             double newBalance = this.getBalance() - withdraw;
             this.setBalance(newBalance);
+            Transaction transaction = new Transaction(this.date, withdraw, 0.00, newBalance);
+            addToTransactionHistory(transaction);
+            System.out.println("checking if withdraw works" + transaction.toString());
             return true;
         } else {
             return false;

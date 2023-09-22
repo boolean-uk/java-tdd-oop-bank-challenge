@@ -42,7 +42,7 @@ public class BankAccountTest {
 
     @Test
     void shouldGetTotalBalance(){
-        SavingsAccount account = new SavingsAccount();
+        CurrentAccount account = new CurrentAccount();
         account.withdraw(1000.0);
         Assertions.assertEquals(-1000.0, account.getBalance());
         account.deposit(4000.50);
@@ -79,5 +79,39 @@ public class BankAccountTest {
         Assertions.assertEquals(1, branch.accounts().size());
         Assertions.assertEquals(0, otherBranch.accounts().size());
         Assertions.assertEquals(branch, account.getBranch());
+    }
+
+    @Test
+    void shouldDenyOverdraftForSavingsAccount(){
+        SavingsAccount account = new SavingsAccount();
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertFalse(account.withdraw(500));
+    }
+
+    @Test
+    void shouldAllowFirstOverdraftRequestForCurrentAccount(){
+        CurrentAccount account = new CurrentAccount();
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertTrue(account.withdraw(500));
+        Assertions.assertEquals(-500.0, account.getBalance());
+    }
+
+    @Test
+    void shouldDenySecondOverdraftRequestForCurrentAccount(){
+        CurrentAccount account = new CurrentAccount();
+        Assertions.assertTrue(account.withdraw(500));
+        Assertions.assertFalse(account.withdraw(500));
+        Assertions.assertEquals(-500.0, account.getBalance());
+    }
+
+    @Test
+    void shouldAcceptFurtherOverdraftIfEnoughDepositsAreDone() {
+        CurrentAccount account = new CurrentAccount();
+        Assertions.assertTrue(account.withdraw(500));
+        Assertions.assertFalse(account.withdraw(500));
+        account.deposit(400);
+        Assertions.assertFalse(account.withdraw(500));
+        account.deposit(1000);
+        Assertions.assertTrue(account.withdraw(500));
     }
 }

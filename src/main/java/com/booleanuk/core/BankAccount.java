@@ -16,9 +16,7 @@ public abstract class BankAccount {
         this.transactions.add(new Transaction(amount, true));
     }
 
-    public void withdraw(double amount){
-        this.transactions.add(new Transaction(amount, false));
-    }
+    public abstract boolean withdraw(double amount);
 
     public String generateStatements() {
         int balance = 0;

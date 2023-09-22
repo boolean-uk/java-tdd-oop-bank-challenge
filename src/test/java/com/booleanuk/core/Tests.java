@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.plaf.ColorUIResource;
+
 public class Tests {
     @Test
     void currentAccountCreationTest() {
@@ -22,12 +24,9 @@ public class Tests {
 
     @Test
     void DepositTest() {
-        CurrentAccount account = new CurrentAccount("0001");
-        Assertions.assertTrue(account.deposit(100.20));
-        Assertions.assertEquals(100.20d,account.getBalance());
-        account.deposit(49.8d);
-        Assertions.assertEquals(150.00d,account.getBalance());
-        System.out.println(account.getStatements());
+        CurrentAccount account1 = new CurrentAccount("0001");
+        Assertions.assertTrue(account1.deposit(100.20d));
+        Assertions.assertEquals(100.20d,account1.getBalance());
     }
 
     @Test

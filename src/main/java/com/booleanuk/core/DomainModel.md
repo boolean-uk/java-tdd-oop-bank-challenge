@@ -2,29 +2,29 @@
 ## User Stories
 ### Core
 ```
-1. As a customer,
+1. (Completed) As a customer,
    So I can safely store and use my money,
    I want to create a current account.
 
-2. As a customer,
+2. (Completed) As a customer,
    So I can save for a rainy day,
    I want to create a savings account.
 
-3. As a customer,
+3. (Completed) As a customer,
    So I can keep a record of my finances,
    I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
 
-4. As a customer,
+4. (Completed) As a customer,
    So I can use my account,
    I want to deposit and withdraw funds.
 ```
 ### Extensions
 ```
-5. As an engineer,
+5. (Completed) As an engineer,
    So I don't need to keep track of state,
    I want account balances to be calculated based on transaction history instead of stored in memory.
 
-6. As a bank manager,
+6. (Completed) As a bank manager,
    So I can expand,
    I want accounts to be associated with specific branches.
 

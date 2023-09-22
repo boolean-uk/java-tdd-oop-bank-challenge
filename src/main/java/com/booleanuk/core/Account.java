@@ -23,10 +23,20 @@ public abstract class Account {
         return (double) (this.balance / 100.00);
     }
 
+    public void setBalance() {
+        int updatedBalance = 0;
+        for (Statement statement: statements.values()){
+            updatedBalance += (int) (statement.getAmount() * 100);
+        }
+        this.balance = updatedBalance;
+    }
+
     public boolean deposit(double amount){
-        this.balance += (int) (amount * 100);
+        int balance = this.balance;
+        balance += (int) (amount * 100);
         Statement statement = new Statement(amount,balance);
         this.statements.put(statement.getDate(),statement);
+        setBalance();
         return true;
     }
 

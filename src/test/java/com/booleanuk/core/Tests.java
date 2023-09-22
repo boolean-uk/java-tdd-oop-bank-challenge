@@ -39,4 +39,13 @@ public class Tests {
         Assertions.assertFalse(account1.withdraw(10.00d));
     }
 
+    @Test
+    void amoundCalculatedByStatementsTest() {
+        CurrentAccount account = new CurrentAccount("0002");
+        account.deposit(500.00d);
+        account.withdraw(100.00d);
+        account.withdraw(0.51);
+        Assertions.assertEquals(399.49d,account.getBalance());
+    }
+
 }

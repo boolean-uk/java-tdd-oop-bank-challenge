@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Statement {
-    Date date;
-    double amount;
-    int balance;
+    private Date date;
+    private double amount;
+    private int balance;
 
     public Statement (double amount, int balance) {
         this.date = new Date();
@@ -16,6 +16,10 @@ public class Statement {
 
     public Date getDate() {
         return this.date;
+    }
+
+    public double getAmount() {
+        return this.amount;
     }
 
     @Override

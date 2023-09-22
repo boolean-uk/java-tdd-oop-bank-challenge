@@ -29,7 +29,7 @@ public abstract class BankAccount {
             } else {
                 balance -= (int)(transaction.getAmount()*100);
             }
-            result.append(String.format(Locale.US,"%.2f",(double) (balance/100))).append("\n");
+            result.append(String.format(Locale.US,"%.2f",(double) balance/100)).append("\n");
         }
         return String.valueOf(result).substring(0,result.length()-1);
     }

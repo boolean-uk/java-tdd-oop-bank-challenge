@@ -29,4 +29,13 @@ public class Tests {
         Assertions.assertEquals(150.00d,account.getBalance());
     }
 
+    @Test
+    void withdrawTest() {
+        CurrentAccount account = new CurrentAccount("0002");
+        account.deposit(100.00d);
+        Assertions.assertTrue(account.withdraw(50.00d));
+        CurrentAccount account1 = new CurrentAccount("0003");
+        Assertions.assertFalse(account1.withdraw(10.00d));
+    }
+
 }

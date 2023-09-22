@@ -43,14 +43,15 @@
 ## UML Diagram
 ## Domain Model
 
-| Class                              | Method                            | Description                               | Output              |
-|------------------------------------|-----------------------------------|-------------------------------------------|---------------------|
-| `AccountsList`                     | `AccountsList()`                  | constructor, initiates `accounts` Hashmap | void                |
-|                                    | `generateAccountId()`             | generates a new unique `accountID`        | String: `accountId` |
-| `Account`                          | `Account(String branchId)`        | constructor                               | void                |
-|                                    | `getAccoutnId()`                  | getter                                    | String: `accountId` |
-|                                    | `toString()`                      | displays accountID and balance info       | String              |
-| `CurrentAccount` extends `Account` | `CurrentAccount(String branchId)` | constructor                               | void                |
-| `SavingsAccount` extends `Account` | `SavingsAccount(String branchId)` | constructor                               | void                |
-|                                    |                                   |                                           |                     |
-|                                    |                                   |                                           |                     |
+| Class                              | Method                                 | Description                               | Output                          |
+|------------------------------------|----------------------------------------|-------------------------------------------|---------------------------------|
+| `AccountsList`                     | `AccountsList()`                       | constructor, initiates `accounts` Hashmap | `void`                          |
+|                                    | `generateAccountId()`                  | generates a new unique `accountID`        | `String`: `accountId`           |
+| `Account`                          | `Account(String branchId)`             | constructor                               | `void`                          |
+|                                    | `getAccoutnId()`                       | getter                                    | `String`: `accountId`           |
+|                                    | `toString()`                           | displays accountID and balance info       | `String`                        |
+| `CurrentAccount` extends `Account` | `CurrentAccount(String branchId)`      | constructor                               | `void`                          |
+| `SavingsAccount` extends `Account` | `SavingsAccount(String branchId)`      | constructor                               | `void`                          |
+| `Statement`                        | `Statement(double amount,int balance)` | constructor                               | `void`                          |
+|                                    | `getDate()`                            | getter                                    | `Date`: statement object's date |
+|                                    | `toString()`                           | generates a Statement info String         | `String`                        |

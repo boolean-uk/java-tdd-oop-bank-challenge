@@ -14,7 +14,8 @@ public class SavingsAccount extends Account{
             super.balance -= amount;
             getHistory().add(new Transaction(date, 0, amount, getBalance()));
             System.out.println("withdraw done successfully");
+        } else {
+            System.out.println("withdraw failed");
         }
-        System.out.println("withdraw failed");
     }
 }

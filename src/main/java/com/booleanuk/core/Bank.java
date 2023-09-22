@@ -33,4 +33,14 @@ public class Bank {
                     "\t\t\t || " + transaction.getBalance());
         }
     }
+    public double printBalance(Account account) {
+        double balance = 0;
+
+        List<Transaction> transactions = account.getHistory();
+        for (Transaction transaction : transactions) {
+            balance += transaction.getCredit();
+            balance -= transaction.getDebit();
+        }
+        return balance;
+    }
 }

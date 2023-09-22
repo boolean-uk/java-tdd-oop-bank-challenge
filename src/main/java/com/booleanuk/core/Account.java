@@ -33,8 +33,9 @@ public class Account {
             balance += amount;
             history.add(new Transaction(date, amount, 0, balance));
             System.out.println("deposit done successfully");
+        } else {
+            System.out.println("deposit failed");
         }
-        System.out.println("deposit failed");
     }
 
     public void withdraw(double amount, Date date) {

@@ -30,6 +30,9 @@ public class BankTest {
         bank.addAccount(currentAccount);
         bank.addAccount(savingsAccount);
 
+        currentAccount.deposit(0, new Date());
+        Assertions.assertEquals(1000.0, currentAccount.balance);
+
         currentAccount.deposit(500.0, new Date());
         savingsAccount.deposit(130.0, new Date());
 
@@ -47,6 +50,9 @@ public class BankTest {
         bank.addAccount(currentAccount);
         bank.addAccount(savingsAccount);
 
+        currentAccount.withdraw(0, new Date());
+        Assertions.assertEquals(1000.0, currentAccount.balance);
+
         currentAccount.withdraw(300.0, new Date());
         savingsAccount.withdraw(1000.0, new Date());
 
@@ -59,16 +65,33 @@ public class BankTest {
         Bank bank = new Bank();
 
         CurrentAccount currentAccount = new CurrentAccount("G25097362", 0);
+
+        bank.addAccount(currentAccount);
+
+        currentAccount.deposit(1000.0, new Date(112,0,10));
+        currentAccount.deposit(2000.0, new Date(112,0,13));
+        currentAccount.withdraw(500.0, new Date(112,0,14));
+
+        bank.bankStatement(currentAccount);
+    }
+
+    @Test
+    public void printBalance() {
+        Bank bank = new Bank();
+
+        CurrentAccount currentAccount = new CurrentAccount("G25097362", 1000.0);
         SavingsAccount savingsAccount = new SavingsAccount("S47382546", 2000.0);
 
         bank.addAccount(currentAccount);
         bank.addAccount(savingsAccount);
 
         currentAccount.deposit(1000.0, new Date(112,0,10));
-        //savingsAccount.withdraw(1000.0);
         currentAccount.deposit(2000.0, new Date(112,0,13));
         currentAccount.withdraw(500.0, new Date(112,0,14));
 
-        bank.bankStatement(currentAccount);
+        Assertions.assertEquals(2500.0, bank.printBalance(currentAccount));
+
+        currentAccount.withdraw(200.0, new Date());
+        Assertions.assertEquals(2300.0, bank.printBalance(currentAccount));
     }
 }

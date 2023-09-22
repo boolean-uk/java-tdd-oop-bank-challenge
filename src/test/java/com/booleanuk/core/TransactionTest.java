@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class TransactionTest {
     @Test
@@ -31,7 +32,7 @@ public class TransactionTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = date + " || " + String.format("%.2f",1000.0) + " ||         || ";
+        String expected = date + " || " + String.format(Locale.US,"%.2f",1000.0) + " ||         || ";
         Assertions.assertEquals(expected, transaction.printData());
     }
 
@@ -41,7 +42,7 @@ public class TransactionTest {
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String date = today.format(formatter);
-        String expected = date + " ||         || " + String.format("%.2f",1000.0) + " || ";
+        String expected = date + " ||         || " + String.format(Locale.US,"%.2f",1000.0) + " || ";
         Assertions.assertEquals(expected, transaction.printData());
     }
 }

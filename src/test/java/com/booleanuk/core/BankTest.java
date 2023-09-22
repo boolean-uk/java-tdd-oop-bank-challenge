@@ -94,4 +94,31 @@ public class BankTest {
         currentAccount.withdraw(200.0, new Date());
         Assertions.assertEquals(2300.0, bank.printBalance(currentAccount));
     }
+
+    @Test
+    public void addAccountAtBranch() {
+        Bank bank = new Bank();
+
+        CurrentAccount currentAccount = new CurrentAccount("G25097362", 1000.0);
+        SavingsAccount savingsAccount = new SavingsAccount("S47382546", 2000.0);
+
+        bank.addAccount(currentAccount);
+        bank.addAccount(savingsAccount);
+
+        String branch1 = "Bank of America";
+        String branch2 = "Wells Fargo Bank";
+
+        bank.addAccountAtBranch(currentAccount, branch1);
+        Assertions.assertEquals(1, bank.getAccountsBranch().size());
+
+        bank.addAccountAtBranch(currentAccount, "");
+        Assertions.assertEquals(1, bank.getAccountsBranch().size());
+
+        bank.addAccountAtBranch(savingsAccount, branch2);
+        Assertions.assertEquals(2, bank.getAccountsBranch().size());
+
+        CurrentAccount nonexistedAccount = new CurrentAccount("G90056962", 1500.0);
+        bank.addAccountAtBranch(nonexistedAccount, branch1);
+        Assertions.assertEquals(2, bank.getAccountsBranch().size());
+    }
 }

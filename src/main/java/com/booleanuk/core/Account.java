@@ -19,6 +19,17 @@ public abstract class Account {
         return this.accountId;
     }
 
+    public double getBalance() {
+        return (double) (this.balance / 100.00);
+    }
+
+    public boolean deposit(double amount){
+        this.balance += (int) (amount * 100);
+        Statement statement = new Statement(amount,balance,statements);
+        this.statements.put(statement.getStatementId(),statement);
+        return true;
+    }
+
     @Override
     public String toString() {
         return "Account " + accountId + "\nBalance: " + balance;

@@ -18,7 +18,7 @@ public class AccountsList {
         String accountId = "";
         do {
             Random random = new Random();
-            String randomId = String.format("%04d", random.nextInt(10000));;
+            String randomId = String.format("%04d", random.nextInt(10000));
             accountId = branchId + randomId;
         } while (accounts.containsKey(accountId));
         return accountId;

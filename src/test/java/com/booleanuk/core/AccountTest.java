@@ -71,4 +71,23 @@ public class AccountTest {
         assertEquals(1, transactionHistory.size());
         assertEquals(transaction, transactionHistory.get(0));
     }
+
+    @Test
+    public void testGetTransactionHistoryWorks() {
+
+        Account account = new Account("SA123456", 500.00, "SavingsAccount");
+        Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
+        Transaction transactionTwo = new Transaction("16-02-2023", 80.00, 20.00, 560.00);
+        //not added to the transactionHistory so shouldn't be found in the history
+        Transaction transactionThree = new Transaction("17-02-2023", 50.00, 60.00, 560.00);
+
+        Assertions.assertTrue(account.addToTransactionHistory(transaction));
+        Assertions.assertTrue(account.addToTransactionHistory(transactionTwo));
+
+        List<Transaction> transactionHistory = account.getTransactionHistory();
+
+        Assertions.assertTrue(transactionHistory.contains(transaction));
+        Assertions.assertTrue(transactionHistory.contains(transactionTwo));
+        Assertions.assertFalse(transactionHistory.contains(transactionThree));
+    }
 }

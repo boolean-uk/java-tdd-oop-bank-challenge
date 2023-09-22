@@ -10,8 +10,14 @@ public class Bank {
         this.accounts = new ArrayList<>();
     }
 
-
     public boolean createAccount(String accountNumber, double balance, String accountType) {
+        for (Account account : accounts) {
+            if (account.getAccountNumber().equals(accountNumber)) {
+                System.out.println("Account with this number already exists");
+                return false;
+            }
+        }
+
         if (accountType.equalsIgnoreCase("SavingsAccount")) {
             SavingsAccount savingsAccount = new SavingsAccount(accountNumber, balance, "SavingsAccount");
             accounts.add(savingsAccount);

@@ -58,7 +58,7 @@ public class BankTest {
         bank.createAccount("SA12345", 1000.00, "SavingsAccount");
 
         assertEquals("SavingsAccount", bank.getAccountType("SA12345"));
-        Assertions.assertFalse(bank.createAccount("SA234567", 1000.0, "SavingsAccount"));
+        Assertions.assertFalse(bank.createAccount("SA12345", 1000.0, "SavingsAccount"));
     }
 }
 

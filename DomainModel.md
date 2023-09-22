@@ -38,27 +38,37 @@ As a bank manager,
 So I can expand,
 I want accounts to be associated with specific branches.
 ```
+```
+7.
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+```
+```
+8.
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+```
 
 ### Domain Model
 
-| Class                  | Method                          | Attributes                                | Scenario                                          | Outcome             |
-|------------------------|---------------------------------|-------------------------------------------|---------------------------------------------------|---------------------|
-| Branch (Record)        |                                 | String name, String Address, String phone |                                                   |                     |
-|                        | addAccount(BankAccount account) | ArrayList<BankAccount> accounts           | Add bank account to this branch                   |                     |
-|                        |                                 |                                           | - If account has no branch set:                   | true, Account added |
-|                        |                                 |                                           | - Otherwise:                                      | false               |
-| BankAccount (Abstract) | deposit()                       | ArrayList<Transaction> transactions       | 4.Deposit money to account                        | void                |
-|                        | withdraw()                      |                                           | 4.Withdraw money from account                     | void                |
-|                        | generateStatements()            |                                           | 3.Generate statements based on transactions' info | String              |
-|                        | getBalance()                    |                                           | 5.Generate balance based on transactions          | double              |
-|                        | setBranch(Branch branch)        | Branch branch                             | 6.Set the account's branch                        |                     |
-|                        |                                 |                                           | - If branch doesn't exist:                        | true, Branch set    |
-|                        |                                 |                                           | - If branch exists:                               | false               |
-|                        | getBranch()                     |                                           | Get the account's branch                          | Branch/null         |
-| CurrentAccount         |                                 |                                           | 1.Inherit from BankAccount                        |                     |
-| SavingsAccount         |                                 |                                           | 2.Inherit from BankAccount                        |                     |
-| Transaction            | getAmount()                     | double amount                             | Get the amount of the transaction                 | double              |
-|                        | isDeposit()                     | boolean isDeposit                         | Differentiate deposits and withdrawals:           |                     |
-|                        |                                 |                                           | - If deposit:                                     | true                |
-|                        |                                 |                                           | - If withdrawal:                                  | false               |
-|                        | printData()                     | String date                               | Generate transaction info (date + credit/debit)   | String              |
+| Class                  | Method                   | Attributes                                | Scenario                                          | Outcome          |
+|------------------------|--------------------------|-------------------------------------------|---------------------------------------------------|------------------|
+| Branch (Record)        |                          | String name, String Address, String phone |                                                   |                  |
+| BankAccount (Abstract) | deposit()                | ArrayList<Transaction> transactions       | 4.Deposit money to account                        | void             |
+|                        | abstract withdraw()      |                                           | 4.Withdraw money from account                     | boolean          |
+|                        | generateStatements()     |                                           | 3.Generate statements based on transactions' info | String           |
+|                        | getBalance()             |                                           | 5.Generate balance based on transactions          | double           |
+|                        | setBranch(Branch branch) | Branch branch                             | 6.Set the account's branch                        |                  |
+|                        |                          |                                           | - If branch doesn't exist:                        | true, Branch set |
+|                        |                          |                                           | - If branch exists:                               | false            |
+|                        | getBranch()              |                                           | Get the account's branch                          | Branch/null      |
+| CurrentAccount         |                          |                                           | 1,7,8.Inherit from BankAccount                    |                  |
+| SavingsAccount         |                          |                                           | 2.Inherit from BankAccount                        |                  |
+|                        |                          |                                           |                                                   |                  |
+| Transaction            | getAmount()              | double amount                             | Get the amount of the transaction                 | double           |
+|                        | isDeposit()              | boolean isDeposit                         | Differentiate deposits and withdrawals:           |                  |
+|                        |                          |                                           | - If deposit:                                     | true             |
+|                        |                          |                                           | - If withdrawal:                                  | false            |
+|                        | printData()              | String date                               | Generate transaction info (date + credit/debit)   | String           |

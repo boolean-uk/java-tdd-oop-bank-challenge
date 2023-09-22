@@ -25,7 +25,7 @@ public abstract class Account {
 
     public void setBalance() {
         int updatedBalance = 0;
-        for (Statement statement: statements.values()){
+        for (Statement statement: this.statements.values()){
             updatedBalance += (int) (statement.getAmount() * 100);
         }
         this.balance = updatedBalance;
@@ -34,7 +34,7 @@ public abstract class Account {
     public boolean deposit(double amount){
         int balance = this.balance;
         balance += (int) (amount * 100);
-        Statement statement = new Statement(amount,balance);
+        Statement statement = new Statement(amount, balance);
         this.statements.put(statement.getDate(),statement);
         setBalance();
         return true;

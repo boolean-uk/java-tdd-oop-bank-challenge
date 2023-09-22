@@ -27,6 +27,8 @@ public class Tests {
         CurrentAccount account1 = new CurrentAccount("0001");
         Assertions.assertTrue(account1.deposit(100.20d));
         Assertions.assertEquals(100.20d,account1.getBalance());
+        Assertions.assertTrue(account1.deposit(49.8d));
+        Assertions.assertEquals(150d,account1.getBalance());
     }
 
     @Test

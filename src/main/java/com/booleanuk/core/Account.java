@@ -17,6 +17,7 @@ public class Account {
         this.balance = balance;
         this.accountType = accountType;
         this.transactionHistory = new ArrayList<>();
+        StringBuilder stringBuilder = new StringBuilder();
     }
 
     public void setBalance(double newBalance) {
@@ -63,6 +64,22 @@ public class Account {
 
     public String getAccountType() {
         return accountType;
+    }
+
+    public String generateBankStatement() {
+        StringBuilder bankStatement = new StringBuilder("date       || credit  || debit  || balance\n");
+        for (Transaction transaction : transactionHistory) {
+            String formattedTransaction = String.format(
+            "%-11s|| %8.2f|| %7.2f|| %7.2f",
+                    transaction.getDate(),
+                    transaction.getCredit(),
+                    transaction.getDebit(),
+                    transaction.getBalance()
+        );
+            bankStatement.append(formattedTransaction).append("\n");
+        }
+        System.out.println(bankStatement);
+        return bankStatement.toString();
     }
 }
 

@@ -27,6 +27,7 @@ public class Tests {
         Assertions.assertEquals(100.20d,account.getBalance());
         account.deposit(49.8d);
         Assertions.assertEquals(150.00d,account.getBalance());
+        System.out.println(account.getStatements());
     }
 
     @Test

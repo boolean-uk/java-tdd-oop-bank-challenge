@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public abstract class Account {
     private String accountId;
@@ -28,7 +27,6 @@ public abstract class Account {
         this.balance += (int) (amount * 100);
         Statement statement = new Statement(amount,balance);
         this.statements.put(statement.getDate(),statement);
-        System.out.println(statement.toString());
         return true;
     }
 
@@ -37,11 +35,21 @@ public abstract class Account {
             this.balance -= (int) (amount * 100);
             Statement statement = new Statement(-amount, balance);
             this.statements.put(statement.getDate(), statement);
-            System.out.println(statement.toString());
             return true;
         } else {
             return false;
         }
+    }
+
+    public String getStatements() {
+        String statementsString = "";
+        ArrayList<Date> datesList = new ArrayList<>();
+        datesList.addAll(statements.keySet());
+        Collections.sort(datesList,Collections.reverseOrder());
+        for (Date date: datesList) {
+            statementsString += "\n" + statements.get(date).toString();
+        }
+        return statementsString;
     }
 
     @Override

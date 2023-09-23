@@ -3,6 +3,7 @@ package com.booleanuk.core.Accounts;
 import com.booleanuk.core.Bank.BankStatement;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
+import com.booleanuk.core.Bank.TransactionTimestampComparator;
 import com.booleanuk.core.BaseEntity;
 
 
@@ -15,11 +16,13 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
+
 @Getter
 @Setter
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
-    private List<Transaction> transactions;
+    private TreeSet<Transaction> transactions;
     private final BigDecimal initialDepositMinimum = BigDecimal.ZERO;
     // A Set maybe?
 
@@ -29,7 +32,7 @@ public abstract class Account extends BaseEntity {
 
 
     public Account(BigDecimal initialBalance, Branch branch, User accountHolder) {
-        this.transactions = new ArrayList<>();
+        this.transactions = new TreeSet<>(new TransactionTimestampComparator());
         this.balance = BigDecimal.ZERO;
         this.depositFunds(initialBalance);
         this.branch = branch;
@@ -46,7 +49,7 @@ public abstract class Account extends BaseEntity {
         Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount);
         transactions.add(depositTransaction);
 
-        this.setBalance(this.getBalance().add(amount));
+//        this.setBalance(this.getBalance().add(amount));
 
         return depositTransaction;
     }
@@ -62,7 +65,7 @@ public abstract class Account extends BaseEntity {
         Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAW, amount);
         transactions.add(withdrawTransaction);
 
-        this.setBalance(this.getBalance().subtract(amount));
+//        this.setBalance(this.getBalance().subtract(amount));
 
         return withdrawTransaction;
     }

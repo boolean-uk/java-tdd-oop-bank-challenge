@@ -5,7 +5,6 @@ import com.booleanuk.core.Accounts.SavingsAccount;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.Enums.Branches;
-import com.booleanuk.core.Enums.TransactionType;
 import com.booleanuk.core.Users.Client;
 
 import java.math.BigDecimal;

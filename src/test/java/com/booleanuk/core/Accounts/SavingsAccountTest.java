@@ -28,6 +28,7 @@ public class SavingsAccountTest {
     @Test
     public void testInitializationWithMinimumBalance() {
         assertNotNull(savingsAccount);
+        assertEquals(BigDecimal.valueOf(2000),savingsAccount.getBalance());
     }
 
     @Test
@@ -42,20 +43,26 @@ public class SavingsAccountTest {
     public void testDepositFunds() {
         BigDecimal depositAmount = BigDecimal.valueOf(500);
         savingsAccount.depositFunds(depositAmount);
-
+        BigDecimal actualBalance = savingsAccount.getBalance();
         assertEquals(BigDecimal.valueOf(2500), savingsAccount.getBalance());
     }
 
     @Test
     public void testWithdrawFunds() {
+        BigDecimal actualBalance = savingsAccount.getBalance();
+        assertEquals(BigDecimal.valueOf(2000),actualBalance);
+
         BigDecimal depositAmount = BigDecimal.valueOf(1000);
         savingsAccount.depositFunds(depositAmount);
 
+        actualBalance = savingsAccount.getBalance();
+        assertEquals(BigDecimal.valueOf(3000),actualBalance);
 
         BigDecimal withdrawAmount = BigDecimal.valueOf(500);
         savingsAccount.withdrawFunds(withdrawAmount);
 
-        assertEquals(BigDecimal.valueOf(2500), savingsAccount.getBalance());
+        actualBalance = savingsAccount.getBalance();
+        assertEquals(BigDecimal.valueOf(2500), actualBalance);
     }
 
     @Test

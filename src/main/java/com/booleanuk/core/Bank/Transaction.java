@@ -5,18 +5,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Transaction {
     private BigDecimal amount;
-    private LocalDateTime timestamp;
+    private Instant timestamp;
 //    private BigDecimal balanceBefore;
     private TransactionType type;
 
     public Transaction(TransactionType type, BigDecimal amount) {
         this.setAmount(amount);
         this.setType(type);
-        this.timestamp = LocalDateTime.now();
+        this.setTimestamp(Instant.now());
+
     }
 }

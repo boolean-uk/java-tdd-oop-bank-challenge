@@ -26,13 +26,19 @@ public abstract class Account extends BaseEntity {
     private boolean canRequestOverdraft;
 
 
-    public Account(BigDecimal balance, Branches branch, User accountHolder) {
-        this.setBalance(balance);
+    public Account(BigDecimal initialBalance, Branches branch, User accountHolder) {
         this.transactions = new ArrayList<>();
+        this.depositFunds(initialBalance);
         this.branch = branch;
         this.accountHolder = accountHolder;
     }
 
+    public Account(User accountHolder, Branches branch) {
+        this.transactions = new ArrayList<>();
+        this.accountHolder = accountHolder;
+        this.branch = branch;
+        this.setBalance(BigDecimal.ZERO);
+    }
 
     public Transaction depositFunds(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {

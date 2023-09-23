@@ -1,4 +1,7 @@
 package com.booleanuk.core.Enums;
 
-public class Status {
+public enum Status {
+    Pending,
+    Approved,
+    Rejected
 }

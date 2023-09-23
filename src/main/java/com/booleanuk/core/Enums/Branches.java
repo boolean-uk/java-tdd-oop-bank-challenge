@@ -1,4 +1,14 @@
 package com.booleanuk.core.Enums;
 
-public class Branches {
+public enum Branches {
+    Sofia,
+    TheHague,
+    Rome,
+    Istanbul,
+    Bucharest,
+    Athens,
+    Berlin,
+    Paris,
+    London,
+    Vienna
 }

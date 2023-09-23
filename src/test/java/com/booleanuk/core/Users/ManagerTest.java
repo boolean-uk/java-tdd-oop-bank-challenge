@@ -21,12 +21,13 @@ public class ManagerTest {
         branch = new Branch(Branches.London, null);
 
         manager = new Manager("John Manager", "123-456-7890", branch);
+        branch.setManager(manager);
     }
 
     @Test
     public void testReviewOverdraftRequestsApproved() {
-        CurrentAccount currentAccount = new CurrentAccount(BigDecimal.valueOf(1000), branch.getBranchLocation(), null);
-
+        CurrentAccount currentAccount = new CurrentAccount(BigDecimal.valueOf(1000), branch, null);
+        branch.addAccount(currentAccount);
         currentAccount.requestOverdraft(BigDecimal.valueOf(500));
 
         manager.reviewOverdraftRequests();
@@ -36,9 +37,10 @@ public class ManagerTest {
 
     @Test
     public void testReviewOverdraftRequestsRejected() {
-        CurrentAccount currentAccount = new CurrentAccount(BigDecimal.valueOf(1000), branch.getBranchLocation(), null);
+        CurrentAccount currentAccount = new CurrentAccount(BigDecimal.valueOf(1000), branch, null);
+        branch.addAccount(currentAccount);
 
-        currentAccount.requestOverdraft(BigDecimal.valueOf(2000));
+        currentAccount.requestOverdraft(BigDecimal.valueOf(5000));
 
         manager.reviewOverdraftRequests();
 

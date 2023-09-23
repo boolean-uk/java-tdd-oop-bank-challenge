@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,13 +20,18 @@ public class Manager extends User{
     }
 
     public void reviewOverdraftRequests() {
-        for (CurrentAccount currentAccount : branch.getCurrentAccounts()) {
+        List<CurrentAccount> currentAccounts = branch.getCurrentAccounts();
+        for (CurrentAccount currentAccount : currentAccounts) {
             if (currentAccount.getOverdraftStatus().equals(Status.Pending)) {
                 BigDecimal balanceThreshold = currentAccount.getBalance().multiply(BigDecimal.valueOf(3.50));
-                if (balanceThreshold.compareTo(currentAccount.getOverdraftLimit()) >= 0) {
-                    currentAccount.setOverdraftStatus(Status.Rejected);
-                } else {
+                BigDecimal overdraftLimit = currentAccount.getOverdraftLimit();
+                double res = balanceThreshold.compareTo(overdraftLimit);
+                if (overdraftLimit != null && balanceThreshold.compareTo(overdraftLimit) >= 0) {
                     currentAccount.setOverdraftStatus(Status.Approved);
+                } else {
+                    currentAccount.setOverdraftStatus(Status.Rejected);
+                    currentAccount.setOverdraftLimit(BigDecimal.ZERO);
+
                 }
             }
         }

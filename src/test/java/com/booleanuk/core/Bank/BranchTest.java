@@ -5,6 +5,7 @@ import com.booleanuk.core.Accounts.CurrentAccount;
 import com.booleanuk.core.Accounts.SavingsAccount;
 import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Users.Client;
+import com.booleanuk.core.Users.Manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,15 +16,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BranchTest {
 
     private Branch branch;
+    private Manager manager;
 
     @BeforeEach
     public void setUp() {
-        branch = new Branch(Branches.Sofia, null);
+        manager = new Manager("John Manager", "123-456-7890", branch);
+
+        branch = new Branch(Branches.Sofia, manager);
     }
 
     @Test
     public void testAddAccount() {
-        SavingsAccount savingsAccount = new SavingsAccount(BigDecimal.valueOf(3000), branch.getBranchLocation(), null);
+        SavingsAccount savingsAccount = new SavingsAccount(BigDecimal.valueOf(3000), branch, null);
 
         assertTrue(branch.addAccount(savingsAccount));
 
@@ -32,9 +36,9 @@ public class BranchTest {
 
     @Test
     public void testGetSavingsAccounts() {
-        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(3000), branch.getBranchLocation(), null);
-        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch.getBranchLocation(), null);
-        SavingsAccount savingsAccount2 = new SavingsAccount(BigDecimal.valueOf(4000), branch.getBranchLocation(), null);
+        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(3000), branch, null);
+        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch, null);
+        SavingsAccount savingsAccount2 = new SavingsAccount(BigDecimal.valueOf(4000), branch, null);
 
         branch.addAccount(savingsAccount1);
         branch.addAccount(currentAccount1);
@@ -53,9 +57,9 @@ public class BranchTest {
     public void testGetCurrentAccounts() {
         Client accountHolder = new Client("John Doe", "123-456-7890");
 
-        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(1500), branch.getBranchLocation(), accountHolder);
-        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch.getBranchLocation(), accountHolder);
-        CurrentAccount currentAccount2 = new CurrentAccount(BigDecimal.valueOf(1500), branch.getBranchLocation(), accountHolder);
+        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(1500), branch, accountHolder);
+        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch, accountHolder);
+        CurrentAccount currentAccount2 = new CurrentAccount(BigDecimal.valueOf(1500), branch, accountHolder);
 
         branch.addAccount(savingsAccount1);
         branch.addAccount(currentAccount1);

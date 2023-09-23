@@ -17,12 +17,16 @@ public class ClientTest {
     private CurrentAccount currentAccount;
     private SavingsAccount savingsAccount;
     private Branch branch;
+    private Manager manager;
 
     @BeforeEach
     public void setUp() {
         client = new Client("John Doe", "123-456-7890");
-        currentAccount = new CurrentAccount(new BigDecimal("1000.00"), Branches.Sofia, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("1200.00"), Branches.Sofia, client);
+        manager = new Manager("John Manager", "123-456-7890", branch);
+
+        branch = new Branch(Branches.Sofia, manager);
+        currentAccount = new CurrentAccount(new BigDecimal("1000.00"), branch, client);
+        savingsAccount = new SavingsAccount(new BigDecimal("1200.00"), branch, client);
 //        branch = new Branch("Main Branch");
     }
     @Test

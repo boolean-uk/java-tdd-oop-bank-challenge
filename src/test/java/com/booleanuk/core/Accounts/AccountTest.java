@@ -2,6 +2,7 @@ package com.booleanuk.core.Accounts;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Users.Client;
+import com.booleanuk.core.Users.Manager;
 import com.booleanuk.core.Users.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,14 +16,17 @@ import static org.junit.jupiter.api.Assertions.*;
     private Account savingsAccount;
     private User client;
     private Branch branch;
+        private Manager manager;
 
     @BeforeEach
     public void setUp() {
         client = new Client("John Doe","123456");
-        currentAccount = new CurrentAccount(new BigDecimal("1000.00"), Branches.Sofia, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"), Branches.Sofia, client);
+        manager = new Manager("John Manager", "123-456-7890", branch);
 
-//        branch = new Branch("Main Branch");
+        branch = new Branch(Branches.Sofia, manager);
+        currentAccount = new CurrentAccount(new BigDecimal("1000.00"), branch, client);
+        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"),branch, client);
+
     }
 
     @Test

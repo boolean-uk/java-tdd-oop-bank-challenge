@@ -33,12 +33,7 @@ public abstract class Account extends BaseEntity {
         this.accountHolder = accountHolder;
     }
 
-    public Account(User accountHolder, Branches branch) {
-        this.transactions = new ArrayList<>();
-        this.accountHolder = accountHolder;
-        this.branch = branch;
-        this.setBalance(BigDecimal.ZERO);
-    }
+
 
     public Transaction depositFunds(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -86,4 +81,5 @@ public abstract class Account extends BaseEntity {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+    public abstract boolean requestOverdraft();
 }

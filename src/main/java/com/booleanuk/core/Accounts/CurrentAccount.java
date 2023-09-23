@@ -5,14 +5,24 @@ import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Users.User;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
-public class CurrentAccount extends Account{
+public class CurrentAccount extends Account {
     public Status overdraftStatus;
-    public CurrentAccount(BigDecimal balance, Branches branch, User accountHolder) {
-        super(balance, branch, accountHolder);
+
+    public CurrentAccount(BigDecimal initialBalance, Branches branch, User accountHolder) {
+        super(initialBalance, branch, accountHolder);
     }
 
-    public void requestOverdraft() {
+    public CurrentAccount(User accountHolder, Branches branch) {
+        this.transactions = new ArrayList<>();
+        this.accountHolder = accountHolder;
+        this.branch = branch;
+        this.setBalance(BigDecimal.ZERO);
+    }
 
+    @Override
+    public boolean requestOverdraft() {
+        return false;
     }
 }

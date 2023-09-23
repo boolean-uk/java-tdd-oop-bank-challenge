@@ -1,0 +1,39 @@
+
+
+| Classes                                | Methods                                                                     | Member Variables           | Scenario                      | Results                             |
+|----------------------------------------|-----------------------------------------------------------------------------|----------------------------|-------------------------------|-------------------------------------|
+| Bank                                   | createBankAccount(String accountNumber, double balance, String accountType) | String accountNumber       | 1 create a current account    | bankAccount of type current created |
+|                                        |                                                                             | String accountType         | 2 create a savings account    | bankAccount of type savings created |
+|                                        |                                                                             | double balance             |                               |                                     |
+|                                        |                                                                             | List <> accounts           |                               | update accounts List                |
+|                                        | get accountType(accountNumber)                                              |                            |                               |                                     |
+| -------------------------------------- | --------------------------------------------------------------------------- | -------------------------- | ----------------------------- | ----------------------------------- |
+| Account                                | generateBankStatement()                                                     | List<> transactionHistory  | 3. create a bankStatement     | return bankStatement                |
+|                                        |                                                                             | double balance             |                               |                                     |
+|                                        | deposit(double amount)                                                      | String Date                | 4. deposit and withdraw funds | update transactionHistory           |
+|                                        | withdraw(double amount )                                                    | String accountNumber       |                               | output success message              |
+|                                        |                                                                             | String accountType         |                               | return true (if succeeded)          |
+|                                        | getAccountNumber()                                                          |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+|                                        | getBalance()                                                                |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+|                                        | setBalance(double newBalance)                                               |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+|                                        | addToTransactionHistory                                                     |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+|                                        | getTransactionHistory                                                       |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+| SavingsAccount (inherits from Account) |                                                                             |                            |                               |                                     |
+| CurrentAccount (inherits from Account) |                                                                             |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+| Transaction                            | getDate()                                                                   | String date                |                               |                                     |
+|                                        | getBalance()                                                                | double balance             |                               |                                     |
+|                                        | getCredit()                                                                 | double credit              |                               |                                     |
+|                                        | getDebit()                                                                  | double debt                |                               |                                     |
+|                                        | setDate()                                                                   |                            |                               |                                     |
+|                                        | setBalance()                                                                |                            |                               |                                     |
+|                                        | setCredit()                                                                 |                            |                               |                                     |
+|                                        | setDebit()                                                                  |                            |                               |                                     |
+|                                        | setDate()                                                                   |                            |                               |                                     |
+|                                        |                                                                             |                            |                               |                                     |
+

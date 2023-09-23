@@ -7,6 +7,7 @@ public class CurrentAccount extends Account {
 
     }
 
+    // extra method for withdrawing from CurrentAccount, you can withdraw till -500
     @Override
     public boolean withdrawAmount(double withdraw) {
         if (withdraw >= 0.00 && this.getBalance() >= -500.00) {

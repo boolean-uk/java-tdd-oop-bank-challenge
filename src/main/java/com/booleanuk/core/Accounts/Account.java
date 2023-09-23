@@ -1,5 +1,6 @@
 package com.booleanuk.core.Accounts;
 
+import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.BaseEntity;
 
@@ -19,15 +20,17 @@ import java.util.List;
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
     private List<Transaction> transactions;
+    private final BigDecimal initialDepositMinimum = BigDecimal.ZERO;
     // A Set maybe?
 
     private User accountHolder;
-    private Branches branch;
-    private boolean canRequestOverdraft;
+    private Branch branch;
 
 
-    public Account(BigDecimal initialBalance, Branches branch, User accountHolder) {
+
+    public Account(BigDecimal initialBalance, Branch branch, User accountHolder) {
         this.transactions = new ArrayList<>();
+        this.balance = BigDecimal.ZERO;
         this.depositFunds(initialBalance);
         this.branch = branch;
         this.accountHolder = accountHolder;
@@ -78,8 +81,17 @@ public abstract class Account extends BaseEntity {
         return balance;
     }
 
+//    public void setBalance(BigDecimal balance) {
+//        this.balance = balance;
+//    }
+//    @Override
     public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+        if (this.getBalance().compareTo(this.initialDepositMinimum) < 0) {
+            throw new IllegalArgumentException("Balance cannot be set below the minimum deposit of " + initialDepositMinimum);
+        }
+       this.balance=balance;
     }
-    public abstract boolean requestOverdraft();
+    public abstract boolean requestOverdraft(BigDecimal amount);
+
+
 }

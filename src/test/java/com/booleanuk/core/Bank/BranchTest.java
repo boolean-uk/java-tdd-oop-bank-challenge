@@ -9,34 +9,65 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.*;
 public class BranchTest {
 
-    private Client client;
-    private Account currentAccount;
-    private Account savingsAccount;
     private Branch branch;
 
     @BeforeEach
     public void setUp() {
-        client = new Client("John Doe", "123-456-7890");
-        currentAccount = new CurrentAccount(BigDecimal.ZERO, Branches.Sofia, client);
-        savingsAccount = new SavingsAccount(BigDecimal.ZERO, Branches.Sofia, client);
-        branch = new Branch(Branches.Sofia);
-    }
-
-
-    @Test
-    public void testBranchCreation() {
-        assertNotNull(branch);
+        branch = new Branch(Branches.Sofia, null);
     }
 
     @Test
-    public void testAssociatingAccountWithBranch() {
-        branch.associateAccount(currentAccount);
-        assertTrue(branch.getAccounts().contains(currentAccount));
+    public void testAddAccount() {
+        SavingsAccount savingsAccount = new SavingsAccount(BigDecimal.valueOf(3000), branch.getBranchLocation(), null);
+
+        assertTrue(branch.addAccount(savingsAccount));
+
+        assertTrue(branch.getAccounts().contains(savingsAccount));
     }
 
+    @Test
+    public void testGetSavingsAccounts() {
+        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(3000), branch.getBranchLocation(), null);
+        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch.getBranchLocation(), null);
+        SavingsAccount savingsAccount2 = new SavingsAccount(BigDecimal.valueOf(4000), branch.getBranchLocation(), null);
+
+        branch.addAccount(savingsAccount1);
+        branch.addAccount(currentAccount1);
+        branch.addAccount(savingsAccount2);
+
+        List<SavingsAccount> savingsAccounts = branch.getSavingsAccounts();
+
+        assertEquals(2, savingsAccounts.size());
+
+        assertTrue(savingsAccounts.contains(savingsAccount1));
+        assertTrue(savingsAccounts.contains(savingsAccount2));
+
+        assertFalse(savingsAccounts.contains(currentAccount1));
+    }
+    @Test
+    public void testGetCurrentAccounts() {
+        Client accountHolder = new Client("John Doe", "123-456-7890");
+
+        SavingsAccount savingsAccount1 = new SavingsAccount(BigDecimal.valueOf(1500), branch.getBranchLocation(), accountHolder);
+        CurrentAccount currentAccount1 = new CurrentAccount(BigDecimal.valueOf(2000), branch.getBranchLocation(), accountHolder);
+        CurrentAccount currentAccount2 = new CurrentAccount(BigDecimal.valueOf(1500), branch.getBranchLocation(), accountHolder);
+
+        branch.addAccount(savingsAccount1);
+        branch.addAccount(currentAccount1);
+        branch.addAccount(currentAccount2);
+
+        List<CurrentAccount> currentAccounts = branch.getCurrentAccounts();
+
+        assertEquals(2, currentAccounts.size());
+
+        assertTrue(currentAccounts.contains(currentAccount1));
+        assertTrue(currentAccounts.contains(currentAccount2));
+
+        assertFalse(currentAccounts.contains(savingsAccount1));
+    }
 }

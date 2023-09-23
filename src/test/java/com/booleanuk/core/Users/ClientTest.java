@@ -39,6 +39,6 @@ public class ClientTest {
     @Test
     public void testCustomerCannotRequestOverdraftForSavingsAccount() {
         client.openSavingsAccount(savingsAccount);
-        assertFalse(client.requestOverdraft(savingsAccount, 1000.0));
+        assertFalse(client.requestOverdraft(savingsAccount, BigDecimal.valueOf(1000)));
     }
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccountTest {
+    public class AccountTest {
     private Account currentAccount;
     private Account savingsAccount;
     private User client;
@@ -20,7 +20,7 @@ public class AccountTest {
     public void setUp() {
         client = new Client("John Doe","123456");
         currentAccount = new CurrentAccount(new BigDecimal("1000.00"), Branches.Sofia, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("1000.00"), Branches.Sofia, client);
+        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"), Branches.Sofia, client);
 
 //        branch = new Branch("Main Branch");
     }
@@ -61,6 +61,6 @@ public class AccountTest {
         currentAccount.depositFunds(new BigDecimal("1000.00"));
         currentAccount.withdrawFunds(new BigDecimal("500.00"));
         currentAccount.depositFunds(new BigDecimal("200.00"));
-        assertEquals(new BigDecimal("700.00"), currentAccount.getBalance());
+        assertEquals(new BigDecimal("1700.00"), currentAccount.getBalance());
     }
 }

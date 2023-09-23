@@ -6,6 +6,8 @@ import com.booleanuk.core.Accounts.SavingsAccount;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class Client extends User {
@@ -17,29 +19,28 @@ public class Client extends User {
         this.currentAccount = null;
         this.savingsAccount = null;
     }
-    public boolean openSavingsAccount() {
+
+    public boolean openSavingsAccount(SavingsAccount savingsAccount) {
         if (this.savingsAccount != null) {
-            // Savings account is already open for this user
             System.out.println("You already have a savings account.");
             return false;
         } else {
-            // Open a new savings account
-            this.savingsAccount = new SavingsAccount(/* constructor parameters */);
+            this.savingsAccount = savingsAccount;
             return true;
         }
     }
-    public boolean openCurrentAccount() {
-        if (currentAccount != null) {
-            // Current account is already open for this user
+
+    public boolean openCurrentAccount(CurrentAccount currentAccount) {
+        if (this.currentAccount != null) {
             System.out.println("You already have a current account.");
             return false;
         } else {
-            // Open a new current account
-            currentAccount = new CurrentAccount(/* constructor parameters */);
+            this.currentAccount = currentAccount;
             return true;
         }
     }
-    public boolean requestOverdraft() {
+
+    public boolean requestOverdraft(Account account, BigDecimal amount) {
         return false;
     }
 }

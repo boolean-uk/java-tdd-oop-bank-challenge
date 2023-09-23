@@ -94,7 +94,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testGenerateBankStatement() {
+    public void testGenerateBankStatement(){
         Account account = new Account("SA123456", 500.00, "SavingsAccount");
         Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
         Transaction transactionTwo = new Transaction("16-02-2023", 80.00, 20.00, 560.00);
@@ -103,11 +103,9 @@ public class AccountTest {
         Assertions.assertTrue(account.addToTransactionHistory(transactionTwo));
 
         String bankStatement = account.generateBankStatement();
-        String expectedBankStatement = """
-                date       || credit  || debit  || balance
-                15-02-2023 ||    50,00||   10,00||  500,00
-                16-02-2023 ||    80,00||   20,00||  560,00
-                """;
+        String expectedBankStatement= "date       || credit  || debit  || balance\n" +
+                "15-02-2023 ||    50,00||   10,00||  500,00\n" +
+                "16-02-2023 ||    80,00||   20,00||  560,00\n";
 
         Assertions.assertEquals(expectedBankStatement, bankStatement);
     }

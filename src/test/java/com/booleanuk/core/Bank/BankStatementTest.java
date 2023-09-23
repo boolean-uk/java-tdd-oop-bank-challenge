@@ -29,7 +29,7 @@ public class BankStatementTest {
 
         branch = new Branch(Branches.Sofia, manager);
         currentAccount = new CurrentAccount(new BigDecimal("1000.00"), branch, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("1000.00"),branch, client);
+        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"),branch, client);
     }
     @Test
     public void testGenerateBankStatementWithTransactionDetails() {

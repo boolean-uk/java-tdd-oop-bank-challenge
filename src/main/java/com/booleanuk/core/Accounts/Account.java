@@ -1,5 +1,6 @@
 package com.booleanuk.core.Accounts;
 
+import com.booleanuk.core.Bank.BankStatement;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.BaseEntity;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
-
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
     private List<Transaction> transactions;
@@ -93,5 +93,7 @@ public abstract class Account extends BaseEntity {
     }
     public abstract boolean requestOverdraft(BigDecimal amount);
 
-
+    public String generateStatement() {
+        return BankStatement.generateStatement(this);
+    }
 }

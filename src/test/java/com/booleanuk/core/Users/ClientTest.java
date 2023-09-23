@@ -26,8 +26,7 @@ public class ClientTest {
 
         branch = new Branch(Branches.Sofia, manager);
         currentAccount = new CurrentAccount(new BigDecimal("1000.00"), branch, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("1200.00"), branch, client);
-//        branch = new Branch("Main Branch");
+        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"), branch, client);
     }
     @Test
     public void testCustomerCanOpenCurrentAccount() {

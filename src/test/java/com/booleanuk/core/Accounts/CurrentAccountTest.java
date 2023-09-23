@@ -35,7 +35,7 @@ public class CurrentAccountTest {
     public void testRequestOverdraftRejected() {
         assertThrows(IllegalArgumentException.class, () -> currentAccount.requestOverdraft(BigDecimal.ZERO));
 
-        assertNull(currentAccount.getOverdraftStatus());
+        assertEquals(Status.None,currentAccount.getOverdraftStatus());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class CurrentAccountTest {
     public void testRequestOverdraftNegativeAmount() {
         assertThrows(IllegalArgumentException.class, () -> currentAccount.requestOverdraft(BigDecimal.valueOf(-500)));
 
-        assertNull(currentAccount.getOverdraftStatus());
+        assertEquals(Status.None,currentAccount.getOverdraftStatus());
     }
 
     @Test

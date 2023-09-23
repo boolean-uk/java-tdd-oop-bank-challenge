@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
 public class Transaction {
     private BigDecimal amount;
     private LocalDateTime timestamp;
-    private BigDecimal balanceBefore;
+//    private BigDecimal balanceBefore;
     private TransactionType type;
 
     public Transaction(TransactionType type, BigDecimal amount) {
         this.setAmount(amount);
         this.setType(type);
+        this.timestamp = LocalDateTime.now();
     }
 }

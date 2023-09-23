@@ -52,7 +52,7 @@ public class Account {
         if (withdraw >= 0.00 && this.getBalance() >= withdraw) {
             double newBalance = this.getBalance() - withdraw;
             this.setBalance(newBalance);
-            Transaction transaction = new Transaction(this.date, withdraw, 0.00, newBalance);
+            Transaction transaction = new Transaction(this.date, 0.00, withdraw, newBalance);
             addToTransactionHistory(transaction);
             System.out.println("checking if withdraw works" + transaction);
             return true;

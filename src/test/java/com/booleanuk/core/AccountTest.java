@@ -108,6 +108,7 @@ public class AccountTest {
                 "16-02-2023 ||    80,00||   20,00||  560,00\n";
 
         Assertions.assertEquals(expectedBankStatement, bankStatement);
+
     }
 
     @Test

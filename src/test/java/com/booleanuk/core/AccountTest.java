@@ -103,9 +103,11 @@ public class AccountTest {
         Assertions.assertTrue(account.addToTransactionHistory(transactionTwo));
 
         String bankStatement = account.generateBankStatement();
-        String expectedBankStatement = "date       || credit  || debit  || balance\n" +
-                "15-02-2023 ||    50,00||   10,00||  500,00\n" +
-                "16-02-2023 ||    80,00||   20,00||  560,00\n";
+        String expectedBankStatement = """
+                date       || credit  || debit  || balance
+                15-02-2023 ||    50,00||   10,00||  500,00
+                16-02-2023 ||    80,00||   20,00||  560,00
+                """;
 
         Assertions.assertEquals(expectedBankStatement, bankStatement);
     }

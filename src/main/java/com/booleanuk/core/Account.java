@@ -14,7 +14,7 @@ public class Account {
 
     private List<Transaction> transactionHistory;
 
-    private String date;
+    protected String date;
 
     public Account(String accountNumber, double balance, String accountType) {
         this.accountNumber = accountNumber;
@@ -49,7 +49,7 @@ public class Account {
     }
 
     public boolean withdrawAmount(double withdraw) {
-        if (withdraw >= 0.00) {
+        if (withdraw >= 0.00 && this.getBalance() >= withdraw) {
             double newBalance = this.getBalance() - withdraw;
             this.setBalance(newBalance);
             Transaction transaction = new Transaction(this.date, withdraw, 0.00, newBalance);

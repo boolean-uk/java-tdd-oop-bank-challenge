@@ -59,6 +59,8 @@ public class AccountTest {
         assertEquals(500.00, account.getBalance(), 0.01);
         Assertions.assertFalse(account.withdrawAmount(-10));
         assertEquals(500.00, account.getBalance(), 0.01);
+        Assertions.assertFalse(account.withdrawAmount(600.00));
+        assertEquals(500, account.getBalance(), 0.01);
     }
 
     @Test
@@ -92,7 +94,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testGenerateBankStatement(){
+    public void testGenerateBankStatement() {
         Account account = new Account("SA123456", 500.00, "SavingsAccount");
         Transaction transaction = new Transaction("15-02-2023", 50.00, 10.00, 500.00);
         Transaction transactionTwo = new Transaction("16-02-2023", 80.00, 20.00, 560.00);
@@ -101,10 +103,21 @@ public class AccountTest {
         Assertions.assertTrue(account.addToTransactionHistory(transactionTwo));
 
         String bankStatement = account.generateBankStatement();
-        String expectedBankStatement= "date       || credit  || debit  || balance\n" +
+        String expectedBankStatement = "date       || credit  || debit  || balance\n" +
                 "15-02-2023 ||    50,00||   10,00||  500,00\n" +
                 "16-02-2023 ||    80,00||   20,00||  560,00\n";
 
         Assertions.assertEquals(expectedBankStatement, bankStatement);
     }
+
+    @Test
+    public void testWithdrawExceptionCurrentAccount() {
+        CurrentAccount accountTwo = new CurrentAccount("CA123456", -600.00, "CurrentAccount");
+
+        assertEquals(-600.00, accountTwo.getBalance(), 0.01);
+        Assertions.assertFalse(accountTwo.withdrawAmount(10));
+        assertEquals(-600.00, accountTwo.getBalance(), 0.01);
+
+    }
 }
+

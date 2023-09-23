@@ -1,23 +1,27 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.Accounts.Account;
+import com.booleanuk.core.Bank.Branch;
+import com.booleanuk.core.Users.Client;
+import com.booleanuk.core.Users.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BankTests {
-//    private Client client;
-//    private Account currentAccount;
-//    private Account savingsAccount;
-//    private Branch branch;
-//
-//    @BeforeEach
-//    public void setUp() {
-//        client = new Client("John Doe", "123-456-7890");
-//        currentAccount = new Account(AccountType.Current);
-//        savingsAccount = new Account(AccountType.Savings);
-//        branch = new Branch("Main Branch");
-//    }
+    private User client;
+    private Account currentAccount;
+    private Account savingsAccount;
+    private Branch branch;
+
+    @BeforeEach
+    public void setUp() {
+        client = new Client("John Doe", "123-456-7890");
+        currentAccount = new Account(AccountType.Current);
+        savingsAccount = new Account(AccountType.Savings);
+        branch = new Branch("Main Branch");
+    }
 //
 //    @Test
 //    public void testCustomerCanCreateCurrentAccount() {

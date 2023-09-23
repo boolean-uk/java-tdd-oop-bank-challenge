@@ -14,7 +14,7 @@ public class AccountTest {
 
     @BeforeEach
     public void setUp() {
-        user = new User("John Doe");
+        user = new User("John Doe","123456");
         account = new CurrentAccount(new BigDecimal("1000.00"), Branches.Sofia, user);
     }
 

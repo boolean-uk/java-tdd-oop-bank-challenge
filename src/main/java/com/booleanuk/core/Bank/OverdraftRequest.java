@@ -4,7 +4,6 @@ import com.booleanuk.core.BaseEntity;
 import com.booleanuk.core.Enums.Status;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 @Getter
 @Setter

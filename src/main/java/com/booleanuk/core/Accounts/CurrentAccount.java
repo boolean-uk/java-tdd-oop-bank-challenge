@@ -3,13 +3,11 @@ package com.booleanuk.core.Accounts;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.OverdraftRequest;
 import com.booleanuk.core.Bank.Transaction;
-import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
 import com.booleanuk.core.Users.User;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Getter

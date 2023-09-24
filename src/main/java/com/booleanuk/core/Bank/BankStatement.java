@@ -7,6 +7,8 @@ import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 public class BankStatement {
     public static String generateStatement(Account account) {
@@ -18,8 +20,10 @@ public class BankStatement {
                 .withZone(ZoneId.systemDefault());
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         BigDecimal balance = BigDecimal.ZERO;
+        List<Transaction> transactions = account.getTransactions();
+        transactions.sort(new TransactionTimestampComparator());
 
-        for (Transaction transaction : account.getTransactions()) {
+        for (Transaction transaction : transactions) {
             Instant timestamp = transaction.getTimestamp();
             String dateTimeStr = dateTimeFormatter.format(timestamp);
 

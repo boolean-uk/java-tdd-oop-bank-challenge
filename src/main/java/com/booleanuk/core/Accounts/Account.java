@@ -3,22 +3,14 @@ package com.booleanuk.core.Accounts;
 import com.booleanuk.core.Bank.BankStatement;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
-import com.booleanuk.core.Bank.TransactionTimestampComparator;
 import com.booleanuk.core.BaseEntity;
-
-
-import com.booleanuk.core.Enums.Branches;
-import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
 import com.booleanuk.core.Users.User;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.TreeSet;
 
 @Getter
 @Setter
@@ -59,7 +51,6 @@ public abstract class Account extends BaseEntity {
                 balance = balance.subtract(transaction.getAmount());
             }
         }
-
         return balance;
     }
 

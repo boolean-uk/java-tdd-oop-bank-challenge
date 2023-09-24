@@ -48,4 +48,21 @@ public class CurrentAccountTest {
     public void testRequestOverdraftNegativeAmount() {
         assertThrows(IllegalArgumentException.class, () -> currentAccount.requestOverdraft(BigDecimal.valueOf(-500)));
     }
+
+    @Test
+    public void testWithdrawExceedingOverdraftLimit() {
+        assertTrue(currentAccount.requestOverdraft(BigDecimal.valueOf(1000)));
+        assertEquals(Status.Pending, currentAccount.getOverdraftRequest().getStatus());
+        currentAccount.getOverdraftRequest().setStatus(Status.Approved);
+        BigDecimal withdrawalAmount = BigDecimal.valueOf(3500);
+        assertThrows(IllegalArgumentException.class, () -> currentAccount.withdrawFunds(withdrawalAmount));
+        assertEquals(BigDecimal.valueOf(2000), currentAccount.getBalance());
+    }
+    @Test
+    public void testWithdrawNegativeAmount() {
+        BigDecimal withdrawalAmount = BigDecimal.valueOf(-500);
+        assertThrows(IllegalArgumentException.class, () -> currentAccount.withdrawFunds(withdrawalAmount));
+
+        assertEquals(BigDecimal.valueOf(2000), currentAccount.getBalance());
+    }
 }

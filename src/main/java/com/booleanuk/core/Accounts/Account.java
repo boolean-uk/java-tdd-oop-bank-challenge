@@ -15,6 +15,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -22,7 +23,7 @@ import java.util.TreeSet;
 @Setter
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
-    private TreeSet<Transaction> transactions;
+    private List<Transaction> transactions;
     private final BigDecimal initialDepositMinimum = BigDecimal.ZERO;
     // A Set maybe?
 
@@ -32,7 +33,7 @@ public abstract class Account extends BaseEntity {
 
 
     public Account(BigDecimal initialBalance, Branch branch, User accountHolder) {
-        this.transactions = new TreeSet<>(new TransactionTimestampComparator());
+        this.transactions = new LinkedList<>();
         this.balance = BigDecimal.ZERO;
         this.depositFunds(initialBalance);
         this.branch = branch;

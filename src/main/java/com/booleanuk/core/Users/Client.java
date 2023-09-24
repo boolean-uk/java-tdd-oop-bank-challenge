@@ -22,7 +22,7 @@ public class Client extends User {
 
     public boolean openSavingsAccount(SavingsAccount savingsAccount) {
         if (this.savingsAccount != null) {
-            System.out.println("You already have a savings account.");
+            System.out.printf("You already have a savings account (Account id: %s).\n",this.savingsAccount.getId());
             return false;
         } else {
             this.savingsAccount = savingsAccount;
@@ -32,7 +32,7 @@ public class Client extends User {
 
     public boolean openCurrentAccount(CurrentAccount currentAccount) {
         if (this.currentAccount != null) {
-            System.out.println("You already have a current account.");
+            System.out.printf("You already have a current account (Account id: %s).\n",this.currentAccount.getId());
             return false;
         } else {
             this.currentAccount = currentAccount;

@@ -1,5 +1,6 @@
 package com.booleanuk.core.Bank;
 
+import com.booleanuk.core.BaseEntity;
 import com.booleanuk.core.Enums.TransactionType;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,7 @@ import java.time.Instant;
 
 @Getter
 @Setter
-public class Transaction {
+public class Transaction extends BaseEntity {
     private BigDecimal amount;
     private Instant timestamp;
     private TransactionType type;

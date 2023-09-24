@@ -3,6 +3,7 @@ package com.booleanuk.core.Bank;
 import com.booleanuk.core.Accounts.Account;
 import com.booleanuk.core.Accounts.CurrentAccount;
 import com.booleanuk.core.Accounts.SavingsAccount;
+import com.booleanuk.core.BaseEntity;
 import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Users.Manager;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class Branch {
+public class Branch extends BaseEntity {
     private Branches branchLocation;
     private Manager manager;
     private List<Account> accounts;

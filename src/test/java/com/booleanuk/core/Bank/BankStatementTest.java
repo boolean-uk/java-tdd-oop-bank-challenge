@@ -38,7 +38,7 @@ public class BankStatementTest {
         String statement = currentAccount.generateStatement();
         System.out.println(statement);
         assertNotNull(statement);
-        // ... add assertions for statement content
+        // ... add assertions for statement content ? time ?
     }
 
 }

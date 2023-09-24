@@ -44,4 +44,18 @@ public class ClientTest {
         client.openSavingsAccount(savingsAccount);
         assertFalse(client.requestOverdraft(savingsAccount, BigDecimal.valueOf(1000)));
     }
+    @Test
+    public void testClientCannotOpenSecondSavingsAccount() {
+        SavingsAccount secondSavingsAccount = new SavingsAccount(BigDecimal.valueOf(3000), branch, client);
+        assertTrue(client.openSavingsAccount(savingsAccount));
+        assertFalse(client.openSavingsAccount(secondSavingsAccount));
+    }
+
+    @Test
+    public void testClientCannotOpenSecondCurrentAccount() {
+        CurrentAccount secondCurrentAccount = new CurrentAccount(BigDecimal.valueOf(5000), branch, client);
+        assertTrue(client.openCurrentAccount(currentAccount));
+        assertFalse(client.openCurrentAccount(secondCurrentAccount));
+
+    }
 }

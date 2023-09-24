@@ -6,13 +6,12 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class Transaction {
     private BigDecimal amount;
     private Instant timestamp;
-//    private BigDecimal balanceBefore;
     private TransactionType type;
 
     public Transaction(TransactionType type, BigDecimal amount) {

@@ -19,7 +19,6 @@ public class SavingsAccountTest {
     public void setUp() {
         User user = new User("John Doe", "123-456-7890");
         manager = new Manager("John Manager", "123-456-7890", branch);
-
         branch = new Branch(Branches.Sofia, manager);
         BigDecimal initialBalance = BigDecimal.valueOf(2000);
         savingsAccount = new SavingsAccount(initialBalance, branch, user);
@@ -43,7 +42,6 @@ public class SavingsAccountTest {
     public void testDepositFunds() {
         BigDecimal depositAmount = BigDecimal.valueOf(500);
         savingsAccount.depositFunds(depositAmount);
-        BigDecimal actualBalance = savingsAccount.getBalance();
         assertEquals(BigDecimal.valueOf(2500), savingsAccount.getBalance());
     }
 
@@ -63,6 +61,7 @@ public class SavingsAccountTest {
 
         actualBalance = savingsAccount.getBalance();
         assertEquals(BigDecimal.valueOf(2500), actualBalance);
+//        BigDecimal invalidWithdrawAmount = BigDecimal.valueOf(500);
     }
 
     @Test

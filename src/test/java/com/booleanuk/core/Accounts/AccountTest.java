@@ -1,4 +1,5 @@
 package com.booleanuk.core.Accounts;
+
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Users.Client;
@@ -11,21 +12,20 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-    public class AccountTest {
+public class AccountTest {
     private Account currentAccount;
     private Account savingsAccount;
     private User client;
     private Branch branch;
-        private Manager manager;
+    private Manager manager;
 
     @BeforeEach
     public void setUp() {
-        client = new Client("John Doe","123456");
+        client = new Client("John Doe", "123456");
         manager = new Manager("John Manager", "123-456-7890", branch);
-
         branch = new Branch(Branches.Sofia, manager);
         currentAccount = new CurrentAccount(new BigDecimal("1000.00"), branch, client);
-        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"),branch, client);
+        savingsAccount = new SavingsAccount(new BigDecimal("2000.00"), branch, client);
 
     }
 
@@ -60,6 +60,7 @@ import static org.junit.jupiter.api.Assertions.*;
         BigDecimal depositAmount = new BigDecimal("-500.00");
         assertThrows(IllegalArgumentException.class, () -> currentAccount.depositFunds(depositAmount));
     }
+
     @Test
     public void testCalculateBalanceBasedOnTransactionHistory() {
         currentAccount.depositFunds(new BigDecimal("1000.00"));

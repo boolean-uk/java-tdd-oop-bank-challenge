@@ -8,6 +8,7 @@ import com.booleanuk.core.BaseEntity;
 
 
 import com.booleanuk.core.Enums.Branches;
+import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
 import com.booleanuk.core.Users.User;
 import lombok.Getter;
@@ -23,13 +24,9 @@ import java.util.TreeSet;
 @Setter
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
-    private List<Transaction> transactions;
-    private final BigDecimal initialDepositMinimum = BigDecimal.ZERO;
-    // A Set maybe?
-
+    protected List<Transaction> transactions;
     private User accountHolder;
     private Branch branch;
-
 
 
     public Account(BigDecimal initialBalance, Branch branch, User accountHolder) {
@@ -40,8 +37,6 @@ public abstract class Account extends BaseEntity {
         this.accountHolder = accountHolder;
     }
 
-
-
     public Transaction depositFunds(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Amount must be positive for deposit.");
@@ -50,26 +45,9 @@ public abstract class Account extends BaseEntity {
         Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount);
         transactions.add(depositTransaction);
 
-//        this.setBalance(this.getBalance().add(amount));
-
         return depositTransaction;
     }
-    public Transaction withdrawFunds(BigDecimal amount) {
-        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Amount must be positive for withdrawal.");
-        }
-
-        if (amount.compareTo(this.getBalance()) > 0) {
-            throw new IllegalArgumentException("Insufficient balance for withdrawal.");
-        }
-
-        Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAW, amount);
-        transactions.add(withdrawTransaction);
-
-//        this.setBalance(this.getBalance().subtract(amount));
-
-        return withdrawTransaction;
-    }
+    public abstract Transaction withdrawFunds(BigDecimal amount);
 
     public BigDecimal getBalance() {
         BigDecimal balance = BigDecimal.ZERO;
@@ -85,16 +63,6 @@ public abstract class Account extends BaseEntity {
         return balance;
     }
 
-//    public void setBalance(BigDecimal balance) {
-//        this.balance = balance;
-//    }
-//    @Override
-    public void setBalance(BigDecimal balance) {
-        if (this.getBalance().compareTo(this.initialDepositMinimum) < 0) {
-            throw new IllegalArgumentException("Balance cannot be set below the minimum deposit of " + initialDepositMinimum);
-        }
-       this.balance=balance;
-    }
     public abstract boolean requestOverdraft(BigDecimal amount);
 
     public String generateStatement() {

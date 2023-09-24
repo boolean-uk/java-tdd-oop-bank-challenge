@@ -32,7 +32,7 @@ public class ManagerTest {
 
         manager.reviewOverdraftRequests();
 
-        assertEquals(Status.Approved, currentAccount.getOverdraftStatus());
+        assertEquals(Status.Approved, currentAccount.getOverdraftRequest().getStatus());
     }
 
     @Test
@@ -44,6 +44,6 @@ public class ManagerTest {
 
         manager.reviewOverdraftRequests();
 
-        assertEquals(Status.Rejected, currentAccount.getOverdraftStatus());
+        assertEquals(Status.Rejected, currentAccount.getOverdraftRequest().getStatus());
     }
 }

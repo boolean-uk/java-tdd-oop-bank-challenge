@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class BankStatementTest {
     private Account currentAccount;
     private Account savingsAccount;
-    private User client;
+    private Client client;
     private Branch branch;
     private Manager manager;
 

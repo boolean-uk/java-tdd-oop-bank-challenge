@@ -5,6 +5,7 @@ import com.booleanuk.core.Bank.OverdraftRequest;
 import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
+import com.booleanuk.core.Users.Client;
 import com.booleanuk.core.Users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 public class CurrentAccount extends Account {
     private OverdraftRequest overdraftRequest;
 
-    public CurrentAccount(BigDecimal initialBalance, Branch branch, User accountHolder) {
+    public CurrentAccount(BigDecimal initialBalance, Branch branch, Client accountHolder) {
         super(initialBalance, branch, accountHolder);
         this.overdraftRequest = null;
     }

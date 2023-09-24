@@ -5,7 +5,7 @@ import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.BaseEntity;
 import com.booleanuk.core.Enums.TransactionType;
-import com.booleanuk.core.Users.User;
+import com.booleanuk.core.Users.Client;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;
@@ -17,11 +17,11 @@ import java.util.List;
 public abstract class Account extends BaseEntity {
     private BigDecimal balance;
     protected List<Transaction> transactions;
-    private User accountHolder;
+    private Client accountHolder;
     private Branch branch;
 
 
-    public Account(BigDecimal initialBalance, Branch branch, User accountHolder) {
+    public Account(BigDecimal initialBalance, Branch branch, Client accountHolder) {
         this.transactions = new LinkedList<>();
         this.balance = BigDecimal.ZERO;
         this.depositFunds(initialBalance);

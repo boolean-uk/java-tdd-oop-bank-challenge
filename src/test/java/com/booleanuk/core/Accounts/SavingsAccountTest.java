@@ -2,6 +2,7 @@ package com.booleanuk.core.Accounts;
 import com.booleanuk.core.Accounts.SavingsAccount;
 import com.booleanuk.core.Bank.Branch;
 import com.booleanuk.core.Enums.Branches;
+import com.booleanuk.core.Users.Client;
 import com.booleanuk.core.Users.Manager;
 import com.booleanuk.core.Users.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,11 +18,11 @@ public class SavingsAccountTest {
 
     @BeforeEach
     public void setUp() {
-        User user = new User("John Doe", "123-456-7890");
+        Client client = new Client("John Doe", "123-456-7890");
         manager = new Manager("John Manager", "123-456-7890", branch);
         branch = new Branch(Branches.Sofia, manager);
         BigDecimal initialBalance = BigDecimal.valueOf(2000);
-        savingsAccount = new SavingsAccount(initialBalance, branch, user);
+        savingsAccount = new SavingsAccount(initialBalance, branch, client);
     }
 
     @Test
@@ -34,7 +35,7 @@ public class SavingsAccountTest {
     public void testInitializationWithInsufficientBalance() {
         BigDecimal invalidBalance = BigDecimal.valueOf(1000);
         assertThrows(IllegalArgumentException.class, () -> {
-            new SavingsAccount(invalidBalance, branch, new User("Jane Doe", "987-654-3210"));
+            new SavingsAccount(invalidBalance, branch, new Client("Jane Doe", "987-654-3210"));
         });
     }
 

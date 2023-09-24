@@ -5,6 +5,7 @@ import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.Enums.Branches;
 import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
+import com.booleanuk.core.Users.Client;
 import com.booleanuk.core.Users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class SavingsAccount extends Account {
     private final BigDecimal interestRate = BigDecimal.valueOf(3.01);
     private final BigDecimal initialDepositMinimum = BigDecimal.valueOf(1500);
 
-    public SavingsAccount(BigDecimal balance, Branch branch, User accountHolder) {
+    public SavingsAccount(BigDecimal balance, Branch branch, Client accountHolder) {
 
         super(balance, branch, accountHolder);
         if (balance.compareTo(this.initialDepositMinimum) < 0) {

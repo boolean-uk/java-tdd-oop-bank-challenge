@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User extends BaseEntity {
+public abstract class User extends BaseEntity {
     private String name;
 
     private String phoneNumber;

@@ -16,26 +16,4 @@ public class SavingsAccount extends BankAccount{
         return bankType;
     }
 
-    @Override
-    public boolean deposit(double amount) {
-        if (amount >= 0) {
-            balance +=amount;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean withdraw(double amount){
-        if(amount <= balance){
-            balance -= amount;
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
-
 }

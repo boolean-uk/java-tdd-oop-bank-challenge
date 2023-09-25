@@ -16,7 +16,7 @@ public class BankAccount {
 
     public boolean deposit(double amount) {
         if (amount >= 0) {
-            balance +=amount;
+            balance += amount;
             return true;
         } else {
             return false;
@@ -24,11 +24,11 @@ public class BankAccount {
     }
 
 
-    public boolean withdraw(double amount){
-        if(amount <= balance){
+    public boolean withdraw(double amount) {
+        if (amount <= balance) {
             balance -= amount;
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -36,7 +36,8 @@ public class BankAccount {
     public String getDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-             return formatter.format(date);
+        System.out.println("This is what the date looks like from getDate(): " + formatter.format(date));
+        return formatter.format(date);
 
     }
 

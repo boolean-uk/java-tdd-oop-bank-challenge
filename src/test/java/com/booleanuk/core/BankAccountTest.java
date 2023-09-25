@@ -3,7 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class BankAccountTest {
 
@@ -58,11 +60,13 @@ public class BankAccountTest {
     @Test
     public void checktheDate() {
         CurrentAccount currentAccount = new CurrentAccount(1000.00);
+        String dateFromClass = currentAccount.getDate();
 
-        String currentDateTest = String.valueOf(LocalDate.now());
-        String date = currentAccount.getDate();
+        SimpleDateFormat datePatternSetter = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        String currentdateformatter = datePatternSetter.format(date);
 
-        Assertions.assertEquals(currentDateTest, date);
+        Assertions.assertEquals(currentdateformatter, dateFromClass);
 
 
     }

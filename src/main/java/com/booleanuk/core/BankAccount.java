@@ -36,7 +36,7 @@ public class BankAccount {
     public String getDate() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        System.out.println("This is what the date looks like from getDate(): " + formatter.format(date));
+//        System.out.println("This is what the date looks like from getDate(): " + formatter.format(date));
         return formatter.format(date);
 
     }

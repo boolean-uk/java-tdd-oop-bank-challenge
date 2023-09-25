@@ -104,11 +104,15 @@ public class BankAccountTest {
         double newBalanceTest = startBalance + depositOne + depositTwo + depositThree - withdrawOne - withdrawTwo;
 
         Assertions.assertEquals(newBalanceTest, currentAccount.balance);
+
+
         /*
         Didn't really know how to test for the table output
         The test checks for the output of the withdrawn + deposited amounts.
         I will show the table as a System.out.println
                  */
+        currentAccount.transferHistory();
+
 
     }
 }

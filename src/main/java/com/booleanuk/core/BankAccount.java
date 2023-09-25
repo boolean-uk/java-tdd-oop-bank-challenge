@@ -10,7 +10,13 @@ public class BankAccount {
         this.balance = balance;
     }
 
-
+    public boolean deposit(double amount){
+      if(amount >= 0){
+          return true;
+      }else{
+          return false;
+      }
+    }
 
 
 }

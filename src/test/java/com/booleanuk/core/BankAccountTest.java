@@ -26,6 +26,13 @@ public class BankAccountTest {
         Assertions.assertEquals(1400.00, newBalance);
 
 
+        SavingsAccount savingsaccount = new SavingsAccount(2000);
+        savingsaccount.deposit(500.00);
+        double newBalance2 = savingsaccount.balance;
+
+        Assertions.assertEquals(2500.00, newBalance2);
+        
+        
     }
 
 

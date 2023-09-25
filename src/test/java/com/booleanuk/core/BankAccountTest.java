@@ -22,7 +22,7 @@ public class BankAccountTest {
         CurrentAccount currentAccount = new CurrentAccount(1000.00);
         currentAccount.deposit(400.00);
         double newBalance = currentAccount.balance;
-        
+
         Assertions.assertEquals(1400.00, newBalance);
 
 
@@ -31,10 +31,20 @@ public class BankAccountTest {
         double newBalance2 = savingsaccount.balance;
 
         Assertions.assertEquals(2500.00, newBalance2);
-        
-        
+
+
     }
 
+    @Test
+    public void userWithdrawsMoneyFromAccounts() {
+        CurrentAccount currentAccount = new CurrentAccount(1000.00);
+        currentAccount.withdraw(400.00);
+        double newBalance = currentAccount.balance;
+
+        Assertions.assertEquals(600.00, newBalance);
+
+
+    }
 
 
 }

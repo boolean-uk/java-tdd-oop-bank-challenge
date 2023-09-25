@@ -25,12 +25,13 @@ public class CurrentAccount extends BankAccount {
             return false;
         }
     }
-@Override
-    public boolean withdraw(double amount){
-        if(amount <= balance){
+
+    @Override
+    public boolean withdraw(double amount) {
+        if (amount <= balance) {
             balance -= amount;
             return true;
-        }else{
+        } else {
             return false;
         }
     }

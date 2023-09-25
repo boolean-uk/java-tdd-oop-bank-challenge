@@ -44,6 +44,13 @@ public class BankAccountTest {
         Assertions.assertEquals(600.00, newBalance);
 
 
+        SavingsAccount savingsaccount = new SavingsAccount(5000);
+        savingsaccount.withdraw(850.00);
+        double newBalance2 = savingsaccount.balance;
+
+        Assertions.assertEquals(4150.00, newBalance2);
+
+
     }
 
 

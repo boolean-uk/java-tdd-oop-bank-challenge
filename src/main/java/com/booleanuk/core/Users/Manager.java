@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 public class Manager extends User{
     private Branch branch;
+    private final BigDecimal MINIMUM_OVERDRAFT_RATIO = BigDecimal.valueOf(3.50);
     public Manager(String name, String phoneNumber, Branch branch) {
         super(name, phoneNumber);
         this.setBranch(branch);
@@ -27,7 +28,7 @@ public class Manager extends User{
             OverdraftRequest overdraftRequest = currentAccount.getOverdraftRequest();
 
             if (overdraftRequest != null && overdraftRequest.getStatus().equals(Status.Pending)) {
-                BigDecimal balanceThreshold = currentAccount.getBalance().multiply(BigDecimal.valueOf(3.50));
+                BigDecimal balanceThreshold = currentAccount.getBalance().multiply(MINIMUM_OVERDRAFT_RATIO);
                 BigDecimal requestedAmount = overdraftRequest.getAmount();
 
                 if (balanceThreshold.compareTo(requestedAmount) >= 0) {

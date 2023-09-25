@@ -6,9 +6,9 @@ import com.booleanuk.core.Bank.Transaction;
 import com.booleanuk.core.Enums.Status;
 import com.booleanuk.core.Enums.TransactionType;
 import com.booleanuk.core.Users.Client;
-import com.booleanuk.core.Users.User;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -20,6 +20,12 @@ public class CurrentAccount extends Account {
         super(initialBalance, branch, accountHolder);
         this.overdraftRequest = null;
     }
+
+    public CurrentAccount(Branch branch, Client accountHolder) {
+        super(BigDecimal.ZERO, branch, accountHolder);
+        this.overdraftRequest = null;
+    }
+
 
     @Override
     public boolean requestOverdraft(BigDecimal amount) {
@@ -38,12 +44,12 @@ public class CurrentAccount extends Account {
 
         BigDecimal newBalance = this.getBalance().subtract(amount);
 
-        if (this.getOverdraftRequest()!=null && this.getOverdraftRequest().getStatus().equals(Status.Approved)) {
+        if (this.getOverdraftRequest() != null && this.getOverdraftRequest().getStatus().equals(Status.Approved)) {
             BigDecimal overdraftLimit = this.getOverdraftRequest().getAmount();
             if (newBalance.compareTo(overdraftLimit.negate()) < 0) {
                 throw new IllegalArgumentException("Exceeds overdraft limit.");
             }
-        } else if (newBalance.compareTo(BigDecimal.ZERO)<0) {
+        } else if (newBalance.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Your balance on this account cannot be negative.");
         }
 

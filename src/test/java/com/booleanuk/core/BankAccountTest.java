@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class BankAccountTest {
 
     @Test
@@ -49,6 +51,18 @@ public class BankAccountTest {
         double newBalance2 = savingsaccount.balance;
 
         Assertions.assertEquals(4150.00, newBalance2);
+
+
+    }
+
+    @Test
+    public void checktheDate() {
+        CurrentAccount currentAccount = new CurrentAccount(1000.00);
+
+        String currentDateTest = String.valueOf(LocalDate.now());
+        String date = currentAccount.getDate();
+
+        Assertions.assertEquals(currentDateTest, date);
 
 
     }

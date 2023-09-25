@@ -1,12 +1,18 @@
 package com.booleanuk.core;
 
-public class CurrentAccount {
-    private final String accType = "current";
+public class CurrentAccount extends BankAccount{
+    private final String bankType = "current";
 
 
+    public CurrentAccount() {
+
+    }
+    public CurrentAccount(double balance) {
+        super(balance);
+    }
 
     public String getBankType(){
-        return accType;
+        return bankType;
     }
 
 

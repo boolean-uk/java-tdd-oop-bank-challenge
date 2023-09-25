@@ -16,7 +16,17 @@ public class BankAccountTest {
         Assertions.assertEquals("savings", banktype2);
     }
 
-    
+    @Test
+
+    public void userAddsMoneyToAccount() {
+        CurrentAccount currentAccount = new CurrentAccount(1000.00);
+        currentAccount.deposit(400.00);
+        double newBalance = currentAccount.balance;
+        
+        Assertions.assertEquals(1400.00, newBalance);
+
+
+    }
 
 
 

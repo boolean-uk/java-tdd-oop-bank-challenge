@@ -15,10 +15,11 @@ public class Customer {
         return accounts;
     }
 
-    public boolean addAccount(Account account) {
+    public boolean createAccount(Account account) {
         this.accounts.add(account);
         return true;
     }
+
 
 
 

@@ -20,4 +20,27 @@ public class CustomerTest {
         Assertions.assertEquals(new ArrayList<>(Arrays.asList(currentAccount, savingsAccount)),customer.getAccounts());
     }
 
+    @Test
+    public void createAndDeleteAccount() {
+        Customer customer = new Customer();
+        Account savingsAccount = new SavingsAccount();
+        Account currentAccount = new CurrentAccount();
+
+        Assertions.assertTrue(customer.createAccount(savingsAccount));
+        Assertions.assertTrue(customer.createAccount(currentAccount));
+
+        Assertions.assertEquals(savingsAccount, customer.getAccount(savingsAccount));
+        Assertions.assertEquals(currentAccount, customer.getAccount(currentAccount));
+
+        Assertions.assertTrue(customer.getAccounts().contains(savingsAccount));
+        Assertions.assertTrue(customer.getAccounts().contains(currentAccount));
+
+        Assertions.assertTrue(customer.deleteAccount(savingsAccount));
+        Assertions.assertTrue(customer.deleteAccount(currentAccount));
+
+        Assertions.assertFalse(customer.getAccounts().contains(savingsAccount));
+        Assertions.assertFalse(customer.getAccounts().contains(currentAccount));
+    }
+
+
 }

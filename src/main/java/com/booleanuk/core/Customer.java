@@ -19,4 +19,7 @@ public class Customer {
         this.accounts.add(account);
         return true;
     }
+
+
+
 }

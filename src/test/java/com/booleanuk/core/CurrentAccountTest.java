@@ -6,7 +6,7 @@ public class CurrentAccountTest {
 
     @Test
     public void initCurrentAccount() {
-
+        Account currentAccount = new CurrentAccount();
     }
 
 }

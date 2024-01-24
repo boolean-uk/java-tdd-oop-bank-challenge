@@ -6,7 +6,7 @@ public class SavingsAccountTest {
 
     @Test
     public void initSavingsAccount() {
-
+        Account SavingsAccount = new SavingsAccount();
     }
 
 }

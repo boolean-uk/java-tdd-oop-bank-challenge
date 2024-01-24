@@ -73,30 +73,30 @@ Class SavingsAccount extends Account
 
 Abstract Class BankStatement
 
-| Class variables      | Method                         | Scenario                                  | Return  |
-|----------------------|--------------------------------|-------------------------------------------|---------|
-| Date transactionDate |                                |                                           |         |
-| double amount        |                                |                                           |         |
-| double balance       |                                |                                           |         |
-|                      |                                |                                           |         |
+| Class variables      | Method                  | Scenario                              | Return |
+|----------------------|-------------------------|---------------------------------------|--------|
+| Date transactionDate | getStatementAsString()  | Gets a formatted string for statement | String |
+| double amount        |                         |                                       |        |
+| double balance       |                         |                                       |        |
+|                      |                         |                                       |        |
 
-Class WithdrawStatement
+Class WithdrawStatement extends BankStatement
 
-| Class variables      | Method                         | Scenario                                  | Return  |
-|----------------------|--------------------------------|-------------------------------------------|---------|
-| Date transactionDate |                                |                                           |         |
-| double amount        |                                |                                           |         |
-| double balance       |                                |                                           |         |
-|                      |                                |                                           |         |
+| Class variables | Method                         | Scenario                                  | Return  |
+|-----------------|--------------------------------|-------------------------------------------|---------|
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
 
-Class DepositStatement
+Class DepositStatement extends BankStatement
 
-| Class variables      | Method                         | Scenario                                  | Return  |
-|----------------------|--------------------------------|-------------------------------------------|---------|
-| Date transactionDate |                                |                                           |         |
-| double amount        |                                |                                           |         |
-| double balance       |                                |                                           |         |
-|                      |                                |                                           |         |
+| Class variables | Method                         | Scenario                                  | Return  |
+|-----------------|--------------------------------|-------------------------------------------|---------|
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
+|                 |                                |                                           |         |
 
 
 ## User story 4

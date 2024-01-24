@@ -17,7 +17,7 @@ public class DepositStatementTest {
         Assertions.assertEquals(date, depositStatement.getTransactionDate());
         Assertions.assertEquals(500, depositStatement.getAmount());
         Assertions.assertEquals(0, depositStatement.getBalance());
-
+        Assertions.assertEquals("", depositStatement.getStatementAsString());
     }
 
 

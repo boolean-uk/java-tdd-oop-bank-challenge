@@ -71,7 +71,25 @@ Class SavingsAccount extends Account
 
 ## User story 3
 
-Class BankStatement
+Abstract Class BankStatement
+
+| Class variables      | Method                         | Scenario                                  | Return  |
+|----------------------|--------------------------------|-------------------------------------------|---------|
+| Date transactionDate |                                |                                           |         |
+| double amount        |                                |                                           |         |
+| double balance       |                                |                                           |         |
+|                      |                                |                                           |         |
+
+Class WithdrawStatement
+
+| Class variables      | Method                         | Scenario                                  | Return  |
+|----------------------|--------------------------------|-------------------------------------------|---------|
+| Date transactionDate |                                |                                           |         |
+| double amount        |                                |                                           |         |
+| double balance       |                                |                                           |         |
+|                      |                                |                                           |         |
+
+Class DepositStatement
 
 | Class variables      | Method                         | Scenario                                  | Return  |
 |----------------------|--------------------------------|-------------------------------------------|---------|

@@ -21,6 +21,12 @@ public class Customer {
     }
 
 
+    public Account getAccount(Account currentAccount) {
+        return this.accounts.stream().filter(account -> account == currentAccount).findFirst().orElse(null);
+    }
 
-
+    public boolean deleteAccount(Account savingsAccount) {
+        this.accounts.remove(savingsAccount);
+        return true;
+    }
 }

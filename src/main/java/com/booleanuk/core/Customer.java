@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Customer {
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
 
     public Customer() {
@@ -13,5 +13,10 @@ public class Customer {
 
     public ArrayList<Account> getAccounts() {
         return accounts;
+    }
+
+    public boolean addAccount(Account account) {
+        this.accounts.add(account);
+        return true;
     }
 }

@@ -17,7 +17,7 @@ public class CustomerTest {
         Assertions.assertTrue(customer.addAccount(currentAccount));
         Assertions.assertTrue(customer.addAccount(savingsAccount));
 
-        Assertions.assertEquals(new ArrayList<Account>(),customer.getAccounts());
+        Assertions.assertEquals(new ArrayList<>(Arrays.asList(currentAccount, savingsAccount)),customer.getAccounts());
 
 
     }

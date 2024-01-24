@@ -42,5 +42,9 @@ public class CustomerTest {
         Assertions.assertFalse(customer.getAccounts().contains(currentAccount));
     }
 
+    @Test
+    public void depositAndWithdraw() {
+
+    }
 
 }

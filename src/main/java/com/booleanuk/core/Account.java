@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Account {
 
@@ -17,22 +18,10 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
     public ArrayList<BankStatement> getBankStatements() {
         return bankStatements;
     }
 
-    public void setBankStatements(ArrayList<BankStatement> bankStatements) {
-        this.bankStatements = bankStatements;
-    }
-
-    public boolean addBankStatement(DepositStatement depositStatement) {
-        this.bankStatements.add(depositStatement);
-        return true;
-    }
 
     public boolean clearBankStatements() {
         this.bankStatements.clear();
@@ -40,12 +29,24 @@ public class Account {
     }
 
     public boolean deposit(double v) {
+        addBankStatement(new DepositStatement(new Date(), v, this.getBalance()));
         this.balance += v;
         return true;
     }
 
     public boolean withdraw(double v) {
-        this.balance -= v;
-        return true;
+
+        if(v < this.getBalance()) {
+            addBankStatement(new WithdrawStatement(new Date(), v, this.getBalance()));
+            this.balance -= v;
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private void addBankStatement(BankStatement bankStatement) {
+        this.bankStatements.add(bankStatement);
     }
 }

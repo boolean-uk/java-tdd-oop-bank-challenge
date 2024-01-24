@@ -15,8 +15,8 @@ public class WithdrawStatementTest {
 
 
         Assertions.assertEquals(date, withdrawStatement.getTransactionDate());
-        Assertions.assertEquals(500, withdrawStatement.getAmount());
-        Assertions.assertEquals(0, withdrawStatement.getBalance());
+        Assertions.assertEquals(500.00, withdrawStatement.getAmount());
+        Assertions.assertEquals(2000.00, withdrawStatement.getBalance());
         Assertions.assertEquals("", withdrawStatement.getStatementAsString());
 
     }

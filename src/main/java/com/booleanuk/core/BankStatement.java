@@ -9,16 +9,23 @@ public abstract class BankStatement {
     private double balance;
 
 
-    protected BankStatement() {
+    protected BankStatement(Date date, double amount, double balance) {
+        this.date = date;
+        this.amount = amount;
+        this.balance = balance;
 
     }
     protected Date getTransactionDate() {
+        return this.date;
     }
 
-    protected int getAmount() {
+    protected double getAmount() {
+        return this.amount;
     }
 
-    protected int getBalance() {
+    protected double getBalance() {
+        return this.balance;
     }
 
+    protected abstract String getStatementAsString();
 }

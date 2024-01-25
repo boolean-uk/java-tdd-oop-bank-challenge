@@ -7,7 +7,7 @@ public class Bank {
     private int id;
     public Bank(){
         this.accounts = new ArrayList<>();
-        id = 0;
+        id = 1;
     }
     public boolean createSavingsAccount(String accountHolder){
         this.accounts.add(new SavingsAccount(id++, accountHolder));
@@ -17,7 +17,36 @@ public class Bank {
         this.accounts.add(new CurrentAccount(id++, accountHolder));
         return true;
     }
+    public boolean depositToAccount(int accountNumber, double amount){
+        for(Account account : accounts){
+            if(account.getAccountId() == accountNumber){
+                return account.deposit(amount);
+            }
+        }
+        return false;
+    }
+    public boolean withdrawFromAccount(int accountNumber, double amount){
+        for(Account account : accounts){
+            if(account.getAccountId() == accountNumber){
+                return account.withdraw(amount);
+            }
+        }
+        return false;
+    }
     public ArrayList<Account> getAccounts(){
         return this.accounts;
+    }
+    public String getBankStatementsFromAccount(int accountNumber){
+        ArrayList<String> statements = new ArrayList<>();
+        for(Account account : accounts){
+            if(account.getAccountId() == accountNumber){
+                statements.addAll(account.getBankStatements());
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for(String s : statements){
+            sb.append(s).append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public abstract class Account {
     protected double balance;
@@ -19,6 +21,7 @@ public abstract class Account {
         }
         else{
             balance += amount;
+            bankStatements.add(new BankStatement(balance,amount,Type.DEPOSIT));
             return true;
         }
     }
@@ -28,10 +31,22 @@ public abstract class Account {
         }
         else{
             balance -= amount;
+            bankStatements.add(new BankStatement(balance,amount,Type.WITHDRAW));
             return true;
         }
 
     }
+
+    public ArrayList<String> getBankStatements() {
+        ArrayList<String> temp = new ArrayList<>();
+        for(BankStatement bankStatement : bankStatements){
+            temp.add(bankStatement.toString());
+        }
+        temp.add("date       || credit  || debit  || balance");
+        Collections.reverse(temp);
+        return temp;
+    }
+
     public int getAccountId(){
         return this.id;
     }

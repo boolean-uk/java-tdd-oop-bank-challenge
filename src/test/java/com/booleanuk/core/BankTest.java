@@ -14,4 +14,17 @@ public class BankTest {
         Bank bank = new Bank();
         Assertions.assertTrue(bank.createSavingsAccount("John"));
     }
+    @Test
+    public void testGettingBankStatementsFromCreatedAccount(){
+        Bank bank = new Bank();
+        bank.createCurrentAccount("John");
+        bank.depositToAccount(1, 100);
+        bank.depositToAccount(1, 300);
+        bank.withdrawFromAccount(1, 50);
+        bank.createCurrentAccount("Daisy");
+        bank.depositToAccount(2, 100);
+        bank.depositToAccount(2, 300);
+        bank.withdrawFromAccount(2, 50);
+        Assertions.assertEquals(bank.getBankStatementsFromAccount(1), bank.getBankStatementsFromAccount(2));
+    }
 }

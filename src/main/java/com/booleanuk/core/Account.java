@@ -6,11 +6,13 @@ import java.util.*;
 public class Account {
     private String accountId;
     private Customer customer;
+    private Branch branch;
     private List<Transaction> transactions;
 
-    public Account(String accountId, Customer customer) {
+    public Account(String accountId, Customer customer, Branch branch) {
         this.accountId = accountId;
         this.customer = customer;
+        this.branch = branch;
         this.transactions = new ArrayList<>();
     }
 
@@ -20,6 +22,11 @@ public class Account {
     public Customer getCustomer() {
         return this.customer;
     }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
     public double getBalance() {
         double bal = 0;
         for (Transaction transaction : this.transactions) {

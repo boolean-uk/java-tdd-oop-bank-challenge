@@ -16,6 +16,19 @@ public class Branch {
         this.overdraftRequests = new HashMap<>();
     }
 
+    public String reviewOverdraftRequest(String accountId, boolean approve) {
+        for(Map.Entry<Account, Double> entry : this.overdraftRequests.entrySet()) {
+            if (entry.getKey().getAccountId().equals(accountId)) {
+                if (approve) {
+                    entry.getKey().setOverdraftLimit(entry.getValue());
+                    return "Request for account "+accountId+" accepted";
+                }
+                return "Request for account "+accountId+" declined";
+            }
+        }
+        return "No request found";
+    }
+
     public Map<Account, Double> getOverdraftRequests() {
         return this.overdraftRequests;
     }

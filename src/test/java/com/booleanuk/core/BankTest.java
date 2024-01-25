@@ -22,7 +22,17 @@ public class BankTest {
         Assertions.assertEquals("Winterfell", jonSnowAccount.getBranch());
         Assertions.assertEquals(23.54, jonSnowAccount.getBalance());
         Assertions.assertEquals("Current Account", jonSnowAccount.getType());
-
     }
+
+    @Test
+    public void testGetBalance() {
+        Bank bank = new Bank();
+        String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
+
+        double balance = bank.getBalance(jonSnowAccountNr);
+        Assertions.assertEquals(23.54, balance);
+    }
+
+
 
 }

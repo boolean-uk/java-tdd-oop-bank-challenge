@@ -18,7 +18,7 @@ public class Bank {
             if (!accounts.containsKey(accountNr))
                 break;
         }
-        if (type.equals("Curernt Account"))
+        if (type.equals("Current Account"))
             accounts.put(accountNr, new CurrentAccount(accountNr, firstName, lastName, branch, amount));
         else if (type.equals("Savings Account"))
             accounts.put(accountNr, new SavingsAccount(accountNr, firstName, lastName, branch, amount));

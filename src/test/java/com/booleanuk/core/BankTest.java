@@ -26,6 +26,25 @@ public class BankTest {
     }
 
     @Test
+    void testCreateCurrent() {
+        Bank tester = new Bank();
+        String result = tester.createCurrent();
+        Assertions.assertEquals("Hassan Hussain", result);
+
+
+
+    }
+
+    @Test
+    void testCreateSavings() {
+        Bank tester = new Bank();
+        String result = tester.createSavings();
+        Assertions.assertEquals("Hassan Hussain", result);
+
+    }
+
+
+    @Test
     void testDepositTrue() {
         Account user1 = new Savings("232323", "Hassan Hussain", 345.00);
         boolean result = user1.deposit(50.00);

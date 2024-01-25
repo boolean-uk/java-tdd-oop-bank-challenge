@@ -121,6 +121,11 @@ public class User {
 
     public boolean requestOverdraft(String accountID, int amount)
     {
+        if(accountID.charAt(0)=='s' && accountID.charAt(1)=='a')
+        {
+            System.out.println("Overdraft rejected, account type is a savings account!");
+            return false;
+        }
         for(Account account : this.accounts)
         {
             if(account.getAccountID().equals(accountID))

@@ -147,4 +147,16 @@ public class UserTest {
         Assertions.assertFalse(user.requestOverdraft("cu-78105109112115111110-1", 20000000));
         Assertions.assertEquals(0, user.getAccount("cu-78105109112115111110-1").getBalance());
     }
+
+    @Test
+    public void testRequestOverdraftRejectedSavings()
+    {
+        Bank bank = new Bank();
+        LocalDate birthday = LocalDate.of(1956, 3, 19);
+        User user = new User("Large Nimpson", birthday);
+        user.createSavingsAccount("Life savings", bank);
+
+        Assertions.assertFalse(user.requestOverdraft("sa-78105109112115111110-1", 20000000));
+        Assertions.assertEquals(0, user.getAccount("sa-78105109112115111110-1").getBalance());
+    }
 }

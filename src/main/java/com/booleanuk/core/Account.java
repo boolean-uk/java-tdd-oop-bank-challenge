@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
+    private Branch branch;
     private final List<Transaction> transactionHistory;
 
-    public Account(String accountType, double initialAmount) {
+    public Account(String accountType, double initialAmount, Branch branch) {
         this.transactionHistory = new ArrayList<>();
+        this.branch = branch;
         addTransaction(new Transaction(LocalDateTime.now(), initialAmount, initialAmount, "Credit"));
     }
 
@@ -29,6 +31,14 @@ public class Account {
     }
 
     public List<Transaction> getTransactionHistory() {
-        return new ArrayList<>(transactionHistory); // Return a copy for immutability
+        return new ArrayList<>(transactionHistory);
+    }
+
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }

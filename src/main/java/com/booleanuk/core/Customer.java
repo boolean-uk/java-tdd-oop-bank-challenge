@@ -18,13 +18,8 @@ public class Customer {
         this.nextAccountNumber = 1; // Start account numbering from 1
     }
 
-    public void addAccount(String accountType, double initialAmount) {
-        Account newAccount = new Account(accountType, initialAmount);
-        accounts.put(nextAccountNumber++, newAccount);
-    }
-
-    public Account getAccount(int accountNumber) {
-        return accounts.get(accountNumber);
+    public void addAccount(Account account) {
+        accounts.put(nextAccountNumber++, account);
     }
 
     public int getId() {
@@ -66,4 +61,8 @@ public class Customer {
     public void setNextAccountNumber(int nextAccountNumber) {
         this.nextAccountNumber = nextAccountNumber;
     }
+    public Account getAccount(int accountNumber) {
+        return accounts.get(accountNumber);
+    }
+
 }

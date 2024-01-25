@@ -8,7 +8,7 @@ public class TestBranch {
     public void testAccountAssociationWithBranch() {
         // Initialize bank, branch, and customer
         Bank bank = new Bank();
-        Branch branch = new Branch("Downtown", "123 City Street");
+        Branch branch = new Branch("Oslo", "123 City Street");
         bank.addBranch(branch);
         Customer customer = new Customer(1, "John", "Doe");
         bank.addCustomer(customer);

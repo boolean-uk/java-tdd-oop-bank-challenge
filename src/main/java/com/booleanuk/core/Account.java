@@ -1,17 +1,18 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Account {
 
     private double balance;
     private ArrayList<BankStatement> bankStatements;
 
+    private String accountName;
 
 
 
-    public Account() {
+    public Account(String accountName) {
+        this.accountName = accountName;
         this.balance = 0.00;
         this.bankStatements = new ArrayList<>();
     }
@@ -59,5 +60,13 @@ public class Account {
             returnString += statement.getStatementAsString();
         }
         return returnString;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class AccountTest {
 
@@ -29,7 +28,7 @@ public class AccountTest {
     @Test
     public void printBankStatementsFromArray() {
 
-        Account account = new Account();
+        Account account = new Account("AccountName1");
 
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(new ArrayList<BankStatement>(), account.getBankStatements());

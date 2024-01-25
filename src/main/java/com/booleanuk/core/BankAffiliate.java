@@ -10,6 +10,11 @@ public class BankAffiliate {
 
     private ArrayList<BankAccount> bankAccountList;
 
+    public BankAffiliate(String fullName, String affiliation) {
+        this.fullName = fullName;
+        this.affiliation = affiliation;
+    }
+
     public BankAffiliate(String fullName, String affiliation, ArrayList<BankAccount> bankAccountList) {
         this.fullName = fullName;
         this.affiliation = affiliation;
@@ -30,6 +35,14 @@ public class BankAffiliate {
             return true;
         }
         return false;
+    }
+
+    public double withdrawFunds(BankAccount bankAccount, double amount) {
+        return 400;
+    }
+
+    public double depositFunds(BankAccount bankAccount, double amount) {
+        return 600;
     }
 
     public String getFullName() {

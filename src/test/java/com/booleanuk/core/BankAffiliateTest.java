@@ -78,7 +78,7 @@ public class BankAffiliateTest {
 
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccountList);
 
-        double result = bankAffiliate.withdrawFund(bankAccount, 100.00);
+        double result = bankAffiliate.withdrawFunds(bankAccount, 100.00);
 
         Assertions.assertEquals(400.00, result);
 
@@ -95,7 +95,7 @@ public class BankAffiliateTest {
 
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccountList);
 
-        double result = bankAffiliate.depositFund(bankAccount, 100.00);
+        double result = bankAffiliate.depositFunds(bankAccount, 100.00);
 
         Assertions.assertEquals(600.00, result);
     }

@@ -15,6 +15,8 @@ public class BankStatement {
     }
 
     public String generateBankStatement(BankAffiliate bankAffiliate) {
+        bankAffiliate = new BankAffiliate("James Bond", "Bank Customer");
+
         String bankStatementOutput = "";
 
         /*

@@ -18,9 +18,11 @@ public class BankStatementTest {
 
         BankStatement bankStatement = new BankStatement(formattedDate, 100.00, 50.00);
 
+        BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer");
+
         String expectedBankStatement = "";
 
-        String actualBankStatement = bankStatement.generateBankStatement();
+        String actualBankStatement = bankStatement.generateBankStatement(bankAffiliate);
 
         Assertions.assertEquals(expectedBankStatement, actualBankStatement);
     }

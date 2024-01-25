@@ -28,6 +28,7 @@ public abstract class Account {
         boolean newBalanceNotLessThanZero = (this.getBalance() - debit) >= 0;
         if(debit > 0 && newBalanceNotLessThanZero) {
             this.setBalance(-toInt(debit));
+            this.transactions.add(new Transaction(-toInt(debit),toInt(this.getBalance())));
             return true;
         }
         return false;

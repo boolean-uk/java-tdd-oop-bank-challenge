@@ -44,6 +44,18 @@ public class CustomerTest {
 
     @Test
     public void depositAndWithdraw() {
+        Customer customer = new Customer();
+        Account savingsAccount = new SavingsAccount();
+        Account currentAccount = new CurrentAccount();
+
+        Assertions.assertTrue(customer.createAccount(savingsAccount));
+        Assertions.assertTrue(customer.createAccount(currentAccount));
+
+        Assertions.assertEquals(0.00, customer.getAccount(savingsAccount).getBalance());
+        Assertions.assertTrue(customer.deposit(savingsAccount, 500.00));
+        Assertions.assertEquals(500.00, customer.getAccount(savingsAccount).getBalance());
+        Assertions.assertTrue(customer.withdraw(savingsAccount, 400.00));
+        Assertions.assertEquals(100.00, customer.getAccount(savingsAccount).getBalance());
 
     }
 

@@ -9,6 +9,8 @@ public class Account {
     private ArrayList<BankStatement> bankStatements;
 
 
+
+
     public Account() {
         this.balance = 0.00;
         this.bankStatements = new ArrayList<>();

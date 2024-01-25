@@ -1,24 +1,24 @@
 package com.booleanuk.core;
 
-import java.time.LocalDateTime;
-
 public class Main {
     public static void main(String[] args) {
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Saving Account", 0,transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-        //outContent.reset();
-        //System.setOut(new PrintStream(outContent));
-        // Assuming the first account number starts at 0
-        int accountNumberForDeposit = 0;
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.printBankStatement(customer.id,accountNumberForDeposit);
+        Bank bank = new Bank();
 
+
+        Customer customer = new Customer(1, "Harry", "Potter");
+        bank.addCustomer(customer);
+
+        bank.createAccount(1, "Saving Account", 500.0);
+        int accountNumberForDeposit = 1;
+
+        bank.deposit(1, accountNumberForDeposit, 100.0);
+        bank.deposit(1, accountNumberForDeposit, 100.0);
+        bank.deposit(1, accountNumberForDeposit, 100.0);
+        bank.deposit(1, accountNumberForDeposit, 100.0);
+        bank.deposit(1, accountNumberForDeposit, 100.0);
+
+        bank.withdraw(1, accountNumberForDeposit, 100.0);
+
+        bank.printBankStatement(1, accountNumberForDeposit);
     }
 }

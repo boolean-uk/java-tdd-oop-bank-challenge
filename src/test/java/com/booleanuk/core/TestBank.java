@@ -10,69 +10,71 @@ import java.time.LocalDateTime;
 public class TestBank {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
     @Test
-    public void TestCurrentAccountCreated(){
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Current Account", 0, transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-        Assertions.assertTrue(bank.createAccount(customer.id, 100.0));
-    }
-    @Test
-    public void TestSavingAccountCreated(){
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Saving Account", 0,transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-        Assertions.assertTrue(bank.createSavingsAccount(customer.id, 100.0));
+    public void TestCurrentAccountCreated() {
+        Bank bank = new Bank();
+        Customer customer = new Customer(1, "Harry", "Potter");
+        bank.addCustomer(customer);
+        Assertions.assertTrue(bank.createAccount(customer.getId(), "Current Account", 100.0));
     }
 
     @Test
-    public void TestDeposit(){
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Saving Account", 0,transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-
-        // Assuming the first account number starts at 0
-        int accountNumberForDeposit = 0;
-        Assertions.assertTrue(bank.deposit(customer.id, accountNumberForDeposit, 100.0));
+    public void TestDeposit() {
+        Bank bank = new Bank();
+        Customer customer = new Customer(1, "Harry", "Potter");
+        bank.addCustomer(customer);
+        bank.createAccount(customer.getId(), "Saving Account", 0.0);
+        int accountNumberForDeposit = customer.getNextAccountNumber() - 1;
+        Assertions.assertTrue(bank.deposit(customer.getId(), accountNumberForDeposit, 100.0));
     }
 
     @Test
-    public void TestTransactionPrint(){
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Saving Account", 0,transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-        outContent.reset();
+    public void TestTransactionPrint() {
+        Bank bank = new Bank();
+        Customer customer = new Customer(1, "Harry", "Potter");
+        bank.addCustomer(customer);
+        bank.createAccount(customer.getId(), "Saving Account", 0.0);
+        int accountNumberForDeposit = customer.getNextAccountNumber() - 1;
+        bank.deposit(customer.getId(), accountNumberForDeposit, 100.0);
+        bank.deposit(customer.getId(), accountNumberForDeposit, 100.0);
+        bank.deposit(customer.getId(), accountNumberForDeposit, 100.0);
         System.setOut(new PrintStream(outContent));
-        int accountNumberForDeposit = 0;
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.printBankStatement(customer.id, accountNumberForDeposit);
-        Assertions.assertTrue(outContent.toString().trim().contains("Credit: 100.0\n" +
-                        "Balance: 300.0"));
+        bank.printBankStatement(customer.getId(), accountNumberForDeposit);
+        Assertions.assertTrue(outContent.toString().contains("Credit: 100.0\nBalance: 300.0"));
+    }
+
+    @Test
+    public void TestWithdraw() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        Bank bank = new Bank();
+        Customer customer = new Customer(1, "Harry", "Potter");
+        bank.addCustomer(customer);
+        bank.createAccount(1, "Saving Account", 300.0);
+
+        int accountNumberForDeposit = 1;
+
+        Assertions.assertTrue(bank.withdraw(customer.getId(), accountNumberForDeposit, 300.0));
+        bank.printBankStatement(customer.getId(), accountNumberForDeposit);
+        String output = outContent.toString();
+        Assertions.assertTrue(output.contains("Balance: 0.0"));
+        System.setOut(System.out);
     }
     @Test
-    public void TestWithdraw(){
-        LocalDateTime date = LocalDateTime.now();
-        Transaction transaction = new Transaction(date,0,0, "Debit");
-        Account account = new Account("Saving Account", 0,transaction);
-        Customer customer = new Customer(1,"Harry","Potter",account);
-        Bank bank = new Bank(customer);
-        outContent.reset();
-        System.setOut(new PrintStream(outContent));
-        int accountNumberForDeposit = 0;
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        bank.deposit(customer.id, accountNumberForDeposit, 100.0);
-        Assertions.assertTrue(bank.withdraw(customer.id, accountNumberForDeposit, 100.0));
-        Assertions.assertEquals("0.0", outContent.toString().trim());
+    public void testBalanceBasedOnTransactionHistory() {
+        // Initialize bank and customer
+        Bank bank = new Bank();
+        Customer customer = new Customer(1, "Ateeb", "Salam");
+        bank.addCustomer(customer);
+        bank.createAccount(customer.getId(), "Checking", 500.0);
+        bank.deposit(customer.getId(), 1, 200.0); // Deposit 200
+        bank.withdraw(customer.getId(), 1, 150.0); // Withdraw 150
+
+        double balance = bank.findCustomerById(customer.getId()).getAccount(1).calculateBalance();
+
+        Assertions.assertEquals(550.0, balance, "Balance should be calculated based on transaction history.");
     }
+
 }

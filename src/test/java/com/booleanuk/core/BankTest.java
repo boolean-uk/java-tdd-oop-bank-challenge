@@ -41,4 +41,11 @@ public class BankTest {
         bank.withdrawFromAccount(2, 50);
         Assertions.assertEquals(bank.getBankStatementsFromAccount(1), bank.getBankStatementsFromAccount(2));
     }
+
+    /* Extension tests*/
+
+    @Test
+    public void test(){
+
+    }
 }

@@ -37,22 +37,28 @@ I want to deposit and withdraw funds.
 |          |                                                   |                        |                                                    |                                                     |
 
 
-| Classes                    | Methods               | Member Variables                                                               | Scenario | Result/Output                                                    |
-|----------------------------|-----------------------|--------------------------------------------------------------------------------|----------|------------------------------------------------------------------|
-| Account                    |                       | double balance                                                                 |          |                                                                  |
-|                            |                       | Map<String, Integer> transactions (String is formatted date and int is amount) |          |                                                                  |
-|                            |                       | int accountNr;                                                                 |          |                                                                  |
-|                            | add(double amount)    |                                                                                |          | adds amount to balance, generates date and adds to transactions  |
-|                            |                       |                                                                                |          |                                                                  |
-|                            | remove(double amount) |                                                                                |          | adds amount to balance, generates date and adds to transactions  |
-|                            |                       |                                                                                |          |                                                                  |
-|                            | getBalance()          |                                                                                |          | returns current balance                                          |
-|                            |                       |                                                                                |          |                                                                  |
-|                            | getTransactions()     |                                                                                |          | returns transactions                                             |
-|                            |                       |                                                                                |          |                                                                  |
-| SavingsAccount             |                       |                                                                                |          |                                                                  |
-| CurrentAccount             |                       |                                                                                |          |                                                                  |
-| both inherits from Account |                       |                                                                                |          |                                                                  |
+| Classes                    | Methods               | Member Variables               | Scenario | Result/Output                                                   |
+|----------------------------|-----------------------|--------------------------------|----------|-----------------------------------------------------------------|
+| Account                    |                       | double balance                 |          |                                                                 |
+|                            |                       | List<Transaction> transactions |          |                                                                 |
+|                            |                       | int accountNr;                 |          |                                                                 |
+|                            | add(double amount)    |                                |          | adds amount to balance, generates date and adds to transactions |
+|                            |                       |                                |          |                                                                 |
+|                            | remove(double amount) |                                |          | adds amount to balance, generates date and adds to transactions |
+|                            |                       |                                |          |                                                                 |
+|                            | getBalance()          |                                |          | returns current balance                                         |
+|                            |                       |                                |          |                                                                 |
+|                            | getTransactions()     |                                |          | returns transactions                                            |
+|                            | getAccountNr()        |                                |          | returns accountNr                                               |
+| SavingsAccount             |                       |                                |          |                                                                 |
+| CurrentAccount             |                       |                                |          |                                                                 |
+| both inherits from Account |                       |                                |          |                                                                 |
+
+| Classes     | Methods               | Member Variables | Scenario | Result/Output                                                   |
+|-------------|-----------------------|------------------|----------|-----------------------------------------------------------------|
+| Transaction |                       | String Date      |          |                                                                 |
+|             |                       | double Amount    |          |                                                                 |
+|             |                       |                  |          |                                                                 |
 
 
 

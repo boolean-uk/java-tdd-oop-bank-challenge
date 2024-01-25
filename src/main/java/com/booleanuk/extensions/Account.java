@@ -9,6 +9,8 @@ public abstract class Account {
     private boolean overdraftStatus;
     private boolean overdraftRequested;
     private boolean overdraftAccepted;
+    // I can add a variable here called overdraftAmount and set it to -500
+    // instead of manually typing -500 in the withdrawal method
 
     public Account() {
         this.transactions = new ArrayList<>();

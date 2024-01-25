@@ -13,4 +13,14 @@ public class SavingsAccountTest {
         Assertions.assertEquals(accountId, savingsAccount.getAccountId());
         Assertions.assertEquals(0.0, savingsAccount.getBalance());
     }
+
+    //User story 4
+    @Test
+    public void assertBalanceCannotBeNegative() {
+        SavingsAccount savingsAccount = new SavingsAccount(123, new BankStatementGenerator());
+        double originalBalance = savingsAccount.getBalance();
+        savingsAccount.withdraw(100);
+        double newBalance = savingsAccount.getBalance();
+        Assertions.assertEquals(originalBalance, newBalance);
+    }
 }

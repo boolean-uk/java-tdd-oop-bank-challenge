@@ -5,5 +5,11 @@ public class SavingsAccount extends Account{
         super(accountId, bankStatementGenerator);
     }
 
-
+    @Override
+    public void withdraw(double amount) {
+        double balance = this.getBalance();
+        if(amount <= balance) {
+            super.withdraw(amount);
+        }
+    }
 }

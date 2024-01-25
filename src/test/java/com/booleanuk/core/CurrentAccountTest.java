@@ -96,6 +96,8 @@ public class CurrentAccountTest {
         Assertions.assertEquals("No transactions made yet in this account.", bankStatement);
     }
 
+    // Extension tests:
+
     @Test
     public void calculateBalanceFromTransactions() {
         User user = new User(123456, "UsersName");

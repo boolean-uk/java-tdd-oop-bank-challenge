@@ -96,11 +96,11 @@ public abstract class Account {
         return transactions;
     }
 
-    private int toInt(Double amount) {
+    protected int toInt(Double amount) {
         return (int) Math.round(amount * 100);
     }
 
-    private double toDouble(int amount) {
+    protected double toDouble(int amount) {
         return amount / 100.0;
     }
 

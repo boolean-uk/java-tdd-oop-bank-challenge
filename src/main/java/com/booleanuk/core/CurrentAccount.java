@@ -41,5 +41,16 @@ public class CurrentAccount extends Account{
         }
     }
 
+    @Override
+    public boolean withdraw(double debit) {
+        boolean newBalanceNotLessThanOverdraftAmount = (this.calculateBalance() - debit) >= -this.getOverdraftAmount();
+        if(debit > 0 && newBalanceNotLessThanOverdraftAmount) {
+            this.setBalance(-this.toInt(debit));
+            this.transactions.add(new Transaction(-toInt(debit),toInt(this.calculateBalance())));
+            return true;
+        }
+        return false;
+    }
+
 
 }

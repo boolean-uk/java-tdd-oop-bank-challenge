@@ -2,8 +2,8 @@ package com.booleanuk.core;
 
 import com.booleanuk.core.enums.AccountType;
 import com.booleanuk.core.enums.TransactionType;
-import com.booleanuk.core.exceptions.AccountNotFoundException;
 import com.booleanuk.core.exceptions.InsufficientFundsException;
+import com.booleanuk.core.exceptions.OverdraftRequestException;
 import com.booleanuk.core.models.Transaction;
 import com.booleanuk.core.models.accounts.Account;
 import com.booleanuk.core.models.accounts.CurrentAccount;
@@ -52,7 +52,8 @@ public class Bank {
                 return account;
             }
         }
-        throw new AccountNotFoundException();
+        System.out.println("Account [" + accountNum + "] not found");
+        return null;
     }
 
     public double performDeposit(int accountNum, double amount)  {
@@ -81,7 +82,7 @@ public class Bank {
             account.withdraw(amount);
             Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL);
             transactions.add(transaction);
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | OverdraftRequestException e) {
             System.out.println("Transaction failed: " + e.getMessage());
         }
         return account.getBalanceInBaseUnits();
@@ -93,7 +94,7 @@ public class Bank {
             account.withdraw(amount);
             Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL, dateTime);
             transactions.add(transaction);
-        } catch (InsufficientFundsException e) {
+        } catch (InsufficientFundsException | OverdraftRequestException e) {
             System.out.println("Transaction failed: " + e.getMessage());
         }
         return account.getBalanceInBaseUnits();

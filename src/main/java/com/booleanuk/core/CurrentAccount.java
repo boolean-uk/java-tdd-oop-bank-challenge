@@ -10,6 +10,9 @@ public class CurrentAccount implements Account {
     private ArrayList<Transaction> transactions;
     private final SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
 
+
+
+    private boolean overdraft = false;
     public CurrentAccount(){
         this.balance = 0.0;
         this.transactions = new ArrayList<>();
@@ -59,14 +62,24 @@ public class CurrentAccount implements Account {
         if(amount < 0) {
             System.out.println("Can't withdraw negative amount.");
             return false;
-        } else if (this.balance - amount < 0){
-            System.out.println("can't have negative balance.");
-            return false;
+        } else if (this.balance < amount) {
+            if(overdraft) {
+                this.balance -= amount;
+                transactions.add(new Transaction(date, amount, 0.0, this.balance));
+                return true;
+            } else {
+                System.out.println("can't have negative balance.");
+                return false;
+            }
         } else {
             this.balance -= amount;
             transactions.add(new Transaction(date, amount, 0.0, this.balance));
             return true;
         }
+    }
+
+    public boolean requestOverdraft() {
+        return overdraft = !overdraft;
     }
 
     public double getBalance() {
@@ -75,5 +88,7 @@ public class CurrentAccount implements Account {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
+    public boolean getOverdraft() {
+        return overdraft;
+    }
 }

@@ -8,6 +8,8 @@ public interface Account {
     String getRecords();
     boolean deposit(double amount, Date date);
     boolean withdraw(double amount, Date date);
+
+    boolean requestOverdraft();
     double getBalance();
     void setBalance(double balance);
 

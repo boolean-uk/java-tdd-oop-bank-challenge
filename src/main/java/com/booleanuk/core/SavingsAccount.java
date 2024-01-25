@@ -9,6 +9,8 @@ public class SavingsAccount implements Account {
     private double balance;
     private ArrayList<Transaction> transactions;
     private final SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
+    private boolean overdraft = false;
+
 
     public SavingsAccount(){
         this.balance = 0.0;
@@ -66,6 +68,9 @@ public class SavingsAccount implements Account {
             transactions.add(new Transaction(date, amount, 0.0, this.balance));
             return true;
         }
+    }
+    public boolean requestOverdraft() {
+        return overdraft = !overdraft;
     }
 
 

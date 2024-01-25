@@ -86,6 +86,10 @@ public class Bank {
     }
 
     public String requestsOverdraft(Customer customer, int accountId, double amount) {
-        return "Customer doesn't exist.";
+        if(!accounts.containsKey(customer)) {
+            return "Customer doesn't exist.";
+        }
+
+        return "Account doesn't exist.";
     }
 }

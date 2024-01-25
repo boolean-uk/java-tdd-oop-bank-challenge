@@ -19,5 +19,8 @@ public class AccountTest {
         account1.deposit(88);
         account1.deposit(100);
         account1.printBankStatement();
+        account2.deposit(55.6);
+        account2.withdraw(5.6);
+        account2.printBankStatement();
     }
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 public class AccountTest {
 
@@ -59,12 +61,22 @@ public class AccountTest {
         account.deposit(d);
         account.withdraw(e);
 
-        Assertions.assertEquals(a+b*3-c+d-e, account.getBalance());
+        double ans = a+b*3-c+d-e;
+
+        Assertions.assertEquals(ans, account.getBalance());
     }
 
     @Test
     public void getEmptyStatementsTest() {
         Assertions.assertEquals(new ArrayList<>(), account.getStatements());
+    }
+
+    @Test
+    public void getStatementsOnePresentTest() {
+        account.deposit(23.231);
+        Statement statement = new Statement(new Date(), 23.231, 23.231);
+        ArrayList<Statement> expected = new ArrayList<>(Arrays.asList(statement));
+        Assertions.assertEquals(expected, account.getStatements());
     }
 
 }

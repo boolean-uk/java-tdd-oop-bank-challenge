@@ -12,5 +12,12 @@ public class CustomerTest {
     public void testRequestOverdraft() {
         c.createCurrentAccount(b);
         Assertions.assertFalse(c.requestOverdraft(b, 33004782, 5000));
+        m.setCreditScore(c, CreditScore.EXCELLENT);
+        Assertions.assertTrue(c.requestOverdraft(b, 33004782, 5000));
+        c.deposit(b, 33004782, 750);
+        c.deposit(b, 33004782, 500);
+        c.withdraw(b, 33004782, 4000);
+        c.generateBankStatement(b);
+        System.out.println();
     }
 }

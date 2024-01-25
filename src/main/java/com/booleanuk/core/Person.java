@@ -156,7 +156,8 @@ public abstract class Person {
 
         if (branch.getCurrentAccounts().containsKey(accountNumber)) {
             if (branch.getCurrentAccounts().get(accountNumber).getAccountOwner() == this) {
-                if ((branch.getCurrentAccounts().get(accountNumber).getBalance() - value) > 0) {
+                CurrentAccount account = (CurrentAccount) branch.getCurrentAccounts().get(accountNumber);
+                if ((branch.getCurrentAccounts().get(accountNumber).getBalance() - value) > (-account.getAllowed_overdraft())) {
                 branch.getCurrentAccounts().get(accountNumber).setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance() - value);
                 t.setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance());
                 branch.getCurrentAccounts().get(accountNumber).getTransactionHistory().add(t);

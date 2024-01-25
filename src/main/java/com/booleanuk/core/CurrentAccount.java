@@ -12,4 +12,8 @@ public class CurrentAccount extends Account {
     public void setAllowed_overdraft(int overdraft) {
         this.allowed_overdraft = overdraft;
     }
+
+    public int getAllowed_overdraft() {
+        return allowed_overdraft;
+    }
 }

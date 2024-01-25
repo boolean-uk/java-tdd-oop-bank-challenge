@@ -56,4 +56,24 @@ public class CustomerTest {
         Assertions.assertEquals(b.getSavingsAccounts().get(27624789).getBalance(), b.getCurrentAccounts().get(33004782).getBalance());
     }
 
+    @Test
+    public void testWithdraw() {
+        c.createCurrentAccount(b);
+        m.createCurrentAccount(b);
+
+        Assertions.assertEquals(0, b.getCurrentAccounts().get(33004782).getBalance());
+        Assertions.assertFalse(c.withdraw(b, 33004782, 10));
+        Assertions.assertEquals(10.0, b.getCurrentAccounts().get(33004782).getBalance());
+        Assertions.assertFalse(m.withdraw(b, 33004782, 10));
+        Assertions.assertFalse(m.withdraw(b, 110, 10));
+
+        c.deposit(b, 33004782, 10);
+        Assertions.assertTrue(c.withdraw(b, 33004782, 10));
+
+        c.createSavingsAccount(b);
+        Assertions.assertTrue(c.deposit(b, 27624789, 10));
+        Assertions.assertFalse(c.withdraw(b, 27624789, 10));
+        Assertions.assertEquals(b.getSavingsAccounts().get(27624789).getBalance(), b.getCurrentAccounts().get(33004782).getBalance());
+    }
+
 }

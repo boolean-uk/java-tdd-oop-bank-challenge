@@ -10,6 +10,7 @@ classDiagram
     class Account{
         - accountName : String
         - accountID : String
+        - branchID : String
         - transactions : ArrayList< Transaction >
         + createAccount(String name) : boolean
         + deposit(int amount) : boolean

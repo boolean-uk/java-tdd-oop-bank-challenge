@@ -75,8 +75,8 @@ So I can expand,
 I want accounts to be associated with specific branches.
 ````
 
-| Classes       | Methods                                               | Member Variables | Scenario                                                         | Output/Result                                                       |
-|---------------|-------------------------------------------------------|------------------|------------------------------------------------------------------|---------------------------------------------------------------------|
-| User, Account | User::createAccount(String name, ...)                 | String branch    | A user in Trondheim wants to create an account                   | The account is created, and is associated with the Trondheim branch |
-|               | User::transferAccount(String ID, String targetBranch) |                  | A user in Oslo wants ot create an account                        | The account is created, and is associated with the Oslo branch      |
-|               |                                                       |                  | A user with an account in Trondheim wants to transfer it to Oslo | The branch the account is associated with is changed to Oslo        |
+| Classes               | Methods                               | Member Variables | Scenario                                                         | Output/Result                                                       |
+|-----------------------|---------------------------------------|------------------|------------------------------------------------------------------|---------------------------------------------------------------------|
+| User, Account, Branch | User::createAccount(String name, ...) | String branch    | A user in Trondheim wants to create an account                   | The account is created, and is associated with the Trondheim branch |
+|                       | Account::assignBranch(Branch branch)  |                  | A user in Oslo wants ot create an account                        | The account is created, and is associated with the Oslo branch      |
+|                       |                                       |                  | A user with an account in Trondheim wants to transfer it to Oslo | The branch the account is associated with is changed to Oslo        |

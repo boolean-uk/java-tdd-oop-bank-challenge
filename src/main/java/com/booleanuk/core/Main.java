@@ -11,5 +11,8 @@ public class Main {
 
         user.createAccount("Savings");
         System.out.println(user.getAccounts().get(1).getClass());
+
+        CurrentAccount account = new CurrentAccount(user);
+        System.out.println(account.getBalance());
     }
 }

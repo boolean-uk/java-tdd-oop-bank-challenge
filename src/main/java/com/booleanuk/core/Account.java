@@ -3,13 +3,16 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class Account {
-    int accountNumber = 0;
+    int accountNumber;
     User owner;
-    int balance;
+    private int balance;
     ArrayList<Transaction> transactions;
 
     public Account(User owner) {
-        this.owner = owner;
+        setOwner(owner);
+        setBalance(0);
+        setAccountNumber(0);
+        this.transactions = new ArrayList<>();
     }
 
     public int getAccountNumber() {
@@ -28,8 +31,8 @@ public abstract class Account {
         this.owner = owner;
     }
 
-    public int getBalance() {
-        return balance;
+    public double getBalance() {
+        return toDouble(balance);
     }
 
     public void setBalance(int balance) {
@@ -40,7 +43,12 @@ public abstract class Account {
         return transactions;
     }
 
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
+    private int toInt(Double amount) {
+        return (int) Math.round(amount * 100);
     }
+
+    private double toDouble(int amount) {
+        return amount / 100.0;
+    }
+
 }

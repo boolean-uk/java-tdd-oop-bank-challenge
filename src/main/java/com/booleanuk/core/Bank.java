@@ -39,6 +39,7 @@ public class Bank {
         accounts.put(customer, new ArrayList<>(Collections.singletonList(account)));
     }
 
+    //TODO: check so amount it >0
     public String deposit(int amount, Customer customer, int accountId) {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
@@ -46,6 +47,7 @@ public class Bank {
         ArrayList<Account> customerAccounts = accounts.get(customer);
         for(Account customerAccount: customerAccounts) {
             if(customerAccount.getId() == accountId) {
+                customerAccount.deposit(amount);
                 return "The deposit has been performed.";
             }
         }

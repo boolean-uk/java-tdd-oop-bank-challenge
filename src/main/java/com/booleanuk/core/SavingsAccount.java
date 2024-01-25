@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
     private double overdraftAmount;
+    private boolean requestForOverdraftIsGranted;
 
     public SavingsAccount(int accountId, Branch branch) {
         super(accountId, branch);
@@ -24,9 +25,10 @@ public class SavingsAccount extends Account{
     }
 
     public void grantOverdraftRequest(boolean requestForOverdraftIsGranted) {
+        this.requestForOverdraftIsGranted = requestForOverdraftIsGranted;
     }
 
     public boolean isOverDraftRequestGranted() {
-        return true;
+        return this.requestForOverdraftIsGranted;
     }
 }

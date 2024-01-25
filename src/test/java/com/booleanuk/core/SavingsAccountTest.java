@@ -44,5 +44,12 @@ public class SavingsAccountTest {
         Assertions.assertTrue(requestForOverdraftIsGranted);
     }
 
+    @Test
+    public void shouldBeFalseIfRequestForOverdraftHasNotBeenMade() {
+        SavingsAccount savingsAccount = new SavingsAccount(123, Branch.PERSONAL);
+        savingsAccount.grantOverdraftRequest(true);
+        boolean requestForOverdraftIsGranted = savingsAccount.isOverDraftRequestGranted();
+        Assertions.assertFalse(requestForOverdraftIsGranted);
+    }
 
 }

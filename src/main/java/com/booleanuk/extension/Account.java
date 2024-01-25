@@ -135,9 +135,13 @@ public class Account {
         return false;
     }
 
-    public boolean assignBranch(Branch branch)
+    public void assignBranch(Branch branch)
     {
-        return true;
-        //return this.branchID = branch.getID();
+        this.branchID = branch.getName();
+    }
+
+    public String getBranch()
+    {
+        return this.branchID;
     }
 }

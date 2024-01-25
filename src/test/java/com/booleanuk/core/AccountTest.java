@@ -40,7 +40,7 @@ class AccountTest {
         account.remove(200);
         Assertions.assertEquals(300, account.getBalance());
 
-        List<Transaction> testList = new ArrayList<>()
+        List<Transaction> testList = new ArrayList<>();
         testList.add(new Transaction(500));
         testList.add(new Transaction(-200));
 

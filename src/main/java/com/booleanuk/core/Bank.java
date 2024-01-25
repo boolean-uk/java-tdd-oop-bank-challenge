@@ -17,6 +17,13 @@ public class Bank {
         return account.getId();
     }
 
+    public int createSavingsAccount(Customer customer) {
+        Account account = new Account(customer.getId());
+        addAccountToCustomer(customer, account);
+        return account.getId();
+    }
+
+
     // For testing purposes
     protected ArrayList<Account> getAccounts(Customer customer) {
         return accounts.get(customer);

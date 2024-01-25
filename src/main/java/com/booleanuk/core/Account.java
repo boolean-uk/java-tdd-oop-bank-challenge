@@ -61,4 +61,8 @@ public class Account {
         }
         return balance;
     }
+
+    public Branch getBranch() {
+        return Branch.PERSONAL;
+    }
 }

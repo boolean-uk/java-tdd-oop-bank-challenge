@@ -12,6 +12,17 @@ public class CustomerTest {
 
     @Test
     public void testCreateCurrentAccount() {
-        Assertions.assertTrue(c.createCurrentAccount());
+        Assertions.assertTrue(c.createCurrentAccount(b));
+        Assertions.assertTrue(b.getCurrentAccounts().containsKey(33004782));
+        Assertions.assertEquals(c, b.getCurrentAccounts().get(33004782).getAccountOwner());
+        Assertions.assertNotEquals(m, b.getCurrentAccounts().get(33004782).getAccountOwner());
+
+        Assertions.assertTrue(m.createCurrentAccount(b));
+        Assertions.assertTrue(b.getCurrentAccounts().containsKey(69477450));
+        Assertions.assertEquals(m, b.getCurrentAccounts().get(69477450).getAccountOwner());
+        Assertions.assertNotEquals(c, b.getCurrentAccounts().get(69477450).getAccountOwner());
+
+        Assertions.assertNotSame(b.getCurrentAccounts().get(33004782), b.getCurrentAccounts().get(69477450));
+        System.out.println();
     }
 }

@@ -22,10 +22,10 @@ public class User {
     }
 
     public void createCurrentAccount(){
-        this.current = new CurrentAccount(this);
+        this.current = new CurrentAccount();
     }
     public void createSavingsAccount(){
-        this.savings = new SavingsAccount(this);
+        this.savings = new SavingsAccount();
     }
 
     public int setId(){

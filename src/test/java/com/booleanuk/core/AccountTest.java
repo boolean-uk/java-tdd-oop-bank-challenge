@@ -18,6 +18,16 @@ public class AccountTest {
     }
 
     @Test
+    public void testGenerateBankStatements(){
+        User user = new User("John", "John@example.org");
+        user.createCurrentAccount();
+        user.getCurrentAccount().deposit(500);
+        user.getCurrentAccount().deposit(300);
+        user.getCurrentAccount().withdraw(600);
+        System.out.println(user.getCurrentAccount().generateBankStatements(user.getCurrentAccount().getTransactions()));
+    }
+
+    @Test
     public void deposit500ToCurrentAnd300ToSaving(){
         User user = new User("John", "John@example.org");
         user.createCurrentAccount();

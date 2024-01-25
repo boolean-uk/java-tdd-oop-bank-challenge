@@ -1,8 +1,8 @@
 package com.booleanuk.core;
 
 public class CurrentAccount extends Account{
-    public CurrentAccount(User user){
-        super(user);
+    public CurrentAccount(){
+        super();
     }
 
     public String toString(){

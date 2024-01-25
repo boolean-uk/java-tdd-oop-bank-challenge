@@ -1,14 +1,15 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Account {
     private double balance;
-    List<Transaction> transactions;
+    private List<Transaction> transactions;
 
-    public Account(User user){
+    public Account(){
         this.balance = 0.00;
         this.transactions = new ArrayList<>();
     }
@@ -17,24 +18,42 @@ public abstract class Account {
         return this.transactions;
     }
 
+    public String generateBankStatements(List<Transaction> transactions){
+        StringBuilder sb = new StringBuilder();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        sb.append("Date\t\t\t\t|| Credit\t|| Debit\t|| Balance\t||\n");
+        for (Transaction transaction : transactions) {
+            sb.append(transaction.getDate().format(formatter)).append("\t||\t");
+            if(transaction.getCredit() == 0){
+                sb.append(transaction.getCredit()).append("\t\t||\t");
+            }else sb.append(transaction.getCredit()).append("\t||\t");
+            if(transaction.getDebit() == 0){
+                sb.append(transaction.getDebit()).append("\t\t||\t");
+            } else sb.append(transaction.getDebit()).append("\t||\t");
+            sb.append(transaction.getBalance()).append("\t||\t\n");
+        }
+        return sb.toString();
+    }
+
+
     public double getBalance(){
         return this.balance;
     }
 
-    public void withdraw(double debit){
-
-        if(this.balance - debit < 0){
+    public void withdraw(double withdraw){
+        if(this.balance - withdraw < 0){
             System.out.println("Unable to withdraw more than balance!");
             return;
         }
         LocalDateTime dateTime = LocalDateTime.now();
-        transactions.add(new Transaction(dateTime,debit, 0, this.balance));
-        this.balance -= debit;
+        this.balance -= withdraw;
+        transactions.add(new Transaction(dateTime,withdraw, 0, this.balance));
     }
 
-    public void deposit(double credit){
+    public void deposit(double deposit){
         LocalDateTime dateTime = LocalDateTime.now();
-        transactions.add(new Transaction(dateTime,0, credit, this.balance));
-        this.balance += credit;
+        this.balance += deposit;
+        transactions.add(new Transaction(dateTime,0, deposit, this.balance));
+
     }
 }

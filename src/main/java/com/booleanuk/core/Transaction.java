@@ -17,7 +17,9 @@ public class Transaction {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.date.format(formatter);
+        return this.date;
     }
     public LocalDateTime setDate(LocalDateTime date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

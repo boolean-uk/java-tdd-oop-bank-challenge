@@ -10,13 +10,13 @@ public class Bank {
         this.accounts = new ArrayList<>();
     }
 
-    public void openCurrentAccount() {
-        CurrentAccount currentAccount = new CurrentAccount();
+    public void openCurrentAccount(Branch branch) {
+        CurrentAccount currentAccount = new CurrentAccount(branch);
         accounts.add(currentAccount);
     }
 
-    public void openSavingsAccount() {
-        SavingsAccount savingsAccount = new SavingsAccount();
+    public void openSavingsAccount(Branch branch) {
+        SavingsAccount savingsAccount = new SavingsAccount(branch);
         accounts.add(savingsAccount);
     }
 

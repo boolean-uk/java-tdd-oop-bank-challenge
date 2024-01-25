@@ -74,10 +74,11 @@ So I can expand,
 I want accounts to be associated with specific branches.
 ```
 
-| Classes | Methods | Scenario | Output/Results |
-|---------|---------|----------|----------------|
-|         |         |          |                |
-|         |         |          |                |
+| Classes | Member variables       |
+|---------|------------------------|
+| Branch  | int branchId           |
+|         | String branchName      |
+|         | List<Account> accounts |
 
 
 ```

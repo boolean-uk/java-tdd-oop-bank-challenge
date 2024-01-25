@@ -4,6 +4,10 @@ import java.util.Date;
 
 public class CurrentAccount extends Account {
 
+    public CurrentAccount(Branch branch) {
+        super(branch);
+    }
+
     @Override
     public void addTransaction(Date date, double amount, double balance) {
         Transaction transaction = new Transaction(date, amount, balance);

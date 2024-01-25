@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class Account {
+    private final Branch branch;
     protected List<Transaction> transactions;
     private boolean overdraftStatus;
     private boolean overdraftRequested;
@@ -12,11 +13,13 @@ public abstract class Account {
     // I can add a variable here called overdraftAmount and set it to -500
     // instead of manually typing -500 in the withdrawal method
 
-    public Account() {
+    public Account(Branch branch) {
+        this.branch = branch;
         this.transactions = new ArrayList<>();
         this.overdraftStatus = false;
         this.overdraftRequested = false;
         this.overdraftAccepted = false;
+        branch.addAccount(this);
     }
 
     public void deposit(double amount) {
@@ -68,5 +71,9 @@ public abstract class Account {
     public void acceptOverdraft() {
         this.overdraftStatus = true;
         this.overdraftAccepted = true;
+    }
+
+    public Branch getBranch() {
+        return this.branch;
     }
 }

@@ -3,12 +3,14 @@ package com.booleanuk.extensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class BankTest {
+public class BankExtensionTest {
     @Test
     public void checkOverdraftStatus() {
         Bank bank = new Bank();
 
-        bank.openCurrentAccount();
+        Branch southNorway = new Branch(234567, "South Norway");
+
+        bank.openCurrentAccount(southNorway);
 
         Account account = bank.getAccounts().get(0);
 
@@ -25,7 +27,9 @@ public class BankTest {
     public void checkingIfBalanceCanBeBelowZero() {
         Bank bank = new Bank();
 
-        bank.openCurrentAccount();
+        Branch southNorway = new Branch(234567, "South Norway");
+
+        bank.openCurrentAccount(southNorway);
 
         Account account = bank.getAccounts().get(0);
 

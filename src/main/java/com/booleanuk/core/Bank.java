@@ -56,7 +56,20 @@ public class Bank {
     }
 
     public double withdraw(String accountNr, double amount) {
-        return amount;
+        if (accounts.containsKey(accountNr)) {
+            double balance = getBalance(accountNr);
+
+            if (amount < balance) {
+                accounts.get(accountNr).addTransactions(-amount);
+                return amount;
+            }
+            else { // Attempt of overdrawing, return remaining of account
+                accounts.get(accountNr).addTransactions(-balance);
+                return balance;
+            }
+        }
+        else
+            return 0.0;
     }
 
 }

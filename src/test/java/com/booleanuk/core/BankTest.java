@@ -50,10 +50,24 @@ public class BankTest {
         String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
 
         bank.deposit(jonSnowAccountNr, 568.9);
-        bank.withdraw(jonSnowAccountNr, 34.56);
+        double money = bank.withdraw(jonSnowAccountNr, 34.56);
 
         double balance = bank.getBalance(jonSnowAccountNr);
         Assertions.assertEquals(23.54+568.9-34.56, balance);
+    }
+
+    @Test
+    public void testOverdraw() {
+        Bank bank = new Bank();
+        String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
+
+        bank.deposit(jonSnowAccountNr, 568.9);
+        System.out.println(bank.getBalance(jonSnowAccountNr));
+        double money = bank.withdraw(jonSnowAccountNr, 1000);
+
+        double balance = bank.getBalance(jonSnowAccountNr);
+        Assertions.assertEquals(0.0, balance);
+        Assertions.assertEquals(23.54+568.9, money);
     }
 
 

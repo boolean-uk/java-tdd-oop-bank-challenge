@@ -8,12 +8,14 @@ public class Account {
     private double balance;
     private ArrayList<Transaction> transactions;
     private BankStatementGenerator bankStatementGenerator;
+    private Branch branch;
 
-    public Account(int accountId, BankStatementGenerator bankStatementGenerator) {
+    public Account(int accountId, BankStatementGenerator bankStatementGenerator, Branch branch) {
         this.accountId = accountId;
         this.balance = 0.0;
         transactions = new ArrayList<>();
         this.bankStatementGenerator = bankStatementGenerator;
+        this.branch = branch;
     }
 
     public int getAccountId() {

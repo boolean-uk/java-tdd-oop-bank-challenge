@@ -75,10 +75,11 @@ I want statements to be sent as messages to my phone.
 | double balance                                | deposit(double amount)                         | if amount is added to balance              | true   |
 | ArrayList<Transaction> transactions           | withdraw(double amount)                        | if amount is withdrawn from balance        | true   |
 | BankStatementGenerator bankStatementGenerator | getBalance()                                   |                                            |        |
-|                                               | getBankStatement()                             | if bank statement has all transactions     | true   |
+| Branch branch                                 | getBankStatement()                             | if bank statement has all transactions     | true   |
 |                                               | getAccountId()                                 |                                            |        |
 |                                               | generateNewTransaction(String transactionType) |                                            |        |
 |                                               | getBalanceFromTransactions()                   | if balance is calculated from transactions |        |
+|                                               | getBranch()                                    |                                            |        |
 
 
 ### Class SavingsAccount extends Account
@@ -94,3 +95,12 @@ I want statements to be sent as messages to my phone.
 | Class members | Methods                       | Scenario | Return |
 |---------------|-------------------------------|----------|--------|
 |               | CurrentAccount(int accountId) |          |        |
+
+
+### Enum Class Branch
+
+| Class members |   |   |   |
+|---------------|---|---|---|
+| BUSINESS      |   |   |   |
+| PERSONAL      |   |   |   |
+| INTERNATIONAL |   |   |   |

@@ -17,14 +17,14 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 ```
-Class BankStatementGenerator
+### Class BankStatementGenerator
 
 | Class members | Methods                                                    | Scenario                       | Return |
 |---------------|------------------------------------------------------------|--------------------------------|--------|
 |               | generateBankStatement(ArrayList<Transaction> transactions) | if bank statement is generated | true   |
 |               |                                                            |                                |        |
 
-Class Transaction
+### Class Transaction
 
 | Class members                  | Methods                                                                                         | Scenario | Return |
 |--------------------------------|-------------------------------------------------------------------------------------------------|----------|--------|
@@ -35,7 +35,7 @@ Class Transaction
 |                                | getBalance()                                                                                    |          |        |
 
 
-Class Account
+### Class Account
 
 | Class members                                 | Methods                                        | Scenario                               | Return |
 |-----------------------------------------------|------------------------------------------------|----------------------------------------|--------|
@@ -48,7 +48,7 @@ Class Account
 |                                               | generateNewTransaction(String transactionType) |                                        |        |
 
 
-Class SavingsAccount extends Account
+### Class SavingsAccount extends Account
 
 | Class members | Methods                       | Scenario                            | Return |
 |---------------|-------------------------------|-------------------------------------|--------|
@@ -56,7 +56,7 @@ Class SavingsAccount extends Account
 |               | withdraw(double amount)       | if there is enough funds in account | true   |
 
 
-Class CurrentAccount extends Account
+### Class CurrentAccount extends Account
 
 | Class members | Methods                       | Scenario | Return |
 |---------------|-------------------------------|----------|--------|

@@ -19,6 +19,10 @@ public class Branch {
     public Map<Account, Double> getOverdraftRequests() {
         return this.overdraftRequests;
     }
+
+    public void addOverdraftRequest(Account account, double amount) {
+        this.overdraftRequests.put(account, amount);
+    }
     public String getBranchId() {
         return this.branchId;
     }

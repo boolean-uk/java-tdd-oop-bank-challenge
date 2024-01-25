@@ -5,11 +5,11 @@ So I can safely store and use my money,
 I want to create a current account.
 ```
 #### Create CurrentAccount and Customer classes
-| CurrentAccount    |
-|-------------------|
-| accountId: String |
-| userId: String    |
-| balance: double   |
+| CurrentAccount     |
+|--------------------|
+| accountId: String  |
+| customer: Customer |
+| balance: double    |
 
 | Customer            |
 |---------------------|
@@ -28,7 +28,7 @@ I want to create a savings account.
 | Account            |
 |--------------------|
 | accountId: String  |
-| customerId: String |
+| customer: Customer |
 | balance: double    |
 
 | CurrentAccount |
@@ -54,7 +54,7 @@ I want to generate bank statements with transaction dates, amounts, and balance 
 | Account                         |
 |---------------------------------|
 | accountId: String               |
-| customerId: String              |
+| customer: Customer              |
 | balance: double                 |
 | transactions: List<Transaction> |
 
@@ -86,7 +86,7 @@ Customer
 	- email: String
 Account
 	- accountId: String
-	- customerId: String
+	- customer: Customer
 	- balance: double
 	- transactions: List<Transaction>
 	+ getBankStatement() String

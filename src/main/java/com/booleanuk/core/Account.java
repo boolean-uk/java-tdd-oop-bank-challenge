@@ -13,6 +13,10 @@ public abstract class Account {
     }
 
     public void withdraw(double debit){
+        if(this.balance - debit < 0){
+            System.out.println("Unable to withdraw more than balance!");
+            return;
+        }
         this.balance -= debit;
     }
 

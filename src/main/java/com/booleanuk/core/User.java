@@ -1,19 +1,29 @@
 package com.booleanuk.core;
 
+import java.util.Random;
+
 public class User {
     String name;
     String email;
-    double balance;
+    int id;
+
     Account current;
     Account savings;
 
+    Random random;
+
     public User(String name, String email){
+        this.random = new Random();
+        this.id = setId();
         this.name = setName(name);
         this.email = setEmail(email);
-        this.balance = 0.00;
         this.current = null;
         this.savings = null;
     }
+    public int setId(){
+        return this.id = random.nextInt(100000,1000000);
+    }
+
     public String getName() {
         return name;
     }
@@ -30,30 +40,12 @@ public class User {
         return this.email = email;
     }
 
-    public double getBalance() {
-        return balance;
-    }
-
-    public User setBalance(double balance) {
-        this.balance = balance;
-        return this;
-    }
 
     public Account getCurrentAccount() {
         return current;
     }
 
-    public User setCurrentAccount(Account current) {
-        this.current = current;
-        return this;
-    }
-
     public Account getSavingsAccount() {
         return savings;
-    }
-
-    public User setSavingsAccount(Account savings) {
-        this.savings = savings;
-        return this;
     }
 }

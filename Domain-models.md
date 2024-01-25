@@ -205,12 +205,12 @@ Class BankManager
 Class Customer
 
 
-| Class variables | Method                                                 | Scenario                                              | Return  |
-|-----------------|--------------------------------------------------------|-------------------------------------------------------|---------|
-|                 | requestOverdraft(Account account, BankManager manager) | Sends request for overdraft of account to BankManager | boolean |
-|                 |                                                        |                                                       |         |
-|                 |                                                        |                                                       |         |
-|                 |                                                        |                                                       |         |
+| Class variables | Method                                                               | Scenario                                                     | Return  |
+|-----------------|----------------------------------------------------------------------|--------------------------------------------------------------|---------|
+|                 | requestOverdraft(CurrentAccount currentAccount, BankManager manager) | Sends request for overdraft of CurrentAccount to BankManager | boolean |
+|                 |                                                                      |                                                              |         |
+|                 |                                                                      |                                                              |         |
+|                 |                                                                      |                                                              |         |
 
 
 Overdraft

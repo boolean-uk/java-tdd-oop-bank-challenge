@@ -87,10 +87,11 @@ So I have an emergency fund,
 I want to be able to request an overdraft on my account.
 ````
 
-| Classes      | Methods                                              | Member Variables | Scenario                                              | Output/Result                                                           |
-|--------------|------------------------------------------------------|------------------|-------------------------------------------------------|-------------------------------------------------------------------------|
-| User, Branch | User::requestOverdraft(String accountID, int amount) |                  | A user wants an overdraft of 5000, they have 100 left | 5000 is withdrawn, and their balance is -4900                           |
-|              | Branch::processOverdraft(int amount)                 |                  | A user wants an overdraft of 100, they have 101 left  | The money is withdrawn as normal, as the user has enough funds for this |
+| Classes      | Methods                                              | Member Variables | Scenario                                                               | Output/Result                                                           |
+|--------------|------------------------------------------------------|------------------|------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| User, Branch | User::requestOverdraft(String accountID, int amount) |                  | A user wants an overdraft of 5000, they have 100 left                  | 5000 is withdrawn, and their balance is -4900                           |
+|              | Branch::processOverdraft(int amount)                 |                  | A user wants an overdraft of 100, they have 101 left                   | The money is withdrawn as normal, as the user has enough funds for this |
+|              |                                                      |                  | A user wants an overdraft of 5000, the account type is savings account | The overdraft request is rejected automatically                         |
 
 ````dtd
 As a bank manager,

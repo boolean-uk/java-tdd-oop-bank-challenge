@@ -36,16 +36,9 @@ public class Bank {
 		return accountsSave;
 	}
 
-	public void setAccountsSave(HashMap<String, AccountSave> accountsSave) {
-		this.accountsSave = accountsSave;
-	}
 
 	public ArrayList<String> getRequests() {
 		return requests;
-	}
-
-	public void setRequests(ArrayList<String> requests) {
-		this.requests = requests;
 	}
 
 	public Account getAccount(String accountId) {
@@ -54,6 +47,13 @@ public class Bank {
 		if (accountsSave.containsKey(accountId))
 			return accountsSave.get(accountId);
 
+		throw new RuntimeException();
+	}
+
+	public AccountCurr getAccountCurr(String accountId) {
+		if (accountsCurr.containsKey(accountId)) {
+			return accountsCurr.get(accountId);
+		}
 		throw new RuntimeException();
 	}
 
@@ -134,7 +134,8 @@ public class Bank {
 		if (requests.isEmpty()) {
 			return "No pending requests";
 		}
-		return requests.get(0);
+		;
+		return "Account "+requests.get(0)+" has overdraft "+(getAccountCurr(requests.get(0)).isOverdraftEnabled() ? "enabled": "disabled");
 	}
 
 	public String answerNextRequest(boolean answer) {
@@ -142,7 +143,7 @@ public class Bank {
 			return "No pending requests";
 		}
 		accountsCurr.get(requests.get(0)).setOverdraftEnabled(answer);
-		String s = "Overdraft for account " + requests.get(0) + " is now " + answer;
+		String s = "Overdraft for account " + requests.get(0) + " is " + answer;
 		requests.remove(0);
 		return s;
 	}

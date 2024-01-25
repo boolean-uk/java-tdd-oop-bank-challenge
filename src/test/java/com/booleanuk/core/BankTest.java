@@ -134,7 +134,10 @@ public class BankTest {
 		} catch (NotFoundException e) {
 			throw new RuntimeException(e);
 		}
-		Assertions.assertEquals("Overdraft for account 0 is now true", bank.answerNextRequest(true));
+		Assertions.assertEquals("Account 0 has overdraft disabled",bank.readNextRequest());
+		Assertions.assertFalse(ac0.isOverdraftEnabled());
+		Assertions.assertEquals("Overdraft for account 0 is true", bank.answerNextRequest(true));
+		Assertions.assertTrue(ac0.isOverdraftEnabled());
 		Assertions.assertEquals("Not a valid request", bank.answerRequest(true, 1));
 		Assertions.assertEquals("No pending requests", bank.answerNextRequest(true));
 		Assertions.assertEquals("Not a valid request", bank.answerRequest(true, 0));
@@ -143,7 +146,8 @@ public class BankTest {
 		} catch (NotFoundException e) {
 			throw new RuntimeException(e);
 		}
-		Assertions.assertEquals("Overdraft for account 0 is now false", bank.answerNextRequest(false));
+		Assertions.assertEquals("Overdraft for account 0 is false", bank.answerNextRequest(false));
+		Assertions.assertFalse(ac0.isOverdraftEnabled());
 
 
 	}

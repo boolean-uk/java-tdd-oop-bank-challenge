@@ -82,7 +82,7 @@ public class AccountTest {
     @Test
     public void getStatementsOneDepositPresentTest() {
         savingsAccount.deposit(23.231);
-        Statement statement = new Statement(new Date(), 23.231, 23.231);
+        Statement statement = new Statement(new Date(), 23.231);
         ArrayList<Statement> expected = new ArrayList<>(Arrays.asList(statement));
         Assertions.assertEquals(expected, savingsAccount.getStatements());
     }
@@ -97,15 +97,15 @@ public class AccountTest {
         ArrayList<Statement> expected = new ArrayList<>();
 
         savingsAccount.deposit(a);
-        expected.add(new Statement(new Date(), a, a));
+        expected.add(new Statement(new Date(), a));
         savingsAccount.deposit(b);
-        expected.add(new Statement(new Date(), b, a+b));
+        expected.add(new Statement(new Date(), b));
         savingsAccount.withdraw(c);
-        expected.add(new Statement(new Date(), c, a+b-c));
+        expected.add(new Statement(new Date(), c));
         savingsAccount.deposit(d);
-        expected.add(new Statement(new Date(), d, a+b-c+d));
+        expected.add(new Statement(new Date(), d));
         savingsAccount.withdraw(e);
-        expected.add(new Statement(new Date(), e, a+b-c+d-e));
+        expected.add(new Statement(new Date(), e));
 
         Assertions.assertEquals(expected, savingsAccount.getStatements());
     }

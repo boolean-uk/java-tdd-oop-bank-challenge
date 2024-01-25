@@ -14,4 +14,10 @@ public class SavingsAccount extends Account{
         }
     }
 
+    public void makeRequestForOverdraft(double amount) {
+    }
+
+    public double getRequestForOverDraft() {
+        return 100.0;
+    }
 }

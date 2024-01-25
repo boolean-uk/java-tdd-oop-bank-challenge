@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Statement {
     private Date date;
@@ -23,5 +24,20 @@ public class Statement {
 
     public double getBalance() {
         return balance;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Statement)) {
+            return false;
+        }
+
+        Statement other = (Statement) obj;
+        return this.date.equals(other.date) && this.amount == other.amount && this.balance == other.balance;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, amount, balance);
     }
 }

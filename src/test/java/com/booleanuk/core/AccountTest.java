@@ -72,7 +72,7 @@ public class AccountTest {
     }
 
     @Test
-    public void getStatementsOnePresentTest() {
+    public void getStatementsOneDepositPresentTest() {
         account.deposit(23.231);
         Statement statement = new Statement(new Date(), 23.231, 23.231);
         ArrayList<Statement> expected = new ArrayList<>(Arrays.asList(statement));

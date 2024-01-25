@@ -1,12 +1,16 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 public class Account {
     private double balance;
+    private ArrayList<Statement> statements;
 
     public Account() {
         balance = 0;
+        statements = new ArrayList<>();
     }
 
     public double getBalance() {
@@ -18,6 +22,7 @@ public class Account {
             return false;
         }
         balance += amount;
+        statements.add(new Statement(new Date(), amount, balance));
         return true;
     }
 
@@ -30,6 +35,6 @@ public class Account {
     }
 
     public ArrayList<Statement> getStatements() {
-        return new ArrayList<>();
+        return statements;
     }
 }

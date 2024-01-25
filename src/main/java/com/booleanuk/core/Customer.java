@@ -56,11 +56,15 @@ public class Customer {
     }
 
     public String printBankStatements(Account account) {
-        return "";
+        return account.printBankStatements();
     }
 
-    public boolean requestOverdraft(CurrentAccount currentAccount, BankManager bankManager) {
+    public boolean requestOverdraft(CurrentAccount currentAccount, BankManager bankManager, Overdraft overdraft) {
 
-        return true;
+        if(currentAccount.setOverdraft(overdraft)) {
+            bankManager.addOverDraft(overdraft);
+            return true;
+        }
+        return false;
     }
 }

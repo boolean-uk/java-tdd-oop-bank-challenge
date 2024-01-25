@@ -121,7 +121,7 @@ public class CustomerTest {
 
         Assertions.assertEquals("\n    Date        Debit       Credit     Balance\n" +
                 date +" ||          ||    500.0 ||     500.0\n" +
-                date +" ||    500.0 ||          ||    2000.0\n", customer.getAccount(account).printBankStatements());
+                date +" ||    500.0 ||          ||    2000.0\n", customer.printBankStatements(account));
 
     }
 
@@ -135,10 +135,14 @@ public class CustomerTest {
         BankManager bankManager = new BankManager();
 
         Overdraft overdraft = new Overdraft(500);
+        customer.createAccount(currentAccount);
 
         Assertions.assertTrue(customer.requestOverdraft(currentAccount, bankManager, overdraft));
 
         Assertions.assertTrue(bankManager.getOverdraftRequests().contains(overdraft));
+
+        CurrentAccount currentAccount2 = (CurrentAccount) customer.getAccount(currentAccount);
+        Assertions.assertEquals(overdraft, currentAccount2.getOverdraft());
     }
 
 

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Bank {
@@ -35,7 +36,13 @@ public class Bank {
     }
 
     public double getBalance(String accountNr) {
-        return 2.2;
+        double balance = 0;
+        ArrayList<Transaction> transactions = accounts.get(accountNr).getTransactions();
+
+        for (Transaction transaction: transactions){
+            balance += transaction.getAmount();
+        }
+        return balance;
     }
 
     public boolean deposit(String accountNr, double amount) {

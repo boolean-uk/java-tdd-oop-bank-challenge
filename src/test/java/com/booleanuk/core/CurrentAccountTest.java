@@ -152,7 +152,7 @@ public class CurrentAccountTest {
         CurrentAccount a = new CurrentAccount(user);
         a.requestOverdraft();
         a.answerOverdraftRequest(true, 100.00);
-        Assertions.assertFalse(a.getOverdraftRequested());
+        Assertions.assertFalse(a.isOverdraftRequested());
         Assertions.assertEquals(100.00, a.getOverdraftAmount());
         a.answerOverdraftRequest(true, 100.00);
         Assertions.assertEquals("The owner has not requested overdraft.", outputStreamCaptor.toString().trim());
@@ -167,7 +167,7 @@ public class CurrentAccountTest {
 
         a.requestOverdraft();
         a.answerOverdraftRequest(false, 100.00);
-        Assertions.assertFalse(a.getOverdraftRequested());
+        Assertions.assertFalse(a.isOverdraftRequested());
         Assertions.assertEquals(0.00, a.getOverdraftAmount());
     }
 

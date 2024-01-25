@@ -8,11 +8,13 @@ import java.util.Comparator;
 
 public class BankStatement {
 
-
     public static void printStatement(Account account) {
         Collections.sort(account.getTransactions(), Comparator.comparing(Transaction::getDate));
 
         double balance = 0;
+        System.out.println(String.format("Customer: %-10s", account.getCustomer().getCustomerID()));
+        System.out.println(String.format("Account: %-10s", account));
+        System.out.println("-----------------------------------------------------------------");
         System.out.println("date                 || credit     || debit      || balance");
         for (Transaction transaction : account.getTransactions()) {
             balance += transaction.getAmount();

@@ -48,4 +48,8 @@ public abstract class Account {
     public Branch getBranch() {
         return branch;
     }
+
+    public Customer getCustomer(){
+        return customer;
+    }
 }

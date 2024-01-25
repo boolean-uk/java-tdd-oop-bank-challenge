@@ -11,24 +11,12 @@ class Account {
 		return statements;
 	}
 
-	public void setStatements(ArrayList<Statement> statements) {
-		this.statements = statements;
-	}
-
 	public String getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
-
 	public String getBranch() {
 		return branch;
-	}
-
-	public void setBranch(String branch) {
-		this.branch = branch;
 	}
 
 	public Account(String accountId, String branch) {

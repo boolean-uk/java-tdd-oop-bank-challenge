@@ -2,7 +2,11 @@ package com.booleanuk.core.models.accounts;
 
 import com.booleanuk.core.exceptions.InsufficientFundsException;
 import com.booleanuk.core.exceptions.OverdraftRequestException;
+import com.booleanuk.core.models.Transaction;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.booleanuk.core.util.CurrencyUtils.toBaseUnits;
 import static com.booleanuk.core.util.CurrencyUtils.toSubUnits;
@@ -12,15 +16,32 @@ public abstract class Account {
     protected int accountNumber;
     protected int balance;
     protected int maximumOverdraft;
+    private List<Transaction> transactionHistory;
 
     public Account(int accountNumber) {
         this.accountNumber = accountNumber;
         this.balance = 0;
         this.maximumOverdraft = 0;
+        this.transactionHistory = new ArrayList<>();
     }
 
     public double getBalanceInBaseUnits() {
         return toBaseUnits(balance);
+    }
+
+    public double getBalanceInBaseUnitsFromTransactions() {
+        return toBaseUnits(getBalanceFromTransactions());
+    }
+
+    public int getBalanceFromTransactions() {
+        int sum = 0;
+        for (Transaction transaction : transactionHistory) {
+            switch (transaction.getTransactionType()) {
+                case DEPOSIT -> sum += transaction.getAmount();
+                case WITHDRAWAL -> sum -= transaction.getAmount();
+            }
+        }
+        return sum;
     }
 
     public void deposit(double amount) {
@@ -46,5 +67,9 @@ public abstract class Account {
         if (balanceAfter < -getMaximumOverdraft()) {
             throw new OverdraftRequestException();
         }
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactionHistory.add(transaction);
     }
 }

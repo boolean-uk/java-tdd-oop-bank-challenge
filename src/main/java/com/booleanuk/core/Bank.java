@@ -62,6 +62,7 @@ public class Bank {
 
         Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.DEPOSIT);
         transactions.add(transaction);
+        account.addTransaction(transaction);
 
         return account.getBalanceInBaseUnits();
     }
@@ -72,6 +73,7 @@ public class Bank {
 
         Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.DEPOSIT, dateTime);
         transactions.add(transaction);
+        account.addTransaction(transaction);
 
         return account.getBalanceInBaseUnits();
     }
@@ -82,6 +84,7 @@ public class Bank {
             account.withdraw(amount);
             Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL);
             transactions.add(transaction);
+            account.addTransaction(transaction);
         } catch (InsufficientFundsException | OverdraftRequestException e) {
             System.out.println("Transaction failed: " + e.getMessage());
         }
@@ -94,6 +97,7 @@ public class Bank {
             account.withdraw(amount);
             Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL, dateTime);
             transactions.add(transaction);
+            account.addTransaction(transaction);
         } catch (InsufficientFundsException | OverdraftRequestException e) {
             System.out.println("Transaction failed: " + e.getMessage());
         }
@@ -101,9 +105,12 @@ public class Bank {
     }
 
     public double getAccountBalance(int accountNumber) {
-        return getAccountByAccountNumber(accountNumber).getBalanceInBaseUnits();
+        // return getAccountByAccountNumber(accountNumber).getBalanceInBaseUnits();
+        return getAccountByAccountNumber(accountNumber).getBalanceInBaseUnitsFromTransactions();
     }
 
+    @Deprecated
+    // Should not be used since transactions now are stored in the account object
     public List<Transaction> getAccountTransactions(int accountNum) {
         List<Transaction> accountTransactions = new ArrayList<>();
         for (Transaction transaction : transactions) {

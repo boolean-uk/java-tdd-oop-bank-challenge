@@ -25,9 +25,10 @@ public class Transaction {
     }
 
     public int getOldBalance() {
-        if (transactionType == TransactionType.DEPOSIT) {
-            return newBalance - amount;
+        switch (transactionType) {
+            case DEPOSIT -> { return newBalance - amount; }
+            case WITHDRAWAL -> { return newBalance + amount; }
+            default -> { return newBalance; }
         }
-        return newBalance + amount;
     }
 }

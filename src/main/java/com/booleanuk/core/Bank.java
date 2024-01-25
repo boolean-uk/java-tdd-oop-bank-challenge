@@ -52,6 +52,7 @@ public class Bank {
             }
         }
         System.out.println("Account [" + accountNum + "] not found");
+        // FIXME Should throw AccountNotFoundError that is caught in each method
         return null;
     }
 

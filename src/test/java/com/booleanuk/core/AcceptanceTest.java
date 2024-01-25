@@ -4,11 +4,10 @@ import com.booleanuk.core.enums.AccountType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
-
 public class AcceptanceTest {
     @Test
     public void passesAcceptanceCriteria() {
+        // See previous commits for when this class had easily distinguishable dates
         Bank bank = new Bank();
         int accountNum = bank.createAccount(AccountType.CURRENT);
         Assertions.assertEquals(0, bank.getAccountBalance(accountNum));

@@ -15,6 +15,14 @@ public class AccountTest {
         account = new Account("12345");
 
     }
+
+    @Test
+    public void overdraftPermissionTest() {
+        account.requestOverdraftPermission();
+        Assertions.assertTrue(account.hasOverdraftPermission());
+        account.withdrawal(30);
+        Assertions.assertEquals(-30, account.getBalance());
+    }
     @Test
     public void constructorTest() {
         Assertions.assertEquals("12345", account.getIdentifier());

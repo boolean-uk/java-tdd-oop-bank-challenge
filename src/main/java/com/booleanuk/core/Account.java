@@ -7,11 +7,13 @@ public class Account {
     private String identifier;
     private int balance;
     private ArrayList<Transaction> transactions;
+    private boolean overdraftPermission;
 
     public Account(String identifier) {
         this.identifier =  identifier;
         this.balance = 0;
         this.transactions = new ArrayList<>();
+        overdraftPermission = false;
     }
 
     public String getIdentifier() {
@@ -19,31 +21,43 @@ public class Account {
     }
 
     public int getBalance() {
-        return balance;
-        /*
         if(this.transactions.isEmpty()) {
             return 0;
         }
         int balance = 0;
         for(Transaction transaction : transactions) {
-            if transaction.getType
-        }*/
+            if (transaction.getType() == TransactionType.WITHDRAWAL) {
+                balance -= transaction.getAmount();
+
+            }
+            if (transaction.getType() == TransactionType.DEPOSIT) {
+                balance += transaction.getAmount();
+            }
+        }
+        return balance;
     }
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
 
+    public boolean hasOverdraftPermission() {
+        return overdraftPermission;
+    }
+
+    public void requestOverdraftPermission() {
+        overdraftPermission = true;
+    }
 
     public void withdrawal(int amount) {
         if(amount < 0) {return;}
-        if(amount > this.balance) {return;}
+        if(amount > getBalance() && !overdraftPermission) {return;}
         try {
             transactions.add(new Transaction(TransactionType.WITHDRAWAL, this, amount));
         } catch(InvalidTransactionTypeException e) {
             System.out.println(e.getMessage());
         }
-        this.balance -= amount;
+
 
     }
 
@@ -54,9 +68,6 @@ public class Account {
         } catch(InvalidTransactionTypeException e) {
             return;
         }
-        this.balance += amount;
-
-
     }
 
     public String getBankStatement() {

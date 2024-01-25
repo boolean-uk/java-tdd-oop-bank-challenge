@@ -6,7 +6,7 @@ public class CurrentAccount extends Account {
         this.overDraftLimit = 0;
     }
 
-    boolean setOverDraftLimit(){
+    boolean setOverDraftLimit(double limit){
         return false;
     }
 

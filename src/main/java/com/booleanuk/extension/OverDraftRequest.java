@@ -1,10 +1,10 @@
 package com.booleanuk.extension;
 
 public class OverDraftRequest {
-    boolean isAccepted;
-    boolean isPending;
-    double limit;
-    CurrentAccount account;
+    private boolean isAccepted;
+    private boolean isPending;
+    private double limit;
+    private CurrentAccount account;
 
     public OverDraftRequest(double limit, CurrentAccount account) {
         this.isAccepted = false;
@@ -14,11 +14,15 @@ public class OverDraftRequest {
     }
 
     public String acceptRequest(){
-        return "";
+        this.isAccepted = true;
+        this.account.setOverDraftLimit(this.limit);
+        this.isPending = false;
+        return "request accepted";
     }
 
     public String declineRequest(){
-        return "";
+        this.isPending = false;
+        return "request rejected";
     }
 
     public boolean isAccepted() {

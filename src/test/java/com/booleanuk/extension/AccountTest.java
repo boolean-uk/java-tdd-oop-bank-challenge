@@ -58,4 +58,12 @@ class AccountTest {
         Assertions.assertEquals(2, account2.getAccountNr());
     }
 
+    @Test
+    public void testGetBranch(){
+        com.booleanuk.core.Account account = new com.booleanuk.core.SavingsAccount(GOTHENBURG);
+
+        Assertions.assertEquals(GOTHENBURG, account.getBranch());
+
+    }
+
 }

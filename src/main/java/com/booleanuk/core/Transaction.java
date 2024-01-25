@@ -5,9 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 public class Transaction {
-    private Date date;
-    private double amount;
-    private double balance;
+    private final Date date;
+    private final double amount;
+    private final double balance;
 
     public Transaction(Date date, double amount, double balance) {
         this.date = date;

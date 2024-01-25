@@ -107,6 +107,17 @@ public class UserTest {
     }
 
     @Test
+    public void testWithdrawalNotAllowed()
+    {
+        LocalDate birthday = LocalDate.of(1956, 3, 19);
+        User user = new User("Large Nimpson", birthday);
+        user.createCurrentAccount("Groceries");
+
+        user.makeDeposit("cu-78105109112115111110-1", 100);
+        Assertions.assertFalse( user.makeWithdrawal("cu-78105109112115111110-1", 300));
+    }
+
+    @Test
     public void testRequestOverdraft()
     {
         LocalDate birthday = LocalDate.of(1956, 3, 19);

@@ -75,7 +75,16 @@ public class User {
         for(Account account : this.accounts)
         {
             if(account.getAccountID().equals(ID))
-                return account.withdraw(amount);
+            {
+                if(account.getBalance() > 0 && account.getBalance() > amount)
+                {
+                    return account.withdraw(amount);
+                }   else {
+                    System.out.println("Insufficient funds!");
+                    return false;
+                }
+            }
+
         }
         return false;
     }

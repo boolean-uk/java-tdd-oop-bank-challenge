@@ -5,11 +5,13 @@ import java.util.Date;
 public class Transaction {
     private Date date;
     private double amount;
+    private TransactionType type;
     private double balance;
 
-    public Transaction(Date date, double amount, double balance) {
+    public Transaction(Date date, double amount, TransactionType type, double balance) {
         this.date = date;
         this.amount = amount;
+        this.type = type;
         this.balance = balance;
     }
 
@@ -19,6 +21,10 @@ public class Transaction {
 
     public double getAmount() {
         return this.amount;
+    }
+
+    public TransactionType getType() {
+        return type;
     }
 
     public double getBalance() {

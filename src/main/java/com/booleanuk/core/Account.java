@@ -9,10 +9,22 @@ public abstract class Account {
     protected int id;
     protected String accountHolder;
     protected ArrayList<BankStatement> bankStatements;
+    protected Branch branch;
 
-    public Account(int id, String accountHolder){
+    public Account(int id, String accountHolder, Branch branch){
+        this();
         this.id = id;
         this.accountHolder = accountHolder;
+        this.branch = branch;
+
+    }
+    public Account(int id, String accountHolder){
+        this();
+        this.id = id;
+        this.accountHolder = accountHolder;
+
+    }
+    private Account(){
         bankStatements = new ArrayList<>();
     }
     public boolean deposit(double amount){
@@ -53,7 +65,9 @@ public abstract class Account {
     public String getAccountHolder(){
         return this.accountHolder;
     }
-
+    public Branch getBranch(){
+        return this.branch;
+    }
     @Override
     public String toString() {
         return "Account Holder: " + this.accountHolder + ", Current Balance: " + this.balance;

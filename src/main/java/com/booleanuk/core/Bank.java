@@ -9,12 +9,12 @@ public class Bank {
         this.accounts = new ArrayList<>();
         id = 1;
     }
-    public boolean createSavingsAccount(String accountHolder){
-        this.accounts.add(new SavingsAccount(id++, accountHolder));
+    public boolean createSavingsAccount(String accountHolder, Branch branch){
+        this.accounts.add(new SavingsAccount(id++, accountHolder, branch));
         return true;
     }
-    public boolean createCurrentAccount(String accountHolder){
-        this.accounts.add(new CurrentAccount(id++, accountHolder));
+    public boolean createCurrentAccount(String accountHolder, Branch branch){
+        this.accounts.add(new CurrentAccount(id++, accountHolder, branch));
         return true;
     }
     public boolean depositToAccount(int accountNumber, double amount){
@@ -35,6 +35,10 @@ public class Bank {
     }
     public ArrayList<Account> getAccounts(){
         return this.accounts;
+    }
+
+    public ArrayList<String> getAccountsInBranch(Branch branch){
+        return new ArrayList<>();
     }
     public String getBankStatementsFromAccount(int accountNumber){
         ArrayList<String> statements = new ArrayList<>();

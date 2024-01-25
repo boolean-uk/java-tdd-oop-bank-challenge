@@ -22,4 +22,11 @@ public class SavingsAccount extends Account{
     public double getRequestForOverDraft() {
         return this.overdraftAmount;
     }
+
+    public void grantOverdraftRequest(boolean requestForOverdraftIsGranted) {
+    }
+
+    public boolean isOverDraftRequestGranted() {
+        return true;
+    }
 }

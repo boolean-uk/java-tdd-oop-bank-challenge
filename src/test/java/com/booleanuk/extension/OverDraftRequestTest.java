@@ -27,7 +27,7 @@ class OverDraftRequestTest {
         Assertions.assertTrue(request.isPending());
         Assertions.assertFalse(request.isAccepted());
 
-        Assertions.assertEquals("request rejected", request.declineRequest());
+        Assertions.assertEquals("request rejected", request.rejectRequest());
 
         Assertions.assertFalse(request.isPending());
         Assertions.assertFalse(request.isAccepted());

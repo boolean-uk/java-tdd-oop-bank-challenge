@@ -20,7 +20,7 @@ public class OverDraftRequest {
         return "request accepted";
     }
 
-    public String declineRequest(){
+    public String rejectRequest(){
         this.isPending = false;
         return "request rejected";
     }

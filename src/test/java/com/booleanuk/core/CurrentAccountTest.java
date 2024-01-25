@@ -53,7 +53,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void checkNewTransactionAfterDeposit(){
+    public void checkNewTransactionAfterDeposit() {
         User user = new User(123456, "UsersName");
         CurrentAccount a = new CurrentAccount(user);
         a.deposit(100.00);
@@ -64,7 +64,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void checkNewTransactionAfterWithdraw(){
+    public void checkNewTransactionAfterWithdraw() {
         User user = new User(123456, "UsersName");
         CurrentAccount a = new CurrentAccount(user);
         a.deposit(100.00);
@@ -72,5 +72,19 @@ public class CurrentAccountTest {
         Assertions.assertEquals(2, a.getTransactions().size());
         Assertions.assertEquals(-2000, a.transactions.get(1).getAmount());
         Assertions.assertEquals(8000, a.transactions.get(1).getBalance());
+    }
+
+    @Test
+    public void getBankStatement() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.deposit(100.00);
+        a.withdraw(20.00);
+        Transaction transaction = a.transactions.get(0);
+        Transaction transaction1 = a.transactions.get(1);
+        String bankStatement = a.getBankStatement();
+        Assertions.assertTrue(bankStatement.contains("Date\t\t\t\t|| Credit\t|| Balance"));
+        Assertions.assertTrue(bankStatement.contains(transaction.getDateTimeString() + "\t|| " + 100.00 + "\t|| " + 100.00));
+        Assertions.assertTrue(bankStatement.contains(transaction1.getDateTimeString() + "\t|| " + -20.00 + "\t|| " + 80.00));
     }
 }

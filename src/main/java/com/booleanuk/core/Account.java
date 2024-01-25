@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Account {
     Customer customer;
@@ -11,7 +10,6 @@ public class Account {
     public Account(Customer customer) {
         this.customer = customer;
         this.balance = 0.0;
-        this.bankStatement = bankStatement;
     }
     public String deposit(double amount) {
         LocalDate date = LocalDate.now();

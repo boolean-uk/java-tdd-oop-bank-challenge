@@ -3,7 +3,7 @@ title: Bank Challenge
 ---
 classDiagram
     User <|-- Customer
-    User *-- Account
+    Customer *-- Account
 
     Account <|-- CurrentAccount
     Account <|-- SavingsAccount
@@ -21,7 +21,7 @@ classDiagram
         -ArrayList~Transaction~ transactions
         +withdrawl(int amount) void
         +deposit(int amount) void
-        +String getBankStatement
+        +getBankStatement() String
 
     }
     class CurrentAccount{

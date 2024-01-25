@@ -9,8 +9,8 @@
 |                     |                    | String identifier                   |                                 |   |   |           |                 |   |
 |                     |                    | int amount                          |                                 |   |   |           |                 |   |
 |                     |                    | ArrayList<Transaction> transactions |                                 |   |   |           |                 |   |
-|                     |                    |                                     | void withdraw(int amount)       |   |   |           |                 |   |
-|                     |                    |                                     | void deposit(int amount)        |   |   |           |                 |   |
+|                     |                    |                                     | void withdraw(  int amount)     |   |   |           |                 |   |
+|                     |                    |                                     | void deposit( int amount)       |   |   |           |                 |   |
 |                     |                    |                                     | String getBankStatement()       |   |   |           |                 |   |
 | CurrentAccount      | Account            |                                     |                                 |   |   |           |                 |   |
 | SavingsAccount      | Account            |                                     |                                 |   |   |           |                 |   |

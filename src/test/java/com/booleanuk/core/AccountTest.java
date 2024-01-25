@@ -98,4 +98,29 @@ class AccountTest {
         Account account = new Account("1", customer);
         Assertions.assertEquals("The amount cannot be a negative number", account.withdraw(-1));
     }
+
+    @Test
+    public void testGetBalanceZero() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        Assertions.assertEquals(0,account.getBalance());
+    }
+
+    @Test
+    public void testGetBalanceOneTransaction() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        account.deposit(1000);
+        Assertions.assertEquals(1000,account.getBalance());
+    }
+
+    @Test
+    public void testGetBalanceMultipleTransaction() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        account.deposit(1000);
+        account.deposit(1000);
+        account.withdraw(500);
+        Assertions.assertEquals(1000+1000-500,account.getBalance());
+    }
 }

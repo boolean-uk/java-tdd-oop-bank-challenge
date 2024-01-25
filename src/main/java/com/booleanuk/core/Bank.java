@@ -12,13 +12,13 @@ public class Bank {
     }
 
     public int createCurrentAccount(Customer customer) {
-        Account account = new Account(customer);
+        Account account = new CurrentAccount(customer);
         addAccountToCustomer(customer, account);
         return account.getId();
     }
 
     public int createSavingsAccount(Customer customer) {
-        Account account = new Account(customer);
+        Account account = new SavingsAccount(customer);
         addAccountToCustomer(customer, account);
         return account.getId();
     }

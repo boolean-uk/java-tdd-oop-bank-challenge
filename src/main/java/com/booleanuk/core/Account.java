@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
-public class Account {
+public abstract class Account {
     private double balance;
     private ArrayList<Statement> statements;
     private int id;
@@ -31,11 +31,11 @@ public class Account {
     }
 
     public boolean withdraw(double amount) {
-        if(amount > balance || amount < 0) {
+        if(amount < 0) {
             return false;
         }
         balance -= amount;
-        statements.add(new WithdrawStatement(new Date(), amount, balance));
+        statements.add(new WithdrawStatement(new Date(), amount, this.getBalance()));
         return true;
     }
 

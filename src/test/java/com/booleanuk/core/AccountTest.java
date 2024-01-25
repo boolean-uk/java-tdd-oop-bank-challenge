@@ -9,40 +9,48 @@ import java.util.Date;
 
 public class AccountTest {
 
-    Account account = new Account(new Customer("Bob Bagel", 1234));
+    Account savingsAccount = new SavingsAccount(new Customer("Bob Bagel", 1234));
+    Account currentAccount = new CurrentAccount(new Customer("Bob Bagel", 1234));
 
     @Test
     public void depositValidAmount() {
-        Assertions.assertEquals(0, account.getBalance());
-        Assertions.assertTrue(account.deposit(15));
-        Assertions.assertEquals(15, account.getBalance());
+        Assertions.assertEquals(0, savingsAccount.getBalance());
+        Assertions.assertTrue(savingsAccount.deposit(15));
+        Assertions.assertEquals(15, savingsAccount.getBalance());
     }
 
     @Test
     public void depositInvalidAmount() {
-        Assertions.assertEquals(0, account.getBalance());
-        Assertions.assertFalse(account.deposit(-15));
-        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(0, savingsAccount.getBalance());
+        Assertions.assertFalse(savingsAccount.deposit(-15));
+        Assertions.assertEquals(0, savingsAccount.getBalance());
     }
 
     @Test
     public void withdrawValidAmount() {
-        account.deposit(30);
-        Assertions.assertTrue(account.withdraw(20));
-        Assertions.assertEquals(10, account.getBalance());
+        savingsAccount.deposit(30);
+        Assertions.assertTrue(savingsAccount.withdraw(20));
+        Assertions.assertEquals(10, savingsAccount.getBalance());
     }
 
     @Test
-    public void withdrawMoreThanAccountHas() {
-        account.deposit(30);
-        Assertions.assertFalse(account.withdraw(40));
-        Assertions.assertEquals(30, account.getBalance());
+    public void withdrawMoreThanSavingsAccountHas() {
+        savingsAccount.deposit(30);
+        Assertions.assertFalse(savingsAccount.withdraw(40));
+        Assertions.assertEquals(30, savingsAccount.getBalance());
+    }
+
+    @Test
+    public void withdrawMoreThanCurrentAccountHas() {
+        currentAccount.deposit(30);
+        Assertions.assertTrue(currentAccount.withdraw(40));
+        Assertions.assertEquals(-10, currentAccount.getBalance());
     }
 
     @Test
     public void withdrawNegativeAmount() {
-        Assertions.assertFalse(account.withdraw(-40));
-        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertFalse(savingsAccount.withdraw(-40));
+        Assertions.assertEquals(0, savingsAccount.getBalance());
     }
 
     @Test
@@ -53,30 +61,30 @@ public class AccountTest {
         double d = 432.002001;
         double e = 22.119232;
 
-        account.deposit(a);
-        account.deposit(b);
-        account.deposit(b);
-        account.deposit(b);
-        account.withdraw(c);
-        account.deposit(d);
-        account.withdraw(e);
+        savingsAccount.deposit(a);
+        savingsAccount.deposit(b);
+        savingsAccount.deposit(b);
+        savingsAccount.deposit(b);
+        savingsAccount.withdraw(c);
+        savingsAccount.deposit(d);
+        savingsAccount.withdraw(e);
 
         double ans = a+b*3-c+d-e;
 
-        Assertions.assertEquals(ans, account.getBalance());
+        Assertions.assertEquals(ans, savingsAccount.getBalance());
     }
 
     @Test
     public void getEmptyStatementsTest() {
-        Assertions.assertEquals(new ArrayList<>(), account.getStatements());
+        Assertions.assertEquals(new ArrayList<>(), savingsAccount.getStatements());
     }
 
     @Test
     public void getStatementsOneDepositPresentTest() {
-        account.deposit(23.231);
+        savingsAccount.deposit(23.231);
         Statement statement = new Statement(new Date(), 23.231, 23.231);
         ArrayList<Statement> expected = new ArrayList<>(Arrays.asList(statement));
-        Assertions.assertEquals(expected, account.getStatements());
+        Assertions.assertEquals(expected, savingsAccount.getStatements());
     }
 
     @Test
@@ -88,18 +96,18 @@ public class AccountTest {
         double e = 22.119232;
         ArrayList<Statement> expected = new ArrayList<>();
 
-        account.deposit(a);
+        savingsAccount.deposit(a);
         expected.add(new Statement(new Date(), a, a));
-        account.deposit(b);
+        savingsAccount.deposit(b);
         expected.add(new Statement(new Date(), b, a+b));
-        account.withdraw(c);
+        savingsAccount.withdraw(c);
         expected.add(new Statement(new Date(), c, a+b-c));
-        account.deposit(d);
+        savingsAccount.deposit(d);
         expected.add(new Statement(new Date(), d, a+b-c+d));
-        account.withdraw(e);
+        savingsAccount.withdraw(e);
         expected.add(new Statement(new Date(), e, a+b-c+d-e));
 
-        Assertions.assertEquals(expected, account.getStatements());
+        Assertions.assertEquals(expected, savingsAccount.getStatements());
     }
 
 }

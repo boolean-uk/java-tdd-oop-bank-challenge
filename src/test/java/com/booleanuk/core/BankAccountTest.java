@@ -31,5 +31,11 @@ class BankAccountTest {
         assertEquals("Current", bankAccount.getAccountType());
         assertEquals(0.0, bankAccount.getBalance());
     }
+    @Test
+    public void depositToBankAccount() {
+        BankAccount bankAccount = new BankAccount("Current");
+        bankAccount.deposit(500.0, "01-01-2023");
+        assertEquals(500.0, bankAccount.getBalance());
+    }
 }
 

@@ -15,7 +15,6 @@ public class TestBranch {
         boolean accountCreated = bank.createAccount(customer.getId(), "Checking", 1000.0, branch.getName());
         Account account = customer.getAccount(1);
 
-        // Assertions
         Assertions.assertTrue(accountCreated, "Account should be created successfully");
         Assertions.assertNotNull(account, "Account should not be null");
         Assertions.assertEquals(branch, account.getBranch(), "Account should be associated with the correct branch");

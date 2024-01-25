@@ -115,6 +115,28 @@ public class TestUser{
         Assertions.assertFalse(user.withdraw(2, 500));
         Assertions.assertFalse(user.requestOverdraft(4, 200));
     }
+
+    @Test
+    public void testPrintBankStatement(){
+        User user = new User("Maha", "Ryan");
+        CurrentAccount ca = new CurrentAccount();
+        SavingsAccount sa = new SavingsAccount();
+        user.newAccount(ca);
+        user.newAccount(sa);
+        int caid = ca.getAccountID();
+        int said = sa.getAccountID();
+
+        user.deposit(caid, 3000);
+        user.deposit(said, 7000);
+        user.withdraw(caid, 200);
+        user.withdraw(caid, 500);
+        user.deposit(said, 450);
+        user.requestOverdraft(caid, 500);
+        user.withdraw(caid, 3000);
+        user.withdraw(said, 320);
+
+        user.printBankStatements();
+    }
 }
 
 

@@ -61,7 +61,7 @@ public class User {
 
     public boolean withdraw(int accountID, int fund){
         try {
-            return getAccount(accountID).withdraw(Math.abs(fund));
+            return getAccount(accountID).withdraw(fund);
         } catch (NullPointerException e){
             System.out.println("No account with this account ID.");
             return false;
@@ -69,15 +69,12 @@ public class User {
     }
 
     public boolean deposit(int accountID, int fund){
-        if (Math.abs(fund) == fund){
-            try {
-                return getAccount(accountID).deposit(Math.abs(fund));
-            } catch (NullPointerException e){
-                System.out.println("No account with this account ID.");
-                return false;
-            }
+        try {
+            return getAccount(accountID).deposit(fund);
+        } catch (NullPointerException e){
+            System.out.println("No account with this account ID.");
+            return false;
         }
-        return false;
     }
 
     public boolean requestOverdraft(int accountID, int overdraft){
@@ -96,6 +93,11 @@ public class User {
     }
 
     public void printBankStatements(){
-
+        for (Account account : accounts){
+            System.out.println();
+            System.out.printf("%45s %n", account.getClass().getSimpleName() + " " + account.getAccountID());
+            account.printTransactions();
+            System.out.println();
+        }
     }
 }

@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 abstract public class Account {
@@ -11,7 +11,7 @@ abstract public class Account {
     private int userID;
     private final int accountID;
     protected int overdraft;
-    private HashMap<Transaction, LocalDateTime> history;
+    private LinkedHashMap<Transaction, LocalDateTime> history;
     private int balance = 0;
 
     private ArrayList<Integer> balanceHistory = new ArrayList<>();
@@ -20,7 +20,7 @@ abstract public class Account {
         accountID = counter;
         counter++;
         overdraft = 0;
-        history = new HashMap<>();
+        history = new LinkedHashMap<>();
     }
     public int getUserID(){
         return userID;
@@ -45,7 +45,7 @@ abstract public class Account {
     }
 
     public boolean withdraw(int fund){
-        if (fund > 0){
+        if (Math.abs(fund) == fund){
             if (getBalance() >= fund + overdraft){
                 history.put(new Transaction(-fund, "Withdrawal"), LocalDateTime.now());
                 balance -= fund;

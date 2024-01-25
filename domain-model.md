@@ -26,23 +26,24 @@ Class BankStatementGenerator
 
 Class Transaction
 
-| Class members                   | Methods                                                                | Scenario | Return |
-|---------------------------------|------------------------------------------------------------------------|----------|--------|
-| Date date                       | Transaction(Date date, double amount, double balanceBeforeTransaction) |          |        |
-| double amount                   |                                                                        |          |        |
-| double balanceBeforeTransaction |                                                                        |          |        |
+| Class members                   | Methods                                                                  | Scenario | Return |
+|---------------------------------|--------------------------------------------------------------------------|----------|--------|
+| String date                     | Transaction(String date, double amount, double balanceBeforeTransaction) |          |        |
+| double amount                   |                                                                          |          |        |
+| double balanceBeforeTransaction |                                                                          |          |        |
 
 
 Class Account
 
-| Class members                       | Methods                 | Scenario                               | Return |
-|-------------------------------------|-------------------------|----------------------------------------|--------|
-| int accountId                       | Account(int accountId)  |                                        |        |
-| double balance                      | deposit(double amount)  | if amount is added to balance          | true   |
-| ArrayList<Transaction> transactions | withdraw(double amount) | if amount is withdrawn from balance    | true   |
-|                                     | getBalance()            |                                        |        |
-|                                     | getBankStatement()      | if bank statement has all transactions | true   |
-|                                     | getAccountId()          |                                        |        |
+| Class members                       | Methods                                      | Scenario                               | Return |
+|-------------------------------------|----------------------------------------------|----------------------------------------|--------|
+| int accountId                       | Account(int accountId)                       |                                        |        |
+| double balance                      | deposit(double amount)                       | if amount is added to balance          | true   |
+| ArrayList<Transaction> transactions | withdraw(double amount)                      | if amount is withdrawn from balance    | true   |
+|                                     | getBalance()                                 |                                        |        |
+|                                     | getBankStatement()                           | if bank statement has all transactions | true   |
+|                                     | getAccountId()                               |                                        |        |
+|                                     | generateNewTransaction(char transactionType) |                                        |        |
 
 
 Class SavingsAccount extends Account

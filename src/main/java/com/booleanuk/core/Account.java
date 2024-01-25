@@ -19,4 +19,16 @@ public class Account {
     public double getBalance() {
         return this.balance;
     }
+
+    public void deposit(double amount) {
+
+    }
+
+    public void withdraw(double amount) {
+
+    }
+
+    public String getBankStatement() {
+        return "";
+    }
 }

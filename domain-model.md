@@ -19,10 +19,10 @@ I want to deposit and withdraw funds.
 ```
 Class BankStatementGenerator
 
-| Class members | Methods                                        | Scenario | Return |
-|---------------|------------------------------------------------|----------|--------|
-|               | generateBankStatement(Transaction transaction) |          |        |
-|               |                                                |          |        |
+| Class members | Methods                                        | Scenario                       | Return |
+|---------------|------------------------------------------------|--------------------------------|--------|
+|               | generateBankStatement(Transaction transaction) | if bank statement is generated | true   |
+|               |                                                |                                |        |
 
 Class Transaction
 
@@ -35,21 +35,21 @@ Class Transaction
 
 Class Account
 
-| Class members                       | Methods                 | Scenario | Return |
-|-------------------------------------|-------------------------|----------|--------|
-| double balance                      | Account(int accountId)  |          |        |
-| ArrayList<Transaction> transactions | deposit(double amount)  |          |        |
-|                                     | withdraw(double amount) |          |        |
-|                                     | getBalance()            |          |        |
-|                                     | getStatement()          |          |        |
+| Class members                       | Methods                 | Scenario                               | Return |
+|-------------------------------------|-------------------------|----------------------------------------|--------|
+| double balance                      | Account(int accountId)  |                                        |        |
+| ArrayList<Transaction> transactions | deposit(double amount)  | if amount is added to balance          | true   |
+|                                     | withdraw(double amount) | if amount is withdrawn from balance    | true   |
+|                                     | getBalance()            |                                        |        |
+|                                     | getBankStatement()      | if bank statement has all transactions | true   |
 
 
 Class SavingsAccount extends Account
 
-| Class members | Methods                       | Scenario | Return |
-|---------------|-------------------------------|----------|--------|
-|               | SavingsAccount(int accountId) |          |        |
-|               | withdraw(double amount)       |          |        |
+| Class members | Methods                       | Scenario                            | Return |
+|---------------|-------------------------------|-------------------------------------|--------|
+|               | SavingsAccount(int accountId) |                                     |        |
+|               | withdraw(double amount)       | if there is enough funds in account | true   |
 
 
 Class CurrentAccount extends Account

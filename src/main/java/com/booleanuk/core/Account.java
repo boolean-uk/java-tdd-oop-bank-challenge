@@ -11,7 +11,10 @@ public class Account {
         return balance;
     }
 
-    public boolean deposit(int amount) {
+    public boolean deposit(double amount) {
+        if(amount < 0) {
+            return false;
+        }
         balance += amount;
         return true;
     }

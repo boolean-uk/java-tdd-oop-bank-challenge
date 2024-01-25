@@ -34,6 +34,16 @@ public abstract class Account {
         return false;
     }
 
+    public String getBankStatement() {
+        StringBuilder bankStatement = new StringBuilder();
+        bankStatement.append("Date\t\t\t\t|| Credit\t|| Balance\n");
+        for (Transaction transaction: this.transactions) {
+            String transactionRow = transaction.getDateTimeString() + "\t|| " + this.toDouble(transaction.getAmount()) + "\t|| " + this.toDouble(transaction.getBalance()) + "\n";
+            bankStatement.append(transactionRow);
+        }
+        return bankStatement.toString();
+    }
+
     public int getAccountNumber() {
         return accountNumber;
     }

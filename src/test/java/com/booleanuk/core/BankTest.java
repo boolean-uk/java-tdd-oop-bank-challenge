@@ -104,7 +104,7 @@ public class BankTest {
 
     @Test
     public void customerTriesToWithdrawsMoreThanTheirBalanceFromSavingsAccountTest() {
-        String expected = "The withdrawal could not be performed. The balance is too low.";
+        String expected = "The withdrawal could not be performed.";
         int accountId = bank.createSavingsAccount(customer);
         bank.deposit(22.342, customer, accountId);
         Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
@@ -162,6 +162,16 @@ public class BankTest {
     public void customerMakesValidOverdraftRequest() {
         int accountId = bank.createCurrentAccount(customer);
         Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
+    }
+
+    @Test
+    public void customerGetsOverdraftRequestApprovedTest() {
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals("The withdrawal could not be performed.", bank.withdraw(200, customer, accountId));
+        bank.approveAllOverdraftRequest();
+        Assertions.assertEquals("The withdrawal has been performed." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals(-200, bank.getAccounts(customer).get(0).getBalance());
     }
 
 }

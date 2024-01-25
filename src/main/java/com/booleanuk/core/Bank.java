@@ -6,6 +6,7 @@ import java.util.*;
 public class Bank {
 
     private HashMap<Customer, ArrayList<Account>> accounts;
+    private ArrayList<OverdraftRequest> overdraftRequests;
 
     public Bank() {
         accounts = new HashMap<>();
@@ -65,7 +66,7 @@ public class Bank {
                 if(customerAccount.withdraw(amount)) {
                     return "The withdraw has been performed.";
                 } else {
-                    return "The withdrawal could not be performed. The balance is too low.";
+                    return "The withdrawal could not be performed.";
                 }
             }
         }
@@ -102,5 +103,19 @@ public class Bank {
 
 
         return "Account doesn't exist.";
+    }
+
+    public void goThroughOverdraftRequests() {
+
+
+    }
+
+    //For testing purposes
+    protected void approveAllOverdraftRequest() {
+
+    }
+
+    private void approveOverdraftRequest(OverdraftRequest overdraftRequest) {
+
     }
 }

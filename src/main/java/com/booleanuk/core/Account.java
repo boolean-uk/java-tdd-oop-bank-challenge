@@ -8,12 +8,15 @@ public class Account {
     private Customer customer;
     private Branch branch;
     private List<Transaction> transactions;
+    private double overdraftLimit;
 
     public Account(String accountId, Customer customer, Branch branch) {
         this.accountId = accountId;
         this.customer = customer;
         this.branch = branch;
         this.transactions = new ArrayList<>();
+        this.overdraftLimit = 0;
+
     }
 
     public String getAccountId() {
@@ -25,6 +28,16 @@ public class Account {
 
     public Branch getBranch() {
         return branch;
+    }
+
+    public double getOverdraftLimit() {
+        return overdraftLimit;
+    }
+
+    public void setOverdraftLimit(double overdraftLimit) {
+        if (overdraftLimit > 0) {
+            this.overdraftLimit = overdraftLimit;
+        }
     }
 
     public double getBalance() {

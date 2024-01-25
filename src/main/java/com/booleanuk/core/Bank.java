@@ -36,6 +36,8 @@ public class Bank {
     public double deposit(Account target, double amount) {
 
         double balance = target.getBalance();
+
+
         if (amount > 10) {
 
             LocalDate currentDate = LocalDate.now();
@@ -56,6 +58,8 @@ public class Bank {
 
     public double withdrawal(Account target, double amount) {
         double balance = target.getBalance();
+
+
         if (amount < balance) {
 
             LocalDate currentDate = LocalDate.now();
@@ -67,6 +71,17 @@ public class Bank {
 
             return balance;
 
+        }
+        else if (amount > balance && target.isOverDraft()) {
+
+            LocalDate currentDate = LocalDate.now();
+
+            balance -= amount;
+            Transactions transaction = new Transactions("Overdraft", amount, currentDate, balance);
+            transactionsList.add(transaction);
+
+
+            return balance;
         }
 
 
@@ -80,7 +95,7 @@ public class Bank {
 
     public String bankStatement() {
         StringBuilder output = new StringBuilder();
-        if (transactionsList.size() > 0) {
+        if (!transactionsList.isEmpty()) {
             output.append("Date " + " | " + " Amount " + " | " + " Type " + " | " + " Balance " + "\n");
             for (Transactions transactions : transactionsList) {
 
@@ -97,9 +112,16 @@ public class Bank {
     }
 
 
-    public double requestOverdraft() {
+    public String requestOverdraft(Current tester, boolean status) {
 
-        return 0.00;
+        if (status) {
+            tester.setOverDraftTrue();
+            return "Your overdraft request was accepted";
+        }
+        else {
+            tester.setOverDraftFalse();
+        }
+        return "Your overdraft request was denied";
     }
 
 

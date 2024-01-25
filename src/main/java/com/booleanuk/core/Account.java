@@ -13,7 +13,12 @@ public interface Account {
 
     public void setBalance(double balance);
 
+    public void setOverDraftTrue();
 
+
+    public void setOverDraftFalse();
+
+    public boolean isOverDraft();
     public String getName();
     public void setName(String name);
 

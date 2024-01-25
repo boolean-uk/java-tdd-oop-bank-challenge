@@ -6,6 +6,8 @@ public class Savings implements Account {
     private String accountNumber;
     private String name;
     private double balance;
+    private boolean overDraft;
+
 
 
     public Savings(String accountNumber, String name, double balance) {
@@ -13,6 +15,8 @@ public class Savings implements Account {
         this.setAccountNumber(accountNumber);
         this.setName(name);
         this.setBalance(balance);
+        this.overDraft = false;
+
 
 
     }
@@ -31,6 +35,17 @@ public class Savings implements Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    public void setOverDraftTrue() {
+        this.overDraft = true;
+    }
+
+    public boolean isOverDraft() {
+        return overDraft;
+    }
+
+    public void setOverDraftFalse() {
+        this.overDraft = false;
     }
 
     @Override

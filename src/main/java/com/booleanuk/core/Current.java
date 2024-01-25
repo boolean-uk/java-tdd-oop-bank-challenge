@@ -51,6 +51,9 @@ public class Current implements Account{
         this.overDraft = true;
     }
 
+    public boolean isOverDraft() {
+        return overDraft;
+    }
 
     public void setOverDraftFalse() {
         this.overDraft = false;

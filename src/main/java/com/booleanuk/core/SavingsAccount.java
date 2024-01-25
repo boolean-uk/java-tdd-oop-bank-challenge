@@ -10,4 +10,8 @@ public class SavingsAccount extends Account {
     public String requestOverdraft(double amount) {
         return "You can not overdraft a savings account";
     }
+
+    @Override
+    public void setOverdraftLimit(double overdraftLimit) {
+    }
 }

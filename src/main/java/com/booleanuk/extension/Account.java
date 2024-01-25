@@ -15,7 +15,7 @@ public class Account {
         this.accountID = "" ; // Will get to that
         this.transactions = new ArrayList<>();
         this.balance = 0;
-        this.branchID = "Unspecified";
+        this.branchID = "Trondheim";    // Default branch in Trondheim
     }
 
     public String getAccountName() {

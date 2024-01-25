@@ -12,20 +12,20 @@ public abstract class Account {
     private List<Transaction> transactions;
 
     public Account() {
-        this.accountNr = this.lastAccountNumber + 1;
+        this.accountNr = lastAccountNumber + 1;
         lastAccountNumber ++;
         this.balance = 0;
         this.transactions = new ArrayList<>();
     }
 
     public void add(double amount){
-        this.transactions.add(new Transaction(amount));
         this.balance += amount;
+        this.transactions.add(new Transaction(amount, this.balance));
     }
 
     public void remove(double amount){
-        this.transactions.add(new Transaction(-amount));
         this.balance -= amount;
+        this.transactions.add(new Transaction(-amount, this.balance));
     }
 
     public double getBalance() {
@@ -38,5 +38,10 @@ public abstract class Account {
 
     public int getAccountNr() {
         return accountNr;
+    }
+
+    //Only for testing purposes
+    public static void resetLastAccountNumber() {
+        lastAccountNumber = 0;
     }
 }

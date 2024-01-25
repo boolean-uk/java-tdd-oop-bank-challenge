@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
+
+    @BeforeEach
+    void setUp() {
+        Account.resetLastAccountNumber();
+    }
 
     @Test
     public void testAdd(){
@@ -41,8 +47,8 @@ class AccountTest {
         Assertions.assertEquals(300, account.getBalance());
 
         List<Transaction> testList = new ArrayList<>();
-        testList.add(new Transaction(500));
-        testList.add(new Transaction(-200));
+        testList.add(new Transaction(500, 500));
+        testList.add(new Transaction(-200, 300));
 
         Assertions.assertEquals(testList.get(0).getDate(), account.getTransactions().get(0).getDate());
         Assertions.assertEquals(testList.get(1).getAmount(), account.getTransactions().get(1).getAmount());

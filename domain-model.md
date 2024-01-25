@@ -41,6 +41,7 @@ I want to deposit and withdraw funds.
 |----------------------------|-----------------------|--------------------------------------------------------------------------------|----------|------------------------------------------------------------------|
 | Account                    |                       | double balance                                                                 |          |                                                                  |
 |                            |                       | Map<String, Integer> transactions (String is formatted date and int is amount) |          |                                                                  |
+|                            |                       | int accountNr;                                                                 |          |                                                                  |
 |                            | add(double amount)    |                                                                                |          | adds amount to balance, generates date and adds to transactions  |
 |                            |                       |                                                                                |          |                                                                  |
 |                            | remove(double amount) |                                                                                |          | adds amount to balance, generates date and adds to transactions  |

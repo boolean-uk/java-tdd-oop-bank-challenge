@@ -4,25 +4,38 @@ import java.util.ArrayList;
 
 public class BankStatementGenerator {
     public String generateBankStatement(ArrayList<Transaction> transactions) {
-        String bankStatement = "Date Credit Debit Balance";
+        String bankStatement = "\n";
+        bankStatement += String.format("|| %-20s ", "Date");
+        bankStatement += String.format("|| %-20s ", "Credit");
+        bankStatement += String.format("|| %-20s ", "Debit");
+        bankStatement += String.format("|| %-20s ||", "Balance");
+
+        String date;
+        String credit;
+        String debit;
+        String balance;
 
         for(Transaction transaction : transactions) {
-            bankStatement += "/n";
+            bankStatement += "\n";
 
-            bankStatement += transaction.getDate() + " ";
+            date = transaction.getDate();
+            bankStatement += String.format("|| %20s ", date);
 
             if(transaction.getTransactionType().equalsIgnoreCase("Credit")) {
-                bankStatement += transaction.getAmount() + " ";
-                bankStatement += "0" + " ";
+                credit = " " + transaction.getAmount();
+                bankStatement += String.format("|| %20s ", credit);
+                debit = "";
+                bankStatement += String.format("|| %20s ", debit);
             }
             else {
-                bankStatement += "0" + " ";
-                bankStatement += transaction.getAmount() + " ";
+                credit = "";
+                bankStatement += String.format("|| %20s ", credit);
+                debit = " " + transaction.getAmount();
+                bankStatement += String.format("|| %20s ", debit);
             }
-            bankStatement += transaction.getBalance();
+            balance = " " + transaction.getBalance();
+            bankStatement += String.format("|| %20s ||", balance);
         }
-
-        
 
         return bankStatement;
     }

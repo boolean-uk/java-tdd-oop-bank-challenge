@@ -13,11 +13,11 @@ import static com.booleanuk.core.util.CurrencyUtils.toBaseUnits;
 public class StatementService {
     private final static String SEPARATOR = "\t||";
     private final static String NEW_LINE = "\n";
-    Bank bank;
+    Branch branch;
     DateTimeFormatter formatter;
 
-    public StatementService(Bank bank) {
-        this.bank = bank;
+    public StatementService(Branch branch) {
+        this.branch = branch;
         this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     }
 
@@ -49,7 +49,7 @@ public class StatementService {
     }
 
     private List<Transaction> getReverseSortedTransactions(int accountNumber) {
-        List<Transaction> sortedList = bank.getAccountTransactions(accountNumber);
+        List<Transaction> sortedList = branch.getAccountTransactions(accountNumber);
         sortedList.sort(Comparator.comparing(Transaction::getDateTime));
         Collections.reverse(sortedList);
         return sortedList;

@@ -1,104 +1,60 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.AccountType;
-import com.booleanuk.core.enums.TransactionType;
-import com.booleanuk.core.exceptions.InsufficientFundsException;
-import com.booleanuk.core.exceptions.OverdraftRequestException;
-import com.booleanuk.core.models.Transaction;
-import com.booleanuk.core.models.accounts.Account;
-import com.booleanuk.core.models.accounts.CurrentAccount;
-import com.booleanuk.core.models.accounts.SavingsAccount;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.booleanuk.core.util.CurrencyUtils.toSubUnits;
-
 @Data
 public class Bank {
-    private final List<Account> accounts;
-    private final List<Transaction> transactions;
-    private AtomicInteger accountNumberCounter;
+    private final List<Branch> branches;
+    private final AtomicInteger accountNumberCounter;
+    private final AtomicInteger branchNumberCounter;
 
     public Bank() {
-        this.accounts = new ArrayList<>();
-        this.transactions = new ArrayList<>();
+        this.branches = new ArrayList<>();
         this.accountNumberCounter = new AtomicInteger(480_00000);
+        this.branchNumberCounter = new AtomicInteger(803_000);
     }
 
     private int generateAccountNumber() {
         return accountNumberCounter.getAndIncrement();
     }
 
-    public int createAccount(AccountType accountType) {
-        Account account = null;
-        int accountNum = generateAccountNumber();
-
-        switch (accountType) {
-            case CURRENT -> account = new CurrentAccount(accountNum);
-            case SAVINGS -> account = new SavingsAccount(accountNum);
-        }
-
-        accounts.add(account);
-        return accountNum;
+    private int generateBranchNumber() {
+        return accountNumberCounter.getAndIncrement();
     }
 
-    public Account getAccountByAccountNumber(int accountNum) {
-        for (Account account : accounts) {
-            if (account.getAccountNumber() == (accountNum)) {
-                return account;
+    public Branch getBranchByNumber(int branchNum) {
+        for (Branch branch : branches) {
+            if (branch.getBranchNumber() == (branchNum)) {
+                return branch;
             }
         }
-        System.out.println("Account [" + accountNum + "] not found");
-        // FIXME Should throw AccountNotFoundError that is caught in each method
+        System.out.println("Account [" + branchNum + "] not found");
         return null;
     }
 
-    public double performDeposit(int accountNum, double amount)  {
-        Account account = getAccountByAccountNumber(accountNum);
-        account.deposit(amount);
-
-        Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.DEPOSIT);
-        transactions.add(transaction);
-        account.addTransaction(transaction);
-
-        return account.getBalanceInBaseUnits();
+    public int createAccount(Branch branch, AccountType accountType) {
+        return branch.addNewAccount(accountType, generateAccountNumber());
     }
 
-    public double performWithdrawal(int accountNum, double amount) {
-        Account account = getAccountByAccountNumber(accountNum);
-        try {
-            account.withdraw(amount);
-            Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL);
-            transactions.add(transaction);
-            account.addTransaction(transaction);
-        } catch (InsufficientFundsException | OverdraftRequestException e) {
-            System.out.println("Transaction failed: " + e.getMessage());
-        }
-        return account.getBalanceInBaseUnits();
-    }
-
-    public double getAccountBalance(int accountNumber) {
-        // return getAccountByAccountNumber(accountNumber).getBalanceInBaseUnits();
-        return getAccountByAccountNumber(accountNumber).getBalanceInBaseUnitsFromTransactions();
-    }
-
-    @Deprecated
-    // Should not be used since transactions now are stored in the account object
-    public List<Transaction> getAccountTransactions(int accountNum) {
-        List<Transaction> accountTransactions = new ArrayList<>();
-        for (Transaction transaction : transactions) {
-            if (transaction.getAccount() == getAccountByAccountNumber(accountNum)) {
-                accountTransactions.add(transaction);
+    public Branch getBranchByAccountNumber(int accountNumber) {
+        for (Branch branch : branches) {
+            if (branch.getAccountByAccountNumber(accountNumber) != null) {
+                return branch;
             }
         }
-        return accountTransactions;
+        return null;
     }
 
-    public String getAccountBankStatement(int accountNumber) {
-        StatementService statementService = new StatementService(this);
-        return statementService.generateBankStatement(accountNumber);
+    public int createBranch() {
+        int branchNum = generateBranchNumber();
+        Branch branch = new Branch(branchNum);
+        // Could pass in bank/branch name in both class constructors if there needs to be a class variable name
+        branches.add(branch);
+        return branchNum;
     }
 }

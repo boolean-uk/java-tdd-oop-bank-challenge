@@ -4,10 +4,12 @@ public class Overdraft {
 
     private double amount;
     private boolean approved;
+    private boolean isLookedAt;
 
     public Overdraft(double amount) {
         this.setAmount(amount);
         this.approved = false;
+        this.isLookedAt = false;
     }
 
     public double getAmount() {
@@ -29,5 +31,13 @@ public class Overdraft {
     public boolean setApproved(boolean approved) {
         this.approved = approved;
         return true;
+    }
+
+    public boolean isLookedAt() {
+        return this.isLookedAt;
+    }
+
+    public void setLookedAt(boolean lookedAt) {
+        isLookedAt = lookedAt;
     }
 }

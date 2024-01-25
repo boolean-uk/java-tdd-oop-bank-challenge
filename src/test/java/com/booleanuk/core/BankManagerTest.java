@@ -17,6 +17,7 @@ public class BankManagerTest {
 
         Overdraft overdraft = new Overdraft(500);
 
+        Assertions.assertTrue(bankManager.addOverDraft(overdraft));
         Assertions.assertFalse(bankManager.getOverdraftRequests().get(bankManager.getOverdraftRequests().indexOf(overdraft)).isApproved());
         Assertions.assertTrue(bankManager.approveOverdraft(overdraft));
         Assertions.assertTrue(bankManager.getOverdraftRequests().get(bankManager.getOverdraftRequests().indexOf(overdraft)).isLookedAt());
@@ -31,6 +32,8 @@ public class BankManagerTest {
         BankManager bankManager = new BankManager();
 
         Overdraft overdraft = new Overdraft(500);
+
+        Assertions.assertTrue(bankManager.addOverDraft(overdraft));
 
         Assertions.assertFalse(bankManager.getOverdraftRequests().get(bankManager.getOverdraftRequests().indexOf(overdraft)).isApproved());
         Assertions.assertTrue(bankManager.rejectOverdraft(overdraft));

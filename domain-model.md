@@ -139,7 +139,7 @@ I want statements to be sent as messages to my phone.
 | Account                    |                               | double balance                 |                                   |                                                                 |
 |                            |                               | List<Transaction> transactions |                                   |                                                                 |
 |                            |                               | int accountNr;                 |                                   |                                                                 |
-|                            |                               |                                |                                   |                                                                 |
+|                            |                               | Branch branch;                 |                                   |                                                                 |
 |                            |                               |                                |                                   |                                                                 |
 |                            | boolean add(double amount)    |                                | if amount > 0                     | adds amount to balance, generates date and adds to transactions |
 |                            |                               |                                | if amount < 0                     | return false;                                                   |
@@ -151,22 +151,22 @@ I want statements to be sent as messages to my phone.
 |                            |                               |                                |                                   |                                                                 |
 |                            | getTransactions()             |                                |                                   | returns transactions                                            |
 |                            | getAccountNr()                |                                |                                   | returns accountNr                                               |
-|                            |                               |                                |                                   |                                                                 |
+|                            | getBranch()                   |                                |                                   | returns branch                                                  |
 | SavingsAccount             |                               |                                |                                   |                                                                 |
 | CurrentAccount             |                               |                                |                                   |                                                                 |
 | both inherits from Account |                               |                                |                                   |                                                                 |
 
 
-| Classes                    | Methods                                  | Member Variables       | Scenario                                                      | Result/Output                          |
-|----------------------------|------------------------------------------|------------------------|---------------------------------------------------------------|----------------------------------------|
-| CurrentAccount             |                                          | double overDraftLimit  |                                                               |                                        |
-|                            |                                          |                        |                                                               |                                        |
-|                            | boolean setOverDraftLimit                |                        | if overDraftLimit > 0                                         | set new overDraftLimit return true     |
-|                            |                                          |                        | else                                                          | return false                           |
-|                            |                                          |                        |                                                               |                                        |
-|                            | @Override Account remove (double amount) |                        | if amount < balance + accounts overDraftLimit                 | remove amount from balance return true |
-|                            |                                          |                        | if amount >  balance + accounts overDraftLimit or amount < 0  | return false                           |
-|                            |                                          |                        |                                                               |                                        |
+| Classes                    | Methods                                  | Member Variables      | Scenario                                                      | Result/Output                          |
+|----------------------------|------------------------------------------|-----------------------|---------------------------------------------------------------|----------------------------------------|
+| CurrentAccount             |                                          | double overDraftLimit |                                                               |                                        |
+|                            |                                          |                       |                                                               |                                        |
+|                            | boolean setOverDraftLimit                |                       | if overDraftLimit > 0                                         | set new overDraftLimit return true     |
+|                            |                                          |                       | else                                                          | return false                           |
+|                            |                                          |                       |                                                               |                                        |
+|                            | @Override Account remove (double amount) |                       | if amount < balance + accounts overDraftLimit                 | remove amount from balance return true |
+|                            |                                          |                       | if amount >  balance + accounts overDraftLimit or amount < 0  | return false                           |
+|                            |                                          |                       |                                                               |                                        |
 
 
 
@@ -180,5 +180,4 @@ I want statements to be sent as messages to my phone.
 |             | getAmount  |                  |          | return amount  |
 |             | getBalance |                  |          | return balance |
 |             |            |                  |          |                |
-
 

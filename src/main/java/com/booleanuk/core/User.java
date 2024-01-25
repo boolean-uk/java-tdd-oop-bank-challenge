@@ -7,9 +7,9 @@ public class User {
     private String name;
     private String branch;
 
-    public User(String name, String branch) {
-        Random random = new Random();
-        this.id = random.nextInt(1, 10000);
+    public User(int id,String name, String branch) {
+
+        this.id = id;
         this.name = name;
         this.branch = branch;
     }

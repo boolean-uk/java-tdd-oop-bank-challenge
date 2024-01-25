@@ -8,7 +8,7 @@ public class UserTest {
     private User user;
     @BeforeEach
     void setUp(){
-        user = new User("Thomas", "Oslo");
+        user = new User(38,"Thomas", "Oslo");
     }
     @Test
     public void testGetUserAttributes(){

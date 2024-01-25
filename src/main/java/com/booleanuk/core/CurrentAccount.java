@@ -13,7 +13,17 @@ public class CurrentAccount extends Account{
     public double getOverdraft(){
         return overdraft;
     }
+
     public void setOverdraft(double overdraft){
-        this.overdraft = overdraft;
+        this.overdraft = -overdraft;
+    }
+
+    public boolean requestOverdraft(double overdraft){
+        overdraft = -overdraft;
+        if (requestAccepted(overdraft)){
+            this.overdraft = overdraft;
+            return true;
+        }
+        return false;
     }
 }

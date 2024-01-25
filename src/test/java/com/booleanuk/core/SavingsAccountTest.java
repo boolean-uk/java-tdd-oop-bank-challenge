@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SavingsAccountTest {
     private SavingsAccount savingsAccount;
     private User user;
 
     @BeforeEach
     void setUp(){
-        user = new User("Thomas", "Oslo");
+        user = new User(38,"Thomas", "Oslo");
         savingsAccount = new SavingsAccount(user);
     }
 
@@ -46,11 +49,16 @@ public class SavingsAccountTest {
     }
     @Test
     public void testGenerateTransactionLog(){
-        savingsAccount.setBalance(40000);
-        savingsAccount.deposit(8000);
-        savingsAccount.withdraw(2000);
-        savingsAccount.withdraw(80);
-        savingsAccount.withdraw(400);
-        System.out.println(savingsAccount.getTransactionLog());
+        Date clock = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        savingsAccount.setBalance(2000);
+        savingsAccount.deposit(800);
+        savingsAccount.withdraw(300);
+        String expected = "User ID || Deposited   || Withdrew   || New Balance   || Date \n" +
+                "              \n" +
+                "38      || 800.0       || 0.0        || 2800.0        || "+ dateFormat.format(clock)+"    \n" +
+                "38      || 0.0         || 300.0      || 2500.0        || "+ dateFormat.format(clock)+"    \n" ;
+
+        Assertions.assertEquals(expected,savingsAccount.getTransactionLog());
     }
 }

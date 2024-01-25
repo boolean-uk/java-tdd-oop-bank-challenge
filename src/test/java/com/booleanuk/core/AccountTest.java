@@ -4,7 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
+import java.util.Locale;
 
 public class AccountTest {
     private Account account;
@@ -12,7 +17,7 @@ public class AccountTest {
 
     @BeforeEach
     void setUp(){
-        user = new User("Thomas", "Oslo");
+        user = new User(38,"Thomas", "Oslo");
         account = new Account(user);
     }
 
@@ -58,9 +63,16 @@ public class AccountTest {
 
     @Test
     public void testTransactionLog(){
-        account.setBalance(30);
-        account.deposit(20000);
-        account.withdraw(400);
-        System.out.println(account.getTransactionLog());
+        Date clock = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        account.setBalance(2000);
+        account.deposit(800);
+        account.withdraw(300);
+        String expected = "User ID || Deposited   || Withdrew   || New Balance   || Date \n" +
+                "              \n" +
+                "38      || 800.0       || 0.0        || 2800.0        || "+ dateFormat.format(clock)+"    \n" +
+                "38      || 0.0         || 300.0      || 2500.0        || "+ dateFormat.format(clock)+"    \n" ;
+
+        Assertions.assertEquals(expected,account.getTransactionLog());
     }
 }

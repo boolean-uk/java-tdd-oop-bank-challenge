@@ -44,6 +44,20 @@ public class BankTest {
         Assertions.assertEquals(23.54+568.9, balance);
     }
 
+    @Test
+    public void testWithdraw() {
+        Bank bank = new Bank();
+        String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
+
+        bank.deposit(jonSnowAccountNr, 568.9);
+        bank.withdraw(jonSnowAccountNr, 34.56);
+
+        double balance = bank.getBalance(jonSnowAccountNr);
+        Assertions.assertEquals(23.54+568.9-34.56, balance);
+    }
+
+
+
 
 
 

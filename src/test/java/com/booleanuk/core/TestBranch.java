@@ -6,7 +6,6 @@ public class TestBranch {
 
     @Test
     public void testAccountAssociationWithBranch() {
-        // Initialize bank, branch, and customer
         Bank bank = new Bank();
         Branch branch = new Branch("Oslo", "123 City Street");
         bank.addBranch(branch);

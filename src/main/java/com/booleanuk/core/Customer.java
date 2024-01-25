@@ -3,6 +3,7 @@ package com.booleanuk.core;
 public class Customer {
     private String name;
     private int id;
+    private int noOfCreatedAccounts; //TODO: other soultion?
 
     public Customer(String name, int id) {
         this.name = name;
@@ -15,6 +16,14 @@ public class Customer {
 
     public int getId() {
         return id;
+    }
+
+    public int getNoOfCreatedAccounts() {
+        return noOfCreatedAccounts;
+    }
+
+    public void increaseNoOfCreatedAccounts() {
+        noOfCreatedAccounts++;
     }
 
     @Override

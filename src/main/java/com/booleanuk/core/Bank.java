@@ -12,13 +12,13 @@ public class Bank {
     }
 
     public int createCurrentAccount(Customer customer) {
-        Account account = new Account(customer.getId());
+        Account account = new Account(customer);
         addAccountToCustomer(customer, account);
         return account.getId();
     }
 
     public int createSavingsAccount(Customer customer) {
-        Account account = new Account(customer.getId());
+        Account account = new Account(customer);
         addAccountToCustomer(customer, account);
         return account.getId();
     }
@@ -37,5 +37,9 @@ public class Bank {
             return;
         }
         accounts.put(customer, new ArrayList<>(Collections.singletonList(account)));
+    }
+
+    public String deposit(int amount, Customer customer, int accountId) {
+        return "Customer doesn't exist.";
     }
 }

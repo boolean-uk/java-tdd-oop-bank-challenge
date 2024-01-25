@@ -10,10 +10,11 @@ public class Account {
     private ArrayList<Statement> statements;
     private int id;
 
-    public Account(int customerId) {
+    public Account(Customer customer) {
         balance = 0;
         statements = new ArrayList<>();
-        this.id = Objects.hash(customerId, new Date()); //Assumes a customer doesn't create two accounts exactly at the same time
+        this.id = Objects.hash(customer.getId(), customer.getNoOfCreatedAccounts());
+        customer.increaseNoOfCreatedAccounts();
     }
 
     public double getBalance() {

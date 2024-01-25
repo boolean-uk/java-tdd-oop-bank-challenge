@@ -31,4 +31,10 @@ public class BankTest {
         Assertions.assertNotEquals(currentAccountId, savingsAccountId);
     }
 
+    @Test
+    public void nonExistentCustomerTriesToDepositTest() {
+        String expected = "Customer doesn't exist.";
+        Assertions.assertEquals(expected, bank.deposit(2, customer, 123));
+    }
+
 }

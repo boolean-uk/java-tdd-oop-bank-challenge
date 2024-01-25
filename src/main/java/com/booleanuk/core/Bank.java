@@ -93,11 +93,13 @@ public class Bank {
             return output.toString();
         }
 
-
-
-
-
         return "You have no history.";
+    }
+
+
+    public double requestOverdraft() {
+
+        return 0.00;
     }
 
 

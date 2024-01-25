@@ -43,3 +43,17 @@ I want to deposit and withdraw funds.
 | Bank    | boolean deposit(double amount)    | double balance | user adds amount bigger than 10/user does not add amount bigger than 10 | balance/balance |
 |         | boolean withdrawal(double amount) | double balance | user adds positive amount/user adds negative amount                     | balance/balance |
 |         |                                   |                |                                                                         |                 |
+
+EXTENSION
+Assuming that an overdraft is when the account holder is allowed to withdraw more than they have
+in their balance:
+
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+| Classes | Methods                                        | Members        | Scenario                                                                | Output           |
+|---------|------------------------------------------------|----------------|-------------------------------------------------------------------------|------------------|
+| Bank    |                                                |                |                                                                         |                  |
+|         | boolean withdrawal(double amount)              | double balance | refactoring the method so that a minus value will be possible.          | balance/balance  |
+|         | public String requestOverdraft(boolean status) | double status  | based on the status, the reaction will trigger the withdrawal function. | String on status |

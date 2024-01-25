@@ -6,6 +6,7 @@ public class Current implements Account{
         private String accountNumber;
         private String name;
         private double balance;
+        private boolean overDraft;
 
 
     public Current(String accountNumber, String name, double balance) {
@@ -13,6 +14,7 @@ public class Current implements Account{
         this.setAccountNumber(accountNumber);
         this.setName(name);
         this.setBalance(balance);
+        this.overDraft = false;
 
 
 
@@ -42,6 +44,16 @@ public class Current implements Account{
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+
+    public void setOverDraftTrue() {
+        this.overDraft = true;
+    }
+
+
+    public void setOverDraftFalse() {
+        this.overDraft = false;
     }
 }
 

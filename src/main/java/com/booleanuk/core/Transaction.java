@@ -19,11 +19,11 @@ public class Transaction {
         return date;
     }
 
-    public double getAmount() {
-        return amount;
-    }
-
     public double getBalance() {
         return balance;
+    }
+
+    public double getAmount() {
+        return amount;
     }
 }

@@ -66,4 +66,17 @@ class AccountTest {
 
     }
 
+    @Test
+    public void testGetBalance(){
+        Account account = new SavingsAccount(Branch.COPENHAGEN);
+        account.add(500);
+        account.remove(200);
+        Assertions.assertEquals(300, account.getBalance());
+
+        List<Transaction> testList = new ArrayList<>();
+        testList.add(new Transaction(500, 500));
+
+    }
+
+
 }

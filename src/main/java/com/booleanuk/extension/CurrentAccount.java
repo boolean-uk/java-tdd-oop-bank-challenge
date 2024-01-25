@@ -20,7 +20,8 @@ public class CurrentAccount extends Account {
         if (amount > this.getBalance() + this.overDraftLimit){
             return false;
         }
-        this.setBalance(this.getBalance() - amount);
+        this.getTransactions().add(new Transaction(-amount, this.getBalance()));
+        //this.setBalance(this.getBalance() - amount);
         return true;
     }
 }

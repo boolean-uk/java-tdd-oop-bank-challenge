@@ -112,7 +112,4 @@ class CustomerTest {
         return input.replaceAll("\\s", "");
     }
 
-
-
-
 }

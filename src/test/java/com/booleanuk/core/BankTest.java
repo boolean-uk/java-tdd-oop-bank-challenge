@@ -1,7 +1,6 @@
 package com.booleanuk.core;
 
 import com.booleanuk.core.enums.AccountType;
-import com.booleanuk.core.exceptions.AccountNotFoundException;
 import com.booleanuk.core.models.accounts.Account;
 import com.booleanuk.core.models.accounts.CurrentAccount;
 import com.booleanuk.core.models.accounts.SavingsAccount;
@@ -39,7 +38,7 @@ public class BankTest {
         Assertions.assertEquals(accountNumber, account.getAccountNumber());
 
         int imaginaryAccountNumber = 1234567;
-        Assertions.assertThrows(AccountNotFoundException.class, () -> bank.getAccountByAccountNumber(imaginaryAccountNumber));
+        Assertions.assertNull(bank.getAccountByAccountNumber(imaginaryAccountNumber));
     }
 
     @Test
@@ -56,5 +55,21 @@ public class BankTest {
         bank.performDeposit(accountNumber, 17.3);
         Assertions.assertEquals(12.3, bank.performWithdrawal(accountNumber, 5));
         Assertions.assertEquals(12.3, bank.getAccountByAccountNumber(accountNumber).getBalanceInBaseUnits());
+    }
+
+    @Test
+    public void cantWithdrawNonExistentMoney() {
+        int accountNumber = bank.createAccount(AccountType.SAVINGS);
+        bank.performDeposit(accountNumber, 17.3);
+        Assertions.assertEquals(17.3, bank.performWithdrawal(accountNumber, 25));
+        // Should also print that the transaction failed
+    }
+
+    @Test
+    public void canOverdraftCurrentAccount() {
+        int accountNumber = bank.createAccount(AccountType.CURRENT);
+        Assertions.assertEquals(-25, bank.performWithdrawal(accountNumber, 25));
+        Assertions.assertEquals(-1000, bank.performWithdrawal(accountNumber, 975));
+        Assertions.assertNotEquals(-1001, bank.performWithdrawal(accountNumber, 1));
     }
 }

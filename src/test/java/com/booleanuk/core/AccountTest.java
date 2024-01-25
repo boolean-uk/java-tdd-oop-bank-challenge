@@ -36,4 +36,17 @@ public class AccountTest {
         account.deposit(800);
         Assertions.assertEquals(2800, account.getBalance());
     }
+
+    @Test
+    public void testIfTotalAccountBalanceChangesWithSavingAndCurrent(){
+        SavingsAccount savingsAccount = new SavingsAccount(user);
+        CurrentAccount currentAccount = new CurrentAccount(user);
+
+        savingsAccount.deposit(4000);
+        currentAccount.deposit(200);
+
+        Assertions.assertEquals(4000, savingsAccount.getBalance());
+        Assertions.assertEquals(200, currentAccount.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
+    }
 }

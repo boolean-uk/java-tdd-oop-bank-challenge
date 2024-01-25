@@ -6,6 +6,7 @@ classDiagram
         - userID : String
         - accounts : ArrayList< Account >
         + createUser(String name, LocalDate birthdate) : boolean
+        + requestOverdraft(String accountID, int amount) : boolean
     }
     class Account{
         - accountName : String

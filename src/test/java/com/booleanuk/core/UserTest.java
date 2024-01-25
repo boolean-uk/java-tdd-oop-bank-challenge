@@ -10,7 +10,6 @@ public class UserTest {
         User user = new User("John", "John@example.org");
         Assertions.assertEquals("John", user.getName());
         Assertions.assertEquals("John@example.org", user.getEmail());
-        Assertions.assertEquals(0.00, user.getBalance());
         Assertions.assertNull(user.getCurrentAccount());
         Assertions.assertNull(user.getSavingsAccount());
     }

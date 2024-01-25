@@ -5,20 +5,19 @@ public abstract class Account {
     private final int id;
     public Account(User user){
         this.balance = 0.00;
-        this.id = user.id;
+        this.id = user.getId();
     }
 
     public double getBalance(){
         return this.balance;
     }
 
-    public double withdraw(double debit){
-        return this.balance - debit;
+    public void withdraw(double debit){
+        this.balance -= debit;
     }
 
-    public double deposit(double credit){
-        return this.balance + credit;
+    public void deposit(double credit){
+        this.balance += credit;
     }
-
 
 }

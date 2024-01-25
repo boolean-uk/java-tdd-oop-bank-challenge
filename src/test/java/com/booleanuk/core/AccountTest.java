@@ -26,7 +26,6 @@ public class AccountTest {
         user.getSavingsAccount().deposit(300);
         Assertions.assertEquals(user.getCurrentAccount().getBalance(), 500.00);
         Assertions.assertEquals(user.getSavingsAccount().getBalance(), 300.00);
-
     }
     @Test
     public void WithdrawOverBalanceAmount(){

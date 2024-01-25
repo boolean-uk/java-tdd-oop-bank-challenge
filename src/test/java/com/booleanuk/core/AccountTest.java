@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class AccountTest {
 
-    Account account = new Account();
+    Account account = new Account(123);
 
     @Test
     public void depositValidAmount() {

@@ -3,14 +3,17 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 public class Account {
     private double balance;
     private ArrayList<Statement> statements;
+    private int id;
 
-    public Account() {
+    public Account(int customerId) {
         balance = 0;
         statements = new ArrayList<>();
+        this.id = Objects.hash(customerId, new Date()); //Assumes a customer doesn't create two accounts exactly at the same time
     }
 
     public double getBalance() {
@@ -38,4 +41,24 @@ public class Account {
     public ArrayList<Statement> getStatements() {
         return statements;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Account)) {
+            return false;
+        }
+
+        Account other = (Account) obj;
+        return this.id == other.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
 }

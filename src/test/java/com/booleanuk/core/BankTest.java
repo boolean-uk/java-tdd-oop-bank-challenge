@@ -80,5 +80,15 @@ public class BankTest {
         Assertions.assertEquals(22.342-2.234673, bank.getAccounts(customer).get(0).getBalance());
     }
 
+    @Test
+    public void customerTriesToWithdrawMoreThanTheAccountsBalanceTest() {
+        String expected = "The withdrawal could not be performed. The balance is too low.";
+        int accountId = bank.createCurrentAccount(customer);
+        bank.deposit(22.342, customer, accountId);
+        Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
+        Assertions.assertEquals(expected, bank.withdraw(22.434673, customer, accountId));
+        Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
+    }
+
 
 }

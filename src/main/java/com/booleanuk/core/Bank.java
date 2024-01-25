@@ -10,7 +10,6 @@ import com.booleanuk.core.models.accounts.CurrentAccount;
 import com.booleanuk.core.models.accounts.SavingsAccount;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -67,35 +66,11 @@ public class Bank {
         return account.getBalanceInBaseUnits();
     }
 
-    public double performDeposit(int accountNum, double amount, LocalDateTime dateTime)  {
-        Account account = getAccountByAccountNumber(accountNum);
-        account.deposit(amount);
-
-        Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.DEPOSIT, dateTime);
-        transactions.add(transaction);
-        account.addTransaction(transaction);
-
-        return account.getBalanceInBaseUnits();
-    }
-
     public double performWithdrawal(int accountNum, double amount) {
         Account account = getAccountByAccountNumber(accountNum);
         try {
             account.withdraw(amount);
             Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL);
-            transactions.add(transaction);
-            account.addTransaction(transaction);
-        } catch (InsufficientFundsException | OverdraftRequestException e) {
-            System.out.println("Transaction failed: " + e.getMessage());
-        }
-        return account.getBalanceInBaseUnits();
-    }
-
-    public double performWithdrawal(int accountNum, double amount, LocalDateTime dateTime) {
-        Account account = getAccountByAccountNumber(accountNum);
-        try {
-            account.withdraw(amount);
-            Transaction transaction = new Transaction(account, account.getBalance(), toSubUnits(amount), TransactionType.WITHDRAWAL, dateTime);
             transactions.add(transaction);
             account.addTransaction(transaction);
         } catch (InsufficientFundsException | OverdraftRequestException e) {

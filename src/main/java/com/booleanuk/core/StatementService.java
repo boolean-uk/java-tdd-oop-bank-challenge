@@ -18,7 +18,7 @@ public class StatementService {
 
     public StatementService(Bank bank) {
         this.bank = bank;
-        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     }
 
     public String generateBankStatement(int accountNumber) {

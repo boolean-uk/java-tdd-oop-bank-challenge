@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.util.Random;
 
 public class User {
+    private static int lastAssignedId;
     private String name;
     private String email;
     private int id;
@@ -10,15 +11,15 @@ public class User {
     private CurrentAccount current;
     private SavingsAccount savings;
 
-    Random random;
-
     public User(String name, String email){
-        this.random = new Random();
         this.id = setId();
         this.name = setName(name);
         this.email = setEmail(email);
         this.current = null;
         this.savings = null;
+    }
+    public int setId(){
+        return lastAssignedId++;
     }
 
     public void createCurrentAccount(){
@@ -28,9 +29,6 @@ public class User {
         this.savings = new SavingsAccount();
     }
 
-    public int setId(){
-        return this.id = random.nextInt(100000,1000000);
-    }
     public int getId(){
         return this.id;
     }

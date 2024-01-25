@@ -27,21 +27,13 @@ public class Transaction {
         return this.date = date;
     }
     public double getDebit() {
-        return debit;
-    }
-    public Transaction setDebit(double debit) {
-        this.debit = debit;
-        return this;
+        return this.debit;
     }
     public double getCredit() {
-        return credit;
-    }
-    public Transaction setCredit(double credit) {
-        this.credit = credit;
-        return this;
+        return this.credit;
     }
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
     public Transaction setBalance(double balance) {
         this.balance = balance;

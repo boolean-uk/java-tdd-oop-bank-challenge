@@ -14,7 +14,5 @@ public class TransactionTest {
         user.getCurrentAccount().deposit(250);
         user.getCurrentAccount().withdraw(700);
         Assertions.assertEquals(4, user.getCurrentAccount().getTransactions().size());
-
-
     }
 }

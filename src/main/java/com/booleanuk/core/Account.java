@@ -6,13 +6,15 @@ import java.util.List;
 
 public abstract class Account {
     private double balance;
-    private final int id;
     List<Transaction> transactions;
 
     public Account(User user){
         this.balance = 0.00;
-        this.id = user.getId();
         this.transactions = new ArrayList<>();
+    }
+
+    public List<Transaction> getTransactions(){
+        return this.transactions;
     }
 
     public double getBalance(){

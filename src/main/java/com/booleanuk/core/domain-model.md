@@ -2,11 +2,11 @@ As a customer,
 So I can safely store and use my money,
 I want to create a current account.
 
-| Classes           | Methods | Members                                           | Scenario | Output |
-|-------------------|---------|---------------------------------------------------|----------|--------|
-| Interface Account |         | String accountNumber, String name, double balance |          |        |
-| Class Current     |         |                                                   |          |        |
-|                   |         |                                                   |          |        |
+| Classes           | Methods            | Members                                           | Scenario | Output |
+|-------------------|--------------------|---------------------------------------------------|----------|--------|
+| Interface Account | getName()          | String accountNumber, String name, double balance |          |        |
+| Class Current     | getAccountNumber() |                                                   |          |        |
+|                   | getBalance()       |                                                   |          |        |
 
 
 
@@ -14,11 +14,11 @@ As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 
-| Classes           | Methods | Members                                                                        | Scenario | Output |
-|-------------------|---------|--------------------------------------------------------------------------------|----------|--------|
-| Interface Account |         | String accountNumber, String name, double balance, double debit, double credit |          |        |
-| Class Savings     |         |                                                                                |          |        |
-|                   |         |                                                                                |          |        |
+| Classes           | Methods            | Members                                                                        | Scenario | Output |
+|-------------------|--------------------|--------------------------------------------------------------------------------|----------|--------|
+| Interface Account | getName()          | String accountNumber, String name, double balance, double debit, double credit |          |        |
+| Class Savings     | getAccountNumber() |                                                                                |          |        |
+|                   | getBalance()       |                                                                                |          |        |
 
 As a customer,
 So I can keep a record of my finances,

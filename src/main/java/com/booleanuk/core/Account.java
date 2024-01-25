@@ -11,9 +11,8 @@ public class Account {
 
     public Account(User user){
         this.user = user;
-
-        this.balance = 0d;
-        this.overdraft = 0d;
+        this.balance = 0;
+        this.overdraft = 0;
         this.transactionLog = new StringBuilder();
         createLogHeader();
     }
@@ -36,13 +35,21 @@ public class Account {
     }
 
 
-    public void withdraw(double amount){
-        if (getBalance() > overdraft){
+    public boolean withdraw(double amount){
+        if (amount < getBalance()) {
             setBalance(this.balance - amount);
-            logTransactions(0d,amount);
+            logTransactions(0d, amount);
+            return true;
         }
+        else if (getOverdraft() < getBalance() - amount){
+            setBalance(this.balance - amount);
+            logTransactions(0d, amount);
+            return true;
+        }
+
         else {
             System.out.println("Insufficient funds");
+            return false;
         }
     }
 

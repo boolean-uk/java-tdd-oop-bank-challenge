@@ -30,6 +30,14 @@ public class CurrentAccountTest {
         currentAccount.withdraw(2000d);
         Assertions.assertEquals(6000d, currentAccount.getBalance());
     }
+    @Test
+    public void testWithdrawInsufficientFunds(){
+        currentAccount.deposit(50);
+        Assertions.assertEquals(false, currentAccount.withdraw(200));
+        currentAccount.setOverdraft(-1000);
+        Assertions.assertEquals(true, currentAccount.withdraw(200));
+        Assertions.assertEquals(-150, currentAccount.getBalance());
+    }
 
     @Test
     public void testSavingAndCurrentIsDifferent(){

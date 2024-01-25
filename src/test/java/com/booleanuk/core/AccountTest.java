@@ -29,9 +29,15 @@ public class AccountTest {
         account.withdraw(200);
         Assertions.assertEquals(1800, account.getBalance());
     }
+    @Test
+    public void testWithdrawWithInsufficientFunds(){
+        account.setBalance(20);
+        account.withdraw(300);
+        Assertions.assertFalse(account.withdraw(300));
+    }
 
     @Test
-    public void testDeposti(){
+    public void testDeposit(){
         account.setBalance(2000);
         account.deposit(800);
         Assertions.assertEquals(2800, account.getBalance());

@@ -33,6 +33,12 @@ public class SavingsAccountTest {
     }
 
     @Test
+    public void testWithdrawInsufficientFunds(){
+        savingsAccount.deposit(50);
+        Assertions.assertEquals(false, savingsAccount.withdraw(200));
+    }
+
+    @Test
     public void testSavingAndCurrentIsDifferent(){
         CurrentAccount currentAccount = new CurrentAccount(user);
         savingsAccount.deposit(4000);

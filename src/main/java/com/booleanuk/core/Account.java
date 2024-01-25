@@ -36,6 +36,9 @@ public abstract class Account {
 
     public String getBankStatement() {
         StringBuilder bankStatement = new StringBuilder();
+        if (this.transactions.isEmpty()) {
+            return "No transactions made yet in this account.";
+        }
         bankStatement.append("Date\t\t\t\t|| Credit\t|| Balance\n");
         for (Transaction transaction: this.transactions) {
             String transactionRow = transaction.getDateTimeString() + "\t|| " + this.toDouble(transaction.getAmount()) + "\t|| " + this.toDouble(transaction.getBalance()) + "\n";

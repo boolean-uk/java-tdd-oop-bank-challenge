@@ -73,7 +73,7 @@ public class CustomerTest {
         Assertions.assertEquals(500.00, customer.getAccount(currentAccount).getBalance());
 
         Assertions.assertFalse(customer.transferCredit(currentAccount, savingsAccount, 600.00));
-        Assertions.assertFalse(customer.transferCredit(currentAccount, savingsAccount, 400.00));
+        Assertions.assertTrue(customer.transferCredit(currentAccount, savingsAccount, 400.00));
         Assertions.assertEquals(400.00, customer.getAccount(savingsAccount).getBalance());
         Assertions.assertEquals(100.00, customer.getAccount(currentAccount).getBalance());
 

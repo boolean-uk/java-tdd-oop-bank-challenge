@@ -44,4 +44,14 @@ public class Customer {
     }
 
 
+    public boolean transferCredit(Account account1, Account account2, double credit) {
+
+        if(account1.getBalance() >= credit) {
+            account1.withdraw(credit);
+            account2.deposit(credit);
+            return true;
+        }
+
+        return false;
+    }
 }

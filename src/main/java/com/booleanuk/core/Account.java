@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -9,6 +12,10 @@ public class Account {
     private Branch branch;
     private List<Transaction> transactions;
     private double overdraftLimit;
+
+    // Twilio
+    public static final String ACCOUNT_SID = "Twilio Account SID";
+    public static final String AUTH_TOKEN = "Twilio Auth Token";
 
     public Account(String accountId, Customer customer, Branch branch) {
         this.accountId = accountId;
@@ -55,6 +62,16 @@ public class Account {
         return transactions;
     }
 
+    // Send bank statement to customers phone number with Twilio
+    public void sendBankStatement() {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message.creator(
+                        new com.twilio.type.PhoneNumber(this.customer.getPhoneNumber()),
+                        new com.twilio.type.PhoneNumber("*Twilio Phone Number*"),
+                        "Bank Statement: \n"+this.getBankStatement())
+                .create();
+    }
+
     public String getBankStatement() {
         if (transactions.isEmpty()) {
             return "No transactions";
@@ -78,7 +95,6 @@ public class Account {
             }
             stringBuilder.append(String.format("%" + "s%s%" + (9-Double.toString(transaction.getBalance()).length()) + "s", "", transaction.getBalance(), "")).append("\n");
         }
-
         return stringBuilder.substring(0,stringBuilder.length()-1);
     }
 
@@ -88,7 +104,7 @@ public class Account {
         } else if (this.getBalance()-amount < 0) {
             return "Withdraw failed. Amount withdrawn is more than balance in account";
         }
-        this.transactions.add(new Transaction(new Date(), amount, TransactionType.WITHDRAW, this.getBalance()));
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.WITHDRAW, this.getBalance()-amount));
         return "Withdraw successful. $"+amount+" has been withdrawn";
     }
 
@@ -96,7 +112,7 @@ public class Account {
         if (amount < 0) {
             return "The amount cannot be a negative number";
         }
-        this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.getBalance()));
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.getBalance()+amount));
         return "$"+amount+" deposited";
     }
 

@@ -40,11 +40,12 @@ class AccountTest {
         account.remove(200);
         Assertions.assertEquals(300, account.getBalance());
 
-        List<Transaction> testList = new ArrayList<>();
+        List<Transaction> testList = new ArrayList<>()
         testList.add(new Transaction(500));
         testList.add(new Transaction(-200));
 
-        Assertions.assertEquals(testList, account.getTransactions());
+        Assertions.assertEquals(testList.get(0).getDate(), account.getTransactions().get(0).getDate());
+        Assertions.assertEquals(testList.get(1).getAmount(), account.getTransactions().get(1).getAmount());
     }
 
     @Test

@@ -57,6 +57,17 @@ public abstract class Account {
         return bankStatement.toString();
     }
 
+    public double calculateBalance() {
+        if (this.transactions.isEmpty()) {
+            return 0.0d;
+        }
+        int balance = 0;
+        for (Transaction transaction: this.transactions) {
+            balance += transaction.getAmount();
+        }
+        return this.toDouble(balance);
+    }
+
     public int getAccountNumber() {
         return accountNumber;
     }

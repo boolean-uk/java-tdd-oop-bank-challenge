@@ -79,15 +79,16 @@ I want statements to be sent as messages to my phone.
 |                                               | getAccountId()                                 |                                            |        |
 |                                               | generateNewTransaction(String transactionType) |                                            |        |
 |                                               | getBalanceFromTransactions()                   | if balance is calculated from transactions |        |
-|                                               | getBranch()                                    |                                            |        |
+|                                               | getBranch()                                    | if branch is expected branch               |        |
 
 
 ### Class SavingsAccount extends Account
 
-| Class members | Methods                       | Scenario                            | Return |
-|---------------|-------------------------------|-------------------------------------|--------|
-|               | SavingsAccount(int accountId) |                                     |        |
-|               | withdraw(double amount)       | if there is enough funds in account | true   |
+| Class members | Methods                         | Scenario                                    | Return |
+|---------------|---------------------------------|---------------------------------------------|--------|
+|               | SavingsAccount(int accountId)   |                                             |        |
+|               | withdraw(double amount)         | if there is enough funds in account         | true   |
+|               | requestOverdraft(double amount) | if withdrawal amount is higher than balance |        |
 
 
 ### Class CurrentAccount extends Account

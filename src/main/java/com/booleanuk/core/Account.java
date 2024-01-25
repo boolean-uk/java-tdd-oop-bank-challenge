@@ -10,11 +10,11 @@ public class Account {
     private BankStatementGenerator bankStatementGenerator;
     private Branch branch;
 
-    public Account(int accountId, BankStatementGenerator bankStatementGenerator, Branch branch) {
+    public Account(int accountId, Branch branch) {
         this.accountId = accountId;
         this.balance = 0.0;
         transactions = new ArrayList<>();
-        this.bankStatementGenerator = bankStatementGenerator;
+        this.bankStatementGenerator = new BankStatementGenerator();
         this.branch = branch;
     }
 

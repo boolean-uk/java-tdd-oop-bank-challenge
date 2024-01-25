@@ -8,7 +8,7 @@ public class AccountTest {
     //User story 4
     @Test
     public void assertAmountIsAddedToBalance() {
-        Account account = new Account(123, new BankStatementGenerator(), Branch.PERSONAL);
+        Account account = new Account(123, Branch.PERSONAL);
         double originalBalance = account.getBalance();
         account.deposit(100);
         double newBalance =  account.getBalance();
@@ -18,7 +18,7 @@ public class AccountTest {
     //User story 5
     @Test
     public void assertBalanceIsSumOfAllTransactions() {
-        Account account = new Account(123, new BankStatementGenerator(), Branch.PERSONAL);
+        Account account = new Account(123, Branch.PERSONAL);
         account.deposit(100);
         account.withdraw(50);
         double expectedBalance = 50.0;
@@ -30,7 +30,7 @@ public class AccountTest {
     @Test
     public void assertBranchIsCorrect() {
         Branch expectedBranch = Branch.PERSONAL;
-        Account account = new Account(123, new BankStatementGenerator(), Branch.PERSONAL);
+        Account account = new Account(123, Branch.PERSONAL);
         Branch actualBranch = account.getBranch();
         Assertions.assertEquals(expectedBranch, actualBranch);
     }

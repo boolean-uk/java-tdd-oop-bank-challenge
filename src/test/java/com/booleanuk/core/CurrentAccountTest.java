@@ -9,7 +9,7 @@ public class CurrentAccountTest {
     @Test
     public void assertCurrentAccountWasCreated() {
         int accountId = 123;
-        CurrentAccount currentAccount = new CurrentAccount(accountId, new BankStatementGenerator());
+        CurrentAccount currentAccount = new CurrentAccount(accountId, Branch.PERSONAL);
         Assertions.assertEquals(accountId, currentAccount.getAccountId());
         Assertions.assertEquals(0.0, currentAccount.getBalance());
     }
@@ -17,7 +17,7 @@ public class CurrentAccountTest {
     //User story 4
     @Test
     public void assertAmountIsSubtractedFromBalance() {
-        CurrentAccount currentAccount = new CurrentAccount(123, new BankStatementGenerator());
+        CurrentAccount currentAccount = new CurrentAccount(123, Branch.PERSONAL);
         double originalBalance = currentAccount.getBalance();
         currentAccount.withdraw(100);
         double newBalance = currentAccount.getBalance();

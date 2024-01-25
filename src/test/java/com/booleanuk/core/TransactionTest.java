@@ -12,6 +12,12 @@ class TransactionTest {
     }
 
     @Test
+    public void getDateTimeString() {
+        Transaction transaction = new Transaction(100,100);
+        Assertions.assertEquals(transaction.getDateTime().toString().replace("T", " "), transaction.getDateTimeString());
+    }
+
+    @Test
     public void getAmount() {
         Transaction transaction = new Transaction(100, 100);
         Assertions.assertEquals(100, transaction.getAmount());

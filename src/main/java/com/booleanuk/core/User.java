@@ -87,7 +87,7 @@ public class User {
         for(Account account : this.accounts)
         {
             if(account.getAccountID().equals(ID))
-                return account.deposit((int)amount*100);
+                return account.deposit((int)(amount*100.0));
         }
         System.out.println("The account ID was not found!");
         return false;
@@ -98,7 +98,7 @@ public class User {
         for(Account account : this.accounts)
         {
             if(account.getAccountID().equals(ID))
-                return account.withdraw((int)amount*100);
+                return account.withdraw((int)(amount*100.0));
         }
         System.out.println("The account ID was not found!");
         return false;

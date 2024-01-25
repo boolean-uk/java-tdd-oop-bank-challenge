@@ -66,13 +66,13 @@ public class UserTest {
         LocalDate today = LocalDate.now();
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Groceries");
-        user.makeDeposit("cu-78105109112115111110-1", 1000.00);
-        user.makeWithdrawal("cu-78105109112115111110-1", 50.00);
+        user.makeDeposit("cu-78105109112115111110-1", 2000.00);
+        user.makeWithdrawal("cu-78105109112115111110-1", 0.50);
 
         String expectedString =
                 "date       || credit || debit || balance\n"
-                        + today +" || 1000.0 ||       ||  1000.0\n"
-                        + today + " ||        ||  50.0 ||   950.0";
+                        + today +" || 2000.0 ||       ||  2000.0\n"
+                        + today + " ||        ||   0.5 ||  1999.5";
         Assertions.assertEquals(expectedString, user.generateTransactionHistory("cu-78105109112115111110-1"));
     }
 

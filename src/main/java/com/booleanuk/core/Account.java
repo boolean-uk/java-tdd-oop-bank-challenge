@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Account {
 
+    private static final double maxLimit = 100000000.00;
+
     private final String accountName;
     private final int clearingNumber;
     private final int accountNumber;
@@ -12,17 +14,21 @@ public class Account {
     protected double minLimit;
     private List<BankStatement> statements;
 
-    public Account(String accountName, int clearingNumber, int accountNumber, double startingBalance) {
+    public Account(String accountName, int clearingNumber, int accountNumber) {
         this.accountName = accountName;
         this.clearingNumber = clearingNumber;
         this.accountNumber = accountNumber;
-        this.balance = startingBalance;
+        this.balance = 0.00;
         this.statements = new ArrayList<>();
     }
 
     public boolean changeBalance(double amount, String date) {
         double newBalance = this.balance + amount;
         String type;
+        if (newBalance >= maxLimit) {
+            System.out.print("Can't put in that much money, overrides the maximum limit.\n");
+            return false;
+        }
         if (newBalance < this.minLimit) {
             System.out.print("Can't withdraw that much money from that account!\n");
             return false;

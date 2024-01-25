@@ -25,6 +25,12 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 ```
+```
+5.
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+```
 
 ### Account Class
 

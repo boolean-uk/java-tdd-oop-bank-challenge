@@ -30,12 +30,20 @@ public class Customer {
     }
 
     public double showCurrentBalance(Account account) {
-        return account.getBalance();
+        double currentBalance = 0;
+        for (BankStatement statement : account.getStatements()) {
+            if (statement.getType().equals("credit")) {
+                currentBalance += statement.getAmount();
+            } else {
+                currentBalance -= statement.getAmount();
+            }
+        }
+        return currentBalance;
     }
 
     public String printBankStatements(Account account) {
         StringBuilder output = new StringBuilder();
-        int columnSpace = 9;
+        int columnSpace = 12;
         int spacesForBalance;
         int spacesForAmount;
         String amountString;
@@ -44,7 +52,7 @@ public class Customer {
         if (account.getStatements().isEmpty()) {
             return "No bank statements has been made for this account";
         }
-        output.append(" date      || credit   || debit    || balance  \n");
+        output.append("      date ||      credit ||       debit ||     balance \n");
         for (BankStatement statement : account.getStatements()) {
             amountString = String.format("%.2f", statement.getAmount());
             balanceString = String.format("%.2f", statement.getBalanceAfter());

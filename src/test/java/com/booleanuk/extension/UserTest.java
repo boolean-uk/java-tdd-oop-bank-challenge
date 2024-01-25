@@ -105,4 +105,17 @@ public class UserTest {
         user.makeWithdrawal("cu-78105109112115111110-1", -300);
         Assertions.assertEquals(700, user.getBalance("cu-78105109112115111110-1"));
     }
+
+    @Test
+    public void testRequestOverdraft()
+    {
+        LocalDate birthday = LocalDate.of(1956, 3, 19);
+        User user = new User("Large Nimpson", birthday);
+        user.createCurrentAccount("Groceries");
+
+        user.requestOverdraft("cu-78105109112115111110-1", 200);
+        Assertions.assertEquals(-200, user.getBalance("cu-78105109112115111110-1"));
+        user.requestOverdraft("cu-78105109112115111110-1", 600);
+        Assertions.assertEquals(-800, user.getBalance("cu-78105109112115111110-1"));
+    }
 }

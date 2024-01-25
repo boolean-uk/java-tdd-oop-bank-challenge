@@ -15,14 +15,16 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 
-| Classes     | Variables               | Method                |
-|-------------|-------------------------|-----------------------|
-| User        | String: id              |                       |
-|             | String: name            |                       |
-| Account     | String: accountType     |                       |
-|             | String: accountNumber   |                       |
-| Transaction | String: date            |                       |
-|             | double: credit          | getDebit(): double    |
-|             | double: debit           | getCredit(): double   |
-|             | LocalDateTime: dateTime | showBalance(): double |
-| Bank        | ArrayList<Account>      |                       |
+| Classes     | Variables               | Method                          |
+|-------------|-------------------------|---------------------------------|
+| User        | String: id              |                                 |
+|             | String: name            |                                 |
+| Account     | String: accountType     | deposit(): double               |
+|             | String: accountNumber   | withdraw(): String              |
+| Transaction | String: date            |                                 |
+|             | double: credit          | getDebit(): double              |
+|             | double: debit           | getCredit(): double             |
+|             | LocalDateTime: dateTime | getBalance(): double            |
+| Bank        | ArrayList<Account>      | createAccount(): boolean        |
+|             |                         | addTransaction():               |
+|             |                         | generateBankStatement(): String |

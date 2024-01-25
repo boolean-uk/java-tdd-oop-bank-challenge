@@ -31,7 +31,7 @@ public abstract class Account {
         }
         this.balance -= amount;
         this.transactions.add(new Transaction(-amount, this.balance));
-        return true;re
+        return true;
     }
 
     public double getBalance() {

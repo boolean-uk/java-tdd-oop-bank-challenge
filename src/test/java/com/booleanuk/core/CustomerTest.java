@@ -67,7 +67,6 @@ class CustomerTest {
 
         customer.withdraw(account, 7.5);
 
-        System.out.println(customer.generateBankStatement(account));
 
         StringBuilder test = new StringBuilder();
 
@@ -87,7 +86,13 @@ class CustomerTest {
         test.append("| ").append(String.format("%-9s", "-7.5\t\t |"));
         test.append("| ").append(String.format("%-9s", "80.5 |\n"));
 
-        System.out.println(test);
+        System.out.println(removeSpaces(customer.generateBankStatement(account)));
+        System.out.println(removeSpaces(test.toString()));
+
+        System.out.println((customer.generateBankStatement(account)));
+        System.out.println((test.toString()));
+
+
 
         Assertions.assertEquals(removeSpaces(test.toString()), (removeSpaces(customer.generateBankStatement(account))));
 

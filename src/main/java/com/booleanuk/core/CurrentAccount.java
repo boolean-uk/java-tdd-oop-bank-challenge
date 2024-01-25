@@ -7,7 +7,7 @@ public class CurrentAccount implements Account {
     private ArrayList<Transaction> transactions;
     private double balance;
     private final Customer customer;
-    private boolean isOverdrafted;
+
     private double lowerBalanceLimit;
 
     public CurrentAccount(Customer customer) {

@@ -61,5 +61,4 @@ public class SavingsAccount implements Account {
         this.balance = balance;
         return this.balance;
     }
-
 }

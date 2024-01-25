@@ -49,8 +49,4 @@ public class Bank {
     public ArrayList<Customer> getCustomerList() {
         return customerList;
     }
-
-    public ArrayList<Account> getAccountList() {
-        return accountList;
-    }
 }

@@ -33,18 +33,13 @@ public class Customer {
             System.out.println("You can't overdraft a savings account...");
         }
         if(account.getClass() == CurrentAccount.class) {
-            bank.requestOverdraft(this, (CurrentAccount) account, scanner);
-            requestSent = true;
+            requestSent = bank.requestOverdraft(this, (CurrentAccount) account, scanner);
         }
         return requestSent;
     }
 
     public ArrayList<Account> getAccounts() {
         return accounts;
-    }
-
-    public int getCustomerId() {
-        return customerId;
     }
 
     public String getName() {

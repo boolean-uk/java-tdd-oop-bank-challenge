@@ -88,4 +88,18 @@ public class CoreTest {
         Assertions.assertEquals(-500.0, customerAccount.getLowerBalanceLimit());
     }
 
+    @Test
+    public void denyOverdraftOnCurrentAccountTest() {
+        Customer customer = new Customer(123, "Tom", bank);
+        bank.getCustomerList().add(customer);
+        CurrentAccount customerAccount = new CurrentAccount(customer);
+        customer.getAccounts().add(customerAccount);
+        String userInput = "n";
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(userInput.getBytes());
+        scanner = new Scanner(inputStream);
+        boolean wasOverdrafted = customer.requestOverdraftOnAccount(customerAccount, scanner);
+        Assertions.assertFalse(wasOverdrafted);
+        Assertions.assertEquals(0, customerAccount.getLowerBalanceLimit());
+    }
+
 }

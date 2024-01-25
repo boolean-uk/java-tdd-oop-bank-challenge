@@ -1,4 +1,4 @@
-![classdiagram-v1.png](classdiagram-v1.png)
+![classDiagram.png](classDiagram.png)
 
 ```
 As a customer,
@@ -42,7 +42,6 @@ Account
 | method                  | object attribute                    | context                                                                                                  | output/return                            |
 |-------------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------|------------------------------------------|
 | transactionListToString | ArrayList<Transaction> transactions | Each account has a list of transactions. This method iterates over the list, and prints all transactions | (String) allTransactionsFormattedToPrint |
-|                         |                                     |                                                                                                          |                                          |
 
 
 ---
@@ -57,12 +56,10 @@ Customer
 | method                                  | object attributes           | context                                    | output/return       |
 |-----------------------------------------|-----------------------------|--------------------------------------------|---------------------|
 | deposit(Account account, double amount) | ArrayList<Account> accounts | calls deposit-method on the Account-object | (double) newBalance |
-|                                         |                             |                                            |                     |
 
 | method                                    | object attributes           | context                                     | output/return       |
 |-------------------------------------------|-----------------------------|---------------------------------------------|---------------------|
 | withdraw(Account, account, double amount) | ArrayList<Account> accounts | calls withdraw-method on the Account-object | (double) newBalance |
-|                                           |                             |                                             |                     |
 
 Account
 

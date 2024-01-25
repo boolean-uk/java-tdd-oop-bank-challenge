@@ -11,7 +11,12 @@ public class CurrentAccount extends Account{
     }
 
     public boolean requestOverdraft() {
-        return false;
+        if (this.overdraftRequested){
+            System.out.println("Overdraft already requested.");
+            return false;
+        }
+        this.overdraftRequested = true;
+        return true;
     }
 
     public void answearOverdraftRequest(boolean confirm, double overdraftAmount) {

@@ -1,20 +1,20 @@
 package com.booleanuk.core;
 
 public class BankStatement {
-    private String date;
+    private String transactionDate;
     private String type;
     private double amount;
     private double balanceAfter;
 
     public BankStatement(String date, String type, double amount, double balanceAfter) {
-        this.date = date;
+        this.transactionDate = date;
         this.type = type;
         this.amount = amount;
         this.balanceAfter = balanceAfter;
     }
 
-    public String getDate() {
-        return this.date;
+    public String getTransactionDate() {
+        return this.transactionDate;
     }
 
     public String getType() {

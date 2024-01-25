@@ -51,7 +51,7 @@ public class Customer {
             spacesForAmount = columnSpace - amountString.length();
             spacesForBalance = columnSpace - balanceString.length();
             /* Column 1 */
-            output.append(statement.getDate());
+            output.append(statement.getTransactionDate());
             output.append(" ||");
             if (statement.getType().equals("credit")) {
                 /* Column 2 */

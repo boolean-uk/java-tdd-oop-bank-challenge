@@ -37,10 +37,6 @@ public class Account {
         return true;
     }
 
-    public double getMinLimit() {
-        return this.minLimit;
-    }
-
     public String getAccountName() {
         return this.accountName;
     }
@@ -57,6 +53,9 @@ public class Account {
         return this.balance;
     }
 
+    public double getMinLimit() {
+        return this.minLimit;
+    }
     public List<BankStatement> getStatements() {
         return this.statements;
     }

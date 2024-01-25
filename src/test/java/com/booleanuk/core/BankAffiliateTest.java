@@ -7,7 +7,7 @@ public class BankAffiliateTest {
 
     @Test
     public void testCurrentAccountCreated() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "Current", "Oslo", 0.00);
+        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "", "Oslo", 0.00);
 
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccount);
 
@@ -18,12 +18,12 @@ public class BankAffiliateTest {
 
     @Test
     public void testCurrentAccountNotCreated() {
-        //BankAffiliate bankAffiliate = new BankAffiliate();
+        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "Current", "Oslo", 0.00);
 
-        //BankAccount bankAccount = new  BankAccount();
+        BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccount);
 
-        //boolean currentAccountNotCreated = bankAffiliate.createCurrentAccount(bankAccount);
+        boolean currentAccountNotCreated = bankAffiliate.createCurrentAccount(bankAccount);
 
-        //Assertions.assertFalse(currentAccountNotCreated);
+        Assertions.assertFalse(currentAccountNotCreated);
     }
 }

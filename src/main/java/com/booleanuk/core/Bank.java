@@ -21,18 +21,38 @@ public class Bank {
         return "";
     }
 
-    public boolean deposit(double amount) {
+    public double deposit(Account target, double amount) {
+
+        double balance = target.getBalance();
+        if (amount > 10) {
+            balance += amount;
+
+            return balance;
+
+        }
 
 
 
-        return false;
+        return balance;
     }
 
-    public boolean withdrawal(double amount) {
+    public double withdrawal(Account target, double amount) {
+
+        double balance = target.getBalance();
+        if (amount < balance) {
+            balance -= amount;
+
+            return balance;
+
+        }
 
 
 
-        return false;
+        return 0;
+
+
+
+
     }
 
 

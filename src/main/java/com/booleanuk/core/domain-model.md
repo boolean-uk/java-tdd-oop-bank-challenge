@@ -38,8 +38,8 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 
-| Classes | Methods                           | Members        | Scenario                                                                | Output     |
-|---------|-----------------------------------|----------------|-------------------------------------------------------------------------|------------|
-| Bank    | boolean deposit(double amount)    | double balance | user adds amount bigger than 10/user does not add amount bigger than 10 | true/false |
-|         | boolean withdrawal(double amount) | double balance | user adds positive amount/user adds negative amount                     | true/false |
-|         |                                   |                |                                                                         |            |
+| Classes | Methods                           | Members        | Scenario                                                                | Output          |
+|---------|-----------------------------------|----------------|-------------------------------------------------------------------------|-----------------|
+| Bank    | boolean deposit(double amount)    | double balance | user adds amount bigger than 10/user does not add amount bigger than 10 | balance/balance |
+|         | boolean withdrawal(double amount) | double balance | user adds positive amount/user adds negative amount                     | balance/balance |
+|         |                                   |                |                                                                         |                 |

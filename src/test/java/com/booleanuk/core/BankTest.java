@@ -47,8 +47,9 @@ public class BankTest {
     @Test
     void testDepositTrue() {
         Bank tester = new Bank();
-        boolean result = tester.deposit(50.00);
-        Assertions.assertTrue(result);
+        Account testAcc = new Current("232323", "ssss", 230);
+        double result = tester.deposit(testAcc, 50.00);
+        Assertions.assertEquals(280, result);
 
 
     }
@@ -57,8 +58,9 @@ public class BankTest {
     @Test
     void testDepositFalse() {
         Bank tester = new Bank();
-        boolean result = tester.deposit(50.00);
-        Assertions.assertFalse(result);
+        Account testAcc = new Current("232323", "ssss", 9.00);
+        double result = tester.deposit(testAcc, 9.00);
+        Assertions.assertEquals(9, result);
 
 
     }
@@ -66,8 +68,9 @@ public class BankTest {
     @Test
     void testWithdrawalTrue() {
         Bank tester = new Bank();
-        boolean result = tester.withdrawal(50.00);
-        Assertions.assertTrue(result);
+        Account testAcc = new Current("232323", "ssss", 900.00);
+        double result = tester.withdrawal(testAcc, 50.00);
+        Assertions.assertEquals(850, result);
 
 
     }
@@ -75,8 +78,9 @@ public class BankTest {
     @Test
     void testWithdrawalFalse() {
         Bank tester = new Bank();
-        boolean result = tester.withdrawal(50.00);
-        Assertions.assertTrue(result);
+        Account testAcc = new Current("232323", "ssss", 9.00);
+        double result = tester.withdrawal(testAcc, 50.00);
+        Assertions.assertEquals(0, result);
 
 
     }

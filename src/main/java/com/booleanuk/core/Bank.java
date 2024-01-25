@@ -96,10 +96,13 @@ public class Bank {
             if(customerAccount.getId() == accountId) {
                 if(customerAccount instanceof SavingsAccount) {
                     return "You can't have an overdraft on a savings account.";
+                } else if (((CurrentAccount) customerAccount).getAllowedOverdraft() >= amount) {
+                    return "You already have an approved overdraft for this account and amount.";
                 } else {
                     overdraftRequests.add(new OverdraftRequest(customer, accountId, amount));
                     return "Your request has been sent.";
                 }
+
             }
         }
 

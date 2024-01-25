@@ -37,4 +37,14 @@ public class CurrentAccountTest {
         currentAccount.deposit(4000);
         Assertions.assertNotEquals(savingsAccount.getBalance(),currentAccount.getBalance());
     }
+
+    @Test
+    public void testGenerateTransactionLog(){
+        currentAccount.setBalance(40000);
+        currentAccount.deposit(8000);
+        currentAccount.withdraw(2000);
+        currentAccount.withdraw(80);
+        currentAccount.withdraw(400);
+        System.out.println(currentAccount.getTransactionLog());
+    }
 }

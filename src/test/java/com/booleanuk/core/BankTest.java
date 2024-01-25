@@ -50,7 +50,7 @@ public class BankTest {
     /* Extension tests*/
 
     @Test
-    public void testGettingSavingsAccountFromABCBranch(){
+    public void testGettingSavingsAccountFromDEFBranch(){
         Bank bank = new Bank();
 
         bank.createCurrentAccount("John", Branch.DEF);
@@ -63,6 +63,13 @@ public class BankTest {
 
         Assertions.assertEquals(expected, bank.getAccountsInBranch(Branch.DEF));
 
+    }
+
+    @Test
+    public void testRequestingOverdraftToSavingsAccount(){
+        Bank bank = new Bank();
+        bank.createSavingsAccount("Joe", Branch.ABC);
+        Assertions.assertFalse(bank.requestOverdraft(1));
 
 
     }

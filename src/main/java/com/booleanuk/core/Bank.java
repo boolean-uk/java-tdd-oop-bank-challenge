@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Bank {
     private ArrayList<Account> accounts;
+    private ArrayList<Account> overdraftRequests;
     private int id;
     public Bank(){
         this.accounts = new ArrayList<>();
+        this.overdraftRequests = new ArrayList<>();
         id = 1;
     }
     public boolean createSavingsAccount(String accountHolder, Branch branch){
@@ -58,5 +60,9 @@ public class Bank {
             sb.append(s).append("\n");
         }
         return sb.toString();
+    }
+    public boolean requestOverdraft(int accountNumber){
+
+        return true;
     }
 }

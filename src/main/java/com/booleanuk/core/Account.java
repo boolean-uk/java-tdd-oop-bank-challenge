@@ -10,12 +10,14 @@ public abstract class Account {
     protected String accountHolder;
     protected ArrayList<BankStatement> bankStatements;
     protected Branch branch;
+    protected boolean overdraftApproved;
 
     public Account(int id, String accountHolder, Branch branch){
         this();
         this.id = id;
         this.accountHolder = accountHolder;
         this.branch = branch;
+
 
     }
     public Account(int id, String accountHolder){
@@ -26,6 +28,7 @@ public abstract class Account {
     }
     private Account(){
         bankStatements = new ArrayList<>();
+        this.overdraftApproved = false;
     }
     public boolean deposit(double amount){
         if(amount < 0){
@@ -67,6 +70,12 @@ public abstract class Account {
     }
     public Branch getBranch(){
         return this.branch;
+    }
+    public boolean getOverdraftApproved(){
+        return this.overdraftApproved;
+    }
+    public void setOverdraftApproved(boolean overdraftApproved){
+        this.overdraftApproved = overdraftApproved;
     }
     @Override
     public String toString() {

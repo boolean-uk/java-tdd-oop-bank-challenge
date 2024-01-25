@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BankAffiliate {
@@ -9,6 +10,13 @@ public class BankAffiliate {
     private String affiliation;
 
     private ArrayList<BankAccount> bankAccountList;
+
+    private ArrayList<Transaction> transactionList;
+
+
+    public BankAffiliate() {
+        transactionList = new ArrayList<>();
+    }
 
     public BankAffiliate(String fullName, String affiliation) {
         this.fullName = fullName;
@@ -37,13 +45,28 @@ public class BankAffiliate {
         return false;
     }
 
-    public double withdrawFunds(BankAccount bankAccount, double amount) {
-        return 400;
+    public double depositFunds(BankAccount bankAccount, double amount) {
+        double balance = bankAccount.getBalance() + amount;
+        bankAccount.setBalance(balance);
+
+        LocalDate currentDate = LocalDate.now();
+        Transaction transaction = new Transaction("Deposit", amount, currentDate, balance);
+        bankAccount.getTransactionList().add(transaction);
+
+        return balance;
     }
 
-    public double depositFunds(BankAccount bankAccount, double amount) {
-        return 600;
+    public double withdrawFunds(BankAccount bankAccount, double amount) {
+        double balance = bankAccount.getBalance() - amount;
+        bankAccount.setBalance(balance);
+
+        LocalDate currentDate = LocalDate.now();
+        Transaction transaction = new Transaction("Withdrawal", amount, currentDate, balance);
+        bankAccount.getTransactionList().add(transaction);
+
+        return balance;
     }
+
 
     public String getFullName() {
         return fullName;
@@ -67,5 +90,13 @@ public class BankAffiliate {
 
     public void setBankAccountList(ArrayList<BankAccount> bankAccountList) {
         this.bankAccountList = bankAccountList;
+    }
+
+    public ArrayList<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(ArrayList<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 }

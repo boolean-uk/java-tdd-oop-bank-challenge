@@ -4,26 +4,46 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class BankStatementTest {
 
     @Test
-    public void generateBankStatement() {
-        Date date = new Date();
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String formattedDate = dateFormat.format(date);
-
-        BankStatement bankStatement = new BankStatement(formattedDate, 100.00, 50.00);
-
+    public void generateBankStatementTest() {
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer");
+        BankAccount bankAccount = new BankAccount("James Bond", "12345", "Current Account", "Oslo", 1000.00);
+        BankStatement bankStatement = new BankStatement();
 
-        String expectedBankStatement = "";
+        // Perform transactions
+        bankAffiliate.depositFunds(bankAccount, 250);
+        bankAffiliate.depositFunds(bankAccount, 250);
+        bankAffiliate.withdrawFunds(bankAccount, 100);
+        bankAffiliate.withdrawFunds(bankAccount, 50);
 
-        String actualBankStatement = bankStatement.generateBankStatement(bankAffiliate);
+        String actualBankStatement = bankStatement.generateBankStatement(bankAffiliate, bankAccount);
+
+        LocalDate formattedDate = LocalDate.now();
+        String expectedBankStatement
+                ="\n"
+                + "Date       || Deposit  || Withdrawal || Balance\n"
+                + formattedDate + " || 250.00   ||            || 1250.00\n"
+                + formattedDate + " || 250.00   ||            || 1500.00\n"
+                + formattedDate + " ||          || 100.00     || 1400.00\n"
+                + formattedDate + " ||          || 50.00      || 1350.00\n";
+
+
+        expectedBankStatement = "\nDate       || Deposit  || Withdrawal || Balance\n" +
+                "2024-01-25 || 250.00   ||            || 1250.00\n" +
+                "2024-01-25 || 250.00   ||            || 1500.00\n" +
+                "2024-01-25 ||          || 100.00     || 1400.00\n" +
+                "2024-01-25 ||          || 50.00      || 1350.00\n";
+
+
 
         Assertions.assertEquals(expectedBankStatement, actualBankStatement);
+
+        //System.out.println(actualBankStatement);
     }
 }

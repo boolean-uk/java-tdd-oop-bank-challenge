@@ -59,6 +59,26 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void transferCredit() {
+        Customer customer = new Customer();
+        Account savingsAccount = new SavingsAccount();
+        Account currentAccount = new CurrentAccount();
+
+        Assertions.assertTrue(customer.createAccount(savingsAccount));
+        Assertions.assertTrue(customer.createAccount(currentAccount));
+
+        Assertions.assertEquals(0.00, customer.getAccount(currentAccount).getBalance());
+        Assertions.assertTrue(customer.deposit(currentAccount, 500.00));
+        Assertions.assertEquals(500.00, customer.getAccount(currentAccount).getBalance());
+
+        Assertions.assertFalse(customer.transferCredit(currentAccount, savingsAccount, 600.00));
+        Assertions.assertFalse(customer.transferCredit(currentAccount, savingsAccount, 400.00));
+        Assertions.assertEquals(400.00, customer.getAccount(savingsAccount).getBalance());
+        Assertions.assertEquals(100.00, customer.getAccount(currentAccount).getBalance());
+
+
+    }
 
 
 }

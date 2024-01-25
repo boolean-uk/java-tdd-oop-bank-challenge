@@ -14,7 +14,7 @@ class TransactionTest {
         Transaction transaction = new Transaction(new Date(), 100, TransactionType.WITHDRAW,1000);
         Assertions.assertEquals(new Date(), transaction.getDate());
         Assertions.assertEquals(100, transaction.getAmount());
-        Assertions.assertEquals(TransactionType.WITHDRAW, transaction.getType());
+        Assertions.assertEquals("Debit", transaction.getType());
         Assertions.assertEquals(1000, transaction.getBalance());
     }
 

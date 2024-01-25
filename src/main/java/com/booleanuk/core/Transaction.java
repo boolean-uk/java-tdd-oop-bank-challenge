@@ -23,8 +23,8 @@ public class Transaction {
         return this.amount;
     }
 
-    public TransactionType getType() {
-        return type;
+    public String getType() {
+        return type.toString();
     }
 
     public double getBalance() {

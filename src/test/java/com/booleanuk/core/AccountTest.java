@@ -41,4 +41,23 @@ public class AccountTest {
         Assertions.assertEquals(0, account.getBalance());
     }
 
+    @Test
+    public void maintainingCorrectBalanceTest() {
+        double a = 23.4322;
+        double b = 343.32342;
+        double c = 44.432;
+        double d = 432.002001;
+        double e = 22.119232;
+
+        account.deposit(a);
+        account.deposit(b);
+        account.deposit(b);
+        account.deposit(b);
+        account.withdraw(c);
+        account.deposit(d);
+        account.withdraw(e);
+
+        Assertions.assertEquals(a+b*3-c+d-e, account.getBalance());
+    }
+
 }

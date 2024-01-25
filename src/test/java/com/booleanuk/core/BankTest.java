@@ -165,4 +165,14 @@ public class BankTest {
         Assertions.assertEquals(-200, bank.getAccounts(customer).get(0).getBalance());
     }
 
+    @Test
+    public void customerRequestsOverdraftThatIsAlreadyApprovedTest() {
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
+        bank.approveAllOverdraftRequest();
+        Assertions.assertEquals("You already have an approved overdraft for this account and amount." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals("You already have an approved overdraft for this account and amount." , bank.requestsOverdraft(customer, accountId, 150));
+
+    }
+
 }

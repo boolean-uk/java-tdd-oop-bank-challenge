@@ -188,4 +188,13 @@ public class CurrentAccountTest {
         Assertions.assertEquals(-10.00, a.calculateBalance());
     }
 
+    @Test
+    public void shouldNotBePossibleToOverdraftAfterReject() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.requestOverdraft();
+        a.answerOverdraftRequest(false, 100.00);
+        Assertions.assertFalse(a.withdraw(10.00));
+    }
+
 }

@@ -28,8 +28,8 @@ public class BankTest {
     @Test
     void testCreateCurrent() {
         Bank tester = new Bank();
-        String result = tester.createCurrent();
-        Assertions.assertEquals("Hassan Hussain", result);
+        String result = tester.createCurrent("232323", "Hassan Hussain", 333);
+        Assertions.assertEquals("Your current account name is: Hassan Hussain", result);
 
 
 
@@ -38,16 +38,16 @@ public class BankTest {
     @Test
     void testCreateSavings() {
         Bank tester = new Bank();
-        String result = tester.createSavings();
-        Assertions.assertEquals("Hassan Hussain", result);
+        String result = tester.createSavings("232323", "Hassan Hussain", 333);
+        Assertions.assertEquals("Your savings account name is: Hassan Hussain", result);
 
     }
 
 
     @Test
     void testDepositTrue() {
-        Account user1 = new Savings("232323", "Hassan Hussain", 345.00);
-        boolean result = user1.deposit(50.00);
+        Bank tester = new Bank();
+        boolean result = tester.deposit(50.00);
         Assertions.assertTrue(result);
 
 
@@ -56,8 +56,8 @@ public class BankTest {
 
     @Test
     void testDepositFalse() {
-        Account user1 = new Savings("232323", "Hassan Hussain", 345.00);
-        boolean result = user1.deposit(1.00);
+        Bank tester = new Bank();
+        boolean result = tester.deposit(50.00);
         Assertions.assertFalse(result);
 
 
@@ -65,8 +65,8 @@ public class BankTest {
 
     @Test
     void testWithdrawalTrue() {
-        Account user1 = new Current("232323", "Hassan Hussain", 345.00);
-        boolean result = user1.withdrawal(50.00);
+        Bank tester = new Bank();
+        boolean result = tester.withdrawal(50.00);
         Assertions.assertTrue(result);
 
 
@@ -74,8 +74,8 @@ public class BankTest {
 
     @Test
     void testWithdrawalFalse() {
-        Account user1 = new Current("232323", "Hassan Hussain", 20.00);
-        boolean result = user1.withdrawal(50.00);
+        Bank tester = new Bank();
+        boolean result = tester.withdrawal(50.00);
         Assertions.assertTrue(result);
 
 

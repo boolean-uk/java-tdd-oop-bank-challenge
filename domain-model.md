@@ -236,3 +236,8 @@ So I can stay up to date,
 I want statements to be sent as messages to my phone.
 ```
 #### Twilio
+
+| Class   | Method              | Variables         | Scenario                                                                                                             | Return |
+|---------|---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------|--------|
+| Account | sendBankStatement() | Customer customer | SendBankStatement called, customers phonenumber found in customer class, getBankStatement String sent to phonenumber | Void   |
+|         |                     | transactions      |                                                                                                                      |        |

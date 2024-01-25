@@ -37,9 +37,4 @@ public class Bank {
     {
         this.funds = funds;
     }
-
-    public void newBranch(String name, String location)
-    {
-        this.branches.add(new Branch(name, location));
-    }
 }

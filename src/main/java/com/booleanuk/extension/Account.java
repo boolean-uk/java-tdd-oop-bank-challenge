@@ -6,7 +6,6 @@ public class Account {
     String accountName;
     String accountID;
     ArrayList<Transaction> transactions;
-    int balance;
     Branch branch;
 
     public Account(String accountName, Bank bank)
@@ -14,7 +13,6 @@ public class Account {
         this.accountName  = accountName;
         this.accountID    = "" ;    // Will get to that
         this.transactions = new ArrayList<>();
-        this.balance      = 0;
         this.branch       = bank.getBranch("Oslo_East");
         this.branch.addAccount(this.accountID);// Default branch in Oslo
     }
@@ -44,14 +42,9 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
     public boolean deposit(int amount)  {
         if(amount >= 0) {
             this.transactions.add(new Transaction(amount,true));
-            this.balance += amount;
             return true;
         }
         System.out.println("Cannot deposit negative value!");
@@ -122,7 +115,6 @@ public class Account {
     public boolean withdraw(int amount)  {
         if(amount >= 0) {
             this.transactions.add(new Transaction(amount,false));
-            this.balance -= amount;
             return true;
         }
         System.out.println("Cannot withdraw negative value!");

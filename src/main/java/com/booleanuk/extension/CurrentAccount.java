@@ -10,7 +10,6 @@ public class CurrentAccount extends Account {
         this.accountName  = name;
         this.accountID    = "cu-" + generateID(owner) + "-" + num;
         this.transactions = new ArrayList<>();
-        this.balance      = 0;
         this.branch       = bank.getBranch("Oslo_East"); // Default branch in Oslo
         this.branch.addAccount(this.accountID);
     }

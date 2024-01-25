@@ -3,12 +3,10 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
 public class BankChallengeTest {
     @Test
     public void testDeposit() {
-        Account _account = new Account(4, 10000.0);
+        SavingsAccount _account = new SavingsAccount("Generic Joe's Account", 10000.0);
 
         Assertions.assertEquals(Status.OK, _account.deposit(9000.0));
         Assertions.assertEquals(Status.EXCEEDED_BALANCE, _account.deposit(8000.0));
@@ -20,7 +18,7 @@ public class BankChallengeTest {
 
     @Test
     public void testWithdraw() {
-        Account _account = new Account(4, 10000.0);
+        Account _account = new SavingsAccount("Generic Joe's Account", 10000.0);
 
         _account.deposit(5000.0);
 
@@ -29,12 +27,14 @@ public class BankChallengeTest {
         Assertions.assertEquals(Status.OK, _account.withdraw(2000.0));
         Assertions.assertEquals(Status.BALANCE_TOO_SMALL, _account.withdraw(4000.0));
 
-        Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
-        Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
-        Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
+        Assertions.assertEquals(Status.OK, _account.withdraw(10.0));
+        Assertions.assertEquals(Status.OK, _account.withdraw(10.0));
+        Assertions.assertEquals(Status.OK, _account.withdraw(10.0));
+        Assertions.assertEquals(Status.OK, _account.withdraw(10.0));
+        Assertions.assertEquals(Status.OK, _account.withdraw(10.0));
         Assertions.assertEquals(Status.EXCEEDED_WITHDRAWAL_AMOUNT, _account.withdraw(100.0));
 
-        Assertions.assertEquals(2700.0, _account.getBalance(), 0.0001);
+        Assertions.assertEquals(2950.0, _account.getBalance(), 0.0001);
 
         //System.out.println(Arrays.toString(_account.getBankStatement()));
     }

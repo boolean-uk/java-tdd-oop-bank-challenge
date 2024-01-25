@@ -86,13 +86,11 @@ I want to deposit and withdraw funds.
 | Customer creates a savings account                             | Adds a savings account to the customers accounts list.                                         |
 | Customer creates a current account                             | Adds a current account to the customer accounts list.                                          |
 |                                                                |                                                                                                |
-| Customer generates bank statements for a specific account      | Prints out a all bank statements made for that account.                                        |
-| Customer generates bank statements for newly created account   | Prints "No bank statements has been made for this account".                                    |
-|                                                                |                                                                                                |
 | Customer deposits £500 to a savings account                    | Returns true. Adds £500 to the account and creates a bank statement.                           |
 | Customer withdraws £300 from a savings account. Balance = £500 | Returns true. Removes £300 from the account and creates a bank statement.                      |
 | Customer withdraws £300 from a savings account. Balance = £200 | Returns false and prints "Can't withdraw that much money". No bank statement is created.       |
 | Customer withdraws £300 from a current account. Balance = £200 | Return true. Removes £300 (new balance = -£100) from the account and creates a bank statement. |
 |                                                                |                                                                                                |
-
+| Customer generates bank statements for a specific account      | Prints out a all bank statements made for that account.                                        |
+| Customer generates bank statements for newly created account   | Prints "No bank statements has been made for this account".                                    |
                                                                               |

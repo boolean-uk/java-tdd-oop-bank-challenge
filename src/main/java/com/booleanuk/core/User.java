@@ -11,13 +11,26 @@ public class User {
     private CurrentAccount current;
     private SavingsAccount savings;
 
+    private Bank bank;
+
+    public User(String name, String email, Bank bank){
+        this.id = setId();
+        this.name = setName(name);
+        this.email = setEmail(email);
+        this.current = null;
+        this.savings = null;
+        this.bank = bank;
+    }
+
     public User(String name, String email){
         this.id = setId();
         this.name = setName(name);
         this.email = setEmail(email);
         this.current = null;
         this.savings = null;
+        this.bank = null;
     }
+
     public int setId(){
         return lastAssignedId++;
     }
@@ -27,6 +40,10 @@ public class User {
     }
     public void createSavingsAccount(){
         this.savings = new SavingsAccount();
+    }
+
+    public String getBankBranch(){
+        return this.bank.getBranch();
     }
 
     public int getId(){

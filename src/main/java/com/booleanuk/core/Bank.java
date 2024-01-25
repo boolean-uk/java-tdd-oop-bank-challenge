@@ -53,4 +53,8 @@ public class Bank {
         }
         return "Account doesn't exist.";
     }
+
+    public String withdraw(int amount, Customer customer, int accountId) {
+        return "Customer doesn't exist.";
+    }
 }

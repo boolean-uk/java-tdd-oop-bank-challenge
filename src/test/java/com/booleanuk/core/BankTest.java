@@ -55,5 +55,11 @@ public class BankTest {
         Assertions.assertEquals(2, bank.getAccounts(customer).get(0).getBalance());
     }
 
+    @Test
+    public void nonExistentCustomerTriesToWithdrawTest() {
+        String expected = "Customer doesn't exist.";
+        Assertions.assertEquals(expected, bank.withdraw(2, customer, 123));
+    }
+
 
 }

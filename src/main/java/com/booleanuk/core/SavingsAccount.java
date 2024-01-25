@@ -31,6 +31,28 @@ public class SavingsAccount implements Account {
         return record.toString();
     }
 
+    public boolean deposit(double amount) {
+        if(amount < 0) {
+            System.out.println("can't deposit negativ amount.");
+            return false;
+        } else {
+            this.balance += amount;
+            return true;
+        }
+    }
+
+    public boolean withdraw(double amount) {
+        if(amount < 0) {
+            System.out.println("can't withdraw negative amount.");
+            return false;
+        } else if (this.balance - amount < 0){
+            System.out.println("can't have negative balance.");
+            return false;
+        } else {
+            this.balance -= amount;
+            return true;
+        }
+    }
     public double getBalance() {
         return balance;
     }

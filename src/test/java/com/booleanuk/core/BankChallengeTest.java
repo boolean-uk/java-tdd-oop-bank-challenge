@@ -71,14 +71,17 @@ public class BankChallengeTest {
     @Test
     public void testDepositing() {
         CurrentAccount current1 = new CurrentAccount();
+        CurrentAccount current2 = new CurrentAccount();
         SavingsAccount savings1 = new SavingsAccount();
+        SavingsAccount savings2 = new SavingsAccount();
 
-        current1.depostit(100.0);
+        current1.deposit(100.0);
         savings1.deposit(10000.0);
 
         Assertions.assertEquals(100.0, current1.getBalance());
-
         Assertions.assertEquals(10000.0, savings1.getBalance());
+        Assertions.assertFalse(current2.deposit(-100.0));
+        Assertions.assertFalse(savings2.deposit(-10000.0));
 
     }
     @Test
@@ -87,14 +90,16 @@ public class BankChallengeTest {
         CurrentAccount current2 = new CurrentAccount(10.0);
         SavingsAccount savings1 = new SavingsAccount(100000.0);
         SavingsAccount savings2 = new SavingsAccount(1000.0);
+        SavingsAccount savings3 = new SavingsAccount(10000.0);
+
 
         Assertions.assertTrue(current1.withdraw(100.0));
-        Assertions.assertTrue(current2.withdraw(100.0));
-        Assertions.assertTrue(current2.withdraw(1000.0));
+        Assertions.assertFalse(current2.withdraw(100.0));
 
         Assertions.assertTrue(savings1.withdraw(10000.0));
         Assertions.assertFalse(savings2.withdraw(10000.0));
-
+        savings3.withdraw(10000.0);
+        Assertions.assertEquals(0.0, savings3.getBalance());
 
     }
 

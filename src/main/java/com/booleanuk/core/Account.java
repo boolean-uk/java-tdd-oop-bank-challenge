@@ -5,6 +5,8 @@ public interface Account {
 
     String getRecords();
 
+    boolean deposit(double amount);
+    boolean withdraw(double amount);
     double getBalance();
     void setBalance(double balance);
 

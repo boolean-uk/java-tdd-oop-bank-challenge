@@ -9,7 +9,7 @@ public class CurrentAccountTest {
     private User user;
     @BeforeEach
     void setUp(){
-        user = new User(777,"Thomas","Oslo");
+        user = new User("Thomas","Oslo");
         currentAccount = new CurrentAccount(user);
     }
 
@@ -20,31 +20,31 @@ public class CurrentAccountTest {
 
     @Test
     public void testDepositSavingsAccount(){
-        currentAccount.deposit(4000);
-        Assertions.assertEquals(4000, currentAccount.getBalance());
+        currentAccount.deposit(4000d);
+        Assertions.assertEquals(4000d, currentAccount.getBalance());
     }
 
     @Test
     public void testWithdrawSavingsAccount(){
-        currentAccount.deposit(8000);
-        currentAccount.withdraw(2000);
-        Assertions.assertEquals(6000, currentAccount.getBalance());
+        currentAccount.deposit(8000d);
+        currentAccount.withdraw(2000d);
+        Assertions.assertEquals(6000d, currentAccount.getBalance());
     }
 
     @Test
     public void testSavingAndCurrentIsDifferent(){
         SavingsAccount savingsAccount = new SavingsAccount(user);
-        currentAccount.deposit(4000);
+        currentAccount.deposit(4000d);
         Assertions.assertNotEquals(savingsAccount.getBalance(),currentAccount.getBalance());
     }
 
     @Test
     public void testGenerateTransactionLog(){
-        currentAccount.setBalance(40000);
-        currentAccount.deposit(8000);
-        currentAccount.withdraw(2000);
-        currentAccount.withdraw(80);
-        currentAccount.withdraw(400);
+        currentAccount.setBalance(40000d);
+        currentAccount.deposit(8000d);
+        currentAccount.withdraw(2000d);
+        currentAccount.withdraw(80d);
+        currentAccount.withdraw(400.689);
         System.out.println(currentAccount.getTransactionLog());
     }
 }

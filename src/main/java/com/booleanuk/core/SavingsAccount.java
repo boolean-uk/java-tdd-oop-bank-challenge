@@ -1,7 +1,7 @@
 package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
-    private int balance;
+    private double balance;
     public SavingsAccount(User user) {
         super(user);
         this.balance = getBalance();

@@ -10,7 +10,7 @@ public class SavingsAccountTest {
 
     @BeforeEach
     void setUp(){
-        user = new User(777, "Thomas", "Oslo");
+        user = new User("Thomas", "Oslo");
         savingsAccount = new SavingsAccount(user);
     }
 

@@ -12,7 +12,7 @@ public class AccountTest {
 
     @BeforeEach
     void setUp(){
-        user = new User(286, "Thomas", "Oslo");
+        user = new User("Thomas", "Oslo");
         account = new Account(user);
     }
 

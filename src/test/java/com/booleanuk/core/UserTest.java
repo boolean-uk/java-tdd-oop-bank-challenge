@@ -8,11 +8,11 @@ public class UserTest {
     private User user;
     @BeforeEach
     void setUp(){
-        user = new User(286, "Thomas", "Oslo");
+        user = new User("Thomas", "Oslo");
     }
     @Test
     public void testGetUserAttributes(){
-        Assertions.assertEquals(286, user.getId());
+        System.out.println(user.getId());
         Assertions.assertEquals("Thomas", user.getName());
         Assertions.assertEquals("Oslo", user.getBranch());
     }

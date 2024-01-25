@@ -4,16 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Account {
-    private int balance;
-    private int overdraft;
+    private double balance;
+    private double overdraft;
     private StringBuilder transactionLog;
     private User user;
 
     public Account(User user){
         this.user = user;
 
-        this.balance = 0;
-        this.overdraft = 0;
+        this.balance = 0d;
+        this.overdraft = 0d;
         this.transactionLog = new StringBuilder();
         createLogHeader();
     }
@@ -23,35 +23,35 @@ public class Account {
                 ,"Withdrew"," || ","New Balance", " || ", "Date \n" ));
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public int getOverdraft() {
+    public double getOverdraft() {
         return overdraft;
     }
 
 
-    public void withdraw(int amount){
+    public void withdraw(double amount){
         if (getBalance() > overdraft){
             setBalance(this.balance - amount);
-            logTransactions(0,amount);
+            logTransactions(0d,amount);
         }
         else {
             System.out.println("Insufficient funds");
         }
     }
 
-    public void deposit(int amount){
+    public void deposit(double amount){
         setBalance(this.balance + amount);
-        logTransactions(amount,0);
+        logTransactions(amount,0d);
     }
 
-    public void logTransactions(int withdrawAmount, int depositAmount){
+    public void logTransactions(double withdrawAmount, double depositAmount){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Date currentDate = new Date();
 

@@ -16,7 +16,7 @@ class AccountTest {
 
     @Test
     public void testAdd(){
-        Account account = new SavingsAccount();
+        Account account = new SavingsAccount(Branch.COPENHAGEN);
 
         //Add
         Assertions.assertEquals(0, account.getBalance());
@@ -27,7 +27,7 @@ class AccountTest {
 
     @Test
     public void testRemove(){
-        Account account = new SavingsAccount();
+        Account account = new SavingsAccount(Branch.COPENHAGEN);
 
         account.add(500);
         account.remove(200);
@@ -37,7 +37,7 @@ class AccountTest {
 
     @Test
     public void testGetTransactions(){
-        Account account = new SavingsAccount();
+        Account account = new SavingsAccount(Branch.COPENHAGEN);
         account.add(500);
         account.remove(200);
         Assertions.assertEquals(300, account.getBalance());
@@ -52,17 +52,17 @@ class AccountTest {
 
     @Test
     public void testGetAccountNr(){
-        Account account = new SavingsAccount();
-        Account account2 = new CurrentAccount();
+        Account account = new SavingsAccount(Branch.COPENHAGEN);
+        Account account2 = new CurrentAccount(Branch.COPENHAGEN);
         Assertions.assertEquals(1, account.getAccountNr());
         Assertions.assertEquals(2, account2.getAccountNr());
     }
 
     @Test
     public void testGetBranch(){
-        com.booleanuk.core.Account account = new com.booleanuk.core.SavingsAccount(GOTHENBURG);
+        com.booleanuk.core.Account account = new SavingsAccount(Branch.GOTHENBURG);
 
-        Assertions.assertEquals(GOTHENBURG, account.getBranch());
+        Assertions.assertEquals(Branch.GOTHENBURG, account.getBranch());
 
     }
 

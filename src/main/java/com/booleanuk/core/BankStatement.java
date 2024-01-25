@@ -1,10 +1,11 @@
 package com.booleanuk.core;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class BankStatement {
+public class BankStatement implements Serializable {
 
     private LocalDate date;
     private double currentBalance;

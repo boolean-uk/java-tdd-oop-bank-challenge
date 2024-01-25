@@ -1,10 +1,11 @@
 package com.booleanuk.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public abstract class Account {
+public abstract class Account implements Serializable {
     protected double balance;
     protected int id;
     protected String accountHolder;

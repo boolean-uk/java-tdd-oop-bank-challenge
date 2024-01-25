@@ -1,39 +1,40 @@
 package com.booleanuk.core;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 
 public class Transaction {
-    private Date date;
-    private String type;
+    private String transactionType;
     private double amount;
-    private double balance;
+    private Date date;
 
-    public Transaction(String date, String type, double amount) {
-        try {
-            this.date = new SimpleDateFormat("dd-MM-yyyy").parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.type = type;
+    public Transaction(String transactionType, double amount) {
+        this.transactionType = transactionType;
         this.amount = amount;
-
+        this.date = new Date();
     }
 
-    public String getDate() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(date);
-    }
-
-    public String getType() {
-        return type;
+    public String getTransactionType() {
+        return transactionType;
     }
 
     public double getAmount() {
         return amount;
     }
 
+    public String getDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.format(date);
+    }
+
+    public String getCredit() {
+        return transactionType.equals("Deposit") ? String.format("%.2f", amount) : "";
+    }
+
+    public String getDebit() {
+        return transactionType.equals("Withdrawal") ? String.format("%.2f", amount) : "";
+    }
+
     public double getBalance() {
-        return balance;
+        return amount;
     }
 }

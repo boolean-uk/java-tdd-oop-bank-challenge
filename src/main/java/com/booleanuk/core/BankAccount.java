@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BankAccount {
     private String accountType;
-    private double balance;
+    double balance;
     private List<Transaction> transactions;
 
     public BankAccount(String accountType) {

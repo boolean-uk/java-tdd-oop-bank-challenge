@@ -15,9 +15,9 @@ public class BankAffiliate {
     }
 
     public boolean createCurrentAccount(BankAccount bankAccount) {
-        if(!bankAccount.getAccountType().contains("Current")
+        if(!bankAccount.getAccountType().contains("Current Account")
             || bankAccount.getAccountType().isEmpty()) {
-            this.bankAccount.setAccountType("Current");
+            this.bankAccount.setAccountType("Current Account");
             return true;
         }
         return false;

@@ -65,11 +65,11 @@ public class BankAccount {
         this.balance = balance;
     }
 
-    public void addTransaction(Transaction transaction) {
-        transactionList.add(transaction);
-    }
-
     public ArrayList<Transaction> getTransactionList() {
         return transactionList;
+    }
+
+    public void setTransactionList(ArrayList<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 }

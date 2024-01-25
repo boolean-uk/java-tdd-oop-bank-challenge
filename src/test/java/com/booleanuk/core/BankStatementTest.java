@@ -25,16 +25,8 @@ public class BankStatementTest {
         String actualBankStatement = bankStatement.generateBankStatement(bankAffiliate, bankAccount);
 
         LocalDate formattedDate = LocalDate.now();
-        String expectedBankStatement
-                ="\n"
-                + "Date       || Deposit  || Withdrawal || Balance\n"
-                + formattedDate + " || 250.00   ||            || 1250.00\n"
-                + formattedDate + " || 250.00   ||            || 1500.00\n"
-                + formattedDate + " ||          || 100.00     || 1400.00\n"
-                + formattedDate + " ||          || 50.00      || 1350.00\n";
 
-
-        expectedBankStatement = "\nDate       || Deposit  || Withdrawal || Balance\n" +
+        String expectedBankStatement = "\nDate       || Deposit  || Withdrawal || Balance\n" +
                 "2024-01-25 || 250.00   ||            || 1250.00\n" +
                 "2024-01-25 || 250.00   ||            || 1500.00\n" +
                 "2024-01-25 ||          || 100.00     || 1400.00\n" +

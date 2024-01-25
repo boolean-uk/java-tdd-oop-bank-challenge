@@ -42,18 +42,18 @@ Version 2
 
 Version 3
 
-| Class         | Member Variables                       | Methods                                               | Scenario                                  | Result/Output                                            |
-|---------------|----------------------------------------|-------------------------------------------------------|-------------------------------------------|----------------------------------------------------------|
-| BankAccount   | String accountHolder                   |                                                       |                                           |                                                          |
-|               | String accountNumber                   |                                                       |                                           |                                                          |
-|               | String accountType                     |                                                       |                                           |                                                          |
-|               | String accountBranch                   |                                                       |                                           |                                                          |
-|               | double balance                         |                                                       |                                           |                                                          |
-|               |                                        |                                                       |                                           |                                                          |
-| BankAffiliate | String fullName                        | boolean createCurrentAccount(BankAccount bankAccount) | If current account is not already created | Add current account to bank account list and return true |
-|               | String affiliation                     |                                                       | If current account is already created     | Return false                                             |
-|               | ArrayList<BankAccount> bankAccountList |                                                       |                                           |                                                          |
-|               |                                        |                                                       |                                           |                                                          |
+| Class         | Member Variables                       | Methods                                                      | Scenario                                  | Result/Output                                            |
+|---------------|----------------------------------------|--------------------------------------------------------------|-------------------------------------------|----------------------------------------------------------|
+| BankAccount   | String accountHolder                   |                                                              |                                           |                                                          |
+|               | String accountNumber                   |                                                              |                                           |                                                          |
+|               | String accountType                     |                                                              |                                           |                                                          |
+|               | String accountBranch                   |                                                              |                                           |                                                          |
+|               | double balance                         |                                                              |                                           |                                                          |
+|               |                                        |                                                              |                                           |                                                          |
+| BankAffiliate | String fullName                        | boolean createCurrentAccount(BankAccount currentBankAccount) | If current account is not already created | Add current account to bank account list and return true |
+|               | String affiliation                     |                                                              | If current account is already created     | Return false                                             |
+|               | ArrayList<BankAccount> bankAccountList |                                                              |                                           |                                                          |
+|               |                                        |                                                              |                                           |                                                          |
 
 
 
@@ -83,18 +83,18 @@ Version 1
 
 Version 2
 
-| Class         | Member Variables                       | Methods                                               | Scenario                                  | Result/Output                                            |
-|---------------|----------------------------------------|-------------------------------------------------------|-------------------------------------------|----------------------------------------------------------|
-| BankAccount   | String accountHolder                   |                                                       |                                           |                                                          |
-|               | String accountNumber                   |                                                       |                                           |                                                          |
-|               | String accountType                     |                                                       |                                           |                                                          |
-|               | String accountBranch                   |                                                       |                                           |                                                          |
-|               | double balance                         |                                                       |                                           |                                                          |
-|               |                                        |                                                       |                                           |                                                          |
-| BankAffiliate | String fullName                        | boolean createSavingsAccount(BankAccount bankAccount) | If savings account is not already created | Add savings account to bank account list and return true |
-|               | String affiliation                     |                                                       | If savings account is already created     | Return false                                             |
-|               | ArrayList<BankAccount> bankAccountList |                                                       |                                           |                                                          |
-|               |                                        |                                                       |                                           |                                                          |
+| Class         | Member Variables                       | Methods                                                      | Scenario                                  | Result/Output                                            |
+|---------------|----------------------------------------|--------------------------------------------------------------|-------------------------------------------|----------------------------------------------------------|
+| BankAccount   | String accountHolder                   |                                                              |                                           |                                                          |
+|               | String accountNumber                   |                                                              |                                           |                                                          |
+|               | String accountType                     |                                                              |                                           |                                                          |
+|               | String accountBranch                   |                                                              |                                           |                                                          |
+|               | double balance                         |                                                              |                                           |                                                          |
+|               |                                        |                                                              |                                           |                                                          |
+| BankAffiliate | String fullName                        | boolean createSavingsAccount(BankAccount savingsBankAccount) | If savings account is not already created | Add savings account to bank account list and return true |
+|               | String affiliation                     |                                                              | If savings account is already created     | Return false                                             |
+|               | ArrayList<BankAccount> bankAccountList |                                                              |                                           |                                                          |
+|               |                                        |                                                              |                                           |                                                          |
 
 
 ## User Story 3
@@ -119,6 +119,20 @@ Version 1
 |                                   | String accountType   |                                                           |                                                                                              |                                    |
 |                                   | String accountBranch |                                                           |                                                                                              |                                    |
 |                                   | double balance       |                                                           |                                                                                              |                                    |
+
+Version 2
+
+| Class                             | Member Variables     | Methods                                                                            | Scenario                                                                                     | Result/Output                      |
+|-----------------------------------|----------------------|------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|------------------------------------|
+| BankStatement extends BankAccount | Date transactionDate | String generateBankStatement(BankAffiliate bankAffiliate, BankAccount bankAccount) | Generate bank statement with transaction dates, amount and balance at the time of generation | Outputs bank statement as a String |
+|                                   | double amount        |                                                                                    |                                                                                              |                                    |
+|                                   | double balance       |                                                                                    |                                                                                              |                                    |
+|                                   |                      |                                                                                    |                                                                                              |                                    |
+| BankAccount                       | String accountHolder |                                                                                    |                                                                                              |                                    |
+|                                   | String accountNumber |                                                                                    |                                                                                              |                                    |
+|                                   | String accountType   |                                                                                    |                                                                                              |                                    |
+|                                   | String accountBranch |                                                                                    |                                                                                              |                                    |
+|                                   | double balance       |                                                                                    |                                                                                              |                                    |
 
 
 ## User Story 4

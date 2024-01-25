@@ -25,6 +25,8 @@ public class BankStatement {
         this.balance = balance;
     }
 
+    //User Story 3
+    //Comment: Somehow fails on my machine, but passes on GitHub and on Dave's machine.
     public String generateBankStatement(BankAffiliate bankAffiliate, BankAccount bankAccount) {
         //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Format the date as "dd/MM/yyyy"
         StringBuilder bankStatementOutput = new StringBuilder();
@@ -52,12 +54,6 @@ public class BankStatement {
 
         return bankStatementOutput.toString();
     }
-
-
-
-
-
-
 
     public String getTransactionDate() {
         return transactionDate;

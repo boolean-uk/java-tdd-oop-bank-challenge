@@ -3,17 +3,18 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 
 public class Transaction {
-    private LocalDateTime dateTime;
+    LocalDateTime dateTime;
     private int amount;
     private int balance;
 
     public Transaction(int amount, int balance) {
         this.amount = amount;
         this.balance = balance;
+        this.dateTime = LocalDateTime.now();
     }
 
     public LocalDateTime getDateTime() {
-        return this.dateTime;
+        return this.dateTime.minusNanos(this.dateTime.getNano());
     }
 
     public int getAmount() {

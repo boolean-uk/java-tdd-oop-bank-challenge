@@ -64,13 +64,13 @@ public class BankTest {
 		bank.getAccount("0").deposit(1000);
 		statement =
 				"date       || credit  ||  debit  || balance\n" +
-						date + " ||  1000.0 ||         || 1000.0";
+						date + " ||  1000.0 ||         ||  1000.0";
 		Assertions.assertEquals(statement, bank.generateStatements("0"));
 		bank.getAccount("0").deposit(2000);
 		statement =
 				"date       || credit  ||  debit  || balance\n" +
-						date + " ||  2000.0 ||         || 3000.0\n" +
-						date + " ||  1000.0 ||         || 1000.0";
+						date + " ||  2000.0 ||         ||  3000.0\n" +
+						date + " ||  1000.0 ||         ||  1000.0";
 		Assertions.assertEquals(statement, bank.generateStatements("0"));
 		try {
 			bank.getAccount("0").withdraw(500);
@@ -79,9 +79,19 @@ public class BankTest {
 		}
 		statement =
 				"date       || credit  ||  debit  || balance\n" +
-						date + " ||         ||   500.0 || 2500.0\n" +
-						date + " ||  2000.0 ||         || 3000.0\n" +
-						date + " ||  1000.0 ||         || 1000.0";
+						date + " ||         ||   500.0 ||  2500.0\n" +
+						date + " ||  2000.0 ||         ||  3000.0\n" +
+						date + " ||  1000.0 ||         ||  1000.0";
+		Assertions.assertEquals(statement, bank.generateStatements("0"));
+
+			bank.getAccount("0").deposit(5000000);
+
+		statement =
+				"date       || credit  ||  debit  || balance\n" +
+						date + " || 5000000.0 ||           || 5002500.0\n" +
+						date + " ||           ||     500.0 ||    2500.0\n" +
+						date + " ||    2000.0 ||           ||    3000.0\n" +
+						date + " ||    1000.0 ||           ||    1000.0";
 		Assertions.assertEquals(statement, bank.generateStatements("0"));
 	}
 

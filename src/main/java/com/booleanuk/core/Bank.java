@@ -59,20 +59,25 @@ public class Bank {
 
 
 	public String generateStatements(String accountId) {
-		StringBuilder sb = new StringBuilder("date       || credit  ||  debit  || balance\n");
 		Account acc = getAccount(accountId);
 		ArrayList<Statement> statements = new ArrayList<>(acc.getStatements());
 		Collections.reverse(statements);
+
+		double maxWidth = 7;
+		if (maxWidth < findMaxAmountWidth(statements)) {
+			maxWidth = findMaxAmountWidth(statements);
+		}
 		double balance = getBalance(accountId);
+		StringBuilder sb = new StringBuilder("date       || credit  ||  debit  || balance\n");
 		for (Statement statement : statements) {
 			if (statement.getType().equals("deposit")) {
 				sb.append(String.format("%-10s", statement.getDate()));
 				sb.append(" || ");
-				sb.append(String.format("%7s", statement.getAmount()));
+				sb.append(String.format("%" + (int) maxWidth + "s", statement.getAmount()));
 				sb.append(" || ");
-				sb.append(String.format("%7s", ""));
+				sb.append(String.format("%" + (int) maxWidth + "s", ""));
 				sb.append(" || ");
-				sb.append(String.format("%-6s", balance));
+				sb.append(String.format("%" + (int) maxWidth + "s", balance));
 				balance -= statement.getAmount();
 				sb.append("\n");
 
@@ -80,11 +85,11 @@ public class Bank {
 			if (statement.getType().equals("withdraw")) {
 				sb.append(String.format("%-10s", statement.getDate()));
 				sb.append(" || ");
-				sb.append(String.format("%7s", ""));
+				sb.append(String.format("%" + (int) maxWidth + "s", ""));
 				sb.append(" || ");
-				sb.append(String.format("%7s", statement.getAmount()));
+				sb.append(String.format("%" + (int) maxWidth + "s", statement.getAmount()));
 				sb.append(" || ");
-				sb.append(String.format("%-6s", balance));
+				sb.append(String.format("%" + (int) maxWidth + "s", balance));
 				balance += statement.getAmount();
 				sb.append("\n");
 
@@ -93,6 +98,18 @@ public class Bank {
 		sb.deleteCharAt(sb.length() - 1);
 
 		return sb.toString();
+	}
+
+	private double findMaxAmountWidth(ArrayList<Statement> statements) {
+		double maxAmount = 0.0;
+
+		for (Statement statement : statements) {
+			double amount = Math.abs(statement.getAmount());
+			if (amount > maxAmount) {
+				maxAmount = amount;
+			}
+		}
+		return Math.ceil(Math.log10(maxAmount))+2;
 	}
 
 	public double getBalance(String accountId) {

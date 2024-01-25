@@ -12,6 +12,13 @@ public abstract class Account {
         }
     }
     public boolean withdraw(double amount){
-        return true;
+        if(amount > balance){
+            return false;
+        }
+        else{
+            balance -= amount;
+            return true;
+        }
+
     }
 }

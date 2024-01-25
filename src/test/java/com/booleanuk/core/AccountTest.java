@@ -16,4 +16,11 @@ public class AccountTest {
         Account account = new CurrentAccount();
         Assertions.assertFalse(account.withdraw(200));
     }
+
+    @Test
+    public void testWithdrawingFromAccountWithSufficientFunds(){
+        Account account = new CurrentAccount();
+        account.deposit(1000);
+        Assertions.assertTrue(account.withdraw(200));
+    }
 }

@@ -9,7 +9,7 @@ class BankManagerTest {
 
     @Test
     public void testDecideRequest(){
-        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount());
+        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount(Branch.GOTHENBURG));
         BankManager manager = new BankManager();
 
         Assertions.assertEquals("request accepted", manager.decideRequest(request, true));

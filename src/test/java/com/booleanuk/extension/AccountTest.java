@@ -60,7 +60,7 @@ class AccountTest {
 
     @Test
     public void testGetBranch(){
-        com.booleanuk.core.Account account = new SavingsAccount(Branch.GOTHENBURG);
+        Account account = new SavingsAccount(Branch.GOTHENBURG);
 
         Assertions.assertEquals(Branch.GOTHENBURG, account.getBranch());
 

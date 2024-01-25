@@ -9,7 +9,7 @@ class OverDraftRequestTest {
 
     @Test
     public void testAcceptRequest(){
-        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount());
+        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount(Branch.GOTHENBURG));
 
         Assertions.assertTrue(request.isPending());
         Assertions.assertFalse(request.isAccepted());
@@ -22,7 +22,7 @@ class OverDraftRequestTest {
     }
     @Test
     public void testDeclineRequest(){
-        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount());
+        OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount(Branch.GOTHENBURG));
 
         Assertions.assertTrue(request.isPending());
         Assertions.assertFalse(request.isAccepted());

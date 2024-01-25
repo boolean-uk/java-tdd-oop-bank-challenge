@@ -7,9 +7,12 @@ public abstract class Account {
     private static int lastAccountNumber = 0;
     private int accountNr;
     private double balance;
+    private Branch branch;
     private List<Transaction> transactions;
 
-    public Account() {
+
+    public Account(Branch branch) {
+        this.branch = branch;
         this.accountNr = lastAccountNumber + 1;
         lastAccountNumber ++;
         this.balance = 0;
@@ -48,6 +51,10 @@ public abstract class Account {
 
     public int getAccountNr() {
         return accountNr;
+    }
+
+    public Branch getBranch() {
+        return branch;
     }
 
     //Only for testing purposes

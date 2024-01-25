@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class CurrentAccountTest {
     @Test
     public void testSetLimit(){
-        CurrentAccount account = new CurrentAccount();
+        CurrentAccount account = new CurrentAccount(Branch.GOTHENBURG);
 
         //negative number
         Assertions.assertFalse(account.setOverDraftLimit(-100));
@@ -20,7 +20,7 @@ class CurrentAccountTest {
 
     @Test
     public void testAddWithLimit(){
-        CurrentAccount account = new CurrentAccount();
+        CurrentAccount account = new CurrentAccount(Branch.GOTHENBURG);
 
         Assertions.assertFalse(account.remove(50));
 

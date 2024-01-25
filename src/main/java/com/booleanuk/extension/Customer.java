@@ -12,12 +12,12 @@ public class Customer {
         requests = new ArrayList<>();
     }
 
-    public boolean createAccount(String type){
+    public boolean createAccount(String type, Branch branch){
         if (type.equalsIgnoreCase("Savings")){
-            savingsAccount = new SavingsAccount();
+            savingsAccount = new SavingsAccount(branch);
             return true;
         } else if (type.equalsIgnoreCase("Current")){
-            currentAccount = new CurrentAccount();
+            currentAccount = new CurrentAccount(branch);
             return true;
         }
         System.out.println("Invalid account type");

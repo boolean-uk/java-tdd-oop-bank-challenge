@@ -83,9 +83,9 @@ public class CurrentAccountTest {
         Transaction transaction = a.transactions.get(0);
         Transaction transaction1 = a.transactions.get(1);
         String bankStatement = a.getBankStatement();
-        Assertions.assertTrue(bankStatement.contains("Date\t\t\t\t|| Credit\t|| Balance"));
-        Assertions.assertTrue(bankStatement.contains(transaction.getDateTimeString() + "\t|| " + 100.00 + "\t|| " + 100.00));
-        Assertions.assertTrue(bankStatement.contains(transaction1.getDateTimeString() + "\t|| " + -20.00 + "\t|| " + 80.00));
+        Assertions.assertTrue(bankStatement.contains("Date\t\t\t\t|| Credit\t|| Debit\t|| Balance"));
+        Assertions.assertTrue(bankStatement.contains(transaction.getDateTimeString() + "\t|| " + 100.00 + "\t|| " + "\t|| " + 100.00));
+        Assertions.assertTrue(bankStatement.contains(transaction1.getDateTimeString() + "\t|| " + "\t|| " + 20.00 + "\t|| " + 80.00));
     }
 
     @Test
@@ -95,4 +95,5 @@ public class CurrentAccountTest {
         String bankStatement = a.getBankStatement();
         Assertions.assertEquals("No transactions made yet in this account.", bankStatement);
     }
+
 }

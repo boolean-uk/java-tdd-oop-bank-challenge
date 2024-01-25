@@ -24,4 +24,10 @@ public class User {
     public ArrayList<Account> getAccounts() {
         return accounts;
     }
+
+    public int createAccount(String accountType) {
+        Account newAccount = new Account(this);
+        this.accounts.add(newAccount);
+        return newAccount.getAccountNumber();
+    }
 }

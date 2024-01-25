@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Account {
-    int accountNumber;
+    int accountNumber = 0;
     User owner;
     int balance;
     ArrayList<Transaction> transactions;

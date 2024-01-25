@@ -14,7 +14,7 @@ public class Transaction {
         this.date = new Date();
         this.amount = amount;
         this.account = account;
-        this.balance = account.getBalance();
+        this.balance = account.getBalance()+amount;
     }
 
     @Override

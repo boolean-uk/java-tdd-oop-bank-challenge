@@ -7,11 +7,14 @@ public class CurrentAccount implements Account {
     private ArrayList<Transaction> transactions;
     private double balance;
     private final Customer customer;
+    private boolean isOverdrafted;
+    private double lowerBalanceLimit;
 
     public CurrentAccount(Customer customer) {
         this.customer = customer;
         this.transactions = new ArrayList<>();
         this.balance = 0;
+        this.lowerBalanceLimit = 0;
     }
 
 
@@ -27,7 +30,7 @@ public class CurrentAccount implements Account {
 
     @Override
     public double withdraw(double amount) {
-        if(amount < 0) {
+        if(amount < lowerBalanceLimit) {
             this.transactions.add(new Transaction(amount, this));
             return setBalance(this.balance-amount);
         } else {
@@ -60,5 +63,13 @@ public class CurrentAccount implements Account {
     private double setBalance(double balance) {
         this.balance = balance;
         return this.balance;
+    }
+
+    public void setOverdrafted() {
+        this.lowerBalanceLimit = -500;
+    }
+
+    public double getLowerBalanceLimit() {
+        return lowerBalanceLimit;
     }
 }

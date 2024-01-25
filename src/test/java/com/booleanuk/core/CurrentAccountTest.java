@@ -176,4 +176,16 @@ public class CurrentAccountTest {
         System.setOut(standardOut);
     }
 
+    @Test
+    public void shouldBePossibleToOverdraftAfterConfirm() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.requestOverdraft();
+        Assertions.assertFalse(a.withdraw(10.00));
+
+        a.answerOverdraftRequest(true, 100.00);
+        Assertions.assertTrue(a.withdraw(10.00));
+        Assertions.assertEquals(-10.00, a.calculateBalance());
+    }
+
 }

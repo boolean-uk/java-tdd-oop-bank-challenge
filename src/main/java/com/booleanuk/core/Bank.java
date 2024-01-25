@@ -48,7 +48,11 @@ public class Bank {
     }
 
     public boolean deposit(String accountNr, double amount) {
-        return true;
+        if (accounts.containsKey(accountNr)){
+            accounts.get(accountNr).addTransactions(amount);
+            return true;
+        }
+        return false;
     }
 
     public double withdraw(String accountNr, double amount) {

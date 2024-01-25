@@ -1,9 +1,18 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class CurrentAccountTest {
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+
     @Test
     public void createAccount() {
         User user = new User(123456, "UsersName");
@@ -130,6 +139,41 @@ public class CurrentAccountTest {
         CurrentAccount a = new CurrentAccount(user);
         a.requestOverdraft();
         Assertions.assertFalse(a.requestOverdraft());
+    }
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
+    @Test
+    public void answerOverdraftRequestWithConfirm() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.requestOverdraft();
+        a.answerOverdraftRequest(true, 100.00);
+        Assertions.assertFalse(a.getOverdraftRequested());
+        Assertions.assertEquals(100.00, a.getOverdraftAmount());
+        a.answerOverdraftRequest(true, 100.00);
+        Assertions.assertEquals("The owner has not requested overdraft.", outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void answerOverdraftRequestWithRejection() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.answerOverdraftRequest(false, 100.00);
+        Assertions.assertEquals("The owner has not requested overdraft.", outputStreamCaptor.toString().trim());
+
+        a.requestOverdraft();
+        a.answerOverdraftRequest(false, 100.00);
+        Assertions.assertFalse(a.getOverdraftRequested());
+        Assertions.assertEquals(0.00, a.getOverdraftAmount());
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
     }
 
 }

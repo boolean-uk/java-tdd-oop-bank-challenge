@@ -173,11 +173,18 @@ Class Account
 
 
 
+## User story 2 Extension
 
 
+Class Account
 
 
-
+| Class variables | Method | Scenario | Return |
+|-----------------|--------|----------|--------|
+| String branch   |        |          |        |
+|                 |        |          |        |
+|                 |        |          |        |
+|                 |        |          |        |
 
 
 

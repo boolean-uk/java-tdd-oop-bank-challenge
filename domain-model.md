@@ -23,6 +23,7 @@ I want to deposit and withdraw funds.
 |                 |                                     |                      |                        |              |
 | Account         | addFunds(amount)                    | double balance       | If withdraw < balance  | return true  |
 |                 | viewTransactions()                  | double amount        | If withdraw > balance  | return false |
+|                 |                                     | type                 |                        |              |
 |                 |                                     | List<Transactions>   |                        |              |
 |                 |                                     |                      |                        |              |
 | CurrentAccount  | withdraw(amount)                    |                      |                        |              |

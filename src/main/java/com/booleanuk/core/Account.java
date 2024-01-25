@@ -31,6 +31,7 @@ public class Account {
             return false;
         }
         balance -= amount;
+        statements.add(new Statement(new Date(), amount, balance));
         return true;
     }
 

@@ -103,6 +103,30 @@ public class CustomerTest {
     }
 
     @Test
+    public void printBankStatementsFromArray() {
+
+        Customer customer = new Customer();
+
+        Account account = new Account("AccountName1", Branches.Oslo);
+
+        customer.createAccount(account);
+
+        Assertions.assertEquals(0.00, customer.getAccount(account).getBalance());
+        Assertions.assertEquals(new ArrayList<BankStatement>(), customer.getAccount(account).getBankStatements());
+        Assertions.assertTrue(customer.getAccount(account).deposit(500));
+        Assertions.assertTrue(customer.getAccount(account).withdraw(100));
+
+        LocalDate date = LocalDate.now();
+
+
+        Assertions.assertEquals("\n    Date        Debit       Credit     Balance\n" +
+                date +" ||          ||    500.0 ||     500.0\n" +
+                date +" ||    500.0 ||          ||    2000.0\n", customer.getAccount(account).printBankStatements());
+
+    }
+
+
+    @Test
     public void requestOverdraft() {
         Customer customer = new Customer();
 
@@ -110,8 +134,14 @@ public class CustomerTest {
 
         BankManager bankManager = new BankManager();
 
-        Assertions.assertTrue(customer.requestOverdraft(currentAccount, bankManager));
+        Overdraft overdraft = new Overdraft(500);
 
+        Assertions.assertTrue(customer.requestOverdraft(currentAccount, bankManager, overdraft));
+
+        Assertions.assertTrue(bankManager.getOverdraftRequests().contains(overdraft));
     }
+
+
+
 
 }

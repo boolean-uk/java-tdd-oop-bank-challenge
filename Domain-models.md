@@ -205,12 +205,12 @@ Class BankManager
 Class Customer
 
 
-| Class variables | Method                                                               | Scenario                                                     | Return  |
-|-----------------|----------------------------------------------------------------------|--------------------------------------------------------------|---------|
-|                 | requestOverdraft(CurrentAccount currentAccount, BankManager manager) | Sends request for overdraft of CurrentAccount to BankManager | boolean |
-|                 |                                                                      |                                                              |         |
-|                 |                                                                      |                                                              |         |
-|                 |                                                                      |                                                              |         |
+| Class variables | Method                                                                                    | Scenario                                                     | Return  |
+|-----------------|-------------------------------------------------------------------------------------------|--------------------------------------------------------------|---------|
+|                 | requestOverdraft(CurrentAccount currentAccount, BankManager manager, Overdraft overdraft) | Sends request for overdraft of CurrentAccount to BankManager | boolean |
+|                 |                                                                                           |                                                              |         |
+|                 |                                                                                           |                                                              |         |
+|                 |                                                                                           |                                                              |         |
 
 
 Class Overdraft

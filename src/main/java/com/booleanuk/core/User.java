@@ -26,7 +26,12 @@ public class User {
     }
 
     public int createAccount(String accountType) {
-        Account newAccount = new Account(this);
+        if (accountType.equals("Current")) {
+            CurrentAccount newAccount = new CurrentAccount(this);
+            this.accounts.add(newAccount);
+            return newAccount.getAccountNumber();
+        }
+        SavingsAccount newAccount = new SavingsAccount(this);
         this.accounts.add(newAccount);
         return newAccount.getAccountNumber();
     }

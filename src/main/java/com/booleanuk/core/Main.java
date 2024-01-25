@@ -7,5 +7,9 @@ public class Main {
 
         User user = new User(123456, "UserName");
         System.out.println(user.createAccount("Current"));
+        System.out.println(user.getAccounts().get(0).getClass());
+
+        user.createAccount("Savings");
+        System.out.println(user.getAccounts().get(1).getClass());
     }
 }

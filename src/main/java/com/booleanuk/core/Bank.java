@@ -73,6 +73,9 @@ public class Bank {
     }
 
     public String generateBankStatements(Customer customer, int accountId) {
-        return "Customer doesn't exist.";
-    }
+        if(!accounts.containsKey(customer)) {
+            return "Customer doesn't exist.";
+        }
+
+        return "Account doesn't exist.";    }
 }

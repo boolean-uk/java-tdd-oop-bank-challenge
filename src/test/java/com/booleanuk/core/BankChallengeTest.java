@@ -66,4 +66,37 @@ public class BankChallengeTest {
         Assertions.assertTrue(savingsRecords.length() > 195 );
 
     }
+
+
+    @Test
+    public void testDepositing() {
+        CurrentAccount current1 = new CurrentAccount();
+        SavingsAccount savings1 = new SavingsAccount();
+
+        current1.depostit(100.0);
+        savings1.deposit(10000.0);
+
+        Assertions.assertEquals(100.0, current1.getBalance());
+
+        Assertions.assertEquals(10000.0, savings1.getBalance());
+
+    }
+    @Test
+    public void testWithdrawing() {
+        CurrentAccount current1 = new CurrentAccount(200.0);
+        CurrentAccount current2 = new CurrentAccount(10.0);
+        SavingsAccount savings1 = new SavingsAccount(100000.0);
+        SavingsAccount savings2 = new SavingsAccount(1000.0);
+
+        Assertions.assertTrue(current1.withdraw(100.0));
+        Assertions.assertTrue(current2.withdraw(100.0));
+        Assertions.assertTrue(current2.withdraw(1000.0));
+
+        Assertions.assertTrue(savings1.withdraw(10000.0));
+        Assertions.assertFalse(savings2.withdraw(10000.0));
+
+
+    }
+
+
 }

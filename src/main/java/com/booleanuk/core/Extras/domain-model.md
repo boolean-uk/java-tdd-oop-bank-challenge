@@ -24,6 +24,7 @@
 |                  | generateBankStatement() | void    | Sys.out |
 |                  | deposit()               | boolean | void    |
 |                  | withdraw()              | boolean | Sys.out |
+|                  | requestOverdraft()      | boolean | Sys.out |
 
 
 

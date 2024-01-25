@@ -62,7 +62,7 @@ public abstract class Person {
                     System.out.printf("%-11s|| %-9s|| %-8s|| %-8s%n", "date", "credit", "debit", "balance");
                     Collections.reverse(account.getTransactionHistory());
                     for(Transaction t : account.getTransactionHistory()) {
-                        System.out.printf("%-11s|| %9.2f|| %8.2f|| %8.2f%n", t.getDate(), t.getCredit(), t.getDebit(), t.getBalance());
+                        System.out.printf("%-11s|| %9s|| %8s|| %8.2f%n", t.getDate(), t.getCredit() == 0.0 ? "" : String.valueOf(t.getCredit()), t.getDebit() == 0.0 ? "" : String.valueOf(t.getDebit()), t.getBalance());
                     }
                 }
                 System.out.println("**Transaction Statement was made by**");
@@ -82,7 +82,7 @@ public abstract class Person {
                     System.out.printf("%-11s|| %-9s|| %-8s|| %-8s%n", "date", "credit", "debit", "balance");
                     Collections.reverse(account.getTransactionHistory());
                     for(Transaction t : account.getTransactionHistory()) {
-                        System.out.printf("%-11s|| %9.2f|| %8.2f|| %8.2f%n", t.getDate(), t.getCredit(), t.getDebit(), t.getBalance());
+                        System.out.printf("%-11s|| %9s|| %8s|| %8.2f%n", t.getDate(), t.getCredit() == 0.0 ? "" : String.valueOf(t.getCredit()), t.getDebit() == 0.0 ? "" : String.valueOf(t.getDebit()), t.getBalance());
                     }
                 }
                 System.out.println("Transaction Statement was made by:");

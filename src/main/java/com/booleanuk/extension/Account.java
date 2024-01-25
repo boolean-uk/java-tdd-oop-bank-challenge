@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.extension;
 
 import java.util.ArrayList;
 
@@ -7,6 +7,7 @@ public class Account {
     String accountID;
     ArrayList<Transaction> transactions;
     int balance;
+    String branchID;
 
     public Account(String accountName)
     {
@@ -14,6 +15,7 @@ public class Account {
         this.accountID = "" ; // Will get to that
         this.transactions = new ArrayList<>();
         this.balance = 0;
+        this.branchID = "Unspecified";
     }
 
     public String getAccountName() {
@@ -41,7 +43,12 @@ public class Account {
     }
 
     public int getBalance() {
-        return this.balance;
+        int balance = 0;
+        for(Transaction t : this.transactions)
+        {
+            balance = t.isDeposit() ? balance + t.getAmount() : balance - t.getAmount();
+        }
+        return balance;
     }
 
     public void setBalance(int balance) {
@@ -126,5 +133,11 @@ public class Account {
         }
         System.out.println("Cannot withdraw negative value!");
         return false;
+    }
+
+    public boolean assignBranch(Branch branch)
+    {
+        return true;
+        //return this.branchID = branch.getID();
     }
 }

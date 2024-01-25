@@ -95,7 +95,8 @@ public class CustomerTest {
 
 
 
-        Assertions.assertEquals("\n2024-01-25 ||          ||    500.0 ||     500.0\n" +
+        Assertions.assertEquals("\n    Date        Debit       Credit     Balance\n" +
+                "2024-01-25 ||          ||    500.0 ||     500.0\n" +
                 "2024-01-25 ||    500.0 ||          ||    2000.0\n", customer.getAccount(currentAccount).printBankStatements());
 
     }

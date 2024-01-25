@@ -54,6 +54,7 @@ public class Account {
 
     public String printBankStatements() {
         String returnString = "\n";
+        returnString += String.format("%8s %12s %12s %12s", "Date", "Debit", "Credit", "Balance\n");
         for (BankStatement statement : bankStatements) {
             returnString += statement.getStatementAsString();
         }

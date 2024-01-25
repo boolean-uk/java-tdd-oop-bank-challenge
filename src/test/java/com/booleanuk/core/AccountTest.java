@@ -14,4 +14,11 @@ public class AccountTest {
         Assertions.assertEquals(15, account.getBalance());
     }
 
+    @Test
+    public void depositInvalidAmount() {
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertFalse(account.deposit(-15));
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
 }

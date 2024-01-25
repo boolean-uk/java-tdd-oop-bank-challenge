@@ -23,6 +23,10 @@ public class BankAffiliate {
         return false;
     }
 
+    public boolean createSavingsAccount(BankAccount bankAccount) {
+        return true;
+    }
+
     public String getFullName() {
         return fullName;
     }

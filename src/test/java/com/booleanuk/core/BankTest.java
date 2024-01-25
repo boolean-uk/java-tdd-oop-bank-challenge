@@ -14,12 +14,28 @@ public class BankTest {
 		Assertions.assertEquals(0, bank.getAccountsCurr().size());
 		bank.createAccountCurr(new AccountCurr("0", branch));
 		Assertions.assertEquals(1, bank.getAccountsCurr().size());
-		Assertions.assertEquals("0", bank.getAccount("0").getAccountId());
-		Assertions.assertEquals("123456", bank.getAccount("0").getBranch());
+		try {
+			Assertions.assertEquals("0", bank.getAccount("0").getAccountId());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals("123456", bank.getAccount("0").getBranch());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 		bank.createAccountCurr(new AccountCurr("1", branch));
 		Assertions.assertEquals(2, bank.getAccountsCurr().size());
-		Assertions.assertEquals("1", bank.getAccount("1").getAccountId());
-		Assertions.assertEquals("123456", bank.getAccount("1").getBranch());
+		try {
+			Assertions.assertEquals("1", bank.getAccount("1").getAccountId());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals("123456", bank.getAccount("1").getBranch());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Test
@@ -29,12 +45,28 @@ public class BankTest {
 		Assertions.assertEquals(0, bank.getAccountsSave().size());
 		bank.createAccountSave(new AccountSave("0", branch));
 		Assertions.assertEquals(1, bank.getAccountsSave().size());
-		Assertions.assertEquals("0", bank.getAccount("0").getAccountId());
-		Assertions.assertEquals("123456", bank.getAccount("0").getBranch());
+		try {
+			Assertions.assertEquals("0", bank.getAccount("0").getAccountId());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals("123456", bank.getAccount("0").getBranch());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 		bank.createAccountSave(new AccountSave("1", branch));
 		Assertions.assertEquals(2, bank.getAccountsSave().size());
-		Assertions.assertEquals("1", bank.getAccount("1").getAccountId());
-		Assertions.assertEquals("123456", bank.getAccount("1").getBranch());
+		try {
+			Assertions.assertEquals("1", bank.getAccount("1").getAccountId());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals("123456", bank.getAccount("1").getBranch());
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Test
@@ -42,12 +74,32 @@ public class BankTest {
 		String branch = "123456";
 		Bank bank = new Bank();
 		bank.createAccountCurr(new AccountCurr("0", branch));
-		Assertions.assertEquals(0, bank.getBalance("0"));
+		try {
+			Assertions.assertEquals(0, bank.getBalance("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 
-		bank.getAccount("0").deposit(1000);
-		Assertions.assertEquals(1000, bank.getBalance("0"));
-		bank.getAccount("0").deposit(2000);
-		Assertions.assertEquals(3000, bank.getBalance("0"));
+		try {
+			bank.getAccount("0").deposit(1000);
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals(1000, bank.getBalance("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			bank.getAccount("0").deposit(2000);
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			Assertions.assertEquals(3000, bank.getBalance("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Test
@@ -60,21 +112,41 @@ public class BankTest {
 		bank.createAccountCurr(new AccountCurr("0", branch));
 		statement =
 				"date       || credit  ||  debit  || balance";
-		Assertions.assertEquals(statement, bank.generateStatements("0"));
-		bank.getAccount("0").deposit(1000);
+		try {
+			Assertions.assertEquals(statement, bank.generateStatements("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			bank.getAccount("0").deposit(1000);
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 		statement =
 				"date       || credit  ||  debit  || balance\n" +
 						date + " ||  1000.0 ||         ||  1000.0";
-		Assertions.assertEquals(statement, bank.generateStatements("0"));
-		bank.getAccount("0").deposit(2000);
+		try {
+			Assertions.assertEquals(statement, bank.generateStatements("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			bank.getAccount("0").deposit(2000);
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 		statement =
 				"date       || credit  ||  debit  || balance\n" +
 						date + " ||  2000.0 ||         ||  3000.0\n" +
 						date + " ||  1000.0 ||         ||  1000.0";
-		Assertions.assertEquals(statement, bank.generateStatements("0"));
+		try {
+			Assertions.assertEquals(statement, bank.generateStatements("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 		try {
 			bank.getAccount("0").withdraw(500);
-		} catch (OverdraftException e) {
+		} catch (OverdraftException | InvalidAccountIdException e) {
 			throw new RuntimeException(e);
 		}
 		statement =
@@ -82,9 +154,17 @@ public class BankTest {
 						date + " ||         ||   500.0 ||  2500.0\n" +
 						date + " ||  2000.0 ||         ||  3000.0\n" +
 						date + " ||  1000.0 ||         ||  1000.0";
-		Assertions.assertEquals(statement, bank.generateStatements("0"));
+		try {
+			Assertions.assertEquals(statement, bank.generateStatements("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 
+		try {
 			bank.getAccount("0").deposit(5000000);
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 
 		statement =
 				"date       ||   credit  ||    debit  || balance\n" +
@@ -92,7 +172,11 @@ public class BankTest {
 				date +    " ||           ||     500.0 ||    2500.0\n" +
 				date +    " ||    2000.0 ||           ||    3000.0\n" +
 				date +    " ||    1000.0 ||           ||    1000.0";
-		Assertions.assertEquals(statement, bank.generateStatements("0"));
+		try {
+			Assertions.assertEquals(statement, bank.generateStatements("0"));
+		} catch (InvalidAccountIdException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 

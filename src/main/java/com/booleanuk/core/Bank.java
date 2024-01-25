@@ -41,13 +41,13 @@ public class Bank {
 		return requests;
 	}
 
-	public Account getAccount(String accountId) {
+	public Account getAccount(String accountId) throws InvalidAccountIdException {
 		if (accountsCurr.containsKey(accountId))
 			return accountsCurr.get(accountId);
 		if (accountsSave.containsKey(accountId))
 			return accountsSave.get(accountId);
 
-		throw new RuntimeException();
+		throw new InvalidAccountIdException(accountId);
 	}
 
 	public AccountCurr getAccountCurr(String accountId) {
@@ -58,7 +58,7 @@ public class Bank {
 	}
 
 
-	public String generateStatements(String accountId) {
+	public String generateStatements(String accountId) throws InvalidAccountIdException {
 		Account acc = getAccount(accountId);
 		ArrayList<Statement> statements = new ArrayList<>(acc.getStatements());
 		Collections.reverse(statements);
@@ -118,7 +118,7 @@ public class Bank {
 		return Math.ceil(Math.log10(maxAmount)) + 2;
 	}
 
-	public double getBalance(String accountId) {
+	public double getBalance(String accountId) throws InvalidAccountIdException {
 		return getAccount(accountId).calcBalance();
 	}
 

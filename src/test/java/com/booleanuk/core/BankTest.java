@@ -85,6 +85,41 @@ public class BankTest {
 
     }
 
+    @Test
+    void testGetDepositDate() {
+        Bank tester = new Bank();
+        Account testAcc = new Current("232323", "ssss", 9.00);
+        double result = tester.withdrawal(testAcc, 50.00);
+        Assertions.assertEquals(0, result);
+
+
+    }
+
+    @Test
+    void testBankStatementsWithHistory() {
+        Bank tester = new Bank();
+        Account testAcc = new Current("232323", "ssss", 500.00);
+        tester.withdrawal(testAcc, 50.00);
+        tester.deposit(testAcc, 500.00);
+        tester.withdrawal(testAcc, 200.00);
+        tester.deposit(testAcc, 300.00);
+
+        String result = tester.bankStatement();
+        Assertions.assertEquals("shdhhfhsbehd", result);
+
+    }
+
+    @Test
+    void testBankStatementsWithoutHistory() {
+        Bank tester = new Bank();
+        Account testAcc = new Current("232323", "ssss", 500.00);
+
+        String result = tester.bankStatement();
+        Assertions.assertEquals("You have no history.", result);
+
+
+    }
+
 
 
 

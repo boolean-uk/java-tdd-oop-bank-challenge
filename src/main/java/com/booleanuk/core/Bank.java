@@ -1,6 +1,17 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bank {
+
+    private List<Transactions> transactionsList;
+
+
+    public Bank() {
+        this.transactionsList = new ArrayList<>();
+    }
 
 
     public String createCurrent(String accountNumber, String name, double balance) {
@@ -25,6 +36,10 @@ public class Bank {
 
         double balance = target.getBalance();
         if (amount > 10) {
+
+            LocalDateTime currentDate = LocalDateTime.now();
+            Transactions transaction = new Transactions("Deposit", amount, currentDate);
+            transactionsList.add(transaction);
             balance += amount;
 
             return balance;
@@ -37,10 +52,15 @@ public class Bank {
     }
 
     public double withdrawal(Account target, double amount) {
-
         double balance = target.getBalance();
         if (amount < balance) {
+
+            LocalDateTime currentDate = LocalDateTime.now();
+            Transactions transaction = new Transactions("Withdrawal", amount, currentDate);
+            transactionsList.add(transaction);
+
             balance -= amount;
+
 
             return balance;
 
@@ -53,6 +73,23 @@ public class Bank {
 
 
 
+    }
+
+    public String bankStatement() {
+        StringBuilder output = new StringBuilder();
+        if (transactionsList.size() > 0) {
+
+            output.append("G");
+
+
+            return output.toString();
+        }
+
+
+
+
+
+        return "You have no history.";
     }
 
 

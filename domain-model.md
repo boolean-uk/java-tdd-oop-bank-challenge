@@ -108,18 +108,18 @@ I want to generate bank statements with transaction dates, amounts, and balance 
 
 Version 1
 
-| Class                             | Member Variables     | Methods                        | Scenario                                                                                     | Result/Output                      |
-|-----------------------------------|----------------------|--------------------------------|----------------------------------------------------------------------------------------------|------------------------------------|
-| BankStatement extends BankAccount | Date transactionDate | String generateBankStatement() | Generate bank statement with transaction dates, amount and balance at the time of generation | Outputs bank statement as a String |
-|                                   | double amount        |                                |                                                                                              |                                    |
-|                                   | double balance       |                                |                                                                                              |                                    |
-|                                   |                      |                                |                                                                                              |                                    |
-| BankAccount                       | String accountHolder |                                |                                                                                              |                                    |
-|                                   | String accountNumber |                                |                                                                                              |                                    |
-|                                   | String accountType   |                                |                                                                                              |                                    |
-|                                   | String accountBranch |                                |                                                                                              |                                    |
-|                                   | double balance       |                                |                                                                                              |                                    |
-|
+| Class                             | Member Variables     | Methods                                                   | Scenario                                                                                     | Result/Output                      |
+|-----------------------------------|----------------------|-----------------------------------------------------------|----------------------------------------------------------------------------------------------|------------------------------------|
+| BankStatement extends BankAccount | Date transactionDate | String generateBankStatement(BankAffiliate bankAffiliate) | Generate bank statement with transaction dates, amount and balance at the time of generation | Outputs bank statement as a String |
+|                                   | double amount        |                                                           |                                                                                              |                                    |
+|                                   | double balance       |                                                           |                                                                                              |                                    |
+|                                   |                      |                                                           |                                                                                              |                                    |
+| BankAccount                       | String accountHolder |                                                           |                                                                                              |                                    |
+|                                   | String accountNumber |                                                           |                                                                                              |                                    |
+|                                   | String accountType   |                                                           |                                                                                              |                                    |
+|                                   | String accountBranch |                                                           |                                                                                              |                                    |
+|                                   | double balance       |                                                           |                                                                                              |                                    |
+
 
 ## User Story 4
 ```
@@ -127,3 +127,19 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 ```
+
+# Domain Model For User Story 4
+
+
+| Class         | Member Variables                       | Methods                                                     | Scenario               | Result/Output      |
+|---------------|----------------------------------------|-------------------------------------------------------------|------------------------|--------------------|
+| BankAccount   | String accountHolder                   |                                                             |                        |                    |
+|               | String accountNumber                   |                                                             |                        |                    |
+|               | String accountType                     |                                                             |                        |                    |
+|               | String accountBranch                   |                                                             |                        |                    |
+|               | double balance                         |                                                             |                        |                    |
+|               |                                        |                                                             |                        |                    |
+| BankAffiliate | String fullName                        |                                                             |                        |                    |
+|               | String affiliation                     | double withdrawFund(BankAccount bankAccount, double amount) | I want to withdraw £50 | Return mew balance |
+|               | ArrayList<BankAccount> bankAccountList | double depositFund(BankAccount bankAccount, double amount)  | I want to deposit £100 | Return new balance |
+|               |                                        |                                                             |                        |                    |

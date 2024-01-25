@@ -139,6 +139,7 @@ public class Account {
     public void assignBranch(Branch branch)
     {
         this.branchID = branch.getName();
+        branch.addAccount(this.accountID);
     }
 
     public String getBranch()

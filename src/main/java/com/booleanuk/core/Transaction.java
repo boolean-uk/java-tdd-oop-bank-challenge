@@ -5,9 +5,11 @@ import java.time.LocalTime;
 
 public class Transaction {
     private final int amount;
+
+
+    private final int newBalance;
     private final TransactionType type;
-    private final Account receiving;
-    private final Account sending;
+    private final Account account;
     private final LocalDate date;
     private final LocalTime time;
 
@@ -15,17 +17,16 @@ public class Transaction {
         return amount;
     }
 
+    public int getNewBalance() {
+        return newBalance;
+    }
+
+
     public TransactionType getType() {
         return type;
     }
 
-    public Account getReceiving() {
-        return receiving;
-    }
 
-    public Account getSending() {
-        return sending;
-    }
 
     public LocalDate getDate() {
         return date;
@@ -37,26 +38,23 @@ public class Transaction {
 
 
 
-    public Transaction(TransactionType type, Account sending, int amount) throws InvalidTransactionTypeException {
+    public Transaction(TransactionType type, Account account, int amount) throws InvalidTransactionTypeException {
         if(!(type.equals(TransactionType.WITHDRAWAL) || type.equals(TransactionType.DEPOSIT))) {
             throw new InvalidTransactionTypeException("The type: " + type + " needs a receiving account");
         }
+        if(type == TransactionType.DEPOSIT) {
+            this.newBalance = account.getBalance() + amount;
+        } else if (type == TransactionType.WITHDRAWAL) {
+            this.newBalance = account.getBalance() - amount;
+        } else {
+            this.newBalance = 0;
+        }
+        this.account = account;
         this.type = type;
-        this.sending = sending;
-        this.receiving = null;
         this.amount = amount;
-
         this.date = LocalDate.now();
         this.time = LocalTime.now();
-    }
 
-    public Transaction(TransactionType type, Account sending, Account receiving, int amount) {
-        this.sending = sending;
-        this.receiving = receiving;
-        this.amount = amount;
-        this.type = type;
-        this.date = LocalDate.now();
-        this.time = LocalTime.now();
     }
 
     @Override

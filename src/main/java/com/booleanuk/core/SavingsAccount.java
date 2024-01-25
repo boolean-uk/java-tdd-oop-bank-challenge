@@ -14,6 +14,11 @@ public class SavingsAccount extends Account{
         if(amount <= balance) {
             super.withdraw(amount);
         }
+        else if(requestForOverdraftIsGranted) {
+            super.withdraw(amount);
+            overdraftAmount = 0.0;
+            requestForOverdraftIsGranted = false;
+        }
     }
 
     public void makeRequestForOverdraft(double overdraftAmount) {

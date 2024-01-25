@@ -127,7 +127,7 @@ public class BankTest {
 
     }
 
-    //Extension
+    //Extension 1, 3, 4
     @Test
     void testOverdraftWithdrawal() {
         Bank tester = new Bank();
@@ -145,15 +145,22 @@ public class BankTest {
     @Test
     void testEngineerBalance() {
         Bank tester = new Bank();
-        Current testAcc = new Current("232323", "ssss", 500.00);
+        Current testAcc = new Current("232323", "ssss", 1000.00);
+        tester.requestOverdraft(testAcc, true);
         tester.deposit(testAcc, 500.00);
         tester.deposit(testAcc, 500.00);
-        tester.withdrawal(testAcc, 100.00);
-        tester.deposit(testAcc, 400.00);
-        tester.withdrawal(testAcc, 1000.00);
+        tester.deposit(testAcc, 500.00);
+        tester.deposit(testAcc, 500.00);
+        tester.deposit(testAcc, 500.00);
+        tester.withdrawal(testAcc, 500.00);
+        tester.withdrawal(testAcc, 500.00);
+        tester.withdrawal(testAcc, 500.00);
+        tester.withdrawal(testAcc, 1500.00);
 
-        double result = tester.engineerBalance();
-        Assertions.assertEquals(800, result);
+
+
+        double result = tester.engineerBalance(testAcc);
+        Assertions.assertEquals(500, result);
 
 
     }

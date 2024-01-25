@@ -124,10 +124,25 @@ public class Bank {
         return "Your overdraft request was denied";
     }
 
-    public double engineerBalance() {
+    public double engineerBalance(Account testAcc) {
 
 
-        return 0;
+        double balance = testAcc.getBalance();
+        for (Transactions transactions : transactionsList) {
+            if (transactions.getType().equals("Deposit")) {
+                balance += transactions.getAmount();
+
+            } else if (transactions.getType().equals("Withdrawal")){
+                balance -= transactions.getAmount();
+            } else if (transactions.getType().equals("Overdraft")) {
+                balance -= transactions.getAmount();
+
+            }
+
+
+        }
+
+        return balance;
     }
 
 

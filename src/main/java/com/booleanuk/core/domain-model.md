@@ -44,7 +44,7 @@ I want to deposit and withdraw funds.
 |         | boolean withdrawal(double amount) | double balance | user adds positive amount/user adds negative amount                     | balance/balance |
 |         |                                   |                |                                                                         |                 |
 
-EXTENSION 4 and 5
+EXTENSION 1, 3 and 4
 Assuming that an overdraft is when the account holder is allowed to withdraw more than they have
 in their balance:
 

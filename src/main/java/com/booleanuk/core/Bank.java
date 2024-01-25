@@ -40,7 +40,7 @@ public class Bank {
     }
 
     //TODO: check so amount it >0
-    public String deposit(int amount, Customer customer, int accountId) {
+    public String deposit(double amount, Customer customer, int accountId) {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
         }
@@ -54,7 +54,7 @@ public class Bank {
         return "Account doesn't exist.";
     }
 
-    public String withdraw(int amount, Customer customer, int accountId) {
+    public String withdraw(double amount, Customer customer, int accountId) {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
         }

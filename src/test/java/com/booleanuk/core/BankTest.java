@@ -70,5 +70,15 @@ public class BankTest {
         Assertions.assertEquals(0, bank.getAccounts(customer).get(0).getBalance());
     }
 
+    @Test
+    public void customerSuccessfullyTriesToWithdrawTest() {
+        String expected = "The withdraw has been performed.";
+        int accountId = bank.createCurrentAccount(customer);
+        bank.deposit(22.342, customer, accountId);
+        Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
+        Assertions.assertEquals(expected, bank.withdraw(2.234673, customer, accountId));
+        Assertions.assertEquals(22.342-2.234673, bank.getAccounts(customer).get(0).getBalance());
+    }
+
 
 }

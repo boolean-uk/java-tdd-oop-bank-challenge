@@ -19,7 +19,6 @@ public class Overdraft {
             this.amount = amount;
             return true;
         }
-
         return false;
     }
 

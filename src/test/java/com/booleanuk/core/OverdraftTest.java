@@ -14,6 +14,7 @@ public class OverdraftTest {
     @Test
     public void settersValid() {
         Overdraft overdraft = new Overdraft(500.00);
+        Overdraft overdraft2 = new Overdraft(-500.00);
 
         Assertions.assertEquals(500, overdraft.getAmount());
         Assertions.assertFalse(overdraft.setAmount(-100));
@@ -22,5 +23,8 @@ public class OverdraftTest {
         Assertions.assertFalse(overdraft.isApproved());
         Assertions.assertTrue(overdraft.setApproved(false));
         Assertions.assertFalse(overdraft.isApproved());
+
+
+        Assertions.assertEquals(0, overdraft2.getAmount());
     }
 }

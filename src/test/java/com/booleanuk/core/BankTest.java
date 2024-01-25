@@ -62,7 +62,6 @@ public class BankTest {
         String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
 
         bank.deposit(jonSnowAccountNr, 568.9);
-        System.out.println(bank.getBalance(jonSnowAccountNr));
         double money = bank.withdraw(jonSnowAccountNr, 1000);
 
         double balance = bank.getBalance(jonSnowAccountNr);
@@ -70,10 +69,23 @@ public class BankTest {
         Assertions.assertEquals(23.54+568.9, money);
     }
 
+    @Test
+    public void testStatement() {
+        Bank bank = new Bank();
+        String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
 
+        bank.deposit(jonSnowAccountNr, 568.9);
+        double money = bank.withdraw(jonSnowAccountNr, 1000);
+        money = bank.withdraw(jonSnowAccountNr, 1000);
+        bank.deposit(jonSnowAccountNr, 568.9);
+        money = bank.withdraw(jonSnowAccountNr, 1000);
+        bank.deposit(jonSnowAccountNr, 568.9);
 
+        Account jonSnowAccount = bank.getAccount(jonSnowAccountNr);
 
+        Statement statement = new Statement(jonSnowAccount);
 
+        statement.makeStatement();
 
-
+    }
 }

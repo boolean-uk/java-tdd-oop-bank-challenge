@@ -42,10 +42,10 @@
 |                 |                          |                          |                              |               |
 |                 |                          |                          |                              |               |
 |                 |                          |                          |                              |               |
-| Statement       | Bank                     | makeStatement(accountNr) |                              | statement     |
+| Statement       | Account account          | makeStatement() |                              | statement     |
 |                 |                          |                          |                              |               |
-|                 |                          |                          |                              |               |
-|                 |                          |                          |                              |               |
+|                 | ArrayList<String>        |                          |                              |               |
+|                 | bankStatement            |                          |                              |               |
 |                 |                          |                          |                              |               |
 | CurrentAccount  |                          |                          |                              |               |
 | inherit Account |                          |                          |                              |               |

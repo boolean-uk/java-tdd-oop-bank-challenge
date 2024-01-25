@@ -6,9 +6,15 @@ import java.util.List;
 
 public abstract class Account {
     protected List<Transaction> transactions;
+    private boolean overdraftStatus;
+    private boolean overdraftRequested;
+    private boolean overdraftAccepted;
 
     public Account() {
         this.transactions = new ArrayList<>();
+        this.overdraftStatus = false;
+        this.overdraftRequested = false;
+        this.overdraftAccepted = false;
     }
 
     public void deposit(double amount) {
@@ -16,11 +22,20 @@ public abstract class Account {
     }
 
     public String withdraw(double amount) {
-        if (getBalance() - amount < 0) {
-            return "Invalid withdrawal amount or insufficient funds";
+        if (!overdraftAccepted) {
+            if (getBalance() - amount < 0) {
+                return "Invalid withdrawal amount or insufficient funds";
+            } else {
+                transactions.add(new Transaction(new Date(), -amount, getBalance() - amount));
+                return "Successfully withdrawn amount";
+            }
         } else {
-            transactions.add(new Transaction(new Date(), -amount, getBalance() - amount));
-            return "Successfully withdrawn amount";
+            if (getBalance() - amount < -500) {
+                return "Invalid withdrawal amount or insufficient funds";
+            } else {
+                transactions.add(new Transaction(new Date(), -amount, getBalance() - amount));
+                return "Successfully withdrawn amount";
+            }
         }
     }
 
@@ -31,4 +46,25 @@ public abstract class Account {
     }
 
     public abstract void addTransaction(Date date, double amount, double balance);
+
+    public boolean getOverdraftStatus() {
+        return this.overdraftStatus;
+    }
+
+    public void requestOverdraft() {
+        if (!overdraftRequested && !overdraftAccepted) {
+            overdraftRequested = true;
+        } else {
+            System.out.println("Overdraft request already made or approved.");
+        }
+    }
+
+    public boolean getOverdraftRequested() {
+        return this.overdraftRequested;
+    }
+
+    public void acceptOverdraft() {
+        this.overdraftStatus = true;
+        this.overdraftAccepted = true;
+    }
 }

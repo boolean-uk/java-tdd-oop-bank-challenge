@@ -31,4 +31,10 @@ public class Bank {
     public List<Account> getAccounts() {
         return accounts;
     }
+
+    public void acceptOverdraftRequest(Account account) {
+        if (account.getOverdraftRequested()) {
+            account.acceptOverdraft();
+        }
+    }
 }

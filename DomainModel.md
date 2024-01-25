@@ -25,12 +25,13 @@ Customer
 
 Account
 
-| Method                  | Member variable                 | Scenario                                              | Output     |
-|-------------------------|---------------------------------|-------------------------------------------------------|------------|
-| deposit(double amount)  | double balance                  | Customer wants to deposit money                       | void       |
-| withdraw(double amount) | int id                          | Customer wants to withdraw a valid amount of money    | true       |
-| withdraw(double amount) |                                 | Customer wants to withdraw an invalid amount of money | false      |
-| getStatements()         | ArrayList<Statement> statements | Customer wants to see statements                      | statements |
+| Method                  | Member variable                 | Scenario                                                                                      | Output     |
+|-------------------------|---------------------------------|-----------------------------------------------------------------------------------------------|------------|
+| deposit(double amount)  | double balance                  | Customer wants to deposit money, where amount >= 0                                            | true       |
+| deposit(double amount)  | int id                          | Customer wants to deposit money, where amount < 0                                             | false      |
+| withdraw(double amount) |                                 | Customer wants to withdraw a valid amount of money                                            | true       |
+| withdraw(double amount) |                                 | Customer wants to withdraw an invalid amount of money (either amount < 0 or amount > balance) | false      |
+| getStatements()         | ArrayList<Statement> statements | Customer wants to see statements                                                              | statements |
 
 SavingsAccount
 

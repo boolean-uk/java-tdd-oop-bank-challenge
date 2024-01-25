@@ -10,7 +10,7 @@ public abstract class Account {
     private double balance;
     private List<Transaction> transactionHistory;
 
-    public Account(Branch branch, int accountNumber, Person accountOwner, double balance, List<Transaction> transactionHistory) {
+    public Account(Branch branch, int accountNumber, Person accountOwner, double balance) {
         this.setBranch(branch);
         this.setAccountNumber(accountNumber);
         this.setAccountOwner(accountOwner);

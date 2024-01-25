@@ -1,11 +1,16 @@
-| Classes            | Members                                | Methods                                  | Outputs                                   |
-|--------------------|----------------------------------------|------------------------------------------|-------------------------------------------|
-| BankAccount        | - accountType: String                  | + deposit(amount: double, date: String)  | - generateStatement(): String             |
-|                    | - balance: double                      | + withdraw(amount: double, date: String) | - getBalance(): double                    |
-|                    | - transactions: List<Transaction>      | + getBalance(): double                   |                                           |
-|                    |                                        | + generateStatement(): String            |                                           |
-| ------------------ | -------------------------------------- | ---------------------------------------- | ----------------------------------------- |
-| Transaction        | - date: String                         | + getDate(): String                      | - date: String                            |
-|                    | - type: String                         | + getType(): String                      | - type: String (Deposit/Withdrawal)       |
-|                    | - amount: double                       | + getAmount(): double                    | - amount: double                          |
-| Statement          | - transactions: List<Transaction>      | + generate(): String                     | - transactions: List<Transaction>         |
+| Classes           | Members                              | Methods                                       | Outputs                             |
+|---------------------|--------------------------------------|-----------------------------------------------|-------------------------------------|
+| BankAccount        | - accountType: String                | + deposit(amount: double): void               | - generateStatement(): String       |
+|                    | - balance: double                    | + withdraw(amount: double): void              | - getBalance(): double              |
+|                    | - transactions: List<Transaction>    | + getBalance(): double                       |                                     |
+|                    |                                      | + generateStatement(): String                |                                     |
+|---------------------|--------------------------------------|-----------------------------------------------|-------------------------------------|
+| Transaction        | - transactionDate: String            | + getDate(): String                          | - transactionDate: String           |
+|                    | - transactionType: String            | + getType(): String                          | - transactionType: String           |
+|                    | - amount: double                     | + getAmount(): double                        | - amount: double                    |
+|---------------------|--------------------------------------|-----------------------------------------------|-------------------------------------|
+| CurrentAccount      | - overdraftLimit: double             | + applyOverdraft(): void                     |                                     |
+|                    |                                      | + checkOverdraft(): boolean                  |                                     |
+|---------------------|--------------------------------------|-----------------------------------------------|-------------------------------------|
+| SavingsAccount      | - interestRate: double               | + accrueInterest(): void                     |                                     |
+|                    |                                      | + checkInterestRate(): double                |                                     |

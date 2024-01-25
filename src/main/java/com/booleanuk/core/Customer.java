@@ -10,6 +10,15 @@ public class Customer extends Person {
         this.setCreditScore(CreditScore.FAIR);
     }
 
+    /**
+     * Logic: Can be invoked on an instance 'this' of Customer class, to specify which of its accounts needs overdraft.
+     * The behaviour depends on the value of this.creditScore. Firstly it uses helper method to the requesting instance is equal to
+     * the owner of the account.
+     * @param branch
+     * @param accountNumber
+     * @param value
+     * @return
+     */
     public boolean requestOverdraft(Branch branch, int accountNumber, int value) {
         CurrentAccount account = (CurrentAccount) branch.getCurrentAccounts().get(accountNumber);
         Person owner = branch.getCurrentAccounts().get(accountNumber).getAccountOwner();

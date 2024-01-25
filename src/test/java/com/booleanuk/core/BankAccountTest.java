@@ -1,6 +1,7 @@
 package com.booleanuk.core;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 
@@ -22,6 +23,13 @@ class BankAccountTest {
                 "10/01/2012 || 1000.00 ||  || 1000.00";
 
         assertArrayEquals(expectedStatement.split("\n"), actualStatement.split("\n"));
+    }
+    @Test
+    public void createBankAccount() {
+        BankAccount bankAccount = new BankAccount("Current");
+        assertNotNull(bankAccount);
+        assertEquals("Current", bankAccount.getAccountType());
+        assertEquals(0.0, bankAccount.getBalance());
     }
 }
 

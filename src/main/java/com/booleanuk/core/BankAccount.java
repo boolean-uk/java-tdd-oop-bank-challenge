@@ -17,17 +17,22 @@ public class BankAccount {
     }
 
     public void deposit(double amount, String date) {
-        transactions.add(new Transaction(date, "Deposit", amount, balance + amount));
         balance += amount;
+        transactions.add(new Transaction(date, "Deposit", amount, balance));
     }
 
     public void withdraw(double amount, String date) {
-        transactions.add(new Transaction(date, "Withdrawal", amount, balance - amount));
-        balance -= amount;
+        if (balance >= amount) {
+            balance -= amount;
+            transactions.add(new Transaction(date, "Withdrawal", amount, balance));
+        } else {
+            // Handle insufficient funds
+            System.out.println("Insufficient funds for withdrawal.");
+        }
     }
 
     public String generateStatement() {
-        // Sort transactions by date in descending order
+
         transactions.sort(Comparator.comparing(Transaction::getDate).reversed());
 
         StringBuilder statement = new StringBuilder("date       || credit  || debit  || balance\n");
@@ -41,5 +46,10 @@ public class BankAccount {
         return statement.toString().trim();
     }
 
-
+    public String getAccountType() {
+        return accountType;
+    }
+    public double getBalance() {
+        return balance;
+    }
 }

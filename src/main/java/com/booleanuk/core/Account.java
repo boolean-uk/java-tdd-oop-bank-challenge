@@ -92,8 +92,9 @@ class AccountCurr extends Account {
 	public void setOverdraftEnabled(boolean overdraftEnabled) {
 		this.overdraftEnabled = overdraftEnabled;
 	}
-	public void setOverdraftLimit(int limit){
-		this.overdraftLimit=limit;
+
+	public void setOverdraftLimit(int limit) {
+		this.overdraftLimit = Math.max(limit, 0);
 	}
 }
 

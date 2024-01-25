@@ -28,5 +28,7 @@ class CurrentAccountTest {
 
         Assertions.assertTrue(account.remove(50));
 
+        Assertions.assertEquals(-50, account.getBalance());
+
     }
 }

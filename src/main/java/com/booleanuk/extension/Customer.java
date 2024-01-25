@@ -25,20 +25,11 @@ public class Customer {
     }
 
     public boolean deposit(Account account, double amount){
-        if(amount < 0){
-            return false;
-        }
-        account.add(amount);
-        return true;
-
+        return account.add(amount);
     }
 
     public boolean withdraw(Account account, double amount){
-        if(amount > account.getBalance() || amount < 0){
-            return false;
-        }
-        account.remove(amount);
-        return true;
+       return account.remove(amount);
     }
 
     public String generateBankStatement(Account account){

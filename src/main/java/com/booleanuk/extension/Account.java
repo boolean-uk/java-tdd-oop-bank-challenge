@@ -17,15 +17,21 @@ public abstract class Account {
     }
 
     public boolean add(double amount){
+        if(amount < 0){
+            return false;
+        }
         this.balance += amount;
         this.transactions.add(new Transaction(amount, this.balance));
-        return false;
+        return true;
     }
 
     public boolean remove(double amount){
+        if(amount > this.balance || amount < 0){
+            return false;
+        }
         this.balance -= amount;
         this.transactions.add(new Transaction(-amount, this.balance));
-        return false;
+        return true;re
     }
 
     public double getBalance() {

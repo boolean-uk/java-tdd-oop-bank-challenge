@@ -11,8 +11,7 @@ public class UserTest {
         Assertions.assertEquals("John", user.getName());
         Assertions.assertEquals("John@example.org", user.getEmail());
         Assertions.assertEquals(0.00, user.getBalance());
-        Assertions.assertEquals(null, user.getCurrentAccount());
-        Assertions.assertEquals(null, user.getSavingsAccount());
+        Assertions.assertNull(user.getCurrentAccount());
+        Assertions.assertNull(user.getSavingsAccount());
     }
-
 }

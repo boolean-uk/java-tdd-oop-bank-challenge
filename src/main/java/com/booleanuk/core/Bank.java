@@ -94,6 +94,8 @@ public class Bank {
             if(customerAccount.getId() == accountId) {
                 if(customerAccount instanceof SavingsAccount) {
                     return "You can't have an overdraft on a savings account.";
+                } else {
+                    return "Your request has been sent.";
                 }
             }
         }

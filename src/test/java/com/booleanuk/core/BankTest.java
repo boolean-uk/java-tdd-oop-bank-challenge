@@ -33,14 +33,17 @@ public class BankTest {
     @Test
     public void testGettingBankStatementsFromCreatedAccount(){
         Bank bank = new Bank();
+
         bank.createCurrentAccount("John", Branch.ABC);
         bank.depositToAccount(1, 100);
         bank.depositToAccount(1, 300);
         bank.withdrawFromAccount(1, 50);
+
         bank.createCurrentAccount("Daisy", Branch.DEF);
         bank.depositToAccount(2, 100);
         bank.depositToAccount(2, 300);
         bank.withdrawFromAccount(2, 50);
+
         Assertions.assertEquals(bank.getBankStatementsFromAccount(1), bank.getBankStatementsFromAccount(2));
     }
 
@@ -49,13 +52,16 @@ public class BankTest {
     @Test
     public void testGettingSavingsAccountFromABCBranch(){
         Bank bank = new Bank();
+
         bank.createCurrentAccount("John", Branch.DEF);
         bank.createSavingsAccount("Joe", Branch.DEF);
         bank.createCurrentAccount("Johnny", Branch.ABC);
+
         ArrayList<String> expected = new ArrayList<>();
-        expected.add("Account Holder: " + "John" + ", Current Balance: " + "0");
-        expected.add("Account Holder: " + "Joe" + ", Current Balance: " + "0");
-        Assertions.assertEquals(bank.getAccountsInBranch(Branch.DEF), expected);
+        expected.add("Account Holder: " + "John" + ", Current Balance: " + "0.0");
+        expected.add("Account Holder: " + "Joe" + ", Current Balance: " + "0.0");
+
+        Assertions.assertEquals(expected, bank.getAccountsInBranch(Branch.DEF));
 
 
 

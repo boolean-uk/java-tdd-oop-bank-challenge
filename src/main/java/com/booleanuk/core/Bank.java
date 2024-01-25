@@ -38,7 +38,13 @@ public class Bank {
     }
 
     public ArrayList<String> getAccountsInBranch(Branch branch){
-        return new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        for(Account account : accounts){
+            if(account.getBranch().equals(branch)){
+                temp.add(account.toString());
+            }
+        }
+        return temp;
     }
     public String getBankStatementsFromAccount(int accountNumber){
         ArrayList<String> statements = new ArrayList<>();

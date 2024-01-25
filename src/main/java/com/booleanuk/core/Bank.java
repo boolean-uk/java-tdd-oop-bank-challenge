@@ -22,8 +22,27 @@ public class Bank {
         return true;
     }
 
-    public String generateBankStatement(){
-        return " ";
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+    }
+    public String generateBankStatement() {
+        StringBuilder res = new StringBuilder();
+
+        res.append(String.format("%-25s", "date "));
+        res.append(String.format("%-15s", "credit"));
+        res.append(String.format("%-15s", "debit"));
+        res.append(String.format("%-15s", "balance"));
+        res.append("\n");
+
+        for (Transaction transaction : transactions) {
+            res.append(String.format("%-25s", transaction.getDateTime()));
+            res.append(String.format("%-15s", transaction.getCredit()));
+            res.append(String.format("%-15s", transaction.getDebit()));
+            res.append(String.format("%-15s", transaction.getBalance()));
+            res.append("\n");
+        }
+        return res.toString();
+
     }
 
 

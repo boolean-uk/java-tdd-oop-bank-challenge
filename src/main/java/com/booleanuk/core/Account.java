@@ -48,12 +48,26 @@ public class Account {
     }
 
     public double deposit(double amount){
-      return 0.0;
+        LocalDateTime dateTime = LocalDateTime.now();
+        balance = balance + amount;
+        transaction = new Transaction(0, amount, balance, dateTime);
+        bank.addTransaction(transaction);
+
+        return balance;
+
     }
 
     public String withdraw(double amount){
+        if(balance > amount){
+            LocalDateTime dateTime = LocalDateTime.now();
+            balance = balance - amount;
+            transaction = new Transaction( amount,0, balance, dateTime);
+            bank.addTransaction(transaction);
 
-        return " ";
+            return "Balance: " + balance;
+        }
+        return "Your balance is low to withdraw";
+
     }
 
 

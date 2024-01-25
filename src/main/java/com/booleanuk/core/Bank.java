@@ -7,16 +7,27 @@ public class Bank {
     private ArrayList<Account> accountList;
 
     public Bank() {
-        this.customerList = new ArrayList<Customer>();
-        this.accountList = new ArrayList<Account>();
+        this.customerList = new ArrayList<>();
+        this.accountList = new ArrayList<>();
     }
 
     public Account createAccount(Customer customer, String type) {
-        return new SavingsAccount();
+        findOrCreateCustomer(customer);
+        Account account = null;
+        if(type.equalsIgnoreCase("s")) {
+            account = new SavingsAccount(customer);
+        } else if(type.equalsIgnoreCase("c")) {
+            account = new CurrentAccount(customer);
+        }
+        customer.getAccounts().add(account);
+        this.accountList.add(account);
+        return account;
     }
 
-    private Customer findOrCreateCustomer(Customer customer) {
-        return new Customer(123456, "Thomas");
+    private void findOrCreateCustomer(Customer customer) {
+        if(!customerList.contains(customer)) {
+            customerList.add(customer);
+        }
     }
 
     public ArrayList<Customer> getCustomerList() {

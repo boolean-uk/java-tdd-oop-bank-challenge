@@ -6,21 +6,50 @@ public class CurrentAccount implements Account {
 
     private ArrayList<Transaction> transactions;
     private double balance;
+    private final Customer customer;
+
+    public CurrentAccount(Customer customer) {
+        this.customer = customer;
+        this.transactions = new ArrayList<>();
+        this.balance = 0;
+    }
 
 
     @Override
     public double deposit(double amount) {
-        return 0;
+        if(amount > 0) {
+            this.transactions.add(new Transaction(amount, this));
+            return setBalance(this.balance+amount);
+        } else {
+            return this.balance;
+        }
     }
 
     @Override
     public double withdraw(double amount) {
-        return 0;
+        if(amount < 0) {
+            this.transactions.add(new Transaction(amount, this));
+            return setBalance(this.balance-amount);
+        } else {
+            return this.balance;
+        }
     }
 
     @Override
     public String transactionListToString() {
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(String.format(
+                "%-20s %-10s %-10s %-10s",
+                "date",
+                "credit",
+                "debit",
+                "balance"
+        ));
+        for(Transaction t : transactions) {
+            stringBuilder.append(t.toString());
+        }
+        return stringBuilder.toString();
     }
 
     @Override
@@ -28,7 +57,8 @@ public class CurrentAccount implements Account {
         return balance;
     }
 
-    private void setBalance(double balance) {
+    private double setBalance(double balance) {
         this.balance = balance;
+        return this.balance;
     }
 }

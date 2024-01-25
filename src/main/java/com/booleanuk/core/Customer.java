@@ -11,15 +11,15 @@ public class Customer {
     public Customer(int customerId, String name) {
         this.customerId = customerId;
         this.name = name;
-        this.accounts = new ArrayList<Account>();
+        this.accounts = new ArrayList<>();
     }
 
     public double deposit(Account account, double amount) {
-        return -1.0;
+        return account.deposit(amount);
     }
 
     public double withdraw(Account account, double amount) {
-        return -1.0;
+        return account.withdraw(amount);
     }
 
     public ArrayList<Account> getAccounts() {

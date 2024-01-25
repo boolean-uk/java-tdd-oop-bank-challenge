@@ -15,4 +15,15 @@ public class TransactionTest {
         user.getCurrentAccount().withdraw(700);
         Assertions.assertEquals(4, user.getCurrentAccount().getTransactions().size());
     }
+//    @Test
+//    public void testOverdraft(){
+//        Bank bank = new Bank("Sparebanken sør 25");
+//        bank.createUser("John", "John@example.org");
+//        bank.getUser(0).createCurrentAccount();
+//        bank.getUser(0).getCurrentAccount().deposit(500);
+//        bank.getUser(0).setOverdraftAccess(true);
+//        bank.getUser(0).setOverdraftAmount(-500);
+//        bank.getUser(0).getCurrentAccount().withdraw(600);
+//        Assertions.assertEquals(-100, bank.getUser(0).getCurrentAccount().getBalance());
+//    }
 }

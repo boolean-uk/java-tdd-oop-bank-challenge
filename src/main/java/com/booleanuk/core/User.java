@@ -7,9 +7,12 @@ public class User {
     private String name;
     private String email;
     private int id;
+    private boolean overdraftAccess;
+    private double overdraftAmount;
 
     private CurrentAccount current;
     private SavingsAccount savings;
+
 
     private Bank bank;
 
@@ -20,6 +23,8 @@ public class User {
         this.current = null;
         this.savings = null;
         this.bank = bank;
+        this.overdraftAccess = false;
+        this.overdraftAmount = 0;
     }
 
     public User(String name, String email){
@@ -33,6 +38,31 @@ public class User {
 
     public int setId(){
         return lastAssignedId++;
+    }
+    public boolean overdraftAccess(double amount){
+        if(isOverdraftAccess()){
+            setOverdraftAmount(amount);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isOverdraftAccess() {
+        return overdraftAccess;
+    }
+
+    public User setOverdraftAccess(boolean overdraftAccess) {
+        this.overdraftAccess = overdraftAccess;
+        return this;
+    }
+
+    public double getOverdraftAmount() {
+        return overdraftAmount;
+    }
+
+    public User setOverdraftAmount(double overdraftAmount) {
+        this.overdraftAmount = overdraftAmount;
+        return this;
     }
 
     public void createCurrentAccount(){

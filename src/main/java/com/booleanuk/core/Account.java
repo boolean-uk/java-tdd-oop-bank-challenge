@@ -8,11 +8,28 @@ import java.util.List;
 public abstract class Account {
     private double balance;
     private List<Transaction> transactions;
-    private boolean approvedOverdraft;
+    boolean approvedOverdraft;
+    double overdraftAmount;
     public Account(){
         this.transactions = new ArrayList<>();
-        this.approvedOverdraft = setApprovedOverdraft(false);
+        this.approvedOverdraft = false;
+        this.overdraftAmount = setOverdraftAmount(0);
     }
+    public double setOverdraftAmount(double amount){
+        if(approvedOverdraft){
+            this.overdraftAmount = amount;
+        }
+        return 0;
+    }
+
+    public double getOverdraftAmount(){
+        return this.overdraftAmount;
+    }
+
+    public boolean setApprovedDraft(boolean bool){
+        return this.approvedOverdraft = bool;
+    }
+
 
     public List<Transaction> getTransactions(){
         return this.transactions;
@@ -35,13 +52,6 @@ public abstract class Account {
         return sb.toString();
     }
 
-    public boolean getApprovedOverdraft(){
-        return this.approvedOverdraft;
-    }
-    public boolean setApprovedOverdraft(boolean bool){
-        return this.approvedOverdraft = bool;
-    }
-
     public double getBalance(){
         double balance = 0.00;
         for (int i = 0; i < this.getTransactions().size(); i++) {
@@ -51,8 +61,9 @@ public abstract class Account {
     }
 
 
+
     public void withdraw(double withdraw){
-        if(this.balance - withdraw < 0){
+        if(this.balance - withdraw < this.overdraftAmount){
             if(!approvedOverdraft){
                 System.out.println("Unable to withdraw more than balance!");
                 return;

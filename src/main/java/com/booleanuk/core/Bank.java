@@ -25,6 +25,11 @@ public class Bank {
         return users.get(index);
     }
 
+    public void grantUserDraft(User user, double amount){
+
+        return;
+    }
+
     public String getBranch() {
         return branch;
     }

@@ -46,7 +46,7 @@ public class CurrentAccount extends Account{
         boolean newBalanceNotLessThanOverdraftAmount = (this.calculateBalance() - debit) >= -this.getOverdraftAmount();
         if(debit > 0 && newBalanceNotLessThanOverdraftAmount) {
             this.setBalance(-this.toInt(debit));
-            this.transactions.add(new Transaction(-toInt(debit),toInt(this.calculateBalance())));
+            this.transactions.add(new Transaction(-toInt(debit),toInt(this.calculateBalance()) - toInt(debit)));
             return true;
         }
         return false;

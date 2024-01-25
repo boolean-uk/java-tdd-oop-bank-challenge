@@ -84,5 +84,15 @@ public class BankTest {
         Assertions.assertEquals(expected.toString(),  bank.getRequestedOverdrafts().toString());
 
     }
+    @Test
+    public void testApprovingAndWithdrawingFromAccountWithOverdraftApproved(){
+        Bank bank = new Bank();
+        bank.createCurrentAccount("Joe", Branch.ABC);
+        bank.requestOverdraft(1);
+
+        bank.approveOverDraft(1);
+        Assertions.assertTrue(bank.withdrawFromAccount(1, 1000));
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Bank {
     private ArrayList<Account> accounts;
@@ -76,5 +77,17 @@ public class Bank {
             temp.add(account.toString());
         }
         return temp;
+    }
+    public void approveOverDraft(int accountNumber){
+        Iterator iterator = overdraftRequests.iterator();
+        while(iterator.hasNext()){
+            CurrentAccount account = (CurrentAccount) iterator.next();
+            if(account.getAccountId() == accountNumber){
+                account.setOverdraftApproved(true);
+                iterator.remove();
+                break;
+            }
+
+        }
     }
 }

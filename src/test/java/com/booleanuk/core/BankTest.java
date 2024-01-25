@@ -141,4 +141,9 @@ public class BankTest {
         Assertions.assertEquals(expected, bank.generateBankStatements(customer, accountId));
     }
 
+    @Test
+    public void nonExistentCustomerRequestsOverdraft() {
+        Assertions.assertEquals("Customer doesn't exist.", bank.requestsOverdraft(customer, 123, 200));
+    }
+
 }

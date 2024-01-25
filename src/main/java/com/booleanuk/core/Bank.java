@@ -82,5 +82,10 @@ public class Bank {
                 return customerAccount.generateStatements();
             }
         }
-        return "Account doesn't exist.";    }
+        return "Account doesn't exist.";
+    }
+
+    public String requestsOverdraft(Customer customer, int accountId, double amount) {
+        return "Customer doesn't exist.";
+    }
 }

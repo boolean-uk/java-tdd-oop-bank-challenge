@@ -11,16 +11,15 @@ abstract public class Account {
     private int userID;
     private final int accountID;
     protected int overdraft;
-    private LinkedHashMap<Transaction, LocalDateTime> history;
-    private int balance = 0;
-
-    private ArrayList<Integer> balanceHistory = new ArrayList<>();
+    private LinkedHashMap<Transaction, LocalDateTime> transactions;
+    private ArrayList<Integer> balanceHistory;
 
     public Account(){
         accountID = counter;
         counter++;
         overdraft = 0;
-        history = new LinkedHashMap<>();
+        transactions = new LinkedHashMap<>();
+        balanceHistory = new ArrayList<>();
     }
     public int getUserID(){
         return userID;
@@ -35,21 +34,19 @@ abstract public class Account {
     }
 
     public double getBalance(){
-        /*
         int balance = 0;
-        for (Transaction transaction : history.values()){
+        for (Transaction transaction : transactions.keySet()){
             balance += transaction.getAmount();
         }
-        */
+
         return balance;
     }
 
     public boolean withdraw(int fund){
         if (Math.abs(fund) == fund){
             if (getBalance() >= fund + overdraft){
-                history.put(new Transaction(-fund, "Withdrawal"), LocalDateTime.now());
-                balance -= fund;
-                balanceHistory.add(balance);
+                transactions.put(new Transaction(-fund, "Withdrawal"), LocalDateTime.now());
+                balanceHistory.add((int) getBalance());
                 return true;
             }
         }
@@ -60,9 +57,9 @@ abstract public class Account {
 
     public boolean deposit(int fund){
         if (Math.abs(fund) == fund){
-            history.put(new Transaction(fund, "Deposit"), LocalDateTime.now());
-            balance += fund;
-            balanceHistory.add(balance);
+            transactions.put(new Transaction(fund, "Deposit"), LocalDateTime.now());
+            //balance += fund;
+            balanceHistory.add((int) getBalance());
             return true;
         }
         System.out.println("Insufficient funds. Deposit failed.");
@@ -76,7 +73,7 @@ abstract public class Account {
         DateTimeFormatter myFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         int index = 0;
-        for (Map.Entry<Transaction, LocalDateTime> set : history.entrySet()){
+        for (Map.Entry<Transaction, LocalDateTime> set : transactions.entrySet()){
             String formattedDate = set.getValue().format(myFormat);
             if (set.getKey().getType().equals("Deposit")){
                 System.out.printf("|%-22s| %-15s| %-15s| %-15s| %n", formattedDate, set.getKey().getAmount(), "", balanceHistory.get(index));
@@ -86,17 +83,5 @@ abstract public class Account {
             index++;
         }
         System.out.println("\n");
-    }
-
-    private int previousBalanceHelper(Transaction transaction){
-        int balance = 0;
-        for (Map.Entry<Transaction, LocalDateTime> set : history.entrySet()){
-            balance += set.getKey().getAmount();
-            if (set.getKey() == transaction){
-                return balance;
-            }
-        }
-
-        return balance;
     }
 }

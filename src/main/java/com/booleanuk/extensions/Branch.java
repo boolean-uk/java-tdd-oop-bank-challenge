@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Branch {
-    private int branchId;
-    private String branchName;
-    private List<Account> accounts;
+    private final int branchId;
+    private final String branchName;
+    private final List<Account> accounts;
 
     public Branch(int branchId, String branchName) {
         this.branchId = branchId;

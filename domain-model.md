@@ -117,3 +117,5 @@ I want statements to be sent as messages to my phone.
 ### Class diagram
 
 ![img.png](img.png)
+
+![img_1.png](img_1.png)

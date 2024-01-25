@@ -7,9 +7,11 @@ public class Account {
     double balance;
     BankStatement bankStatement = new BankStatement();
     Transaction transaction;
-    public Account(Customer customer) {
+    Branch branch;
+    public Account(Customer customer, Branch branch) {
         this.customer = customer;
         this.balance = 0.0;
+        this.branch = branch;
     }
     public String deposit(double amount) {
         LocalDate date = LocalDate.now();

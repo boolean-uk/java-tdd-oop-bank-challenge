@@ -4,9 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
+    Branch center = new Branch();
+    Branch west = new Branch();
+    Branch east = new Branch();
     Customer customer = new Customer();
-    CurrentAccount account1 = new CurrentAccount(customer);
-    SavingsAccount account2 = new SavingsAccount(customer);
+    CurrentAccount account1 = new CurrentAccount(customer, center);
+    SavingsAccount account2 = new SavingsAccount(customer, center);
     @Test
     public void depositWithdrawTest() {
         Assertions.assertEquals("New Balance: 88.0", account1.deposit(88));

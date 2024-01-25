@@ -24,7 +24,12 @@ public class BankAffiliate {
     }
 
     public boolean createSavingsAccount(BankAccount bankAccount) {
-        return true;
+        if(!bankAccount.getAccountType().contains("Savings Account")
+                || bankAccount.getAccountType().isEmpty()) {
+            this.bankAccount.setAccountType("Savings Account");
+            return true;
+        }
+        return false;
     }
 
     public String getFullName() {

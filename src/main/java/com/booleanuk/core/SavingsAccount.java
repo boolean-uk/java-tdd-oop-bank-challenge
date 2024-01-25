@@ -3,8 +3,8 @@ package com.booleanuk.core;
 public class SavingsAccount extends Account {
 
 
-    public SavingsAccount(String accountName, int clearingNumber, int accountNumber) {
-        super(accountName, clearingNumber, accountNumber);
+    public SavingsAccount(int accountNumber, Branches branch) {
+        super(accountNumber, branch);
         this.minLimit = 0.00;
     }
 }

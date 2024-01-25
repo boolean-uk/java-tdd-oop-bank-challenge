@@ -13,7 +13,7 @@ public class CustomerTest {
     @Test
     public void testCreateAndGetSavingsAccount() {
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
 
         List<Account> expected = new ArrayList<>();
         expected.add(savingsOne);
@@ -25,7 +25,7 @@ public class CustomerTest {
     @Test
     public void testCreateAndGetCurrentAccount() {
         Customer customer = new Customer("Gustav Svennas");
-        Account currentOne = new CurrentAccount("current1", 5400, 6900800);
+        Account currentOne = new CurrentAccount(6900800, Branches.STOCKHOLM);
 
         List<Account> expected = new ArrayList<>();
         expected.add(currentOne);
@@ -37,7 +37,7 @@ public class CustomerTest {
     @Test
     public void testDepositToAccount() {
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         Assertions.assertTrue(customer.depositFounds(500, savingsOne, "25/01/2023"));
@@ -49,14 +49,14 @@ public class CustomerTest {
     @Test
     public void testWithdrawFromAccountWithEnoughMoney() {
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         Assertions.assertTrue(customer.depositFounds(500, savingsOne,"25/01/2023"));
         Assertions.assertTrue(customer.withdrawFounds(300, savingsOne, "25/01/2023"));
         Assertions.assertEquals(200, customer.showCurrentBalance(savingsOne));
 
-        Account currentsOne = new CurrentAccount("current1", 5400, 6900800);
+        Account currentsOne = new CurrentAccount(6900800, Branches.STOCKHOLM);
         customer.addAccount(currentsOne);
 
         Assertions.assertTrue(customer.depositFounds(200, currentsOne, "25/01/2023"));
@@ -71,7 +71,7 @@ public class CustomerTest {
         String expectedOutput = "Can't withdraw that much money from that account!\n";
 
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         Assertions.assertTrue(customer.depositFounds(200, savingsOne, "25/01/2023"));
@@ -81,7 +81,7 @@ public class CustomerTest {
 
         final ByteArrayOutputStream outContentTwo = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContentTwo));
-        Account currentsOne = new CurrentAccount("current1", 5400, 6900800);
+        Account currentsOne = new CurrentAccount(6900800, Branches.STOCKHOLM);
         customer.addAccount(currentsOne);
 
         Assertions.assertTrue(customer.depositFounds(200, currentsOne, "25/01/2023"));
@@ -99,7 +99,7 @@ public class CustomerTest {
                 "23/01/2023 ||      250.90 ||             ||      250.90 \n";
 
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         customer.depositFounds(250.90, savingsOne,"23/01/2023");
@@ -118,7 +118,7 @@ public class CustomerTest {
                 "23/01/2023 ||   125000.90 ||             ||   125000.90 \n";
 
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         customer.depositFounds(125000.90, savingsOne,"23/01/2023");
@@ -137,7 +137,7 @@ public class CustomerTest {
                 "10/01/2012 ||     1000.00 ||             ||     1000.00 \n";
 
         Customer customer = new Customer("Gustav Svennas");
-        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758);
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
         customer.addAccount(savingsOne);
 
         customer.depositFounds(1000.00, savingsOne,"10/01/2012");
@@ -145,5 +145,17 @@ public class CustomerTest {
         customer.withdrawFounds(500.00, savingsOne, "14/01/2012");
 
         Assertions.assertEquals(expectedOutput, customer.printBankStatements(savingsOne));
+    }
+
+    @Test
+    public void testAddingBranches() {
+        Customer customer = new Customer("Gustav Svennas");
+        Account savingsOne = new SavingsAccount(6900758, Branches.STOCKHOLM);
+        Account currentOne = new SavingsAccount(6900801, Branches.OSLO);
+        customer.addAccount(savingsOne);
+        customer.addAccount(currentOne);
+
+        Assertions.assertEquals(Branches.STOCKHOLM, savingsOne.getBranch());
+        Assertions.assertEquals(Branches.OSLO, currentOne.getBranch());
     }
 }

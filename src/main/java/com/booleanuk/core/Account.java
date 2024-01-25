@@ -7,19 +7,17 @@ public class Account {
 
     private static final double maxLimit = 100000000.00;
 
-    private final String accountName;
-    private final int clearingNumber;
     private final int accountNumber;
     private double balance;
     protected double minLimit;
     private List<BankStatement> statements;
+    private Branches branch;
 
-    public Account(String accountName, int clearingNumber, int accountNumber) {
-        this.accountName = accountName;
-        this.clearingNumber = clearingNumber;
+    public Account(int accountNumber, Branches branch) {
         this.accountNumber = accountNumber;
         this.balance = 0.00;
         this.statements = new ArrayList<>();
+        this.branch = branch;
     }
 
     public boolean changeBalance(double amount, String date) {
@@ -43,27 +41,16 @@ public class Account {
         return true;
     }
 
-    public String getAccountName() {
-        return this.accountName;
-    }
-
-    public int getClearingNumber() {
-        return this.clearingNumber;
-    }
-
     public int getAccountNumber() {
         return this.accountNumber;
     }
 
-    public double getBalance() {
-        return this.balance;
-    }
-
-    public double getMinLimit() {
-        return this.minLimit;
-    }
     public List<BankStatement> getStatements() {
         return this.statements;
+    }
+
+    public Branches getBranch() {
+        return this.branch;
     }
 
     private void addNewBankStatement(String date, double amount, String type) {

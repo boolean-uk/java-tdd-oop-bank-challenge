@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Account {
     int accountId;
@@ -24,13 +25,11 @@ public class Account {
     }
 
     public void deposit(double amount) {
-        this.balance += amount;
-        generateNewTransaction("credit", amount);
+
     }
 
     public void withdraw(double amount) {
-        this.balance -= amount;
-        generateNewTransaction("debit", amount);
+
     }
 
     public String getBankStatement() {
@@ -39,7 +38,9 @@ public class Account {
     }
 
     private void generateNewTransaction(String transactionType, double amount) {
-        Transaction transaction = new Transaction(transactionType, "10/01/2024", amount, this.balance);
+        Date date = new Date(); //Needs to be injected when testing
+        String dateString = date.toString();
+        Transaction transaction = new Transaction(transactionType, dateString, amount, this.balance);
         transactions.add(transaction);
     }
 }

@@ -63,6 +63,10 @@ public class CustomerTest {
 
         Assertions.assertEquals(0, b.getCurrentAccounts().get(33004782).getBalance());
         Assertions.assertFalse(c.withdraw(b, 33004782, 10));
+        System.out.println(b.getCurrentAccounts().get(33004782).getBalance());
+        Assertions.assertTrue(c.deposit(b, 33004782, 20));
+        Assertions.assertFalse(c.withdraw(b, 33004782, 20));
+        Assertions.assertTrue(c.withdraw(b, 33004782, 10));
         Assertions.assertEquals(10.0, b.getCurrentAccounts().get(33004782).getBalance());
         Assertions.assertFalse(m.withdraw(b, 33004782, 10));
         Assertions.assertFalse(m.withdraw(b, 110, 10));

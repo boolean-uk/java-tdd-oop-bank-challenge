@@ -64,8 +64,36 @@ public abstract class Person {
         }
     }
 
-    public boolean withdraw() {
-        return false;
+    public boolean withdraw(Branch branch, int accountNumber, double value) {
+        Transaction t = new Transaction(0, value, 1337);
+
+        if (branch.getCurrentAccounts().containsKey(accountNumber)) {
+            if (branch.getCurrentAccounts().get(accountNumber).getAccountOwner() == this) {
+                if ((branch.getCurrentAccounts().get(accountNumber).getBalance() - value) > 0) {
+                branch.getCurrentAccounts().get(accountNumber).setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance() - value);
+                branch.getCurrentAccounts().get(accountNumber).getTransactionHistory().add(t);
+                System.out.println("APPROVED! " + value + " has been withdrawn from account number: " + accountNumber);
+                return true;
+                } else {
+                    System.out.println("DENIED! The maximum you can withdraw from accountnumber: " + accountNumber + " is " + branch.getCurrentAccounts().get(accountNumber).getBalance() + " to prevent overdraw!");
+                    return false;
+                }
+            } else {
+                System.out.println("You do not have permission to withdraw money from this account!");
+                return false;
+            }
+        } else if (branch.getSavingsAccounts().containsKey(accountNumber)) {
+            if (branch.getSavingsAccounts().get(accountNumber).getAccountOwner() == this) {
+                System.out.println("You are not currently allowed to conduct withdrawals from your savings accounts!");
+                return false;
+            } else {
+                System.out.println("You do not have permission to withdraw money from this account!");
+                return false;
+            }
+        } else {
+            System.out.println("No such account exists!");
+            return false;
+        }
     }
 
     public int generateAccountNumber(Branch branch) {

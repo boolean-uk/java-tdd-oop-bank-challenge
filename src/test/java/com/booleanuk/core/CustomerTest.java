@@ -92,11 +92,11 @@ public class CustomerTest {
 
     @Test
     public void testGetShortBankStatement() {
-        String expectedOutput = "";
-        expectedOutput += " date      || credit   || debit    || balance  \n";
-        expectedOutput += "25/01/2023 ||          ||   250.90 ||   250.90 \n";
-        expectedOutput += "25/01/2023 ||          ||    97.03 ||   347.93 \n";
-        expectedOutput += "25/01/2023 ||   300.01 ||          ||    47,92 \n";
+        StringBuilder expectedOutput = new StringBuilder();
+        expectedOutput.append(" date      || credit   || debit    || balance  \n");
+        expectedOutput.append("25/01/2023 ||          ||   250.90 ||   250.90 \n");
+        expectedOutput.append("25/01/2023 ||          ||    97.03 ||   347.93 \n");
+        expectedOutput.append("25/01/2023 ||   300.01 ||          ||    47,92 \n");
 
         Customer customer = new Customer("Gustav Svennas");
         Account savingsOne = new SavingsAccount("savings1", 5400, 6900758, 0.00);

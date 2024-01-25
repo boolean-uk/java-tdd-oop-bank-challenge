@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class Customer {
         return this.accounts;
     }
 
-    public boolean depositFounds(double amount, Account account) {
-        return account.changeBalance(amount);
+    public boolean depositFounds(double amount, Account account, DateFormat date) {
+        return account.changeBalance(amount, date);
     }
 
-    public boolean withdrawFounds(double amount, Account account) {
-        return account.changeBalance(-amount);
+    public boolean withdrawFounds(double amount, Account account, DateFormat date) {
+        return account.changeBalance(-amount, date);
     }
 
     public double showCurrentBalance(Account account) {
@@ -34,6 +35,14 @@ public class Customer {
     }
 
     public String printBankStatements(Account account) {
+        StringBuilder output = new StringBuilder();
+        if (account.getStatements().isEmpty()) {
+            return "No bank statements has been made for this account";
+        }
+        output.append(" date      || credit   || debit    || balance  \n");
+        for (BankStatement statement : account.getStatements()) {
+
+        }
         return "";
     }
 }

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +21,20 @@ public class Account {
         this.statements = new ArrayList<>();
     }
 
-    public boolean changeBalance(double amount) {
+    public boolean changeBalance(double amount, DateFormat date) {
         double newBalance = this.balance + amount;
+        String type;
         if (newBalance < this.minLimit) {
             System.out.print("Can't withdraw that much money from that account!\n");
             return false;
         }
-        this.balance += amount;
+        if (this.balance > newBalance) {
+            type = "debit";
+        } else {
+            type = "credit";
+        }
+        this.balance = newBalance;
+        addNewBankStatement(date, amount, type);
         return true;
     }
 
@@ -52,5 +60,9 @@ public class Account {
 
     public List<BankStatement> getStatements() {
         return this.statements;
+    }
+
+    private void addNewBankStatement(DateFormat date, double amount, String type) {
+        this.statements.add(new BankStatement(date, type, amount, this.balance));
     }
 }

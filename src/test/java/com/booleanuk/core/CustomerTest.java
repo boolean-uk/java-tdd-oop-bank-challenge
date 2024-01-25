@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -93,11 +94,11 @@ public class CustomerTest {
         Assertions.assertTrue(currentAccount.deposit(500));
         Assertions.assertTrue(currentAccount.withdraw(100));
 
-
+        LocalDate localDate = LocalDate.now();
 
         Assertions.assertEquals("\n    Date        Debit       Credit     Balance\n" +
-                "2024-01-25 ||          ||    500.0 ||     500.0\n" +
-                "2024-01-25 ||    500.0 ||          ||    2000.0\n", customer.getAccount(currentAccount).printBankStatements());
+                localDate +" ||          ||    500.0 ||     500.0\n" +
+                localDate +" ||    500.0 ||          ||    2000.0\n", customer.getAccount(currentAccount).printBankStatements());
 
     }
 

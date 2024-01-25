@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BankStatementTest {
@@ -10,7 +11,8 @@ public class BankStatementTest {
     @Test
     public void initBankStatement() {
 
-        Date date = new Date();
+
+        LocalDate date = LocalDate.now();
         BankStatement bankStatement = new BankStatement(500.00, 2000.00) {
             @Override
             protected String getStatementAsString() {

@@ -28,7 +28,7 @@ public class WithdrawStatementTest {
 
         LocalDate date = LocalDate.now();
 
-        String testString = String.format("%-8s %2s %8s %2s %8s %9s\n",date,"||", "500.0","||","||","2000.0");
+        String testString = String.format("%-8s %2s %8s %2s %11s %9s\n",date,"||", "500.0","||","||","2000.0");
 
         WithdrawStatement withdrawStatement = new WithdrawStatement(500, 2000);
 

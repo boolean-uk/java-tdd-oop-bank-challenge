@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -35,10 +36,12 @@ public class AccountTest {
         Assertions.assertTrue(account.deposit(500));
         Assertions.assertTrue(account.withdraw(100));
 
+        LocalDate date = LocalDate.now();
 
 
-        Assertions.assertEquals("\n2024-01-25 ||          ||    500.0 ||     500.0\n" +
-                "2024-01-25 ||    500.0 ||          ||    2000.0\n", account.printBankStatements());
+        Assertions.assertEquals("\n    Date        Debit       Credit     Balance\n" +
+                date +" ||          ||    500.0 ||     500.0\n" +
+                date +" ||    500.0 ||          ||    2000.0\n", account.printBankStatements());
 
     }
 

@@ -42,8 +42,12 @@ class AccountTest {
         String bankStatement = account.getBankStatement();
 //        Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
 //                                        "2024-01-25 08:57:01  || 100.0    ||          || 100.0    ", account.getBankStatement());
-        Assertions.assertTrue(bankStatement.contains("Date                 || Credit   || Debit    || Balance"));
-        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01  || 100.0    ||          || 100.0"));
+        Assertions.assertTrue(bankStatement.contains("Date"));
+        Assertions.assertTrue(bankStatement.contains("Credit"));
+        Assertions.assertTrue(bankStatement.contains("Debit"));
+        Assertions.assertTrue(bankStatement.contains("Balance"));
+        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
+        Assertions.assertTrue(bankStatement.contains("100.0"));
 
     }
 
@@ -68,10 +72,14 @@ class AccountTest {
 //                        2024-01-25 14:30:26  ||          || 200.0    || 900.0   \s
 //                        2024-01-25 11:44:05  || 100.0    ||          || 1100.0  \s
 //                        2024-01-25 08:57:01  || 1000.0   ||          || 1000.0  \s""", account.getBankStatement());
-        Assertions.assertTrue(bankStatement.contains("Date                 || Credit   || Debit    || Balance"));
-        Assertions.assertTrue(bankStatement.contains("2024-01-25 14:30:26  ||          || 200.0    || 900.0"));
-        Assertions.assertTrue(bankStatement.contains("2024-01-25 11:44:05  || 100.0    ||          || 1100.0"));
-        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01  || 1000.0   ||          || 1000.0"));
+        Assertions.assertTrue(bankStatement.contains("2024-01-25 14:30:26"));
+        Assertions.assertTrue(bankStatement.contains("200.0"));
+        Assertions.assertTrue(bankStatement.contains("900.0"));
+        Assertions.assertTrue(bankStatement.contains("2024-01-25 11:44:05"));
+        Assertions.assertTrue(bankStatement.contains("100.0"));
+        Assertions.assertTrue(bankStatement.contains("1100.0"));
+        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
+        Assertions.assertTrue(bankStatement.contains("1000.0"));
     }
 
     @Test

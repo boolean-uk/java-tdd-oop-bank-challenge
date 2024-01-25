@@ -26,10 +26,12 @@ public class Account {
 
     public void deposit(double amount) {
         this.balance += amount;
+        generateNewTransaction("Credit", amount);
     }
 
     public void withdraw(double amount) {
         this.balance -= amount;
+        generateNewTransaction("Debit", amount);
     }
 
     public String getBankStatement() {
@@ -45,6 +47,16 @@ public class Account {
     }
 
     public double getBalanceFromTransactions() {
-        return 50.0;
+        double balance = 0.0;
+
+        for(Transaction transaction : transactions) {
+            if(transaction.getTransactionType().equalsIgnoreCase("Credit")) {
+                balance += Double.parseDouble(transaction.getAmount());
+            }
+            else {
+                balance -= Double.parseDouble(transaction.getAmount());
+            }
+        }
+        return balance;
     }
 }

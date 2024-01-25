@@ -1,2 +1,3 @@
 rootProject.name = 'java.tdd.oop.bank.challenge'
+include 'class-models'
 

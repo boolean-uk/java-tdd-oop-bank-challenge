@@ -37,9 +37,9 @@ Class Account
 
 | Class members                       | Methods                 | Scenario                               | Return |
 |-------------------------------------|-------------------------|----------------------------------------|--------|
-| double balance                      | Account(int accountId)  |                                        |        |
-| ArrayList<Transaction> transactions | deposit(double amount)  | if amount is added to balance          | true   |
-|                                     | withdraw(double amount) | if amount is withdrawn from balance    | true   |
+| int accountId                       | Account(int accountId)  |                                        |        |
+| double balance                      | deposit(double amount)  | if amount is added to balance          | true   |
+| ArrayList<Transaction> transactions | withdraw(double amount) | if amount is withdrawn from balance    | true   |
 |                                     | getBalance()            |                                        |        |
 |                                     | getBankStatement()      | if bank statement has all transactions | true   |
 

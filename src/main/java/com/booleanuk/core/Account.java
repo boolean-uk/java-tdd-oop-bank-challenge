@@ -10,7 +10,6 @@ public abstract class Account {
     private List<Transaction> transactions;
 
     public Account(){
-        this.balance = 0.00;
         this.transactions = new ArrayList<>();
     }
 
@@ -37,7 +36,11 @@ public abstract class Account {
 
 
     public double getBalance(){
-        return this.balance;
+        double balance = 0.00;
+        for (int i = 0; i < this.getTransactions().size(); i++) {
+            balance += this.getTransactions().get(i).getBalance();
+        }
+        return this.balance = balance;
     }
 
     public void withdraw(double withdraw){

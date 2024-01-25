@@ -5,34 +5,25 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class Account {
-    protected double balance;
     protected List<Transaction> transactions;
 
     public Account() {
         this.transactions = new ArrayList<>();
     }
     public void deposit(double amount) {
-        if (amount > 0) {
-            balance += amount;
-            addTransaction(new Date(), amount, balance);
-        } else {
-            System.out.println("Invalid deposit amount");
-        }
+        transactions.add(new Transaction(new Date(), amount, getBalance() + amount));
     }
 
     public String withdraw(double amount) {
-        if (amount > 0 && amount <= balance) {
-            balance -= amount;
-            addTransaction(new Date(), -amount, balance);
-            return "Successfully withdrawn amount";
-        } else {
+        if (getBalance() - amount < 0) {
             return "Invalid withdrawal amount or insufficient funds";
+        } else {
+            transactions.add(new Transaction(new Date(), -amount, getBalance() - amount));
+            return "Successfully withdrawn amount";
         }
     }
 
-    public double getBalance() {
-        return balance;
-    }
+    public abstract double getBalance();
 
     public List<Transaction> getTransactions() {
         return transactions;

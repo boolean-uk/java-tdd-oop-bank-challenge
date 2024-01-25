@@ -9,5 +9,14 @@ public class CurrentAccount extends Account {
         Transaction transaction = new Transaction(date, amount, balance);
         transactions.add(transaction);
     }
+
+    @Override
+    public double getBalance() {
+        double balance = 0.0;
+        for (Transaction transaction : transactions) {
+            balance += transaction.getAmount();
+        }
+        return balance;
+    }
 }
 

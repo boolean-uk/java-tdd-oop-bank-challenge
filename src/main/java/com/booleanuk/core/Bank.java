@@ -89,6 +89,15 @@ public class Bank {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
         }
+        ArrayList<Account> customerAccounts = accounts.get(customer);
+        for(Account customerAccount: customerAccounts) {
+            if(customerAccount.getId() == accountId) {
+                if(customerAccount instanceof SavingsAccount) {
+                    return "You can't have an overdraft on a savings account.";
+                }
+            }
+        }
+
 
         return "Account doesn't exist.";
     }

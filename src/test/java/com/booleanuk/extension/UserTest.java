@@ -125,14 +125,26 @@ public class UserTest {
     }
 
     @Test
-    public void testRequestOverdraft()
+    public void testRequestOverdraftSuccessful()
     {
         Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Groceries", bank);
 
-        user.requestOverdraft("cu-78105109112115111110-1", 200);
-        Assertions.assertEquals(1, bank.getBranch("Oslo_East").overdraftRequests.size());
+        Assertions.assertTrue(user.requestOverdraft("cu-78105109112115111110-1", 200));
+        Assertions.assertEquals(-200, user.getAccount("cu-78105109112115111110-1").getBalance());
+    }
+
+    @Test
+    public void testRequestOverdraftRejected()
+    {
+        Bank bank = new Bank();
+        LocalDate birthday = LocalDate.of(1956, 3, 19);
+        User user = new User("Large Nimpson", birthday);
+        user.createCurrentAccount("Groceries", bank);
+
+        Assertions.assertFalse(user.requestOverdraft("cu-78105109112115111110-1", 20000000));
+        Assertions.assertEquals(0, user.getAccount("cu-78105109112115111110-1").getBalance());
     }
 }

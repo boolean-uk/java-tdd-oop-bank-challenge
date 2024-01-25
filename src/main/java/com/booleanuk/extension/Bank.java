@@ -28,6 +28,16 @@ public class Bank {
         return null;
     }
 
+    public int getFunds()
+    {
+        return this.funds;
+    }
+
+    public void setFunds(int funds)
+    {
+        this.funds = funds;
+    }
+
     public void newBranch(String name, String location)
     {
         this.branches.add(new Branch(name, location));

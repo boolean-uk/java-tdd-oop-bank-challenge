@@ -20,10 +20,6 @@ public class Account {
         return accountName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
-
     public String getAccountID() {
         return accountID;
     }
@@ -34,10 +30,6 @@ public class Account {
 
     public int getBalance() {
         return this.balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 
     public boolean deposit(int amount)  {
@@ -64,24 +56,23 @@ public class Account {
 
     public String generateTransactionStatement()
     {
-        String statement = "";
         int balance = 0;
         int creditWidth = getCreditWidth(), debitWidth = getDebitWidth();
-        statement = String.format("%-11s%s%-"+(creditWidth-1)+"s%s%-"+(debitWidth-1)+"s%s%-7s",
-                "date ", "|| ", "credit", "|| ", "debit", "|| ", "balance");
+        StringBuilder statement = new StringBuilder(String.format("%-11s%s%-" + (creditWidth - 1) + "s%s%-" + (debitWidth - 1) + "s%s%-7s",
+                "date ", "|| ", "credit", "|| ", "debit", "|| ", "balance"));
 
 
         for(Transaction t: this.transactions)
         {
-            statement += "\n";
+            statement.append("\n");
             balance = t.isDeposit() ? balance + t.getAmount() : balance - t.getAmount();
-            statement += String.format("%-11s%s%"+(creditWidth-1)+"s%s%"+(debitWidth-1)+"s%s%8s",
-                    t.getDate(), "||", t.isDeposit() ? (double)t.getAmount()/100.0 : "",
-                    " ||", t.isDeposit() ? "" : (double)t.getAmount()/100.0,
-                    " ||", (double)balance/100.0);
+            statement.append(String.format("%-11s%s%" + (creditWidth - 1) + "s%s%" + (debitWidth - 1) + "s%s%8s",
+                    t.getDate(), "||", t.isDeposit() ? (double) t.getAmount() / 100.0 : "",
+                    " ||", t.isDeposit() ? "" : (double) t.getAmount() / 100.0,
+                    " ||", (double) balance / 100.0));
 
         }
-        return statement;
+        return statement.toString();
     }
 
     public int getCreditWidth()

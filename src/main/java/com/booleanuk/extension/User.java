@@ -18,16 +18,9 @@ public class User {
         this.accountNum = 0;
         this.accounts = new ArrayList<>();
     }
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
 
     public String getUserName() {
         return userName;
-    }
-
-    public String getUserID() {
-        return userID;
     }
 
     public void createCurrentAccount(String name, Bank bank)
@@ -54,10 +47,6 @@ public class User {
 
     public ArrayList<Account> getAccounts() {
         return accounts;
-    }
-
-    public void setAccounts(ArrayList<Account> accounts) {
-        this.accounts = accounts;
     }
 
     public boolean makeDeposit(String ID, int amount)
@@ -136,10 +125,20 @@ public class User {
         {
             if(account.getAccountID().equals(accountID))
             {
-                account.branch.addOverdraftRequest(accountID, amount);
-                System.out.println("Overdraft request sent to branch " + account.branch.getName());
-
-                return true;
+                if (account.branch.processOverdraftRequest(amount))
+                {
+                    System.out.println("Overdraft accepted in branch " + account.branch.getName());
+                    account.withdraw(amount);
+                    return true;
+                }
+                else {
+                    System.out.println("Do you think the bank is made of money? Rejected");
+                    return false;
+                }
+            }
+            else {
+                System.out.println("No such account");
+                return false;
             }
         }
         return false;

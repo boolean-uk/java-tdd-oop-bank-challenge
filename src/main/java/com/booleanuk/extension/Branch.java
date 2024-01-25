@@ -1,19 +1,18 @@
 package com.booleanuk.extension;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Branch {
     private final String name;
-    private String location;
+    private final  String location;
     private ArrayList<String> accountIDs;
-    HashMap<String, Integer> overdraftRequests;
+    private int funds;
     public Branch(String name, String location)
     {
         this.name = name;
         this.location = location;
         this.accountIDs = new ArrayList<>();
-        this.overdraftRequests = new HashMap<>();
+        this.funds = 10000;
     }
 
     public boolean addAccount(String accountID)
@@ -24,10 +23,9 @@ public class Branch {
         return true;
     }
 
-    public boolean addOverdraftRequest(String accountID, int amount)
+    public boolean processOverdraftRequest(int amount)
     {
-        this.overdraftRequests.put(accountID, amount);
-        return true;
+        return amount < this.funds;
     }
 
     public ArrayList<String> getAccounts()

@@ -6,7 +6,7 @@ public class SavingsAccount extends Account{
     public SavingsAccount(String name, String owner, int num)
     {
         super(name);
-        this.accountName = accountName;
+        this.accountName = name;
         this.accountID = "sa-" + generateID(owner) + "-" + num;
         System.out.println(accountID);
         this.transactions = new ArrayList<>();

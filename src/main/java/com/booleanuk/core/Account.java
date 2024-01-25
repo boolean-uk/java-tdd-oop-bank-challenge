@@ -23,6 +23,15 @@ public abstract class Account {
         return false;
     }
 
+    public boolean withdraw(double debit) {
+        boolean newBalanceNotLessThanZero = (this.getBalance() - debit) >= 0;
+        if(debit > 0 && newBalanceNotLessThanZero) {
+            this.setBalance(-toInt(debit));
+            return true;
+        }
+        return false;
+    }
+
     public int getAccountNumber() {
         return accountNumber;
     }

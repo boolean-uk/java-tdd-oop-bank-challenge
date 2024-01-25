@@ -43,7 +43,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void shouldReturnTrueWithdraw() {
+    public void shouldReturnFalseWithdraw() {
         User user = new User(123456, "UsersName");
         CurrentAccount a = new CurrentAccount(user);
         a.deposit(50.00);

@@ -7,12 +7,12 @@ I want to create a current account.
 ```
 Bank Class
 
-| Methods()                          | Member Variables | Scenario                                                  | Result/Output       |
-|------------------------------------|------------------|-----------------------------------------------------------|---------------------|
-| createCurrAcc(Customer,int choice) | int branchNr     | Get the customer object and check if                      | return confirmation |
-|                                    |                  | it exists, then ask if they want saving- or               |                     |
-|                                    |                  | current account. Send parameters and create               |                     |
-|                                    |                  | an account based on the choice, connected to the Customer |                     |
+| Methods()                      | Member Variables | Scenario                                                  | Result/Output       |
+|--------------------------------|------------------|-----------------------------------------------------------|---------------------|
+| createAcc(Customer,int choice) | int branchNr     | Get the customer object and check if                      | return confirmation |
+|                                |                  | it exists, then ask if they want saving- or               |                     |
+|                                |                  | current account. Send parameters and create               |                     |
+|                                |                  | an account based on the choice, connected to the Customer |                     |
 
 ```
 2. As a customer,
@@ -21,12 +21,12 @@ I want to create a savings account.
 ```
 Bank Class
 
-| Methods()                          | Member Variables | Scenario                                                  | Result/Output       |
-|------------------------------------|------------------|-----------------------------------------------------------|---------------------|
-| createSaveAcc(Customer,int choice) | int branchNr     | Get the customer object and check if                      | return confirmation |
-|                                    |                  | it exists, then ask if they want saving- or               |                     |
-|                                    |                  | current account. Send parameters and create               |                     |
-|                                    |                  | an account based on the choice, connected to the Customer |                     |
+| Methods()                      | Member Variables | Scenario                                                  | Result/Output       |
+|--------------------------------|------------------|-----------------------------------------------------------|---------------------|
+| createAcc(Customer,int choice) | int branchNr     | Get the customer object and check if                      | return confirmation |
+|                                |                  | it exists, then ask if they want saving- or               |                     |
+|                                |                  | current account. Send parameters and create               |                     |
+|                                |                  | an account based on the choice, connected to the Customer |                     |
 ```
 3. As a customer,
 So I can keep a record of my finances,

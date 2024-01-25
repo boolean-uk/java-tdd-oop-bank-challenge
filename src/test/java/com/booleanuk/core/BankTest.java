@@ -25,6 +25,45 @@ public class BankTest {
 
     }
 
+    @Test
+    void testDepositTrue() {
+        Account user1 = new Savings("232323", "Hassan Hussain", 345.00);
+        boolean result = user1.deposit(50.00);
+        Assertions.assertTrue(result);
+
+
+    }
+
+
+    @Test
+    void testDepositFalse() {
+        Account user1 = new Savings("232323", "Hassan Hussain", 345.00);
+        boolean result = user1.deposit(1.00);
+        Assertions.assertFalse(result);
+
+
+    }
+
+    @Test
+    void testWithdrawalTrue() {
+        Account user1 = new Current("232323", "Hassan Hussain", 345.00);
+        boolean result = user1.withdrawal(50.00);
+        Assertions.assertTrue(result);
+
+
+    }
+
+    @Test
+    void testWithdrawalFalse() {
+        Account user1 = new Current("232323", "Hassan Hussain", 20.00);
+        boolean result = user1.withdrawal(50.00);
+        Assertions.assertTrue(result);
+
+
+    }
+
+
+
 
 
 

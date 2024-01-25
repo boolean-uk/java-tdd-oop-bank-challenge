@@ -69,9 +69,9 @@ As a bank manager,
 So I can safeguard our funds,
 I want to approve or reject overdraft requests.
 ```
-| Class | Methods | Member variables | Scenario | Outputs/Results |
-|-------|---------|------------------|----------|-----------------|
-|       |         |                  |          |                 |
-|       |         |                  |          |                 |
-|       |         |                  |          |                 |
+| Class       | Methods                                              | Member variables      | Scenario                             | Outputs/Results |
+|-------------|------------------------------------------------------|-----------------------|--------------------------------------|-----------------|
+| BankManager | boolean checkOverdraftLimit(double overdraftAmount)  | double overdraftLimit | if overdraftAmount <= overdraftLimit | request granted |
+|             |                                                      |                       | if overdraftAmount > overdraftLimit  | request deied   |
+|             |                                                      |                       |                                      |                 |
 

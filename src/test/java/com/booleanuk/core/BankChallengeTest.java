@@ -163,9 +163,17 @@ public class BankChallengeTest {
         Assertions.assertFalse(current.withdraw(500, formatting.parse("10-1-2024")));
         current.requestOverdraft();
         Assertions.assertTrue(current.withdraw(500, formatting.parse("10-1-2024")));
-        System.out.println(current.getBalance());
-
     }
 
+    @Test
+    public void testBankManagerOverdraftRequest() throws ParseException {
+        CurrentAccount current = new CurrentAccount();
+
+        Assertions.assertFalse(current.withdraw(500, formatting.parse("10-1-2024")));
+        current.requestOverdraft();
+        Assertions.assertTrue(current.withdraw(500, formatting.parse("10-1-2024")));
+        current.requestOverdraft();
+        Assertions.assertFalse(current.withdraw(20000, formatting.parse("10-1-2024")));
+    }
 
 }

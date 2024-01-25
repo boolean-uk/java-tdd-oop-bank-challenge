@@ -65,10 +65,55 @@ public class Account {
         for(int i = 0; i < names[names.length-1].length(); i++)
         {
             char c = names[names.length-1].charAt(i);
-            System.out.println("Char " + c + ": " + (int) c);
             ID.append((int) c);
         }
         return ID.toString();
+    }
+
+    public String generateTransactionStatement()
+    {
+        String statement = "";
+        int balance = 0;
+        int creditWidth = getCreditWidth(), debitWidth = getDebitWidth();
+        statement = String.format("%-11s%s%-"+(creditWidth-1)+"s%s%-"+(debitWidth-1)+"s%s%-7s",
+                "date ", "|| ", "credit", "|| ", "debit", "|| ", "balance");
+
+
+        for(Transaction t: this.transactions)
+        {
+            statement += "\n";
+            balance = t.isDeposit ? balance + t.amount : balance - t.amount;
+            statement += String.format("%-11s%s%"+(creditWidth-1)+"s%s%"+(debitWidth-1)+"s%s%8s",
+                    t.date, "||", t.isDeposit ? (double)t.amount/100.0 : "", " ||", t.isDeposit ? "" : (double)t.amount/100.0, " ||", (double)balance/100.0);
+
+        }
+        return statement;
+    }
+
+    public int getCreditWidth()
+    {
+        int max = 8;
+        for(Transaction t : this.transactions)
+        {
+            if(t.isDeposit) {
+                String number = "" + t.amount;
+                if (number.length() > max) max = number.length();
+            }
+        }
+        return max;
+    }
+
+    public int getDebitWidth()
+    {
+        int max = 7;
+        for(Transaction t : this.transactions)
+        {
+            if(!t.isDeposit) {
+                String number = "" + t.amount;
+                if (number.length() > max) max = number.length();
+            }
+        }
+        return max;
     }
 
     public boolean withdraw(int amount)  {

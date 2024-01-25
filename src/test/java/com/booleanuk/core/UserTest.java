@@ -52,10 +52,9 @@ public class UserTest {
         user.makeWithdrawal("cu-78105109112115111110-1", 5000);
 
         String expectedString = """
-                date       || credit  || debit || balance
-                25-01-2024 || 1000.00 ||       || 1000.00
-                25-01-2024 ||         || 50.00 ||  950.00
-                """;
+                date       || credit || debit || balance
+                2024-01-25 || 1000.0 ||       ||  1000.0
+                2024-01-25 ||        ||  50.0 ||   950.0""";
         Assertions.assertEquals(expectedString, user.generateTransactionHistory("cu-78105109112115111110-1"));
     }
 

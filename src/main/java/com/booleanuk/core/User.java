@@ -92,6 +92,11 @@ public class User {
 
     public String generateTransactionHistory(String ID)
     {
+        for(Account account : this.accounts)
+        {
+            if(account.getAccountID().equals(ID))
+                return account.generateTransactionStatement();
+        }
         return "";
     }
 

@@ -1,8 +1,15 @@
 package com.booleanuk.core;
 
 public abstract class Account {
-
+    protected double balance;
     public boolean deposit(double amount){
-        return false;
+        if(amount < 0){
+            return false;
+        }
+        else{
+            balance += amount;
+            return true;
+        }
+
     }
 }

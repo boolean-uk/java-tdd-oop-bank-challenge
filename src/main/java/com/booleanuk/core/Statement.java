@@ -22,7 +22,8 @@ public class Statement {
 	public double getAmount() {
 		return this.amount;
 	}
-	public String getDate(){
+
+	public String getDate() {
 		return this.date;
 	}
 }

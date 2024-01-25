@@ -52,8 +52,12 @@ public class AccountTest {
 		} catch (OverdraftException e) {
 			Assertions.fail();
 		}
-		Assertions.assertThrows(OverdraftException.class,()->{acc.withdraw(2000);});
-		Assertions.assertThrows(OverdraftException.class,()->{acs.withdraw(2000);});
+		Assertions.assertThrows(OverdraftException.class, () -> {
+			acc.withdraw(2000);
+		});
+		Assertions.assertThrows(OverdraftException.class, () -> {
+			acs.withdraw(2000);
+		});
 
 	}
 

@@ -102,4 +102,16 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void requestOverdraft() {
+        Customer customer = new Customer();
+
+        CurrentAccount currentAccount = new CurrentAccount("AccountName1", Branches.Kristiansand);
+
+        BankManager bankManager = new BankManager();
+
+        Assertions.assertTrue(customer.requestOverdraft(currentAccount, bankManager));
+
+    }
+
 }

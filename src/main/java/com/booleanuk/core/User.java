@@ -25,9 +25,11 @@ public class User {
         if (account.getUserID() == 0){
             accounts.add(account);
             account.setUserID(userID);
+            System.out.println("New " + account.getClass().getSimpleName() + " created.");
 
             return true;
         }
+        System.out.println("This account is connected to another user.");
         return false;
     }
 
@@ -58,10 +60,42 @@ public class User {
     }
 
     public boolean withdraw(int accountID, int fund){
-        return getAccount(accountID).withdraw(fund);
+        try {
+            return getAccount(accountID).withdraw(Math.abs(fund));
+        } catch (NullPointerException e){
+            System.out.println("No account with this account ID.");
+            return false;
+        }
     }
 
-    public void deposit(int accountID, int fund){
-        getAccount(accountID).deposit(fund);
+    public boolean deposit(int accountID, int fund){
+        if (Math.abs(fund) == fund){
+            try {
+                return getAccount(accountID).deposit(Math.abs(fund));
+            } catch (NullPointerException e){
+                System.out.println("No account with this account ID.");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean requestOverdraft(int accountID, int overdraft){
+        try {
+            Account account = getAccount(accountID);
+            if (account instanceof CurrentAccount){
+                return ((CurrentAccount) account).setOverdraft(Math.abs(overdraft));
+            }
+            System.out.println("Cannot request overdraft on savings accounts.");
+            return false;
+
+        } catch (NullPointerException e){
+            System.out.println("No account with this account ID.");
+            return false;
+        }
+    }
+
+    public void printBankStatements(){
+
     }
 }

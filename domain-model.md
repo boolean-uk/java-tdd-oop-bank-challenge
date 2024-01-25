@@ -57,6 +57,6 @@ User
 | String firstName            | void printBankStatement()     | To keep record of finances.                |                                           | S3           |
 | String lastName             | boolean withdraw(int, int)    | To withdraw money from account of choice.  |                                           | S4           |
 | ArrayList<Account> accounts | boolean deposit(int, int)     | To deposit money from account of choice.   |                                           | S4           |
-|                             | void accountOverview()        | To see all accounts and following balance. |                                           |              |
+|                             | void showAccounts()           | To see all accounts and following balance. |                                           |              |
 |                             | Account getAccount(int)       |                                            |                                           |              |
 |                             | boolean requestOverdraft(int) | To have an emergency fund.                 | True if overdraft approved, false if not. | S6           |

@@ -68,7 +68,13 @@ public class Bank {
 			maxWidth = findMaxAmountWidth(statements);
 		}
 		double balance = getBalance(accountId);
-		StringBuilder sb = new StringBuilder("date       || credit  ||  debit  || balance\n");
+		StringBuilder sb = new StringBuilder();
+		sb.append("date       || ");
+		sb.append(String.format("%" + (int) (maxWidth) + "s", "credit "));
+		sb.append(" || ");
+		sb.append(String.format("%" + (int) (maxWidth) + "s", " debit "));
+		sb.append(" || balance\n");
+
 		for (Statement statement : statements) {
 			if (statement.getType().equals("deposit")) {
 				sb.append(String.format("%-10s", statement.getDate()));
@@ -109,7 +115,7 @@ public class Bank {
 				maxAmount = amount;
 			}
 		}
-		return Math.ceil(Math.log10(maxAmount))+2;
+		return Math.ceil(Math.log10(maxAmount)) + 2;
 	}
 
 	public double getBalance(String accountId) {
@@ -122,6 +128,13 @@ public class Bank {
 		} else {
 			throw new NotFoundException(accountId);
 		}
+	}
+
+	public String readNextRequest() {
+		if (requests.isEmpty()) {
+			return "No pending requests";
+		}
+		return requests.get(0);
 	}
 
 	public String answerNextRequest(boolean answer) {

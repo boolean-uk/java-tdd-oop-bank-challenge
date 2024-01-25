@@ -87,11 +87,11 @@ public class BankTest {
 			bank.getAccount("0").deposit(5000000);
 
 		statement =
-				"date       || credit  ||  debit  || balance\n" +
-						date + " || 5000000.0 ||           || 5002500.0\n" +
-						date + " ||           ||     500.0 ||    2500.0\n" +
-						date + " ||    2000.0 ||           ||    3000.0\n" +
-						date + " ||    1000.0 ||           ||    1000.0";
+				"date       ||   credit  ||    debit  || balance\n" +
+				date +    " || 5000000.0 ||           || 5002500.0\n" +
+				date +    " ||           ||     500.0 ||    2500.0\n" +
+				date +    " ||    2000.0 ||           ||    3000.0\n" +
+				date +    " ||    1000.0 ||           ||    1000.0";
 		Assertions.assertEquals(statement, bank.generateStatements("0"));
 	}
 

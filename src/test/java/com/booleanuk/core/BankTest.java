@@ -16,6 +16,4 @@ public class BankTest {
 
         Assertions.assertEquals(2, bank.getAccounts().size());
     }
-
-
 }

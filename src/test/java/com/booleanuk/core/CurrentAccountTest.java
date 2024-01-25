@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class CurrentAccountTest {
     @Test
-    public void checkBalanceAfterDepositAndWithdraw() {
+    public void checkBalanceAfterDepositAndWithdrawal() {
         Bank bank = new Bank();
 
         bank.openCurrentAccount();
@@ -19,5 +19,16 @@ public class CurrentAccountTest {
         bank.withdrawFromAccount(account, 500);
 
         Assertions.assertEquals(500, account.getBalance());
+    }
+
+    @Test
+    public void checkingForInvalidWithdrawal() {
+        Bank bank = new Bank();
+
+        bank.openCurrentAccount();
+
+        Account account = bank.getAccounts().get(0);
+
+        Assertions.assertEquals("Invalid withdrawal amount or insufficient funds", account.withdraw(10));
     }
 }

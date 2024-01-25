@@ -16,10 +16,10 @@ public class TransactionTest {
 
         bank.depositToAccount(account, 1000);
 
-        Transaction transactions = new Transaction();
+        List<Transaction> transactions = account.getTransactions();
 
-        StringBuilder yourTransactions = transactions.generateTransactions();
+        String yourTransactions = Transaction.generateTransactions(transactions);
 
-        Assertions.assertTrue(yourTransactions.indexOf("balance") != -1);
+        Assertions.assertTrue(yourTransactions.contains("balance"));
     }
 }

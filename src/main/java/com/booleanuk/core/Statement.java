@@ -6,7 +6,7 @@ import java.util.Date;
 public class Statement {
 	private final String type;
 	private final double amount;
-	private String date;
+	private final String date;
 
 	public Statement(String type, int amount) {
 		this.type = type;

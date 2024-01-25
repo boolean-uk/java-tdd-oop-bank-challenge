@@ -58,7 +58,17 @@ public class AccountTest {
 		Assertions.assertThrows(OverdraftException.class, () -> {
 			acs.withdraw(2000);
 		});
-
+		acc.setOverdraftLimit(1500);
+		acc.setOverdraftEnabled(true);
+		try {
+			acc.withdraw(1000);
+		} catch (OverdraftException e) {
+			throw new RuntimeException(e);
+		}
+		Assertions.assertEquals(-500, acc.calcBalance());
+		Assertions.assertThrows(OverdraftException.class, () -> {
+			acc.withdraw(2000);
+		});
 	}
 
 }

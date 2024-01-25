@@ -11,7 +11,7 @@ public class UserTest {
     public void createUser() {
         User user = new User(250799, "Marit");
         Assertions.assertEquals(250799, user.getUserId());
-        Assertions.assertEquals("Marit", user.getName);
-        Assertions.assertEquals(new ArrayList<>(), user.getAccounts);
+        Assertions.assertEquals("Marit", user.getName());
+        Assertions.assertEquals(new ArrayList<>(), user.getAccounts());
     }
 }

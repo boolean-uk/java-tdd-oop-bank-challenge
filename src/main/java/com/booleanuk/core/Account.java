@@ -1,15 +1,18 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 abstract public class Account {
     private static int counter = 1;
     private int userID;
     private final int accountID;
-    private int balance;
+    private int overdraft;
+    private ArrayList<Integer> activity;
 
     public Account(){
-        balance = 0;
         accountID = counter;
         counter++;
+        overdraft = 0;
     }
     public int getUserID(){
         return userID;
@@ -24,6 +27,21 @@ abstract public class Account {
     }
 
     public double getBalance(){
+        int balance = 0;
+        if (activity != null){
+            for (int fund : activity){
+                balance += fund;
+            }
+        }
+
         return balance;
+    }
+
+    public boolean withdraw(int fund){
+        if (getBalance() - fund >= overdraft){
+            activity.add(-fund);
+            return true;
+        }
+        return false;
     }
 }

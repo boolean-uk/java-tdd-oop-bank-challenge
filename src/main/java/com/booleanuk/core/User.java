@@ -36,11 +36,10 @@ public class User {
         System.out.printf("|%-15s| %-15s| %-15s| %n", "Account ID", "Type", "Balance");
         System.out.println(("=").repeat(51));
 
-        for (Account account : accounts){
+        if (!accounts.isEmpty()){
+            for (Account account : accounts){
             System.out.printf("|%14s | %-15s| %14.2f | %n", account.getAccountID(), account.getClass().getSimpleName(), account.getBalance());
         }
-
-        if (!accounts.isEmpty()){
             System.out.println(("-").repeat(51));
         } else {
             System.out.printf("%30s", "No entries");
@@ -56,5 +55,9 @@ public class User {
             }
         }
         return null;
+    }
+
+    public boolean withdraw(int accountID, int fund){
+        return getAccount(accountID).withdraw(fund);
     }
 }

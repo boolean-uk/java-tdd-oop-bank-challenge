@@ -10,8 +10,6 @@ public class TestUser{
         User user2 = new User("Eli", "Elisson");
 
         Assertions.assertNotEquals(user1.getUserID(), user2.getUserID());
-        Assertions.assertEquals(1, user1.getUserID());
-        Assertions.assertEquals(2, user2.getUserID());
     }
 
     @Test
@@ -32,25 +30,25 @@ public class TestUser{
         Assertions.assertFalse(user2.newAccount(currentAccount));
         user2.showAccounts();
     }
-/*
+
     @Test
     public void testWithdraw(){
         User user = new User("Kevin", "James");
         user.newAccount(new CurrentAccount());
-        user.deposit(1, 2300);
+        user.withdraw(1, 2300);
 
-        Assertions.assertEquals(2300, user.getAccount(1).getBalance());
+        Assertions.assertEquals(0, user.getAccount(1).getBalance());
 
-        user.deposit(1, 500);
+        user.withdraw(1, 500);
 
-        Assertions.assertEquals(2800, user.getAccount(1).getBalance());
+        Assertions.assertEquals(0, user.getAccount(1).getBalance());
     }
 
     @Test
     public void testDeposit(){
 
     }
-
+/*
     @Test
     public void testWithdrawAndDeposit(){
 

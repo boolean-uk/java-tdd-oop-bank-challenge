@@ -10,6 +10,14 @@ public class CurrentAccount extends Account{
         this.overdraftAmount = 0.0;
     }
 
+    public boolean isOverdraftRequested() {
+        return this.overdraftRequested;
+    }
+
+    public double getOverdraftAmount() {
+        return this.overdraftAmount;
+    }
+
     public boolean requestOverdraft() {
         if (this.overdraftRequested){
             System.out.println("Overdraft already requested.");
@@ -19,8 +27,18 @@ public class CurrentAccount extends Account{
         return true;
     }
 
-    public void answearOverdraftRequest(boolean confirm, double overdraftAmount) {
-
+    public void answerOverdraftRequest(boolean confirm, double overdraftAmount) {
+        if (confirm && isOverdraftRequested()) {
+            this.overdraftAmount = overdraftAmount;
+            this.overdraftRequested = false;
+        }
+        else if (!isOverdraftRequested()) {
+            System.out.println("The owner has not requested overdraft.");
+        }
+        else {
+            this.overdraftRequested = false;
+            System.out.println("The request was rejected.");
+        }
     }
 
 

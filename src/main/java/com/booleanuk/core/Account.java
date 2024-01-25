@@ -11,11 +11,11 @@ public class Account {
     private double balance;
     private List<BankStatement> statements;
 
-    public Account(String accountName, int clearingNumber, int accountNumber, double balance) {
+    public Account(String accountName, int clearingNumber, int accountNumber, double startingBalance) {
         this.accountName = accountName;
         this.clearingNumber = clearingNumber;
         this.accountNumber = accountNumber;
-        this.balance = balance;
+        this.balance = startingBalance;
         this.statements = new ArrayList<>();
     }
 

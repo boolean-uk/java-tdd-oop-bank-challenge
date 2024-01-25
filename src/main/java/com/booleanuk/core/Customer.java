@@ -13,6 +13,14 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
 
+    public void addAccount(Account account) {
+        this.accounts.add(account);
+    }
+
+    public List<Account> getAccounts() {
+        return this.accounts;
+    }
+
     public double showCurrentBalance(Account account) {
         return 0.00;
     }

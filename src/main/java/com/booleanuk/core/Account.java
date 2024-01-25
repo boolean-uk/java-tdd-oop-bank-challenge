@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Account {
 
-    private double balance;
+
     private ArrayList<BankStatement> bankStatements;
 
     private String accountName;
@@ -13,11 +13,22 @@ public class Account {
 
     public Account(String accountName) {
         this.accountName = accountName;
-        this.balance = 0.00;
         this.bankStatements = new ArrayList<>();
     }
 
     public double getBalance() {
+        double balance = 0.0;
+        if(!bankStatements.isEmpty()) {
+            for(BankStatement bankStatement : bankStatements) {
+                if(bankStatement instanceof DepositStatement) {
+                    balance += bankStatement.getAmount();
+                }
+                if(bankStatement instanceof WithdrawStatement) {
+                    balance -= bankStatement.getAmount();
+                }
+            }
+        }
+
         return balance;
     }
 
@@ -33,7 +44,6 @@ public class Account {
 
     public boolean deposit(double v) {
         this.addBankStatement(new DepositStatement(v, this.getBalance()+v));
-        this.balance += v;
         return true;
     }
 
@@ -41,7 +51,6 @@ public class Account {
 
         if(v < this.getBalance()) {
             this.addBankStatement(new WithdrawStatement(v, this.getBalance()-v));
-            this.balance -= v;
             return true;
         }
 

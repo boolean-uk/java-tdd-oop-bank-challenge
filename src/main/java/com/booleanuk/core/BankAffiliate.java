@@ -6,18 +6,18 @@ public class BankAffiliate {
 
     private String affiliation;
 
-    private BankAccount account;
+    private BankAccount bankAccount;
 
-    public BankAffiliate(String fullName, String affiliation, BankAccount account) {
+    public BankAffiliate(String fullName, String affiliation, BankAccount bankAccount) {
         this.fullName = fullName;
         this.affiliation = affiliation;
-        this.account = account;
+        this.bankAccount = bankAccount;
     }
 
     public boolean createCurrentAccount(BankAccount bankAccount) {
         if(!bankAccount.getAccountType().contains("Current")
             || bankAccount.getAccountType().isEmpty()) {
-            this.account.setAccountType("Current");
+            this.bankAccount.setAccountType("Current");
             return true;
         }
         return false;
@@ -39,11 +39,11 @@ public class BankAffiliate {
         this.affiliation = affiliation;
     }
 
-    public BankAccount getAccount() {
-        return account;
+    public BankAccount getBankAccount() {
+        return bankAccount;
     }
 
-    public void setAccount(BankAccount account) {
-        this.account = account;
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
     }
 }

@@ -70,3 +70,59 @@ Extends Account.
 |                                           | int amount              |                      |               |
 |                                           | int balance             |                      |               |
 
+# Bank Challenge Extension
+
+## User Stories
+
+```
+5.
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
+6.
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+7.
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+8.
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+9.
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```
+
+## Domain Model
+
+### Class Account
+
+Account is extended with one method.
+
+| Methods                 | Member variables                    | Scenario       | Output/Return      |
+|-------------------------|-------------------------------------|----------------|--------------------|
+| {5}`calculateBalance()` | ArrayList<Transaction> transactions | Empty list     | double balance 0.0 |
+|                         | transaction.getAmount()             | Not empty list | double balance     |
+
+
+### Class CurrentAccount
+
+CurrentAccount is extended to request and approve/reject overdrafts.
+
+| Methods                                          | Member variables           | Scenario                     | Output/Return                                                     |
+|--------------------------------------------------|----------------------------|------------------------------|-------------------------------------------------------------------|
+| {7,8}`requestOverdraft()`                        | boolean overdraftRequested | overdraftRequested = false   | boolean true, overdraftRequested = true                           |
+|                                                  |                            | overdraftRequested = true    | boolean false, system.out.println("Overdraft already requested.") |
+| {7,8}`answearOverdraftRequest(boolean confirm, ` | boolean overdraftRequested | overdraftRequested = true && |                                                                   |
+| `double overdraftAmount)`                        | double overdraftAmount     | confirm = true               | double overdraftAmount is set                                     |
+|                                                  |                            | overdraftRequested = false   | system.out.println("The owner has not requested overdraft.")      |
+|                                                  |                            | overdraftRequested = true && |                                                                   |
+|                                                  |                            | confirm = false              | overdraftRequested = false                                        |

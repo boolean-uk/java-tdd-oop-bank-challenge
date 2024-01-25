@@ -31,20 +31,23 @@ As an engineer,
 So I don't need to keep track of state,
 I want account balances to be calculated based on transaction history instead of stored in memory.
 ```
+```
+6.
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+```
 
 ### Account Class
 
 | Methods                                                      | Member Variables                     |
 |--------------------------------------------------------------|--------------------------------------|
-| getAccountName()                                             | String accountName                   |
-| getAccountNumber()                                           | int clearingNumber                   |
-| getClearingNumber                                            | int accountNumber                    |
-| getBalance()                                                 | double balance                       |
-| changeBalance(double amount)                                 | double minLimit                      |
-| getMinLimit()                                                | ArrayList\<BankStatement> statements |
-| getStatements()                                              |                                      |
-| addNewBankStatement(String date, double amount, String type) |                                      |
-
+| getAccountNumber()                                           | int accountNumber                    |
+| changeBalance(double amount)                                 | double balance                       |
+| getStatements()                                              | double minLimit                      |
+| getBranch()                                                  | ArrayList\<BankStatement> statements |
+| addNewBankStatement(String date, double amount, String type) | Branches branch                      |
+| getMinLimit()                                                | maxLimit = 100,000,000.00            |
 
 ### SavingsAccount Class extends Account
 
@@ -59,6 +62,14 @@ I want account balances to be calculated based on transaction history instead of
 |---------|--------------------|
 |         | minLimit = -100.00 |
 
+### Branches Enum Class
+
+| Member Variables |
+|------------------|
+| STOCKHOLM        |
+| OSLO             |
+| COPENHAGEN       |
+| HELSINKI         |  
 
 ### BankStatement Class
 
@@ -93,3 +104,5 @@ I want account balances to be calculated based on transaction history instead of
 |                                                                |                                                                                                             |
 | Customer generates bank statements for a specific account      | Prints out a all bank statements made for that account.                                                     |
 | Customer generates bank statements for newly created account   | Prints "No bank statements has been made for this account".                                                 |
+|                                                                |                                                                                                             |
+| Manager adds a branch to a specific account                    | Adds branch to specified account                                                                            |

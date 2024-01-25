@@ -40,7 +40,7 @@ public class SavingsAccountTest {
         SavingsAccount savingsAccount = new SavingsAccount(123, Branch.PERSONAL);
         savingsAccount.makeRequestForOverdraft(100.0);
         savingsAccount.grantOverdraftRequest(true);
-        boolean requestForOverdraftIsGranted = savingsAccount.isOverDraftRequestGranted();
+        boolean requestForOverdraftIsGranted = savingsAccount.isOverdraftRequestGranted();
         Assertions.assertTrue(requestForOverdraftIsGranted);
     }
 
@@ -48,7 +48,7 @@ public class SavingsAccountTest {
     public void shouldBeFalseIfRequestForOverdraftHasNotBeenMade() {
         SavingsAccount savingsAccount = new SavingsAccount(123, Branch.PERSONAL);
         savingsAccount.grantOverdraftRequest(true);
-        boolean requestForOverdraftIsGranted = savingsAccount.isOverDraftRequestGranted();
+        boolean requestForOverdraftIsGranted = savingsAccount.isOverdraftRequestGranted();
         Assertions.assertFalse(requestForOverdraftIsGranted);
     }
 
@@ -58,7 +58,7 @@ public class SavingsAccountTest {
         savingsAccount.makeRequestForOverdraft(100.0);
         savingsAccount.grantOverdraftRequest(true);
         savingsAccount.withdraw(100.0);
-        boolean requestForOverdraftIsGranted = savingsAccount.isOverDraftRequestGranted();
+        boolean requestForOverdraftIsGranted = savingsAccount.isOverdraftRequestGranted();
         Assertions.assertFalse(requestForOverdraftIsGranted);
     }
 

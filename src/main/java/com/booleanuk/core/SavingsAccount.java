@@ -14,10 +14,10 @@ public class SavingsAccount extends Account{
         if(amount <= balance) {
             super.withdraw(amount);
         }
-        else if(requestForOverdraftIsGranted) {
+        else if(this.requestForOverdraftIsGranted) {
             super.withdraw(amount);
-            overdraftAmount = 0.0;
-            requestForOverdraftIsGranted = false;
+            this.overdraftAmount = 0.0;
+            this.requestForOverdraftIsGranted = false;
         }
     }
 
@@ -30,12 +30,12 @@ public class SavingsAccount extends Account{
     }
 
     public void grantOverdraftRequest(boolean requestForOverdraftIsGranted) {
-        if(overdraftAmount > 0) {
+        if(this.overdraftAmount > 0) {
             this.requestForOverdraftIsGranted = requestForOverdraftIsGranted;
         }
     }
 
-    public boolean isOverDraftRequestGranted() {
+    public boolean isOverdraftRequestGranted() {
         return this.requestForOverdraftIsGranted;
     }
 }

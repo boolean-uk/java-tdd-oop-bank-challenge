@@ -20,4 +20,12 @@ public class OverDraftRequest {
     public String declineRequest(){
         return "";
     }
+
+    public boolean isAccepted() {
+        return isAccepted;
+    }
+
+    public boolean isPending() {
+        return isPending;
+    }
 }

@@ -28,4 +28,11 @@ public class AccountTest {
         Assertions.assertEquals(10, account.getBalance());
     }
 
+    @Test
+    public void withdrawMoreThanAccountHas() {
+        account.deposit(30);
+        Assertions.assertFalse(account.withdraw(40));
+        Assertions.assertEquals(30, account.getBalance());
+    }
+
 }

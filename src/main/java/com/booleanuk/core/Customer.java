@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class Customer {
 
@@ -9,10 +10,14 @@ public class Customer {
     String lastName;
     HashMap<Integer,Account> Accounts;
 
-    public Customer(int id, String firstName, String lastName, HashMap<Integer, Account> accounts) {
+    public Customer(int id, String firstName, String lastName, Account accounts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        Accounts = accounts;
+        this.Accounts = new HashMap<>();
+        Random random = new Random();
+        int generateAccountNumber = random.nextInt()+100;
+        this.Accounts.put(generateAccountNumber,accounts);
     }
+
 }

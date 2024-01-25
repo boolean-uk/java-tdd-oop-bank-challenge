@@ -17,6 +17,10 @@ public class Transaction {
         return this.dateTime.minusNanos(this.dateTime.getNano());
     }
 
+    public String getDateTimeString() {
+        return this.getDateTime().toString().replace("T", " ");
+    }
+
     public int getAmount() {
         return this.amount;
     }

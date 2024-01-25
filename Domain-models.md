@@ -226,12 +226,12 @@ Class Overdraft
 
 Class CurrentAccount
 
-| Class variables     | Method | Scenario | Return |
-|---------------------|--------|----------|--------|
-| Overdraft overdraft |        |          |        |
-|                     |        |          |        |
-|                     |        |          |        |
-|                     |        |          |        |
+| Class variables     | Method                                                 | Scenario                                                   | Return   |
+|---------------------|--------------------------------------------------------|------------------------------------------------------------|----------|
+| Overdraft overdraft | withdraw(CurrentAccount currentAccount, double amount) | Withdraws from currentAccount with overdraft consideration | boolean  |
+|                     |                                                        |                                                            |          |
+|                     |                                                        |                                                            |          |
+|                     |                                                        |                                                            |          |
 
 
 

@@ -15,6 +15,14 @@ public abstract class Account {
         this.transactions = new ArrayList<>();
     }
 
+    public boolean deposit(double credit) {
+        if(credit > 0) {
+            setBalance(toInt(credit));
+            return true;
+        }
+        return false;
+    }
+
     public int getAccountNumber() {
         return accountNumber;
     }
@@ -36,7 +44,7 @@ public abstract class Account {
     }
 
     public void setBalance(int balance) {
-        this.balance = balance;
+        this.balance += balance;
     }
 
     public ArrayList<Transaction> getTransactions() {

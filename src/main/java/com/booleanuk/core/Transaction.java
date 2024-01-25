@@ -3,6 +3,15 @@ package com.booleanuk.core;
 import java.time.LocalDate;
 
 public class Transaction {
+    private LocalDate date;
+    private int amount;
+    private boolean isDeposit;
+    public Transaction(int amount, boolean isDeposit)
+    {
+        this.amount = amount;
+        this.isDeposit = isDeposit;
+        this.date = LocalDate.now();
+    }
     public LocalDate getDate() {
         return date;
     }
@@ -27,13 +36,5 @@ public class Transaction {
         isDeposit = deposit;
     }
 
-    private LocalDate date;
-    private int amount;
-    private boolean isDeposit;
-    public Transaction(int amount, boolean isDeposit)
-    {
-        this.amount = amount;
-        this.isDeposit = isDeposit;
-        this.date = LocalDate.now();
-    }
+
 }

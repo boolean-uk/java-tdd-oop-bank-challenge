@@ -28,16 +28,8 @@ public class Account {
         return accountID;
     }
 
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
-    }
-
     public ArrayList<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public int getBalance() {

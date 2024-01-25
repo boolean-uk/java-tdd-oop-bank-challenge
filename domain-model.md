@@ -80,3 +80,14 @@ I want accounts to be associated with specific branches.
 | User, Account, Branch | User::createAccount(String name, ...) | String branch    | A user in Trondheim wants to create an account                   | The account is created, and is associated with the Trondheim branch |
 |                       | Account::assignBranch(Branch branch)  |                  | A user in Oslo wants ot create an account                        | The account is created, and is associated with the Oslo branch      |
 |                       |                                       |                  | A user with an account in Trondheim wants to transfer it to Oslo | The branch the account is associated with is changed to Oslo        |
+
+````dtd
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+````
+
+| Classes      | Methods                                              | Member Variables | Scenario                                              | Output/Result                                                           |
+|--------------|------------------------------------------------------|------------------|-------------------------------------------------------|-------------------------------------------------------------------------|
+| User, Branch | User::requestOverdraft(String accountID, int amount) |                  | A user wants an overdraft of 5000, they have 100 left | 5000 is withdrawn, and their balance is -4900                           |
+|              |                                                      |                  | A user wants an overdraft of 100, they have 101 left  | The money is withdrawn as normal, as the user has enough funds for this |

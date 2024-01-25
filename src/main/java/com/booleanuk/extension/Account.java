@@ -7,15 +7,15 @@ public class Account {
     String accountID;
     ArrayList<Transaction> transactions;
     int balance;
-    String branchID;
+    Branch branch;
 
     public Account(String accountName)
     {
-        this.accountName = accountName;
-        this.accountID = "" ; // Will get to that
+        this.accountName  = accountName;
+        this.accountID    = "" ;    // Will get to that
         this.transactions = new ArrayList<>();
-        this.balance = 0;
-        this.branchID = "Trondheim";    // Default branch in Trondheim
+        this.balance      = 0;
+        this.branch       = null;   // Default branch in Trondheim
     }
 
     public String getAccountName() {
@@ -138,12 +138,12 @@ public class Account {
 
     public void assignBranch(Branch branch)
     {
-        this.branchID = branch.getName();
+        this.branch = branch;
         branch.addAccount(this.accountID);
     }
 
-    public String getBranch()
+    public Branch getBranch()
     {
-        return this.branchID;
+        return this.branch;
     }
 }

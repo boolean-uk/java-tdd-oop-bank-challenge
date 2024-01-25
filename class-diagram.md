@@ -47,4 +47,5 @@ classDiagram
     Account "1"--"0..*" Transaction 
     User "1" -- "0..*" Account
     Branch "1" -- "0..*" Account
+    Account ..|> Branch
 ````

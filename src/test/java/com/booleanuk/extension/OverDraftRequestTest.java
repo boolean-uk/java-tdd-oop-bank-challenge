@@ -20,7 +20,7 @@ class OverDraftRequestTest {
         Assertions.assertTrue(request.isAccepted());
 
     }
-
+    @Test
     public void testDeclineRequest(){
         OverDraftRequest request = new OverDraftRequest(100, new CurrentAccount());
 

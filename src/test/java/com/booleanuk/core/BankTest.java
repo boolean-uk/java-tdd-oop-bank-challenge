@@ -14,6 +14,14 @@ public class BankTest {
         Bank bank = new Bank();
         Assertions.assertTrue(bank.createSavingsAccount("John"));
     }
+
+    @Test
+    public void testWithdrawingFromExistingCurrentAccount(){
+        Bank bank = new Bank();
+        bank.createCurrentAccount("John");
+        bank.depositToAccount(1, 1000);
+        Assertions.assertTrue(bank.withdrawFromAccount(1, 200));
+    }
     @Test
     public void testGettingBankStatementsFromCreatedAccount(){
         Bank bank = new Bank();

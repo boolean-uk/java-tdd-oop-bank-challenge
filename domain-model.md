@@ -42,6 +42,7 @@ Class Account
 | ArrayList<Transaction> transactions | withdraw(double amount) | if amount is withdrawn from balance    | true   |
 |                                     | getBalance()            |                                        |        |
 |                                     | getBankStatement()      | if bank statement has all transactions | true   |
+|                                     | getAccountId()          |                                        |        |
 
 
 Class SavingsAccount extends Account

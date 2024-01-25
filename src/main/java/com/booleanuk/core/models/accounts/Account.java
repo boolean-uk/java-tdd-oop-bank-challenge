@@ -3,6 +3,7 @@ package com.booleanuk.core.models.accounts;
 import com.booleanuk.core.exceptions.InsufficientFundsException;
 import com.booleanuk.core.exceptions.OverdraftRequestException;
 import com.booleanuk.core.models.Transaction;
+import com.booleanuk.extension.models.OverdraftRequest;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static com.booleanuk.core.util.CurrencyUtils.toBaseUnits;
 import static com.booleanuk.core.util.CurrencyUtils.toSubUnits;
+import static com.booleanuk.extension.OverdraftManager.requestOverdraft;
 
 @Data
 public abstract class Account {
@@ -51,22 +53,14 @@ public abstract class Account {
 
     public void withdraw(double amount) throws InsufficientFundsException, OverdraftRequestException {
         int subUnitAmount = toSubUnits(amount);
-        if (balance < subUnitAmount) {
-            requestOverdraft(subUnitAmount);
-        }
-        balance -= subUnitAmount;
-    }
 
-    private void requestOverdraft(int amount) throws OverdraftRequestException, InsufficientFundsException {
-        // Check if account with a maximum overdraft
-        if (this.getMaximumOverdraft() == 0) {
-            throw new InsufficientFundsException();
+        if (balance < subUnitAmount) {
+            // If not enough money on account request an overdraft
+            // Should throw OverdraftRequestException and exit the method if denied
+            requestOverdraft(new OverdraftRequest(this, amount));
         }
-        // Check if account would dip below the maximum overcharge
-        int balanceAfter = balance - amount;
-        if (balanceAfter < -getMaximumOverdraft()) {
-            throw new OverdraftRequestException();
-        }
+
+        balance -= subUnitAmount;
     }
 
     public void addTransaction(Transaction transaction) {

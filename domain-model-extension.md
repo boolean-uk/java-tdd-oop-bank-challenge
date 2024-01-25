@@ -1,15 +1,19 @@
 ## User stories and domain models
 
-### Story 3
+### Story 3 & 4
 ```
 As a customer,
 So I have an emergency fund,
 I want to be able to request an overdraft on my account.
+
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
 ```
 
-| Class   | Method                          | Return value | Class variable                       | Description                                     |
-|---------|---------------------------------|--------------|--------------------------------------|-------------------------------------------------|
-| Account | requestOverdraft(double amount) | void         | int balance<br/>int maximumOverdraft | Either approves or denies the account overdraft |
+| Class            | Method                                     | Return value | Class variable | Description                                                                                                                                |
+|------------------|--------------------------------------------|--------------|----------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| OverdraftManager | requestOverdraft(OverdraftRequest request) | void         |                | Either approves or denies the account overdraft. Current logic denies if new balance would exceed maximum overdraft value for that account |
 
 ### Story 1
 

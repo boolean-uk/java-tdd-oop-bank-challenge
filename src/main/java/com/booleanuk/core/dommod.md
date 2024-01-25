@@ -3,8 +3,8 @@
 
 | Class           | Class members            | Methods                  | Scenario                     | Output        |
 |-----------------|--------------------------|--------------------------|------------------------------|---------------|
-| Bank            | HashMap<String, Account> | newAccount(firstName,    | account added                | accountNumber |
-|                 | accountNr key            | lastName, type, branch,  |                              |               |
+| Bank            | HashMap<String, Account> | newAccount(firstName,    | account added to accounts    | accountNumber |
+|                 | accounts (accountNr key) | lastName, type, branch,  |                              |               |
 |                 |                          | amount)                  |                              |               |
 |                 | int accountIterator      |                          |                              |               |
 |                 |                          |                          |                              |               |
@@ -26,8 +26,8 @@
 |                 |                          |                          |                              |               |
 | Account         | String accountNumber     | Getters Setters          |                              |               |
 |                 | String firstName         |                          |                              |               |
-|                 | String lastName          |                          |                              |               |
-|                 | String branch            |                          |                              |               |
+|                 | String lastName          | addTransaction(amount)   | adds element to transaction  |               |
+|                 | String branch            |                          | list                         |               |
 |                 | String type              |                          |                              |               |
 |                 |                          |                          |                              |               |
 |                 | ArrayList<Transaction>   |                          |                              |               |

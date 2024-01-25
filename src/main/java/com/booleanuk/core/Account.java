@@ -20,6 +20,7 @@ public class Account {
     }
 
     public boolean withdraw(double amount) {
-        return false;
+        balance -= amount;
+        return true;
     }
 }

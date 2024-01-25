@@ -46,15 +46,16 @@ public class UserTest {
     public void testGenerateTransactionStatement()
     {
         LocalDate birthday = LocalDate.of(1956, 3, 19);
+        LocalDate today = LocalDate.now();
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Groceries");
         user.makeDeposit("cu-78105109112115111110-1", 100000);
         user.makeWithdrawal("cu-78105109112115111110-1", 5000);
 
-        String expectedString = """
-                date       || credit || debit || balance
-                2024-01-25 || 1000.0 ||       ||  1000.0
-                2024-01-25 ||        ||  50.0 ||   950.0""";
+        String expectedString =
+                "date       || credit || debit || balance\n"
+                + today +" || 1000.0 ||       ||  1000.0\n"
+                        + today + " ||        ||  50.0 ||   950.0";
         Assertions.assertEquals(expectedString, user.generateTransactionHistory("cu-78105109112115111110-1"));
     }
 

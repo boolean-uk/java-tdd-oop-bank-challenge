@@ -79,24 +79,25 @@ public class Account {
 
     public String generateTransactionStatement()
     {
-        String statement = "";
+        StringBuilder statement = new StringBuilder();
         int balance = 0;
         int creditWidth = getCreditWidth(), debitWidth = getDebitWidth();
-        statement = String.format("%-11s%s%-"+(creditWidth-1)+"s%s%-"+(debitWidth-1)+"s%s%-7s",
-                "date ", "|| ", "credit", "|| ", "debit", "|| ", "balance");
+        statement = new StringBuilder(String.format(
+                "%-11s%s%-" + (creditWidth - 1) + "s%s%-" + (debitWidth - 1) + "s%s%-7s",
+                "date ", "|| ", "credit", "|| ", "debit", "|| ", "balance"));
 
 
         for(Transaction t: this.transactions)
         {
-            statement += "\n";
+            statement.append("\n");
             balance = t.isDeposit() ? balance + t.getAmount() : balance - t.getAmount();
-            statement += String.format("%-11s%s%"+(creditWidth-1)+"s%s%"+(debitWidth-1)+"s%s%8s",
-                    t.getDate(), "||", t.isDeposit() ? (double)t.getAmount()/100.0 : "",
-                    " ||", t.isDeposit() ? "" : (double)t.getAmount()/100.0,
-                    " ||", (double)balance/100.0);
+            statement.append(String.format("%-11s%s%" + (creditWidth - 1) + "s%s%" + (debitWidth - 1) + "s%s%8s",
+                    t.getDate(), "||", t.isDeposit() ? (double) t.getAmount() / 100.0 : "",
+                    " ||", t.isDeposit() ? "" : (double) t.getAmount() / 100.0,
+                    " ||", (double) balance / 100.0));
 
         }
-        return statement;
+        return statement.toString();
     }
 
     public int getCreditWidth()

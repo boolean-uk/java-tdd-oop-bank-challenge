@@ -39,7 +39,7 @@ public class Bank {
         accounts.put(customer, new ArrayList<>(Collections.singletonList(account)));
     }
 
-    //TODO: check so amount it >0
+    //TODO: check so amount is >0
     public String deposit(double amount, Customer customer, int accountId) {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
@@ -54,6 +54,7 @@ public class Bank {
         return "Account doesn't exist.";
     }
 
+    //TODO: check so amount is >0
     public String withdraw(double amount, Customer customer, int accountId) {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
@@ -61,8 +62,11 @@ public class Bank {
         ArrayList<Account> customerAccounts = accounts.get(customer);
         for(Account customerAccount: customerAccounts) {
             if(customerAccount.getId() == accountId) {
-                customerAccount.withdraw(amount);
-                return "The withdraw has been performed.";
+                if(customerAccount.withdraw(amount)) {
+                    return "The withdraw has been performed.";
+                } else {
+                    return "The withdrawal could not be performed. The balance is too low.";
+                }
             }
         }
         return "Account doesn't exist.";

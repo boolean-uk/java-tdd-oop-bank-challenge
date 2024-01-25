@@ -213,7 +213,7 @@ Class Customer
 |                 |                                                                      |                                                              |         |
 
 
-Overdraft
+Class Overdraft
 
 | Class variables  | Method | Scenario | Return |
 |------------------|--------|----------|--------|
@@ -224,7 +224,14 @@ Overdraft
 
 
 
+Class CurrentAccount
 
+| Class variables     | Method | Scenario | Return |
+|---------------------|--------|----------|--------|
+| Overdraft overdraft |        |          |        |
+|                     |        |          |        |
+|                     |        |          |        |
+|                     |        |          |        |
 
 
 

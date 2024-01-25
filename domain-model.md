@@ -241,3 +241,6 @@ I want statements to be sent as messages to my phone.
 |---------|---------------------|-------------------|----------------------------------------------------------------------------------------------------------------------|--------|
 | Account | sendBankStatement() | Customer customer | SendBankStatement called, customers phonenumber found in customer class, getBankStatement String sent to phonenumber | Void   |
 |         |                     | transactions      |                                                                                                                      |        |
+
+#### Example from Twilio test
+![](assets/twilio-sms-example.png)

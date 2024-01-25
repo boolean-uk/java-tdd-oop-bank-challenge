@@ -23,13 +23,13 @@ I want to deposit and withdraw funds.
 
 Class Customer
 
-| Class variables               | Method                                            | Scenario                                       | Return  |
-|-------------------------------|---------------------------------------------------|------------------------------------------------|---------|
-| ArrayList<Account> accounts   | createAccount(Account account)                    | Creates and adds account to accounts list      | boolean |
-|                               | deleteAccount(Account account)                    | Removes account from accounts list             | boolean |
-|                               | printBankStatements()                             | Prints bankStatements                          | String  |
-|                               | createTransaction(Account account, double amount) | Creates a transaction for the account provided | boolean |
-|                               |                                                   |                                                |         |
+| Class variables               | Method                                                            | Scenario                                       | Return  |
+|-------------------------------|-------------------------------------------------------------------|------------------------------------------------|---------|
+| ArrayList<Account> accounts   | createAccount(Account account)                                    | Creates and adds account to accounts list      | boolean |
+|                               | deleteAccount(Account account)                                    | Removes account from accounts list             | boolean |
+|                               | printBankStatements()                                             | Prints bankStatements                          | String  |
+|                               | transferCredit(Account account1, Account account2, double credit) | Creates a transaction for the account provided | boolean |
+|                               |                                                                   |                                                |         |
 
 
 Class Account

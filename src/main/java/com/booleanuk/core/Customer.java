@@ -31,6 +31,17 @@ public class Customer {
     }
 
 
+    public boolean deposit(Account account, double v) {
+        account.deposit(v);
+        return true;
+    }
+
+
+
+    public boolean withdraw(Account account, double v) {
+        account.withdraw(v);
+        return true;
+    }
 
 
 }

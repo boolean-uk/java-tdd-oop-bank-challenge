@@ -33,6 +33,7 @@ public class CurrentAccountTest {
 
         Assertions.assertFalse(customer.withdraw(currentAccount, 400));
 
+        customer.requestOverdraft(currentAccount, bankManager, overdraft2);
         bankManager.addOverDraft(overdraft2);
         bankManager.approveOverdraft(overdraft2);
 

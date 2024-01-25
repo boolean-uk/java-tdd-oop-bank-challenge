@@ -51,7 +51,7 @@ public class Account {
 
     public boolean withdraw(double v) {
 
-        if(v < this.getBalance()) {
+        if(v <= this.getBalance()) {
             this.addBankStatement(new WithdrawStatement(v, this.getBalance()-v));
             return true;
         }
@@ -60,7 +60,7 @@ public class Account {
     }
 
 
-    private void addBankStatement(BankStatement bankStatement) {
+    protected void addBankStatement(BankStatement bankStatement) {
         this.bankStatements.add(bankStatement);
     }
 

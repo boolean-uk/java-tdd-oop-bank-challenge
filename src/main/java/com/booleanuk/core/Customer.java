@@ -39,8 +39,7 @@ public class Customer {
 
 
     public boolean withdraw(Account account, double v) {
-        account.withdraw(v);
-        return true;
+        return account.withdraw(v);
     }
 
 

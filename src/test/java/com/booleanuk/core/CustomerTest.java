@@ -82,7 +82,7 @@ public class CustomerTest {
 
     @Test
     public void testGenerateBankStatement() {
-        Assertions.assertTrue(c.generateBankStatement());
+        Assertions.assertTrue(c.generateBankStatement(b));
     }
 
 }

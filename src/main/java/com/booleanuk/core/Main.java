@@ -24,7 +24,7 @@ public class Main {
         c.withdraw(b, 33004782, 2000);
 
         // After being rejected, she tries to withdraw 1000 from each of her accounts at Bank 'b'.
-        c.withdraw(b, 3304782, 1000);
+        c.withdraw(b, 33004782, 1000);
         c.withdraw(b, 69477450, 1000);
 
         // With the female customer started to get annoyed, she tries to withdraw from a random account!
@@ -36,7 +36,7 @@ public class Main {
         c.withdraw(b, 27624789, 2000);
 
         // After failing to withdraw enough money from the Bank, she wants an overview of her transactions.
-
+        c.generateBankStatement(b);
 
     }
 }

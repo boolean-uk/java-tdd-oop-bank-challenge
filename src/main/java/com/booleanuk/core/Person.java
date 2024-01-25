@@ -1,6 +1,8 @@
 package com.booleanuk.core;
 
+import java.util.Collections;
 import java.util.Random;
+import java.util.SortedMap;
 
 public abstract class Person {
     private String name;
@@ -31,9 +33,51 @@ public abstract class Person {
         return true;
     }
 
-    public boolean generateBankStatement() {
-        System.out.println("");
-        return false;
+    public boolean generateBankStatement(Branch b) {
+        try {
+            for(Account account : b.getCurrentAccounts().values()) {
+                if(account.getAccountOwner() == this) {
+                    System.out.println("Transaction History for [current account]");
+                    System.out.println("[accountnumber]: " + account.getAccountNumber());
+                    System.out.println("[accountowner_UID]: " + account.getAccountOwner().getUID());
+                    System.out.println("[accountowner_name]: " + account.getAccountOwner().getName());
+                    System.out.printf("%-11s|| %-9s|| %-8s|| %-8s%n", "date", "credit", "debit", "balance");
+                    Collections.reverse(account.getTransactionHistory());
+                    for(Transaction t : account.getTransactionHistory()) {
+                        System.out.printf("%-11s|| %9.2f|| %8.2f|| %8.2f%n", t.getDate(), t.getCredit(), t.getDebit(), t.getBalance());
+                    }
+                }
+                System.out.println("**Transaction Statement was made by**");
+                System.out.println("[Bank]: " + b.getName());
+                System.out.println("[Location]: " + b.getLocation());
+                System.out.println("[Branch]: " + b.getBranchID());
+                System.out.println("[Managed by]: " + b.getManager().getName());
+                System.out.println();
+            }
+
+            for(Account account : b.getSavingsAccounts().values()) {
+                if(account.getAccountOwner() == this) {
+                    System.out.println("Transaction History for [savings account]");
+                    System.out.println("[accountnumber]: " + account.getAccountNumber());
+                    System.out.println("[accountowner_UID]: " + account.getAccountOwner().getUID());
+                    System.out.println("[accountowner_name]: " + account.getAccountOwner().getName());
+                    System.out.printf("%-11s|| %-9s|| %-8s|| %-8s%n", "date", "credit", "debit", "balance");
+                    Collections.reverse(account.getTransactionHistory());
+                    for(Transaction t : account.getTransactionHistory()) {
+                        System.out.printf("%-11s|| %9.2f|| %8.2f|| %8.2f%n", t.getDate(), t.getCredit(), t.getDebit(), t.getBalance());
+                    }
+                }
+                System.out.println("Transaction Statement was made by:");
+                System.out.println("Bank: " + b.getName());
+                System.out.println("Location: " + b.getLocation());
+                System.out.println("Branch: " + b.getBranchID());
+                System.out.println("Managed by: " + b.getManager().getName());
+                System.out.println();
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean deposit(Branch branch, int accountNumber, double value) {
@@ -42,6 +86,7 @@ public abstract class Person {
         if (branch.getCurrentAccounts().containsKey(accountNumber)) {
             if (branch.getCurrentAccounts().get(accountNumber).getAccountOwner() == this) {
                 branch.getCurrentAccounts().get(accountNumber).setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance() + value);
+                t.setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance());
                 branch.getCurrentAccounts().get(accountNumber).getTransactionHistory().add(t);
                 System.out.println(value + " has been deposited to account number: " + accountNumber);
                 return true;
@@ -52,6 +97,7 @@ public abstract class Person {
         } else if (branch.getSavingsAccounts().containsKey(accountNumber)) {
             if (branch.getSavingsAccounts().get(accountNumber).getAccountOwner() == this) {
                 branch.getSavingsAccounts().get(accountNumber).setBalance(branch.getSavingsAccounts().get(accountNumber).getBalance() + value);
+                t.setBalance(branch.getSavingsAccounts().get(accountNumber).getBalance());
                 branch.getSavingsAccounts().get(accountNumber).getTransactionHistory().add(t);
                 System.out.println(value + " has been deposited to account number: " + accountNumber);
                 return true;
@@ -72,6 +118,7 @@ public abstract class Person {
             if (branch.getCurrentAccounts().get(accountNumber).getAccountOwner() == this) {
                 if ((branch.getCurrentAccounts().get(accountNumber).getBalance() - value) > 0) {
                 branch.getCurrentAccounts().get(accountNumber).setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance() - value);
+                t.setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance());
                 branch.getCurrentAccounts().get(accountNumber).getTransactionHistory().add(t);
                 System.out.println("APPROVED! " + value + " has been withdrawn from account number: " + accountNumber);
                 return true;

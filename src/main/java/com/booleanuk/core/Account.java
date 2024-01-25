@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class Account {
     private double balance;
 
@@ -25,5 +27,9 @@ public class Account {
         }
         balance -= amount;
         return true;
+    }
+
+    public ArrayList<Statement> getStatements() {
+        return new ArrayList<>();
     }
 }

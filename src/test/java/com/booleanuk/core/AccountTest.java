@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class AccountTest {
 
     Account account = new Account();
@@ -58,6 +60,11 @@ public class AccountTest {
         account.withdraw(e);
 
         Assertions.assertEquals(a+b*3-c+d-e, account.getBalance());
+    }
+
+    @Test
+    public void getEmptyStatementsTest() {
+        Assertions.assertEquals(new ArrayList<>(), account.getStatements());
     }
 
 }

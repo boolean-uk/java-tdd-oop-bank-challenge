@@ -1,5 +1,6 @@
 package com.booleanuk.extension;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
@@ -8,6 +9,7 @@ public class Customer {
     private List<OverDraftRequest> requests;
 
     public Customer() {
+        requests = new ArrayList<>();
     }
 
     public boolean createAccount(String type){
@@ -58,7 +60,11 @@ public class Customer {
         return res.toString();
     }
 
-    public boolean requestOverDraft(CurrentAccount account, double amount){
-        return false;
+    public boolean requestOverDraft(CurrentAccount account, double limit){
+        if (limit < 0){
+            return false;
+        }
+        this.requests.add(new OverDraftRequest(limit, account));
+        return true;
     }
 }

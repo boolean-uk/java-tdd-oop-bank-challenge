@@ -13,4 +13,14 @@ public class CurrentAccountTest {
         Assertions.assertEquals(accountId, currentAccount.getAccountId());
         Assertions.assertEquals(0.0, currentAccount.getBalance());
     }
+
+    //User story 4
+    @Test
+    public void assertAmountIsSubtractedFromBalance() {
+        CurrentAccount currentAccount = new CurrentAccount(123, new BankStatementGenerator());
+        double originalBalance = currentAccount.getBalance();
+        currentAccount.withdraw(100);
+        double newBalance = currentAccount.getBalance();
+        Assertions.assertEquals(originalBalance-100, newBalance);
+    }
 }

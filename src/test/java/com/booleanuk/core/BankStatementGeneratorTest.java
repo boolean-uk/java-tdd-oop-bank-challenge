@@ -22,8 +22,8 @@ public class BankStatementGeneratorTest {
 
         String expectedBankStatement =
                         "Date Credit Debit Balance" + "/n" +
-                        "10/01/2024 100.0 0 100.0" + "/n" +
-                        "15/01/2024 0 50.0 50.0";
+                        "10/01/2024 100.00 0 100.00" + "/n" +
+                        "15/01/2024 0 50.00 50.00";
 
         Assertions.assertEquals(expectedBankStatement, actualBankStatement);
     }

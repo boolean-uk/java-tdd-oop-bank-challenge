@@ -22,6 +22,8 @@ public class BankStatementGenerator {
             bankStatement += transaction.getBalance();
         }
 
+        
+
         return bankStatement;
     }
 }

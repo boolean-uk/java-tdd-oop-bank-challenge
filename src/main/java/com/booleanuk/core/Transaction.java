@@ -21,11 +21,13 @@ public class Transaction {
         return this.date;
     }
 
-    public double getAmount() {
-        return this.amount;
+    public String getAmount() {
+        String amount = String.format("%.2f", this.amount);
+        return amount;
     }
 
-    public double getBalance() {
-        return this.balance;
+    public String getBalance() {
+        String balance = String.format("%.2f", this.balance);
+        return balance;
     }
 }

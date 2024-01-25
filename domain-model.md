@@ -24,10 +24,10 @@ I want to deposit and withdraw funds.
 |                 |                |                       | the account balance.    |                                  |
 |                 | int overdraft  | setBalance()          | User wants to update    | Sets a new balance amount.       |
 |                 |                |                       | the account balance.    |                                  |
-|                 | User user      | getOverdraft()        | Gets the overdraft      | Returns the current overdraft    |
-|                 |                |                       | amount, default 0.      | amount                           |
-|                 | StringBuilder  | withdraw()            | User wants to withdraw  | Returns nothing. Updates balance |
-|                 | transactionLog |                       | money from the account. | after withdrawal.                |
+|                 | StringBuilder  | getOverdraft()        | Gets the overdraft      | Returns the current overdraft    |
+|                 | transactionLog |                       | amount, default 0.      | amount                           |
+|                 |                | withdraw()            | User wants to withdraw  | Returns nothing. Updates balance |
+|                 |                |                       | money from the account. | after withdrawal.                |
 |                 |                | deposit()             | User wants to deposit   | Returns nothing. Updates balance |
 |                 |                |                       | money into the account  | after deposit.                   |
 |                 |                | printTransactionLog() | Prints the transaction  | Returns a string of the          |

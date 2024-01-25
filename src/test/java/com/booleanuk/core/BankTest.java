@@ -14,9 +14,21 @@ public class BankTest {
     @Test
     public void createCurrentAccountTest() {
         ArrayList<Account> accounts = bank.getAccounts(customer);
-        Assertions.assertEquals(null, accounts);
-        int bankId = bank.createCurrentAccount(customer);
-        Assertions.assertEquals(bankId, bank.getAccounts(customer).get(0).getId());
+        Assertions.assertNull(accounts);
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals(accountId, bank.getAccounts(customer).get(0).getId());
+    }
+
+    @Test
+    public void createCurrentAndSavingsAccountTest() {
+        ArrayList<Account> accounts = bank.getAccounts(customer);
+        Assertions.assertNull(accounts);
+        int currentAccountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals(currentAccountId, bank.getAccounts(customer).get(0).getId());
+        int savingsAccountId = bank.createSavingsAccount(customer);
+        Assertions.assertEquals(currentAccountId, bank.getAccounts(customer).get(0).getId());
+        Assertions.assertEquals(savingsAccountId, bank.getAccounts(customer).get(1).getId());
+        Assertions.assertNotEquals(currentAccountId, savingsAccountId);
     }
 
 }

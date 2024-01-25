@@ -1,32 +1,32 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class BankAffiliate {
 
     private String fullName;
 
     private String affiliation;
 
-    private BankAccount bankAccount;
+    private ArrayList<BankAccount> bankAccountList;
 
-    public BankAffiliate(String fullName, String affiliation, BankAccount bankAccount) {
+    public BankAffiliate(String fullName, String affiliation, ArrayList<BankAccount> bankAccountList) {
         this.fullName = fullName;
         this.affiliation = affiliation;
-        this.bankAccount = bankAccount;
+        this.bankAccountList = bankAccountList;
     }
 
-    public boolean createCurrentAccount(BankAccount bankAccount) {
-        if(!bankAccount.getAccountType().contains("Current Account")
-            || bankAccount.getAccountType().isEmpty()) {
-            this.bankAccount.setAccountType("Current Account");
+    public boolean createCurrentAccount(BankAccount currentBankAccount) {
+        if(!this.bankAccountList.contains(currentBankAccount)) {
+            this.bankAccountList.add(currentBankAccount);
             return true;
         }
         return false;
     }
 
-    public boolean createSavingsAccount(BankAccount bankAccount) {
-        if(!bankAccount.getAccountType().contains("Savings Account")
-                || bankAccount.getAccountType().isEmpty()) {
-            this.bankAccount.setAccountType("Savings Account");
+    public boolean createSavingsAccount(BankAccount savingsBankAccount) {
+        if(!this.bankAccountList.contains(savingsBankAccount)) {
+            this.bankAccountList.add(savingsBankAccount);
             return true;
         }
         return false;
@@ -48,11 +48,11 @@ public class BankAffiliate {
         this.affiliation = affiliation;
     }
 
-    public BankAccount getBankAccount() {
-        return bankAccount;
+    public ArrayList<BankAccount> getBankAccountList() {
+        return bankAccountList;
     }
 
-    public void setBankAccount(BankAccount bankAccount) {
-        this.bankAccount = bankAccount;
+    public void setBankAccountList(ArrayList<BankAccount> bankAccountList) {
+        this.bankAccountList = bankAccountList;
     }
 }

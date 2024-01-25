@@ -40,6 +40,21 @@ Version 2
 |               | BankAccount bankAccount |                                                       |                                     |                                |
 |               |                         |                                                       |                                     |                                |
 
+Version 3
+
+| Class         | Member Variables                       | Methods                                               | Scenario                                  | Result/Output                                                 |
+|---------------|----------------------------------------|-------------------------------------------------------|-------------------------------------------|---------------------------------------------------------------|
+| BankAccount   | String accountHolder                   | String getAccountType()                               | I want to get the bank account type       | Return accountType                                            |
+|               | String accountNumber                   | void setAccountType(String accountType)               | I want to set the bank account type       | this.accountType = accountType                                |
+|               | String accountType                     |                                                       |                                           |                                                               |
+|               | String accountBranch                   |                                                       |                                           |                                                               |
+|               | double balance                         |                                                       |                                           |                                                               |
+|               |                                        |                                                       |                                           |                                                               |
+| BankAffiliate | String fullName                        | boolean createCurrentAccount(BankAccount bankAccount) | If current account is not already created | Add current bank account to bank account list and return true |
+|               | String affiliation                     |                                                       | If current account is already created     | Return false                                                  |
+|               | ArrayList<BankAccount> bankAccountList |                                                       |                                           |                                                               |
+|               |                                        |                                                       |                                           |                                                               |
+
 
 
 ## User Story 2
@@ -65,6 +80,21 @@ Version 1
 |               | String affiliation      |                                                       | If savings account is not created   | Return false                   |
 |               | BankAccount bankAccount |                                                       |                                     |                                |
 |               |                         |                                                       |                                     |                                |
+
+Version 2
+
+| Class         | Member Variables                       | Methods                                               | Scenario                                  | Result/Output                                            |
+|---------------|----------------------------------------|-------------------------------------------------------|-------------------------------------------|----------------------------------------------------------|
+| BankAccount   | String accountHolder                   |                                                       |                                           |                                                          |
+|               | String accountNumber                   |                                                       |                                           |                                                          |
+|               | String accountType                     |                                                       |                                           |                                                          |
+|               | String accountBranch                   |                                                       |                                           |                                                          |
+|               | double balance                         |                                                       |                                           |                                                          |
+|               |                                        |                                                       |                                           |                                                          |
+| BankAffiliate | String fullName                        | boolean createSavingsAccount(BankAccount bankAccount) | If savings account is not already created | Add savings account to bank account list and return true |
+|               | String affiliation                     |                                                       | If savings account is already created     | Return false                                             |
+|               | ArrayList<BankAccount> bankAccountList |                                                       |                                           |                                                          |
+|               |                                        |                                                       |                                           |                                                          |
 
 
 ## User Story 3

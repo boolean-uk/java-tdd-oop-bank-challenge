@@ -14,4 +14,15 @@ public class AccountTest {
         double newBalance =  account.getBalance();
         Assertions.assertEquals(originalBalance+100, newBalance);
     }
+
+    //User story 5
+    @Test
+    public void assertBalanceIsSumOfAllTransactions() {
+        Account account = new Account(123, new BankStatementGenerator());
+        account.deposit(100);
+        account.withdraw(50);
+        double expectedBalance = 50.0;
+        double actualBalance = account.getBalanceFromTransactions();
+        Assertions.assertEquals(expectedBalance, actualBalance);
+    }
 }

@@ -69,15 +69,16 @@ I want statements to be sent as messages to my phone.
 
 ### Class Account
 
-| Class members                                 | Methods                                        | Scenario                               | Return |
-|-----------------------------------------------|------------------------------------------------|----------------------------------------|--------|
-| int accountId                                 | Account(int accountId)                         |                                        |        |
-| double balance                                | deposit(double amount)                         | if amount is added to balance          | true   |
-| ArrayList<Transaction> transactions           | withdraw(double amount)                        | if amount is withdrawn from balance    | true   |
-| BankStatementGenerator bankStatementGenerator | getBalance()                                   |                                        |        |
-|                                               | getBankStatement()                             | if bank statement has all transactions | true   |
-|                                               | getAccountId()                                 |                                        |        |
-|                                               | generateNewTransaction(String transactionType) |                                        |        |
+| Class members                                 | Methods                                        | Scenario                                   | Return |
+|-----------------------------------------------|------------------------------------------------|--------------------------------------------|--------|
+| int accountId                                 | Account(int accountId)                         |                                            |        |
+| double balance                                | deposit(double amount)                         | if amount is added to balance              | true   |
+| ArrayList<Transaction> transactions           | withdraw(double amount)                        | if amount is withdrawn from balance        | true   |
+| BankStatementGenerator bankStatementGenerator | getBalance()                                   |                                            |        |
+|                                               | getBankStatement()                             | if bank statement has all transactions     | true   |
+|                                               | getAccountId()                                 |                                            |        |
+|                                               | generateNewTransaction(String transactionType) |                                            |        |
+|                                               | getBalanceFromTransactions()                   | if balance is calculated from transactions |        |
 
 
 ### Class SavingsAccount extends Account

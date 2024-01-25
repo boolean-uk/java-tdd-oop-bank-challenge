@@ -34,9 +34,17 @@ classDiagram
         + getAmountAsDouble() : double
         + getType() : boolean
     }
+    class Branch{
+        - name : String
+        - location : String
+        - accountIDs : ArrayList< String >
+        + addAccount(String accountID) : boolean
+        + getAccounts() : ArrayList< String >
+    }
     
     Account <|-- CurrentAccount
     Account <|-- SavingsAccount
     Account "1"--"0..*" Transaction 
     User "1" -- "0..*" Account
+    Branch "1" -- "0..*" Account
 ````

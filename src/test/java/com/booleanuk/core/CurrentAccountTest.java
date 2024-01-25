@@ -96,4 +96,23 @@ public class CurrentAccountTest {
         Assertions.assertEquals("No transactions made yet in this account.", bankStatement);
     }
 
+    @Test
+    public void calculateBalanceFromTransactions() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.deposit(20.00);
+        a.deposit(1000.00);
+        a.withdraw(10.00);
+        double balance = a.calculateBalance();
+        Assertions.assertEquals(1010.00, balance);
+    }
+
+    @Test
+    public void calculateBalanceEmptyTransactions() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        double balance = a.calculateBalance();
+        Assertions.assertEquals(0.0, balance);
+    }
+
 }

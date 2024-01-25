@@ -86,4 +86,12 @@ public class Account {
         this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.getBalance()));
         return "$"+amount+" deposited";
     }
+
+    public String requestOverdraft(double amount) {
+        if (amount < 0) {
+            return "Amount cannot be negative";
+        }
+        this.branch.addOverdraftRequest(this, amount);
+        return "Overdraft of $"+amount+" requested";
+    }
 }

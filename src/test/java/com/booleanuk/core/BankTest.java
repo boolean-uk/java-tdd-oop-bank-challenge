@@ -127,6 +127,21 @@ public class BankTest {
 
     }
 
+    //Extension
+    @Test
+    void testOverdraftWithdrawal() {
+        Bank tester = new Bank();
+        Current testAcc = new Current("232323", "ssss", 500.00);
+
+        String result = tester.requestOverdraft(testAcc, true);
+        Assertions.assertEquals("Your overdraft request was accepted", result);
+
+        double result2 = tester.withdrawal(testAcc, 600);
+        Assertions.assertEquals(-100.00, result2);
+
+
+    }
+
 
 
 

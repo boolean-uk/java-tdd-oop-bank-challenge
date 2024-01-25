@@ -9,9 +9,9 @@ public class UserTest {
 
     @Test
     public void createUser() {
-        User user = new User(int userId, String name);
-        Assertions.assertEquals(userId, user.getUserId());
-        Assertions.assertEquals(name, user.getName);
+        User user = new User(250799, "Marit");
+        Assertions.assertEquals(250799, user.getUserId());
+        Assertions.assertEquals("Marit", user.getName);
         Assertions.assertEquals(new ArrayList<>(), user.getAccounts);
     }
 }

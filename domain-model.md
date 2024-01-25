@@ -26,3 +26,26 @@ I want to deposit and withdraw funds.
 | SavingsAccount | void createAccount(Account account) | want to create a new account | creates new account                  |
 | Customer       | String bankStatement()              | want to see bank statement   | list out bank history and balance    |
 | Transactions   |                                     |                              |                                      |
+
+```
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+
+
+```
+
+| Classes          | Methods   | Scenario             | Output                         |
+|------------------|-----------|----------------------|--------------------------------|
+| RequestOverDraft | approve() | bankmanager approves | edit limit to requested amount |
+|                  | reject()  | bankmanage rejects   | limit stays the same           |
+|                  |           |                      |                                |
+|                  |           |                      |                                |

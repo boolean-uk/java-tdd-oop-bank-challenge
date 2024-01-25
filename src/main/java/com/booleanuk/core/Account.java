@@ -6,13 +6,11 @@ import java.util.*;
 public class Account {
     private String accountId;
     private Customer customer;
-    private double balance;
     private List<Transaction> transactions;
 
     public Account(String accountId, Customer customer) {
         this.accountId = accountId;
         this.customer = customer;
-        this.balance = 0.0;
         this.transactions = new ArrayList<>();
     }
 
@@ -23,7 +21,15 @@ public class Account {
         return this.customer;
     }
     public double getBalance() {
-        return this.balance;
+        double bal = 0;
+        for (Transaction transaction : this.transactions) {
+            if (transaction.getType().equals("Credit")) {
+                bal+= transaction.getAmount();
+            } else if (transaction.getType().equals("Debit")) {
+                bal-= transaction.getAmount();
+            }
+        }
+        return bal;
     }
     public List<Transaction> getTransactions() {
         return transactions;
@@ -59,11 +65,10 @@ public class Account {
     public String withdraw(double amount) {
         if (amount < 0) {
             return "The amount cannot be a negative number";
-        } else if (this.balance-amount < 0) {
+        } else if (this.getBalance()-amount < 0) {
             return "Withdraw failed. Amount withdrawn is more than balance in account";
         }
-        this.balance -= amount;
-        this.transactions.add(new Transaction(new Date(), amount, TransactionType.WITHDRAW, this.balance));
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.WITHDRAW, this.getBalance()));
         return "Withdraw successful. $"+amount+" has been withdrawn";
     }
 
@@ -71,8 +76,7 @@ public class Account {
         if (amount < 0) {
             return "The amount cannot be a negative number";
         }
-        this.balance += amount;
-        this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.balance));
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.getBalance()));
         return "$"+amount+" deposited";
     }
 }

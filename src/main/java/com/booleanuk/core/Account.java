@@ -1,10 +1,7 @@
 package com.booleanuk.core;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Account {
     private String accountId;
@@ -57,5 +54,25 @@ public class Account {
         }
 
         return stringBuilder.substring(0,stringBuilder.length()-1);
+    }
+
+    public String withdraw(double amount) {
+        if (amount < 0) {
+            return "The amount cannot be a negative number";
+        } else if (this.balance-amount < 0) {
+            return "Withdraw failed. Amount withdrawn is more than balance in account";
+        }
+        this.balance -= amount;
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.WITHDRAW, this.balance));
+        return "Withdraw successful. $"+amount+" has been withdrawn";
+    }
+
+    public String deposit(double amount) {
+        if (amount < 0) {
+            return "The amount cannot be a negative number";
+        }
+        this.balance += amount;
+        this.transactions.add(new Transaction(new Date(), amount, TransactionType.DEPOSIT, this.balance));
+        return "$"+amount+" deposited";
     }
 }

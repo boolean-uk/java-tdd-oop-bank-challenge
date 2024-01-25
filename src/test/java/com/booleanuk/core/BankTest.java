@@ -189,4 +189,24 @@ public class BankTest {
         Assertions.assertEquals("The withdrawal has been performed." , bank.withdraw(200, customer, accountId));
 
     }
+
+    @Test
+    public void customerGetsOverdraftRequestManuallyApprovedTest() {
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals("The withdrawal could not be performed.", bank.withdraw(200, customer, accountId));
+        bank.approveOverdraftRequest(customer, accountId, 200);
+        Assertions.assertEquals("The withdrawal has been performed." , bank.withdraw(200, customer, accountId));
+        Assertions.assertEquals(-200, bank.getAccounts(customer).get(0).getBalance());
+    }
+
+    @Test
+    public void customerGetsOverdraftRequestRejectedTest() {
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals("The withdrawal could not be performed.", bank.withdraw(200, customer, accountId));
+        bank.rejectOverdraftRequest(customer, accountId, 200);
+        Assertions.assertEquals("The withdrawal could not be performed." , bank.withdraw(200, customer, accountId));
+        Assertions.assertEquals(0, bank.getAccounts(customer).get(0).getBalance());
+    }
 }

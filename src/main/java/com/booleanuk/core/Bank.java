@@ -8,6 +8,8 @@ public class Bank {
     private HashMap<Customer, ArrayList<Account>> accounts;
     private ArrayList<OverdraftRequest> overdraftRequests;
 
+    private Scanner scanner = new Scanner(System.in);
+
     public Bank() {
         accounts = new HashMap<>();
         overdraftRequests = new ArrayList<>();
@@ -111,7 +113,25 @@ public class Bank {
     }
 
     public void goThroughOverdraftRequests() {
+        System.out.println("Press [y]es to approve, [n]o to reject and [q] to quit.\n\n");
+        ArrayList<OverdraftRequest> toRemove = new ArrayList<>();
 
+        String input = "";
+        for(int i = 0; i < overdraftRequests.size() && !input.equalsIgnoreCase("q"); i++) {
+            OverdraftRequest overdraftRequest = overdraftRequests.get(i);
+            System.out.println("\n"+overdraftRequest);
+            input = scanner.nextLine();
+            if(input.equalsIgnoreCase("y")) {
+                approveOverdraftRequest(overdraftRequest);
+                toRemove.add(overdraftRequest);
+            } else if(input.equalsIgnoreCase("n")) {
+                toRemove.add(overdraftRequest);
+            }
+        }
+
+        for(OverdraftRequest overdraftRequest: toRemove) {
+            overdraftRequests.remove(overdraftRequest);
+        }
 
     }
 
@@ -121,6 +141,19 @@ public class Bank {
             approveOverdraftRequest(overdraftRequest);
         }
 
+    }
+
+    //For testing purposes
+    protected void approveOverdraftRequest(Customer customer, int account, double overdraft) {
+        OverdraftRequest overdraftRequest = new OverdraftRequest(customer, account, overdraft);
+        approveOverdraftRequest(overdraftRequest);
+        overdraftRequests.remove(overdraftRequest);
+    }
+
+    //For testing purposes
+    protected void rejectOverdraftRequest(Customer customer, int account, double overdraft) {
+        OverdraftRequest overdraftRequest = new OverdraftRequest(customer, account, overdraft);
+        overdraftRequests.remove(overdraftRequest);
     }
 
     private void approveOverdraftRequest(OverdraftRequest overdraftRequest) {

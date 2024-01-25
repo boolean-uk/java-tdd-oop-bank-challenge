@@ -18,6 +18,7 @@ public abstract class Account {
     public boolean deposit(double credit) {
         if(credit > 0) {
             setBalance(toInt(credit));
+            this.transactions.add(new Transaction(toInt(credit),toInt(this.getBalance())));
             return true;
         }
         return false;

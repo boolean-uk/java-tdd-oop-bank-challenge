@@ -18,4 +18,11 @@ class SavingsAccountTest {
         Assertions.assertEquals(0.0, savingsAccount.getBalance());
     }
 
+    @Test
+    public void testRequestOverdraft() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Branch branch = new Branch("1", "DNC", "London");
+        Account savingsAccount = new SavingsAccount("1", customer, branch);
+        Assertions.assertEquals("You can not overdraft a savings account", savingsAccount.requestOverdraft(1));
+    }
 }

@@ -1,14 +1,15 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Type;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class BankStatement implements Serializable {
 
-    private LocalDate date;
-    private double currentBalance;
+    private final LocalDate date;
+    private final double currentBalance;
     private double withdrawBalance;
     private double depositBalance;
     public BankStatement(double currentBalance, double amount, Type type ){

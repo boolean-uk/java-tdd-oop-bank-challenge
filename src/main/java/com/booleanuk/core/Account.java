@@ -1,8 +1,10 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Branch;
+import com.booleanuk.core.enums.Type;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public abstract class Account implements Serializable {
@@ -37,7 +39,7 @@ public abstract class Account implements Serializable {
         }
         else{
             balance += amount;
-            bankStatements.add(new BankStatement(balance,amount,Type.DEPOSIT));
+            bankStatements.add(new BankStatement(balance,amount, Type.DEPOSIT));
             return true;
         }
     }

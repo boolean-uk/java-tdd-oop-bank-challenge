@@ -1,9 +1,8 @@
 package com.booleanuk.core;
 
-import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
+import com.booleanuk.core.enums.Branch;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Bank {
     private final AccountHandler accountHandler;

@@ -1,10 +1,9 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Branch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 

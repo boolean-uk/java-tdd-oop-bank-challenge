@@ -1,7 +1,8 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Branch;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class SavingsAccount extends Account implements Serializable {
 

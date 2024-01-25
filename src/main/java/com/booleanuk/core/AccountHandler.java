@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Branch;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;

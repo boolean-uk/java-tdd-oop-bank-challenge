@@ -1,7 +1,9 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.enums.Branch;
+import com.booleanuk.core.enums.Type;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class CurrentAccount extends Account implements Serializable {
 

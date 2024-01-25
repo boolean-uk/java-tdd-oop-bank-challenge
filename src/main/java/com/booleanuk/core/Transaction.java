@@ -12,4 +12,12 @@ public class Transaction {
         this.date = java.time.LocalDate.now().format(formatter);
         this.amount = amount;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
 }

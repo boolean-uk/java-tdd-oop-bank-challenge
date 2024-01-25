@@ -33,11 +33,7 @@ public class Customer {
         return account.getBalance();
     }
 
-    public void printBankStatements(Account account) {
-
+    public String printBankStatements(Account account) {
+        return "";
     }
-
-
-
-
 }

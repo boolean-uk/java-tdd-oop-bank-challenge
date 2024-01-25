@@ -92,6 +92,20 @@ public class CustomerTest {
 
     @Test
     public void testGetShortBankStatement() {
+        String expectedOutput = "";
+        expectedOutput += " date      || credit   || debit    || balance  \n";
+        expectedOutput += "25/01/2023 ||          ||   250.90 ||   250.90 \n";
+        expectedOutput += "25/01/2023 ||          ||    97.03 ||   347.93 \n";
+        expectedOutput += "25/01/2023 ||   300.01 ||          ||    47,92 \n";
 
+        Customer customer = new Customer("Gustav Svennas");
+        Account savingsOne = new SavingsAccount("savings1", 5400, 6900758, 0.00);
+        customer.addAccount(savingsOne);
+
+        customer.depositFounds(250.90, savingsOne);
+        customer.depositFounds(97.03, savingsOne);
+        customer.withdrawFounds(300.01, savingsOne);
+
+        Assertions.assertEquals(expectedOutput, customer.printBankStatements(savingsOne));
     }
 }

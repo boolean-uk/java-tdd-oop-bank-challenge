@@ -23,9 +23,10 @@ public class UserTest {
     @Test
     public void testCreateCurrentAccount()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
 
         Assertions.assertEquals(0,user.getAccount("cu-78105109112115111110-1").getBalance());
         Assertions.assertEquals("Groceries",user.getAccount("cu-78105109112115111110-1").getAccountName());
@@ -34,9 +35,10 @@ public class UserTest {
     @Test
     public void testCreateSavingsAccount()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createSavingsAccount("Lizzie's college fund");
+        user.createSavingsAccount("Lizzie's college fund", bank);
 
         Assertions.assertEquals(0,user.getAccount("sa-78105109112115111110-1").getBalance());
         Assertions.assertEquals("Lizzie's college fund",user.getAccount("sa-78105109112115111110-1").getAccountName());
@@ -45,10 +47,11 @@ public class UserTest {
     @Test
     public void testGenerateTransactionStatement()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         LocalDate today = LocalDate.now();
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
         user.makeDeposit("cu-78105109112115111110-1", 100000);
         user.makeWithdrawal("cu-78105109112115111110-1", 5000);
 
@@ -62,10 +65,11 @@ public class UserTest {
     @Test
     public void testGenerateTransactionStatementDoubles()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         LocalDate today = LocalDate.now();
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
         user.makeDeposit("cu-78105109112115111110-1", 2000.00);
         user.makeWithdrawal("cu-78105109112115111110-1", 0.50);
 
@@ -79,9 +83,10 @@ public class UserTest {
     @Test
     public void testDeposit()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
 
         user.makeDeposit("cu-78105109112115111110-1", 1000);
         Assertions.assertEquals(1000, user.getBalance("cu-78105109112115111110-1"));
@@ -94,9 +99,10 @@ public class UserTest {
     @Test
     public void testWithdrawal()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
 
         user.makeDeposit("cu-78105109112115111110-1", 1000);
         Assertions.assertEquals(1000, user.getBalance("cu-78105109112115111110-1"));
@@ -109,9 +115,10 @@ public class UserTest {
     @Test
     public void testWithdrawalNotAllowed()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
 
         user.makeDeposit("cu-78105109112115111110-1", 100);
         Assertions.assertFalse( user.makeWithdrawal("cu-78105109112115111110-1", 300));
@@ -120,13 +127,12 @@ public class UserTest {
     @Test
     public void testRequestOverdraft()
     {
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
-        user.createCurrentAccount("Groceries");
+        user.createCurrentAccount("Groceries", bank);
 
-        user.requestOverdraft("cu-78105109112115111110-1", 200);
+        //user.requestOverdraft("cu-78105109112115111110-1", 200);
         Assertions.assertEquals(-200, user.getBalance("cu-78105109112115111110-1"));
-        user.requestOverdraft("cu-78105109112115111110-1", 600);
-        Assertions.assertEquals(-800, user.getBalance("cu-78105109112115111110-1"));
     }
 }

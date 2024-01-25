@@ -9,13 +9,14 @@ public class Account {
     int balance;
     Branch branch;
 
-    public Account(String accountName)
+    public Account(String accountName, Bank bank)
     {
         this.accountName  = accountName;
         this.accountID    = "" ;    // Will get to that
         this.transactions = new ArrayList<>();
         this.balance      = 0;
-        this.branch       = null;   // Default branch in Trondheim
+        this.branch       = bank.getBranch("Oslo_East");
+        this.branch.addAccount(this.accountID);// Default branch in Oslo
     }
 
     public String getAccountName() {

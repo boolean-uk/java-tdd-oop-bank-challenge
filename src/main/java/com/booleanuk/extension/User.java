@@ -30,16 +30,16 @@ public class User {
         return userID;
     }
 
-    public void createCurrentAccount(String name)
+    public void createCurrentAccount(String name, Bank bank)
     {
         this.accountNum+=1;
-        this.accounts.add(new CurrentAccount(name, this.userName, accountNum));
+        this.accounts.add(new CurrentAccount(name, this.userName, accountNum, bank));
     }
 
-    public void createSavingsAccount(String name)
+    public void createSavingsAccount(String name, Bank bank)
     {
         this.accountNum+=1;
-        this.accounts.add(new SavingsAccount(name, this.userName, accountNum));
+        this.accounts.add(new SavingsAccount(name, this.userName, accountNum, bank));
     }
 
     public Account getAccount(String ID)
@@ -84,7 +84,6 @@ public class User {
                     return false;
                 }
             }
-
         }
         return false;
     }

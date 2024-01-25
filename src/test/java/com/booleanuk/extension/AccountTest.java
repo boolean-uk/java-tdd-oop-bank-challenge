@@ -7,7 +7,8 @@ public class AccountTest {
     @Test
     public void testDeposit()
     {
-        Account account = new Account("Spending");
+        Bank bank = new Bank();
+        Account account = new Account("Spending", bank);
         account.deposit(10000);
         Assertions.assertEquals(10000, account.getBalance());
         account.deposit(400);
@@ -19,7 +20,8 @@ public class AccountTest {
     @Test
     public void testWithdraw()
     {
-        Account account = new Account("Spending");
+        Bank bank = new Bank();
+        Account account = new Account("Spending", bank);
         account.deposit(10000);
         Assertions.assertEquals(10000, account.getBalance());
         account.withdraw(400);

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class Bank {
     ArrayList<Branch> branches;
+    int funds;
     public Bank()
     {
         this.branches = new ArrayList<>(Arrays.asList(
@@ -14,15 +15,21 @@ public class Bank {
                 new Branch("Kristiansand_South", "Kristiansand"),
                 new Branch("Lakselv_North", "Lakselv")
         ));
+        this.funds = 999999999;
     }
 
-    public Branch getBranch(String id)
+    public Branch getBranch(String name)
     {
         for(Branch b : this.branches)
         {
-            if(b.getName().equals(id)) return b;
+            if(b.getName().equals(name)) return b;
         }
         System.out.println("Branch not found");
         return null;
+    }
+
+    public void newBranch(String name, String location)
+    {
+        this.branches.add(new Branch(name, location));
     }
 }

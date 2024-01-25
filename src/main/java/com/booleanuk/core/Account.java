@@ -44,12 +44,12 @@ public abstract class Account {
             double amount = this.toDouble(transaction.getAmount());
             double balance = this.toDouble(transaction.getBalance());
             if (amount > 0) {
-                String transactionRow = transaction.getDateTimeString() + "\t|| " + amount + "\t|| " + "\t|| " + balance + "\n";
+                String transactionRow = transaction.getDateTimeString() + "\t|| " + amount + "\t|| " + "\t\t\t|| " + balance + "\n";
                 bankStatement.append(transactionRow);
             }
             else {
                 amount = - amount;
-                String transactionRow = transaction.getDateTimeString() + "\t|| " + "\t|| " + amount + "\t|| " + balance + "\n";
+                String transactionRow = transaction.getDateTimeString() + "\t|| " + "\t\t\t|| " + amount + "\t\t|| " + balance + "\n";
                 bankStatement.append(transactionRow);
             }
 

@@ -63,6 +63,6 @@ public class Account {
     }
 
     public Branch getBranch() {
-        return Branch.PERSONAL;
+        return this.branch;
     }
 }

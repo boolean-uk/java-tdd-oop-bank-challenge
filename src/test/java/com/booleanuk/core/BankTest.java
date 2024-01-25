@@ -39,7 +39,7 @@ class BankTest {
     public void withdraw(){
         User user = new User("1", "test");
         Account currentAccount = new Account(user, "1234", "current", 2000);
-        Assertions.assertEquals("Balance: " + 1000,currentAccount.withdraw(1000));
+        Assertions.assertEquals("Balance: " + 1000.0,currentAccount.withdraw(1000));
     }
     @Test
     public void withdrawShouldReturnMessage(){

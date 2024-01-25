@@ -56,3 +56,16 @@ Bank Class
 |                                                   |                  | Get the current value in the account and add the amount + dateTime      |                     |
 |                                                   |                  |                                                                         |                     |
 | makeWithdraw(Customer, int choice, double amount) |                  | Same as above, just subtraction, check if the amount doesn't overextend |                     |
+
+```
+
+```
+
+Bank Class
+
+| Methods()                                         | Member Variables | Scenario                                                                | Result/Output       |
+|---------------------------------------------------|------------------|-------------------------------------------------------------------------|---------------------|
+| makeDeposit(Customer,int choice,double amount)    | int branchNr     | Check if customer exists, choose account based on choice.               | return confirmation |
+|                                                   |                  | Get the current value in the account and add the amount + dateTime      |                     |
+|                                                   |                  |                                                                         |                     |
+| makeWithdraw(Customer, int choice, double amount) |                  | Same as above, just subtraction, check if the amount doesn't overextend |                     |

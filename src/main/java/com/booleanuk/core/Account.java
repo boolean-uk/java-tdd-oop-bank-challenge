@@ -41,6 +41,11 @@ public class Account {
     }
 
     public int getBalance() {
+        int balance = 0;
+        for(Transaction t : this.transactions)
+        {
+            balance = t.isDeposit() ? balance + t.getAmount() : balance - t.getAmount();
+        }
         return balance;
     }
 
@@ -82,9 +87,11 @@ public class Account {
         for(Transaction t: this.transactions)
         {
             statement += "\n";
-            balance = t.isDeposit ? balance + t.amount : balance - t.amount;
+            balance = t.isDeposit() ? balance + t.getAmount() : balance - t.getAmount();
             statement += String.format("%-11s%s%"+(creditWidth-1)+"s%s%"+(debitWidth-1)+"s%s%8s",
-                    t.date, "||", t.isDeposit ? (double)t.amount/100.0 : "", " ||", t.isDeposit ? "" : (double)t.amount/100.0, " ||", (double)balance/100.0);
+                    t.getDate(), "||", t.isDeposit() ? (double)t.getAmount()/100.0 : "",
+                    " ||", t.isDeposit() ? "" : (double)t.getAmount()/100.0,
+                    " ||", (double)balance/100.0);
 
         }
         return statement;
@@ -95,8 +102,8 @@ public class Account {
         int max = 8;
         for(Transaction t : this.transactions)
         {
-            if(t.isDeposit) {
-                String number = "" + t.amount;
+            if(t.isDeposit()) {
+                String number = "" + t.getAmount();
                 if (number.length() > max) max = number.length();
             }
         }
@@ -108,8 +115,8 @@ public class Account {
         int max = 7;
         for(Transaction t : this.transactions)
         {
-            if(!t.isDeposit) {
-                String number = "" + t.amount;
+            if(!t.isDeposit()) {
+                String number = "" + t.getAmount();
                 if (number.length() > max) max = number.length();
             }
         }

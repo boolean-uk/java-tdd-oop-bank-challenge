@@ -55,3 +55,16 @@ I want to deposit and withdraw funds.
 |                                                                              | CurrentAccount::withdrawFunds(int amount) | String accountID                          | I want to withdraw 500 from my current/savings account, it has 1000 | 500 is withdrawn, account balance is now 500                                               |
 |                                                                              | SavingsAccount::depositFunds(int amount)  | LocalDate transactionDate                 | I want to withdraw 500 from my current account, it has 300          | 500 is withdrawn, account balance is now -200                                              |
 |                                                                              | CurrentAccount::depositFunds(int amount)  | LocalTime transactionTime                 | I want to withdraw 500 from my savings account, it has 300          | A message is displayed showing user the account does not have enough funds. No action done |
+
+## Extension
+
+````dtd
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+````
+
+| Classes                                                                      | Methods               | Member Variables | Scenario                                                              | Output/Result                        |
+|------------------------------------------------------------------------------|-----------------------|------------------|-----------------------------------------------------------------------|--------------------------------------|
+| User, Account, Account::SavingsAccount, Account::CurrentAccount, Transaction | Account::getBalance() | int balance      | User wants to see balance, with a deposit of 300 av withdrawal of 100 | The balance is calculated, being 200 |
+|                                                                              |                       |                  |                                                                       |                                      |

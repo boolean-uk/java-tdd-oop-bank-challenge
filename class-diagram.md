@@ -11,12 +11,12 @@ classDiagram
         - accountName : String
         - accountID : String
         - transactions : ArrayList< Transaction >
-        - balance : Integer
         + createAccount(String name) : boolean
         + deposit(int amount) : boolean
         + deposit(double amount) : boolean
         + withdraw(int amount) : boolean
         + withdraw(double amount) : boolean
+        + getBalance() : Integer
     }
     class CurrentAccount{
         

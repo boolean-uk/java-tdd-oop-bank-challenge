@@ -1,58 +1,74 @@
 package com.booleanuk.core;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SavingsAccount implements Account {
 
     private double balance;
+    private ArrayList<Transaction> transactions;
+    private final SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
 
     public SavingsAccount(){
         this.balance = 0.0;
+        this.transactions = new ArrayList<>();
+
     }
-    public SavingsAccount(double balance){
-        this.balance = balance;
-    }
-    // Not correct dates etc.
+//    public SavingsAccount(double balance){
+//        this.balance = balance;
+//        this.transactions = new ArrayList<>();
+//    }
+
     public String getRecords() {
 
         SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
-        Date todaysDate = new Date();
-        String date = formatting.format(todaysDate);
-
         StringBuilder record = new StringBuilder();
-        record.append(String.format("%-10s || %-8s || %-8s || %-8s %n", "date", "credit", "debit", "balance"));
-        double credit = getBalance();
-        double debit = 0.0;
-        for(int i = 0; i < 3; i++) {
-            record.append(String.format("%-8s || %-8s || %-8s || %-8s %n", date, credit, debit, balance));
 
+        // date       || credit  || debit  || balance
+        //14/01/2012 ||         || 500.00 || 1500.00
+        //13/01/2012 || 2000.00 ||        || 2000.00
+        record.append(String.format("%-10s || %-8s || %-8s || %-8s %n", "date", "credit", "debit", "balance"));
+
+        for(Transaction transaction : transactions) {
+            record.append(String.format("%-8s || %-8s || %-8s || %-8s %n",
+                    formatting.format(transaction.getDate()),
+                    transaction.getCredit(),
+                    transaction.getDebit(),
+                    transaction.getBalance()
+            ));
         }
         return record.toString();
     }
 
-    public boolean deposit(double amount) {
+
+
+    public boolean deposit(double amount, Date date) {
         if(amount < 0) {
-            System.out.println("can't deposit negativ amount.");
+            System.out.println("Can't deposit negativ amount.");
             return false;
         } else {
             this.balance += amount;
+            transactions.add(new Transaction(date, 0.0, amount, this.balance));
             return true;
         }
     }
 
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount, Date date) {
         if(amount < 0) {
-            System.out.println("can't withdraw negative amount.");
+            System.out.println("Can't withdraw negative amount.");
             return false;
         } else if (this.balance - amount < 0){
             System.out.println("can't have negative balance.");
             return false;
         } else {
             this.balance -= amount;
+            transactions.add(new Transaction(date, amount, 0.0, this.balance));
             return true;
         }
     }
+
+
     public double getBalance() {
         return balance;
     }

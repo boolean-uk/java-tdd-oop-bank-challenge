@@ -45,11 +45,15 @@ public class CustomerTest {
         c.createCurrentAccount(b);
         m.createCurrentAccount(b);
 
+        Assertions.assertEquals(0, b.getCurrentAccounts().get(33004782).getBalance());
         Assertions.assertTrue(c.deposit(b,33004782, 10));
         Assertions.assertEquals(10.0, b.getCurrentAccounts().get(33004782).getBalance());
-
         Assertions.assertFalse(m.deposit(b, 33004782, 10));
         Assertions.assertFalse(m.deposit(b, 110, 10));
+
+        c.createSavingsAccount(b);
+        Assertions.assertTrue(c.deposit(b, 27624789, 10));
+        Assertions.assertEquals(b.getSavingsAccounts().get(27624789).getBalance(), b.getCurrentAccounts().get(33004782).getBalance());
     }
 
 }

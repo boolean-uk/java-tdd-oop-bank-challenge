@@ -2,17 +2,22 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Account {
+public abstract class Account {
+    //protected final String branch;
+    protected final String accountName;
     private final ArrayList<Transaction> transactions = new ArrayList<>();
-    private final int monthlyMaxWithdrawalCount;
     private final double maxBalance;
+
+    protected boolean isOverdraft;
 
     private int currentWithdrawalCount;
 
-    public Account(int monthlyMaxWithdrawalCount, double maxBalance) {
-        this.monthlyMaxWithdrawalCount = monthlyMaxWithdrawalCount;
+    public Account(String accountName, double maxBalance) {
+        this.accountName = accountName;
         this.maxBalance = maxBalance;
     }
+
+    protected abstract int monthlyMaxWithdrawalCount();
 
     protected double getBalance() {
         double _outBalance = 0.0;
@@ -36,8 +41,8 @@ public class Account {
 
     public Status withdraw(double debit) {
         if (debit <= 0.0) return Status.INVALID_NUMBER;
-        if (monthlyMaxWithdrawalCount >= 0 && hasExceededMonthlyWithdrawal()) return Status.EXCEEDED_WITHDRAWAL_AMOUNT;
-        if (getBalance() - debit < 0.0) return Status.BALANCE_TOO_SMALL;
+        if (monthlyMaxWithdrawalCount() > 0 && hasExceededMonthlyWithdrawal()) return Status.EXCEEDED_WITHDRAWAL_AMOUNT;
+        if (getBalance() - debit < 0.0 && !isOverdraft) return Status.BALANCE_TOO_SMALL;
 
         currentWithdrawalCount++;
         transactions.add(new Transaction(-debit));
@@ -55,13 +60,13 @@ public class Account {
                 case DEPOSIT -> _balanceTracker += _t.getCredit();
                 case WITHDRAW -> _balanceTracker -= _t.getCredit();
             }
-            _outTransactions[i] = new TransactionStatement(_t.getCredit(), _balanceTracker, _t.getDate(), _t.getType());
+            _outTransactions[transactions.size() - i - 1] = new TransactionStatement(_t.getCredit(), _balanceTracker, _t.getDate(), _t.getType());
         }
 
         return _outTransactions;
     }
 
     public boolean hasExceededMonthlyWithdrawal() {
-        return monthlyMaxWithdrawalCount <= currentWithdrawalCount;
+        return monthlyMaxWithdrawalCount() <= currentWithdrawalCount;
     }
 }

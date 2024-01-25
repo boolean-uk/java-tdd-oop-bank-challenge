@@ -8,6 +8,7 @@ public class Menu {
     public static Menu currentActiveMenu;
     public Menu parentMenu;
 
+    public Callable onPreMenuPrint;
     public Callable afterMenuPrintCallback;
     public Callable onFocus;
 
@@ -113,6 +114,9 @@ public class Menu {
     }
 
     public void printMenu() {
+        if (onPreMenuPrint != null)
+            onPreMenuPrint.call();
+
         Menu.clearScreen();
 
         int _whitespaceIndex = 0;

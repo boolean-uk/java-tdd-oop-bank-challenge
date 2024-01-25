@@ -194,12 +194,12 @@ Class Account
 Class BankManager
 
 
-| Class variables                        | Method                                | Scenario                          | Return  |
-|----------------------------------------|---------------------------------------|-----------------------------------|---------|
-| ArrayList<Overdraft> overdraftRequests | approveOverdraft(Overdraft overdraft) | BankManager can approve overdraft | boolean |
-|                                        | rejectOverdraft(Overdraft overdraft)  | BankManager can reject overdraft  | boolean |
-|                                        |                                       |                                   |         |
-|                                        |                                       |                                   |         |
+| Class variables                        | Method                                | Scenario                                 | Return  |
+|----------------------------------------|---------------------------------------|------------------------------------------|---------|
+| ArrayList<Overdraft> overdraftRequests | approveOverdraft(Overdraft overdraft) | BankManager can approve overdraft        | boolean |
+|                                        | rejectOverdraft(Overdraft overdraft)  | BankManager can reject overdraft         | boolean |
+|                                        | addOverdraft(Overdraft overdraft)     | Adds overdraft to overdraftRequests      | boolean |
+|                                        | removeOverdraft(Overdraft overdraft)  | Removes overdraft from overdraftRequests | boolean |
 
 
 Class Customer
@@ -219,7 +219,7 @@ Class Overdraft
 |------------------|--------|----------|--------|
 | double amount    |        |          |        |
 | boolean approved |        |          |        |
-|                  |        |          |        |
+| boolean lookedAt |        |          |        |
 |                  |        |          |        |
 
 

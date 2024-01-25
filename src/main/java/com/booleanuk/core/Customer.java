@@ -58,4 +58,9 @@ public class Customer {
     public String printBankStatements(Account account) {
         return "";
     }
+
+    public boolean requestOverdraft(CurrentAccount currentAccount, BankManager bankManager) {
+
+        return true;
+    }
 }

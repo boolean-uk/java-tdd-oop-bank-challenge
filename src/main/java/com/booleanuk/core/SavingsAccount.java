@@ -25,7 +25,9 @@ public class SavingsAccount extends Account{
     }
 
     public void grantOverdraftRequest(boolean requestForOverdraftIsGranted) {
-        this.requestForOverdraftIsGranted = requestForOverdraftIsGranted;
+        if(overdraftAmount > 0) {
+            this.requestForOverdraftIsGranted = requestForOverdraftIsGranted;
+        }
     }
 
     public boolean isOverDraftRequestGranted() {

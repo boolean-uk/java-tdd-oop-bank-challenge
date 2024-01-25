@@ -48,10 +48,38 @@ public class bankTest {
         Assertions.assertEquals(150,account.addFunds(100));
     }
 
-//    @Test
-//    public void addWithdrawTest() {
-//        CurrentAccount account = new CurrentAccount("1234C", 100d, "current");
-//
-//        Assertions.assertEquals(0,account.withdraw(100));
-//    }
+    @Test
+    public void withdrawTest() {
+        CurrentAccount account = new CurrentAccount("1234C", 100d);
+
+        Assertions.assertEquals(0,account.withdraw(100));
+    }
+
+    @Test
+    public void withdrawNoBalance() {
+        CurrentAccount account = new CurrentAccount("1234C", 0d);
+
+        Assertions.assertEquals(0,account.withdraw(100));
+    }
+
+    @Test
+    public void withdrawLowBalance() {
+        CurrentAccount account = new CurrentAccount("1234C", 50d);
+
+        Assertions.assertEquals(50,account.withdraw(100));
+    }
+    @Test
+    public void WithdrawTest2() {
+        CurrentAccount account = new CurrentAccount("1234C", 1000d);
+
+        Assertions.assertEquals(900,account.withdraw(100));
+    }
+
+    @Test
+    public void transaction() {
+        Account account = new Account("123C", 100, "current");
+        account.addFunds(250);
+        account.withdraw(100);
+        account.viewTransaction();
+    }
 }

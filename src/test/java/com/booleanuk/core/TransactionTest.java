@@ -21,5 +21,13 @@ public class TransactionTest {
         String yourTransactions = Transaction.generateTransactions(transactions);
 
         Assertions.assertTrue(yourTransactions.contains("balance"));
+
+        Assertions.assertTrue(yourTransactions.contains("1000"));
+
+        Assertions.assertFalse(yourTransactions.contains("deposit"));
+
+        Assertions.assertTrue(yourTransactions.contains("credit"));
+
+        Assertions.assertTrue(yourTransactions.contains("date"));
     }
 }

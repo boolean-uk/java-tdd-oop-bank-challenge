@@ -20,7 +20,9 @@ public class UserTest {
         User user = new User(250799, "Marit");
         user.createAccount("Current");
         Assertions.assertEquals(1, user.getAccounts().size());
+        Assertions.assertTrue(user.getAccounts().get(0).getClass() == CurrentAccount.class);
         user.createAccount("Savings");
         Assertions.assertEquals(2, user.getAccounts().size());
+        Assertions.assertTrue(user.getAccounts().get(1).getClass() == SavingsAccount.class);
     }
 }

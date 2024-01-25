@@ -79,4 +79,27 @@ public class AccountTest {
         Assertions.assertEquals(expected, account.getStatements());
     }
 
+    @Test
+    public void getStatementsSeveralDepositsAndWithdrawalsPresentTest() {
+        double a = 23.4322;
+        double b = 343.32342;
+        double c = 44.432;
+        double d = 432.002001;
+        double e = 22.119232;
+        ArrayList<Statement> expected = new ArrayList<>();
+
+        account.deposit(a);
+        expected.add(new Statement(new Date(), a, a));
+        account.deposit(b);
+        expected.add(new Statement(new Date(), b, a+b));
+        account.withdraw(c);
+        expected.add(new Statement(new Date(), c, a+b-c));
+        account.deposit(d);
+        expected.add(new Statement(new Date(), d, a+b-c+d));
+        account.withdraw(e);
+        expected.add(new Statement(new Date(), e, a+b-c+d-e));
+
+        Assertions.assertEquals(expected, account.getStatements());
+    }
+
 }

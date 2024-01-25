@@ -40,4 +40,9 @@ public class Statement {
     public int hashCode() {
         return Objects.hash(date, amount, balance);
     }
+
+    @Override
+    public String toString() {
+        return date + " " + amount + " " + balance;
+    }
 }

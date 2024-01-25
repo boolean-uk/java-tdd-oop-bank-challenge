@@ -2,7 +2,7 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 
-public class Account {
+public abstract class Account {
     int accountNumber = 0;
     User owner;
     int balance;

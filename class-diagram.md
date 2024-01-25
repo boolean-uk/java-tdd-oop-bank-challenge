@@ -5,7 +5,6 @@ classDiagram
         - birthdate : LocalDate
         - userID : String
         - accounts : ArrayList< Account >
-        + createUser(String name, String birthdate) : boolean
         + createUser(String name, LocalDate birthdate) : boolean
     }
     class Account{

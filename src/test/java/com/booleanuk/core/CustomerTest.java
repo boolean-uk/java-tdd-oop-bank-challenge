@@ -14,8 +14,8 @@ public class CustomerTest {
     @Test
     public void initCustomer() {
         Customer customer = new Customer();
-        Account currentAccount = new CurrentAccount();
-        Account savingsAccount = new SavingsAccount();
+        Account currentAccount = new CurrentAccount("AccountName", Branches.Oslo);
+        Account savingsAccount = new SavingsAccount("AccountName", Branches.Oslo);
 
         Assertions.assertTrue(customer.createAccount(currentAccount));
         Assertions.assertTrue(customer.createAccount(savingsAccount));
@@ -26,8 +26,8 @@ public class CustomerTest {
     @Test
     public void createAndDeleteAccount() {
         Customer customer = new Customer();
-        Account savingsAccount = new SavingsAccount();
-        Account currentAccount = new CurrentAccount();
+        Account savingsAccount = new SavingsAccount("AccountName", Branches.Oslo);
+        Account currentAccount = new CurrentAccount("AccountName", Branches.Oslo);
 
         Assertions.assertTrue(customer.createAccount(savingsAccount));
         Assertions.assertTrue(customer.createAccount(currentAccount));
@@ -48,8 +48,8 @@ public class CustomerTest {
     @Test
     public void depositAndWithdraw() {
         Customer customer = new Customer();
-        Account savingsAccount = new SavingsAccount();
-        Account currentAccount = new CurrentAccount();
+        Account savingsAccount = new SavingsAccount("AccountName", Branches.Oslo);
+        Account currentAccount = new CurrentAccount("AccountName", Branches.Oslo);
 
         Assertions.assertTrue(customer.createAccount(savingsAccount));
         Assertions.assertTrue(customer.createAccount(currentAccount));
@@ -65,8 +65,8 @@ public class CustomerTest {
     @Test
     public void transferCredit() {
         Customer customer = new Customer();
-        Account savingsAccount = new SavingsAccount();
-        Account currentAccount = new CurrentAccount();
+        Account savingsAccount = new SavingsAccount("AccountName", Branches.Oslo);
+        Account currentAccount = new CurrentAccount("AccountName", Branches.Oslo);
 
         Assertions.assertTrue(customer.createAccount(savingsAccount));
         Assertions.assertTrue(customer.createAccount(currentAccount));
@@ -85,7 +85,7 @@ public class CustomerTest {
     @Test
     public void printCorrectBankStatements() {
         Customer customer = new Customer();
-        Account currentAccount = new CurrentAccount();
+        Account currentAccount = new CurrentAccount("AccountName", Branches.Oslo);
 
         Assertions.assertTrue(customer.createAccount(currentAccount));
 

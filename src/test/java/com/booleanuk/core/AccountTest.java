@@ -10,7 +10,7 @@ public class AccountTest {
 
     @Test
     public void depositWithdrawClearMethods() {
-        Account account = new Account("AccountName1", Branches.Bergen);
+        Account account = new Account("AccountName1", Branches.Stavanger);
 
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(new ArrayList<BankStatement>(), account.getBankStatements());
@@ -28,7 +28,7 @@ public class AccountTest {
     @Test
     public void printBankStatementsFromArray() {
 
-        Account account = new Account("AccountName1");
+        Account account = new Account("AccountName1", Branches.Oslo);
 
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(new ArrayList<BankStatement>(), account.getBankStatements());

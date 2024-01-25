@@ -8,10 +8,12 @@ public class Account {
     private ArrayList<BankStatement> bankStatements;
 
     private String accountName;
+    private Branches branch;
 
 
 
-    public Account(String accountName) {
+    public Account(String accountName, Branches branch) {
+        this.branch = branch;
         this.accountName = accountName;
         this.bankStatements = new ArrayList<>();
     }
@@ -77,5 +79,13 @@ public class Account {
 
     public void setAccountName(String accountName) {
         this.accountName = accountName;
+    }
+
+    public Branches getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branches branch) {
+        this.branch = branch;
     }
 }

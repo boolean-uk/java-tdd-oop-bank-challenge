@@ -59,6 +59,9 @@ public class Bank {
         if (accounts.containsKey(accountNr)) {
             double balance = getBalance(accountNr);
 
+            if (balance == 0.0)
+                return 0.0;
+
             if (amount < balance) {
                 accounts.get(accountNr).addTransactions(-amount);
                 return amount;

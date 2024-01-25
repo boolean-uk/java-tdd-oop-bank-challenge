@@ -39,10 +39,20 @@ public abstract class Account {
         if (this.transactions.isEmpty()) {
             return "No transactions made yet in this account.";
         }
-        bankStatement.append("Date\t\t\t\t|| Credit\t|| Balance\n");
+        bankStatement.append("Date\t\t\t\t|| Credit\t|| Debit\t|| Balance\n");
         for (Transaction transaction: this.transactions) {
-            String transactionRow = transaction.getDateTimeString() + "\t|| " + this.toDouble(transaction.getAmount()) + "\t|| " + this.toDouble(transaction.getBalance()) + "\n";
-            bankStatement.append(transactionRow);
+            double amount = this.toDouble(transaction.getAmount());
+            double balance = this.toDouble(transaction.getBalance());
+            if (amount > 0) {
+                String transactionRow = transaction.getDateTimeString() + "\t|| " + amount + "\t|| " + "\t|| " + balance + "\n";
+                bankStatement.append(transactionRow);
+            }
+            else {
+                amount = - amount;
+                String transactionRow = transaction.getDateTimeString() + "\t|| " + "\t|| " + amount + "\t|| " + balance + "\n";
+                bankStatement.append(transactionRow);
+            }
+
         }
         return bankStatement.toString();
     }

@@ -21,11 +21,11 @@ public class User {
         this.savings = null;
     }
 
-    public CurrentAccount createCurrentAccount(){
-        return this.current = new CurrentAccount(this);
+    public void createCurrentAccount(){
+        this.current = new CurrentAccount(this);
     }
-    public SavingsAccount createSavingsAccount(){
-        return this.savings = new SavingsAccount(this);
+    public void createSavingsAccount(){
+        this.savings = new SavingsAccount(this);
     }
 
     public int setId(){

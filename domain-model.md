@@ -29,8 +29,10 @@ Class Transaction
 | Class members                  | Methods                                                                                         | Scenario | Return |
 |--------------------------------|-------------------------------------------------------------------------------------------------|----------|--------|
 | String date                    | Transaction(String transactionType, String date, double amount, double balanceAfterTransaction) |          |        |
-| double amount                  |                                                                                                 |          |        |
-| double balanceAfterTransaction |                                                                                                 |          |        |
+| double amount                  | getTransactionType()                                                                            |          |        |
+| double balanceAfterTransaction | getDate()                                                                                       |          |        |
+|                                | getAmount()                                                                                     |          |        |
+|                                | getBalance()                                                                                    |          |        |
 
 
 Class Account

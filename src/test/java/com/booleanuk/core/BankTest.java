@@ -103,4 +103,20 @@ public class BankTest {
         Assertions.assertEquals(expected,  bank.generateBankStatements(customer, 123));
     }
 
+    @Test
+    public void customerSuccessfullyGenerateBankStatementsTest() {
+        String expected =
+                        "date       || credit  || debit  || balance\n" +
+                        "25/01/2024 ||         || 500.00 || 2500.00\n" +
+                        "25/01/2024 || 2000.00 ||        || 3000.00\n" +
+                        "25/01/2024 || 1000.00 ||        || 1000.00";
+
+        int accountId = bank.createCurrentAccount(customer);
+        bank.deposit(1000, customer, accountId);
+        bank.deposit(2000, customer, accountId);
+        bank.withdraw(500, customer, accountId);
+
+        Assertions.assertEquals(expected, bank.generateBankStatements(customer, accountId));
+    }
+
 }

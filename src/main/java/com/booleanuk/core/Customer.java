@@ -21,19 +21,23 @@ public class Customer {
         return this.accounts;
     }
 
+    public boolean depositFounds(double amount, Account account) {
+        return account.changeBalance(amount);
+    }
+
+    public boolean withdrawFounds(double amount, Account account) {
+        return account.changeBalance(-amount);
+    }
+
     public double showCurrentBalance(Account account) {
-        return 0.00;
+        return account.getBalance();
     }
 
     public void printBankStatements(Account account) {
 
     }
 
-    public boolean depositFounds(double amount, Account account) {
-        return true;
-    }
 
-    public boolean withdrawFounds(double amount, Account account) {
-        return true;
-    }
+
+
 }

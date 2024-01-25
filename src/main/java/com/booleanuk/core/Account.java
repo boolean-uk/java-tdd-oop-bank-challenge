@@ -9,6 +9,7 @@ public class Account {
     private final int clearingNumber;
     private final int accountNumber;
     private double balance;
+    protected double minLimit;
     private List<BankStatement> statements;
 
     public Account(String accountName, int clearingNumber, int accountNumber, double startingBalance) {
@@ -20,8 +21,17 @@ public class Account {
     }
 
     public boolean changeBalance(double amount) {
-        balance += amount;
+        double newBalance = this.balance + amount;
+        if (newBalance < this.minLimit) {
+            System.out.print("Can't withdraw that much money from that account!\n");
+            return false;
+        }
+        this.balance += amount;
         return true;
+    }
+
+    public double getMinLimit() {
+        return this.minLimit;
     }
 
     public String getAccountName() {

@@ -136,4 +136,21 @@ class AccountTest {
         account.withdraw(500);
         Assertions.assertEquals(1000+1000-500,account.getBalance());
     }
+
+    @Test
+    public void testRequestOverdraft() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Branch branch = new Branch("1", "DNC", "London");
+        Account account = new Account("1", customer, branch);
+        Assertions.assertEquals("Overdraft of $500.0 requested",account.requestOverdraft(500));
+        Assertions.assertTrue(branch.getOverdraftRequests().containsKey(account));
+    }
+
+    @Test
+    public void testRequestOverdraftNegativeAmount() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Branch branch = new Branch("1", "DNC", "London");
+        Account account = new Account("1", customer, branch);
+        Assertions.assertEquals("Amount cannot be negative",account.requestOverdraft(-1));
+    }
 }

@@ -1,7 +1,7 @@
 package com.booleanuk.extension;
 
 public class CurrentAccount extends Account {
-    double overDraftLimit;
+    private double overDraftLimit;
     public CurrentAccount() {
         this.overDraftLimit = 0;
     }
@@ -12,6 +12,7 @@ public class CurrentAccount extends Account {
 
     @Override
     public boolean add(double amount){
+
         return false;
     }
 }

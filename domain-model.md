@@ -16,23 +16,23 @@ So I can use my account,
 I want to deposit and withdraw funds.
 ```
 
-| Class           | Methods                             | Member Variables     | Scenario               | Results      |
-|-----------------|-------------------------------------|----------------------|------------------------|--------------|
-| Bank            | createCurrentAccount(accountNumber) | String accountNumber | If accountNumber exist | return false |
-|                 | createSavingsAccount(accountNumber) | List<Account>        |                        |              |
-|                 |                                     |                      |                        |              |
-| Account         | addFunds(amount)                    | double balance       | If withdraw < balance  | return true  |
-|                 | viewTransactions()                  | double amount        | If withdraw > balance  | return false |
-|                 |                                     | type                 |                        |              |
-|                 |                                     | List<Transactions>   |                        |              |
-|                 |                                     |                      |                        |              |
-| CurrentAccount  | withdraw(amount)                    |                      |                        |              |
-| extends Account |                                     |                      |                        |              |
-|                 |                                     |                      |                        |              |
-| SavingsAccount  | withdraw(amount)                    |                      |                        |              |
-| extends Account |                                     |                      |                        |              |
-|                 |                                     |                      |                        |              |
-| Transactions    | getters and setters()               | accountNumber        |                        |              |
-|                 | toString()                          | date                 |                        |              |
-|                 |                                     | amount               |                        |              |
-|                 |                                     | balance              |                        |              |
+| Class           | Methods                             | Member Variables     | Scenario               | Results          |
+|-----------------|-------------------------------------|----------------------|------------------------|------------------|
+| Bank            | createCurrentAccount(accountNumber) | String accountNumber | If accountNumber exist | return false     |
+|                 | createSavingsAccount(accountNumber) | List<Account>        |                        |                  |
+|                 |                                     |                      |                        |                  |
+| Account         | addFunds(amount)                    | double balance       | If withdraw < balance  | return true      |
+|                 | viewTransactions()                  | double amount        | If withdraw > balance  | return false     |
+|                 | withdraw(amount)                    | type                 |                        |                  |
+|                 |                                     | List<Transactions>   |                        |                  |
+|                 |                                     |                      |                        |                  |
+| CurrentAccount  | viewTransactions()                  |                      |                        | return current   |
+| extends Account |                                     |                      |                        | account as title |
+|                 |                                     |                      |                        |                  |
+| SavingsAccount  | viewTransactions()                  |                      |                        | return saving    |
+| extends Account |                                     |                      |                        | account as title |
+|                 |                                     |                      |                        |                  |
+| Transactions    | getters and setters()               | date                 |                        |                  |
+|                 | toString()                          | debit                |                        |                  |
+|                 |                                     | credit               |                        |                  |
+|                 |                                     | balance              |                        |                  |

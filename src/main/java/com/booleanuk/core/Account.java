@@ -1,11 +1,18 @@
 package com.booleanuk.core;
 
 public class Account {
-    public int getBalance() {
-        return -1;
+    private double balance;
+
+    public Account() {
+        balance = 0;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     public boolean deposit(int amount) {
-        return false;
+        balance += amount;
+        return true;
     }
 }

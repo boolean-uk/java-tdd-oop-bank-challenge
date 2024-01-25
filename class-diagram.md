@@ -36,4 +36,6 @@ classDiagram
     
     Account <|-- CurrentAccount
     Account <|-- SavingsAccount
+    Account "1"--"0..*" Transaction 
+    User "1" -- "0..*" Account
 ````

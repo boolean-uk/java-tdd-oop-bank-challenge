@@ -58,10 +58,11 @@ class AccountTest {
         account.getTransactions().add(new Transaction(date1,100, TransactionType.DEPOSIT, 1100));
         account.getTransactions().add(new Transaction(date,1000, TransactionType.DEPOSIT, 1000));
         Assertions.assertEquals(
-                "Date                 || Credit   || Debit    || Balance  \n" +
-                         "2024-01-25 14:30:26  ||          || 200.0    || 900.0    \n" +
-                         "2024-01-25 11:44:05  || 100.0    ||          || 1100.0   \n" +
-                         "2024-01-25 08:57:01  || 1000.0   ||          || 1000.0   ", account.getBankStatement());
+                """
+                        Date                 || Credit   || Debit    || Balance \s
+                        2024-01-25 14:30:26  ||          || 200.0    || 900.0   \s
+                        2024-01-25 11:44:05  || 100.0    ||          || 1100.0  \s
+                        2024-01-25 08:57:01  || 1000.0   ||          || 1000.0  \s""", account.getBankStatement());
     }
 
     @Test

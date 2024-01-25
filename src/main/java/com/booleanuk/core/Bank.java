@@ -11,11 +11,21 @@ public class Bank {
     }
 
     public String addAccount(String firstName, String lastName, String type, String branch, double amount) {
-        this.accountIterator++;
-        String accountNr = Integer.toString(accountIterator);
+        String accountNr;
+        while(true) {
+            this.accountIterator++;
+            accountNr = Integer.toString(accountIterator);
+            if (!accounts.containsKey(accountNr))
+                break;
+        }
+        if (type.equals("Curernt Account"))
+            accounts.put(accountNr, new CurrentAccount(accountNr, firstName, lastName, branch, amount));
+        else if (type.equals("Savings Account"))
+            accounts.put(accountNr, new SavingsAccount(accountNr, firstName, lastName, branch, amount));
+        else
+            return null;
 
-
-        return accountNr;
+        return accounts.get(accountNr).getAccountNr();
     }
 
     public Account getAccount(String accountNr) {

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,12 @@ public class Bank {
         double balance = target.getBalance();
         if (amount > 10) {
 
-            LocalDateTime currentDate = LocalDateTime.now();
-            Transactions transaction = new Transactions("Deposit", amount, currentDate);
-            transactionsList.add(transaction);
+            LocalDate currentDate = LocalDate.now();
+
             balance += amount;
+            Transactions transaction = new Transactions("Deposit", amount, currentDate, balance);
+            transactionsList.add(transaction);
+
 
             return balance;
 
@@ -55,11 +58,11 @@ public class Bank {
         double balance = target.getBalance();
         if (amount < balance) {
 
-            LocalDateTime currentDate = LocalDateTime.now();
-            Transactions transaction = new Transactions("Withdrawal", amount, currentDate);
-            transactionsList.add(transaction);
+            LocalDate currentDate = LocalDate.now();
 
             balance -= amount;
+            Transactions transaction = new Transactions("Withdrawal", amount, currentDate, balance);
+            transactionsList.add(transaction);
 
 
             return balance;
@@ -78,8 +81,13 @@ public class Bank {
     public String bankStatement() {
         StringBuilder output = new StringBuilder();
         if (transactionsList.size() > 0) {
+            output.append("Date " + " | " + " Amount " + " | " + " Type " + " | " + " Balance " + "\n");
+            for (Transactions transactions : transactionsList) {
 
-            output.append("G");
+
+                output.append(transactions.getDate() + " | " + transactions.getAmount() + " | " + transactions.getType() + " | " + transactions.getBalance() + "\n");
+            }
+
 
 
             return output.toString();

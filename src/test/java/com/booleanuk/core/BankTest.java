@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class BankTest {
 
 
@@ -103,9 +105,14 @@ public class BankTest {
         tester.deposit(testAcc, 500.00);
         tester.withdrawal(testAcc, 200.00);
         tester.deposit(testAcc, 300.00);
+        LocalDate currentDate = LocalDate.now();
 
         String result = tester.bankStatement();
-        Assertions.assertEquals("shdhhfhsbehd", result);
+        Assertions.assertEquals("Date  |  Amount  |  Type  |  Balance \n" +
+                currentDate + " | 50.0 | Withdrawal | 450.0\n" +
+                currentDate + " | 500.0 | Deposit | 1000.0\n" +
+                currentDate + " | 200.0 | Withdrawal | 300.0\n" +
+                currentDate + " | 300.0 | Deposit | 800.0\n", result);
 
     }
 

@@ -64,4 +64,38 @@ class AccountTest {
         Account account = new Account("1", customer);
         Assertions.assertEquals("No transactions", account.getBankStatement());
     }
+
+    @Test
+    public void testDepositAndWithdrawFromAccountAndCheckTransactions() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        Assertions.assertEquals("$200.0 deposited", account.deposit(200));
+        Assertions.assertTrue(account.getTransactions().stream().anyMatch(x->x.getAmount() == 200));
+        Assertions.assertTrue(account.getTransactions().stream().anyMatch(x->x.getType().equals("Credit")));
+        Assertions.assertEquals("Withdraw successful. $100.0 has been withdrawn", account.withdraw(100));
+        Assertions.assertTrue(account.getTransactions().stream().anyMatch(x->x.getAmount() == 100));
+        Assertions.assertTrue(account.getTransactions().stream().anyMatch(x->x.getType().equals("Debit")));
+    }
+
+    @Test
+    public void testWithdrawFromAccountWithZeroBalance() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        Assertions.assertEquals("Withdraw failed. Amount withdrawn is more than balance in account", account.withdraw(200));
+    }
+
+    @Test
+    public void testDepositNegativeAccount() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        Assertions.assertEquals("The amount cannot be a negative number", account.deposit(-1));
+
+    }
+
+    @Test
+    public void testWithdrawNegativeAccount() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Account account = new Account("1", customer);
+        Assertions.assertEquals("The amount cannot be a negative number", account.withdraw(-1));
+    }
 }

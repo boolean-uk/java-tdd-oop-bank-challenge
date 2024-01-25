@@ -21,8 +21,14 @@ public abstract class Person {
         return true;
     }
 
-    public boolean createSavingsAccount() {
-        return false;
+    public boolean createSavingsAccount(Branch branch) {
+        try {
+            SavingsAccount savingsAccount = new SavingsAccount(branch, generateAccountNumber(branch), this, 0.0);
+            branch.getSavingsAccounts().put(savingsAccount.getAccountNumber(), savingsAccount);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public void generateBankStatement() {

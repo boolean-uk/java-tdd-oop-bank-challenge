@@ -9,41 +9,42 @@ public class BranchTest {
     @Test
     public void testCreateUserInBranch()
     {
-        Branch osloBranch = new Branch("Oslo_East", "Oslo");
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Spending");
-        user.getAccount("cu-78105109112115111110-1").assignBranch(osloBranch);
+        user.getAccount("cu-78105109112115111110-1").assignBranch(bank.getBranch("Oslo_East"));
 
         Assertions.assertEquals("Oslo_East",
                 user.getAccount("cu-78105109112115111110-1").getBranch().getName());
-        Assertions.assertTrue(osloBranch.getAccounts().contains("cu-78105109112115111110-1"));
+        Assertions.assertTrue(bank.getBranch("Oslo_East").getAccounts().contains("cu-78105109112115111110-1"));
     }
     @Test
     public void testChangeBranch()
     {
-        Branch osloBranch = new Branch("Oslo_East", "Oslo");
-        Branch trondheimBranch = new Branch("Trondheim_South", "Oslo");
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Spending");
-        user.getAccount("cu-78105109112115111110-1").assignBranch(osloBranch);
-        user.getAccount("cu-78105109112115111110-1").assignBranch(trondheimBranch);
+        user.getAccount("cu-78105109112115111110-1").assignBranch(bank.getBranch("Oslo_East"));
+        user.getAccount("cu-78105109112115111110-1").assignBranch(bank.getBranch("Trondheim_Central"));
 
-        Assertions.assertEquals("Trondheim_South",
+        Assertions.assertEquals("Trondheim_Central",
                 user.getAccount("cu-78105109112115111110-1").getBranch().getName());
-        Assertions.assertTrue(trondheimBranch.getAccounts().contains("cu-78105109112115111110-1"));
+        Assertions.assertTrue(bank.getBranch("Trondheim_Central")
+                .getAccounts()
+                .contains("cu-78105109112115111110-1"));
     }
 
     @Test
     public void testCantAddUserToBranchTwiceOrMore()
     {
-        Branch osloBranch = new Branch("Oslo_East", "Oslo");
+        Bank bank = new Bank();
         LocalDate birthday = LocalDate.of(1956, 3, 19);
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Spending");
-        user.getAccount("cu-78105109112115111110-1").assignBranch(osloBranch);
+        user.getAccount("cu-78105109112115111110-1").assignBranch(bank.getBranch("Oslo_East"));
 
-        Assertions.assertFalse(osloBranch.addAccount("cu-78105109112115111110-1"));
+        Assertions.assertFalse(bank.getBranch("Oslo_East").addAccount("cu-78105109112115111110-1"));
     }
 }

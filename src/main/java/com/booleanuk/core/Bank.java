@@ -13,7 +13,13 @@ public class Bank {
 
     }
     public boolean createAccount(Account account){
-        return false;
+        if (accountsList.contains(account)) {
+            System.out.println("Account already registered");
+            return false;
+        }
+        accountsList.add(account);
+        System.out.println("Account created successfully");
+        return true;
     }
 
     public String generateBankStatement(){

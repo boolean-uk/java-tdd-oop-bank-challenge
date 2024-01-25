@@ -13,6 +13,12 @@ public abstract class Person {
         this.setUID(UID);
     }
 
+    /**
+     * Logic: Invoke method on instance of Person 'this', and specify which branch you want to create account at.
+     * Uses helper method to ensure account number is unique.
+     * @param branch
+     * @return
+     */
     public boolean createCurrentAccount(Branch branch) {
         try {
             CurrentAccount currentAccount = new CurrentAccount(branch, generateAccountNumber(branch), this, 0.0);
@@ -23,6 +29,11 @@ public abstract class Person {
         return true;
     }
 
+    /**
+     * Logic: Same as createCurrentAccount()
+     * @param branch
+     * @return
+     */
     public boolean createSavingsAccount(Branch branch) {
         try {
             SavingsAccount savingsAccount = new SavingsAccount(branch, generateAccountNumber(branch), this, 0.0);
@@ -33,6 +44,13 @@ public abstract class Person {
         return true;
     }
 
+    /**
+     * Logic: Invoke method on instance of Person 'this', and specify which branch you want the statements from.
+     * The same instance of Person can have multiple accounts like IRL, thus it will make a statement of Transactions for each
+     * associated account. It utilizes the member variables associated with the branch to authenticate the statements.
+     * @param b
+     * @return
+     */
     public boolean generateBankStatement(Branch b) {
         try {
             for(Account account : b.getCurrentAccounts().values()) {
@@ -80,6 +98,19 @@ public abstract class Person {
         return true;
     }
 
+    /**
+     * Logic: Invoke method on instance of Person 'this', and specify which branch you want to deposit money to,
+     * which account (as the same instance of Person can have multiple accounts with unique account numbers),
+     * and the value you want to deposit.
+     *
+     * It updates the balance of said instance of Account, if deposit is returns true.
+     * If trying to deposit to Account not owned by 'this', it rejects the deposit and returns false.
+     * If trying to deposit to Account that does not exist, it rejects the deposit and returns false.
+     * @param branch
+     * @param accountNumber
+     * @param value
+     * @return
+     */
     public boolean deposit(Branch branch, int accountNumber, double value) {
         Transaction t = new Transaction(value, 0, 1337);
 
@@ -111,6 +142,15 @@ public abstract class Person {
         }
     }
 
+    /**
+     * Logic: Same logic as above.
+     * Additionally, it checks if the value to be withdrawn would make the Account.balance() < 0, if true, return false.
+     * Furthermore, it prevents withdrawing any value from an instance of a SavingsAccount!
+     * @param branch
+     * @param accountNumber
+     * @param value
+     * @return
+     */
     public boolean withdraw(Branch branch, int accountNumber, double value) {
         Transaction t = new Transaction(0, value, 1337);
 
@@ -143,6 +183,13 @@ public abstract class Person {
         }
     }
 
+    /**
+     * Logic: Helper method to prevent multiple instances of Account's with same account number at same branch.
+     * Ideally, we would want to allow same account number at different branches by adding the branches unique ID
+     * in front of the account number. Did not manage to do this in time.
+     * @param branch
+     * @return
+     */
     public int generateAccountNumber(Branch branch) {
         Random random = new Random(123);
         int accountNumber = 0;

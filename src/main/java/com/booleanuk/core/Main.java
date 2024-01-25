@@ -1,6 +1,14 @@
 package com.booleanuk.core;
 
 public class Main {
+
+    /**
+     * (!!!!!)
+     * EXTENSIONS INCORPORATED INTO EXISTING CODE
+     * (1) Bank Managers are associated with branches
+     * (2) To be made tomorrow
+     * @param args
+     */
     public static void main(String[] args) {
         Manager m = new Manager("Nicolai", 1992);
         Customer c = new Customer("Pia", 1996);

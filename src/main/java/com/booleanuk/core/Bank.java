@@ -10,6 +10,7 @@ public class Bank {
 
     public Bank() {
         accounts = new HashMap<>();
+        overdraftRequests = new ArrayList<>();
     }
 
     public int createCurrentAccount(Customer customer) {
@@ -64,7 +65,7 @@ public class Bank {
         for(Account customerAccount: customerAccounts) {
             if(customerAccount.getId() == accountId) {
                 if(customerAccount.withdraw(amount)) {
-                    return "The withdraw has been performed.";
+                    return "The withdrawal has been performed.";
                 } else {
                     return "The withdrawal could not be performed.";
                 }
@@ -96,6 +97,7 @@ public class Bank {
                 if(customerAccount instanceof SavingsAccount) {
                     return "You can't have an overdraft on a savings account.";
                 } else {
+                    overdraftRequests.add(new OverdraftRequest(customer, accountId, amount));
                     return "Your request has been sent.";
                 }
             }
@@ -112,10 +114,18 @@ public class Bank {
 
     //For testing purposes
     protected void approveAllOverdraftRequest() {
+        for(OverdraftRequest overdraftRequest: overdraftRequests) {
+            approveOverdraftRequest(overdraftRequest);
+        }
 
     }
 
     private void approveOverdraftRequest(OverdraftRequest overdraftRequest) {
+        for(Account account: accounts.get(overdraftRequest.getCustomer())) {
+            if(account.getId() == overdraftRequest.getAccountId()) {
+                ((CurrentAccount) account).setAllowedOverdraft(overdraftRequest.getOverdraft());
+            }
+        }
 
     }
 }

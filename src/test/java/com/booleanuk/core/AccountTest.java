@@ -10,7 +10,7 @@ import java.util.Date;
 public class AccountTest {
 
     Account savingsAccount = new SavingsAccount(new Customer("Bob Bagel", 1234));
-    Account currentAccount = new CurrentAccount(new Customer("Bob Bagel", 1234));
+    CurrentAccount currentAccount = new CurrentAccount(new Customer("Bob Bagel", 1234));
 
     @Test
     public void depositValidAmount() {
@@ -43,6 +43,7 @@ public class AccountTest {
     @Test
     public void withdrawMoreThanCurrentAccountHas() {
         currentAccount.deposit(30);
+        currentAccount.setAllowedOverdraft(20);
         Assertions.assertTrue(currentAccount.withdraw(40));
         Assertions.assertEquals(-10, currentAccount.getBalance());
     }

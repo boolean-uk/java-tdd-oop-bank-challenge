@@ -2,12 +2,12 @@ package com.booleanuk.core;
 
 public class OverdraftRequest {
     private Customer customer;
-    private CurrentAccount account;
+    private int accountId;
     private double overdraft;
 
-    public OverdraftRequest(Customer customer, CurrentAccount account, double overdraft) {
+    public OverdraftRequest(Customer customer, int account, double overdraft) {
         this.customer = customer;
-        this.account = account;
+        this.accountId = account;
         this.overdraft = overdraft;
     }
 
@@ -15,8 +15,8 @@ public class OverdraftRequest {
         return customer;
     }
 
-    public CurrentAccount getAccount() {
-        return account;
+    public int getAccountId() {
+        return accountId;
     }
 
     public double getOverdraft() {

@@ -74,7 +74,7 @@ public class BankTest {
 
     @Test
     public void customerSuccessfullyTriesToWithdrawFromCurrentAccountTest() {
-        String expected = "The withdraw has been performed.";
+        String expected = "The withdrawal has been performed.";
         int accountId = bank.createCurrentAccount(customer);
         bank.deposit(22.342, customer, accountId);
         Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
@@ -82,19 +82,10 @@ public class BankTest {
         Assertions.assertEquals(22.342-2.234673, bank.getAccounts(customer).get(0).getBalance());
     }
 
-    @Test
-    public void customerSuccessfullyWithdrawsMoreThanTheirBalanceFromCurrentAccountTest() {
-        String expected = "The withdraw has been performed.";
-        int accountId = bank.createCurrentAccount(customer);
-        bank.deposit(22.342, customer, accountId);
-        Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
-        Assertions.assertEquals(expected, bank.withdraw(22.434673, customer, accountId));
-        Assertions.assertEquals(22.342-22.434673, bank.getAccounts(customer).get(0).getBalance());
-    }
 
     @Test
     public void customerSuccessfullyTriesToWithdrawFromSavingsAccountTest() {
-        String expected = "The withdraw has been performed.";
+        String expected = "The withdrawal has been performed.";
         int accountId = bank.createSavingsAccount(customer);
         bank.deposit(22.342, customer, accountId);
         Assertions.assertEquals(22.342, bank.getAccounts(customer).get(0).getBalance());
@@ -170,7 +161,7 @@ public class BankTest {
         Assertions.assertEquals("Your request has been sent." , bank.requestsOverdraft(customer, accountId, 200));
         Assertions.assertEquals("The withdrawal could not be performed.", bank.withdraw(200, customer, accountId));
         bank.approveAllOverdraftRequest();
-        Assertions.assertEquals("The withdrawal has been performed." , bank.requestsOverdraft(customer, accountId, 200));
+        Assertions.assertEquals("The withdrawal has been performed." , bank.withdraw(200, customer, accountId));
         Assertions.assertEquals(-200, bank.getAccounts(customer).get(0).getBalance());
     }
 

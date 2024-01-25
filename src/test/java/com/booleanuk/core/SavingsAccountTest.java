@@ -52,4 +52,14 @@ public class SavingsAccountTest {
         Assertions.assertFalse(requestForOverdraftIsGranted);
     }
 
+    @Test
+    public void shouldBeFalseIfOverdraftHasAlreadyBeenMade() {
+        SavingsAccount savingsAccount = new SavingsAccount(123, Branch.PERSONAL);
+        savingsAccount.makeRequestForOverdraft(100.0);
+        savingsAccount.grantOverdraftRequest(true);
+        savingsAccount.withdraw(100.0);
+        boolean requestForOverdraftIsGranted = savingsAccount.isOverDraftRequestGranted();
+        Assertions.assertFalse(requestForOverdraftIsGranted);
+    }
+
 }

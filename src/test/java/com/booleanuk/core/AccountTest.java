@@ -31,18 +31,31 @@ class AccountTest {
     public void testGetBankStatementWithTransaction() {
         Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
         Account account = new Account("1", customer);
-        account.getTransactions().add(new Transaction(new Date(),100, TransactionType.DEPOSIT, 100));
-        Assertions.assertEquals("", account.getBankStatement());
+        Date date = new Date();
+        date.setTime(1706169421767L);
+        account.getTransactions().add(new Transaction(date,100, TransactionType.DEPOSIT, 100));
+        Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
+                                        "2024-01-25 08:57:01  || 100.0    ||          || 100.0    ", account.getBankStatement());
     }
 
     @Test
     public void testGetBankStatementWithMultipleTransactions() {
         Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
         Account account = new Account("1", customer);
-        account.getTransactions().add(new Transaction(new Date(),200, TransactionType.WITHDRAW, 900));
-        account.getTransactions().add(new Transaction(new Date(),100, TransactionType.DEPOSIT, 1100));
-        account.getTransactions().add(new Transaction(new Date(),1000, TransactionType.DEPOSIT, 1000));
-        Assertions.assertEquals("", account.getBankStatement());
+        Date date = new Date();
+        date.setTime(1706169421767L);
+        Date date1 = new Date();
+        date1.setTime(1706179445767L);
+        Date date2 = new Date();
+        date2.setTime(1706189426367L);
+        account.getTransactions().add(new Transaction(date2,200, TransactionType.WITHDRAW, 900));
+        account.getTransactions().add(new Transaction(date1,100, TransactionType.DEPOSIT, 1100));
+        account.getTransactions().add(new Transaction(date,1000, TransactionType.DEPOSIT, 1000));
+        Assertions.assertEquals(
+                "Date                 || Credit   || Debit    || Balance  \n" +
+                         "2024-01-25 14:30:26  ||          || 200.0    || 900.0    \n" +
+                         "2024-01-25 11:44:05  || 100.0    ||          || 1100.0   \n" +
+                         "2024-01-25 08:57:01  || 1000.0   ||          || 1000.0   ", account.getBankStatement());
     }
 
     @Test

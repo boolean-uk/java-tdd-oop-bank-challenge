@@ -6,6 +6,9 @@ public class BankManager {
     }
 
     public String decideRequest(OverDraftRequest request, boolean accept){
-        return "";
+        if(accept){
+            return request.acceptRequest();
+        }
+        return request.rejectRequest();
     }
 }

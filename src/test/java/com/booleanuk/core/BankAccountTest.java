@@ -44,5 +44,13 @@ class BankAccountTest {
         bankAccount.withdraw(500.0, "02-01-2023");
         assertEquals(500.0, bankAccount.getBalance());
     }
+    @Test
+    public void createTransaction() {
+        Transaction transaction = new Transaction("01-01-2023", "Deposit", 500.0);
+        assertNotNull(transaction);
+        assertEquals("01/01/2023", transaction.getDate());
+        assertEquals("Deposit", transaction.getType());
+        assertEquals(500.0, transaction.getAmount());
+    }
 }
 

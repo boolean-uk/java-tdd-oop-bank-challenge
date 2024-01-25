@@ -10,7 +10,7 @@ public class Transaction {
     private double amount;
     private double balance;
 
-    public Transaction(String date, String type, double amount, double balance) {
+    public Transaction(String date, String type, double amount) {
         try {
             this.date = new SimpleDateFormat("dd-MM-yyyy").parse(date);
         } catch (ParseException e) {
@@ -18,7 +18,7 @@ public class Transaction {
         }
         this.type = type;
         this.amount = amount;
-        this.balance = balance;
+
     }
 
     public String getDate() {

@@ -18,13 +18,13 @@ public class BankAccount {
 
     public void deposit(double amount, String date) {
         balance += amount;
-        transactions.add(new Transaction(date, "Deposit", amount, balance));
+        transactions.add(new Transaction(date, "Deposit", amount));
     }
 
     public void withdraw(double amount, String date) {
         if (balance >= amount) {
             balance -= amount;
-            transactions.add(new Transaction(date, "Withdrawal", amount, balance));
+            transactions.add(new Transaction(date, "Withdrawal", amount));
         } else {
             // Handle insufficient funds
             System.out.println("Insufficient funds for withdrawal.");

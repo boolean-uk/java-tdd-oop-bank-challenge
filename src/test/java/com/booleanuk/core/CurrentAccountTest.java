@@ -117,4 +117,19 @@ public class CurrentAccountTest {
         Assertions.assertEquals(0.0, balance);
     }
 
+    @Test
+    public void requestOverdraftReturnsTrue() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        Assertions.assertTrue(a.requestOverdraft());
+    }
+
+    @Test
+    public void requestOverdraftReturnsFalse() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.requestOverdraft();
+        Assertions.assertFalse(a.requestOverdraft());
+    }
+
 }

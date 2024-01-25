@@ -7,11 +7,10 @@ public class BankTest {
 @Test
     public void testBankBranches(){
         Bank bank = new Bank("Sparebanken Sør 25");
-        bank.createUser("John", "John@example.org", bank);
-        bank.createUser("Timmy", "Timmy@example.org", bank);
+        bank.createUser("John", "John@example.org");
+        bank.createUser("Timmy", "Timmy@example.org");
         Assertions.assertEquals(2, bank.getUsers().size());
-        Assertions.assertEquals("Sparebanken Sør 25", bank.getUsers().get(1).getBankBranch());
-
+        Assertions.assertEquals("Sparebanken Sør 25", bank.getUser(1).getBankBranch());
     }
 }
 

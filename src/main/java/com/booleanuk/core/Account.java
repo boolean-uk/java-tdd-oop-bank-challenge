@@ -8,9 +8,10 @@ import java.util.List;
 public abstract class Account {
     private double balance;
     private List<Transaction> transactions;
-
+    private boolean approvedOverdraft;
     public Account(){
         this.transactions = new ArrayList<>();
+        this.approvedOverdraft = setApprovedOverdraft(false);
     }
 
     public List<Transaction> getTransactions(){
@@ -34,6 +35,12 @@ public abstract class Account {
         return sb.toString();
     }
 
+    public boolean getApprovedOverdraft(){
+        return this.approvedOverdraft;
+    }
+    public boolean setApprovedOverdraft(boolean bool){
+        return this.approvedOverdraft = bool;
+    }
 
     public double getBalance(){
         double balance = 0.00;
@@ -43,9 +50,16 @@ public abstract class Account {
         return this.balance = balance;
     }
 
+
     public void withdraw(double withdraw){
         if(this.balance - withdraw < 0){
-            System.out.println("Unable to withdraw more than balance!");
+            if(!approvedOverdraft){
+                System.out.println("Unable to withdraw more than balance!");
+                return;
+            }
+            LocalDateTime dateTime = LocalDateTime.now();
+            this.balance -= withdraw;
+            transactions.add(new Transaction(dateTime,withdraw, 0, this.balance));
             return;
         }
         LocalDateTime dateTime = LocalDateTime.now();

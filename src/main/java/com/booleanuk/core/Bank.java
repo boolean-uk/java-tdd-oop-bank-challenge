@@ -13,18 +13,16 @@ public class Bank {
         this.users = new ArrayList<>();
     }
 
-    public void createUser(String name, String email, Bank bank){
-        User user = new User(name, email, bank);
+    public void createUser(String name, String email){
+        User user = new User(name, email, this);
         users.add(user);
     }
 
     public List<User> getUsers() {
         return users;
     }
-
-    public Bank setUsers(List<User> users) {
-        this.users = users;
-        return this;
+    public User getUser(int index){
+        return users.get(index);
     }
 
     public String getBranch() {

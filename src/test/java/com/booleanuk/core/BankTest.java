@@ -33,6 +33,19 @@ public class BankTest {
         Assertions.assertEquals(23.54, balance);
     }
 
+    @Test
+    public void testDeposit() {
+        Bank bank = new Bank();
+        String jonSnowAccountNr = bank.addAccount("Jon", "Snow", "Current Account", "Winterfell", 23.54);
+
+        bank.deposit(jonSnowAccountNr, 568.9);
+
+        double balance = bank.getBalance(jonSnowAccountNr);
+        Assertions.assertEquals(23.54+568.9, balance);
+    }
+
+
+
 
 
 }

@@ -60,7 +60,7 @@ public class SavingsAccount implements Account {
         if(amount < 0) {
             System.out.println("Can't withdraw negative amount.");
             return false;
-        } else if (this.balance - amount < 0){
+        } else if (this.balance < amount){
             System.out.println("can't have negative balance.");
             return false;
         } else {

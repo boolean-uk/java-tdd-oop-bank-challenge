@@ -59,11 +59,13 @@ public class CurrentAccount implements Account {
     }
 
     public boolean withdraw(double amount, Date date) {
+        BankManager banker = new BankManager();
+
         if(amount < 0) {
             System.out.println("Can't withdraw negative amount.");
             return false;
         } else if (this.balance < amount) {
-            if(overdraft) {
+            if(overdraft && (banker.checkOverdraftLimit(amount))) {
                 this.balance -= amount;
                 transactions.add(new Transaction(date, amount, 0.0, this.balance));
                 return true;

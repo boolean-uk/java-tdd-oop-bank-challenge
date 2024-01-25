@@ -41,4 +41,25 @@ I want to deposit and withdraw funds.
 |       |                 | withdraw(funds, account) | Withdraws funds from the selected account | return double balance |
 
 
+```
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
 
+```
+| Class   | Member Variable   | Method                   | Description                             | Output        |
+|---------|-------------------|--------------------------|-----------------------------------------|---------------|
+| User    | List<Transaction> | generateBankStatements() | Prints out bank statements              | return String |
+| Account |                   | getBalance()             | Calculates balance from all transaction | return double |
+
+
+```
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+```
+
+| Class | Member Variable                      | Method                                 | Description                             | Output      |
+|-------|--------------------------------------|----------------------------------------|-----------------------------------------|-------------|
+| Bank  | User user, String name, String email | createUser(String name, String email)) | Creates user within that branch of bank | return user |
+|       |                                      |                                        |                                         |             |

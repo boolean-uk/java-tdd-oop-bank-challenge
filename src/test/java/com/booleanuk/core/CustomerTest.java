@@ -80,4 +80,9 @@ public class CustomerTest {
         Assertions.assertEquals(b.getSavingsAccounts().get(27624789).getBalance(), b.getCurrentAccounts().get(33004782).getBalance());
     }
 
+    @Test
+    public void testGenerateBankStatement() {
+        Assertions.assertTrue(c.generateBankStatement());
+    }
+
 }

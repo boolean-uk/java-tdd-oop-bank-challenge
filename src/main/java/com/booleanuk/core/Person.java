@@ -31,8 +31,9 @@ public abstract class Person {
         return true;
     }
 
-    public void generateBankStatement() {
+    public boolean generateBankStatement() {
         System.out.println("");
+        return false;
     }
 
     public boolean deposit(Branch branch, int accountNumber, double value) {
@@ -85,11 +86,10 @@ public abstract class Person {
         } else if (branch.getSavingsAccounts().containsKey(accountNumber)) {
             if (branch.getSavingsAccounts().get(accountNumber).getAccountOwner() == this) {
                 System.out.println("You are not currently allowed to conduct withdrawals from your savings accounts!");
-                return false;
             } else {
                 System.out.println("You do not have permission to withdraw money from this account!");
-                return false;
             }
+            return false;
         } else {
             System.out.println("No such account exists!");
             return false;

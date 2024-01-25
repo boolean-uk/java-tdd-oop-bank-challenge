@@ -10,10 +10,10 @@
    I want to create a savings account.
 ```
 
-| Classes | Methods                                | Scenario               | Returns      |
-|---------|----------------------------------------|------------------------|--------------|
-| Bank    | boolean createAccount(Account account) | Account already exists | return false |
-|         |                                        | Account does not exist | return true  |
+| Classes | Methods                                     | Scenario               | Returns      |
+|---------|---------------------------------------------|------------------------|--------------|
+| Bank    | boolean createAccount(String accountHolder) | Account already exists | return false |
+|         |                                             | Account does not exist | return true  |
 
 ```
 3. As a customer,

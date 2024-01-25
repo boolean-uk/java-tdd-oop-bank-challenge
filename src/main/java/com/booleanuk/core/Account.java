@@ -50,4 +50,12 @@ public abstract class Account {
     public int getAccountId(){
         return this.id;
     }
+    public String getAccountHolder(){
+        return this.accountHolder;
+    }
+
+    @Override
+    public String toString() {
+        return "Account Holder: " + this.accountHolder + ", Current Balance: " + this.balance;
+    }
 }

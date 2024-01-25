@@ -4,9 +4,16 @@ import java.util.ArrayList;
 
 public class BankStatementGenerator {
     public String generateBankStatement(ArrayList<Transaction> transactions) {
+        String bankStatement = "";
 
-        return "Credit: 100 on 10/01/2024" + "/n" +
-                "Debit: 50 on 15/01/2024" + "/n" +
-                "Balance: 50";
+        for(Transaction transaction : transactions) {
+            bankStatement += transaction.getTransactionType();
+            bankStatement += transaction.getDate();
+            bankStatement += transaction.getAmount();
+            bankStatement += transaction.getBalance();
+            bankStatement += "/n";
+        }
+
+        return bankStatement;
     }
 }

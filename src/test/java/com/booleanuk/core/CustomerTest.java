@@ -88,17 +88,16 @@ public class CustomerTest {
 
         Assertions.assertTrue(customer.createAccount(currentAccount));
 
-        Assertions.assertEquals(0.00, customer.getAccount(currentAccount).getBalance());
-        Assertions.assertTrue(customer.deposit(currentAccount, 500.00));
-        Assertions.assertEquals(500.00, customer.getAccount(currentAccount).getBalance());
+        Assertions.assertEquals(0.00, currentAccount.getBalance());
+        Assertions.assertEquals(new ArrayList<BankStatement>(), currentAccount.getBankStatements());
+        Assertions.assertTrue(currentAccount.deposit(500));
+        Assertions.assertTrue(currentAccount.withdraw(100));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.format(new Date());
 
-        Assertions.assertEquals("date       || credit  || debit  || balance\n" +
-                sdf + " ||         || 500.00 || 500.00", customer.printBankStatements(currentAccount) );
+
+        Assertions.assertEquals("\n2024-01-25 ||          ||    500.0 ||     500.0\n" +
+                "2024-01-25 ||    500.0 ||          ||    2000.0\n", customer.getAccount(currentAccount).printBankStatements());
 
     }
-
 
 }

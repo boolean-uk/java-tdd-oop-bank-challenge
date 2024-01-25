@@ -1,21 +1,22 @@
 package com.booleanuk.core;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class BankStatement {
 
-    private Date date;
+    private LocalDate date;
     private double amount;
     private double balance;
 
 
-    protected BankStatement(Date date, double amount, double balance) {
-        this.date = date;
+    protected BankStatement(double amount, double balance) {
+        this.date = LocalDate.now();
         this.amount = amount;
         this.balance = balance;
 
     }
-    protected Date getTransactionDate() {
+    protected LocalDate getTransactionDate() {
         return this.date;
     }
 

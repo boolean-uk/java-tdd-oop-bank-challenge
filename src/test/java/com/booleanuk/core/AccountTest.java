@@ -27,12 +27,18 @@ public class AccountTest {
 
     @Test
     public void printBankStatementsFromArray() {
+
         Account account = new Account();
 
         Assertions.assertEquals(0.00, account.getBalance());
         Assertions.assertEquals(new ArrayList<BankStatement>(), account.getBankStatements());
+        Assertions.assertTrue(account.deposit(500));
+        Assertions.assertTrue(account.withdraw(100));
 
-        Assertions.assertEquals("", account.printBankStatements());
+
+
+        Assertions.assertEquals("\n2024-01-25 ||          ||    500.0 ||     500.0\n" +
+                "2024-01-25 ||    500.0 ||          ||    2000.0\n", account.printBankStatements());
 
     }
 

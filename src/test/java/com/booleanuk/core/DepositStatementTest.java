@@ -3,37 +3,36 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class DepositStatementTest {
 
     @Test
     public void testDepositStatementInit() {
-        Date date = new Date();
-
-        BankStatement depositStatement = new DepositStatement(date, 500, 2000);
+        LocalDate date = LocalDate.now();
 
 
-        Assertions.assertEquals(date, depositStatement.getTransactionDate());
+        DepositStatement depositStatement = new DepositStatement(500, 2000);
+
+
+        Assertions.assertEquals(date.getDayOfMonth(), depositStatement.getTransactionDate().getDayOfMonth());
         Assertions.assertEquals(500.00, depositStatement.getAmount());
         Assertions.assertEquals(2000.00, depositStatement.getBalance());
-        Assertions.assertEquals("", depositStatement.getStatementAsString());
+
     }
 
     @Test
     public void getStatementAsStringCorrectlyFormatted() {
 
-        Date date = new Date();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.format(date);
+        LocalDate date = LocalDate.now();
 
 
-
-        BankStatement depositStatement = new DepositStatement(date, 500, 2000);
-
-        Assertions.assertEquals(sdf + " ||          || 500.00 || 2500.00", depositStatement.getStatementAsString());
+        String testString = String.format("%-8s %2s %8s %8s %2s %9s\n",date,"||","||", "500.0","||","2000.0");
+        DepositStatement depositStatement = new DepositStatement(500, 2000);
+        Assertions.assertEquals(testString, depositStatement.getStatementAsString());
 
     }
 

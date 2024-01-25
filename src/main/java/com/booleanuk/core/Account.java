@@ -31,7 +31,7 @@ public class Account {
     }
 
     public boolean deposit(double v) {
-        addBankStatement(new DepositStatement(new Date(), v, this.getBalance()));
+        this.addBankStatement(new DepositStatement(v, this.getBalance()+v));
         this.balance += v;
         return true;
     }
@@ -39,7 +39,7 @@ public class Account {
     public boolean withdraw(double v) {
 
         if(v < this.getBalance()) {
-            addBankStatement(new WithdrawStatement(new Date(), v, this.getBalance()));
+            this.addBankStatement(new WithdrawStatement(v, this.getBalance()-v));
             this.balance -= v;
             return true;
         }
@@ -53,8 +53,10 @@ public class Account {
     }
 
     public String printBankStatements() {
-
-
-        return "";
+        String returnString = "\n";
+        for (BankStatement statement : bankStatements) {
+            returnString += statement.getStatementAsString();
+        }
+        return returnString;
     }
 }

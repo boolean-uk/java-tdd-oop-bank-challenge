@@ -11,7 +11,7 @@ public class BankStatementTest {
     public void initBankStatement() {
 
         Date date = new Date();
-        BankStatement bankStatement = new BankStatement(date, 500.00, 2000.00) {
+        BankStatement bankStatement = new BankStatement(500.00, 2000.00) {
             @Override
             protected String getStatementAsString() {
                 return "";

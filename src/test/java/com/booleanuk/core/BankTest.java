@@ -146,4 +146,10 @@ public class BankTest {
         Assertions.assertEquals("Customer doesn't exist.", bank.requestsOverdraft(customer, 123, 200));
     }
 
+    @Test
+    public void customerWithNonExistentAccountRequestsOverdraft() {
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals("Account doesn't exist.", bank.requestsOverdraft(customer, 123, 200));
+    }
+
 }

@@ -35,8 +35,33 @@ public abstract class Person {
         System.out.println("");
     }
 
-    public boolean deposit() {
-        return false;
+    public boolean deposit(Branch branch, int accountNumber, double value) {
+        Transaction t = new Transaction(value, 0, 1337);
+
+        if (branch.getCurrentAccounts().containsKey(accountNumber)) {
+            if (branch.getCurrentAccounts().get(accountNumber).getAccountOwner() == this) {
+                branch.getCurrentAccounts().get(accountNumber).setBalance(branch.getCurrentAccounts().get(accountNumber).getBalance() + value);
+                branch.getCurrentAccounts().get(accountNumber).getTransactionHistory().add(t);
+                System.out.println(value + " has been deposited to account number: " + accountNumber);
+                return true;
+            } else {
+                System.out.println("You do not have permission to deposit money to this account!");
+                return false;
+            }
+        } else if (branch.getSavingsAccounts().containsKey(accountNumber)) {
+            if (branch.getSavingsAccounts().get(accountNumber).getAccountOwner() == this) {
+                branch.getSavingsAccounts().get(accountNumber).setBalance(branch.getSavingsAccounts().get(accountNumber).getBalance() + value);
+                branch.getSavingsAccounts().get(accountNumber).getTransactionHistory().add(t);
+                System.out.println(value + " has been deposited to account number: " + accountNumber);
+                return true;
+            } else {
+                System.out.println("You do not have permission to deposit money to this account!");
+                return false;
+            }
+        } else {
+            System.out.println("No such account exists!");
+            return false;
+        }
     }
 
     public boolean withdraw() {

@@ -40,5 +40,16 @@ public class CustomerTest {
         System.out.println();
     }
 
+    @Test
+    public void testDeposit() {
+        c.createCurrentAccount(b);
+        m.createCurrentAccount(b);
+
+        Assertions.assertTrue(c.deposit(b,33004782, 10));
+        Assertions.assertEquals(10.0, b.getCurrentAccounts().get(33004782).getBalance());
+
+        Assertions.assertFalse(m.deposit(b, 33004782, 10));
+        Assertions.assertFalse(m.deposit(b, 110, 10));
+    }
 
 }

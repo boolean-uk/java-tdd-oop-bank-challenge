@@ -132,7 +132,7 @@ public class UserTest {
         User user = new User("Large Nimpson", birthday);
         user.createCurrentAccount("Groceries", bank);
 
-        //user.requestOverdraft("cu-78105109112115111110-1", 200);
-        Assertions.assertEquals(-200, user.getBalance("cu-78105109112115111110-1"));
+        user.requestOverdraft("cu-78105109112115111110-1", 200);
+        Assertions.assertEquals(1, bank.getBranch("Oslo_East").overdraftRequests.size());
     }
 }

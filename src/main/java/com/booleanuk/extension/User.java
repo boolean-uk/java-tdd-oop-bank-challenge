@@ -130,4 +130,19 @@ public class User {
         return "";
     }
 
+    public boolean requestOverdraft(String accountID, int amount)
+    {
+        for(Account account : this.accounts)
+        {
+            if(account.getAccountID().equals(accountID))
+            {
+                account.branch.addOverdraftRequest(accountID, amount);
+                System.out.println("Overdraft request sent to branch " + account.branch.getName());
+
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

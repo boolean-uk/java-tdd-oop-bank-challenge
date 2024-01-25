@@ -62,7 +62,12 @@ public class Bank {
         return sb.toString();
     }
     public boolean requestOverdraft(int accountNumber){
-
-        return true;
+        for(Account account : accounts){
+            if(account.getAccountId() == accountNumber && account instanceof CurrentAccount && !account.getOverdraftApproved()){
+                overdraftRequests.add(account);
+                return true;
+            }
+        }
+        return false;
     }
 }

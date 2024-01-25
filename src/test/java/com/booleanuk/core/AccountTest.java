@@ -21,4 +21,11 @@ public class AccountTest {
         Assertions.assertEquals(0, account.getBalance());
     }
 
+    @Test
+    public void withdrawValidAmount() {
+        account.deposit(30);
+        Assertions.assertTrue(account.withdraw(20));
+        Assertions.assertEquals(10, account.getBalance());
+    }
+
 }

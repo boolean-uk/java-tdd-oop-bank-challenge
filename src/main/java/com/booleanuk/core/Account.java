@@ -18,4 +18,8 @@ public class Account {
         balance += amount;
         return true;
     }
+
+    public boolean withdraw(double amount) {
+        return false;
+    }
 }

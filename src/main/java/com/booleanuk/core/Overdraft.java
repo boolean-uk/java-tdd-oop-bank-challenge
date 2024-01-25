@@ -6,7 +6,7 @@ public class Overdraft {
     private boolean approved;
 
     public Overdraft(double amount) {
-        this.amount = amount;
+        this.setAmount(amount)
         this.approved = false;
     }
 
@@ -14,15 +14,17 @@ public class Overdraft {
         return this.amount;
     }
 
-    public void setAmount(double amount) {
+    public boolean setAmount(double amount) {
         this.amount = amount;
+        return true;
     }
 
     public boolean isApproved() {
         return this.approved;
     }
 
-    public void setApproved(boolean approved) {
+    public boolean setApproved(boolean approved) {
         this.approved = approved;
+        return true;
     }
 }

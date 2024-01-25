@@ -30,4 +30,25 @@ public class CurrentAccountTest {
         Assertions.assertFalse(a.deposit(0));
         Assertions.assertEquals(0.00, a.getBalance());
     }
+
+    @Test
+    public void shouldReturnTrueWithdraw() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.deposit(100.00);
+        Assertions.assertTrue(a.withdraw(50.00));
+        Assertions.assertTrue(a.withdraw(25.00));
+        Assertions.assertEquals(25.00, a.getBalance());
+        Assertions.assertTrue(a.withdraw(25.00));
+    }
+
+    @Test
+    public void shouldReturnTrueWithdraw() {
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.deposit(50.00);
+        Assertions.assertFalse(a.withdraw(100.00));
+        Assertions.assertFalse(a.withdraw(-20.00));
+        Assertions.assertEquals(50.00, a.getBalance());
+    }
 }

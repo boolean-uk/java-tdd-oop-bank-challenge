@@ -188,6 +188,40 @@ Class Account
 
 
 
+## User story 3 and 4 Extension
+
+
+Class BankManager
+
+
+| Class variables                        | Method                                | Scenario                          | Return  |
+|----------------------------------------|---------------------------------------|-----------------------------------|---------|
+| ArrayList<Overdraft> overdraftRequests | approveOverdraft(Overdraft overdraft) | BankManager can approve overdraft | boolean |
+|                                        | rejectOverdraft(Overdraft overdraft)  | BankManager can reject overdraft  | boolean |
+|                                        |                                       |                                   |         |
+|                                        |                                       |                                   |         |
+
+
+Class Customer
+
+
+| Class variables | Method                                                 | Scenario                                              | Return  |
+|-----------------|--------------------------------------------------------|-------------------------------------------------------|---------|
+|                 | requestOverdraft(Account account, BankManager manager) | Sends request for overdraft of account to BankManager | boolean |
+|                 |                                                        |                                                       |         |
+|                 |                                                        |                                                       |         |
+|                 |                                                        |                                                       |         |
+
+
+Overdraft
+
+| Class variables  | Method | Scenario | Return |
+|------------------|--------|----------|--------|
+| double amount    |        |          |        |
+| boolean approved |        |          |        |
+|                  |        |          |        |
+|                  |        |          |        |
+
 
 
 

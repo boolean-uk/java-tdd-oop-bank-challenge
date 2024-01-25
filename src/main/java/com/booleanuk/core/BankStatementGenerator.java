@@ -4,14 +4,22 @@ import java.util.ArrayList;
 
 public class BankStatementGenerator {
     public String generateBankStatement(ArrayList<Transaction> transactions) {
-        String bankStatement = "";
+        String bankStatement = "Date Credit Debit Balance";
 
         for(Transaction transaction : transactions) {
-            bankStatement += transaction.getTransactionType();
-            bankStatement += transaction.getDate();
-            bankStatement += transaction.getAmount();
-            bankStatement += transaction.getBalance();
             bankStatement += "/n";
+
+            bankStatement += transaction.getDate() + " ";
+
+            if(transaction.getTransactionType().equalsIgnoreCase("Credit")) {
+                bankStatement += transaction.getAmount() + " ";
+                bankStatement += "0" + " ";
+            }
+            else {
+                bankStatement += "0" + " ";
+                bankStatement += transaction.getAmount() + " ";
+            }
+            bankStatement += transaction.getBalance();
         }
 
         return bankStatement;

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
+
     public SavingsAccount(int accountId, Branch branch) {
         super(accountId, branch);
     }
@@ -12,4 +13,5 @@ public class SavingsAccount extends Account{
             super.withdraw(amount);
         }
     }
+
 }

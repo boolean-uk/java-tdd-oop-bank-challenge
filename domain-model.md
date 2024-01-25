@@ -84,11 +84,12 @@ I want statements to be sent as messages to my phone.
 
 ### Class SavingsAccount extends Account
 
-| Class members | Methods                         | Scenario                                    | Return |
-|---------------|---------------------------------|---------------------------------------------|--------|
-|               | SavingsAccount(int accountId)   |                                             |        |
-|               | withdraw(double amount)         | if there is enough funds in account         | true   |
-|               | requestOverdraft(double amount) | if withdrawal amount is higher than balance |        |
+| Class members | Methods                                | Scenario                                    | Return |
+|---------------|----------------------------------------|---------------------------------------------|--------|
+|               | SavingsAccount(int accountId)          |                                             |        |
+|               | withdraw(double amount)                | if there is enough funds in account         | true   |
+|               | makeRequestForOverdraft(double amount) | if withdrawal amount is higher than balance |        |
+|               | getRequestForOverDraft()               | if request has been made                    | double |
 
 
 ### Class CurrentAccount extends Account

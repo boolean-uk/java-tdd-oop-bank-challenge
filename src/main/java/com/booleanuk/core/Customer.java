@@ -54,4 +54,8 @@ public class Customer {
 
         return false;
     }
+
+    public String printBankStatements(Account account) {
+        return "";
+    }
 }

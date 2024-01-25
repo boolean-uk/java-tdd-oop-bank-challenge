@@ -23,4 +23,5 @@ public class BankStatementTest {
         Assertions.assertEquals(date,bankStatement.getTransactionDate());
     }
 
+
 }

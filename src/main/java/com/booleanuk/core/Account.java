@@ -51,4 +51,10 @@ public class Account {
     private void addBankStatement(BankStatement bankStatement) {
         this.bankStatements.add(bankStatement);
     }
+
+    public String printBankStatements() {
+
+
+        return "";
+    }
 }

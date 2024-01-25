@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WithdrawStatementTest {
@@ -20,4 +21,21 @@ public class WithdrawStatementTest {
         Assertions.assertEquals("", withdrawStatement.getStatementAsString());
 
     }
+
+
+    @Test
+    public void getStatementAsStringCorrectlyFormatted() {
+
+        Date date = new Date();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.format(date);
+
+
+
+        BankStatement withdrawStatement = new WithdrawStatement(date, 500, 2000);
+
+        Assertions.assertEquals(sdf + " ||  500.00  ||        || 1500.00", withdrawStatement.getStatementAsString());
+    }
+
 }

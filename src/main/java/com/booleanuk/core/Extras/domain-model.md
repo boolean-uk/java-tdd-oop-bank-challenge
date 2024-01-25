@@ -11,10 +11,10 @@
 
 
 ### Class Manager EXTENDS Person
-| Member Variables | Methods | Return | Output |
-|------------------|---------|--------|--------|
-|                  |         |        |        |
-|                  |         |        |        |
+| Member Variables | Methods        | Return | Output |
+|------------------|----------------|--------|--------|
+|                  | setOverdraft() |        |        |
+|                  |                |        |        |
 
 ### Class Customer EXTENDS Person
 | Member Variables | Methods                 | Return  | Output  |
@@ -78,10 +78,10 @@
 |                  |         |        |        |
 
 ### CurrentAccount EXTENDS Account
-| Member Variables | Methods | Return | Output |
-|------------------|---------|--------|--------|
-|                  |         |        |        |
-|                  |         |        |        |
+| Member Variables       | Methods                | Return | Output |
+|------------------------|------------------------|--------|--------|
+| allowed_overdraft: int |                        |        |        |
+|                        | setAllowed_overdraft() |        |        |
 
 
 

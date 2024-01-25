@@ -199,6 +199,16 @@ public abstract class Person {
         return accountNumber;
     }
 
+    /**
+     * Logic: Helper method to check for requestOverdraft()
+     * @param owner
+     * @param person
+     * @return
+     */
+    public boolean checkAccountBelongsToPerson(Person owner, Person person) {
+        return owner == this;
+    }
+
     public String getName() {
         return name;
     }

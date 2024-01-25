@@ -10,7 +10,7 @@ public class CustomerTest {
 
     @Test
     public void testRequestOverdraft() {
-        Assertions.assertTrue(c.requestOverdraft());
+        c.createCurrentAccount(b);
+        Assertions.assertFalse(c.requestOverdraft(b, 33004782, 5000));
     }
-
 }

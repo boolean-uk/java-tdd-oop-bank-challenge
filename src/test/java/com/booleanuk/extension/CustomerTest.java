@@ -92,10 +92,27 @@ class CustomerTest {
 
     }
 
+    @Test
+    public void testRequestOverDraft(){
+        Customer customer = new Customer();
+        CurrentAccount account = new CurrentAccount();
+
+        //amount > 0
+        Assertions.assertTrue(customer.requestOverDraft(account, 500));
+
+        //amount < 0
+        Assertions.assertFalse(customer.requestOverDraft(account, -10));
+
+
+    }
+
+    // Help methods
     private static String removeSpaces(String input) {
         // Replace all spaces in the string with an empty string
         return input.replaceAll("\\s", "");
     }
+
+
 
 
 }

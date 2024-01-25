@@ -1,8 +1,11 @@
 package com.booleanuk.extension;
 
+import java.util.List;
+
 public class Customer {
     private Account savingsAccount;
     private Account currentAccount;
+    private List<OverDraftRequest> requests;
 
     public Customer() {
     }

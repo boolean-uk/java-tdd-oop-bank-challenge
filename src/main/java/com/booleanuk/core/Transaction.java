@@ -1,10 +1,10 @@
 package com.booleanuk.core;
 
 public class Transaction {
-    String transactionType;
-    String date;
-    double amount;
-    double balance;
+    private String transactionType;
+    private String date;
+    private double amount;
+    private double balance;
 
     public Transaction(String transactionType, String date, double amount, double balance) {
         this.transactionType = transactionType;

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Account {
-    int accountId;
-    double balance;
-    ArrayList<Transaction> transactions;
-    BankStatementGenerator bankStatementGenerator;
+    private int accountId;
+    private double balance;
+    private ArrayList<Transaction> transactions;
+    private BankStatementGenerator bankStatementGenerator;
 
     public Account(int accountId, BankStatementGenerator bankStatementGenerator) {
         this.accountId = accountId;

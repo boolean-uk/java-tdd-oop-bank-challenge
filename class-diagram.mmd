@@ -1,0 +1,54 @@
+---
+title: Bank Challenge
+---
+classDiagram
+    User <|-- Customer
+    User *-- Account
+
+    Account <|-- CurrentAccount
+    Account <|-- SavingsAccount
+    Account *-- Transaction
+    class User{
+        -String identifier
+    }
+    class Customer{
+        -ArrayList~Account~ accounts
+        +createAccount(AccountType type) void
+    }
+    class Account{
+        -String identifier
+        -int amount
+        -ArrayList~Transaction~ transactions
+        +withdrawl(int amount) void
+        +deposit(int amount) void
+        +String getBankStatement
+
+    }
+    class CurrentAccount{
+
+    }
+    class SavingsAccount{
+
+    }
+    class Transaction{
+        -int amount
+        -Account receiving
+        -Account sending
+        -LocalDate date
+        -LocalTime time
+        +toString() String
+    }
+
+
+    class TransactionTypes{
+        DEPOSIT
+        WITHDRAWAL
+
+    }
+    <<enumeration>> TransactionTypes
+    class AccountTypes{
+        CURRENT
+        SAVINGS
+    }
+    <<enumeration>> AccountTypes
+

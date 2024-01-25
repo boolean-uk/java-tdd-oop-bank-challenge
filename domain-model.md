@@ -1,6 +1,6 @@
 | Class               | Implements/Extends | Attributes                          | Methods                         | T | I | Situation | Return / Output |   |
 |---------------------|--------------------|-------------------------------------|---------------------------------|---|---|-----------|-----------------|---|
-| User                |                    | String id                           |                                 |   |   |           |                 |   |
+| User                |                    | String identifier                   |                                 |   |   |           |                 |   |
 |                     |                    |                                     |                                 |   |   |           |                 |   |
 | Customer            | User               |                                     |                                 |   |   |           |                 |   |
 |                     |                    | ArrayList<Account> accounts         |                                 |   |   |           |                 |   |

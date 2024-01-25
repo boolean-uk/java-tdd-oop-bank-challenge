@@ -44,4 +44,11 @@ public class BankTest {
         Assertions.assertEquals(expected, bank.deposit(2, customer, 123));
     }
 
+    @Test
+    public void customerSuccessfullyTriesToDepositTest() {
+        String expected = "The deposit has been performed.";
+        int accountId = bank.createCurrentAccount(customer);
+        Assertions.assertEquals(expected, bank.deposit(2, customer, accountId));
+    }
+
 }

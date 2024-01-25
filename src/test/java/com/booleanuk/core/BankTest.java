@@ -37,4 +37,11 @@ public class BankTest {
         Assertions.assertEquals(expected, bank.deposit(2, customer, 123));
     }
 
+    @Test
+    public void customerWithNonExistentAccountIdTriesToDepositTest() {
+        String expected = "Account doesn't exist.";
+        bank.createCurrentAccount(customer);
+        Assertions.assertEquals(expected, bank.deposit(2, customer, 123));
+    }
+
 }

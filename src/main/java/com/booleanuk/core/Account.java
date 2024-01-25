@@ -8,7 +8,11 @@ public class Account {
     private StringBuilder transactionLog;
     private Date transactionDate;
 
+    private User user;
+
     public Account(User user){
+        this.user = user;
+
         this.balance = 0;
         this.overdraft = 0;
         this.transactionLog = new StringBuilder();
@@ -31,4 +35,7 @@ public class Account {
         return transactionLog;
     }
 
+    public void withdraw(int amount){
+        setBalance(this.balance - amount);
+    }
 }

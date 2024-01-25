@@ -9,8 +9,10 @@ public class AccountTest {
 	public void depositTest(){
 
 		String branch="123456";
-		Account acc = new AccountCurr(branch);
-		Account acs = new AccountSave(branch);
+		AccountCurr acc = new AccountCurr("0",branch);
+		AccountSave acs= new AccountSave("1",branch);
+		Assertions.assertEquals(0,acc.calcBalance());
+		Assertions.assertEquals(0,acs.calcBalance());
 		acc.deposit(1000);
 		acs.deposit(1000);
 		Assertions.assertEquals(1000,acc.calcBalance());
@@ -24,8 +26,10 @@ public class AccountTest {
 	@Test
 	public void withdrawTest(){
 		String branch="123456";
-		Account acc = new AccountCurr(branch);
-		Account acs = new AccountSave(branch);
+		AccountCurr acc = new AccountCurr("0",branch);
+		AccountSave acs = new AccountSave("1",branch);
+		Assertions.assertEquals(0,acc.calcBalance());
+		Assertions.assertEquals(0,acs.calcBalance());
 		acc.deposit(1000);
 		acs.deposit(1000);
 		Assertions.assertEquals(1000,acc.calcBalance());
@@ -45,7 +49,7 @@ public class AccountTest {
 			Assertions.assertEquals(1000, acs.calcBalance());
 			acc.withdraw(2000);
 			acs.withdraw(2000);
-		}catch (Exception e){
+		}catch (OverdraftException e){
 			System.out.println(e);
 		}
 

@@ -9,7 +9,7 @@ public class CurrentAccountTest {
     @Test
     public void assertCurrentAccountWasCreated() {
         int accountId = 123;
-        CurrentAccount currentAccount = new CurrentAccount(accountId);
+        CurrentAccount currentAccount = new CurrentAccount(accountId, new BankStatementGenerator());
         Assertions.assertEquals(accountId, currentAccount.getAccountId());
         Assertions.assertEquals(0.0, currentAccount.getBalance());
     }

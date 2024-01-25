@@ -9,7 +9,7 @@ public class SavingsAccountTest {
     @Test
     public void assertSavingsAccountWasCreated() {
         int accountId = 123;
-        SavingsAccount savingsAccount = new SavingsAccount(accountId);
+        SavingsAccount savingsAccount = new SavingsAccount(accountId, new BankStatementGenerator());
         Assertions.assertEquals(accountId, savingsAccount.getAccountId());
         Assertions.assertEquals(0.0, savingsAccount.getBalance());
     }

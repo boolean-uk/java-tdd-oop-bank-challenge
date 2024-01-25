@@ -8,7 +8,7 @@ public class AccountTest {
     //User story 3
     @Test
     public void generatedBankStatementShouldHaveAllTransactions() {
-        Account account = new Account(123);
+        Account account = new Account(123, new BankStatementGenerator());
         account.deposit(100);
         account.withdraw(50);
         String actualBankStatement = account.getBankStatement();

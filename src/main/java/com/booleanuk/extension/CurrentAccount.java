@@ -7,12 +7,19 @@ public class CurrentAccount extends Account {
     }
 
     boolean setOverDraftLimit(double limit){
-        return false;
+        if (limit < 0){
+            return false;
+        }
+        this.overDraftLimit = limit;
+        return true;
     }
 
     @Override
-    public boolean add(double amount){
-
-        return false;
+    public boolean remove(double amount){
+        if (amount > this.getBalance() + this.overDraftLimit){
+            return false;
+        }
+        this.setBalance(this.getBalance() - amount);
+        return true;
     }
 }

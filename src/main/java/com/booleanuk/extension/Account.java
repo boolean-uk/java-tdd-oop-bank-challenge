@@ -32,6 +32,10 @@ public abstract class Account {
         return balance;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     public List<Transaction> getTransactions() {
         return transactions;
     }

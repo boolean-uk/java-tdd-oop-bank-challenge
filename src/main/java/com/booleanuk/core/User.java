@@ -67,6 +67,7 @@ public class User {
             if(account.getAccountID().equals(ID))
                 return account.deposit(amount);
         }
+        System.out.println("The account ID was not found!");
         return false;
     }
 
@@ -77,6 +78,29 @@ public class User {
             if(account.getAccountID().equals(ID))
                 return account.withdraw(amount);
         }
+        System.out.println("The account ID was not found!");
+        return false;
+    }
+
+    public boolean makeDeposit(String ID, double amount)
+    {
+        for(Account account : this.accounts)
+        {
+            if(account.getAccountID().equals(ID))
+                return account.deposit((int)amount*100);
+        }
+        System.out.println("The account ID was not found!");
+        return false;
+    }
+
+    public boolean makeWithdrawal(String ID, double amount)
+    {
+        for(Account account : this.accounts)
+        {
+            if(account.getAccountID().equals(ID))
+                return account.withdraw((int)amount*100);
+        }
+        System.out.println("The account ID was not found!");
         return false;
     }
 

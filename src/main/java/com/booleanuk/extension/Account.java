@@ -30,7 +30,6 @@ public class Account {
         return accountID;
     }
 
-
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }

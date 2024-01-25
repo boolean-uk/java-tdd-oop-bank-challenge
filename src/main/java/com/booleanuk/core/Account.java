@@ -56,6 +56,8 @@ public class Account {
 
     public String generateTransactionStatement()
     {
+        if(this.transactions.isEmpty())
+            return "No transactions to show";
         int balance = 0;
         int creditWidth = getCreditWidth(), debitWidth = getDebitWidth();
         StringBuilder statement = new StringBuilder(String.format("%-11s%s%-" + (creditWidth - 1) + "s%s%-" + (debitWidth - 1) + "s%s%-7s",

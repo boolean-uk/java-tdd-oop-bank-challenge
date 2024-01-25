@@ -6,14 +6,14 @@ So I can safely store and use my money,
 I want to create a current account.
 ````
 
-| Classes                                | Methods                                             | Member Variable                           | Scenario                           | Output/Result                                                                   |
-|----------------------------------------|-----------------------------------------------------|-------------------------------------------|------------------------------------|---------------------------------------------------------------------------------|
-| User, Account, Account::CurrentAccount | User::createCurrentAccount(String name, String ...) | String userName                           | I want to create a current account | A current account is made, with a generated ID, 0 funds, and saved creationDate |
-|                                        | Account::CurrentAccount(String name, String ...)    | LocalDate creationDate                    |                                    |                                                                                 |
-|                                        |                                                     | Integer balance                           |                                    |                                                                                 |
-|                                        |                                                     | ArrayList<Transaction> transactionHistory |                                    |                                                                                 |
-|                                        |                                                     | String userID                             |                                    |                                                                                 |
-|                                        |                                                     | String accountID                          |                                    |                                                                                 |
+| Classes                                | Methods                                                        | Member Variable                           | Scenario                           | Output/Result                                                                   |
+|----------------------------------------|----------------------------------------------------------------|-------------------------------------------|------------------------------------|---------------------------------------------------------------------------------|
+| User, Account, Account::CurrentAccount | User::createCurrentAccount(String name, String owner, int num) | String userName                           | I want to create a current account | A current account is made, with a generated ID, 0 funds, and saved creationDate |
+|                                        | Account::CurrentAccount(String name, String ...)               | LocalDate creationDate                    |                                    |                                                                                 |
+|                                        |                                                                | Integer balance                           |                                    |                                                                                 |
+|                                        |                                                                | ArrayList<Transaction> transactionHistory |                                    |                                                                                 |
+|                                        |                                                                | String userID                             |                                    |                                                                                 |
+|                                        |                                                                | String accountID                          |                                    |                                                                                 |
 
 ````dtd
 As a customer,
@@ -21,14 +21,14 @@ So I can save for a rainy day,
 I want to create a savings account.
 ````
 
-| Classes                                   | Methods                                             | Member Variables                          | Scenario                           | Output/Result                                                                  |
-|-------------------------------------------|-----------------------------------------------------|-------------------------------------------|------------------------------------|--------------------------------------------------------------------------------|
-| User, Account, Account::SavingsAccount,   | User::createSavingsAccount(String name, String ...) | String userName                           | I want to create a savings account | A savings account is made,with a generated ID, 0 funds, and saved creationDate |
-|                                           | Account::SavingsAccount(String name, String ...)    | LocalDate creationDate                    |                                    |                                                                                |
-|                                           |                                                     | Integer balance                           |                                    |                                                                                |
-|                                           |                                                     | ArrayList<Transaction> transactionHistory |                                    |                                                                                |
-|                                           |                                                     | String userID                             |                                    |                                                                                |
-|                                           |                                                     | String accountID                          |                                    |                                                                                |
+| Classes                                   | Methods                                                        | Member Variables                          | Scenario                           | Output/Result                                                                  |
+|-------------------------------------------|----------------------------------------------------------------|-------------------------------------------|------------------------------------|--------------------------------------------------------------------------------|
+| User, Account, Account::SavingsAccount,   | User::createSavingsAccount(String name, String owner, int num) | String userName                           | I want to create a savings account | A savings account is made,with a generated ID, 0 funds, and saved creationDate |
+|                                           | Account::SavingsAccount(String name, String ...)               | LocalDate creationDate                    |                                    |                                                                                |
+|                                           |                                                                | Integer balance                           |                                    |                                                                                |
+|                                           |                                                                | ArrayList<Transaction> transactionHistory |                                    |                                                                                |
+|                                           |                                                                | String userID                             |                                    |                                                                                |
+|                                           |                                                                | String accountID                          |                                    |                                                                                |
 
 ````dtd
 As a customer,
@@ -38,7 +38,7 @@ I want to generate bank statements with transaction dates, amounts, and balance 
 
 | Classes                                                                      | Methods                                       | Member Variables                                   | Scenario                             | Output/Result                                                 |
 |------------------------------------------------------------------------------|-----------------------------------------------|----------------------------------------------------|--------------------------------------|---------------------------------------------------------------|
-| User, Account, Account::SavingsAccount, Account::CurrentAccount, Transaction | User::generateBankStatement(String accountID) | Account::ArrayList<Transaction> transactionHistory | I have made one or more transactions | The transactions in the lsit are shown as a table             |
+| User, Account, Account::SavingsAccount, Account::CurrentAccount, Transaction | User::generateBankStatement(String accountID) | Account::ArrayList<Transaction> transactionHistory | I have made one or more transactions | The transactions in the list are shown as a table             |
 |                                                                              |                                               | String userName                                    | I have made no transactions          | The transactions list is empty, and the table has no contents |
 |                                                                              |                                               | String userID                                      |                                      |                                                               |
 |                                                                              |                                               | String accountID                                   |                                      |                                                               |

@@ -3,10 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class Account {
-    int accountNumber;
-    User owner;
+    protected int accountNumber;
+    private User owner;
     private int balance;
-    ArrayList<Transaction> transactions;
+    protected ArrayList<Transaction> transactions;
 
     public Account(User owner) {
         setOwner(owner);

@@ -6,7 +6,7 @@ public class Main {
 
         user.createAccount("Current");
 
-        Account account = user.accounts.get(0);
+        Account account = user.getAccounts().get(0);
 
         account.deposit(100.00);
         account.withdraw(20.00);

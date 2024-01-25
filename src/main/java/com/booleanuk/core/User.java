@@ -3,9 +3,9 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class User {
-    int userId;
-    String name;
-    ArrayList<Account> accounts;
+    private int userId;
+    private String name;
+    private ArrayList<Account> accounts;
 
     public User(int userId, String name) {
         this.userId = userId;

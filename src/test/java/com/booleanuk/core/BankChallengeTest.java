@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 public class BankChallengeTest {
     @Test
     public void testDeposit() {
@@ -27,12 +29,13 @@ public class BankChallengeTest {
         Assertions.assertEquals(Status.OK, _account.withdraw(2000.0));
         Assertions.assertEquals(Status.BALANCE_TOO_SMALL, _account.withdraw(4000.0));
 
-
         Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
         Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
         Assertions.assertEquals(Status.OK, _account.withdraw(100.0));
         Assertions.assertEquals(Status.EXCEEDED_WITHDRAWAL_AMOUNT, _account.withdraw(100.0));
 
-        Assertions.assertEquals(3700.0, _account.getBalance(), 0.0001);
+        Assertions.assertEquals(2700.0, _account.getBalance(), 0.0001);
+
+        //System.out.println(Arrays.toString(_account.getBankStatement()));
     }
 }

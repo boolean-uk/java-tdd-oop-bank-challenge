@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Account {
-    private ArrayList<Transaction> transactions;
+    private final ArrayList<Transaction> transactions = new ArrayList<>();
     private final int monthlyMaxWithdrawalCount;
     private final double maxBalance;
 
@@ -15,19 +15,50 @@ public class Account {
     }
 
     protected double getBalance() {
-        return 0.0;
+        double _outBalance = 0.0;
+        for (Transaction t : transactions) {
+            switch (t.getType()) {
+                case DEPOSIT -> _outBalance += t.getCredit();
+                case WITHDRAW -> _outBalance -= t.getCredit();
+            }
+        }
+        return _outBalance;
     }
 
     public Status deposit(double credit) {
-        return Status.ERROR;
+        if (credit <= 0.0) return Status.INVALID_NUMBER;
+        if (getBalance() + credit > maxBalance) return Status.EXCEEDED_BALANCE;
+
+        transactions.add(new Transaction(credit));
+
+        return Status.OK;
     }
 
-    public Status withdraw(double credit) {
-        return Status.ERROR;
+    public Status withdraw(double debit) {
+        if (debit <= 0.0) return Status.INVALID_NUMBER;
+        if (monthlyMaxWithdrawalCount >= 0 && hasExceededMonthlyWithdrawal()) return Status.EXCEEDED_WITHDRAWAL_AMOUNT;
+        if (getBalance() - debit < 0.0) return Status.BALANCE_TOO_SMALL;
+
+        currentWithdrawalCount++;
+        transactions.add(new Transaction(-debit));
+
+        return Status.OK;
     }
 
-    public Transaction[] getBankStatement() {
-        return new Transaction[]{};
+    public TransactionStatement[] getBankStatement() {
+        TransactionStatement[] _outTransactions = new TransactionStatement[transactions.size()];
+        double _balanceTracker = 0.0;
+
+        for (int i = 0; i < _outTransactions.length; i++) {
+            Transaction _t = transactions.get(i);
+            switch (_t.getType()) {
+                case DEPOSIT -> _balanceTracker += _t.getCredit();
+                case WITHDRAW -> _balanceTracker -= _t.getCredit();
+            }
+            _outTransactions[i] = new TransactionStatement(_t.getCredit(), _balanceTracker, _t.getDate(), _t.getType());
+        }
+
+        return _outTransactions;
     }
 
     public boolean hasExceededMonthlyWithdrawal() {

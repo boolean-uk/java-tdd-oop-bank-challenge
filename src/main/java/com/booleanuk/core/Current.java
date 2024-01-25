@@ -1,9 +1,9 @@
 package com.booleanuk.core;
 
 public class Current extends Account{
-    private String type = "Current account";
-    public Current(String type, double balance,Customer customer) {
-        super(balance,customer);
-        this.type = type;
+    public Current(int accNr,double balance,String type,Customer customer) {
+        super(accNr,balance,type,customer);
     }
+
+
 }

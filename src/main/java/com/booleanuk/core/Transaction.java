@@ -1,37 +1,47 @@
 package com.booleanuk.core;
 
 public class Transaction {
-    double amount;
-    String dateTime;
+    private int accNr;
+    private String dateTime;
+    private double balance;
+    private double debit;
+    private double credit;
     Customer customer;
 
-    public Transaction(double amount, String dateTime, Customer customer) {
-        this.amount = amount;
+    public Transaction(int accNr, String dateTime, double balance, double debit, double credit, Customer customer) {
+        this.accNr = accNr;
         this.dateTime = dateTime;
+        this.balance = balance;
+        this.debit = debit;
+        this.credit = credit;
         this.customer = customer;
     }
 
-    public double getAmount() {
-        return amount;
+    public int getAccNr() {
+        return accNr;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getDebit() {
+        return debit;
+    }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
     }
 
     public String getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
-    }
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }

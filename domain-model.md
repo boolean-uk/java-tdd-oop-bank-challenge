@@ -7,17 +7,17 @@ I want to create a current account.
 | Class | Member Variable                                    | Method          | Description                  | Output                    |
 |-------|----------------------------------------------------|-----------------|------------------------------|---------------------------|
 | User  | String name<br/>String email, String accountNumber | User()          | Creates a user               |                           |
-| User  | String accountNumber                               | createCurrent() | User creates current account | return true if successful |
+| User  | String accountNumber<br/>Account account           | createCurrent() | User creates current account | return true if successful |
 
 ```
 As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 ```
-| Class | Member Variable      | Method            | Description                  | Output                    |
-|-------|----------------------|-------------------|------------------------------|---------------------------|
-| User  | String accountNumber | createSavings()   | User creates savings account | return true if successful |
-|       |                      |                   |                              |                           |
+| Class | Member Variable                  | Method            | Description                  | Output                    |
+|-------|----------------------------------|-------------------|------------------------------|---------------------------|
+| User  | String accountNumber<br/>Account | createSavings()   | User creates savings account | return true if successful |
+|       |                                  |                   |                              |                           |
 
 ```
 As a customer,

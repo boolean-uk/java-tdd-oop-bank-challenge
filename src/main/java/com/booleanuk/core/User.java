@@ -60,4 +60,8 @@ public class User {
     public boolean withdraw(int accountID, int fund){
         return getAccount(accountID).withdraw(fund);
     }
+
+    public void deposit(int accountID, int fund){
+        getAccount(accountID).deposit(fund);
+    }
 }

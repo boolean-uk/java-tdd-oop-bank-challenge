@@ -13,6 +13,7 @@ abstract public class Account {
         accountID = counter;
         counter++;
         overdraft = 0;
+        activity = new ArrayList<>();
     }
     public int getUserID(){
         return userID;
@@ -28,10 +29,8 @@ abstract public class Account {
 
     public double getBalance(){
         int balance = 0;
-        if (activity != null){
-            for (int fund : activity){
-                balance += fund;
-            }
+        for (int fund : activity){
+            balance += fund;
         }
 
         return balance;
@@ -43,5 +42,9 @@ abstract public class Account {
             return true;
         }
         return false;
+    }
+
+    public void deposit(int fund){
+        activity.add(fund);
     }
 }

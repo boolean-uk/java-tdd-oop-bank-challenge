@@ -49,4 +49,23 @@ public class BankChallengeTest {
         Assertions.assertEquals(10.0, savings2.getBalance());
         Assertions.assertEquals(100.0, savings3.getBalance());
     }
+
+
+    @Test
+    public void generateStatements() {
+        CurrentAccount current = new CurrentAccount(500.0);
+        SavingsAccount savings = new SavingsAccount(10000.0);
+
+        String currentRecords = current.getRecords();
+        String savingsRecords = savings.getRecords();
+
+        Assertions.assertNotNull(current);
+        Assertions.assertNotNull(savings);
+
+        Assertions.assertEquals("date       || credit  || debit  || balance\n" +
+                "14/01/2012 ||         ||  || 500.00", currentRecords);
+        Assertions.assertEquals("date       || credit  || debit  || balance\n" +
+                "14/01/2012 ||         ||  || 500.00", savingsRecords);
+
+    }
 }

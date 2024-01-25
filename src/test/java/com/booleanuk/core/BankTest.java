@@ -3,7 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class BankTest {
@@ -127,9 +129,9 @@ public class BankTest {
     public void customerSuccessfullyGenerateBankStatementsTest() {
         String expected =
                         "date       || credit  || debit  || balance\n" +
-                        "25/01/2024 ||         || 500.00 || 2500.00\n" +
-                        "25/01/2024 || 2000.00 ||        || 3000.00\n" +
-                        "25/01/2024 || 1000.00 ||        || 1000.00";
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " ||         || 500.00 || 2500.00\n" +
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " || 2000.00 ||        || 3000.00\n" +
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " || 1000.00 ||        || 1000.00";
 
         int accountId = bank.createCurrentAccount(customer);
         bank.deposit(1000, customer, accountId);

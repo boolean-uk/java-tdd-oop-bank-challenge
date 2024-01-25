@@ -71,4 +71,8 @@ public class Bank {
         }
         return "Account doesn't exist.";
     }
+
+    public String generateBankStatements(Customer customer, int accountId) {
+        return "Customer doesn't exist.";
+    }
 }

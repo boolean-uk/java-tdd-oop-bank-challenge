@@ -2,11 +2,11 @@
 | Member Variables | Methods   | Return    | Output |
 |------------------|-----------|-----------|--------|
 | name: String     |           |           |        |
-| ID: int          |           |           |        |
+| UID: int         |           |           |        |
 |                  | getName() | this.name | void   |
 |                  | setName() | void      | void   |
-|                  | getID()   | this.ID   | void   |
-|                  | setID()   | void      | void   |
+|                  | getUID()  | this.ID   | void   |
+|                  | setUID()  | void      | void   |
 
 
 ### Class Manager EXTENDS Person
@@ -29,23 +29,22 @@
 ### Class Bank
 | Member Variables | Methods       | Return  | Output |
 |------------------|---------------|---------|--------|
-| name: String     |               |         |        |
-| location: String |               |         |        |
-| branch: int      |               |         |        |
-| manager: Manager |               |         |        |
 |                  | getName()     | String  | void   |
 |                  | setName()     | void    | void   |
 |                  | getLocation() | String  | void   |
 |                  | setLocation() | void    | void   |
-|                  | getBranch()   | int     | void   |
-|                  | setBranch()   | void    | void   |
+|                  | getBranchID() | int     | void   |
+|                  | setBranchID() | void    | void   |
 |                  | getManager()  | Manager | void   |
 |                  | setManager()  | void    | void   |
 
 ### Class Branch IMPLEMENTS Bank
 | Member Variables | Methods | Return | Output |
 |------------------|---------|--------|--------|
-|                  |         |        |        |
+| name: String     |         |        |        |
+| location: String |         |        |        |
+| branchID: int    |         |        |        |
+| manager: Manager |         |        |        |
 |                  |         |        |        |
 
 

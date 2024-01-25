@@ -14,4 +14,13 @@ public class UserTest {
         Assertions.assertEquals("Marit", user.getName());
         Assertions.assertEquals(new ArrayList<>(), user.getAccounts());
     }
+
+    @Test
+    public void createAccount() {
+        User user = new User(250799, "Marit");
+        user.createAccount("Current");
+        Assertions.assertEquals(1, user.getAccounts().size());
+        user.createAccount("Savings");
+        Assertions.assertEquals(2, user.getAccounts().size());
+    }
 }

@@ -55,6 +55,9 @@ public class Bank {
     }
 
     public String withdraw(int amount, Customer customer, int accountId) {
-        return "Customer doesn't exist.";
+        if(!accounts.containsKey(customer)) {
+            return "Customer doesn't exist.";
+        }
+        return "Account doesn't exist.";
     }
 }

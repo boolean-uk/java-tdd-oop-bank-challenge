@@ -27,7 +27,7 @@ Class Customer
 |-------------------------------|-------------------------------------------------------------------|------------------------------------------------|---------|
 | ArrayList<Account> accounts   | createAccount(Account account)                                    | Creates and adds account to accounts list      | boolean |
 |                               | deleteAccount(Account account)                                    | Removes account from accounts list             | boolean |
-|                               | printBankStatements()                                             | Prints bankStatements                          | String  |
+|                               | printBankStatements(Account account)                              | Prints bankStatements                          | String  |
 |                               | transferCredit(Account account1, Account account2, double credit) | Creates a transaction for the account provided | boolean |
 |                               |                                                                   |                                                |         |
 
@@ -97,6 +97,16 @@ Class DepositStatement extends BankStatement
 |                 |                                |                                           |         |
 |                 |                                |                                           |         |
 |                 |                                |                                           |         |
+
+Class Customer
+
+| Class variables | Method                                | Scenario                                     | Return |
+|-----------------|---------------------------------------|----------------------------------------------|--------|
+|                 | printBankStatements(Account account)  | Gets BankStatements of account and prints it | String |
+|                 |                                       |                                              |        |
+|                 |                                       |                                              |        |
+|                 |                                       |                                              |        |
+
 
 
 ## User story 4

@@ -25,5 +25,16 @@ public class AccountTest {
         Assertions.assertEquals(2, account.getBankStatements().size());
     }
 
+    @Test
+    public void printBankStatementsFromArray() {
+        Account account = new Account();
+
+        Assertions.assertEquals(0.00, account.getBalance());
+        Assertions.assertEquals(new ArrayList<BankStatement>(), account.getBankStatements());
+
+        Assertions.assertEquals("", account.printBankStatements());
+
+    }
+
 
 }

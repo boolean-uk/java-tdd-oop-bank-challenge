@@ -3,8 +3,10 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 public class CustomerTest {
 
@@ -77,6 +79,24 @@ public class CustomerTest {
         Assertions.assertEquals(400.00, customer.getAccount(savingsAccount).getBalance());
         Assertions.assertEquals(100.00, customer.getAccount(currentAccount).getBalance());
 
+    }
+
+    @Test
+    public void printCorrectBankStatements() {
+        Customer customer = new Customer();
+        Account currentAccount = new CurrentAccount();
+
+        Assertions.assertTrue(customer.createAccount(currentAccount));
+
+        Assertions.assertEquals(0.00, customer.getAccount(currentAccount).getBalance());
+        Assertions.assertTrue(customer.deposit(currentAccount, 500.00));
+        Assertions.assertEquals(500.00, customer.getAccount(currentAccount).getBalance());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.format(new Date());
+
+        Assertions.assertEquals("date       || credit  || debit  || balance\n" +
+                sdf + " ||         || 500.00 || 500.00", customer.printBankStatements(currentAccount) );
 
     }
 

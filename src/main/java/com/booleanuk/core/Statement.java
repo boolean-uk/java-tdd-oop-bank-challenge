@@ -9,6 +9,9 @@ public class Statement {
 	private final String date;
 
 	public Statement(String type, int amount) {
+		if (amount <= 0) {
+			throw new IllegalArgumentException("Amount must be positive");
+		}
 		this.type = type;
 		this.amount = amount;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

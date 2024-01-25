@@ -21,6 +21,12 @@ public class AccountTest {
 		acs.deposit(1000);
 		Assertions.assertEquals(2000, acc.calcBalance());
 		Assertions.assertEquals(2000, acs.calcBalance());
+		Assertions.assertThrows(IllegalArgumentException.class,()->{
+			acs.deposit(-1000);
+		});
+		Assertions.assertThrows(IllegalArgumentException.class,()->{
+			acc.deposit(-1000);
+		});
 
 	}
 
@@ -68,6 +74,12 @@ public class AccountTest {
 		Assertions.assertEquals(-500, acc.calcBalance());
 		Assertions.assertThrows(OverdraftException.class, () -> {
 			acc.withdraw(2000);
+		});
+		Assertions.assertThrows(IllegalArgumentException.class,()->{
+			acs.withdraw(-1000);
+		});
+		Assertions.assertThrows(IllegalArgumentException.class,()->{
+			acc.withdraw(-1000);
 		});
 	}
 

@@ -20,11 +20,13 @@ public class Bank {
                 break;
         }
         if (type.equals("Current Account"))
-            accounts.put(accountNr, new CurrentAccount(accountNr, firstName, lastName, branch, amount));
+            accounts.put(accountNr, new CurrentAccount(accountNr, firstName, lastName, branch));
         else if (type.equals("Savings Account"))
-            accounts.put(accountNr, new SavingsAccount(accountNr, firstName, lastName, branch, amount));
+            accounts.put(accountNr, new SavingsAccount(accountNr, firstName, lastName, branch));
         else
             return null;
+
+        accounts.get(accountNr).addTransactions(amount);
 
         return accounts.get(accountNr).getAccountNr();
     }

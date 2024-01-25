@@ -12,13 +12,13 @@ public class Account {
     private double balance;
     private ArrayList<Transaction> transactions;
 
-    public Account(String accountNr, String firstName, String lastName, String type, String branch, double balance) {
+    public Account(String accountNr, String firstName, String lastName, String type, String branch) {
         this.accountNr = accountNr;
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
         this.branch = branch;
-        this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     // Getters

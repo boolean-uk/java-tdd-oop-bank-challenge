@@ -49,4 +49,12 @@ public class AccountTest {
         Assertions.assertEquals(200, currentAccount.getBalance());
         Assertions.assertEquals(0, account.getBalance());
     }
+
+    @Test
+    public void testTransactionLog(){
+        account.setBalance(30);
+        account.deposit(20000);
+        account.withdraw(400);
+        System.out.println(account.getTransactionLog());
+    }
 }

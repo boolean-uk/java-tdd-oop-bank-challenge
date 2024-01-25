@@ -1,12 +1,13 @@
 ### Class Person
-| Member Variables | Methods   | Return    | Output |
-|------------------|-----------|-----------|--------|
-| name: String     |           |           |        |
-| UID: int         |           |           |        |
-|                  | getName() | this.name | void   |
-|                  | setName() | void      | void   |
-|                  | getUID()  | this.ID   | void   |
-|                  | setUID()  | void      | void   |
+| Member Variables | Methods                 | Return    | Output |
+|------------------|-------------------------|-----------|--------|
+| name: String     |                         |           |        |
+| UID: int         |                         |           |        |
+|                  | getName()               | this.name | void   |
+|                  | setName()               | void      | void   |
+|                  | getUID()                | this.ID   | void   |
+|                  | setUID()                | void      | void   |
+|                  | generateAccountNumber() | int       | void   |
 
 
 ### Class Manager EXTENDS Person

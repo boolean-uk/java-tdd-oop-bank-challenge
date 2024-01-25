@@ -1,9 +1,10 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private LocalDateTime date;
+    private String date;
     private double credit;
     private double debit;
     private double balance;
@@ -15,12 +16,14 @@ public class Transaction {
         this.setBalance(balance);
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
     public void setDate() {
-        this.date = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        this.date = now.format(formatter);
     }
 
     public double getCredit() {

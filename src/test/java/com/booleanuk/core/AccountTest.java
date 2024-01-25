@@ -18,11 +18,15 @@ public class AccountTest {
     }
 
     @Test
-    public void deposit500ToCurrent(){
+    public void deposit500ToCurrentAnd300ToSaving(){
         User user = new User("John", "John@example.org");
         user.createCurrentAccount();
+        user.createSavingsAccount();
         user.getCurrentAccount().deposit(500);
+        user.getSavingsAccount().deposit(300);
         Assertions.assertEquals(user.getCurrentAccount().getBalance(), 500.00);
+        Assertions.assertEquals(user.getSavingsAccount().getBalance(), 300.00);
+
     }
     @Test
     public void WithdrawOverBalanceAmount(){

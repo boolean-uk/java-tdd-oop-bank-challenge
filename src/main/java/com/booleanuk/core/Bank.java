@@ -63,11 +63,18 @@ public class Bank {
     }
     public boolean requestOverdraft(int accountNumber){
         for(Account account : accounts){
-            if(account.getAccountId() == accountNumber && account instanceof CurrentAccount && !account.getOverdraftApproved()){
+            if(account.getAccountId() == accountNumber && account instanceof CurrentAccount && !account.getOverdraftApproved() && !overdraftRequests.contains(account)){
                 overdraftRequests.add(account);
                 return true;
             }
         }
         return false;
+    }
+    public ArrayList<String> getRequestedOverdrafts(){
+        ArrayList<String> temp = new ArrayList<>();
+        for(Account account : accounts){
+            temp.add(account.toString());
+        }
+        return temp;
     }
 }

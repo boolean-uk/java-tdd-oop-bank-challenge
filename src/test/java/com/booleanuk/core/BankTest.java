@@ -71,6 +71,18 @@ public class BankTest {
         bank.createSavingsAccount("Joe", Branch.ABC);
         Assertions.assertFalse(bank.requestOverdraft(1));
 
+    }
+    @Test
+    public void testGettingAllPendingOverdraftRequests(){
+        Bank bank = new Bank();
+        bank.createCurrentAccount("Joe", Branch.ABC);
+        bank.requestOverdraft(1);
+
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("Account Holder: " + "Joe" + ", Current Balance: " + "0.0");
+
+        Assertions.assertEquals(expected.toString(),  bank.getRequestedOverdrafts().toString());
 
     }
+
 }

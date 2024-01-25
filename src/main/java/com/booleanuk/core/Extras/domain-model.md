@@ -53,7 +53,7 @@
 ### Class Account
 | Member Variables                      | Methods                 | Return    | Output |
 |---------------------------------------|-------------------------|-----------|--------|
-| branch: int                           |                         |           |        |
+| branch: Branch                        |                         |           |        |
 | accountNumber: int                    |                         |           |        |
 | accountOwner: Person                  |                         |           |        |
 | balance: double                       |                         |           |        |
@@ -87,7 +87,7 @@
 ### Transaction
 | Member Variables | Methods      | Return   | Output |
 |------------------|--------------|----------|--------|
-| date: DateTime   |              |          |        |
+| date: String     |              |          |        |
 | credit: double   |              |          |        |
 | debit: double    |              |          |        |
 | balance: double  |              |          |        |

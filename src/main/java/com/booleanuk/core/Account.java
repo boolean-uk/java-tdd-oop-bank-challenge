@@ -26,7 +26,7 @@ public class Account {
             return false;
         }
         balance += amount;
-        statements.add(new Statement(new Date(), amount, balance));
+        statements.add(new DepositStatement(new Date(), amount, balance));
         return true;
     }
 
@@ -35,7 +35,7 @@ public class Account {
             return false;
         }
         balance -= amount;
-        statements.add(new Statement(new Date(), amount, balance));
+        statements.add(new WithdrawStatement(new Date(), amount, balance));
         return true;
     }
 
@@ -45,6 +45,16 @@ public class Account {
 
     public int getId() {
         return id;
+    }
+
+    //TODO: what to do if very big sum? weird formatting then
+    public String generateStatements() {
+        String output = "date       || credit  || debit  || balance\n";
+        for(int i = statements.size()-1; i >= 0; i--) {
+            Statement statement = statements.get(i);
+            output += statement.toString() + "\n";
+        }
+        return output.substring(0, output.length()-1);
     }
 
     @Override

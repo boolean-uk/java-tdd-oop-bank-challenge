@@ -76,6 +76,11 @@ public class Bank {
         if(!accounts.containsKey(customer)) {
             return "Customer doesn't exist.";
         }
-
+        ArrayList<Account> customerAccounts = accounts.get(customer);
+        for(Account customerAccount: customerAccounts) {
+            if(customerAccount.getId() == accountId) {
+                return customerAccount.generateStatements();
+            }
+        }
         return "Account doesn't exist.";    }
 }

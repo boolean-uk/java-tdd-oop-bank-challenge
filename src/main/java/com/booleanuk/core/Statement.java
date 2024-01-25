@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
@@ -41,8 +42,5 @@ public class Statement {
         return Objects.hash(date, amount, balance);
     }
 
-    @Override
-    public String toString() {
-        return date + " " + amount + " " + balance;
-    }
+
 }

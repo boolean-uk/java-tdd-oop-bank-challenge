@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
+    private double overdraftAmount;
 
     public SavingsAccount(int accountId, Branch branch) {
         super(accountId, branch);
@@ -14,10 +15,11 @@ public class SavingsAccount extends Account{
         }
     }
 
-    public void makeRequestForOverdraft(double amount) {
+    public void makeRequestForOverdraft(double overdraftAmount) {
+        this.overdraftAmount = overdraftAmount;
     }
 
     public double getRequestForOverDraft() {
-        return 100.0;
+        return this.overdraftAmount;
     }
 }

@@ -6,10 +6,10 @@ So I can safely store and use my money,
 I want to create a current account.
 ```
 
-| Classes        | Method           |
-|----------------|------------------|
-| CurrentAccount | CurrentAccount() |
-|                |                  |
+| Classes | Method               |
+|---------|----------------------|
+| Bank    | openCurrentAccount() |
+|         |                      |
 
 
 ```
@@ -18,10 +18,10 @@ So I can save for a rainy day,
 I want to create a savings account.
 ```
 
-| Classes        | Methods          |
-|----------------|------------------|
-| SavingsAccount | SavingsAccount() |
-|                |                  |
+| Classes | Methods              |
+|---------|----------------------|
+| Bank    | openSavingsAccount() |
+|         |                      |
 
 
 ```
@@ -30,10 +30,10 @@ So I can keep a record of my finances,
 I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
 ```
 
-| Classes        | Methods                  | Scenario                    | Output/Results |
-|----------------|--------------------------|-----------------------------|----------------|
-| BankStatements | generateBankStatements() | If statements *don't* exist | false          |
-|                |                          | If statements *do* exist    | statements     |
+| Classes | Methods           | Scenario                      | Output/Results |
+|---------|-------------------|-------------------------------|----------------|
+| Account | getTransactions() | If transactions *don't* exist | false          |
+|         |                   | If transactions *do* exist    | transactions   |
 
 
 ```
@@ -47,3 +47,8 @@ I want to deposit and withdraw funds.
 | deposit(int amount)  | int accountBalance | if withdraw amount *is* greater than the balance    | false          |
 |                      |                    | if withdraw amount *isn't* greater than the balance | true           |
 | withdraw(int amount) |                    |                                                     |                |
+
+
+## Class diagram
+
+![img.png](img.png)

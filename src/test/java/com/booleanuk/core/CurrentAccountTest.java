@@ -51,4 +51,15 @@ public class CurrentAccountTest {
         Assertions.assertFalse(a.withdraw(-20.00));
         Assertions.assertEquals(50.00, a.getBalance());
     }
+
+    @Test
+    public void checkNewTransactionAfterDeposit(){
+        User user = new User(123456, "UsersName");
+        CurrentAccount a = new CurrentAccount(user);
+        a.deposit(100.00);
+        Assertions.assertEquals(1, a.getTransactions().size());
+        Assertions.assertEquals(10000, a.transactions.get(0).getBalance());
+        a.deposit(20.00);
+        Assertions.assertEquals(12000, a.transactions.get(1).getBalance());
+    }
 }

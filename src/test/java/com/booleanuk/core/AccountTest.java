@@ -19,6 +19,7 @@ class AccountTest {
         Assertions.assertEquals(branch, account.getBranch());
         Assertions.assertEquals(0.0, account.getBalance());
         Assertions.assertTrue(account.getTransactions().isEmpty());
+        Assertions.assertEquals(0.0, account.getOverdraftLimit());
     }
 
     @Test
@@ -152,5 +153,23 @@ class AccountTest {
         Branch branch = new Branch("1", "DNC", "London");
         Account account = new Account("1", customer, branch);
         Assertions.assertEquals("Amount cannot be negative",account.requestOverdraft(-1));
+    }
+
+    @Test
+    public void testSetOverdraftLimitPosNum() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Branch branch = new Branch("1", "DNC", "London");
+        Account account = new Account("1", customer, branch);
+        account.setOverdraftLimit(100);
+        Assertions.assertEquals(100,account.getOverdraftLimit());
+    }
+
+    @Test
+    public void testSetOverdraftLimitNegNum() {
+        Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
+        Branch branch = new Branch("1", "DNC", "London");
+        Account account = new Account("1", customer, branch);
+        account.setOverdraftLimit(-1);
+        Assertions.assertEquals(0,account.getOverdraftLimit());
     }
 }

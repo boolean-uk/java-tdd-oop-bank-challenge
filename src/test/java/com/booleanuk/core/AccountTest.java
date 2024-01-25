@@ -35,4 +35,10 @@ public class AccountTest {
         Assertions.assertEquals(30, account.getBalance());
     }
 
+    @Test
+    public void withdrawNegativeAmount() {
+        Assertions.assertFalse(account.withdraw(-40));
+        Assertions.assertEquals(0, account.getBalance());
+    }
+
 }

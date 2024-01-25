@@ -62,4 +62,12 @@ class AccountTest {
         Assertions.assertEquals(2, account2.getAccountNr());
     }
 
+    @Test
+    public void testGetBranch(){
+        Account account = new SavingsAccount(GOTHENBURG);
+
+        Assertions.assertEquals(GOTHENBURG, account.getBranch());
+
+    }
+
 }

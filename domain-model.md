@@ -49,6 +49,70 @@ I want to deposit and withdraw funds.
 | withdraw(int amount) |                    |                                                     |                |
 
 
-## Class diagram
+
+## Extension User Stories
+
+```
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+```
+
+
+| Classes        | Methods              | Scenario                                 | Output/Results       |
+|----------------|----------------------|------------------------------------------|----------------------|
+| Account        | deposit(int amount)  |                                          |                      |
+|                | getBalance()         |                                          |                      |
+|                | withdraw(int amount) | If withdrawal amount *is* less than 0    | String error message |
+|                |                      | If withdrawal amount *isn't* less than 0 | void                 |
+| CurrentAccount |                      |                                          |                      |
+| SavingsAccount |                      |                                          |                      |
+
+```
+As a bank manager,
+So I can expand,
+I want accounts to be associated with specific branches.
+```
+
+| Classes | Methods | Scenario | Output/Results |
+|---------|---------|----------|----------------|
+|         |         |          |                |
+|         |         |          |                |
+
+
+```
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+```
+
+| Classes        | Methods            |
+|----------------|--------------------|
+| CurrentAccount | requestOverdraft() |
+|                |                    |
+
+
+```
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+```
+
+| Classes | Methods                                 | Scenario                       | Output/Results |
+|---------|-----------------------------------------|--------------------------------|----------------|
+| Bank    | acceptOverdraftRequest(Account account) | If overdraft *is* requested    | true           |
+|         |                                         | If overdraft *isn't* requested | false          |
+|         |                                         |                                |                |
+|         | denyOverdraftRequest(Account account)   |                                |                |
+
+
+```
+As a customer,
+So I can stay up to date,
+I want statements to be sent as messages to my phone.
+```
+
+
+### Class diagram
 
 ![img.png](img.png)

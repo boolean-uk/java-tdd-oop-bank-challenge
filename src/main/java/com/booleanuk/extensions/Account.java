@@ -10,6 +10,7 @@ public abstract class Account {
     public Account() {
         this.transactions = new ArrayList<>();
     }
+
     public void deposit(double amount) {
         transactions.add(new Transaction(new Date(), amount, getBalance() + amount));
     }

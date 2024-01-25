@@ -10,8 +10,8 @@ public class CoreTest {
     @Test
     void testDeposit() {
         Customer customer = new Customer("Sander",12345);
-        CurrentAccount currentAccount = new CurrentAccount(customer);
-        SavingsAccount savingsAccount = new SavingsAccount(customer);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
+        SavingsAccount savingsAccount = new SavingsAccount(customer,"Oslo");
 
         currentAccount.deposit(500,customer);
         savingsAccount.deposit(1000,customer);
@@ -25,8 +25,8 @@ public class CoreTest {
     @Test
     void testWithdraw() {
         Customer customer = new Customer("Sander",12345);
-        CurrentAccount currentAccount = new CurrentAccount(customer);
-        SavingsAccount savingsAccount = new SavingsAccount(customer);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
+        SavingsAccount savingsAccount = new SavingsAccount(customer,"Oslo");
 
 
         currentAccount.deposit(500,customer);
@@ -43,8 +43,8 @@ public class CoreTest {
     void testCustomerID(){
         Customer customer = new Customer("Alex",12345);
         Customer customer2 = new Customer("Sander", 54321);
-        CurrentAccount currentAccount = new CurrentAccount(customer);
-        SavingsAccount savingsAccount = new SavingsAccount(customer);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
+        SavingsAccount savingsAccount = new SavingsAccount(customer,"Oslo");
         currentAccount.deposit(500, customer);
         Assertions.assertEquals(500,currentAccount.getBalance());
         currentAccount.deposit(200,customer2);
@@ -56,7 +56,7 @@ public class CoreTest {
     @Test
     void testGenerateBankStatement() {
         Customer customer = new Customer("Sander", 12345);
-        CurrentAccount currentAccount = new CurrentAccount(customer);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
 
 
         currentAccount.deposit(1000.00, customer);
@@ -90,6 +90,37 @@ public class CoreTest {
             Assertions.assertEquals(expectedLines[i], actualLines[i]);
         }
 
+    }
+
+    @Test
+    public void testBranch(){
+        Customer customer = new Customer("Sander",12345);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
+        SavingsAccount savingsAccount = new SavingsAccount(customer,"Bergen");
+
+        Assertions.assertEquals("Oslo",currentAccount.getBranch());
+        Assertions.assertEquals("Bergen",savingsAccount.getBranch());
+    }
+
+    @Test
+    void testOverdraftRequestApproval() {
+        Customer customer = new Customer("Sander",12345);
+        CurrentAccount currentAccount = new CurrentAccount(customer,"Oslo");
+
+
+        currentAccount.deposit(1000.00,customer);
+
+        currentAccount.requestOverdraft(500);
+
+        // Bank manager approves overdraft request
+
+        OverdraftRequest request = currentAccount.getOverdraftRequests().get(0);
+        Assertions.assertFalse(request.isApproved());
+        request.approve();
+
+        Assertions.assertTrue(request.isApproved());
+        currentAccount.withdraw(1500,customer);
+        Assertions.assertEquals(-500,currentAccount.getBalance());
     }
 
 }

@@ -11,15 +11,20 @@ public abstract class Account {
     protected List<Transactions> transactions;
     protected String type;
 
+    protected String branch;
+
     protected int limit;
 
     final int customerID;
+    private List<OverdraftRequest> overdraftRequests;
 
-    public Account(Customer customer) {
+    public Account(Customer customer, String branch) {
         this.customer = customer;
         this.balance = 0.0;
         this.transactions = new ArrayList<>();
         this.limit= 0;
+        this.branch=branch;
+        this.overdraftRequests = new ArrayList<>();
         this.customerID=customer.getCustomerID();
 
     }
@@ -30,6 +35,9 @@ public abstract class Account {
 
     public int getLimit() {
         return limit;
+    }
+    public String getBranch(){
+        return branch;
     }
 
     public void setBalance(double balance) {
@@ -47,6 +55,14 @@ public abstract class Account {
 
     public List<Transactions> getTransactions() {
         return transactions;
+    }
+
+    public void requestOverdraft(int amount) {
+        OverdraftRequest request = new OverdraftRequest(customer, this, amount);
+        overdraftRequests.add(request);
+    }
+    public List<OverdraftRequest> getOverdraftRequests() {
+        return overdraftRequests;
     }
 
     public String deposit(double amount, Customer customer) {
@@ -107,6 +123,8 @@ public abstract class Account {
         }
         Collections.reverse(transactions);
     }
+
+
 
 
 

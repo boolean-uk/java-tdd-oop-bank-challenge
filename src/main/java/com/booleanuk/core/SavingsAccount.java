@@ -6,11 +6,8 @@ import java.io.Serializable;
 
 public class SavingsAccount extends Account implements Serializable {
 
-    public SavingsAccount(int id, String accountHolder){
-        super(id, accountHolder);
-    }
-    public SavingsAccount(int id, String accountHolder, Branch branch){
-        super(id, accountHolder, branch);
+    public SavingsAccount(int id, String accountHolder, Branch branch, TransactionManager transactionManager){
+        super(id, accountHolder, branch, transactionManager);
     }
 
 }

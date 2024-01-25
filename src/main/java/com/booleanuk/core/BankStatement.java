@@ -25,8 +25,6 @@ public class BankStatement implements Serializable {
 
     @Override
     public String toString() {
-
-
         if(withdrawBalance > 0){
             return this.date.toString() + " ||      || " + withdrawBalance + "   || " + currentBalance;
         }

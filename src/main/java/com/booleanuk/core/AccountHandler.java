@@ -3,37 +3,40 @@ package com.booleanuk.core;
 import com.booleanuk.core.enums.Branch;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AccountHandler {
+public class AccountHandler implements Serializable {
     private ArrayList<Account> accounts;
 
     private ArrayList<Account> overdraftRequests;
     private int id;
+    private TransactionManager transactionManager;
 
-    public AccountHandler(ArrayList<Account> accounts, ArrayList<Account> overdraftRequests){
-        this();
+    public AccountHandler(ArrayList<Account> accounts, ArrayList<Account> overdraftRequests, TransactionManager transactionManager){
+//        this();
         this.accounts = accounts;
         this.overdraftRequests = overdraftRequests;
+        this.transactionManager = transactionManager;
         this.id = 1;
 
     }
-    private AccountHandler(){
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                saveAccountsAndRequests();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }));
-    }
+//    private AccountHandler(){
+//        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+//            try {
+//                saveAccountsAndRequests();
+//            } catch (FileNotFoundException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }));
+//    }
     public boolean createSavingsAccount(String accountHolder, Branch branch){
-        this.accounts.add(new SavingsAccount(this.id++, accountHolder, branch));
+        this.accounts.add(new SavingsAccount(this.id++, accountHolder, branch, transactionManager));
         return true;
     }
     public boolean createCurrentAccount(String accountHolder, Branch branch){
-        this.accounts.add(new CurrentAccount(this.id++, accountHolder, branch));
+        this.accounts.add(new CurrentAccount(this.id++, accountHolder, branch, transactionManager));
         return true;
     }
     public boolean depositToAccount(int accountNumber, double amount){
@@ -108,9 +111,10 @@ public class AccountHandler {
         }
         return false;
     }
-    private void saveAccountsAndRequests() throws FileNotFoundException {
+    public void saveAccountsAndRequests() throws FileNotFoundException {
         FileHandler.writeToFile("Test.txt", accounts);
         FileHandler.writeToFile("TestOverdraft.txt", overdraftRequests);
+        FileHandler.writeTransactionToFile("TestTransactions.txt", transactionManager.getTransactions());
 
     }
 

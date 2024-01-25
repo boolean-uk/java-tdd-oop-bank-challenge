@@ -8,19 +8,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class Account implements Serializable {
-    protected double balance;
     protected int id;
     protected String accountHolder;
     protected ArrayList<BankStatement> bankStatements;
     protected Branch branch;
     protected boolean overdraftApproved;
 
-    public Account(int id, String accountHolder, Branch branch){
+    protected TransactionManager transactionManager;
+
+    public Account(int id, String accountHolder, Branch branch, TransactionManager transactionManager){
         this();
         this.id = id;
         this.accountHolder = accountHolder;
         this.branch = branch;
-
+        this.transactionManager = transactionManager;
 
     }
     public Account(int id, String accountHolder){
@@ -38,18 +39,18 @@ public abstract class Account implements Serializable {
             return false;
         }
         else{
-            balance += amount;
-            bankStatements.add(new BankStatement(balance,amount, Type.DEPOSIT));
+            transactionManager.addTransaction(new Transaction(this.id, amount));
+            bankStatements.add(new BankStatement(transactionManager.getBalance(this.id), amount, Type.DEPOSIT));
             return true;
         }
     }
     public boolean withdraw(double amount){
-        if(amount > balance){
+        if(amount > transactionManager.getBalance(this.id)){
             return false;
         }
         else{
-            balance -= amount;
-            bankStatements.add(new BankStatement(balance,amount,Type.WITHDRAW));
+            transactionManager.addTransaction(new Transaction(this.id, -amount));
+            bankStatements.add(new BankStatement(transactionManager.getBalance(this.id), amount,Type.WITHDRAW));
             return true;
         }
 
@@ -80,8 +81,12 @@ public abstract class Account implements Serializable {
     public void setOverdraftApproved(boolean overdraftApproved){
         this.overdraftApproved = overdraftApproved;
     }
+
+    public double getBalance(){
+        return transactionManager.getBalance(this.id);
+    }
     @Override
     public String toString() {
-        return "Account Holder: " + this.accountHolder + ", Current Balance: " + this.balance;
+        return "Account Holder: " + this.accountHolder + ", Current Balance: " + transactionManager.getBalance(this.id);
     }
 }

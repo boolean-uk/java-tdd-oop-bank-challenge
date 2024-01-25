@@ -2,9 +2,10 @@ package com.booleanuk.core;
 
 import com.booleanuk.core.enums.Branch;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Bank {
+public class Bank implements Serializable {
     private final AccountHandler accountHandler;
 
     public Bank(AccountHandler accountHandler){

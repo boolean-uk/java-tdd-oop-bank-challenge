@@ -10,10 +10,10 @@
    I want to create a savings account.
 ```
 
-| Classes | Methods                                     | Scenario               | Returns      |
-|---------|---------------------------------------------|------------------------|--------------|
-| Bank    | boolean createAccount(String accountHolder) | Account already exists | return false |
-|         |                                             | Account does not exist | return true  |
+| Classes        | Methods                                     | Scenario               | Returns      |
+|----------------|---------------------------------------------|------------------------|--------------|
+| AccountHandler | boolean createAccount(String accountHolder) | Account already exists | return false |
+|                |                                             | Account does not exist | return true  |
 
 ```
 3. As a customer,
@@ -21,12 +21,12 @@
    I want to generate bank statements with transaction dates, amounts, and balance at the time of transaction.
 ```
 
-| Classes | Methods                                                        | Scenario                    | Returns                                                     |
-|---------|----------------------------------------------------------------|-----------------------------|-------------------------------------------------------------|
-| Account | String getBankStatements(DateTime startDate, DateTime endDate) | Not a valid date            | "No bank statements between these dates"                    |
-|         |                                                                | Valid date                  | String containing all transactions made between given dates |
-| Bank    | Account getAccount(int accountNumber)                          | Existing account number     | returns account                                             |
-|         |                                                                | Non-existent account number | returns null                                                |
+| Classes        | Methods                                                        | Scenario                    | Returns                                                     |
+|----------------|----------------------------------------------------------------|-----------------------------|-------------------------------------------------------------|
+| Account        | String getBankStatements(DateTime startDate, DateTime endDate) | Not a valid date            | "No bank statements between these dates"                    |
+|                |                                                                | Valid date                  | String containing all transactions made between given dates |
+| AccountHandler | Account getAccount(int accountNumber)                          | Existing account number     | returns account                                             |
+|                |                                                                | Non-existent account number | returns null                                                |
 
 ```
 4. As a customer,
@@ -34,13 +34,13 @@
    I want to deposit and withdraw funds.
 ```
 
-| Classes | Methods                                                       | Scenario                         | Returns |
-|---------|---------------------------------------------------------------|----------------------------------|---------|
-| Account | boolean deposit(double amount)                                | Valid amount                     | true    |
-|         |                                                               | Invalid amount                   | false   |
-| Bank    | boolean depositToAccount(int accountNumber, double amount)    | Valid account number and amount  | true    |
-|         |                                                               | invalid Account number or amount | false   |
-| Account | boolean withdraw(double amount)                               | Valid amount                     | true    |
-|         |                                                               | invalid amount                   | false   |
-| Bank    | boolean withdrawFromAccount(int accountNumber, double amount) | valid amount                     | true    |
-|         |                                                               | invalid amount                   | false   |
+| Classes        | Methods                                                       | Scenario                         | Returns |
+|----------------|---------------------------------------------------------------|----------------------------------|---------|
+| Account        | boolean deposit(double amount)                                | Valid amount                     | true    |
+|                |                                                               | Invalid amount                   | false   |
+| AccountHandler | boolean depositToAccount(int accountNumber, double amount)    | Valid account number and amount  | true    |
+|                |                                                               | invalid Account number or amount | false   |
+| Account        | boolean withdraw(double amount)                               | Valid amount                     | true    |
+|                |                                                               | invalid amount                   | false   |
+| AccountHandler | boolean withdrawFromAccount(int accountNumber, double amount) | valid amount                     | true    |
+|                |                                                               | invalid amount                   | false   |

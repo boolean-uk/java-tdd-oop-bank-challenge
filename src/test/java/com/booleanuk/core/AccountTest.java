@@ -41,17 +41,8 @@ class AccountTest {
         c.set(2024, Calendar.JANUARY,25,8,57,1);
         Date date = new Date(c.getTimeInMillis());
         account.getTransactions().add(new Transaction(date,100, TransactionType.DEPOSIT, 100));
-        //String bankStatement = account.getBankStatement();
         Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
                                         "2024-01-25 08:57:01  || 100.0    ||          || 100.0    ", account.getBankStatement());
-//        Assertions.assertTrue(bankStatement.contains("Date"));
-//        Assertions.assertTrue(bankStatement.contains("Credit"));
-//        Assertions.assertTrue(bankStatement.contains("Debit"));
-//        Assertions.assertTrue(bankStatement.contains("Balance"));
-//        // Just checking if This is what Github has an issue with \/
-//        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
-//        Assertions.assertTrue(bankStatement.contains("100.0"));
-
     }
 
     @Test
@@ -59,31 +50,23 @@ class AccountTest {
         Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
         Branch branch = new Branch("1", "DNC", "London");
         Account account = new Account("1", customer, branch);
-        Date date = new Date();
-        date.setTime(1706169421767L);
-        Date date1 = new Date();
-        date1.setTime(1706179445767L);
-        Date date2 = new Date();
-        date2.setTime(1706189426367L);
+        Calendar c = Calendar.getInstance();
+        c.set(2024, Calendar.JANUARY,25,8,57,1);
+        Date date = new Date(c.getTimeInMillis());
+        c.set(2024, Calendar.JANUARY,25,11,44,5);
+        Date date1 = new Date(c.getTimeInMillis());
+        c.set(2024, Calendar.JANUARY,25,14,30,26);
+        Date date2 = new Date(c.getTimeInMillis());
         account.getTransactions().add(new Transaction(date2,200, TransactionType.WITHDRAW, 900));
         account.getTransactions().add(new Transaction(date1,100, TransactionType.DEPOSIT, 1100));
         account.getTransactions().add(new Transaction(date,1000, TransactionType.DEPOSIT, 1000));
-        String bankStatement = account.getBankStatement();
-//        Assertions.assertEquals(
-//                """
-//                        Date                 || Credit   || Debit    || Balance \s
-//                        2024-01-25 14:30:26  ||          || 200.0    || 900.0   \s
-//                        2024-01-25 11:44:05  || 100.0    ||          || 1100.0  \s
-//                        2024-01-25 08:57:01  || 1000.0   ||          || 1000.0  \s""", account.getBankStatement());
-        // Just checking if This is what Github has an issue with \/
-//        Assertions.assertTrue(bankStatement.contains("2024-01-25 14:30:26"));
-//        Assertions.assertTrue(bankStatement.contains("2024-01-25 11:44:05"));
-//        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
-        Assertions.assertTrue(bankStatement.contains("200.0"));
-        Assertions.assertTrue(bankStatement.contains("900.0"));
-        Assertions.assertTrue(bankStatement.contains("100.0"));
-        Assertions.assertTrue(bankStatement.contains("1100.0"));
-        Assertions.assertTrue(bankStatement.contains("1000.0"));
+        Assertions.assertEquals(
+                """
+                        Date                 || Credit   || Debit    || Balance \s
+                        2024-01-25 14:30:26  ||          || 200.0    || 900.0   \s
+                        2024-01-25 11:44:05  || 100.0    ||          || 1100.0  \s
+                        2024-01-25 08:57:01  || 1000.0   ||          || 1000.0  \s""", account.getBankStatement());
+
     }
 
     @Test

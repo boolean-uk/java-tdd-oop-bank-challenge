@@ -40,18 +40,17 @@ class AccountTest {
         Calendar c = Calendar.getInstance();
         c.set(2024, Calendar.JANUARY,25,8,57,1);
         Date date = new Date(c.getTimeInMillis());
-        //date.setTime(Calendar.getInstance().set(2024,1,25,8,57,1));
         account.getTransactions().add(new Transaction(date,100, TransactionType.DEPOSIT, 100));
-        String bankStatement = account.getBankStatement();
-//        Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
-//                                        "2024-01-25 08:57:01  || 100.0    ||          || 100.0    ", account.getBankStatement());
-        Assertions.assertTrue(bankStatement.contains("Date"));
-        Assertions.assertTrue(bankStatement.contains("Credit"));
-        Assertions.assertTrue(bankStatement.contains("Debit"));
-        Assertions.assertTrue(bankStatement.contains("Balance"));
-        // Just checking if This is what Github has an issue with \/
-        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
-        Assertions.assertTrue(bankStatement.contains("100.0"));
+        //String bankStatement = account.getBankStatement();
+        Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
+                                        "2024-01-25 08:57:01  || 100.0    ||          || 100.0    ", account.getBankStatement());
+//        Assertions.assertTrue(bankStatement.contains("Date"));
+//        Assertions.assertTrue(bankStatement.contains("Credit"));
+//        Assertions.assertTrue(bankStatement.contains("Debit"));
+//        Assertions.assertTrue(bankStatement.contains("Balance"));
+//        // Just checking if This is what Github has an issue with \/
+//        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
+//        Assertions.assertTrue(bankStatement.contains("100.0"));
 
     }
 

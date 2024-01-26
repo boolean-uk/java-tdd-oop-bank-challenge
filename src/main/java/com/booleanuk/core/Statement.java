@@ -20,6 +20,13 @@ public class Statement {
     public double getAmount() {
         return amount;
     }
+    public String getDateAsString() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(this.getDate());
+    }
+
+    public String getAmountAsString() {
+        return String.format("%.2f", this.getAmount());
+    }
 
     @Override
     public boolean equals(Object obj) {

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 public class BankTest {
 
@@ -133,13 +132,29 @@ public class BankTest {
     }
 
     @Test
+    public void customerSuccessfullyGenerateLongerBankStatementsTest() {
+        String expected =
+                "date       || credit        || debit    || balance\n" +
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " ||               || 50000.00 || "+ 2009950000+".00\n" +
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " || 2000000000.00 ||          || "+ (10000000 + 2000000000)+".00\n" +
+                        new SimpleDateFormat("dd/MM/yyyy").format(new Date()) + " || 10000000.00   ||          || 10000000.00";
+
+        int accountId = bank.createCurrentAccount(customer);
+        bank.deposit(10000000, customer, accountId);
+        bank.deposit(2000000000, customer, accountId);
+        bank.withdraw(50000, customer, accountId);
+
+        Assertions.assertEquals(expected, bank.generateBankStatements(customer, accountId));
+    }
+
+    @Test
     public void nonExistentCustomerRequestsOverdraft() {
         Assertions.assertEquals("Customer doesn't exist.", bank.requestsOverdraft(customer, 123, 200));
     }
 
     @Test
     public void customerWithNonExistentAccountRequestsOverdraft() {
-        int accountId = bank.createCurrentAccount(customer);
+        bank.createSavingsAccount(customer);
         Assertions.assertEquals("Account doesn't exist.", bank.requestsOverdraft(customer, 123, 200));
     }
 

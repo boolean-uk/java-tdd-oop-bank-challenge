@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,8 +37,10 @@ class AccountTest {
         Customer customer = new Customer("1", "Java Man", "12345678", "java@man.coder");
         Branch branch = new Branch("1", "DNC", "London");
         Account account = new Account("1", customer, branch);
-        Date date = new Date();
-        date.setTime(1706169421767L);
+        Calendar c = Calendar.getInstance();
+        c.set(2024, Calendar.JANUARY,25,8,57,1);
+        Date date = new Date(c.getTimeInMillis());
+        //date.setTime(Calendar.getInstance().set(2024,1,25,8,57,1));
         account.getTransactions().add(new Transaction(date,100, TransactionType.DEPOSIT, 100));
         String bankStatement = account.getBankStatement();
 //        Assertions.assertEquals("Date                 || Credit   || Debit    || Balance  \n" +
@@ -47,7 +50,7 @@ class AccountTest {
         Assertions.assertTrue(bankStatement.contains("Debit"));
         Assertions.assertTrue(bankStatement.contains("Balance"));
         // Just checking if This is what Github has an issue with \/
-        //Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
+        Assertions.assertTrue(bankStatement.contains("2024-01-25 08:57:01"));
         Assertions.assertTrue(bankStatement.contains("100.0"));
 
     }

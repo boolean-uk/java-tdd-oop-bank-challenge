@@ -112,6 +112,10 @@ public abstract class Person {
      * @return
      */
     public boolean deposit(Branch branch, int accountNumber, double value) {
+        if (!validateNotNegativeValue(value)) {
+            return false;
+        }
+
         Transaction t = new Transaction(value, 0, 1337);
 
         if (branch.getCurrentAccounts().containsKey(accountNumber)) {
@@ -152,6 +156,10 @@ public abstract class Person {
      * @return
      */
     public boolean withdraw(Branch branch, int accountNumber, double value) {
+        if (!validateNotNegativeValue(value)) {
+            return false;
+        }
+
         Transaction t = new Transaction(0, value, 1337);
 
         if (branch.getCurrentAccounts().containsKey(accountNumber)) {
@@ -208,6 +216,15 @@ public abstract class Person {
      */
     public boolean checkAccountBelongsToPerson(Person owner, Person person) {
         return owner == this;
+    }
+
+    /**
+     * Logic: Helper method to check for negative floats for deposit()/withdraw()
+     * @param value
+     * @return
+     */
+    public boolean validateNotNegativeValue(double value) {
+        return value > 0.0;
     }
 
     public String getName() {

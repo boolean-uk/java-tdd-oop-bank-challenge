@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class BankApp {
     static class Account {
-        private String accountId;
+        private final String accountId;
         private double balance;
-        private List<String> transactionHistory;
+        private final List<Double> transactionHistory;
 
         public Account(String accountId) {
             this.accountId = accountId;
@@ -22,31 +22,36 @@ public class BankApp {
 
             double runningBalance = 0;
 
-            for (String transaction : transactionHistory) {
-                double amount = Double.parseDouble(transaction.split(" ")[1]);
-                runningBalance += amount;
+            for (Double transaction : transactionHistory) {
+                runningBalance += transaction;
                 Date currentDate = new Date();
                 statementBuilder.append(String.format("%tD", currentDate))
-                        .append(" || ")
-                        .append(transaction)
-                        .append(" || ")
-                        .append(String.format("%.2f", runningBalance))
+                        .append(" || ");
+                        if (transaction <= 0) {
+                        statementBuilder.append(-transaction)
+                                        .append("   ||        || ");
+                        } else {
+                        statementBuilder.append("        || ")
+                                    .append(transaction)
+                                    .append(" || ");
+                        }
+                        statementBuilder.append(String.format("%.2f", runningBalance))
                         .append("\n");
             }
-            System.out.println(statementBuilder.toString());
+            System.out.println(statementBuilder);
             return balance;
         }
 
 
         public void deposit(double amount) {
             balance += amount;
-            transactionHistory.add("Deposit " + amount);
+            transactionHistory.add(amount);
         }
 
         public void withdraw(double amount) {
             if (balance >= amount) {
                 balance -= amount;
-                transactionHistory.add("Withdrawal " + (-amount));
+                transactionHistory.add((-amount));
             } else {
                 System.out.println("Insufficient funds");
             }

@@ -1,6 +1,4 @@
 package com.booleanuk.core;
-
-import com.booleanuk.core.BankApp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,14 +40,12 @@ public class BankAppTest {
     @Test
     void Story2CreateSavingsAccount() {
         assertNotNull(savingsAccount);
-        savingsAccount.deposit(200);
-        savingsAccount.withdraw(200);
         assertEquals(customer.customerId, savingsAccount.getCustomerId());
         assertEquals(branch.branchName, savingsAccount.getBranchName());
     }
 
     @Test
-    void Story3GenerateStatementWithDatesAndAmountsAndBalance() {
+    void Story34AddAndDepositAndGenerateStatementWithDatesAndAmountsAndBalance() {
         currentAccount.deposit(1000);
         currentAccount.withdraw(100);
         currentAccount.calculateBalance();
@@ -66,27 +62,6 @@ public class BankAppTest {
         assertNotNull(savingsAccount);
         assertEquals(customer.customerId, savingsAccount.getCustomerId());
         assertEquals(900, currentAccount.calculateBalance());
-    }
-
-    @Test
-    void Story4MakeDepositsAndWithdrawalsAsCustomer() {
-        currentAccount.deposit(1000);
-        currentAccount.withdraw(100);
-        currentAccount.calculateBalance();
-
-        assertNotNull(savingsAccount);
-        assertEquals(customer.customerId, savingsAccount.getCustomerId());
-        assertEquals(900, currentAccount.calculateBalance());
-
-        savingsAccount.deposit(1000);
-        savingsAccount.withdraw(100);
-        savingsAccount.withdraw(1100);
-        currentAccount.calculateBalance();
-
-        assertNotNull(savingsAccount);
-        assertEquals(customer.customerId, savingsAccount.getCustomerId());
-        assertEquals(900, currentAccount.calculateBalance());
-
     }
 
 }

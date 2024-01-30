@@ -1,12 +1,13 @@
 package com.booleanuk.core;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class BankApp {
     static class Account {
         private String accountId;
         private double balance;
-        private List<Transaction> transactionHistory;
+        private List<String> transactionHistory;
 
         public Account(String accountId) {
             this.accountId = accountId;
@@ -15,18 +16,37 @@ public class BankApp {
         }
 
         public double calculateBalance() {
+
+            StringBuilder statementBuilder = new StringBuilder();
+            statementBuilder.append("date     || credit  || debit  || balance\n");
+
+            double runningBalance = 0;
+
+            for (String transaction : transactionHistory) {
+                double amount = Double.parseDouble(transaction.split(" ")[1]);
+                runningBalance += amount;
+                Date currentDate = new Date();
+                statementBuilder.append(String.format("%tD", currentDate))
+                        .append(" || ")
+                        .append(transaction)
+                        .append(" || ")
+                        .append(String.format("%.2f", runningBalance))
+                        .append("\n");
+            }
+            System.out.println(statementBuilder.toString());
             return balance;
         }
 
+
         public void deposit(double amount) {
             balance += amount;
-            transactionHistory.add(new Transaction("Deposit", amount));
+            transactionHistory.add("Deposit " + amount);
         }
 
         public void withdraw(double amount) {
             if (balance >= amount) {
                 balance -= amount;
-                transactionHistory.add(new Transaction("Withdrawal", -amount));
+                transactionHistory.add("Withdrawal " + (-amount));
             } else {
                 System.out.println("Insufficient funds");
             }
@@ -114,15 +134,4 @@ public class BankApp {
             return new Customer(customerId, phoneNumber);
         }
     }
-
-    static class Transaction {
-        private String type;
-        private double amount;
-
-        public Transaction(String type, double amount) {
-            this.type = type;
-            this.amount = amount;
-        }
-    }
-
 }

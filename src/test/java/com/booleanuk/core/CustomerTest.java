@@ -1,8 +1,16 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class CustomerTest {
 
+    @Test
+    public void testAddCustomer(){
+        Customer customer = new Customer("1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        Assertions.assertEquals("1111-1111-1111", customer.getAccountNum());
+        Assertions.assertEquals("Alexander Ellnestam", customer.getName());
+        Assertions.assertEquals("ABC123", customer.getBranchNum());
+    }
 
 }

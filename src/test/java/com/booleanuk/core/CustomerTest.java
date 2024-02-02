@@ -13,4 +13,12 @@ public class CustomerTest {
         Assertions.assertEquals("ABC123", customer.getBranchNum());
     }
 
+    @Test
+    public void testCurrentCustomerAccount(){
+        CurrentCustomerAccount cca = new CurrentCustomerAccount("1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        Assertions.assertEquals("1111-1111-1111", cca.getAccountNum());
+        Assertions.assertEquals("Alexander Ellnestam", cca.getName());
+        Assertions.assertEquals("ABC123", cca.getBranchNum());
+    }
+
 }

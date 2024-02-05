@@ -41,7 +41,7 @@ public class AccountTest {
     }
 
     @Test
-    public void successfulDepositTest(){
+    public void successfulDepositTest() {
 
         Account account = new Account();
 
@@ -55,7 +55,7 @@ public class AccountTest {
     }
 
     @Test
-    public void notSuccessfulDepositTest(){
+    public void notSuccessfulDepositTest() {
 
         Account account = new Account();
 

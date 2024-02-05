@@ -54,6 +54,17 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void notSuccessfulDepositTest(){
 
+        Account account = new Account();
+
+        account.addCustomerAccount("Savings", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+
+        Assertions.assertFalse(account.deposit("1111-1111", 50.25));
+
+
+
+    }
 
 }

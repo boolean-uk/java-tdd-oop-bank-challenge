@@ -1,12 +1,12 @@
 package com.booleanuk.core;
 
-public class Customer {
+public class CustomerAccount {
 
     private String accountNum;
     private String name;
     private String branchNum;
 
-    public Customer(String accountNum, String name, String branchNum){
+    public CustomerAccount(String accountNum, String name, String branchNum){
         this.setAccountNum(accountNum);
         this.setName(name);
         this.setBranchNum(branchNum);

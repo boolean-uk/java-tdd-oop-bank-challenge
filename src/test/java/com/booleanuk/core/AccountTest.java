@@ -6,12 +6,24 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
 
     @Test
-    public void createAccount(){
+    public void createAccountSavingAndCurrent(){
 
         Account account = new Account();
 
-        Assertions.assertTrue(account.addAccount("Savings","1111-1111-1111", "Alexander Ellnestam", "ABC123"));
         Assertions.assertTrue(account.addAccount("Current","1111-1111-1111", "Alexander Ellnestam", "ABC123"));
+        Assertions.assertTrue(account.addAccount("Savings","2222-2222-2222", "Alexander Ellnestam", "ABC123"));
+
+    }
+
+    @Test
+    public void invalidAccountSavingAndCurrent(){
+
+        Account account = new Account();
+
+        Assertions.assertTrue(account.addAccount("Current","1111-1111-1111", "Alexander Ellnestam", "ABC123"));
+        Assertions.assertFalse(account.addAccount("Current","1111-1111-1111", "Alexander Ellnestam", "ABC123"));
+        Assertions.assertFalse(account.addAccount("Current and Saving","3222-2222-2222", "Alexander Ellnestam", "ABC123"));
+
     }
 
 }

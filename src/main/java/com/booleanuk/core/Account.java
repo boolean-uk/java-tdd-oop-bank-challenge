@@ -7,10 +7,10 @@ public class Account {
 
     List<CustomerAccount> customerAccounts = new ArrayList<>();
 
-    public boolean addAccount(String accountType, String accountNumber, String name, String branchCode) {
+    public boolean addCustomerAccount(String accountType, String accountNumber, String name, String branchCode) {
 
         if (accountType.equalsIgnoreCase("Current")) {
-            if (findAccount(accountNumber) != null) {
+            if (findCustomerAccount(accountNumber) != null) {
                 System.out.println("Current account number busy");
                 return false;
             }
@@ -18,7 +18,7 @@ public class Account {
             System.out.println("Added new current account");
             return true;
     } else if (accountType.equalsIgnoreCase("Savings")) {
-            if (findAccount(accountNumber) != null){
+            if (findCustomerAccount(accountNumber) != null){
                 System.out.println("Savings account number busy");
                 return false;
             }
@@ -30,7 +30,7 @@ public class Account {
         return false;
     }
 
-    public CustomerAccount findAccount(String accountNumber) {
+    public CustomerAccount findCustomerAccount(String accountNumber) {
         for (CustomerAccount customerAccount : customerAccounts){
             if (customerAccount.getAccountNum().equals(accountNumber)) {
                 return customerAccount;
@@ -39,4 +39,13 @@ public class Account {
         System.out.println("No such account");
         return null;
     }
+
+    public boolean deposit(String accountNumber, double amountToDeposit) {
+        if(findCustomerAccount(accountNumber) == null){
+            System.out.println("Account does not exist");
+            return false;
+        }
+        findCustomerAccount(accountNumber).setBalanceCent(amountToDeposit);
+        return true;
     }
+}

@@ -26,4 +26,18 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void findAccountTest(){
+
+        Account account = new Account();
+
+        account.addAccount("Current","1111-1111-1111", "Alexander Ellnestam", "ABC123");
+
+        Assertions.assertEquals(account.customerAccounts.get(0), account.findAccount("1111-1111-1111"));
+
+        Assertions.assertNull(account.findAccount("1111-1111"));
+
+
+    }
+
 }

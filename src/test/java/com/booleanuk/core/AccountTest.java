@@ -97,6 +97,20 @@ public class AccountTest {
 
         Assertions.assertFalse(account.withdraw("1111-1111-1111", 100));
 
+
+    }
+
+    @Test
+    public void approveOverdraft() {
+        Account account = new Account();
+        account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        account.deposit("1111-1111-1111", 1000);
+
+        Assertions.assertTrue(account.approvedOverdraft("1111-1111-1111"));
+        Assertions.assertTrue(account.withdraw("1111-1111-1111", 1100));
+
+        Assertions.assertEquals(-100, account.customerAccounts.get(0).getBalance());
+
     }
 
 }

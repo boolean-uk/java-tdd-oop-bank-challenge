@@ -48,4 +48,8 @@ public class Account {
         findCustomerAccount(accountNumber).setBalanceCent(amountToDeposit);
         return true;
     }
+
+    public boolean withdraw(String accountNumber, int amountToWithdraw) {
+        return false;
+    }
 }

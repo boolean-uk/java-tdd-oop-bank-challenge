@@ -65,4 +65,18 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void successfulWithdraw(){
+        Account account = new Account();
+        account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        account.deposit("1111-1111-1111", 1000);
+
+        Assertions.assertTrue(account.withdraw("1111-1111-1111", 100));
+        Assertions.assertTrue(account.withdraw("1111-1111-1111", 50));
+        Assertions.assertTrue(account.withdraw("1111-1111-1111", 600));
+
+        Assertions.assertEquals(250, account.customerAccounts.get(0).getBalance());
+
+    }
+
 }

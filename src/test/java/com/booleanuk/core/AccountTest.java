@@ -79,4 +79,15 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void nonSuccessfulWithdraw(){
+        Account account = new Account();
+        account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        account.deposit("1111-1111-1111", 1000);
+
+        Assertions.assertTrue(account.withdraw("1", 100));
+
+
+    }
+
 }

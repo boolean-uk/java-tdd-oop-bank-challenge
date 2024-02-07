@@ -1,10 +1,13 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
 
+    double balance = 0.0;
     List<CustomerAccount> customerAccounts = new ArrayList<>();
 
     public boolean addCustomerAccount(String accountType, String accountNumber, String name, String branchCode) {
@@ -49,7 +52,7 @@ public class Account {
         return true;
     }
 
-    public boolean withdraw(String accountNumber, int amountToWithdrawDollar) {
+    public boolean withdraw(String accountNumber, double amountToWithdrawDollar) {
         if(findCustomerAccount(accountNumber) == null){
             System.out.println("Account does not exist cant make withdraw");
             return false;
@@ -71,5 +74,12 @@ public class Account {
     }
 
     public void reciveStatement(String accountNumber) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println("\nBank statement for: " + accountNumber + "\n");
+        System.out.println("Date         Amount         Balance");
+        for (LocalDateTime localDateTime : findCustomerAccount(accountNumber).getTransactions().keySet()){
+            balance += (findCustomerAccount(accountNumber).getTransactions().get(localDateTime) / 100.0);
+            System.out.printf("%-10s %.2f %-2s %.2f \n", dateTimeFormatter.format(localDateTime) + " || $", (findCustomerAccount(accountNumber).getTransactions().get(localDateTime)/ 100.0), " || $", balance);
+        }
     }
 }

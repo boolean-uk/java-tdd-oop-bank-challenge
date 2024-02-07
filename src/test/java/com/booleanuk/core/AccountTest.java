@@ -98,6 +98,7 @@ public class AccountTest {
         Assertions.assertFalse(account.withdraw("1111-1111-1111", 100));
 
 
+
     }
 
     @Test
@@ -117,12 +118,12 @@ public class AccountTest {
     public void statementTest(){
         Account account = new Account();
         account.addCustomerAccount("Savings", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
-        account.deposit("1111-1111-1111",1000);
-        account.withdraw("1111-1111-1111", 900);
-        account.deposit("1111-1111-1111",1000);
-        account.withdraw("1111-1111-1111", 500);
+        account.deposit("1111-1111-1111",300);
+        account.deposit("1111-1111-1111",300);
+        account.withdraw("1111-1111-1111", 50.50);
+        account.withdraw("1111-1111-1111", 300.50);
         account.reciveStatement("1111-1111-1111");
-        Assertions.assertEquals(600, account.balance);
+        Assertions.assertEquals(249, account.balance);
     }
 
 }

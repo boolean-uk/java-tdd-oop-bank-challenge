@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
 
 public class CustomerAccount {
 
@@ -56,6 +57,12 @@ public class CustomerAccount {
         this.balanceCent += (int) (amountToDeposit * 100.0);
         this.setDateTime(LocalDateTime.now());
         this.getTransactions().put(this.getDateTime(), (int) (amountToDeposit * 100.0));
+
+        try {
+            TimeUnit.MILLISECONDS.sleep(1);
+        }catch (InterruptedException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public double getBalance(){

@@ -14,6 +14,8 @@ public class CustomerAccount {
     private LocalDateTime dateTime;
 
     private SortedMap<LocalDateTime, Integer> transaction;
+
+    private boolean approvedOverdraft = false;
     public CustomerAccount(String accountNum, String name, String branchNum){
         this.setAccountNum(accountNum);
         this.setName(name);
@@ -70,5 +72,13 @@ public class CustomerAccount {
 
     public SortedMap<LocalDateTime, Integer> getTransactions(){
         return transaction;
+    }
+
+    public boolean isApprovedOverdraft() {
+        return approvedOverdraft;
+    }
+
+    public void setApprovedOverdraft(boolean approvedOverdraft){
+        this.approvedOverdraft = approvedOverdraft;
     }
 }

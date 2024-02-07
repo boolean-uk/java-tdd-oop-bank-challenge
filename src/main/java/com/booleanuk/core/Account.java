@@ -42,14 +42,31 @@ public class Account {
 
     public boolean deposit(String accountNumber, double amountToDeposit) {
         if(findCustomerAccount(accountNumber) == null){
-            System.out.println("Account does not exist");
+            System.out.println("Account does not exist cant make deposit");
             return false;
         }
         findCustomerAccount(accountNumber).setBalanceCent(amountToDeposit);
         return true;
     }
 
-    public boolean withdraw(String accountNumber, int amountToWithdraw) {
-        return false;
+    public boolean withdraw(String accountNumber, int amountToWithdrawDollar) {
+        if(findCustomerAccount(accountNumber) == null){
+            System.out.println("Account does not exist cant make withdraw");
+            return false;
+        } else if (findCustomerAccount(accountNumber).getBalance() - amountToWithdrawDollar < 0 && !findCustomerAccount(accountNumber).isApprovedOverdraft()) {
+            System.out.println("Not enough money");
+            return false;
+        }
+        findCustomerAccount(accountNumber).setBalanceCent(-amountToWithdrawDollar);
+        return true;
+    }
+
+    public boolean approvedOverdraft(String accountNumber){
+        if(findCustomerAccount(accountNumber) == null){
+            System.out.println("Account does not exist");
+            return false;
+        }
+        findCustomerAccount(accountNumber).setApprovedOverdraft(true);
+        return true;
     }
 }

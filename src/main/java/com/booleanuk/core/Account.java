@@ -69,4 +69,7 @@ public class Account {
         findCustomerAccount(accountNumber).setApprovedOverdraft(true);
         return true;
     }
+
+    public void reciveStatement(String accountNumber) {
+    }
 }

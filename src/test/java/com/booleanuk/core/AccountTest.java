@@ -113,6 +113,16 @@ public class AccountTest {
 
     }
 
-
+    @Test
+    public void statementTest(){
+        Account account = new Account();
+        account.addCustomerAccount("Savings", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        account.deposit("1111-1111-1111",1000);
+        account.withdraw("1111-1111-1111", 900);
+        account.deposit("1111-1111-1111",1000);
+        account.withdraw("1111-1111-1111", 500);
+        account.reciveStatement("1111-1111-1111");
+        Assertions.assertEquals(600, account.balance);
+    }
 
 }

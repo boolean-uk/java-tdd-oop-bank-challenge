@@ -66,7 +66,7 @@ public class AccountTest {
     }
 
     @Test
-    public void successfulWithdraw(){
+    public void successfulWithdraw() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
@@ -80,13 +80,22 @@ public class AccountTest {
     }
 
     @Test
-    public void nonSuccessfulWithdraw(){
+    public void nonSuccessfulWithdrawNoSuchAccount() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
 
         Assertions.assertFalse(account.withdraw("1", 100));
 
+    }
+
+    @Test
+    public void nonSuccessfulWithdrawNotEnoughMoneyInAccount() {
+        Account account = new Account();
+        account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
+        account.deposit("1111-1111-1111", 10);
+
+        Assertions.assertFalse(account.withdraw("1111-1111-1111", 100));
 
     }
 

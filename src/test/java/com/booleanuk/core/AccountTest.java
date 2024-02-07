@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
 
     @Test
-    public void createAccountSavingAndCurrent() {
+    public void createAccountSavingAndCurrentTest() {
 
         Account account = new Account();
 
@@ -16,7 +16,7 @@ public class AccountTest {
     }
 
     @Test
-    public void invalidAccountSavingAndCurrent() {
+    public void invalidAccountSavingAndCurrentTest() {
 
         Account account = new Account();
 
@@ -66,7 +66,7 @@ public class AccountTest {
     }
 
     @Test
-    public void successfulWithdraw() {
+    public void successfulWithdrawTest() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
@@ -80,7 +80,7 @@ public class AccountTest {
     }
 
     @Test
-    public void nonSuccessfulWithdrawNoSuchAccount() {
+    public void nonSuccessfulWithdrawNoSuchAccountTest() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
@@ -90,7 +90,7 @@ public class AccountTest {
     }
 
     @Test
-    public void nonSuccessfulWithdrawNotEnoughMoneyInAccount() {
+    public void nonSuccessfulWithdrawNotEnoughMoneyInAccountTest() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 10);
@@ -101,7 +101,7 @@ public class AccountTest {
     }
 
     @Test
-    public void approveOverdraft() {
+    public void approveOverdraftTest() {
         Account account = new Account();
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
@@ -112,5 +112,7 @@ public class AccountTest {
         Assertions.assertEquals(-100, account.customerAccounts.get(0).getBalance());
 
     }
+
+
 
 }

@@ -85,7 +85,7 @@ public class AccountTest {
         account.addCustomerAccount("Current", "1111-1111-1111", "Alexander Ellnestam", "ABC123");
         account.deposit("1111-1111-1111", 1000);
 
-        Assertions.assertTrue(account.withdraw("1", 100));
+        Assertions.assertFalse(account.withdraw("1", 100));
 
 
     }

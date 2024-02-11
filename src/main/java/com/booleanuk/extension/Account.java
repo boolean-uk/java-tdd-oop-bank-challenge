@@ -1,4 +1,5 @@
 package com.booleanuk.extension;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,11 @@ public class Account {
     }
 
     public double computeBalance() {
-        return 0.0;
+        double balance = 0.0;
+        for (Transaction t : transactions) {
+            balance += t.getCredit() - t.getDebit();
+        }
+        return balance;
     }
 
     public String generateBankStatement() {
@@ -60,6 +65,5 @@ public class Account {
         }
         return res.toString();
     }
-
 
 }

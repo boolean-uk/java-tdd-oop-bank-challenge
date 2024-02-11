@@ -10,9 +10,6 @@ public class Transaction {
     private double balance;
     private String dateTime;
 
-
-
-
     public Transaction(double credit, double debit, double balance, LocalDateTime dateTime){
         this.credit = credit;
         this.debit = debit;

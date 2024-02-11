@@ -62,8 +62,6 @@ class BankTest {
                 date + "   0.0       4000.0    6000.0 ";
 
         Assertions.assertEquals(removeSpaces(testStatement), removeSpaces(account.bank.generateBankStatement()));
-        account.bank.generateBankStatement();
-        account.withdraw(400);
     }
     //Help methods
     private static String removeSpaces(String string){

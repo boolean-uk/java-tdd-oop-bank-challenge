@@ -6,11 +6,10 @@ import java.util.List;
 
 public class Bank {
     List<Account> accountsList;
-
-    ArrayList<Transaction> transactions = new ArrayList<>();
+    ArrayList<Transaction> transactions;
     public Bank() {
         this.accountsList = new ArrayList<>();
-
+        this.transactions = new ArrayList<>();
     }
     public boolean createAccount(Account account){
         if (accountsList.contains(account)) {

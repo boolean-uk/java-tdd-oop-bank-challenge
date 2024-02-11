@@ -47,7 +47,7 @@ class BankTest {
     }
 
     @Test
-    public void testComputeBalance(){
+    public void testComputeBalanceFromTransactionHistory(){
         bank.createAccount(currAccount);
         currAccount.deposit(1000);
         currAccount.withdraw(500);

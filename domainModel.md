@@ -38,7 +38,7 @@ I want accounts to be associated with specific branches.
 | Bank        | List<Account>                                         | createAccount(): boolean        |
 |             | List<Transaction>                                     | addTransaction():               |
 |             | List<Branch>                                          | generateBankStatement(): String |
-| Branch      | enum: Gothenburg, Stockholm, Oslo, Copenhagen, Berlin |                                 |
+| Branch      | enum: Gothenburg, Stockholm, Oslo, Copenhagen, Berlin | getBranch()                     |
 |             |                                                       |                                 |
 
 

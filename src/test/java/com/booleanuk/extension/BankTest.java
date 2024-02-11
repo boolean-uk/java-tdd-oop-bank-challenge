@@ -55,5 +55,13 @@ class BankTest {
         Assertions.assertEquals(300, currAccount.computeBalance());
 
     }
+    @Test
+    public void testGetBranch(){
+        bank.createAccount(currAccount);
+        Assertions.assertEquals(Branch.GOTHENBURG, currAccount.getBranch());
+        bank.createAccount(savAccount);
+        Assertions.assertEquals(Branch.GOTHENBURG, savAccount.getBranch());
+
+    }
 
 }

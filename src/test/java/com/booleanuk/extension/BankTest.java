@@ -11,12 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class BankTest {
     private Bank bank = new Bank();
     private User user = new User("1","A");
-    private Account currAccount = new CurrentAccount(user,"1234", "current");
-    private Account savAccount = new SaveAccount(user,"2345", "save");
+    private Branch branch = Branch.GOTHENBURG;
+    private Account currAccount = new CurrentAccount(user,"1234", "current", branch );
+    private Account savAccount = new SaveAccount(user,"2345", "save", branch);
 
     @Test
     public void createCurrentAccount(){
-        Assertions.assertTrue(bank.createAccount(currAccount ));
+        Assertions.assertTrue(bank.createAccount(currAccount));
         bank.createAccount( currAccount);
         Assertions.assertFalse(bank.createAccount( currAccount));
     }

@@ -11,12 +11,14 @@ public class Account {
 
     private List<Transaction> transactions;
     LocalDateTime dateTime = LocalDateTime.now();
+    private  Branch branch;
 
-    public Account(User user, String accountNumber, String accountType) {
+    public Account(User user, String accountNumber, String accountType, Branch branch) {
         this.user = user;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.transactions = new ArrayList<>();
+        this.branch = branch;
     }
 
 
@@ -64,6 +66,9 @@ public class Account {
             res.append("\n");
         }
         return res.toString();
+    }
+    public Branch getBranch(){
+        return this.branch;
     }
 
 }

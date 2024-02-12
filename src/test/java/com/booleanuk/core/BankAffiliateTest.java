@@ -71,11 +71,36 @@ public class BankAffiliateTest {
         Assertions.assertFalse(savingsAccountCreated);
     }
 
-    //User Story 4 Test - Case 1: Withdraw funds
+    //Extension User Story 1 Test
+
+    @Test
+    public void testGetBalanceWithMultipleTransactions() {
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000.00,0.00);
+
+        ArrayList<BankAccount> bankAccountList = new ArrayList<>();
+
+        bankAccountList.add(bankAccount);
+
+        BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccountList);
+
+        // Perform a series of transactions
+        bankAffiliate.depositFunds(bankAccount, 1000.0); // Balance: $1000
+        bankAffiliate.withdrawFunds(bankAccount, 200.0);  // Balance: $800
+        bankAffiliate.depositFunds(bankAccount, 300.0);   // Balance: $1100
+        bankAffiliate.withdrawFunds(bankAccount, 100.0);  // Balance: $1000
+
+        // Directly test getBalance
+        double expectedBalance = 1000.0;
+        Assertions.assertEquals(expectedBalance, bankAccount.getBalance());
+    }
+
+
+    //User Story 4 Test - Case 1: Withdraw funds  and //Extension User Story 1 Test
     @Test
     public void testWithdrawFunds() {
         BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000,500.00);
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000.00,1000.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -83,17 +108,19 @@ public class BankAffiliateTest {
 
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccountList);
 
-        double result = bankAffiliate.withdrawFunds(bankAccount, 100.00);
+        bankAffiliate.withdrawFunds(bankAccount, 100.00);
 
-        Assertions.assertEquals(400.00, result);
+        double expectedBalance = 900.00;
+
+        Assertions.assertEquals(expectedBalance, bankAccount.getBalance());
 
     }
 
-    //User Story 4 Test - Case 2: Deposit funds
+    //User Story 4 Test - Case 2: Deposit funds and //Extension User Story 1 Test
     @Test
     public void testDepositFunds() {
         BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000,500.00);
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000.00,900.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -101,8 +128,11 @@ public class BankAffiliateTest {
 
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer", bankAccountList);
 
-        double result = bankAffiliate.depositFunds(bankAccount, 100.00);
+        bankAffiliate.depositFunds(bankAccount, 100.00);
 
-        Assertions.assertEquals(600.00, result);
+        double expectedBalance = 1000.00;
+
+        Assertions.assertEquals(expectedBalance, bankAccount.getBalance());
+
     }
 }

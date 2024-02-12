@@ -45,6 +45,7 @@ public class BankAffiliate {
         return false;
     }
 
+    /* Core user story 4
     public double depositFunds(BankAccount bankAccount, double amount) {
         double balance = bankAccount.getBalance() + amount;
         bankAccount.setBalance(balance);
@@ -55,7 +56,6 @@ public class BankAffiliate {
 
         return balance;
     }
-
     public double withdrawFunds(BankAccount bankAccount, double amount) {
         double balance = bankAccount.getBalance() - amount;
         bankAccount.setBalance(balance);
@@ -65,7 +65,24 @@ public class BankAffiliate {
         bankAccount.getTransactionList().add(transaction);
 
         return balance;
+    } */
+
+    //Extension user story 1 getBalance method updated
+    public void depositFunds(BankAccount bankAccount, double amount) {
+        LocalDate currentDate = LocalDate.now();
+        // No need to calculate balance here, just record the transaction
+        Transaction depositTransaction = new Transaction("Deposit", amount, currentDate, bankAccount.getBalance() + amount);
+        bankAccount.getTransactionList().add(depositTransaction);
     }
+
+    public void withdrawFunds(BankAccount bankAccount, double amount) {
+        LocalDate currentDate = LocalDate.now();
+        // No need to calculate balance here, just record the transaction
+        Transaction withdrawalTransaction = new Transaction("Withdrawal", amount, currentDate, bankAccount.getBalance() - amount);
+        bankAccount.getTransactionList().add(withdrawalTransaction);
+    }
+
+
 
     //Extension User Story 4
     public boolean approveOverdraft(BankAccount account, double limit) {

@@ -63,7 +63,7 @@ public class BankAccount {
 
     //Extension User Story 1
     public double getBalance() {
-        double balance = 0;
+        double balance = this.balance;
         for (Transaction transaction : transactionList) {
             if (transaction.getType().equals("Deposit")) {
                 balance += transaction.getAmount();

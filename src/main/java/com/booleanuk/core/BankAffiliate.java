@@ -67,6 +67,15 @@ public class BankAffiliate {
         return balance;
     }
 
+    //Extension User Story 4
+    public boolean approveOverdraft(BankAccount account, double limit) {
+        if (account.getBalance() >= 0) {
+            account.requestOverdraft(limit);
+            return true;
+        }
+        return false;
+    }
+
 
     public String getFullName() {
         return fullName;

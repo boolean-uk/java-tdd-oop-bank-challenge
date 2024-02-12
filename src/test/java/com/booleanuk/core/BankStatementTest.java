@@ -12,8 +12,9 @@ public class BankStatementTest {
 
     @Test
     public void generateBankStatementTest() {
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
         BankAffiliate bankAffiliate = new BankAffiliate("James Bond", "Bank Customer");
-        BankAccount bankAccount = new BankAccount("James Bond", "12345", "Current Account", "Oslo", 1000.00);
+        BankAccount bankAccount = new BankAccount("James Bond", "12345", "Current Account", branch, 1000.00, 0);
         BankStatement bankStatement = new BankStatement();
 
         // Perform transactions

@@ -10,7 +10,8 @@ public class BankAffiliateTest {
     //User Story 1 Test - Case 1: Current account is not already created
     @Test
     public void testCurrentAccountCreated() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "Current Account", "Oslo", 0.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new BankAccount("James Bond", "12345", "Current Account", branch, 0.00,0.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -24,7 +25,8 @@ public class BankAffiliateTest {
     //User Story 1 Test - Case 2: Current account is already created
     @Test
     public void testCurrentAccountAlreadyCreated() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "Current Account", "Oslo", 0.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "12345", "Current Account", branch, 1000, 0.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -40,7 +42,8 @@ public class BankAffiliateTest {
     //User Story 2 Test - Case 1: Savings account is not already created
     @Test
     public void testSavingsAccountCreated() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", "Oslo", 0.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000, 0.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -54,7 +57,8 @@ public class BankAffiliateTest {
     //User Story 2 Test - Case 2: Savings account is already created
     @Test
     public void testSavingsAccountAlreadyCreated() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", "Oslo", 0.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch,1000, 0.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -70,7 +74,8 @@ public class BankAffiliateTest {
     //User Story 4 Test - Case 1: Withdraw funds
     @Test
     public void testWithdrawFunds() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", "Oslo", 500.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000,500.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 
@@ -87,7 +92,8 @@ public class BankAffiliateTest {
     //User Story 4 Test - Case 2: Deposit funds
     @Test
     public void testDepositFunds() {
-        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", "Oslo", 500.00);
+        BankBranch branch = new BankBranch("12345", "Oslo", "Oslo");
+        BankAccount bankAccount = new  BankAccount("James Bond", "54321", "Savings Account", branch, 1000,500.00);
 
         ArrayList<BankAccount> bankAccountList = new ArrayList<>();
 

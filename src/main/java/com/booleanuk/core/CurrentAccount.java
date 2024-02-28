@@ -11,7 +11,6 @@ public class CurrentAccount implements Account {
     private final SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
 
 
-
     private boolean overdraft = false;
     public CurrentAccount(){
         this.balance = 0.0;

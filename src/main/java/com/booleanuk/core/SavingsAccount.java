@@ -9,6 +9,6 @@ public class SavingsAccount extends Account{
         this.setType("Saving");
         this.setBranch(branch);
         this.setTransactions(new ArrayList<>());
-        //this.setInterest(5);
+        this.setInterest(5);
     }
 }

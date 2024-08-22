@@ -5,12 +5,10 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import sun.util.resources.cldr.CurrencyNames;
-
 class CurrentAccountTest {
   @Test
   public void testWithdraw() {
-    Account account = new CurrentAccount(100);
+    Account account = new CurrentAccount(Branch.OSLO, 100);
 
     account.withdraw(50);
     Assertions.assertEquals(50, account.balance());
@@ -21,7 +19,7 @@ class CurrentAccountTest {
 
   @Test
   public void testDeposit() {
-    Account account = new CurrentAccount(100);
+    Account account = new CurrentAccount(Branch.OSLO, 100);
 
     account.deposit(50);
     Assertions.assertEquals(150, account.balance());
@@ -32,7 +30,7 @@ class CurrentAccountTest {
 
   @Test
   public void testWithdrawDeposit() {
-    Account account = new CurrentAccount(100);
+    Account account = new CurrentAccount(Branch.OSLO, 100);
 
     account.withdraw(50);
     Assertions.assertEquals(50, account.balance());
@@ -43,7 +41,7 @@ class CurrentAccountTest {
 
   @Test
   public void testHistory() {
-    Account account = new CurrentAccount();
+    Account account = new CurrentAccount(Branch.OSLO);
 
     LocalDateTime firstDepositDate = LocalDateTime.of(2012, 01, 10, 0, 0);
     LocalDateTime secondDepositDate = LocalDateTime.of(2012, 01, 13, 0, 0);
@@ -62,10 +60,10 @@ class CurrentAccountTest {
 
   @Test
   public void testBranch() {
-    Account osloAccount = new CurrencyNames(Branch.OSLO);
+    Account osloAccount = new CurrentAccount(Branch.OSLO);
     Assertions.assertEquals(osloAccount.branch(), Branch.OSLO);
 
-    Account karlskronaAccount = new CurrencyNames(Branch.KARLSKRONA);
+    Account karlskronaAccount = new CurrentAccount(Branch.KARLSKRONA);
     Assertions.assertEquals(karlskronaAccount.branch(), Branch.KARLSKRONA);
   }
 }

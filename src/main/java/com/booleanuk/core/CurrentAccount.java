@@ -5,20 +5,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentAccount implements Account {
+  // Only protected because SavingsAccount is an inherited copy of this class
   protected List<Transaction> transactions;
+  protected Branch branch;
 
-  public CurrentAccount() {
+  public CurrentAccount(Branch branch) {
     this.transactions = new ArrayList<>();
+    this.branch = branch;
   }
 
-  public CurrentAccount(int deposit) {
-    this();
+  public CurrentAccount(Branch branch, int deposit) {
+    this(branch);
     this.transactions.add(new Transaction(deposit, TransactionType.DEPOSIT, LocalDateTime.now()));
   }
 
   @Override
   public int balance() {
     return this.balance(this.transactions.size() - 1);
+  }
+
+  @Override
+  public Branch branch() {
+    return this.branch;
   }
 
   private int balance(int nTransactions) {

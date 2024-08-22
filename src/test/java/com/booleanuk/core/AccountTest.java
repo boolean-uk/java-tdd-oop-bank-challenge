@@ -2,8 +2,7 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTest {
 
@@ -18,5 +17,11 @@ public class AccountTest {
         assertEquals(0, current.getInterest());
 
         assertEquals(5, savings.getInterest());
+    }
+
+    @Test
+    public void testDeposit() {
+        Account savings = new SavingsAccount(0, "Company");
+        assertTrue(savings.deposit(500));
     }
 }

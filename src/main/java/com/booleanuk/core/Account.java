@@ -10,6 +10,14 @@ public class Account {
     private ArrayList<Transaction> transactions;
     private int interest;
 
+    public boolean deposit(int amount) {
+        if (amount < 1) {
+            System.out.println("Amount must be positive.");
+            return false;
+        }
+        return true;
+    }
+
     public int getId() {
         return id;
     }

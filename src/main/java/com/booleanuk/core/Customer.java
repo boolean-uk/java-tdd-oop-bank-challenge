@@ -9,6 +9,7 @@ public class Customer {
     }
 
     public boolean requestCurrentAccount() {
-        return true;
+        return createCurrentAccount(this);
     }
+
 }

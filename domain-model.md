@@ -1,12 +1,14 @@
 # Domain model for banking system
 
 ## Domain model Account interface
-| Methods                     |
-|-----------------------------|
-| `int balance()`             |
-| `void deposit(int amount)`  |
-| `void withdraw(int amount)` |
-| `String getHistory()`       |
+| Methods                                         |
+|-------------------------------------------------|
+| `int balance()`                                 |
+| `void deposit(int amount)`                      |
+| `void deposit(int amount, LocalDateTime time)`  |
+| `void withdraw(int amount)`                     |
+| `void withdraw(int amount, LocalDateTime time)` |
+| `String getHistory()`                           |
 
 
 ## Domain model CurrentAccount class

@@ -13,6 +13,9 @@ public class Bank {
     }
 
     public boolean createCurrentAccount(Customer customer){
+        if (!customers.contains(customer)) {
+            return false;
+        }
         List<Account> customerAccounts = customer.getAccounts();
         Account currentAccount = new CurrentAccount();
         customerAccounts.add(currentAccount);

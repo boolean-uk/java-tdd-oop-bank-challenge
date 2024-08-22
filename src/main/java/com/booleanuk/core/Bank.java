@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Bank {
     private final String name;
-    private List<Customer> customers;
+    private final List<Customer> customers;
 
     public Bank(String name) {
         this.name = name;
@@ -18,5 +18,9 @@ public class Bank {
         }
         customers.add(customer);
         return true;
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
     }
 }

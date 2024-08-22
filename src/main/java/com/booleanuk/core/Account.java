@@ -8,6 +8,7 @@ public class Account {
     private String type;
     private String branch;
     private ArrayList<Transaction> transactions;
+    private int interest;
 
     public int getId() {
         return id;
@@ -39,5 +40,13 @@ public class Account {
 
     public void setTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+    }
+
+    public int getInterest() {
+        return interest;
+    }
+
+    public void setInterest(int interest) {
+        this.interest = interest;
     }
 }

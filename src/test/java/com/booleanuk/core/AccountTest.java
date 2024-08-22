@@ -15,6 +15,6 @@ public class AccountTest {
         Account current = new CurrentAccount(1, "Private");
         assertEquals(1, current.getId());
 
-        assertNull(current.getInterest());
+        assertEquals(0, current.getInterest());
     }
 }

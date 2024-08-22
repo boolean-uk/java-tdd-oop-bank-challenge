@@ -3,6 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerTest {
 
     @Test
@@ -24,5 +27,16 @@ public class CustomerTest {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
         Assertions.assertEquals(0, customer.getAccounts().size());
+    }
+
+    @Test
+    public void testSetAccounts() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        Account account = new Account();
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(account);
+        customer.setAccounts(accounts);
+        Assertions.assertEquals(1, customer.getAccounts().size());
     }
 }

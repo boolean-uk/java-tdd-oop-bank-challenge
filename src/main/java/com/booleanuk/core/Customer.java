@@ -7,4 +7,8 @@ public class Customer {
     public  Customer(String name) {
         this.name = name;
     }
+
+    public boolean requestCurrentAccount() {
+        return true;
+    }
 }

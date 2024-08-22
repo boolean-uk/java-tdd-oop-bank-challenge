@@ -1,5 +1,19 @@
 # Domain model for banking system
 
+## Domain model OverdraftException class
+| Extends          |
+|------------------|
+| RuntimeException |
+
+## Domain model Branch enum
+| Variants    |
+|-------------|
+| Oslo        |
+| Karlskrona  |
+| Southampton |
+| Bournemouth |
+
+
 ## Domain model Account interface
 | Methods                                         |
 |-------------------------------------------------|

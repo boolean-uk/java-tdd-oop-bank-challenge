@@ -38,4 +38,12 @@ public class BankTest {
         Assertions.assertFalse(bank.getCustomers().contains(customer3));
     }
 
+    @Test
+    public void testCreateCurrentAccount() {
+        Bank bank = new Bank("Bank");
+        Customer customer1 = new Customer("Name");
+        bank.addCustomer(customer1);
+
+        Assertions.assertTrue(bank.createCurrentAccount(customer1));
+    }
 }

@@ -66,4 +66,10 @@ class CurrentAccountTest {
     Account karlskronaAccount = new CurrentAccount(Branch.KARLSKRONA);
     Assertions.assertEquals(karlskronaAccount.branch(), Branch.KARLSKRONA);
   }
+
+  @Test
+  public void testOverdraft() {
+    Account account = new CurrentAccount(Branch.OSLO, 100);
+    Assertions.assertThrows(OverdraftException.class, () -> account.withdraw(200));
+  }
 }

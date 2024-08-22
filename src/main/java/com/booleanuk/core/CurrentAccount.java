@@ -6,20 +6,32 @@ import java.util.List;
 
 public class CurrentAccount implements Account {
   protected List<Transaction> transactions;
-  protected int balance;
 
   public CurrentAccount() {
-    this(0);
+    this.transactions = new ArrayList<>();
   }
 
   public CurrentAccount(int deposit) {
-    this.balance = deposit;
-    this.transactions = new ArrayList<>();
+    this();
+    this.transactions.add(new Transaction(deposit, TransactionType.DEPOSIT, LocalDateTime.now()));
   }
 
   @Override
   public int balance() {
-    return this.balance;
+    return this.balance(this.transactions.size() - 1);
+  }
+
+  private int balance(int nTransactions) {
+    int balance = 0;
+    for (int i = 0; i <= nTransactions; ++i) {
+      Transaction transaction = this.transactions.get(i);
+      if (transaction.type() == TransactionType.DEPOSIT)
+        balance += transaction.amount();
+      else if (transaction.type() == TransactionType.WITHDRAWAL)
+        balance -= transaction.amount();
+    }
+
+    return balance;
   }
 
   @Override
@@ -29,8 +41,7 @@ public class CurrentAccount implements Account {
 
   @Override
   public void deposit(int amount, LocalDateTime time) {
-    this.balance += amount;
-    this.transactions.add(new Transaction(amount, this.balance, TransactionType.DEPOSIT, time));
+    this.transactions.add(new Transaction(amount, TransactionType.DEPOSIT, time));
   }
 
   @Override
@@ -40,8 +51,7 @@ public class CurrentAccount implements Account {
 
   @Override
   public void withdraw(int amount, LocalDateTime time) {
-    this.balance -= amount;
-    this.transactions.add(new Transaction(amount, this.balance, TransactionType.WITHDRAWAL, time));
+    this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
   }
 
   @Override
@@ -61,8 +71,10 @@ public class CurrentAccount implements Account {
 
     history.append("||\n");
 
-    for (Transaction transaction : this.transactions.reversed())
-      history.append(transaction);
+    for (int i = this.transactions.size() - 1; i >= 0; --i) {
+      Transaction transaction = this.transactions.get(i);
+      history.append(transaction.toStringWithBalance(this.balance(i)));
+    }
 
     return history.toString();
   }

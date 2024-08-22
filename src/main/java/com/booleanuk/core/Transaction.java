@@ -3,9 +3,8 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record Transaction(int amount, int balance, TransactionType type, LocalDateTime time) {
-  @Override
-  public String toString() {
+public record Transaction(int amount, TransactionType type, LocalDateTime time) {
+  public String toStringWithBalance(int balance) {
     // This is just some garbage AI generated code for formating the strings. Should
     // probably clean it up and improve it
     String[] columns = new String[4];
@@ -24,7 +23,7 @@ public record Transaction(int amount, int balance, TransactionType type, LocalDa
         break;
 
       default:
-        throw new RuntimeException("Unexpected transaction type");
+        throw new RuntimeException("Unknown transaction type");
     }
 
     int[] columnWidths = { 20, 10, 10, 10 };

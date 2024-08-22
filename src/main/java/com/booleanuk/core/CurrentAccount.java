@@ -20,13 +20,13 @@ public class CurrentAccount implements Account {
   }
 
   @Override
-  public int balance() {
-    return this.balance(this.transactions.size() - 1);
+  public Branch branch() {
+    return this.branch;
   }
 
   @Override
-  public Branch branch() {
-    return this.branch;
+  public int balance() {
+    return this.balance(this.transactions.size() - 1);
   }
 
   private int balance(int nTransactions) {
@@ -61,9 +61,19 @@ public class CurrentAccount implements Account {
   public void withdraw(int amount, LocalDateTime time) throws OverdraftException {
     int balance = this.balance();
     if (balance - amount < 0)
-      throw new OverdraftException(balance, amount);
+      throw new OverdraftException(balance, amount, this);
 
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
+  }
+
+  public void forceWithdraw(int amount) {
+    this.forceWithdraw(amount, LocalDateTime.now());
+  }
+
+  public void forceWithdraw(int amount, LocalDateTime time) {
+    System.out.println("alksdlkalskd " + this.balance());
+    this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
+    System.out.println("alksdlkalskd2222 " + this.balance());
   }
 
   @Override

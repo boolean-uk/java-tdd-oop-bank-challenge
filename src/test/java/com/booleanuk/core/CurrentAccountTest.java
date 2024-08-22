@@ -83,7 +83,7 @@ class CurrentAccountTest {
       Assertions.fail();
     } catch (OverdraftException exception) {
       exception.accept();
-      Assertions.assertEquals(account.balance(), -100);
+      Assertions.assertEquals(-100, account.balance());
     }
 
     try {
@@ -92,7 +92,7 @@ class CurrentAccountTest {
       Assertions.fail();
     } catch (OverdraftException exception) {
       exception.decline();
-      Assertions.assertEquals(account.balance(), -100);
+      Assertions.assertEquals(-100, account.balance());
     }
   }
 }

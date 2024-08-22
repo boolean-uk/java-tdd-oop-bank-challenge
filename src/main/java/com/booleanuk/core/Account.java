@@ -13,6 +13,10 @@ public interface Account {
 
   void withdraw(int amount, LocalDateTime time);
 
+  void forceWithdraw(int amount);
+
+  void forceWithdraw(int amount, LocalDateTime time);
+
   String getHistory();
 
   Branch branch();

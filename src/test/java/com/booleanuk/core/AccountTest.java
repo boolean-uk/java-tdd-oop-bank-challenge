@@ -11,4 +11,10 @@ public class AccountTest {
         Assertions.assertNotNull(account);
         Assertions.assertNotNull(account.getAccountNumber());
     }
+
+    @Test
+    public void testGetBalance() {
+        Account account = new Account();
+        Assertions.assertEquals(0, account.getBalance());
+    }
 }

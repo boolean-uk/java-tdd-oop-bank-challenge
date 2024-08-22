@@ -7,7 +7,15 @@ public class CustomerTest {
 
     @Test
     public void testCreateCustomerInstance() {
-        Customer bank = new Customer("Name");
-        Assertions.assertNotNull(bank);
+        Customer customer = new Customer("Name");
+        Assertions.assertNotNull(customer);
+    }
+
+    @Test
+    public void testRequestCurrentAccount() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        Assertions.assertTrue(customer.requestCurrentAccount());
     }
 }

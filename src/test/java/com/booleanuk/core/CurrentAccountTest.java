@@ -72,4 +72,27 @@ class CurrentAccountTest {
     Account account = new CurrentAccount(Branch.OSLO, 100);
     Assertions.assertThrows(OverdraftException.class, () -> account.withdraw(200));
   }
+
+  @Test
+  public void testOverdraftAcceptDecline() {
+    Account account = new CurrentAccount(Branch.OSLO, 100);
+
+    try {
+      account.withdraw(200);
+      // Should be unreachable
+      Assertions.fail();
+    } catch (OverdraftException exception) {
+      exception.accept();
+      Assertions.assertEquals(account.balance(), -100);
+    }
+
+    try {
+      account.withdraw(100);
+      // Should be unreachable
+      Assertions.fail();
+    } catch (OverdraftException exception) {
+      exception.decline();
+      Assertions.assertEquals(account.balance(), -100);
+    }
+  }
 }

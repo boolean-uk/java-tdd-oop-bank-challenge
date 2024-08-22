@@ -1,9 +1,11 @@
 # Domain model for banking system
 
 ## Domain model OverdraftException class
-| Extends          |
-|------------------|
-| RuntimeException |
+| Extends            | Methods          |
+|--------------------|------------------|
+| `RuntimeException` |                  |
+|                    | `void accept()`  |
+|                    | `void decline()` |
 
 ## Domain model Branch enum
 | Variants    |

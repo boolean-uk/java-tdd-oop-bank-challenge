@@ -18,4 +18,12 @@ public class BankTest {
         Assertions.assertTrue(bank.addCustomer(customer));
         Assertions.assertFalse(bank.addCustomer(customer));
     }
+
+    @Test
+    public void testGetCustomers() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        Assertions.assertEquals(1, bank.getCustomers().size());
+    }
 }

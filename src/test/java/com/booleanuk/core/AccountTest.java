@@ -23,6 +23,7 @@ public class AccountTest {
 
     @Test
     public void testDepositAndWithdraw() {
+        bank = new Bank();
         Account current = new CurrentAccount(0, "Company", bank);
         assertTrue(current.deposit(500));
         assertEquals(500, current.calcCurrentAmount());

@@ -16,5 +16,6 @@ public class BankTest {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
         Assertions.assertTrue(bank.addCustomer(customer));
+        Assertions.assertFalse(bank.addCustomer(customer));
     }
 }

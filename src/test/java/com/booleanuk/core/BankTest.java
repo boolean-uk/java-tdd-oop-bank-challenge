@@ -9,6 +9,7 @@ public class BankTest {
     public void testCreateBankInstance() {
         Bank bank = new Bank("Bank");
         Assertions.assertNotNull(bank);
+        Assertions.assertEquals("Bank", bank.getName());
     }
 
     @Test

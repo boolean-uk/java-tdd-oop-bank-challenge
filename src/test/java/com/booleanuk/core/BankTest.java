@@ -33,5 +33,9 @@ public class BankTest {
         Assertions.assertEquals(2, bank.getCustomers().size());
         Assertions.assertTrue(bank.getCustomers().contains(customer1));
         Assertions.assertTrue(bank.getCustomers().contains(customer2));
+
+        Customer customer3 = new Customer("Name");
+        Assertions.assertFalse(bank.getCustomers().contains(customer3));
     }
+
 }

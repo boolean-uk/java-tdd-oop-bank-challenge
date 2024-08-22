@@ -27,5 +27,8 @@ public class AccountTest {
         assertTrue(current.deposit(5000));
         assertEquals(5500, current.calcCurrentAmount());
 
+        current.withdraw(4000);
+        assertEquals(1500, current.calcCurrentAmount());
+
     }
 }

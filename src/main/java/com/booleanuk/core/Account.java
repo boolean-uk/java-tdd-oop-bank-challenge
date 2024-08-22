@@ -15,7 +15,17 @@ public class Account {
             System.out.println("Amount must be positive.");
             return false;
         }
+        Transaction transaction = new Transaction(amount);
+        this.transactions.add(transaction);
         return true;
+    }
+
+    public int calcCurrentAmount() {
+        int amount = 0;
+        for (Transaction transaction : this.transactions) {
+            amount += transaction.getAmount();
+        }
+        return amount;
     }
 
     public int getId() {

@@ -53,12 +53,16 @@ public class CurrentAccount implements Account {
   }
 
   @Override
-  public void withdraw(int amount) {
+  public void withdraw(int amount) throws OverdraftException {
     this.withdraw(amount, LocalDateTime.now());
   }
 
   @Override
-  public void withdraw(int amount, LocalDateTime time) {
+  public void withdraw(int amount, LocalDateTime time) throws OverdraftException {
+    int balance = this.balance();
+    if (balance - amount < 0)
+      throw new OverdraftException(balance, amount);
+
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
   }
 

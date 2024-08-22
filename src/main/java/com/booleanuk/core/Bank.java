@@ -12,6 +12,10 @@ public class Bank {
         this.customers = new ArrayList<>();
     }
 
+    public boolean createCurrentAccount(Customer customer){
+        return true;
+    }
+
     public boolean addCustomer(Customer customer) {
         if (customers.contains(customer)){
             return false;

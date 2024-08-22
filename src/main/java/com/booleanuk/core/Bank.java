@@ -13,6 +13,9 @@ public class Bank {
     }
 
     public boolean createCurrentAccount(Customer customer){
+        List<Account> customerAccounts = customer.getAccounts();
+        Account currentAccount = new CurrentAccount();
+        customerAccounts.add(currentAccount);
         return true;
     }
 

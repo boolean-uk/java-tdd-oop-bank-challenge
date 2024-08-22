@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+
 public class SavingsAccount implements Account {
   private int balance;
 
@@ -22,7 +24,17 @@ public class SavingsAccount implements Account {
   }
 
   @Override
+  public void deposit(int amount, LocalDateTime time) {
+    this.balance += amount;
+  }
+
+  @Override
   public void withdraw(int amount) {
+    this.balance -= amount;
+  }
+
+  @Override
+  public void withdraw(int amount, LocalDateTime time) {
     this.balance -= amount;
   }
 

@@ -16,5 +16,7 @@ public class AccountTest {
         assertEquals(1, current.getId());
 
         assertEquals(0, current.getInterest());
+
+        assertEquals(5, savings.getInterest());
     }
 }

@@ -21,11 +21,11 @@ public class AccountTest {
 
     @Test
     public void testDepositAndWithdraw() {
-        Account savings = new SavingsAccount(0, "Company");
-        assertTrue(savings.deposit(500));
-        assertEquals(500, savings.calcCurrentAmount());
-        assertTrue(savings.deposit(5000));
-        assertEquals(5500, savings.calcCurrentAmount());
+        Account current = new CurrentAccount(0, "Company");
+        assertTrue(current.deposit(500));
+        assertEquals(500, current.calcCurrentAmount());
+        assertTrue(current.deposit(5000));
+        assertEquals(5500, current.calcCurrentAmount());
 
     }
 }

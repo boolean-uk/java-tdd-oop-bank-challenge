@@ -1,0 +1,196 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "com.booleanuk.core.Transaction",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_2058424510 { 
+   	label=booleanuk
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_543727311 { 
+   	label=core
+	labeljust=l
+	fillcolor="#d8d8d8"
+	style=filled
+   
+   Account1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Account</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   accountName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   currentWithdrawalCount: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   isOverdraft: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   maxBalance: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   transactions: ArrayList&lt;Transaction&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ deposit(credit: double): Status</TD></TR>
+<TR><TD ALIGN="LEFT" ># monthlyMaxWithdrawalCount(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BankManager1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BankManager</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   accountOverdraftRequests: ArrayList&lt;Integer&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   accounts: ArrayList&lt;Account&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >+   targetAccount: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ accountOverview()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ bankManagement()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createNewAccount()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ depositCallback()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ handleRequest(accountIndex: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ populateBankManagementMenu(manager: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printBankStatement()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printCurrentBalance()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ repopulateAccountMenu(accountMenu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ requestOverdraft()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ tellRequest(accountIndex: int, accepted: boolean)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ transactionsMenu(targetAccount: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ withdrawCallback()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+CurrentAccount1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CurrentAccount</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># monthlyMaxWithdrawalCount(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SavingsAccount1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SavingsAccount</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># monthlyMaxWithdrawalCount(): int</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Transaction1325589212[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Transaction</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   credit: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   date: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   type: TransactionType [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ clone(): Transaction</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+} 
+
+'edges    
+Account1325589212 -> CurrentAccount1325589212[arrowhead=none, arrowtail=empty, dir=both];
+Account1325589212 -> SavingsAccount1325589212[arrowhead=none, arrowtail=empty, dir=both];
+Account1325589212 -> Transaction1325589212[label="transactions
+[0..*]"];
+BankManager1325589212 -> Account1325589212[label="accounts
+[0..*]"];
+    
+}
+@enduml

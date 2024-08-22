@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Account {
 
+    private Bank bank;
     private int id;
     private String type;
     private String branch;
@@ -36,6 +37,14 @@ public class Account {
             amount += transaction.getAmount();
         }
         return amount;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 
     public int getId() {

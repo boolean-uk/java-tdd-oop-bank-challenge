@@ -23,5 +23,6 @@ public class AccountTest {
     public void testDeposit() {
         Account savings = new SavingsAccount(0, "Company");
         assertTrue(savings.deposit(500));
+        assertEquals(500, savings.calcCurrentAmount());
     }
 }

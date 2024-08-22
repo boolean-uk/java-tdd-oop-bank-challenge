@@ -13,6 +13,6 @@ public class TransactionTest {
     public void testCreateTransaction() {
         Transaction transaction = new Transaction(500);
         assertEquals(500, transaction.getAmount());
-        assertEquals(new Date(), transaction.getDate());
+        assertEquals(new Date().toString(), transaction.getDate().toString());
     }
 }

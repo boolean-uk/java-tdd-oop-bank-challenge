@@ -1,11 +1,15 @@
 package com.booleanuk.core;
 
+import java.util.Date;
+
 public class Transaction {
 
     private int amount;
+    private Date date;
 
     public Transaction(int amount) {
         this.setAmount(amount);
+        this.setDate(new Date());
     }
 
 
@@ -15,5 +19,13 @@ public class Transaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

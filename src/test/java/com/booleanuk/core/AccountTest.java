@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class AccountTest {
 
@@ -13,5 +14,7 @@ public class AccountTest {
 
         Account current = new CurrentAccount(1, "Private");
         assertEquals(1, current.getId());
+
+        assertNull(current.getInterest());
     }
 }

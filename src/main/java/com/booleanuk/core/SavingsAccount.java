@@ -1,45 +1,15 @@
 package com.booleanuk.core;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 
-public class SavingsAccount implements Account {
-  private int balance;
-
+// Specificiation does not say anything about what the difference is between account types so SavingsAccount is just the same as a CurrentAccount
+public class SavingsAccount extends CurrentAccount {
   public SavingsAccount() {
-    this.balance = 0;
+    this(0);
   }
 
   public SavingsAccount(int deposit) {
     this.balance = deposit;
-  }
-
-  @Override
-  public int balance() {
-    return this.balance;
-  }
-
-  @Override
-  public void deposit(int amount) {
-    this.balance += amount;
-  }
-
-  @Override
-  public void deposit(int amount, LocalDateTime time) {
-    this.balance += amount;
-  }
-
-  @Override
-  public void withdraw(int amount) {
-    this.balance -= amount;
-  }
-
-  @Override
-  public void withdraw(int amount, LocalDateTime time) {
-    this.balance -= amount;
-  }
-
-  @Override
-  public String getHistory() {
-    throw new UnsupportedOperationException("Unimplemented method 'getHistory'");
+    this.transactions = new ArrayList<>();
   }
 }

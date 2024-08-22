@@ -41,15 +41,20 @@ class CurrentAccountTest {
 
   @Test
   public void testHistory() {
-    Account account = new CurrentAccount(100);
-    account.deposit(1000, LocalDateTime.of(2012, 01, 10, 0, 0));
-    account.deposit(200, LocalDateTime.of(2012, 01, 13, 0, 0));
-    account.withdraw(500, LocalDateTime.of(2012, 01, 14, 0, 0));
+    Account account = new CurrentAccount();
+
+    LocalDateTime firstDepositDate = LocalDateTime.of(2012, 01, 10, 0, 0);
+    LocalDateTime secondDepositDate = LocalDateTime.of(2012, 01, 13, 0, 0);
+    LocalDateTime firstWithdrawDate = LocalDateTime.of(2012, 01, 14, 0, 0);
+    account.deposit(1000, firstDepositDate);
+    account.deposit(2000, secondDepositDate);
+    account.withdraw(500, firstWithdrawDate);
 
     String history = account.getHistory();
-    Assertions.assertTrue(history.contains("date       || credit  || debit  || balance"));
-    Assertions.assertTrue(history.contains("14/01/2012 ||         || 500.00 || 2500.00"));
-    Assertions.assertTrue(history.contains("13/01/2012 || 2000.00 ||        || 3000.00"));
-    Assertions.assertTrue(history.contains("10/01/2012 || 1000.00 ||        || 1000.00"));
+
+    Assertions.assertTrue(history.contains("||         date         ||   credit   ||   debit    ||  balance   ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-14 00:00:00  ||            ||    500     ||    2500    ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-13 00:00:00  ||    2000    ||            ||    3000    ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-10 00:00:00  ||    1000    ||            ||    1000    ||"));
   }
 }

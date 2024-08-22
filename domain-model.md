@@ -10,6 +10,19 @@
 | `void withdraw(int amount, LocalDateTime time)` |
 | `String getHistory()`                           |
 
+## Domain model TransactionType enum
+| Variants     |
+|--------------|
+| `DEPOSIT`    |
+| `WITHDRAWAL` |
+
+## Domain model Transaction record
+| Variables              | Methods             |
+|------------------------|---------------------|
+| `int amount`           |                     |
+| `TransactionType type` |                     |
+| `LocalDateTime time`   |                     | 
+|                        | `String toString()` | 
 
 ## Domain model CurrentAccount class
 | Implements | Variables     | Methods | Scenario | Output |

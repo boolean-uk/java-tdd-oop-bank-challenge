@@ -14,4 +14,6 @@ public interface Account {
   void withdraw(int amount, LocalDateTime time);
 
   String getHistory();
+
+  Branch branch();
 }

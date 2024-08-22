@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import sun.util.resources.cldr.CurrencyNames;
+
 class CurrentAccountTest {
   @Test
   public void testWithdraw() {
@@ -56,5 +58,14 @@ class CurrentAccountTest {
     Assertions.assertTrue(history.contains("|| 2012-01-14 00:00:00  ||            ||    500     ||    2500    ||"));
     Assertions.assertTrue(history.contains("|| 2012-01-13 00:00:00  ||    2000    ||            ||    3000    ||"));
     Assertions.assertTrue(history.contains("|| 2012-01-10 00:00:00  ||    1000    ||            ||    1000    ||"));
+  }
+
+  @Test
+  public void testBranch() {
+    Account osloAccount = new CurrencyNames(Branch.OSLO);
+    Assertions.assertEquals(osloAccount.branch(), Branch.OSLO);
+
+    Account karlskronaAccount = new CurrencyNames(Branch.KARLSKRONA);
+    Assertions.assertEquals(karlskronaAccount.branch(), Branch.KARLSKRONA);
   }
 }

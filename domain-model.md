@@ -4,7 +4,7 @@
 | Methods                     |
 |-----------------------------|
 | `int balance()`             |
-| `void deposit()`            |
+| `void deposit(int amount)`  |
 | `void withdraw(int amount)` |
 | `String getHistory()`       |
 

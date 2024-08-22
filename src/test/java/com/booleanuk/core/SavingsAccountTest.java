@@ -3,10 +3,10 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class AccountTest {
+class SavingsAccountTest {
   @Test
   public void testWithdraw() {
-    Account account = new CurrentAccount(100);
+    Account account = new SavingsAccount(100);
 
     account.withdraw(50);
     Assertions.assertEquals(50, account.balance());
@@ -17,7 +17,7 @@ class AccountTest {
 
   @Test
   public void testDeposit() {
-    Account account = new CurrentAccount(100);
+    Account account = new SavingsAccount(100);
 
     account.deposit(50);
     Assertions.assertEquals(150, account.balance());
@@ -28,7 +28,7 @@ class AccountTest {
 
   @Test
   public void testWithdrawDeposit() {
-    Account account = new CurrentAccount(100);
+    Account account = new SavingsAccount(100);
 
     account.withdraw(50);
     Assertions.assertEquals(50, account.balance());

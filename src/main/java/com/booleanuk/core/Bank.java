@@ -23,4 +23,8 @@ public class Bank {
     public List<Customer> getCustomers() {
         return customers;
     }
+
+    public String getName() {
+        return name;
+    }
 }

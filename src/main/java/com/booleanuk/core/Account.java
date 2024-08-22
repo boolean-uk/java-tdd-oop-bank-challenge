@@ -20,6 +20,16 @@ public class Account {
         return true;
     }
 
+    public boolean withdraw(int amount) {
+        if (amount < 1) {
+            System.out.println("Amount must be positive.");
+            return false;
+        }
+        Transaction transaction = new Transaction(-amount);
+        this.transactions.add(transaction);
+        return true;
+    }
+
     public int calcCurrentAmount() {
         int amount = 0;
         for (Transaction transaction : this.transactions) {

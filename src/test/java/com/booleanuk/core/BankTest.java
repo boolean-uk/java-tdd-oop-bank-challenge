@@ -19,5 +19,6 @@ public class BankTest {
     public void testCreateAccount() {
         bank = new Bank();
         assertEquals(bank.createAccount("Savings", "Private"), 0);
+        assertEquals(bank.createAccount("Savings", "Private"), 1);
     }
 }

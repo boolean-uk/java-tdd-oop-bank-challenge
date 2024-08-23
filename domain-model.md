@@ -6,6 +6,7 @@
 | `RuntimeException` |                  |                                                           |                             |
 |                    | `void accept()`  | Bank manager wants to accept the given overdraft request  | Users balance goes negative |
 |                    | `void decline()` | Bank manager wants to decline the given overdraft request |                             | 
+
 ## Domain model Branch enum
 | Variants    |
 |-------------|
@@ -14,22 +15,21 @@
 | Southampton |
 | Bournemouth |
 
-
 ## Domain model Account interface
-| Methods                                              |
-|------------------------------------------------------|
-| `int balance()`                                      |
-|                                                      |
-| `void deposit(int amount)`                           |
-| `void deposit(int amount, LocalDateTime time)`       |
-|                                                      |
-| `void withdraw(int amount)`                          |
-| `void withdraw(int amount, LocalDateTime time)`      |
-|                                                      |
-| `void forceWithdraw(int amount)`                     |
-| `void forceWithdraw(int amount, LocalDateTime time)` |
-|                                                      |
-| `String getHistory()`                                |
+| Methods                                                                   |
+|---------------------------------------------------------------------------|
+| `int balance()`                                                           |
+|                                                                           |
+| `void deposit(int amount)`                                                |
+| `void deposit(int amount, LocalDateTime time)`                            |
+|                                                                           |
+| `void withdraw(int amount) throws OverdraftException`                     |
+| `void withdraw(int amount, LocalDateTime time) throws OverdraftException` |
+|                                                                           |
+| `void forceWithdraw(int amount)`                                          |
+| `void forceWithdraw(int amount, LocalDateTime time)`                      |
+|                                                                           |
+| `String getHistory()`                                                     |
 
 ## Domain model TransactionType enum
 | Variants     |
@@ -46,10 +46,9 @@
 |                        | `String toStringWithBalance(int balance)` | User wants to get a nicely formatted statement for a transaction | A nicely formatted statement for a transaction | 
 
 ## Domain model CurrentAccount class
-| Implements | Variables     |
-|------------|---------------|
-| `Account`  |               |
-|            | `int balance` |
+| Implements |
+|------------|
+| `Account`  |
 
 ## Domain model SavingsAccount class
 - This class is just a copy of `CurrentAccount` with no difference in behavior.

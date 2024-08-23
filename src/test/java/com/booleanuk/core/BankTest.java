@@ -3,6 +3,7 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class BankTest {
 
@@ -23,5 +24,7 @@ public class BankTest {
         assertEquals(1, bank.createAccount( "Savings", "Private"));
 
         assertEquals(0, bank.getAccount(accountId).getId());
+        accountId = bank.createAccount("Current", "Private");
+        assertEquals(bank.getIdCounter(), bank.getAccount(accountId).getBank().getIdCounter());
     }
 }

@@ -43,6 +43,14 @@ public class Bank {
         return false;
     }
 
+    public boolean withdraw(int id, int amount) {
+        if (accounts.containsKey(id)) {
+            return accounts.get(id).withdraw(amount);
+        }
+        System.out.println("No such account exists.");
+        return false;
+    }
+
     public int calculateOverdraft() {
         return 0;
     }

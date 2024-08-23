@@ -78,4 +78,17 @@ public class CustomerTest {
         Assertions.assertEquals(bank, customer.getBank());
     }
 
+    @Test
+    public void testDepositInCurrentAccount() {
+        double amountToDeposit = 100.00;
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        customer.requestCurrentAccount();
+        Account currentAccount = customer.getAccounts().getFirst();
+        Assertions.assertTrue(customer.deposit(currentAccount, amountToDeposit));
+        Assertions.assertEquals(amountToDeposit, currentAccount.getBalance());
+
+    }
+
 }

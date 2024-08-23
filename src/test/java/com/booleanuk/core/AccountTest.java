@@ -19,6 +19,13 @@ public class AccountTest {
     }
 
     @Test
+    public void testSetBalance() {
+        Account account = new Account();
+        account.setBalance(100.0);
+        Assertions.assertEquals(100.0, account.getBalance());
+    }
+
+    @Test
     public void testGetTransactions() {
         Account account = new Account();
         Assertions.assertEquals(0, account.getTransactions().size());

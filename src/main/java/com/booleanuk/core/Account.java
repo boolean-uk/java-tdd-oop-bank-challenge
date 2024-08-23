@@ -33,16 +33,19 @@ public abstract class Account {
         this.accountID = accountID;
     }
 
-    public void deposit(double amount) {
+    public String deposit(double amount) {
         if (amount > 0) {
             this.balance += amount;
         }
+
+        return "The amount should be positive!";
     }
 
-    public void withdraw(double amount) {
+    public String withdraw(double amount) {
         if (amount > 0 && amount <= this.balance) {
             this.balance -= amount;
         }
+        return "You dont have enough money for this withdrawal!";
     }
 
 }

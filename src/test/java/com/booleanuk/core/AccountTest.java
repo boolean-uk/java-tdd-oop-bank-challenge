@@ -33,6 +33,21 @@ public class AccountTest {
 
     }
 
+    @Test
+    public  void NegativeDepositTest() {
+        Account account = new CurrentAccount(500);
+        Assertions.assertEquals("The amount should be positive!", account.deposit(-100));
+
+    }
+
+    @Test
+    public void withdrawalTestIfAmountExceedsLimit() {
+        Account account = new CurrentAccount(500);
+        Assertions.assertEquals("You dont have enough money for this withdrawal!", account.withdraw(600));
+
+
+    }
+
 
 
 }

@@ -28,4 +28,8 @@ public class Customer {
     public Bank getBank() {
         return bank;
     }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 }

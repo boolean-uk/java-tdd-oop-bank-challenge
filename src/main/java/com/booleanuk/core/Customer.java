@@ -24,5 +24,17 @@ public class Customer {
     }
 
     public void addAccount(String type){
+        type = type.toLowerCase();
+        if(type.equals("current")){
+            Current current = new Current();
+            accounts.add(current);
+        }
+        else if(type.equals("savings")){
+            Savings savings = new Savings();
+            accounts.add(savings);
+        }
+        else{
+            System.out.println("Error: No such account type.");
+        }
     }
 }

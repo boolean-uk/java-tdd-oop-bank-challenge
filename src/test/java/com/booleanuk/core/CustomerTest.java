@@ -21,6 +21,10 @@ public class CustomerTest {
         bank.addCustomer(customer);
         Assertions.assertTrue(customer.requestCurrentAccount());
         Assertions.assertEquals(1, customer.getAccounts().size());
+
+        Customer customer2 = new Customer("Name");
+        Assertions.assertFalse(customer2.requestCurrentAccount());
+
     }
 
 

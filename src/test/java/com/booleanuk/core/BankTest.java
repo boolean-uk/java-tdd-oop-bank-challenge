@@ -2,8 +2,7 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BankTest {
 
@@ -29,5 +28,12 @@ public class BankTest {
 
 
         assertEquals(-1, bank.createAccount("Current", "Brivate"));
+    }
+
+    @Test
+    public void testDepositAndWithdraw() {
+        bank = new Bank();
+        int accountId = bank.createAccount("Savings", "Private");
+        assertTrue(bank.deposit(accountId, 500));
     }
 }

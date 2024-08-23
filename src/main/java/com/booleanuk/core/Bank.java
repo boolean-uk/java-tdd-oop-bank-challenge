@@ -12,10 +12,16 @@ public class Bank {
         this.idCounter = 0;
         this.accounts = new HashMap<>();
         this.branches = new ArrayList<>();
+        this.branches.add("Private");
+        this.branches.add("Company");
     }
 
     public int createAccount(String type, String branch) {
         Account newAccount;
+        if (!branches.contains(branch)) {
+            System.out.println("No such branch exists.");
+            return -1;
+        }
         if (type.equals("Savings")) {
             newAccount = new SavingsAccount(idCounter, branch);
         } else if (type.equals("Current")) {

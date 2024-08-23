@@ -23,4 +23,19 @@ public class AccountTest {
         Account account = new Account();
         Assertions.assertEquals(0, account.getTransactions().size());
     }
+
+    @Test
+    public void testAddTransaction() {
+        double amountToDeposit = 100.00;
+        Account account = new Account();
+        account.addTransaction( new Transaction(amountToDeposit, account.getBalance() + amountToDeposit));
+        Assertions.assertEquals(1, account.getTransactions().size());
+        Assertions.assertEquals(amountToDeposit, account.getBalance());
+
+        double amountToWithdraw = -50.00;
+        account.addTransaction( new Transaction(amountToWithdraw, account.getBalance() + amountToWithdraw));
+        Assertions.assertEquals(2, account.getTransactions().size());
+        Assertions.assertEquals(amountToDeposit + amountToWithdraw, account.getBalance());
+    }
+
 }

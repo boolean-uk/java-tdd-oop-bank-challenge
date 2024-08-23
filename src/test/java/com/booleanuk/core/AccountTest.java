@@ -35,6 +35,9 @@ public class AccountTest {
 
         assertFalse(current.withdraw(3000));
 
+        Account savings = new SavingsAccount(1, "Private");
+        assertFalse(savings.withdraw(500));
+
 
     }
 

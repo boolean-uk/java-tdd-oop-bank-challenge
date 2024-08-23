@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrentAccount implements Account {
-  // Only protected because SavingsAccount is an inherited copy of this class
-  protected List<Transaction> transactions;
-  protected Branch branch;
+  private List<Transaction> transactions;
+  private Branch branch;
 
   public CurrentAccount(Branch branch) {
     this.transactions = new ArrayList<>();

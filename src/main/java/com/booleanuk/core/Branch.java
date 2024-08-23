@@ -32,6 +32,12 @@ public class Branch {
         return savingsAccount;
     }
 
+    public Account createCurrentAccount(Costumer costumer, double deposit){
+        CurrentAccount currentAccount = new CurrentAccount(generateId(), this);
+
+        return currentAccount;
+    }
+
     private String generateId() {
        return branchId + " 123";
     }

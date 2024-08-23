@@ -26,7 +26,7 @@ public class MainTest {
     }
 
     @Test
-    public void testAddAccountToBranch() {
+    public void testAddAccountToBranchSavingsAccount() {
         int deposit = 500;
         companyBranch.createSavingsAccount(Company,deposit);
         Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
@@ -35,11 +35,29 @@ public class MainTest {
     }
 
     @Test
-    public void testAddAccountToCostumer() {
+    public void testAddAccountToCostumerSavingsAccount() {
         int deposit = 500;
         companyBranch.createSavingsAccount(Company, deposit);
         Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
         individualBranch.createSavingsAccount(individual, deposit);
+        Assertions.assertEquals(1, individual.getAccountsForCostumer().size());
+    }
+
+    @Test
+    public void testAddAccountToBranchCurrentAccount() {
+        int deposit = 500;
+        companyBranch.createSavingsAccount(Company,deposit);
+        Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
+        individualBranch.createCurrentAccount(individual,deposit);
+        Assertions.assertEquals(1, individualBranch.getAccountsForBranch().size());
+    }
+
+    @Test
+    public void testAddAccountToCostumerCurrentAccount() {
+        int deposit = 500;
+        companyBranch.createSavingsAccount(Company, deposit);
+        Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
+        individualBranch.createCurrentAccount(individual, deposit);
         Assertions.assertEquals(1, individual.getAccountsForCostumer().size());
     }
 }

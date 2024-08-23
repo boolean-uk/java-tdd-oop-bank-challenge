@@ -23,7 +23,6 @@ public class Customer {
         return accounts;
     }
 
-    public void addAccount(){
-
+    public void addAccount(String type){
     }
 }

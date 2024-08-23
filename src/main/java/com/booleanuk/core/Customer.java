@@ -29,6 +29,12 @@ public class Customer {
         return bank.createSavingsAccount(this);
     }
 
+    public boolean deposit(Account account, double amount){
+        account.setBalance(account.getBalance() + amount);
+        Transaction transaction = new Transaction(amount, account.getBalance());
+        account.addTransaction(transaction);
+        return true;
+    }
     public List<Account> getAccounts() {
         return accounts;
     }

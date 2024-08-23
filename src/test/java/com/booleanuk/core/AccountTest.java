@@ -7,15 +7,13 @@ public class AccountTest {
 
     @Test
     public void makeAccountTest() {
-        Customer customer = new Customer("Jeniston", "Antonsen");
-        Account account = new Account(500,customer);
+        Account account = new Account(500);
         Assertions.assertNotNull(account, "The account should be created");
     }
 
     @Test
     public void checkBalance() {
-        Customer customer = new Customer("Jeniston", "Antonsen");
-        Account account = new Account(500,customer);
+        Account account = new Account(500);
         Assertions.assertEquals(500, account.getBalance());
     }
 

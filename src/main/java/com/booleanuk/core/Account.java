@@ -3,12 +3,12 @@ package com.booleanuk.core;
 public class Account {
     private String accountID;
     private double balance;
-    private Customer customer;
 
-    public Account(double balance, Customer customer) {
+
+    public Account(double balance) {
         this.accountID = generateRandomAccountId();
         this.balance = balance;
-        this.customer = customer;
+
     }
 
     private String generateRandomAccountId() {

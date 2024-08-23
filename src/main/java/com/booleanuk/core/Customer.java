@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
@@ -11,6 +12,12 @@ public class Customer {
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.accounts = new ArrayList<>();
+    }
+
+    public void addAccount(Account account) {
+        this.accounts.add(account);
+
     }
 
     public String getFirstName() {

@@ -8,7 +8,7 @@ public class TransactionTest {
     @Test
     public void testCreateTransactionInstance() {
         double amountToDeposit = 100.00;
-        Transaction transaction = new Transaction(amountToDeposit);
+        Transaction transaction = new Transaction(amountToDeposit, amountToDeposit);
         Assertions.assertNotNull(transaction);
     }
 

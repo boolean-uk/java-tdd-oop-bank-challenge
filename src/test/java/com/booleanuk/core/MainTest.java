@@ -75,5 +75,21 @@ public class MainTest {
         Assertions.assertEquals(500, transaction.getAmount());
 
     }
+
+    @Test
+    public void testWithdraw() {
+        savingsAccount.deposit(500);
+        ArrayList<Transaction> transactions = savingsAccount.getTransactions();
+        Transaction transaction = transactions.get(0);
+        Assertions.assertEquals(500, transaction.getAmount());
+
+        savingsAccount.withdraw(500);
+        Transaction transaction1 = transactions.get(1);
+        Assertions.assertEquals(500,transaction.getAmount());
+        Assertions.assertFalse(transaction1.getIsCredit());
+
+
+    }
 }
+
 

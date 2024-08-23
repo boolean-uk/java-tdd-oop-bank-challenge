@@ -13,7 +13,7 @@ public class SavingsAccount extends Account{
 
     @Override
     public void withdraw(int amount) {
-
+        this.addTransaction(amount, false);
     }
 
 }

@@ -12,4 +12,11 @@ public class AccountTest {
         Assertions.assertNotNull(account, "The account should be created");
     }
 
+    @Test
+    public void checkBalance() {
+        Customer customer = new Customer("Jeniston", "Antonsen");
+        Account account = new Account(500,customer);
+        Assertions.assertEquals(500, customer.getBalance);
+    }
+
 }

@@ -16,7 +16,7 @@ public class AccountTest {
     public void checkBalance() {
         Customer customer = new Customer("Jeniston", "Antonsen");
         Account account = new Account(500,customer);
-        Assertions.assertEquals(500, customer.getBalance);
+        Assertions.assertEquals(500, account.getBalance());
     }
 
 }

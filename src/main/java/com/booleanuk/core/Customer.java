@@ -1,9 +1,11 @@
 package com.booleanuk.core;
 
+import java.util.List;
+
 public class Customer {
     private String firstName;
     private String lastName;
-    //private List<Account> accounts;
+    private List<Account> accounts;
 
 
     public Customer(String firstName, String lastName) {

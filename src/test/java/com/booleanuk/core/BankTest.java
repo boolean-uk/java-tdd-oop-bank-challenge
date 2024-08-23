@@ -51,4 +51,17 @@ public class BankTest {
         Customer customer2 = new Customer("Name");
         Assertions.assertFalse(bank.createCurrentAccount(customer2));
     }
+
+    @Test
+    public void testCreateSavingsAccount() {
+        Bank bank = new Bank("Bank");
+        Customer customer1 = new Customer("Name");
+        bank.addCustomer(customer1);
+
+        Assertions.assertTrue(bank.createSavingsAccount(customer1));
+        Assertions.assertEquals(1, customer1.getAccounts().size());
+
+        Customer customer2 = new Customer("Name");
+        Assertions.assertFalse(bank.createSavingsAccount(customer2));
+    }
 }

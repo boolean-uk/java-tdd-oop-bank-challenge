@@ -35,5 +35,15 @@ public class AccountTest {
 
         assertFalse(current.withdraw(3000));
 
+
+    }
+
+    @Test
+    public void testInterest() {
+        Account savings = new SavingsAccount(0, "Company");
+        assertTrue(savings.deposit(500));
+
+        assertEquals(525, savings.calcCurrentAmount());
+
     }
 }

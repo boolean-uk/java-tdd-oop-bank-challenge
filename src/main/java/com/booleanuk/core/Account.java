@@ -26,6 +26,10 @@ public class Account {
             System.out.println("Amount must be positive.");
             return false;
         }
+        if (this.calcCurrentAmount()-amount < 0) {
+            System.out.println("Not enough money in savings account.");
+            return false;
+        }
         Transaction transaction = new Transaction(-amount);
         this.transactions.add(transaction);
         return true;

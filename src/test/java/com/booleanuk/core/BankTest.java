@@ -26,5 +26,8 @@ public class BankTest {
         assertEquals(0, bank.getAccount(accountId).getId());
         accountId = bank.createAccount("Current", "Private");
         assertEquals(bank.getIdCounter(), bank.getAccount(accountId).getBank().getIdCounter());
+
+
+        assertEquals(-1, bank.createAccount("Current", "Brivate"));
     }
 }

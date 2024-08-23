@@ -15,7 +15,15 @@ public class Bank {
     }
 
     public int createAccount(String type, String branch) {
-        Account newAccount = new SavingsAccount(idCounter, branch);
+        Account newAccount;
+        if (type.equals("Savings")) {
+            newAccount = new SavingsAccount(idCounter, branch);
+        } else if (type.equals("Current")) {
+            newAccount = new CurrentAccount(idCounter, branch, this);
+        } else {
+            System.out.println("That is not a correct type of account.");
+            return -1;
+        }
         accounts.put(idCounter, newAccount);
         this.idCounter++;
         return newAccount.getId();

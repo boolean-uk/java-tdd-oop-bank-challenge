@@ -26,11 +26,17 @@ public class MainTest {
     }
 
     @Test
-    public void testOpenCurrentAccount() {
+    public void testAddAccountToBranch() {
         int deposit = 500;
-        companyBranch.createSavingsAccount(individual,deposit);
-        Assertions.assertEquals(1, companyBranch.getAccounts().size());
+        companyBranch.createSavingsAccount(Company,deposit);
+        Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
     }
 
+    @Test
+    public void testAddAccountToCostumer() {
+        int deposit = 500;
+        companyBranch.createSavingsAccount(Company, deposit);
+        Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
+    }
 }
 

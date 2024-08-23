@@ -11,7 +11,7 @@ public class Branch {
         this.branchId = branchId;
     }
 
-    public ArrayList<Account> getAccounts() {
+    public ArrayList<Account> getAccountsForBranch() {
         return accounts;
     }
 
@@ -25,10 +25,15 @@ public class Branch {
 
     public Account createSavingsAccount(Costumer costumer, double deposit){
         SavingsAccount savingsAccount = new SavingsAccount(generateId(), this);
+        costumer.addAccount(savingsAccount);
+        accounts.add(savingsAccount);
+
+
         return savingsAccount;
     }
 
     private String generateId() {
        return branchId + " 123";
     }
+
 }

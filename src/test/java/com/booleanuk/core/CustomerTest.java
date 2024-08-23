@@ -25,6 +25,10 @@ public class CustomerTest {
         Customer customer2 = new Customer("Name");
         Assertions.assertFalse(customer2.requestCurrentAccount());
 
+        Customer customer3 = new Customer("Name");
+        customer3.setBank(new Bank("Name"));
+        Assertions.assertFalse(customer3.requestCurrentAccount());
+
     }
 
 

@@ -91,6 +91,14 @@ public class CustomerTest {
         Assertions.assertEquals(amountToDeposit, currentAccount.getBalance());
         Assertions.assertEquals(1, currentAccount.getTransactions().size());
 
+        Customer customer2 = new Customer("Name");
+        bank.addCustomer(customer2);
+        Account account = new Account();
+        Assertions.assertFalse(customer.deposit(account, amountToDeposit));
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(0, account.getTransactions().size());
+
+
     }
 
 }

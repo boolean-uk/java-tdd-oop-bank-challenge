@@ -12,12 +12,14 @@ public class MainTest {
     Branch lundBranch;
     Costumer costumer = new Costumer("Individual");
     SavingsAccount savingsAccount;
+    CurrentAccount currentAccount;
 
     MainTest() {
         this.bank = new Bank();
         this.stockholmBranch = new Branch("Stockholm");
         this.lundBranch = new Branch("individualBranch");
         this.savingsAccount = new SavingsAccount("12345", lundBranch);
+        this.currentAccount = new CurrentAccount("12345", lundBranch);
 
     }
 
@@ -66,7 +68,7 @@ public class MainTest {
     }
 
     @Test
-    public void testDeposit() {
+    public void testDepositSavingsAccount() {
         savingsAccount.deposit(500);
         Assertions.assertEquals(1, savingsAccount.getTransactions().size());
 
@@ -77,7 +79,7 @@ public class MainTest {
     }
 
     @Test
-    public void testWithdraw() {
+    public void testWithdrawSavingsAccount() {
         savingsAccount.deposit(500);
         ArrayList<Transaction> transactions = savingsAccount.getTransactions();
         Transaction transaction = transactions.get(0);
@@ -88,6 +90,30 @@ public class MainTest {
         Assertions.assertEquals(500,transaction.getAmount());
         Assertions.assertFalse(transaction1.getIsCredit());
 
+    }
+
+    @Test
+    public void testDepositCurrentAccount() {
+        currentAccount.deposit(500);
+        Assertions.assertEquals(1, currentAccount.getTransactions().size());
+
+        ArrayList<Transaction> transactions = currentAccount.getTransactions();
+        Transaction transaction = transactions.get(0);
+        Assertions.assertEquals(500, transaction.getAmount());
+
+    }
+
+    @Test
+    public void testWithdrawCurrentAccount() {
+        currentAccount.deposit(500);
+        ArrayList<Transaction> transactions = currentAccount.getTransactions();
+        Transaction transaction = transactions.get(0);
+        Assertions.assertEquals(500, transaction.getAmount());
+
+        currentAccount.withdraw(500);
+        Transaction transaction1 = transactions.get(1);
+        Assertions.assertEquals(500,transaction.getAmount());
+        Assertions.assertFalse(transaction1.getIsCredit());
 
     }
 }

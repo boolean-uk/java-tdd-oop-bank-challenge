@@ -20,6 +20,7 @@ public class CustomerTest {
         Customer customer = new Customer("Name");
         bank.addCustomer(customer);
         Assertions.assertTrue(customer.requestCurrentAccount());
+        Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
     @Test
@@ -39,4 +40,11 @@ public class CustomerTest {
         customer.setAccounts(accounts);
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
+
+    @Test
+    public void testGetBank() {
+        Customer customer = new Customer("Name");
+        Assertions.assertNull(customer.getBank());
+    }
+
 }

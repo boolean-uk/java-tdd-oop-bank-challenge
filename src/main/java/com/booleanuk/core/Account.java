@@ -9,9 +9,9 @@ public interface Account {
 
   void deposit(int amount, LocalDateTime time);
 
-  void withdraw(int amount);
+  void withdraw(int amount) throws OverdraftException;
 
-  void withdraw(int amount, LocalDateTime time);
+  void withdraw(int amount, LocalDateTime time) throws OverdraftException;
 
   void forceWithdraw(int amount);
 

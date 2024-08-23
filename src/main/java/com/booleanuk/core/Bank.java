@@ -9,5 +9,19 @@ public class Bank {
     public Bank(){
         this.customers = new HashMap<>();
 
+
     }
+
+    public boolean newCustomer(String name){
+        Customer tempCustomer =new Customer(name);
+
+        if(customers.containsKey(tempCustomer)){
+            System.out.println("Customer already exists");
+            return false;
+        }
+        customers.put(tempCustomer, new Account());
+        return true;
+    }
+
+    public boolean newAccount
 }

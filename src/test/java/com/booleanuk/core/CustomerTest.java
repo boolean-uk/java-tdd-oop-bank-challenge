@@ -8,7 +8,7 @@ public class CustomerTest {
     @Test
     public void CustomerExistTest() {
         Customer customer = new Customer("Abdul", "Khan");
-        Assertions.assertEquals("Abdul", customer.getfirstName());
-        Assertions.assertEquals("Khan", customer.getlastName());
+        Assertions.assertEquals("Abdul", customer.getFirstName());
+        Assertions.assertEquals("Khan", customer.getLastName());
     }
 }

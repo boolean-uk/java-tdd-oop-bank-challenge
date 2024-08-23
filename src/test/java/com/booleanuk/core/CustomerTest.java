@@ -11,4 +11,13 @@ public class CustomerTest {
         Assertions.assertEquals("Abdul", customer.getFirstName());
         Assertions.assertEquals("Khan", customer.getLastName());
     }
+
+    @Test
+    public void addAccountToCustomerCheckBalance() {
+        Customer customer = new Customer("Abdul", "Khan");
+        Account account = new Account(500);
+        customer.addAccount(account);
+        Assertions.assertNotNull(customer.getAccounts(), "The account should not be empty!");
+        Assertions.assertEquals(500, customer.getAccounts().get(0).getBalance());
+    }
 }

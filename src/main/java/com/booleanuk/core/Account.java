@@ -7,13 +7,18 @@ import java.util.UUID;
 public class Account {
     private String accountNumber;
     private double balance;
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Transaction> transactions;
 
     public Account(){
         this.accountNumber = UUID.randomUUID().toString();
         this.balance = 0;
+        this.transactions = new ArrayList<>();
     }
 
+    public void addTransaction(Transaction transaction){
+        transactions.add(transaction);
+        balance += transaction.getAmount();
+    }
     public String getAccountNumber() {
         return accountNumber;
     }

@@ -15,7 +15,7 @@ public class TransactionTest {
     @Test
     public void testTransactionGetters() {
         double amountToDeposit = 100.00;
-        Transaction transaction = new Transaction(amountToDeposit);
+        Transaction transaction = new Transaction(amountToDeposit, amountToDeposit);
         Assertions.assertNotNull(transaction);
         Assertions.assertNotNull(transaction.getDate());
         Assertions.assertEquals(amountToDeposit, transaction.getAmount());

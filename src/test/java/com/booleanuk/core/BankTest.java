@@ -20,8 +20,8 @@ public class BankTest {
         bank = new Bank();
         int accountId = bank.createAccount("Savings", "Private");
         assertEquals(0, accountId);
-        assertEquals(bank.createAccount(1, "Savings", "Private"));
+        assertEquals(1, bank.createAccount( "Savings", "Private"));
 
-        assertEquals(bank.getAccount(0, accountId));
+        assertEquals(0, bank.getAccount(accountId));
     }
 }

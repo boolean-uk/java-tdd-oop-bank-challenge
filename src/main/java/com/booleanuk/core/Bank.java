@@ -29,7 +29,13 @@ public class Bank {
     }
 
 
-    public HashMap<Integer, Account> getAccount() {
-        return accounts;
+    public Account getAccount(int id) {
+        for (int accountId : this.accounts.keySet()) {
+            if (accountId == id) {
+                return this.accounts.get(id);
+            }
+        }
+        System.out.println("No such account exists.");
+        return null;
     }
 }

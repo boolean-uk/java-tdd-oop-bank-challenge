@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Account {
 
@@ -41,6 +42,35 @@ public class Account {
             amount += transaction.getAmount();
         }
         return amount;
+    }
+
+    public List<String> printBankStatements() {
+        List<String> transactionStrings = new ArrayList<>();
+        String transactionString;
+        int balance = 0;
+        String currAmount;
+        for (Transaction transaction : this.transactions) {
+            balance += transaction.getAmount();
+            transactionString = "|| " + transaction.getDate().toString() + " || ";
+            if (transaction.getAmount() < 0) {
+                currAmount = "" + (-transaction.getAmount());
+                transactionString += "         || ";
+                transactionString += this.addBlankSpaces(8-currAmount.length()) + currAmount + " || ";
+
+            } else {
+                currAmount = "" + transaction.getAmount();
+                transactionString += this.addBlankSpaces(8-currAmount.length()) + currAmount + " || ";
+                transactionString += "         || ";
+            }
+            currAmount = "" + balance;
+            transactionString += this.addBlankSpaces(8-currAmount.length()) + currAmount + " ||";
+            transactionStrings.addFirst(transactionString);
+        }
+        return transactionStrings;
+    }
+
+    public String addBlankSpaces(int limit) {
+        return " ".repeat(Math.max(0, limit));
     }
 
     public Bank getBank() {

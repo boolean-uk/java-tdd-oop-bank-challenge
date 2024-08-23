@@ -30,6 +30,8 @@ public class MainTest {
         int deposit = 500;
         companyBranch.createSavingsAccount(Company,deposit);
         Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
+        individualBranch.createSavingsAccount(individual,deposit);
+        Assertions.assertEquals(1, individualBranch.getAccountsForBranch().size());
     }
 
     @Test
@@ -37,6 +39,8 @@ public class MainTest {
         int deposit = 500;
         companyBranch.createSavingsAccount(Company, deposit);
         Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
+        individualBranch.createSavingsAccount(individual, deposit);
+        Assertions.assertEquals(1, individual.getAccountsForCostumer().size());
     }
 }
 

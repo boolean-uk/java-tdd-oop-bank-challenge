@@ -14,6 +14,10 @@ public class Customer {
     }
 
     public boolean requestCurrentAccount() {
+        if (bank == null) {
+            System.out.println("Customer do not have a bank.");
+            return false;
+        }
         return bank.createCurrentAccount(this);
     }
 

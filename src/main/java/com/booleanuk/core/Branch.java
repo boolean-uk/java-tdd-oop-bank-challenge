@@ -34,6 +34,8 @@ public class Branch {
 
     public Account createCurrentAccount(Costumer costumer, double deposit){
         CurrentAccount currentAccount = new CurrentAccount(generateId(), this);
+        costumer.addAccount(currentAccount);
+        accounts.add(currentAccount);
 
         return currentAccount;
     }

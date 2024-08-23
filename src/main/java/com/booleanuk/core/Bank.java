@@ -6,7 +6,7 @@ public class Bank {
     private ArrayList<Branch> branches = new ArrayList<>();
 
     public void addBranch(Branch branch) {
-
+        branches.add(branch);
     }
 
     public int getSizeOfBranch () {

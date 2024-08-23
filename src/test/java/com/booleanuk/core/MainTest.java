@@ -6,59 +6,69 @@ import org.junit.jupiter.api.Test;
 public class MainTest {
 
     Bank bank;
-    Branch companyBranch;
-    Branch individualBranch;
-    Costumer individual = new Individual("Individual");
-    Costumer Company = new Company("Company");
+    Branch stockholmBranch;
+    Branch lundBranch;
+    Costumer costumer = new Costumer("Individual");
+    SavingsAccount savingsAccount;
 
     MainTest() {
         this.bank = new Bank();
-        this.companyBranch = new Branch("Company");
-        this.individualBranch = new Branch("individualBranch");
+        this.stockholmBranch = new Branch("Stockholm");
+        this.lundBranch = new Branch("individualBranch");
+        this.savingsAccount = new SavingsAccount("12345", lundBranch);
 
     }
 
     @Test
     public void testAddBranch() {
-        bank.addBranch(companyBranch);
-        bank.addBranch(individualBranch);
+        bank.addBranch(stockholmBranch);
+        bank.addBranch(lundBranch);
         Assertions.assertEquals(2, bank.getSizeOfBranch());
     }
 
     @Test
     public void testAddAccountToBranchSavingsAccount() {
         int deposit = 500;
-        companyBranch.createSavingsAccount(Company,deposit);
-        Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
-        individualBranch.createSavingsAccount(individual,deposit);
-        Assertions.assertEquals(1, individualBranch.getAccountsForBranch().size());
+        stockholmBranch.createSavingsAccount(costumer,deposit);
+        Assertions.assertEquals(1, stockholmBranch.getAccountsForBranch().size());
+        lundBranch.createSavingsAccount(costumer,deposit);
+        Assertions.assertEquals(1, lundBranch.getAccountsForBranch().size());
     }
 
     @Test
     public void testAddAccountToCostumerSavingsAccount() {
         int deposit = 500;
-        companyBranch.createSavingsAccount(Company, deposit);
-        Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
-        individualBranch.createSavingsAccount(individual, deposit);
-        Assertions.assertEquals(1, individual.getAccountsForCostumer().size());
+        stockholmBranch.createSavingsAccount(costumer, deposit);
+        Assertions.assertEquals(1, costumer.getAccountsForCostumer().size());
+        lundBranch.createSavingsAccount(costumer, deposit);
+        Assertions.assertEquals(1, costumer.getAccountsForCostumer().size());
     }
 
     @Test
     public void testAddAccountToBranchCurrentAccount() {
         int deposit = 500;
-        companyBranch.createSavingsAccount(Company,deposit);
-        Assertions.assertEquals(1, companyBranch.getAccountsForBranch().size());
-        individualBranch.createCurrentAccount(individual,deposit);
-        Assertions.assertEquals(1, individualBranch.getAccountsForBranch().size());
+        stockholmBranch.createSavingsAccount(costumer,deposit);
+        Assertions.assertEquals(1, stockholmBranch.getAccountsForBranch().size());
+
+        lundBranch.createCurrentAccount(costumer);
+        Assertions.assertEquals(1, lundBranch.getAccountsForBranch().size());
     }
 
     @Test
     public void testAddAccountToCostumerCurrentAccount() {
+        stockholmBranch.createCurrentAccount(costumer);
+        Assertions.assertEquals(1, costumer.getAccountsForCostumer().size());
+
+        lundBranch.createCurrentAccount(costumer);
+        Assertions.assertEquals(2, costumer.getAccountsForCostumer().size());
+    }
+
+    @Test
+    public void testDeposit() {
         int deposit = 500;
-        companyBranch.createSavingsAccount(Company, deposit);
-        Assertions.assertEquals(1, Company.getAccountsForCostumer().size());
-        individualBranch.createCurrentAccount(individual, deposit);
-        Assertions.assertEquals(1, individual.getAccountsForCostumer().size());
+        stockholmBranch.createSavingsAccount(costumer, deposit);
+        Assertions.assertEquals(1, savingsAccount.getTransactions().size());
+
     }
 }
 

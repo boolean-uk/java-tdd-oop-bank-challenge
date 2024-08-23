@@ -6,5 +6,14 @@ public class SavingsAccount extends Account{
         super(accountNumber, branch);
     }
 
+    @Override
+    public void deposit(int amount) {
+
+    }
+
+    @Override
+    public void withdraw(int amount) {
+
+    }
 
 }

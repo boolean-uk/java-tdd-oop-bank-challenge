@@ -11,7 +11,7 @@ public class Costumer {
         this.costumerId = id;
     }
 
-    public void addAccount(Account account) {
+    public void openAccount(Account account) {
        accounts.add(account);
     }
 

@@ -23,18 +23,17 @@ public class Branch {
         return branchId;
     }
 
-    public Account createSavingsAccount(Costumer costumer, double deposit){
+    public Account createSavingsAccount(Costumer costumer, int deposit){
         SavingsAccount savingsAccount = new SavingsAccount(generateId(), this);
-        costumer.addAccount(savingsAccount);
+        costumer.openAccount(savingsAccount);
         accounts.add(savingsAccount);
-
 
         return savingsAccount;
     }
 
-    public Account createCurrentAccount(Costumer costumer, double deposit){
+    public Account createCurrentAccount(Costumer costumer){
         CurrentAccount currentAccount = new CurrentAccount(generateId(), this);
-        costumer.addAccount(currentAccount);
+        costumer.openAccount(currentAccount);
         accounts.add(currentAccount);
 
         return currentAccount;

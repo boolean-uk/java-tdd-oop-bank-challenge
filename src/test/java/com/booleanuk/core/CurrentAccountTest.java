@@ -52,10 +52,10 @@ class CurrentAccountTest {
 
     String history = account.getHistory();
 
-    Assertions.assertTrue(history.contains("||         date         ||   credit   ||   debit    ||  balance   ||"));
-    Assertions.assertTrue(history.contains("|| 2012-01-14 00:00:00  ||            ||    500     ||    2500    ||"));
-    Assertions.assertTrue(history.contains("|| 2012-01-13 00:00:00  ||    2000    ||            ||    3000    ||"));
-    Assertions.assertTrue(history.contains("|| 2012-01-10 00:00:00  ||    1000    ||            ||    1000    ||"));
+    Assertions.assertTrue(history.contains("|| date                || credit    || debit     || balance   ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-14 00:00:00 || 500       ||           || 2500      ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-13 00:00:00 ||           || 2000      || 3000      ||"));
+    Assertions.assertTrue(history.contains("|| 2012-01-10 00:00:00 ||           || 1000      || 1000      ||"));
   }
 
   @Test

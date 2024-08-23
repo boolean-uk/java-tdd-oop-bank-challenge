@@ -79,19 +79,7 @@ public class CurrentAccount implements Account {
   @Override
   public String getHistory() {
     StringBuilder history = new StringBuilder();
-    history.append("\n");
-
-    String tableLabels = "date || credit || debit || balance";
-    String[] columns = tableLabels.split("\\s*\\|\\|\\s*");
-    int[] columnWidths = { 20, 10, 10, 10 };
-
-    for (int i = 0; i < columns.length; i++) {
-      String centered = String.format("%-" + columnWidths[i] + "s",
-          String.format("%" + ((columnWidths[i] + columns[i].length()) / 2) + "s", columns[i]));
-      history.append("|| ").append(centered.substring(0, columnWidths[i])).append(" ");
-    }
-
-    history.append("||\n");
+    history.append(String.format("|| %-20s|| %-10s|| %-10s|| %-10s||\n", "date", "credit", "debit", "balance"));
 
     for (int i = this.transactions.size() - 1; i >= 0; --i) {
       Transaction transaction = this.transactions.get(i);

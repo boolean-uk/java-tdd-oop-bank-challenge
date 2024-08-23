@@ -14,4 +14,10 @@ public class BankTest {
         assertEquals(0, bank.getIdCounter());
 
     }
+
+    @Test
+    public void testCreateAccount() {
+        bank = new Bank();
+        assertEquals(bank.createAccount("Savings", "Private"), 0);
+    }
 }

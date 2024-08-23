@@ -86,8 +86,10 @@ public class CustomerTest {
         bank.addCustomer(customer);
         customer.requestCurrentAccount();
         Account currentAccount = customer.getAccounts().getFirst();
+
         Assertions.assertTrue(customer.deposit(currentAccount, amountToDeposit));
         Assertions.assertEquals(amountToDeposit, currentAccount.getBalance());
+        Assertions.assertEquals(1, currentAccount.getTransactions().size());
 
     }
 

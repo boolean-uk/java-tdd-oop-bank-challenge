@@ -23,6 +23,17 @@ public class Bank {
         return true;
     }
 
+    public boolean createSavingsAccount(Customer customer){
+        if (!customers.contains(customer)) {
+            return false;
+        }
+        List<Account> customerAccounts = customer.getAccounts();
+        Account savingsAccount = new SavingsAccount();
+        customerAccounts.add(savingsAccount);
+        customer.setAccounts(customerAccounts);
+        return true;
+    }
+
     public boolean addCustomer(Customer customer) {
         if (customers.contains(customer)){
             return false;

@@ -47,4 +47,12 @@ public class CustomerTest {
         Assertions.assertNull(customer.getBank());
     }
 
+    @Test
+    public void testSetBank() {
+        Customer customer = new Customer("Name");
+        Bank bank = new Bank("Bank");
+        customer.setBank(bank);
+        Assertions.assertEquals(bank, customer.getBank());
+    }
+
 }

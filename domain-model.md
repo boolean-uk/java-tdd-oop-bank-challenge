@@ -8,9 +8,9 @@ As a customer,
 So I can save for a rainy day,
 I want to create a savings account.
 
-| Class         | Member variables      | Methods                                         | Scenario                                                    | Outputs    |
-|---------------|-----------------------|-------------------------------------------------|-------------------------------------------------------------|------------|
-| Bank/Customer | `ArrayList<Customer>` | `addAccount(String userId, Account newAccount)` | customer wants to create a new account (savings or current) | true/false |
+| Class         | Member variables      | Methods                                     | Scenario                                                    | Outputs    |
+|---------------|-----------------------|---------------------------------------------|-------------------------------------------------------------|------------|
+| Bank/Customer | `ArrayList<Customer>` | `addAccount(User user, Account newAccount)` | customer wants to create a new account (savings or current) | true/false |
 
 As a customer,
 So I can keep a record of my finances,
@@ -24,7 +24,7 @@ As a customer,
 So I can use my account,
 I want to deposit and withdraw funds.
 
-| Class         | Member variables      | Methods                                                   | Scenario                         | Outputs      |
-|---------------|-----------------------|-----------------------------------------------------------|----------------------------------|--------------|
-| Bank/Customer | `ArrayList<Customer>` | `deposit(String userId, Account account, double amount)`  | customer wants to withdraw money | success/fail |
-| Bank/Customer | `ArrayList<Customer>` | `withdraw(String userId, Account account, double amount)` | customer wants to withdraw money | success/fail |
+| Class         | Member variables      | Methods                                               | Scenario                         | Outputs      |
+|---------------|-----------------------|-------------------------------------------------------|----------------------------------|--------------|
+| Bank/Customer | `ArrayList<Customer>` | `deposit(User user, Account account, double amount)`  | customer wants to deposit money  | success/fail |
+| Bank/Customer | `ArrayList<Customer>` | `withdraw(User user, Account account, double amount)` | customer wants to withdraw money | success/fail |

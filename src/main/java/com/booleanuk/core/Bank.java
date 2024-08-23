@@ -16,6 +16,7 @@ public class Bank {
 
     public int createAccount(String type, String branch) {
         Account newAccount = new SavingsAccount(idCounter, branch);
+        this.idCounter++;
         return newAccount.getId();
     }
 
@@ -28,7 +29,7 @@ public class Bank {
     }
 
 
-    public HashMap<Integer, Account> getAccounts() {
+    public HashMap<Integer, Account> getAccount() {
         return accounts;
     }
 }

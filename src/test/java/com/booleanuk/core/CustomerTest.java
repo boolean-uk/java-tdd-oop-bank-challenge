@@ -23,6 +23,7 @@ public class CustomerTest {
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
+
     @Test
     public void testGetAccounts() {
         Bank bank = new Bank("Bank");

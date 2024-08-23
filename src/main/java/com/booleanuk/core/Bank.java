@@ -14,6 +14,11 @@ public class Bank {
         this.branches = new ArrayList<>();
     }
 
+    public int createAccount(String type, String branch) {
+        Account newAccount = new SavingsAccount(idCounter, branch);
+        return newAccount.getId();
+    }
+
     public int calculateOverdraft() {
         return 0;
     }

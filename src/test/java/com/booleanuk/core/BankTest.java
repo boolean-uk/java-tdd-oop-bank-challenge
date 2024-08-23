@@ -38,5 +38,10 @@ public class BankTest {
         assertEquals(525, bank.getAccount(accountId).calcCurrentAmount());
         assertTrue(bank.withdraw(accountId, 500));
         assertEquals(25, bank.getAccount(accountId).calcCurrentAmount());
+        assertFalse(bank.withdraw(accountId, 500));
+
+        accountId = bank.createAccount("Current", "Private");
+        assertTrue(bank.deposit(accountId, 500));
+        assertEquals(500, bank.getAccount(accountId).calcCurrentAmount());
     }
 }

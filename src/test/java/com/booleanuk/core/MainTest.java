@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 public class MainTest {
 
     Bank bank;
@@ -65,9 +67,12 @@ public class MainTest {
 
     @Test
     public void testDeposit() {
-        int deposit = 500;
-        stockholmBranch.createSavingsAccount(costumer, deposit);
+        savingsAccount.deposit(500);
         Assertions.assertEquals(1, savingsAccount.getTransactions().size());
+
+        ArrayList<Transaction> transactions = savingsAccount.getTransactions();
+        Transaction transaction = transactions.get(0);
+        Assertions.assertEquals(500, transaction.getAmount());
 
     }
 }

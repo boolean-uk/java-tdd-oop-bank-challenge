@@ -4,12 +4,12 @@ package com.booleanuk.core;
 import java.time.LocalDateTime;
 
 public class Transaction {
-    private LocalDateTime date = LocalDateTime.now();
+    private LocalDateTime date;
     private int amount;
     private String type;
     private boolean isCredit;
 
-    Transaction(LocalDateTime localDateTime, int amount, String type, boolean isCredit) {
+    Transaction(LocalDateTime localDateTime, int amount, boolean isCredit) {
         this.date = localDateTime;
         this.amount = amount;
         this.type = type;

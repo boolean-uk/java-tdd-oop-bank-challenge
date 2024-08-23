@@ -25,9 +25,9 @@ public class Branch {
 
     public Account createSavingsAccount(Costumer costumer, int deposit){
         SavingsAccount savingsAccount = new SavingsAccount(generateId(), this);
+        savingsAccount.deposit(deposit);
         costumer.openAccount(savingsAccount);
         accounts.add(savingsAccount);
-
         return savingsAccount;
     }
 

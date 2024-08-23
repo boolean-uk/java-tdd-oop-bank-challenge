@@ -8,7 +8,7 @@ public class SavingsAccount extends Account{
 
     @Override
     public void deposit(int amount) {
-
+        this.addTransaction(amount, true);
     }
 
     @Override

@@ -35,6 +35,14 @@ public class Bank {
         return newAccount.getId();
     }
 
+    public boolean deposit(int id, int amount) {
+        if (accounts.containsKey(id)) {
+            return accounts.get(id).deposit(amount);
+        }
+        System.out.println("No such account exists.");
+        return false;
+    }
+
     public int calculateOverdraft() {
         return 0;
     }

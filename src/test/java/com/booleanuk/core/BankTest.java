@@ -35,5 +35,6 @@ public class BankTest {
         bank = new Bank();
         int accountId = bank.createAccount("Savings", "Private");
         assertTrue(bank.deposit(accountId, 500));
+        assertEquals(525, bank.getAccount(accountId).calcCurrentAmount());
     }
 }

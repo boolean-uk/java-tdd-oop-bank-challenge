@@ -19,6 +19,7 @@ public class Bank {
         List<Account> customerAccounts = customer.getAccounts();
         Account currentAccount = new CurrentAccount();
         customerAccounts.add(currentAccount);
+        customer.setAccounts(customerAccounts);
         return true;
     }
 
@@ -26,6 +27,7 @@ public class Bank {
         if (customers.contains(customer)){
             return false;
         }
+        customer.setBank(this);
         customers.add(customer);
         return true;
     }

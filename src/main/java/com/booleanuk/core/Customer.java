@@ -14,7 +14,7 @@ public class Customer {
     }
 
     public boolean requestCurrentAccount() {
-        return true;
+        return bank.createCurrentAccount(this);
     }
 
     public List<Account> getAccounts() {

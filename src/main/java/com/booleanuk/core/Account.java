@@ -1,6 +1,6 @@
 package com.booleanuk.core;
 
-public class Account {
+public abstract class Account {
     private String accountID;
     private double balance;
 
@@ -32,4 +32,17 @@ public class Account {
     public void setAccountID(String accountID) {
         this.accountID = accountID;
     }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+        }
+    }
+
 }

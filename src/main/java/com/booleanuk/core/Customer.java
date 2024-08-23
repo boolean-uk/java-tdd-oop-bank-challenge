@@ -13,6 +13,7 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accounts = new ArrayList<>();
+        System.out.println("New Customer made!");
     }
 
     public List<Account> getAccounts() {

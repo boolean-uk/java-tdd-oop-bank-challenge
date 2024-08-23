@@ -12,4 +12,14 @@ public class TransactionTest {
         Assertions.assertNotNull(transaction);
     }
 
+    @Test
+    public void testTransactionGetters() {
+        double amountToDeposit = 100.00;
+        Transaction transaction = new Transaction(amountToDeposit);
+        Assertions.assertNotNull(transaction);
+        Assertions.assertNotNull(transaction.getDate());
+        Assertions.assertEquals(amountToDeposit, transaction.getAmount());
+        Assertions.assertEquals(amountToDeposit, transaction.getBalanceAfterTransaction());
+    }
+
 }

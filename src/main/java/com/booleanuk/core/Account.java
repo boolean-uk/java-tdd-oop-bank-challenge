@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.UUID;
 
 public class Account {
-    String accountNumber;
-    double balance;
-    List<Transaction> transactions = new ArrayList<>();
+    private String accountNumber;
+    private double balance;
+    private List<Transaction> transactions = new ArrayList<>();
 
     public Account(){
         this.accountNumber = UUID.randomUUID().toString();

@@ -28,9 +28,7 @@ public class CustomerTest {
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));
         Assertions.assertFalse(customer3.requestCurrentAccount());
-
     }
-
 
     @Test
     public void testGetAccounts() {

@@ -16,6 +16,7 @@ public class Bank {
 
     public int createAccount(String type, String branch) {
         Account newAccount = new SavingsAccount(idCounter, branch);
+        accounts.put(idCounter, newAccount);
         this.idCounter++;
         return newAccount.getId();
     }
@@ -30,10 +31,8 @@ public class Bank {
 
 
     public Account getAccount(int id) {
-        for (int accountId : this.accounts.keySet()) {
-            if (accountId == id) {
-                return this.accounts.get(id);
-            }
+        if (this.accounts.containsKey(id)) {
+            return this.accounts.get(id);
         }
         System.out.println("No such account exists.");
         return null;

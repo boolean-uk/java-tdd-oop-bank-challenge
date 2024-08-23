@@ -22,6 +22,6 @@ public class BankTest {
         assertEquals(0, accountId);
         assertEquals(1, bank.createAccount( "Savings", "Private"));
 
-        assertEquals(0, bank.getAccount(accountId));
+        assertEquals(0, bank.getAccount(accountId).getId());
     }
 }

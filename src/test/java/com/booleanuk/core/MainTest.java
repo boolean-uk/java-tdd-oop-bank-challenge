@@ -8,6 +8,8 @@ public class MainTest {
     Bank bank;
     Branch companyBranch;
     Branch individualBranch;
+    Costumer individual = new Individual("Individual");
+    Costumer Company = new Company("Company");
 
     MainTest() {
         this.bank = new Bank();
@@ -21,6 +23,13 @@ public class MainTest {
         bank.addBranch(companyBranch);
         bank.addBranch(individualBranch);
         Assertions.assertEquals(2, bank.getSizeOfBranch());
+    }
+
+    @Test
+    public void testOpenCurrentAccount() {
+        int deposit = 500;
+        companyBranch.createSavingsAccount(individual,deposit);
+        Assertions.assertEquals(1, companyBranch.getAccounts().size());
     }
 
 }

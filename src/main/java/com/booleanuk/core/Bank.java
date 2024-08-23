@@ -12,5 +12,7 @@ public class Bank {
     public int getSizeOfBranch () {
         return branches.size();
     }
-
+    public ArrayList<Branch> getBranch() {
+        return this.branches;
+    }
 }

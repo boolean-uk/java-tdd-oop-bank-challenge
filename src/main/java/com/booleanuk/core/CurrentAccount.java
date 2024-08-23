@@ -65,10 +65,12 @@ public class CurrentAccount implements Account {
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
   }
 
+  @Override
   public void forceWithdraw(int amount) {
     this.forceWithdraw(amount, LocalDateTime.now());
   }
 
+  @Override
   public void forceWithdraw(int amount, LocalDateTime time) {
     System.out.println("alksdlkalskd " + this.balance());
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));

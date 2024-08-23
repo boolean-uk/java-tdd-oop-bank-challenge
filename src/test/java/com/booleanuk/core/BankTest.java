@@ -11,7 +11,7 @@ public class BankTest {
     @Test
     public void testBankCreate() {
         bank = new Bank();
-        assertEquals(0, bank.getId());
+        assertEquals(0, bank.getIdCounter());
 
     }
 }

@@ -45,5 +45,18 @@ public class BankTest {
         assertEquals(500, bank.getAccount(accountId).calcCurrentAmount());
         assertTrue(bank.withdraw(accountId, 500));
         assertEquals(0, bank.getAccount(accountId).calcCurrentAmount());
+
+        assertTrue(bank.withdraw(accountId, 250));
+        assertEquals(-250, bank.getAccount(accountId).calcCurrentAmount());
+        assertTrue(bank.withdraw(accountId, 250));
+        assertEquals(-500, bank.getAccount(accountId).calcCurrentAmount());
+
+        assertFalse(bank.withdraw(accountId, 250));
+        assertEquals(-500, bank.getAccount(accountId).calcCurrentAmount());
+
+        bank.createAccount("Current", "Private");
+
+        assertTrue(bank.withdraw(accountId, 250));
+        assertEquals(-750, bank.getAccount(accountId).calcCurrentAmount());
     }
 }

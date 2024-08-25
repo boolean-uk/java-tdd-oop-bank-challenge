@@ -50,7 +50,7 @@ public class AccountTest {
 
 
     @Test
-    void addTransactionShouldPrintHeaderOnce() {
+    public void addTransactionShouldPrintHeaderOnce() {
         Account account = new CurrentAccount(500);
         Assertions.assertFalse(account.isHeaderPrinted(), "Header should not be printed initially");
         account.addTransaction(1000.00, "credit");
@@ -62,7 +62,7 @@ public class AccountTest {
     }
 
     @Test
-    void getInterestRateTest() {
+    public void getInterestRateTest() {
         Customer customer = new Customer("Melvin", "Seelan");
         Account account = new SavingAccount(500, 3);
         customer.addAccount(account);
@@ -74,6 +74,17 @@ public class AccountTest {
 
 
 
+    }
+
+    @Test
+    public void applyInterestRateTest() {
+        Customer customer =  new Customer("Melvin", "Seelan");
+        Account savingAccount = new SavingAccount(500, 3);
+        customer.addAccount(savingAccount);
+        savingAccount.applyInterest();
+        double expectedBalance = 500 + (500*3.00/100);
+        Assertions.assertNotNull(savingAccount);
+        Assertions.assertEquals(expectedBalance, customer.getAccounts().get(0).getBalance());
     }
 
 }

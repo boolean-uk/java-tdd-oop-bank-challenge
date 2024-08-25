@@ -81,10 +81,11 @@ public class AccountTest {
         Customer customer =  new Customer("Melvin", "Seelan");
         Account savingAccount = new SavingAccount(500, 3);
         customer.addAccount(savingAccount);
-        savingAccount.applyInterest();
         double expectedBalance = 500 + (500*3.00/100);
-        Assertions.assertNotNull(savingAccount);
-        Assertions.assertEquals(expectedBalance, customer.getAccounts().get(0).getBalance());
+        SavingAccount retrievedAccount = (SavingAccount) customer.getAccounts().get(0);
+        retrievedAccount.applyInterest();
+        Assertions.assertNotNull(retrievedAccount, "Saving account sohuld not be null!");
+        Assertions.assertEquals(expectedBalance, retrievedAccount.getBalance(),0.01);
     }
 
 }

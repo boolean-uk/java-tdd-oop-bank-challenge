@@ -15,4 +15,10 @@ public class SavingAccount extends Account {
     public void setInterestRate(double interestRate) {
         this.interestRate = interestRate;
     }
+
+    public void applyInterest() {
+        double interest = getBalance() * (interestRate/100);
+        deposit(interest);
+
+    }
 }

@@ -18,7 +18,7 @@ public class AccountTest {
     }
 
     @Test
-    public  void DepositTest() {
+    public void DepositTest() {
         Account account = new CurrentAccount(500);
         account.deposit(100);
         Assertions.assertEquals(600, account.getBalance());
@@ -26,7 +26,7 @@ public class AccountTest {
     }
 
     @Test
-    public  void WithdrawalTest() {
+    public void WithdrawalTest() {
         Account account = new CurrentAccount(500);
         account.withdraw(100);
         Assertions.assertEquals(400, account.getBalance());
@@ -34,7 +34,7 @@ public class AccountTest {
     }
 
     @Test
-    public  void NegativeDepositTest() {
+    public void NegativeDepositTest() {
         Account account = new CurrentAccount(500);
         Assertions.assertEquals("The amount should be positive!", account.deposit(-100));
 
@@ -61,4 +61,19 @@ public class AccountTest {
 
     }
 
+    @Test
+    void getInterestRateTest() {
+        Customer customer = new Customer("Melvin", "Seelan");
+        Account account = new SavingAccount(500, 3);
+        customer.addAccount(account);
+        Assertions.assertTrue(true, "Account should be of type SavingAccount");
+        Assertions.assertEquals(customer.getAccounts().get(0).getBalance(),500);
+        SavingAccount savingAccountFromCustomer = (SavingAccount) account;
+        Assertions.assertEquals(savingAccountFromCustomer.getInterestRate(),3);
+
+
+
+
     }
+
+}

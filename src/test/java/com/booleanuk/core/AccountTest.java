@@ -49,5 +49,16 @@ public class AccountTest {
     }
 
 
+    @Test
+    void addTransactionShouldPrintHeaderOnce() {
+        Account account = new CurrentAccount(500);
+        Assertions.assertFalse(account.isHeaderPrinted(), "Header should not be printed initially");
+        account.addTransaction(1000.00, "credit");
+        account.addTransaction(500.00, "debit");
 
-}
+        Assertions.assertTrue(account.isHeaderPrinted(), "Header should be printed after the first transaction");
+        Assertions.assertEquals(2, account.getTransactions().size(), "There should be two transactions recorded");
+
+    }
+
+    }

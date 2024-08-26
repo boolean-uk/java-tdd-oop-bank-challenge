@@ -85,15 +85,15 @@ I want statements to be sent as messages to my phone.
 | `boolean canOverdraft`                      | Decides if customer can overdraft account. |
 | `Type ownerBranch`                          | Branch associated with account.            |
 
-| Methods                                           | Scenario                                                                                       | Outputs                                                                                          |
-|---------------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| `void deposit(int amount)`                        | Customer wants to deposit money into the account.                                              | -                                                                                                |
-| `boolean withdraw(int amount)`                    | Customer wants to withdraw money from the account.                                             | If customer has sufficient money in account, or overdraft has been accepted.                     |
-|                                                   |                                                                                                | False if customer does not have sufficient money in account and overdraft has not been accepted. |
-| `String generateBankStatement()`                  | Creates list of transactions, including dates, amounts and balance.                            | -                                                                                                |
-| `String calculateBalanceFromTransactionHistory()` | Customer wants account balance to be based on transaction history instead of stored in memory. | -                                                                                                |
-| `void printBankStatement()`                       | Prints either of the aforementioned bank statements.                                           |                                                                                                  |
-| `void requestOverdraft()`                         | Customer wants to be allowed to overdraft the account.                                         | -                                                                                                |
+| Methods                                        | Scenario                                                                                       | Outputs                                                                                          |
+|------------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| `void deposit(int amount)`                     | Customer wants to deposit money into the account.                                              | -                                                                                                |
+| `boolean withdraw(int amount)`                 | Customer wants to withdraw money from the account.                                             | If customer has sufficient money in account, or overdraft has been accepted.                     |
+|                                                |                                                                                                | False if customer does not have sufficient money in account and overdraft has not been accepted. |
+| `String generateBankStatement()`               | Creates list of transactions, including dates, amounts and balance.                            | -                                                                                                |
+| `int calculateBalanceFromTransactionHistory()` | Customer wants account balance to be based on transaction history instead of stored in memory. | -                                                                                                |
+| `void printBankStatement()`                    | Prints either of the aforementioned bank statements.                                           |                                                                                                  |
+| `void requestOverdraft()`                      | Customer wants to be allowed to overdraft the account.                                         | -                                                                                                |
 
 ### SavingsAccount extends Account Class
 

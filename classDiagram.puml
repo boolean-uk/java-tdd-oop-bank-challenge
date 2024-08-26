@@ -18,8 +18,7 @@ Class Account {
 + deposit(): void
 + withdraw(): boolean
 + generateBankStatement(): String
-+ calculateBalanceFromTransactionHistory(): String
-+ printBankStatement: void
++ calculateBalanceFromTransactionHistory(): int
 + requestOverdraft(): void
 }
 

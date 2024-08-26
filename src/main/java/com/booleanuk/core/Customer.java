@@ -6,13 +6,14 @@ public class Customer {
     private String name;
     private ArrayList<Account> accounts;
     private int customerID;
+    private Bank mybank;
 
 
-
-    public Customer(String name, int customerID){
+    public Customer(String name, int customerID, Bank bank){
         this.name = name;
         this.accounts = new ArrayList<>();
         this.customerID = customerID;
+        this.mybank = bank;
     }
 
     public void addAccount(Account account){

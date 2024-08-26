@@ -10,13 +10,17 @@ public class SavingsAccount implements Account{
     private String branch;
     private double balance;
     private double overdraftAmount;
+    private Bank bank;
+    private Customer customer;
 
-    public SavingsAccount(String branch, int uniqueID){
+    public SavingsAccount(String branch, int uniqueID, Bank bank, Customer customer){
         this.branch = branch;
         this.uniqueID = uniqueID;
         this.balance = 0;
         this.transactions = new ArrayList<>();
         this.overdraftAmount = 1000;
+        this.bank = bank;
+        this.customer = customer;
     }
 
 
@@ -92,6 +96,14 @@ public class SavingsAccount implements Account{
         return "";
     }
 
+    public void requestOverdraft(Double overdraftAmount){
+        OverdraftRequest request = new OverdraftRequest(this.customer, this, 5000);
+        bank.addOverdraftRequest(request);
+        System.out.println("Overdraft request sent");
+
+
+    }
+
     public void setOverdraftAmount(Double overdraftAmount){
         this.overdraftAmount = overdraftAmount;
     }
@@ -127,6 +139,14 @@ public class SavingsAccount implements Account{
 
     public void setBranch(String branch) {
         this.branch = branch;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
     }
 
     @Override

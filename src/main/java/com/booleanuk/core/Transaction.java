@@ -9,6 +9,7 @@ public class Transaction {
     private double depositAmount;
     private double withdrawAmount;
     private int transactionID;
+    private Bank bank;
 
     public Transaction(double depositAmount, double withdrawAmount){
         this.depositAmount = depositAmount;

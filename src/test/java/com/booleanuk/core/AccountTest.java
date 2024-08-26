@@ -38,4 +38,26 @@ public class AccountTest {
         Assertions.assertEquals(deposit - withdrawal, accountBalance);
     }
 
+    @Test
+    public void CalculateCurrentBalanceTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        // Assert that the transaction history is empty
+        Assertions.assertTrue(account.getTransactionHistory().isEmpty());
+
+        int deposit = 1337;
+        int deposit2 = 7331;
+        int deposit3 = 1234;
+
+        account.deposit(deposit);
+        account.deposit(deposit2);
+        account.deposit(deposit3);
+
+        int currentBalance = c.getAccounts().getFirst().calculateCurrentBalance();
+
+        Assertions.assertEquals(1337+7331+1234, currentBalance);
+    }
 }

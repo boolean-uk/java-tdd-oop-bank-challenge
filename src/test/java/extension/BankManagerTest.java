@@ -1,6 +1,7 @@
 package extension;
 
 import com.booleanuk.core.BankManager;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class BankManagerTest {
@@ -9,6 +10,9 @@ public class BankManagerTest {
     public void makeABankManager() {
         BankManager bankManager = new BankManager();
 
-        bankManager.addAccount(500);
+        bankManager.addCurrentAccount(500, "Stockholm");
+
+
+        Assertions.assertEquals(500, bankManager.getAccountWithIDInBranch("Stockholm", 0));
     }
 }

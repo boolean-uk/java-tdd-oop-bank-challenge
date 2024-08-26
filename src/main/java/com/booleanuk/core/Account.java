@@ -7,7 +7,7 @@ public class Account {
     private float balanceChecker;
     private ArrayList<Transaction> transactionsList;
 
-    public Account(float firstDeposit) {
+    public Account(float firstDeposit, int id) {
         this.balanceChecker = firstDeposit;
         this.transactionsList = new ArrayList<>();
         //First initial deposit of account

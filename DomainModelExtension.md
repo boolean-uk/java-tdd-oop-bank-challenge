@@ -5,16 +5,17 @@ Uses the same logic as Core but with added functionality
 
 ## BankManager
 
-| Variable                          | Method                         | Scenario                                                   | Output |
-|-----------------------------------|--------------------------------|------------------------------------------------------------|--------|
-| HashMap<String, Account> branches | addAccount(float firstDeposit) | Make a new account for a customer and add it to the branch |        |
-|                                   |                                |                                                            |        |
-|                                   |                                |                                                            |        |
-|                                   |                                |                                                            |        |
-|                                   |                                |                                                            |        |
-|                                   |                                |                                                            |        |
-Variables has a get
-
+| Variable                                                              | Method                                        | Scenario                                                   | Output |
+|-----------------------------------------------------------------------|-----------------------------------------------|------------------------------------------------------------|--------|
+| HashMap<String, HashMap<String, HashMap<Integer, Account>>> branches; | addAccount(float firstDeposit, String branch) | Make a new account for a customer and add it to the branch |        |
+| HashMap<String, HashMap<Integer, Account>> currentAccountsList;       |                                               |                                                            |        |
+| HashMap<String, HashMap<Integer, Account>> savingAccountsList;        |                                               |                                                            |        |
+| HashMap<Integer, Account> currentAccounts;                            |                                               |                                                            |        |
+| HashMap<Integer, Account> savingAccounts;                             |                                               |                                                            |        |
+|                                                                       |                                               |                                                            |        |
+Variables has a getter and setter 
+Each branch has a HashMap for currentAccounts and one for savingAccounts with a corresponding ID.
+The user does not need to create a saving accounts when creating a currentAccount.
 
 ## Account
 | Variable                                | Method                          | Scenario                                        | Outcome                          |

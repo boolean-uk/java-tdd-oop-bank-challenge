@@ -73,4 +73,15 @@ public abstract class Account {
             System.out.println("Overdraft has already been requested.");
         }
     }
+
+    /*
+    The following functionality is meant for the manager only.
+     */
+    public void rejectOverdraftRequest(){
+        if (overdraftRequested) { this.canOverdraft = false; }
+    }
+
+    public void acceptOverdraftRequest(){
+        if (overdraftRequested) { this.canOverdraft = true; };
+    }
 }

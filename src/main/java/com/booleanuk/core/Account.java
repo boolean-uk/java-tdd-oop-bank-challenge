@@ -25,7 +25,9 @@ public class Account {
     }
 
     public Transaction withdraw(int money){
-        return null;
+        Transaction newTransaction = new Transaction(0, money);
+        transactions.add(newTransaction);
+        return newTransaction;
     }
 
     public void statement(){

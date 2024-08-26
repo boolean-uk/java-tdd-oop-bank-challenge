@@ -76,6 +76,6 @@ public class BankTest {
         Assertions.assertNotNull(customer1.getAccounts().getFirst().getBranch());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(bank.createSavingsAccount(customer2), "Customer is not in the bank.");
+        Assertions.assertFalse(bank.createSavingsAccount(customer2, branch), "Customer is not in the bank.");
     }
 }

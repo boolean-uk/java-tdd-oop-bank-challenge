@@ -28,12 +28,13 @@ public class Bank {
         return true;
     }
 
-    public boolean createSavingsAccount(Customer customer){
+    public boolean createSavingsAccount(Customer customer, Branch branch){
         if (!customers.contains(customer)) {
             return false;
         }
         List<Account> customerAccounts = customer.getAccounts();
         Account savingsAccount = new SavingsAccount();
+        savingsAccount.setBranch(branch);
         customerAccounts.add(savingsAccount);
         customer.setAccounts(customerAccounts);
         return true;

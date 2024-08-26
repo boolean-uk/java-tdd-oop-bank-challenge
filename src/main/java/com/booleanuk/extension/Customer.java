@@ -21,12 +21,12 @@ public class Customer {
         return bank.createCurrentAccount(this, branch);
     }
 
-    public boolean requestSavingsAccount() {
+    public boolean requestSavingsAccount(Branch branch) {
         if (bank == null) {
             System.out.println("Customer do not have a bank.");
             return false;
         }
-        return bank.createSavingsAccount(this);
+        return bank.createSavingsAccount(this, branch);
     }
 
     public boolean deposit(Account account, double amount){

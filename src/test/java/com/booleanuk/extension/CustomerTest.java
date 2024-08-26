@@ -37,11 +37,11 @@ public class CustomerTest {
         Customer customer = new Customer("Name");
         Branch branch = bank.getBranches().getFirst();
         bank.addCustomer(customer);
-        Assertions.assertTrue(customer.requestSavingsAccount());
+        Assertions.assertTrue(customer.requestSavingsAccount(branch));
         Assertions.assertEquals(1, customer.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(customer2.requestSavingsAccount(), "Customer are not a customer of the bank.");
+        Assertions.assertFalse(customer2.requestSavingsAccount(branch), "Customer are not a customer of the bank.");
 
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));

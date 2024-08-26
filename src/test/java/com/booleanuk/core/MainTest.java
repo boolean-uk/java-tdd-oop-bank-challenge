@@ -130,6 +130,7 @@ public class MainTest {
     @Test
     public void testRequestOverDraft() {
         Assertions.assertTrue(currentAccount.requestOverDraft(manager, 500));
+        Assertions.assertFalse(currentAccount.requestOverDraft(manager, 1001));
 
     }
 }

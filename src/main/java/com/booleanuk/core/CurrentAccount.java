@@ -20,7 +20,7 @@ public class CurrentAccount extends Account{
     }
 
     public boolean requestOverDraft(Manager manager, int amount) {
-        return false;
+        return manager.approveOverDraft(this, amount);
     }
 
 }

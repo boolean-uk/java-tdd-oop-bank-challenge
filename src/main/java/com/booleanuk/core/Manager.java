@@ -9,6 +9,6 @@ public class Manager {
     }
 
     public boolean approveOverDraft(Account account, int amount) {
-        return false;
+        return !(amount - account.getBalance() > 1000);
     }
 }

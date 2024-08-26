@@ -48,6 +48,30 @@ public class AccountTest {
     }
 
     @Test
+    public void NoOverdraftWithdrawTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        account.deposit(2000);
+
+        boolean result = account.withdraw(3000);
+
+        // Assert that withdrawal failed.
+        Assertions.assertFalse(result);
+
+        // Request and accept overdraft
+        account.requestOverdraft();
+        account.acceptOverdraftRequest();
+
+        result = account.withdraw(3000);
+
+        // Assert that the transaction was successful.
+        Assertions.assertTrue(result);
+    }
+
+    @Test
     public void CalculateCurrentBalanceTest(){
         /*
         As an engineer,

@@ -1,0 +1,43 @@
+@startuml
+
+Class Transaction {
+- date: LocalDateTime
+- amount: int
+- currentBalance: float
+}
+
+Class Customer {
+- accounts : ArrayList<Account>
+}
+
+Class Account {
+- canOverdraft: boolean
+- balance: int
+- transactionHistory: ArrayList<Transaction>
+- Type ownerBranch
++ deposit(): void
++ withdraw(): boolean
++ generateBankStatement(): String
++ calculateBalanceFromTransactionHistory(): String
++ printBankStatement: void
++ requestOverdraft(): void
+}
+
+Class Savings extends Account {
+}
+
+Class Current extends Account {
+}
+
+Class Manager(){
++ manageOverdraftRequest()
+}
+
+Class Branch {
+- accounts : ArrayList<Account>
+}
+
+
+
+
+@enduml

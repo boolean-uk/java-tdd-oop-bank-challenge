@@ -220,5 +220,18 @@ public class CustomerTest {
         Assertions.assertEquals(-100.00, currentAccount.getBalance());
     }
 
+    @Test
+    public void testWithdrawOverdraftRequestNotApproved() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        Branch branch = bank.getBranches().getFirst();
+        customer.requestCurrentAccount(branch);
+        Account currentAccount = customer.getAccounts().getFirst();
+        customer.requestOverdraft(currentAccount, 100.00);
+
+        Assertions.assertFalse(customer.withdraw(currentAccount, 100.00), "Overdraft request is not approved. Withdraw should not be successful.");
+        Assertions.assertEquals(0.00, currentAccount.getBalance());
+    }
 
 }

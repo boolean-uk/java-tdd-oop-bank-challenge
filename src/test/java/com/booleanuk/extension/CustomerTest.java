@@ -62,7 +62,6 @@ public class CustomerTest {
 
     @Test
     public void testSetAccounts() {
-        Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
         Account account = new Account();
         List<Account> accounts = new ArrayList<>();

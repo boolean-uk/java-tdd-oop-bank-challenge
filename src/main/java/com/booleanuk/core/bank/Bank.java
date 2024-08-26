@@ -137,4 +137,24 @@ public class Bank {
         return false;
     }
 
+    public boolean approveOverdraft(Overdraft o) {
+        for (Customer c : this.customers.values()) {
+            for (Overdraft oo : c.getAllOverdrafts()) {
+                if (oo.getId().equals(o.getId())) oo.approveOverdraft();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean rejectOverdraft(Overdraft o) {
+        for (Customer c : this.customers.values()) {
+            for (Overdraft oo : c.getAllOverdrafts()) {
+                if (oo.getId().equals(o.getId())) oo.rejectOverdraft();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

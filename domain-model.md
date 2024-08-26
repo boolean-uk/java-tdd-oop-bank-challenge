@@ -75,8 +75,9 @@ These are the methods in the `Account` class.
 
 And these are the methods in the `Transaction` class.
 
-| Name | Parameter | Return | Description |
-|------|-----------|--------|-------------|
+| Name       | Parameter | Return   | Description                             |
+|------------|-----------|----------|-----------------------------------------|
+| `toString` |           | `String` | Outputs a transaction in a nice format. |
 
 
 

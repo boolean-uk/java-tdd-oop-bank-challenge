@@ -52,14 +52,4 @@ abstract class Account {
     public void setBalance(double balance) {
         this.balance = balance;
     }
-
-    public static void main(String[] args) {
-        Current currentAccount = new Current("test", "23843898p342");
-        currentAccount.deposit(500.0);
-
-        currentAccount.deposit(200.0);
-        currentAccount.withdraw(100.0);
-
-        currentAccount.printStatement();
-    }
 }

@@ -38,6 +38,17 @@ public class Customer {
         account.addTransaction(transaction);
         return true;
     }
+
+    public boolean withdraw(Account account, double amount){
+        if (!accounts.contains(account)){
+            return false;
+        }
+        account.setBalance(account.getBalance() - amount);
+        Transaction transaction = new Transaction(-amount, account.getBalance());
+        account.addTransaction(transaction);
+        return true;
+    }
+
     public List<Account> getAccounts() {
         return accounts;
     }

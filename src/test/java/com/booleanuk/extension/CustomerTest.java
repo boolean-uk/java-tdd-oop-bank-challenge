@@ -18,22 +18,24 @@ public class CustomerTest {
     public void testRequestCurrentAccount() {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
+        Branch branch = bank.getBranches().getFirst();
         bank.addCustomer(customer);
-        Assertions.assertTrue(customer.requestCurrentAccount());
+        Assertions.assertTrue(customer.requestCurrentAccount(branch));
         Assertions.assertEquals(1, customer.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(customer2.requestCurrentAccount(), "Customer are not a customer of the bank.");
+        Assertions.assertFalse(customer2.requestCurrentAccount(branch), "Customer are not a customer of the bank.");
 
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));
-        Assertions.assertFalse(customer3.requestCurrentAccount(), "Customer are not a customer of the bank.");
+        Assertions.assertFalse(customer3.requestCurrentAccount(branch), "Customer are not a customer of the bank.");
     }
 
     @Test
     public void testRequestSavingsAccount() {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
+        Branch branch = bank.getBranches().getFirst();
         bank.addCustomer(customer);
         Assertions.assertTrue(customer.requestSavingsAccount());
         Assertions.assertEquals(1, customer.getAccounts().size());
@@ -43,17 +45,18 @@ public class CustomerTest {
 
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));
-        Assertions.assertFalse(customer3.requestCurrentAccount(), "Customer are not a customer of the bank.");
+        Assertions.assertFalse(customer3.requestCurrentAccount(branch), "Customer are not a customer of the bank.");
     }
 
     @Test
     public void testGetAccounts() {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
+        Branch branch = bank.getBranches().getFirst();
         Assertions.assertEquals(0, customer.getAccounts().size());
 
         bank.addCustomer(customer);
-        customer.requestCurrentAccount();
+        customer.requestCurrentAccount(branch);
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
@@ -91,8 +94,9 @@ public class CustomerTest {
         double amountToDeposit = 100.00;
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
+        Branch branch = bank.getBranches().getFirst();
         bank.addCustomer(customer);
-        customer.requestCurrentAccount();
+        customer.requestCurrentAccount(branch);
         Account currentAccount = customer.getAccounts().getFirst();
 
         Assertions.assertTrue(customer.deposit(currentAccount, amountToDeposit));
@@ -113,8 +117,9 @@ public class CustomerTest {
         double amountToDeposit = 200.00;
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
+        Branch branch = bank.getBranches().getFirst();
         bank.addCustomer(customer);
-        customer.requestCurrentAccount();
+        customer.requestCurrentAccount(branch);
         Account currentAccount = customer.getAccounts().getFirst();
         customer.deposit(currentAccount, amountToDeposit);
 
@@ -140,7 +145,8 @@ public class CustomerTest {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
         bank.addCustomer(customer);
-        customer.requestCurrentAccount();
+        Branch branch = bank.getBranches().getFirst();
+        customer.requestCurrentAccount(branch);
         Account currentAccount = customer.getAccounts().getFirst();
         customer.deposit(currentAccount, 100.00);
         customer.withdraw(currentAccount, 50.00);

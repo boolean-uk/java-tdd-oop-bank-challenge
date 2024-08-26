@@ -12,14 +12,17 @@ public class Bank {
         this.name = name;
         this.customers = new ArrayList<>();
         this.branches = new ArrayList<>();
+        addBranch(new Branch("00", "Address"));
+        addBranch(new Branch("01", "Address"));
     }
 
-    public boolean createCurrentAccount(Customer customer){
+    public boolean createCurrentAccount(Customer customer, Branch branch){
         if (!customers.contains(customer)) {
             return false;
         }
         List<Account> customerAccounts = customer.getAccounts();
         Account currentAccount = new CurrentAccount();
+        currentAccount.setBranch(branch);
         customerAccounts.add(currentAccount);
         customer.setAccounts(customerAccounts);
         return true;

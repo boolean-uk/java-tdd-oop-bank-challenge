@@ -13,12 +13,12 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
 
-    public boolean requestCurrentAccount() {
+    public boolean requestCurrentAccount(Branch branch) {
         if (bank == null) {
             System.out.println("Customer do not have a bank.");
             return false;
         }
-        return bank.createCurrentAccount(this);
+        return bank.createCurrentAccount(this, branch);
     }
 
     public boolean requestSavingsAccount() {

@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -14,6 +15,7 @@ public class BranchTest {
         SavingAccount savingAccount = new SavingAccount(1000, 2.5, trondheimBranch);
         customer.addAccount(currentAccount);
         customer.addAccount(savingAccount);
+        Assertions.assertEquals(currentAccount.getBranch(),osloBranch);
     }
 
 }

@@ -44,6 +44,8 @@ public class Customer {
         }
         if (account.getBalance() < amount && (account.getOverdraftRequest() == null || !account.getOverdraftRequest().isApproved())){
             return false;
+        } else if (account.getOverdraftRequest().isApproved() && account.getBalance() - amount < -account.getOverdraftRequest().getAmount()){
+            return false;
         }
         Transaction transaction = new Transaction(-amount, account.getBalance());
         account.addTransaction(transaction);

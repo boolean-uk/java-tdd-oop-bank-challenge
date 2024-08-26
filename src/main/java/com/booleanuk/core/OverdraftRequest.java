@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+// Serves as a way for customers to acquire permission to overdraft
+// on their account
 public class OverdraftRequest {
 	private final BankAccount bankAccount;
 

@@ -58,7 +58,7 @@ public class BankTest {
 
         Assertions.assertTrue(customer1.requestCurrentAccount(branch));
         Assertions.assertEquals(1, customer1.getAccounts().size());
-        Assertions.assertTrue(customer1.getAccounts().getFirst().getBranch() != null);
+        Assertions.assertNotNull(customer1.getAccounts().getFirst().getBranch());
 
         Customer customer2 = new Customer("Name");
         Assertions.assertFalse(bank.createCurrentAccount(customer2, branch), "Customer is not in the bank.");

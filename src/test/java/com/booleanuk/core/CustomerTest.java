@@ -126,5 +126,19 @@ public class CustomerTest {
         Assertions.assertEquals(0, account.getBalance());
         Assertions.assertEquals(0, account.getTransactions().size());
     }
-
+    // generate bank statment test
+    @Test
+    public void testGenerateBankStatement() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        customer.requestCurrentAccount();
+        Account currentAccount = customer.getAccounts().getFirst();
+        customer.deposit(currentAccount, 100.00);
+        customer.withdraw(currentAccount, 50.00);
+        customer.deposit(currentAccount, 200.00);
+        customer.withdraw(currentAccount, 100.00);
+        customer.deposit(currentAccount, 300.00);
+        Assertions.assertTrue(customer.generateBankStatement(currentAccount));
+    }
 }

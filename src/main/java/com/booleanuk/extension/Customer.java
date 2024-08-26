@@ -33,7 +33,7 @@ public class Customer {
         if (!accounts.contains(account)){
             return false;
         }
-        Transaction transaction = new Transaction(amount, account.getBalance());
+        Transaction transaction = new Transaction(amount, account.getBalance() + amount);
         account.addTransaction(transaction);
         return true;
     }
@@ -44,10 +44,10 @@ public class Customer {
         }
         if (account.getBalance() < amount && (account.getOverdraftRequest() == null || !account.getOverdraftRequest().isApproved())){
             return false;
-        } else if (account.getOverdraftRequest().isApproved() && account.getBalance() - amount < -account.getOverdraftRequest().getAmount()){
+        } else if (account.getOverdraftRequest() != null && account.getOverdraftRequest().isApproved() && account.getBalance() - amount < -account.getOverdraftRequest().getAmount()){
             return false;
         }
-        Transaction transaction = new Transaction(-amount, account.getBalance());
+        Transaction transaction = new Transaction(-amount, account.getBalance() - amount);
         account.addTransaction(transaction);
         return true;
     }

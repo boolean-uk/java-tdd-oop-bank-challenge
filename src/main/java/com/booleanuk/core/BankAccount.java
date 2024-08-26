@@ -1,6 +1,9 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import static com.booleanuk.core.StringUtils.*;
 
 public class BankAccount {
 	private final Customer customer;
@@ -19,8 +22,59 @@ public class BankAccount {
 		this.bankType = bankType;
 	}
 
+
 	public String generateStatement(){
-		return transactions.toString();
+		StringBuilder prettyStmt = new StringBuilder();
+
+//		14/01/2012 ||          ||    500.00 || 2500.00
+//		13/01/2012 ||  2000.00 ||           || 3000.00
+//		10/01/2012 ||  1000.00 ||           || 1000.00
+		int datePadding = 12;
+		int depositpadding =  10;
+		int withdrawPadding = 10;
+		int balancePadding = 8;
+
+		//		date       || deposit  || withdraw  || balance
+		String dateStr = centerAlignStringWithPadding("date", datePadding);
+		String depositStr = centerAlignStringWithPadding("deposit", depositpadding);
+		String withdrawStr = centerAlignStringWithPadding("withdraw", withdrawPadding);
+		String balanceStr = centerAlignStringWithPadding("balance", balancePadding);
+
+		prettyStmt.append(dateStr + " || " + depositStr + " || " + withdrawStr + " || " + balanceStr);
+
+		// get all the statements
+		ArrayList<String> statements = new ArrayList<>();
+		double balance = 0;
+		for(Transaction t: transactions){
+			dateStr = t.date.toLocalDate().toString();
+			depositStr = "";
+			withdrawStr = "";
+
+			boolean isADeposit = t.getAmount() > 0;
+			if(isADeposit)
+				depositStr = String.valueOf(formatDoubleToTwoDigits(t.amount));
+			else
+				withdrawStr = String.valueOf(formatDoubleToTwoDigits(-t.amount));
+
+			balance += t.amount;
+			balanceStr = String.valueOf(formatDoubleToTwoDigits(balance));
+
+			dateStr = leftAlignStringWithPadding(dateStr, datePadding);
+			depositStr = leftAlignStringWithPadding(depositStr, depositpadding);
+			withdrawStr = leftAlignStringWithPadding(withdrawStr, withdrawPadding);
+			balanceStr = leftAlignStringWithPadding(balanceStr, balancePadding);
+
+			String stmt = "\n" + dateStr + " || " + depositStr + " || " + withdrawStr + " || " + balanceStr;
+			statements.add(stmt);
+		}
+
+		Collections.reverse(statements);
+		for(String stmt: statements){
+			prettyStmt.append(stmt);
+		}
+
+
+		return prettyStmt.toString();
 	}
 
 	public String deposit(double amount){
@@ -28,24 +82,31 @@ public class BankAccount {
 		return "Added " + amount + " to account.";
 	}
 
+	private double formatDoubleToTwoDigits(double amount){
+		String doubleStr = String.format("%.2f", amount);
+		return Double.valueOf(doubleStr);
+	}
 
-	private double getBalance(){
-		return transactions
+	public double getBalance(){
+		double balance = transactions
 				.parallelStream()
 				.mapToDouble(transaction -> transaction.getAmount())
 				.sum();
+
+		return formatDoubleToTwoDigits(balance);
 	}
 
 	public String withdraw(double amount){
 		// if can go below zero
 		if (canOverdraft){
-			transactions.add(new Transaction(amount));
+			transactions.add(new Transaction(-amount));
 			return "withdrew " + amount + " from account.";
 		}
 
 		// if cant: check if balance >= amount
 		double balance = getBalance();
 		if(balance >= amount){
+			transactions.add(new Transaction(-amount));
 			return "withdrew " + amount + " from account.";
 		}
 

@@ -9,6 +9,13 @@
 | `openSavingsAccount(String, String): String` | New savings account<br/>Account name already exists | "Opened a new savings account: 'Account.name', at branch: 'branch.name'."<br/>"Your already have an account by this name." |
 
 
+### Manager class
+| Method                                      | Scenario                  | Output         |
+|---------------------------------------------|---------------------------|----------------|
+| `approveOverdraftRequest(Account): Boolean` | Accepted<br/>Not accepted | true<br/>false |
+
+
+
 ### Transaction class
 | Method | Scenario | Output |
 |--------|----------|--------|
@@ -22,6 +29,7 @@
 | `deposit(float): void`            | -                                                                 | funds are added to account                               |
 | `withdraw(float): String`         | enough funds in account<br/>not enough funds in account           | "Funds withdrawed from account."<br/>"Not enough funds." |
 | `getBalance(): float`             | Transaction history is not empty<br/>Transaction history is empty | balance<br/>0                                            |
+| `requestOverdraft(): Boolean`     | Request sent<br/>Request not sent                                 | true<br/>false                                           |
 
 
 ### CurrentAccount extends Account class

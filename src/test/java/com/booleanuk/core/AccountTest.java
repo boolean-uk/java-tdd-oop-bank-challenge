@@ -59,4 +59,6 @@ public class AccountTest {
         Account account = new CurrentAccount("Test", Branch.Oslo);
         Assertions.assertEquals(Branch.Oslo, account.getBranch());
     }
+
+    // User story 3: Request overdraft on account
 }

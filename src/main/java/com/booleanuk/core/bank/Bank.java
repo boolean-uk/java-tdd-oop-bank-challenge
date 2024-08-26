@@ -77,8 +77,7 @@ public class Bank {
 
         if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
 
-        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.CREDIT));
-        actualCustomer.getAccount(account.getAccountNumber()).deposit(amount);
+        actualCustomer.addTransaction(new Transaction(amount, actualCustomer.getBalance(actualAccount), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.CREDIT));
 
         return true;
     }
@@ -92,8 +91,8 @@ public class Bank {
 
         if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
 
-        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.DEBIT));
-        actualCustomer.getAccount(account.getAccountNumber()).withdraw(amount);
+        actualCustomer.addTransaction(new Transaction(amount, actualCustomer.getBalance(actualAccount), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.DEBIT));
+
         return true;
     }
 

@@ -26,6 +26,4 @@ public class Customer {
             accounts.add(new SavingsAccount(branch));
         }
     }
-
-
 }

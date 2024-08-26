@@ -40,4 +40,26 @@ public abstract class Account {
         }
         return currentBalance;
     }
+
+    public void generateBankStatement(){
+        ArrayList<String> statement = new ArrayList<>();
+        String  s = String.format("%-10s %2s %-10s %2s %-10s %2s %-10s", "date", "||", "credit", "||", "debit", "||", "balance");
+        statement.add(s);
+
+        for (Transaction t : this.transactionHistory){
+            if (0 < t.getAmount()){
+                s = String.format("%-10s %2s %-10s %2s %-10s %2s %-10s", t.getDate(), "||", t.getAmount() + ".00", "||", " ", "||", t.getCurrentBalance() + ".00");
+            } else {
+                s = String.format("%-10s %2s %-10s %2s %-10s %2s %-10s", t.getDate(), "||", " ", "||", -t.getAmount() + ".00", "||", t.getCurrentBalance() + ".00");
+            }
+            statement.add(s);
+        }
+        printBankStatement(statement);
+    }
+
+    public void printBankStatement(ArrayList<String> list){
+        for (String s : list){
+            System.out.println(s);
+        }
+    }
 }

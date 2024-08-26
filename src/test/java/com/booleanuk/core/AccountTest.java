@@ -89,6 +89,17 @@ public class AccountTest {
     }
 
     @Test
+    public void getOverDraftLimit() {
+        Customer customer =  new Customer("Melvin", "Seelan");
+        Account currentAccount = new CurrentAccount(500);
+        customer.addAccount(currentAccount);
+        CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
+        retrievedAccount.requestOverdraft(300);
+        retrievedAccount.approveOverdraft(300);
+        Assertions.assertEquals(300, retrievedAccount.getOverDraftLimit());
+    }
+
+    @Test
     public void withdrawalTestRejected() {
         Customer customer =  new Customer("Melvin", "Seelan");
         Account currentAccount = new CurrentAccount(500);

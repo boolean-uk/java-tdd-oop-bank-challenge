@@ -21,6 +21,7 @@ public class CurrentAccount extends Account {
         if (limit <= requestedOverdraftLimit) {
             this.approvedOverdraftLimit = limit;
             this.overdraftApproved = true;
+            this.overDraftLimit = limit;
         }
         return false;
     }
@@ -54,5 +55,13 @@ public class CurrentAccount extends Account {
 
     public void setOverdraftApproved(boolean overdraftApproved) {
         this.overdraftApproved = overdraftApproved;
+    }
+
+    public double getOverDraftLimit() {
+        return overDraftLimit;
+    }
+
+    public void setOverDraftLimit(double overDraftLimit) {
+        this.overDraftLimit = overDraftLimit;
     }
 }

@@ -20,7 +20,6 @@ public abstract class Account {
 
     }
 
-
     public void addTransaction(double amount, String type) {
 
         if (!headerPrinted) {

@@ -52,7 +52,7 @@ public class AccountTest {
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         SavingsAccount savings1 = customer1.getSavingsAccount();
-        savings1.setOverdraft(1000);
+        savings1.setOverdraftAmount(1000.00);
 
         double newBalance = bank.newTransaction(savings1, 2000, 0);
         newBalance = bank.newTransaction(savings1, 0, 1000);

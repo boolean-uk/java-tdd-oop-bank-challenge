@@ -92,6 +92,9 @@ public class SavingsAccount implements Account{
         return "";
     }
 
+    public void setOverdraftAmount(Double overdraftAmount){
+        this.overdraftAmount = overdraftAmount;
+    }
 
     public double getBalance(){
         return calculateAccountBalance();

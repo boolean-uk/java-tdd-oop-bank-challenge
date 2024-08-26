@@ -2,7 +2,7 @@ package com.booleanuk.extension;
 
 public class OverdraftRequest {
 
-    private double amount;
+    private final double amount;
     private boolean approved;
 
     public OverdraftRequest(double amount){

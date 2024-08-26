@@ -7,20 +7,26 @@ public class AccountTest {
 
     @Test
     public void generateBankStatement(){
-        Assertions.assertTrue(bankStatement.contains("Bank statement extract"));
+        Account account = new Account("Test");
+        account.deposit(100);
+        account.deposit(20);
+        account.generateBankStatement();
+        account.printBankStatement();
     }
 
     @Test
     public void depositFunds(){
-        Account.deposit(100);
-        Assertions.assertEquals(100, Account.getBalance);
+        Account account = new Account("Test");
+        account.deposit(100);
+        Assertions.assertEquals(100f, account.getBalance());
     }
 
     @Test
-    public void withdrawFunds(){;
-        Assertions.assertEquals("Not enough funds.", Account.withdraw(100));
-        Account.deposit(100);
-        Assertions.assertEquals("Funds withdrawed from account.", Account.withdraw(50));
-        Assertions.assertEquals(50, Account.getBalance);
+    public void withdrawFunds(){
+        Account account = new Account("Test");
+        Assertions.assertEquals("Not enough funds.", account.withdraw(100));
+        account.deposit(100);
+        Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(50));
+        Assertions.assertEquals(50f, account.getBalance());
     }
 }

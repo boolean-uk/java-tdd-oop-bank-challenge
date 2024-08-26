@@ -1,0 +1,68 @@
+@startuml
+class Customer{
+    - id: String
+    - bank: Bank
+    - customerBankAccounts: ArrayList<BankAccount>
+    + createAccount(): String
+    + generateStatements(): String
+    + getAccount(): BankAccount
+    + requestOverdraft(acc: BankAccount): void
+}
+Customer -- BankAccount
+
+class BankAccount{
+    - bank: Bank
+    - canOverdraft: boolean
+    + transactions: ArrayList<Transaction>
+    + generateStatement(): String
+    + deposit(amount: double): String
+    + withdraw(amount: double): String
+    + requestOverdraft(): void
+}
+
+Bank -- BankAccount
+BankAccount -- Transaction
+BankAccount -- OverdraftRequest
+
+
+class OverdraftRequest{
+    - account: BankAccount
+    + accept(): void
+    + deny(): void
+}
+
+
+class Transaction{
+    -amount: double
+    -date: LocalDateTime
+}
+
+class Bank{
+    - customers: ArrayList<Customer>
+    - managers: ArrayList<Manager>
+    - bankAccounts: ArrayList<BankAccount>
+    - overdraftRequests: ArrayList<OverdraftRequest>
+    + createCustomer(): Customer
+}
+Bank -- Customer
+Bank -- Manager
+Bank -- BankAccount
+Bank -- OverdraftRequest
+Bank -- Branch
+
+
+
+
+
+
+class Manager{
+    - branch: Branch
+    - bank: Bank
+
+
+}
+Manager -- Branch
+
+enum Branch{}
+
+@enduml

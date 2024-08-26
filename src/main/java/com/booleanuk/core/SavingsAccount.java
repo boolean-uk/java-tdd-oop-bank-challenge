@@ -18,7 +18,7 @@ public class SavingsAccount implements Account{
         this.uniqueID = uniqueID;
         this.balance = 0;
         this.transactions = new ArrayList<>();
-        this.overdraftAmount = 1000;
+        this.overdraftAmount = 0;
         this.bank = bank;
         this.customer = customer;
     }

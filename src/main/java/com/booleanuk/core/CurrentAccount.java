@@ -94,8 +94,9 @@ public class CurrentAccount implements Account {
     }
 
     public void requestOverdraft(Double overdraftAmount){
-        OverdraftRequest request = new OverdraftRequest(this.customer, this, 5000);
+        OverdraftRequest request = new OverdraftRequest(this.customer, this, overdraftAmount);
         bank.addOverdraftRequest(request);
+        System.out.println("Overdraft request sent");
 
     }
 

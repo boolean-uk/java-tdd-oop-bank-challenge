@@ -72,7 +72,8 @@ public class AccountTest {
         SavingsAccount savings1 = ((SavingsAccount) bank.newAccount(customer1, "Saving"));
         CurrentAccount current1 = ((CurrentAccount) bank.newAccount(customer1, "Current"));
         bank.newAccount(customer1, "Current");
-        //SavingsAccount savings1 = customer1.getSavingsAccount();
+
+
 
 
         savings1.requestOverdraft(5000.00);

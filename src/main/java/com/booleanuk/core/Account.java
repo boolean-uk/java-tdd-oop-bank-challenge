@@ -9,6 +9,7 @@ public interface Account {
     public String generateAccountStatement();
     public double getBalance();
     public void setBalance(double newBalance);
+    public void setOverdraftAmount(Double overdraftAmount);
 
 
 

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Bank {
     //private HashMap<Customer, ArrayList<Account>> customers;
@@ -70,13 +71,12 @@ public class Bank {
         this.customers = customers;
     }
 
-    public int getUniqueID() {
+    public int getAccountID() {
         return accountID;
     }
+    public int getCustomerID() {return customerID;}
+    public int getTransactionID() {return transactionID;}
 
-    public void setUniqueID(int uniqueID) {
-        this.accountID = uniqueID;
-    }
 
     public ArrayList<OverdraftRequest> getOverdraftRequests() {
         return overdraftRequests;
@@ -84,6 +84,56 @@ public class Bank {
 
     public void addOverdraftRequest(OverdraftRequest request) {
         overdraftRequests.add(request);
+    }
+
+    public void reviewOverdrafts(){
+        Scanner scanner = new Scanner(System.in);
+        for(OverdraftRequest r: overdraftRequests){
+            Account account = r.getAccount();
+            Customer customer = r.getCustomer();
+            double overdraftAmount = r.getRequestAmount();
+
+            System.out.println();
+            System.out.println("Overdraft Request Details:");
+            System.out.println("Customer: " + customer.getName());
+            System.out.println("Account balance: " + account.getBalance());
+            System.out.println("Requested Overdraft Amount: " + overdraftAmount);
+
+            System.out.println("Do you approve this overdraft request? (yes/no)");
+
+            String decision = scanner.nextLine().trim().toLowerCase();
+
+            if (decision.equals("yes")) {
+                account.setOverdraftAmount(overdraftAmount);
+                //overdraftRequests.removeFirst();
+                System.out.println("Overdraft request approved.");
+
+            } else if (decision.equals("no")) {
+                //overdraftRequests.remove(r);
+                System.out.println("Overdraft request denied.");
+            } else {
+                System.out.println("Invalid input. Please respond with 'yes' or 'no'.");
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+        Bank bank = new Bank("Oslo");
+        Customer customer1 = new Customer("Jostein",1, bank);
+        bank.newCustomer(customer1);
+        SavingsAccount savings1 = ((SavingsAccount) bank.newAccount(customer1, "Saving"));
+        CurrentAccount current1 = ((CurrentAccount) bank.newAccount(customer1, "Current"));
+        bank.newAccount(customer1, "Current");
+
+
+        savings1.newTransaction(0, 1000, bank.getTransactionID()); //
+        savings1.requestOverdraft(5000.00);
+        current1.requestOverdraft(5000.00);
+
+        //try overdrafting with new limits
+
+        bank.reviewOverdrafts();
     }
 
 }

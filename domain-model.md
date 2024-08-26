@@ -15,11 +15,12 @@
 
 
 ### Account class
-| Method                            | Scenario                                                | Output                                                   |
-|-----------------------------------|---------------------------------------------------------|----------------------------------------------------------|
-| `generateBankStatement(): String` | existing transaction<br/>no transaction                 | transactions<br/>"No account transactions available."    |
-| `deposit(float): void`            | -                                                       | funds are added to account                               |
-| `withdraw(float): String`         | enough funds in account<br/>not enough funds in account | "Funds withdrawed from account."<br/>"Not enough funds." |
+| Method                            | Scenario                                                          | Output                                                   |
+|-----------------------------------|-------------------------------------------------------------------|----------------------------------------------------------|
+| `generateBankStatement(): String` | existing transaction<br/>no transaction                           | transactions<br/>"No account transactions available."    |
+| `deposit(float): void`            | -                                                                 | funds are added to account                               |
+| `withdraw(float): String`         | enough funds in account<br/>not enough funds in account           | "Funds withdrawed from account."<br/>"Not enough funds." |
+| `getBalance(): float`             | Transaction history is not empty<br/>Transaction history is empty | balance<br/>0                                            |
 
 
 ### CurrentAccount extends Account class

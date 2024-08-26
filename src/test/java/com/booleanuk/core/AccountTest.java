@@ -28,7 +28,7 @@ public class AccountTest {
     public void depositFunds(){
         Account account = new Account("Test");
         account.deposit(100);
-        Assertions.assertEquals(100f, account.getBalance());
+        Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100f));
     }
 
     @Test
@@ -37,6 +37,6 @@ public class AccountTest {
         Assertions.assertEquals("Not enough funds.", account.withdraw(100));
         account.deposit(100);
         Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(50));
-        Assertions.assertEquals(50f, account.getBalance());
+        Assertions.assertEquals(String.format("%.2f", 50f), String.format("%.2f", (float) account.getBalance()/100));
     }
 }

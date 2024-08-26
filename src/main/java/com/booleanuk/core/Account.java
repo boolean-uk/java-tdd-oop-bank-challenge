@@ -5,16 +5,13 @@ import java.util.ArrayList;
 
 public class Account {
 
-    // Må muligens ha en type variable for savings/current?
     private ArrayList<Transaction> transactions;
     private ArrayList<String> bankStatement;
-    private int balance;
     private String name;
 
     public Account(String name){
         this.transactions = new ArrayList<>();
         this.bankStatement = new ArrayList<>();
-        this.balance = 0;
         this.name = name;
     }
 
@@ -22,8 +19,11 @@ public class Account {
         return name;
     }
 
-    public float getBalance() {
-        return balance/100f;
+    public int getBalance() {
+        if (transactions.isEmpty()){
+            return 0;
+        }
+        return transactions.getLast().getBalance();
     }
 
     public ArrayList<String> getBankStatement() {
@@ -31,17 +31,17 @@ public class Account {
     }
 
     public void deposit(float amount){
-        this.balance += (int) (amount * 100);
-        transactions.add(new Transaction("£" + String.format("%.2f", amount), this.balance));
+        int newBalance = (getBalance() + ((int) (amount * 100)));
+        transactions.add(new Transaction("£" + String.format("%.2f", amount), newBalance));
     }
 
     public String withdraw(float amount){
-        if (amount > this.balance/100f){
+        if (amount > (float) getBalance()/100f){
             return "Not enough funds.";
         }
 
-        this.balance -= (int) (amount * 100);
-        transactions.add(new Transaction("-£" + String.format("%.2f", amount), this.balance));
+        int newBalance = (getBalance() - ((int) (amount * 100)));
+        transactions.add(new Transaction("-£" + String.format("%.2f", amount), newBalance));
         return "Funds withdrawed from account.";
     }
 
@@ -52,7 +52,7 @@ public class Account {
             bankStatement.add(String.format("%-11s %1s %10s %1s %11s",
                     transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "||",
                     transaction.getAmount(), "||",
-                    transaction.getBalance()));
+                    "£" + String.format("%.2f", (float) transaction.getBalance()/100f)));
         }
     }
 

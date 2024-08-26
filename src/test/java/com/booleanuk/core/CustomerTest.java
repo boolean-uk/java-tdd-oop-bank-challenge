@@ -62,7 +62,7 @@ public class CustomerTest {
         account.deposit(267.96f);
         account.deposit(793.23f);
 
-        Assertions.assertEquals(1061.19f, account.getBalance());
+        Assertions.assertEquals(String.format("%.2f", 1061.19f), String.format("%.2f", (float) account.getBalance()/100f));
     }
 
 
@@ -76,6 +76,6 @@ public class CustomerTest {
         account.deposit(250f);
 
         Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(55f));
-        Assertions.assertEquals(195f, account.getBalance());
+        Assertions.assertEquals(String.format("%.2f", 195f), String.format("%.2f", (float) account.getBalance()/100f));
     }
 }

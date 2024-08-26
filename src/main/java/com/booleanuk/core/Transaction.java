@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 
 public class Transaction {
     private LocalDateTime date;
-    private String balance;
+    private int balance;
     private String amount;
 
     public Transaction(String amount, int balance) {
         this.date = LocalDateTime.now();
         this.amount = amount;
-        this.balance =  "£" + String.format("%.2f", balance/100f);
+        this.balance =  balance;
     }
-    public String getBalance() {
+    public int getBalance() {
         return balance;
     }
 

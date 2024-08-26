@@ -34,4 +34,30 @@ public class BankTest {
         Assertions.assertEquals(newCustomer.getAccounts().getFirst().getAccountNumber(), newAccount.getAccountNumber());
     }
 
+    @Test
+    public void testDepositFunds() {
+        Bank bank = new Bank("Swedbank");
+        Customer customer = bank.addCustomer(new Customer());
+        Account currentAcc = bank.newAccount(customer, new CurrentAccount());
+
+        bank.deposit(customer, currentAcc, 1500);
+
+        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+    }
+
+    @Test
+    public void testWithdrawFunds() {
+        Bank bank = new Bank("Swedbank");
+        Customer customer = bank.addCustomer(new Customer());
+        Account currentAcc = bank.newAccount(customer, new CurrentAccount());
+
+        bank.deposit(customer, currentAcc, 1500);
+
+        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+
+        bank.withdraw(customer, currentAcc, 1000);
+
+        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+    }
+
 }

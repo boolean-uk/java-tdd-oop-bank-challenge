@@ -42,7 +42,7 @@ public class Customer {
         if (!accounts.contains(account)){
             return false;
         }
-        if (account.getBalance() < amount){
+        if (account.getBalance() < amount && (account.getOverdraftRequest() == null || !account.getOverdraftRequest().isApproved())){
             return false;
         }
         Transaction transaction = new Transaction(-amount, account.getBalance());

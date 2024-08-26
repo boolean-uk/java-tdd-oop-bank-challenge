@@ -1,24 +1,27 @@
 package com.booleanuk.core.bank;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
 
-    private Date date;
+    private String date;
     private double amount;
     private double balanceBeforeTransaction;
     private Account fromAccount;
     private String id;
 
     protected Transaction(double amount, double balanceBeforeTransaction, Account fromAccount, String id) {
-        this.date = new Date(); // TODO: format?
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        this.date = format.format(new Date());
+        System.out.println("DATE: " + this.date);
         this.amount = amount;
         this.balanceBeforeTransaction = balanceBeforeTransaction;
         this.fromAccount = fromAccount;
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return this.date;
     }
 

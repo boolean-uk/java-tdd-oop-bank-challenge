@@ -6,31 +6,52 @@ public class SavingsAccount implements Account{
     private ArrayList<Transaction> transactions;
     private int uniqueID;
     private String branch;
+    private double balance;
 
     public SavingsAccount(String branch, int uniqueID){
         this.branch = branch;
         this.uniqueID = uniqueID;
+        this.balance = 0;
+        this.transactions = new ArrayList<>();
     }
 
-    /*
 
-    public double newTransaction(Transaction transaction){
 
+    public double newTransaction(double depositAmount, double withdrawAmount){
+        Transaction t = new Transaction(depositAmount, withdrawAmount);
+
+        transactions.add(t);
+
+        double newBalance = calculateAccountBalance();
+        return newBalance;
     }
+
+    private double calculateAccountBalance(){
+        double totalDeposit = 0;
+        double totalWithdraw = 0;
+        for (Transaction t: transactions){
+            totalDeposit += t.getDepositAmount();
+            totalWithdraw += t.getWithdrawAmount();
+        }
+
+        double newTotal = totalDeposit - totalWithdraw;
+        return newTotal;
+    }
+
     public String generateStatement(){
+        return "";
 
     }
+
+
     public double getBalance(){
+        return calculateAccountBalance();
 
     }
-    public boolean setBalance(){
-
-    }
-    public ArrayList<Transaction> getTransactions(){
-
+    public void setBalance(double newBalance){
+        this.balance = newBalance;
     }
 
-     */
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;

@@ -4,14 +4,13 @@ import java.util.ArrayList;
 
 public interface Account {
 
-    /*
-    public double newTransaction(Transaction transaction);
+
+    public double newTransaction(double depositAmount, double withdrawAmount);
     public String generateStatement();
     public double getBalance();
-    public boolean setBalance();
-    public ArrayList<Transaction> getTransactions();
+    public void setBalance(double newBalance);
 
-     */
+
 
     public ArrayList<Transaction> getTransactions();
 

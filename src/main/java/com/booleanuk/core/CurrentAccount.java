@@ -3,35 +3,40 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class CurrentAccount implements Account {
-
     private ArrayList<Transaction> transactions;
     private int uniqueID;
     private String branch;
+    private double balance;
 
     public CurrentAccount(String branch, int uniqueID){
         this.branch = branch;
         this.uniqueID = uniqueID;
     }
 
-    /*
 
-    public double newTransaction(Transaction transaction){
+    public double newTransaction(double depositAmount, double withdrawAmount){
+        Transaction t = new Transaction(depositAmount, withdrawAmount);
+
+        transactions.add(t);
+        return 00;
 
     }
+
     public String generateStatement(){
+        return "";
 
     }
+
+
     public double getBalance(){
+        return this.balance;
 
     }
-    public boolean setBalance(){
-
-    }
-    public ArrayList<Transaction> getTransactions(){
-
+    public void setBalance(double newBalance){
+        this.balance = newBalance;
     }
 
-     */
+
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
@@ -55,6 +60,7 @@ public class CurrentAccount implements Account {
     public void setBranch(String branch) {
         this.branch = branch;
     }
+
 
     @Override
     public String toString() {

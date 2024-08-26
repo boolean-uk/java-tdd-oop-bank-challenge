@@ -29,4 +29,9 @@ public class Customer {
         this.accounts.add(newAccount);
     }
 
+    public Account getAccount(String accountNumber) {
+        for (Account a : this.accounts) if (a.getAccountNumber().equals(accountNumber)) return a;
+        return null;
+    }
+
 }

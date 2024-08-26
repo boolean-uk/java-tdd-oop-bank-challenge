@@ -9,15 +9,15 @@ public class Current extends Account{
         overdraft = false;
     }
 
-    public Transaction overdraft(int money){
-        return null;
-    }
-
     public boolean getOverdraft(){
         return overdraft;
     }
 
     public void toggleOverdraft(){
         overdraft = !overdraft;
+    }
+
+    public Transaction overdraft(int money){
+        return null;
     }
 }

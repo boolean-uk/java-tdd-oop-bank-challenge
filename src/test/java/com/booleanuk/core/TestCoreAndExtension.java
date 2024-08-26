@@ -66,6 +66,19 @@ public class TestCoreAndExtension {
         Assertions.assertTrue(current.getOverdraft());
     }
 
+    @Test
+    public void testOverdraft(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        current.withdraw(500);
+        Assertions.assertEquals(0, current.getBalance());
+        current.overdraft(500);
+        Assertions.assertEquals(0, current.getBalance());
+        current.toggleOverdraft();
+        current.overdraft(500);
+        Assertions.assertEquals(-500, current.getBalance());
+    }
+
     /*@Test
     public void testAddAccount(){
         Customer customer1 = new Customer("customer1");

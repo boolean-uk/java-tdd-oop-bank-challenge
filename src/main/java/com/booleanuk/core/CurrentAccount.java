@@ -14,22 +14,44 @@ public class CurrentAccount implements Account {
     }
 
 
-    public double newTransaction(double depositAmount, double withdrawAmount){
+
+    public double newTransaction(double depositAmount, double withdrawAmount, int transactionID){
         Transaction t = new Transaction(depositAmount, withdrawAmount);
 
         transactions.add(t);
-        return 00;
 
+        double newBalance = calculateAccountBalance();
+        return newBalance;
     }
 
-    public String generateStatement(){
+    private double calculateAccountBalance(){
+        double totalDeposit = 0;
+        double totalWithdraw = 0;
+        for (Transaction t: transactions){
+            totalDeposit += t.getDepositAmount();
+            totalWithdraw += t.getWithdrawAmount();
+        }
+
+        double newTotal = totalDeposit - totalWithdraw;
+        return newTotal;
+    }
+
+    public String generateAccountStatement(){
+        for (Transaction t: transactions){
+            System.out.println();
+            System.out.println(t.getCurrentDateTime());
+            System.out.println(t.getDepositAmount());
+            System.out.println(t.getWithdrawAmount());
+        }
+
+
         return "";
 
     }
 
 
     public double getBalance(){
-        return this.balance;
+        return calculateAccountBalance();
 
     }
     public void setBalance(double newBalance){

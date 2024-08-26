@@ -8,6 +8,7 @@ public class Bank {
     private ArrayList<Customer> customers;
     private int accountID;
     private int customerID;
+    private int transactionID;
     private String branch;
 
     public Bank(String branch){
@@ -51,6 +52,13 @@ public class Bank {
         }
 
         return null;
+    }
+
+    //added transaction func to Bank so we can keep track of unique transaction ID's
+    public double newTransaction(Account account, double depositAmount,double withdrawAmount){
+        double newBalance = account.newTransaction(depositAmount, withdrawAmount, transactionID);
+        transactionID += 1;
+        return newBalance;
     }
 
     public ArrayList<Customer> getCustomers() {

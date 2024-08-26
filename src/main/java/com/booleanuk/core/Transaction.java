@@ -8,6 +8,7 @@ public class Transaction {
     private LocalDateTime currentDateTime;
     private double depositAmount;
     private double withdrawAmount;
+    private int transactionID;
 
     public Transaction(double depositAmount, double withdrawAmount){
         this.depositAmount = depositAmount;

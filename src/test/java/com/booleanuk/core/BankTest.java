@@ -33,4 +33,5 @@ public class BankTest {
         Customer customer1 = new Customer("Jostein",1);
         bank.newCustomer(customer1);
     }
+
 }

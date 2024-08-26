@@ -11,9 +11,9 @@ public class CustomerTest {
 
     @Test
     public void testCustomerCreate() {
-        Customer c = new Customer("ID1");
+        Customer c = new Customer();
 
-        Assertions.assertEquals("ID1", c.getId());
+        Assertions.assertEquals("", c.getId());
     }
 
 }

@@ -16,4 +16,12 @@ public class BankTest {
         Assertions.assertEquals("Swedbank", bank.getName());
     }
 
+    @Test
+    public void testAddCustomerToBank() {
+        Bank bank = new Bank("Swedbank");
+        Customer customer = new Customer();
+
+        Assertions.assertEquals(bank.getCustomers().getFirst().getId(), customer.getId());
+    }
+
 }

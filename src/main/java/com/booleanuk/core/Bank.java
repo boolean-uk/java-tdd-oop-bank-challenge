@@ -17,6 +17,22 @@ public class Bank {
 		this.branch = branch;
 	}
 
+	public ArrayList<OverdraftRequest> getOverdraftRequests(){
+		return overdraftRequests;
+	}
+
+	public ArrayList<Customer> getCustomers(){
+		return customers;
+	}
+
+
+	public Branch getBranch(){
+		return branch;
+	}
+
+	public OverdraftRequest getOverdraftRequest(int index){
+		return overdraftRequests.remove(index);
+	}
 
 	public void createOverdraftRequest(BankAccount ba){
 		overdraftRequests.add(new OverdraftRequest(ba));
@@ -34,8 +50,8 @@ public class Bank {
 		bankAccounts.add(bankAccount);
 	}
 
-	public Customer createCustomer(){
-		Customer newCustomer = new Customer(this, "Ole");
+	public Customer createCustomer(String name){
+		Customer newCustomer = new Customer(this, name);
 		customers.add(newCustomer);
 		return newCustomer;
 	}

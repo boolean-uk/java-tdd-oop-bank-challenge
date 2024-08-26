@@ -36,7 +36,7 @@ public class BankTest {
         Assertions.assertTrue(bank.getCustomers().contains(customer2));
 
         Customer customer3 = new Customer("Name");
-        Assertions.assertFalse(bank.getCustomers().contains(customer3));
+        Assertions.assertFalse(bank.getCustomers().contains(customer3), "Customer not added to the bank.");
     }
 
     @Test
@@ -49,7 +49,7 @@ public class BankTest {
         Assertions.assertEquals(1, customer1.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(bank.createCurrentAccount(customer2));
+        Assertions.assertFalse(bank.createCurrentAccount(customer2), "Customer is not in the bank.");
     }
 
     @Test
@@ -62,6 +62,6 @@ public class BankTest {
         Assertions.assertEquals(1, customer1.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(bank.createSavingsAccount(customer2));
+        Assertions.assertFalse(bank.createSavingsAccount(customer2), "Customer is not in the bank.");
     }
 }

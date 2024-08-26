@@ -131,7 +131,7 @@ public class AccountTest {
     }
 
     @Test
-    public void CalculateCurrentBalanceTest(){
+    public void CalculateCurrentBalanceFromTransactionHistoryTest(){
         /*
         As an engineer,
         So I don't need to keep track of state,
@@ -154,7 +154,7 @@ public class AccountTest {
         account.deposit(deposit2);
         account.deposit(deposit3);
 
-        Assertions.assertEquals(1337+7331+1234, c.getAccounts().getFirst().calculateCurrentBalance());
+        Assertions.assertEquals(1337+7331+1234, c.getAccounts().getFirst().calculateCurrentBalanceFromTransactionHistory());
     }
 
     @Test

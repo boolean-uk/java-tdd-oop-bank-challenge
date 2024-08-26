@@ -23,7 +23,7 @@ public abstract class Account {
             return;
         }
 
-        int currentBalance = calculateCurrentBalance();
+        int currentBalance = calculateCurrentBalanceFromTransactionHistory();
         Transaction t = new Transaction(amount, currentBalance);
         this.transactionHistory.add(t);
     }
@@ -34,7 +34,7 @@ public abstract class Account {
             return false;
         }
 
-        int currentBalance = calculateCurrentBalance();
+        int currentBalance = calculateCurrentBalanceFromTransactionHistory();
         if (currentBalance < amount && !canOverdraft){
             System.out.println("Insufficient funds.");
             return false;
@@ -45,7 +45,7 @@ public abstract class Account {
         return true;
     }
 
-    public int calculateCurrentBalance(){
+    public int calculateCurrentBalanceFromTransactionHistory(){
         int currentBalance = 0;
 
         for (Transaction t : this.transactionHistory){

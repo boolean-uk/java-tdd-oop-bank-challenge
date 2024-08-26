@@ -218,6 +218,9 @@ public class CustomerTest {
 
         Assertions.assertFalse(customer.withdraw(currentAccount, 1.00), "Withdrawal exceeds approved overdraft limit");
         Assertions.assertEquals(-100.00, currentAccount.getBalance());
+
+        customer.deposit(currentAccount, 100.00);
+        Assertions.assertTrue(customer.withdraw(currentAccount, 1.00), "Withdrawal is within approved overdraft limit");
     }
 
     @Test

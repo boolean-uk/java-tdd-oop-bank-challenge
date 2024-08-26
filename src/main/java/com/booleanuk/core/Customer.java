@@ -53,6 +53,19 @@ public class Customer {
     }
 
     public boolean generateBankStatement(Account account){
+        if (!accounts.contains(account)){
+            return false;
+        }
+        System.out.println("date       || credit   || debit    || balance");
+        List<Transaction> transactions = account.getTransactions();
+        for (int i = transactions.size() - 1; i >= 0; i--) {
+            Transaction transaction = transactions.get(i);
+            String date = transaction.getDate().toString();
+            String credit = transaction.getAmount() > 0 ? String.format("%-8s", String.format("%.2f", transaction.getAmount())) : String.format("%-8s", "");
+            String debit = transaction.getAmount() < 0 ? String.format("%-8s", String.format("%.2f", -transaction.getAmount())) : String.format("%-8s", "");
+            String balance = String.format("%-8s", String.format("%.2f", transaction.getBalanceAfterTransaction()));
+            System.out.printf("%-10s || %-8s || %-8s || %-6s%n", date, credit, debit, balance);
+        }
         return true;
     }
 

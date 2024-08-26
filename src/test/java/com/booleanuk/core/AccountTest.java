@@ -11,16 +11,16 @@ public class AccountTest {
 
     @Test
     public void testCreateCurrentAccount() {
-        Account currentAccount = new CurrentAccount("AC1");
+        Account currentAccount = new CurrentAccount();
 
-        Assertions.assertEquals("AC1", currentAccount.getAccountNumber());
+        Assertions.assertTrue(currentAccount.getAccountNumber() == "");
     }
 
     @Test
     public void testCreateSavingsAccount() {
-        Account savingsAccount = new SavingsAccount("AC1", 1.1);
+        Account savingsAccount = new SavingsAccount(1.1);
 
-        Assertions.assertEquals("AC1", savingsAccount.getAccountNumber());
+        Assertions.assertTrue(savingsAccount.getAccountNumber() == "");
     }
 
 }

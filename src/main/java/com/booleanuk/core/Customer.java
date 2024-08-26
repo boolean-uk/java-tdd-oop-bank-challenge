@@ -27,4 +27,16 @@ public class Customer {
 		bank.createOverdraftRequest(ba);
 	}
 
+	public BankAccount getAccount(int index){
+		return accounts.get(index);
+	}
+
+	public String generateStatements(){
+		StringBuilder prettystmts = new StringBuilder();
+		for(BankAccount b: accounts){
+			prettystmts.append(b.generateStatement() + "\n\n");
+		}
+		return prettystmts.toString();
+	}
+
 }

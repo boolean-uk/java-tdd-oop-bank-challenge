@@ -124,4 +124,16 @@ public class AccountTest {
         // Assert that account can be overdrafted.
         Assertions.assertTrue(account.canOverdraft);
     }
+
+    @Test
+    public void accountAssociatedWithSpecificBranchTest(){
+        Customer c = new Customer();
+        Branch b = new Branch("Oslo");
+        c.createAccount(Customer.AccountType.CURRENT, b);
+
+        Account account = c.getAccounts().getFirst();
+
+        // Assert that branch is associated with account
+        Assertions.assertEquals("Oslo", account.getOwnerBranch().getName());
+    }
 }

@@ -8,14 +8,14 @@ import static com.booleanuk.core.StringUtils.*;
 public class BankAccount {
 	private final Customer customer;
 	private boolean canOverdraft;
-	private ArrayList<Transaction> transactions;
-	private BankType bankType;
+	public final ArrayList<Transaction> transactions;
+	public BankType bankType;
 
 	public BankAccount(Customer customer){
 		this.customer = customer;
 		this.canOverdraft = false; // defaulted to false
 		this.transactions = new ArrayList<>();
-		this.bankType = BankType.Debit;
+		this.bankType = BankType.Debit; //defaulted to debit
 	}
 
 	public void setBankType(BankType bankType){

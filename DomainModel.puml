@@ -14,6 +14,7 @@ class BankAccount{
     - bank: Bank
     - canOverdraft: boolean
     + transactions: ArrayList<Transaction>
+    + banktype: BankType
     + generateStatement(): String
     + deposit(amount: double): String
     + withdraw(amount: double): String

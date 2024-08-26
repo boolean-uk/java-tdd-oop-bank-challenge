@@ -21,6 +21,7 @@
 | CurrentAccount | requestOverdraft(double)    | Always                   | void                         |
 |                | approveOverdraft(double)    | Always                   | boolean                      |
 |                | rejectOverdraft()           | Always                   | void                         |
+|                |                             |                          |                              |
 |                | getApprovedOverdraftLimit() | Overdraft approved       | double                       |
 |                |                             | Overdraft not approved   | 0                            |
 |                |                             |                          |                              |

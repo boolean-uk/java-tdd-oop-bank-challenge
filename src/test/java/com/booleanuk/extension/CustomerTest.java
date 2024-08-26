@@ -189,4 +189,18 @@ public class CustomerTest {
 
     }
 
+    @Test
+    public void testRequestOverdraftOverLimit() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        Branch branch = bank.getBranches().getFirst();
+        customer.requestCurrentAccount(branch);
+        Account currentAccount = customer.getAccounts().getFirst();
+
+        Assertions.assertFalse(customer.requestOverdraft(currentAccount, 1001.00), "Overdraft request is over the limit.");
+
+    }
+
+
 }

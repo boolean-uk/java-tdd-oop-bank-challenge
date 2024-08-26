@@ -27,7 +27,15 @@ public abstract class Account {
     }
 
     public double getBalance() {
-        return 0.0;
+        double balance = 0.0;
+        for (Transaction transactions : transactions ) {
+            if(transactions.getIsCredit()) {
+               balance += transactions.getAmount();
+            } else {
+                balance -= transactions.getAmount();
+            }
+        }
+        return balance;
     }
 
 }

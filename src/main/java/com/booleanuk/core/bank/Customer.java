@@ -7,17 +7,20 @@ public class Customer {
     private final String id;
     private ArrayList<Account> accounts;
     private ArrayList<Transaction> transactions;
+    private ArrayList<Overdraft> overdrafts;
 
     public Customer() {
         this.id = "";
         this.accounts = new ArrayList<>();
         this.transactions = new ArrayList<>();
+        this.overdrafts = new ArrayList<>();
     }
 
     public Customer(String id) {
         this.id = id;
         this.accounts = new ArrayList<>();
         this.transactions = new ArrayList<>();
+        this.overdrafts = new ArrayList<>();
     }
 
     public ArrayList<Account> getAccounts() {
@@ -84,6 +87,28 @@ public class Customer {
             }
         }
         return balance;
+    }
+
+    protected void registerOverdraft(Overdraft o) {
+        this.overdrafts.add(o);
+    }
+
+    public ArrayList<Overdraft> getOverdrafts(Account a) {
+        ArrayList<Overdraft> toReturn = new ArrayList<>();
+        for (Overdraft o : this.overdrafts) {
+            if (o.getAccount().getAccountNumber().equals(a.getAccountNumber())) toReturn.add(o);
+        }
+        return toReturn;
+    }
+
+    public ArrayList<Overdraft> getAllOverdrafts() {
+        return this.overdrafts;
+    }
+
+    public ArrayList<Overdraft> getOverdrafts(Overdraft.OverdraftStatus status) {
+        ArrayList<Overdraft> toReturn = new ArrayList<>();
+        for (Overdraft o : this.overdrafts) if (o.getStatus() == status) toReturn.add(o);
+        return toReturn;
     }
 
 }

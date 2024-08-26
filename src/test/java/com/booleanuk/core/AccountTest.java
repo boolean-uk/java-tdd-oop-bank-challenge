@@ -14,16 +14,18 @@ public class AccountTest {
 
     @Test
     public void testCreateCurrentAccount() {
-        Account currentAccount = new CurrentAccount();
+        Account currentAccount = new CurrentAccount(Account.Branch.GOTHENBURG);
 
         Assertions.assertTrue(currentAccount.getAccountNumber() == "");
+        Assertions.assertEquals(Account.Branch.GOTHENBURG, currentAccount.getBranch());
     }
 
     @Test
     public void testCreateSavingsAccount() {
-        Account savingsAccount = new SavingsAccount(1.1);
+        Account savingsAccount = new SavingsAccount(Account.Branch.LUND, 1.1);
 
         Assertions.assertTrue(savingsAccount.getAccountNumber() == "");
+        Assertions.assertEquals(Account.Branch.LUND, savingsAccount.getBranch());
     }
 
 }

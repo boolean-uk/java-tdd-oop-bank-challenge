@@ -18,5 +18,6 @@ public class Current extends Account{
     }
 
     public void toggleOverdraft(){
+        overdraft = !overdraft;
     }
 }

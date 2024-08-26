@@ -101,11 +101,11 @@ I want statements to be sent as messages to my phone.
 ### CurrentAccount extends Account Class
 
 ### Transaction 
-| Variables            | Description                                      |
-|----------------------|--------------------------------------------------|
-| `LocalDateTime date` | Contains the date of the transaction.            |
-| `int amount`         | Contains the amount of the transaction.          |
-| `int balance`        | Contains the balance at the time of transaction. | 
+| Variables     | Description                                      |
+|---------------|--------------------------------------------------|
+| `String date` | Contains the date of the transaction.            |
+| `int amount`  | Contains the amount of the transaction.          |
+| `int balance` | Contains the balance at the time of transaction. | 
 
 ### Manager Class
 | Methods                         | Scenario                                              | Outputs |

@@ -82,6 +82,7 @@ public class BankAccount {
 		return "Added " + amount + " to account.";
 	}
 
+
 	private double formatDoubleToTwoDigits(double amount){
 		String doubleStr = String.format("%.2f", amount);
 		return Double.valueOf(doubleStr);

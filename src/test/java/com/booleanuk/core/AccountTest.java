@@ -3,6 +3,10 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
 public class AccountTest {
     @Test
     public void DepositAndWithdrawalTest(){
@@ -59,5 +63,31 @@ public class AccountTest {
         int currentBalance = c.getAccounts().getFirst().calculateCurrentBalance();
 
         Assertions.assertEquals(1337+7331+1234, currentBalance);
+    }
+
+    @Test
+    public void GenerateBankStatementTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        int deposit = 20;
+
+        int withdraw = 15;
+
+        account.deposit(deposit);
+        account.withdraw(withdraw);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.generateBankStatement();
+
+        assert(out.toString().contains("26/08/2024 || 20.00      ||            || 20.00"));
+        assert(out.toString().contains("26/08/2024 ||            || 15.00      || 5.00"));
+
+
+
     }
 }

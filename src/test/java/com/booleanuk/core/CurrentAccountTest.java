@@ -52,4 +52,15 @@ public class CurrentAccountTest {
         Assertions.assertEquals("New balance: -100.0£", currentAccount.withdraw(100));
 
     }
+
+    @Test
+    public void TestIfBalanceAndWithdrawalIsSame(){
+        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(me);
+
+        //If I withdraw the same as the balance I have I should get teh message below
+        Assertions.assertEquals("New Balance: 0.0£", savingsAccount.withdraw(0));
+
+    }
+
 }

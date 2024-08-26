@@ -13,13 +13,13 @@ public class Customer {
         return accounts;
     }
 
-    public String openCurrentAccount(String accountName){
-        accounts.add(new CurrentAccount(accountName));
+    public String openCurrentAccount(String accountName, Branch branch){
+        accounts.add(new CurrentAccount(accountName, branch));
         return "Opened a new current account: '" + accountName + "'.";
     }
 
-    public String openSavingsAccount(String accountName){
-        accounts.add(new SavingsAccount(accountName));
+    public String openSavingsAccount(String accountName, Branch branch){
+        accounts.add(new SavingsAccount(accountName, branch));
         return "Opened a new savings account: '" + accountName + "'.";
     }
 

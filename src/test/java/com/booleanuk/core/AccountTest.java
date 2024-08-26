@@ -10,7 +10,7 @@ public class AccountTest {
     //
     @Test
     public void generateBankStatement(){
-        Account account = new Account("Test");
+        Account account = new Account("Test", Branch.Oslo);
         account.deposit(100f);
         account.withdraw(30f);
         account.generateBankStatement();
@@ -28,14 +28,14 @@ public class AccountTest {
 
     @Test
     public void depositFunds(){
-        Account account = new Account("Test");
+        Account account = new Account("Test", Branch.Bergen);
         account.deposit(100);
         Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100f));
     }
 
     @Test
     public void withdrawFunds(){
-        Account account = new Account("Test");
+        Account account = new Account("Test", Branch.Trondheim);
         Assertions.assertEquals("Not enough funds.", account.withdraw(100));
         account.deposit(100);
         Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(50));
@@ -47,7 +47,7 @@ public class AccountTest {
     // User story 1: Account balance calculated on transaction history
     @Test
     public void calculateAccountBalance(){
-        Account account = new Account("Test");
+        Account account = new Account("Test", Branch.Oslo);
         Assertions.assertEquals(0, account.getBalance());
         account.deposit(100);
         Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100));
@@ -56,7 +56,7 @@ public class AccountTest {
     // User story 2: Accounts are associated with specific branches
     @Test
     public void isAccountAssociatedWithBranch(){
-        Account account = new CurrentAccount("Test", "Oslo");
-        Assertions.assertEquals("Oslo", account.getBranch());
+        Account account = new CurrentAccount("Test", Branch.Oslo);
+        Assertions.assertEquals(Branch.Oslo, account.getBranch());
     }
 }

@@ -8,15 +8,21 @@ public class Account {
     private ArrayList<Transaction> transactions;
     private ArrayList<String> bankStatement;
     private String name;
+    private Branch branch;
 
-    public Account(String name){
+    public Account(String name, Branch branch){
         this.transactions = new ArrayList<>();
         this.bankStatement = new ArrayList<>();
         this.name = name;
+        this.branch = branch;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Branch getBranch() {
+        return branch;
     }
 
     public int getBalance() {

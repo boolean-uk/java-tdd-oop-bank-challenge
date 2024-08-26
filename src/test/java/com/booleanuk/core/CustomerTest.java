@@ -15,7 +15,7 @@ public class CustomerTest {
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
 
-        Assertions.assertEquals("Opened a new current account: 'Test Current'.", customer.openCurrentAccount("Test Current"));
+        Assertions.assertEquals("Opened a new current account: 'Test Current'.", customer.openCurrentAccount("Test Current", Branch.Bergen));
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
@@ -25,7 +25,7 @@ public class CustomerTest {
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
 
-        Assertions.assertEquals("Opened a new savings account: 'Test Savings'.", customer.openSavingsAccount("Test Savings"));
+        Assertions.assertEquals("Opened a new savings account: 'Test Savings'.", customer.openSavingsAccount("Test Savings", Branch.Trondheim));
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
@@ -34,7 +34,7 @@ public class CustomerTest {
     public void customersBankStatement(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openCurrentAccount("CurrentAccountTest");
+        customer.openCurrentAccount("CurrentAccountTest", Branch.Trondheim);
         Account account = customer.getAccount("CurrentAccountTest");
         account.deposit(50);
         account.deposit(30);
@@ -59,7 +59,7 @@ public class CustomerTest {
     public void customerDepositFunds(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings");
+        customer.openSavingsAccount("Test Savings", Branch.Bergen);
         Account account = customer.getAccount("Test Savings");
         account.deposit(267.96f);
         account.deposit(793.23f);
@@ -73,7 +73,7 @@ public class CustomerTest {
     public void customerWithdrawFunds(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings");
+        customer.openSavingsAccount("Test Savings", Branch.Oslo);
         Account account = customer.getAccount("Test Savings");
         account.deposit(250f);
 

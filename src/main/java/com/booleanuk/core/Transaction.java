@@ -13,7 +13,7 @@ public class Transaction {
         this.depositAmount = depositAmount;
         this.withdrawAmount = withdrawAmount;
         // Get the current date and time
-        currentDateTime = LocalDateTime.now();
+        this.currentDateTime = LocalDateTime.now();
         // Define the format as dd:MM:yy
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd:MM:yy");
         // Format the current date and time

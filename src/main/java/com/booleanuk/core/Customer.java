@@ -29,6 +29,25 @@ public class Customer {
         return accounts;
     }
 
+    public SavingsAccount getSavingsAccount(){
+        for(Account a: accounts){
+            if (a instanceof SavingsAccount) {
+                return ((SavingsAccount) a);
+            }
+        }
+        return null;
+    }
+    public CurrentAccount getCurrentAccount(){
+        for (Account a: accounts){
+            if(a instanceof CurrentAccount){
+                return ((CurrentAccount) a);
+            }
+        }
+        return null;
+    }
+
+
+
 
     public String getName(){
         return this.name;

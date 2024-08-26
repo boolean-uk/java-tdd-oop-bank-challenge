@@ -32,7 +32,7 @@ public class Bank {
         return customers.contains(customer);
     }
 
-    public boolean newAccount(Customer customer, String accountType){
+    public Account newAccount(Customer customer, String accountType){
 
         if (customerExists(customer)){
             if(accountType.equals("Saving")){
@@ -40,17 +40,17 @@ public class Bank {
                 System.out.println("Created new saving account");
                 customer.addAccount(newAccount);
                 accountID += 1;
-                return true;
+                return newAccount;
             }else if(accountType.equals("Current")){
                 Account newAccount = new CurrentAccount(branch, accountID);
                 System.out.println("created new current account for user: " + customer.getName());
                 customer.addAccount(newAccount);
                 accountID += 1;
-                return true;
+                return newAccount;
             }
         }
 
-        return false;
+        return null;
     }
 
     public ArrayList<Customer> getCustomers() {

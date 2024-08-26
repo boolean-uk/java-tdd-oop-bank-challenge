@@ -8,10 +8,10 @@ public class BankTest {
     @Test
     public void newCustomerTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein");
+        Customer customer1 = new Customer("Jostein", 1);
         bank.newCustomer(customer1);
-        Assertions.assertTrue(bank.newCustomer(new Customer("Haakon")));
-        Assertions.assertFalse(bank.newCustomer(new Customer("Haakon")));
+        Assertions.assertTrue(bank.newCustomer(new Customer("Haakon", 2)));
+        Assertions.assertFalse(bank.newCustomer(new Customer("Haakon", 2)));
     }
 
     @Test
@@ -25,5 +25,12 @@ public class BankTest {
         for (Account a: customer1.getAccounts()){
             System.out.println(a.toString());
         }
+    }
+
+    @Test
+    public void newTransactionTest(){
+        Bank bank = new Bank("Oslo");
+        Customer customer1 = new Customer("Jostein",1);
+        bank.newCustomer(customer1);
     }
 }

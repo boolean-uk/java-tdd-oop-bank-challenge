@@ -24,6 +24,7 @@ public class TransactionTest {
         Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(amount, firstTransaction.getAmount());
         Assertions.assertEquals(customer.getAccount(account.getAccountNumber()).getBalance() - amount, firstTransaction.getBalanceBeforeTransaction());
+        Assertions.assertEquals(Transaction.TransactionType.CREDIT, firstTransaction.getTransactionType());
     }
 
     @Test
@@ -41,6 +42,7 @@ public class TransactionTest {
         Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(amount, firstTransaction.getAmount());
         Assertions.assertEquals(0, firstTransaction.getBalanceBeforeTransaction());
+        Assertions.assertEquals(Transaction.TransactionType.DEBIT, firstTransaction.getTransactionType());
     }
 
     @Test

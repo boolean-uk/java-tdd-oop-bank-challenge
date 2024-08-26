@@ -4,6 +4,7 @@ import com.booleanuk.core.bank.Account;
 import com.booleanuk.core.bank.Bank;
 import com.booleanuk.core.bank.CurrentAccount;
 import com.booleanuk.core.bank.Customer;
+import com.booleanuk.core.bank.Overdraft;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class OverdraftTest {
         this.bank.requestOverdraft(max, maxAccount, 1000);
 
         // Only one overdraft request in customer Max's current account, so getFirst() is ok
-        Assertions.assertTrue(maxAccount.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.PENDING);
+        Assertions.assertTrue(max.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.PENDING);
     }
 
 }

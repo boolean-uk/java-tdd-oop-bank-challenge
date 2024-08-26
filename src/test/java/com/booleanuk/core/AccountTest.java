@@ -78,8 +78,6 @@ public class AccountTest {
         savings1.requestOverdraft(5000.00);
         current1.requestOverdraft(5000.00);
 
-
-
         //customer1.requestOverdraft(int accountID,  )
     }
 }

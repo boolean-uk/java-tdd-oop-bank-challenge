@@ -1,6 +1,4 @@
-package com.booleanuk.core.accounts;
-
-import com.booleanuk.core.Transaction;
+package com.booleanuk.core;
 
 import java.util.ArrayList;
 
@@ -13,8 +11,8 @@ abstract class Account {
     public Account(String fullName, String accountNumber) {
         this.fullName = fullName;
         this.accountNumber = accountNumber;
-        this.balance = 0.0;
-        this.transactions = new ArrayList<>();
+        this.setBalance(0.0);
+        this.setTransactions(new ArrayList<>());
     }
 
     public void deposit(double amount) {
@@ -25,13 +23,25 @@ abstract class Account {
 
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
     public void printStatement() {
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

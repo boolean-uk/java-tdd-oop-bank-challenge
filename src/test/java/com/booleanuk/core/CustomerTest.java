@@ -18,4 +18,18 @@ public class CustomerTest {
         // Verify that list of accounts contains one element
         Assertions.assertEquals(1, c.accounts.size());
     }
+
+    @Test
+    public void CreateSavingsAccountTest(){
+        Customer c = new Customer();
+
+        // Verify that list of accounts is empty
+        assert(c.accounts.isEmpty());
+
+        // Create account
+        c.createAccount(Customer.AccountType.SAVINGS, new Branch("Oslo"));
+
+        // Verify that list of accounts contains one element
+        Assertions.assertEquals(1, c.accounts.size());
+    }
 }

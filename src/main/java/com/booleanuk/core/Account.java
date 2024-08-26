@@ -19,4 +19,25 @@ public abstract class Account {
     public ArrayList<Transaction> getTransactionHistory(){ return this.transactionHistory; }
     public boolean getCanOverdraft(){ return this.canOverdraft; }
     public Branch getOwnerBranch(){ return this.ownerBranch; }
+
+    public void deposit(int amount){
+        int currentBalance = calculateCurrentBalance();
+        Transaction t = new Transaction(amount, currentBalance);
+        this.transactionHistory.add(t);
+    }
+
+    public void withdraw(int amount){
+        int currentBalance = calculateCurrentBalance();
+        Transaction t = new Transaction(-amount, currentBalance);
+        this.transactionHistory.add(t);
+    }
+
+    public int calculateCurrentBalance(){
+        int currentBalance = 0;
+
+        for (Transaction t : this.transactionHistory){
+            currentBalance += t.getAmount();
+        }
+        return currentBalance;
+    }
 }

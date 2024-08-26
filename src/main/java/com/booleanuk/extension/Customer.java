@@ -33,7 +33,6 @@ public class Customer {
         if (!accounts.contains(account)){
             return false;
         }
-        account.setBalance(account.getBalance() + amount);
         Transaction transaction = new Transaction(amount, account.getBalance());
         account.addTransaction(transaction);
         return true;
@@ -46,7 +45,6 @@ public class Customer {
         if (account.getBalance() < amount){
             return false;
         }
-        account.setBalance(account.getBalance() - amount);
         Transaction transaction = new Transaction(-amount, account.getBalance());
         account.addTransaction(transaction);
         return true;

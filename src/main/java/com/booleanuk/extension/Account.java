@@ -6,12 +6,10 @@ import java.util.UUID;
 
 public class Account {
     private final String accountNumber;
-    private double balance;
     private final List<Transaction> transactions;
 
     public Account(){
         this.accountNumber = UUID.randomUUID().toString();
-        this.balance = 0;
         this.transactions = new ArrayList<>();
     }
 
@@ -23,14 +21,10 @@ public class Account {
     }
 
     public double getBalance() {
-        return balance;
+        return transactions.stream().mapToDouble(Transaction::getAmount).sum();
     }
 
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
     }
 }

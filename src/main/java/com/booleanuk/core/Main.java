@@ -13,13 +13,13 @@ public class Main {
 
         Customer max = bank.addCustomer(new Customer());
 
-        Account maxAccount = bank.newAccount(max, new CurrentAccount());
+        Account maxAccount = bank.newAccount(max, new CurrentAccount(Account.Branch.LUND));
 
         bank.deposit(max, maxAccount, 1000);
         bank.deposit(max, maxAccount, 2000);
         bank.withdraw(max, maxAccount, 500);
 
-        for (String s : max.getTransactionPrintout()){
+        for (String s : max.getTransactionPrintout()) {
             System.out.println(s);
         }
     }

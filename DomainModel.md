@@ -50,3 +50,4 @@ Transactions tracks how much a user deposit or withdraw from the account.
 TransactionType holds if it's a deposit or withdraw. Deposit is 0 and withdraw is a 1.
 Transactions can never be removed from the list, therefore the ID is the size of the arraylist
 
+![Transaction receipt for a customer](TransactionReceipt.png)

@@ -13,10 +13,6 @@ public class Transaction {
         this.balance = balance;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
     public double getAmount() {
         return amount;
     }
@@ -32,8 +28,6 @@ public class Transaction {
         String credit = amount > 0 ? String.format("%.2f", amount) : "";
         String debit = amount < 0 ? String.format("%.2f", Math.abs(amount)) : "";
 
-        String title = "\t ~~~~ TRANSACTION HISTORY ~~~~ ";
-        String columnsTitle = String.format("%-10s || %-6s || %-6s || %-6s", "date", "credit", "debit", "balance");
         String transactionDetails = String.format("%-10s || %-6s || %-6s || %-6s",
                 date.format(formatter),
                 credit,
@@ -41,12 +35,6 @@ public class Transaction {
                 String.format("%.2f", balance)
         );
 
-        return title + "\n".repeat(2) + columnsTitle + "\n" + transactionDetails;
-    }
-
-    public static void main(String[] args) {
-
-        Transaction transaction = new Transaction(100.0, 400.0);
-        System.out.println(transaction);
+        return transactionDetails;
     }
 }

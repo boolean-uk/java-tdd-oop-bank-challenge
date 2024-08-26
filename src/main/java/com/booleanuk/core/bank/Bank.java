@@ -105,4 +105,8 @@ public class Bank {
         return newTransactionId;
     }
 
+    public ArrayList<Transaction> getStatements(Customer customer) {
+        return this.customers.get(customer.getId()).getTransactions();
+    }
+
 }

@@ -20,8 +20,8 @@ In constructor of Account, the user has to do a deposit so the balance is not 0.
 ## Account
 | Variable                                | Method                          | Scenario                                        | Outcome                          |
 |-----------------------------------------|---------------------------------|-------------------------------------------------|----------------------------------|
-| id int                                  | Deposit(float amount): void     | Put in amount to deposit into account           | Add the deposit to the balance   |
-| balance float                           |                                 |                                                 |                                  |
+| id: int                                 | Deposit(float amount): void     | Put in amount to deposit into account           | Add the deposit to the balance   |
+| balanceChecker: float                   |                                 |                                                 |                                  |
 | ArrayList<Transaction> transactionsList |                                 |                                                 |                                  |
 |                                         | Withdraw(float amount): void    | Get the amount from balance                     | Returns "money" from the balance |
 |                                         |                                 |                                                 | Insufficient amount              |

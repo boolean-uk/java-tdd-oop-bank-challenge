@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Account {
     private int id;
-    private float balance;
     private float balanceChecker;
     private ArrayList<Transaction> transactionsList;
 
@@ -22,8 +21,7 @@ public class Account {
     }
 
     public float getBalance() {
-        calculateAccountBalance();
-        return this.balance;
+        return calculateAccountBalance();
     }
 
     public void depositMoney(float amount) {
@@ -46,17 +44,17 @@ public class Account {
         }
     }
 
-    public void calculateAccountBalance() {
+    private float calculateAccountBalance() {
         float balanceController = 0;
         if(!transactionsList.isEmpty()) {
             for (Transaction transaction: transactionsList) {
                 balanceController += transaction.getAmount();
             }
         }
-        this.balance = balanceController;
+        return balanceController;
     }
 
-    public void printOutTransaction() {
+    public void printOutTransactions() {
         System.out.println("\t Date \t \t \t|| Deposit\t|| Withdraw\t|| Balance");
         if(!transactionsList.isEmpty()){
             for (Transaction transaction:  transactionsList.reversed()) {

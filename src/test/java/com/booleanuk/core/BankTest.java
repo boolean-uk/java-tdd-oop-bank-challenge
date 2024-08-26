@@ -19,6 +19,6 @@ public class BankTest {
         currentAccount.depositMoney(700);
         currentAccount.depositMoney(1000);
         currentAccount.withdrawMoney(1000);
-        currentAccount.printOutTransaction();
+        currentAccount.printOutTransactions();
     }
 }

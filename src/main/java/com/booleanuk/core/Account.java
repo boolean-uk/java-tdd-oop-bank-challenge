@@ -47,7 +47,9 @@ abstract class Account {
 
     public double getBalance() {
         double balance = 0.0;
-
+        for (Transaction transaction : this.transactions) {
+            balance += transaction.getAmount();
+        }
         return balance;
     }
 

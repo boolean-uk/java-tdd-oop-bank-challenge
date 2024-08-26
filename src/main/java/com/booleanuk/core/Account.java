@@ -30,11 +30,11 @@ public class Account {
         return newTransaction;
     }
 
-    public void statement(){
-
-    }
-
     public int getBalance(){
         return 0;
+    }
+
+    public void statement(){
+
     }
 }

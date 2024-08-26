@@ -32,6 +32,19 @@ public class TestCore{
         Assertions.assertEquals(LocalDate.now(), transaction.getDate());
     }
 
+    @Test
+    public void testGetBalance(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        Assertions.assertEquals(0, current.getBalance());
+        current.deposit(500);
+        Assertions.assertEquals(500, current.getBalance());
+        current.deposit(300);
+        Assertions.assertEquals(800, current.getBalance());
+        current.withdraw(50);
+        Assertions.assertEquals(750, current.getBalance());
+    }
+
     /*@Test
     public void testAddAccount(){
         Customer customer1 = new Customer("customer1");

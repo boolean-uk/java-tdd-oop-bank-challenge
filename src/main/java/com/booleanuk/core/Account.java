@@ -2,23 +2,28 @@ package com.booleanuk.core;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import static com.booleanuk.core.NumberUtils.*;
 
 public class Account {
 
     private ArrayList<Transaction> transactions;
     private ArrayList<String> bankStatement;
-    private String name;
+    private String accountName;
     private Branch branch;
+    private Boolean canOverdraft;
+    private Boolean overdraftRequestPending;
 
-    public Account(String name, Branch branch){
+    public Account(String accountName, Branch branch){
         this.transactions = new ArrayList<>();
         this.bankStatement = new ArrayList<>();
-        this.name = name;
+        this.accountName = accountName;
         this.branch = branch;
+        this.canOverdraft = false;
+        this.overdraftRequestPending = false;
     }
 
-    public String getName() {
-        return name;
+    public String getAccountName() {
+        return accountName;
     }
 
     public Branch getBranch() {
@@ -32,17 +37,16 @@ public class Account {
         return transactions.getLast().getBalance();
     }
 
-    public float centsToPounds(int num){
-        String string = floatFormatter((float) num/100f);
-        return Float.parseFloat(string);
+    public Boolean getOverdraftRequestPending() {
+        return overdraftRequestPending;
     }
 
-    public int poundsToCents(float num){
-        return (int) (num*100f);
+    public void setOverdraftRequestPending(Boolean overdraftRequestPending) {
+        this.overdraftRequestPending = overdraftRequestPending;
     }
 
-    public String floatFormatter(float num){
-        return String.format("%.2f", num);
+    public void setCanOverdraft(Boolean canOverdraft) {
+        this.canOverdraft = canOverdraft;
     }
 
     public ArrayList<String> getBankStatement() {
@@ -55,13 +59,13 @@ public class Account {
     }
 
     public String withdraw(float amount){
-        if (amount > centsToPounds(getBalance())){
+        if (amount > centsToPounds(getBalance()) && !canOverdraft){
             return "Not enough funds.";
         }
 
         int newBalance = (getBalance() - ((int) (amount * 100)));
         transactions.add(new Transaction("-" + floatFormatter(amount) + "£", newBalance));
-        return "Funds withdrawed from account.";
+        return "Funds withdrawn from account.";
     }
 
     public void generateBankStatement(){

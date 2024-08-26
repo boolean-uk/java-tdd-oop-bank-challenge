@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static com.booleanuk.core.NumberUtils.*;
 
 
 public class AccountTest {
@@ -30,7 +31,8 @@ public class AccountTest {
     public void depositFunds(){
         Account account = new Account("Test", Branch.Bergen);
         account.deposit(100);
-        Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100f));
+        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalance())));
+
     }
 
     @Test
@@ -38,8 +40,8 @@ public class AccountTest {
         Account account = new Account("Test", Branch.Trondheim);
         Assertions.assertEquals("Not enough funds.", account.withdraw(100));
         account.deposit(100);
-        Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(50));
-        Assertions.assertEquals(String.format("%.2f", 50f), String.format("%.2f", (float) account.getBalance()/100));
+        Assertions.assertEquals("Funds withdrawn from account.", account.withdraw(50));
+        Assertions.assertEquals(floatFormatter(50f), floatFormatter(centsToPounds(account.getBalance())));
     }
 
     // Extension requirements
@@ -50,7 +52,7 @@ public class AccountTest {
         Account account = new Account("Test", Branch.Oslo);
         Assertions.assertEquals(0, account.getBalance());
         account.deposit(100);
-        Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100));
+        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalance())));
     }
 
     // User story 2: Accounts are associated with specific branches
@@ -60,5 +62,4 @@ public class AccountTest {
         Assertions.assertEquals(Branch.Oslo, account.getBranch());
     }
 
-    // User story 3: Request overdraft on account
 }

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import static com.booleanuk.core.NumberUtils.*;
 
 public class CustomerTest {
 
@@ -15,7 +16,8 @@ public class CustomerTest {
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
 
-        Assertions.assertEquals("Opened a new current account: 'Test Current'.", customer.openCurrentAccount("Test Current", Branch.Bergen));
+        Assertions.assertEquals("Opened a new current account: 'Test Current'.",
+                customer.openCurrentAccount("Test Current", Branch.Bergen));
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
@@ -25,7 +27,8 @@ public class CustomerTest {
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
 
-        Assertions.assertEquals("Opened a new savings account: 'Test Savings'.", customer.openSavingsAccount("Test Savings", Branch.Trondheim));
+        Assertions.assertEquals("Opened a new savings account: 'Test Savings'.",
+                customer.openSavingsAccount("Test Savings", Branch.Trondheim));
         Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
@@ -64,7 +67,7 @@ public class CustomerTest {
         account.deposit(267.96f);
         account.deposit(793.23f);
 
-        Assertions.assertEquals(String.format("%.2f", 1061.19f), account.floatFormatter(account.centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(1061.19f), floatFormatter(centsToPounds(account.getBalance())));
     }
 
 
@@ -77,7 +80,41 @@ public class CustomerTest {
         Account account = customer.getAccount("Test Savings");
         account.deposit(250f);
 
-        Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(55f));
-        Assertions.assertEquals(String.format("%.2f", 195f), String.format("%.2f", (float) account.getBalance()/100f));
+        Assertions.assertEquals("Funds withdrawn from account.", account.withdraw(55f));
+        Assertions.assertEquals(floatFormatter(195f), floatFormatter(centsToPounds(account.getBalance())));
+
     }
+
+    //Extension requirements
+    //
+    // User story 3: Request overdraft on account
+    @Test
+    public void canCustomerRequestOverdraft(){
+        ArrayList<Account> accounts = new ArrayList<>();
+        Customer customer = new Customer(accounts);
+        customer.openSavingsAccount("Test Savings", Branch.Oslo);
+        Account account = customer.getAccount("Test Savings");
+        account.deposit(250f);
+
+        customer.requestOverdraft(account);
+        Assertions.assertTrue(account.getOverdraftRequestPending());
+    }
+
+    @Test
+    public void canCustomerOverdraft(){
+        ArrayList<Account> accounts = new ArrayList<>();
+        Customer customer = new Customer(accounts);
+        customer.openSavingsAccount("Test Savings", Branch.Oslo);
+        Account account = customer.getAccount("Test Savings");
+        account.deposit(250f);
+
+        customer.requestOverdraft(account);
+        Manager manager = new Manager();
+        manager.approveOverdraftRequest(account);
+
+        account.withdraw(1200f);
+        Assertions.assertEquals(floatFormatter(-950.00f), floatFormatter(centsToPounds(account.getBalance())));
+
+    }
+
 }

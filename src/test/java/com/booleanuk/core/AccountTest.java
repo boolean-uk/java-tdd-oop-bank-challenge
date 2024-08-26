@@ -42,6 +42,15 @@ public class AccountTest {
 
         currentAccount.withdraw(100.0);
         Assertions.assertEquals(600.0, transactions.get(2).getBalance());
+    }
 
+    @Test
+    public void testUpdatedGetBalance() {
+        currentAccount.deposit(500);
+        currentAccount.deposit(1000);
+        currentAccount.withdraw(200);
+
+        double balance = currentAccount.getBalance();
+        Assertions.assertEquals(1300.0, balance);
     }
 }

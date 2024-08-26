@@ -17,6 +17,11 @@ public class Transaction {
         return balance;
     }
 
+    public double getAmount() {
+        return this.amount;
+    }
+
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

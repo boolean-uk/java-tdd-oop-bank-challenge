@@ -46,6 +46,8 @@ abstract class Account {
     }
 
     public double getBalance() {
+        double balance = 0.0;
+
         return balance;
     }
 

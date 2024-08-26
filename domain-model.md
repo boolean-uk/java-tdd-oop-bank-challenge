@@ -79,6 +79,46 @@ And these are the methods in the `Transaction` class.
 |------------|-----------|----------|-----------------------------------------|
 | `toString` |           | `String` | Outputs a transaction in a nice format. |
 
+# Extensions
+
+---------------------------------------------
+
+## User Stories
+
+---------------------------------------------
+
+```
+1.
+As an engineer,
+So I don't need to keep track of state,
+I want account balances to be calculated based on transaction history instead of stored in memory.
+
+2.
+As a customer,
+So I have an emergency fund,
+I want to be able to request an overdraft on my account.
+
+3.
+As a bank manager,
+So I can safeguard our funds,
+I want to approve or reject overdraft requests.
+```
+
+## Changes made to the existing code
+
+To complete the first user story, I have updated the `getBalance()` getter in the abstract `Account` class
+to calculate the balance by using the *transactions* arraylist instead of the local *balance* member.
+
+| Method       | Parameter | Return   | Description                                     |
+|--------------|-----------|----------|-------------------------------------------------|
+| `getBalance` |           | `Double` | Iterate over transactions and sums the amounts. |
+|              |           |          |                                                 |
+
+
+
+
+
+
 
 
 

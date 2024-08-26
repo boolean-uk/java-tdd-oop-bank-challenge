@@ -46,7 +46,7 @@ public class BankTest {
 
         bank.deposit(customer, currentAcc, 1500);
 
-        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+        Assertions.assertEquals(customer.getBalance(currentAcc), 1500);
     }
 
     @Test
@@ -57,11 +57,11 @@ public class BankTest {
 
         bank.deposit(customer, currentAcc, 1500);
 
-        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+        Assertions.assertEquals(customer.getBalance(currentAcc), 1500);
 
         bank.withdraw(customer, currentAcc, 1000);
 
-        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 500);
+        Assertions.assertEquals(customer.getBalance(currentAcc), 500);
     }
 
 }

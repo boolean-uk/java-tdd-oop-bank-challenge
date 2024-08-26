@@ -23,7 +23,7 @@ public class TransactionTest {
         // Assertions.assertEquals("2024-08-26", firstTransaction.getDate()); // obviously hard to hard code date for testing
         Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(amount, firstTransaction.getAmount());
-        Assertions.assertEquals(customer.getAccount(account.getAccountNumber()).getBalance() - amount, firstTransaction.getBalanceBeforeTransaction());
+        Assertions.assertEquals(customer.getBalance(account) - amount, firstTransaction.getBalanceBeforeTransaction());
         Assertions.assertEquals(Transaction.TransactionType.CREDIT, firstTransaction.getTransactionType());
     }
 
@@ -59,7 +59,7 @@ public class TransactionTest {
         Transaction depositTransaction = customer.getTransactions().getFirst();
         Assertions.assertEquals(account.getAccountNumber(), depositTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(depositAmount, depositTransaction.getAmount());
-        Assertions.assertEquals(depositAmount - customer.getAccount(account.getAccountNumber()).getBalance(), depositTransaction.getBalanceBeforeTransaction());
+        Assertions.assertEquals(depositAmount - customer.getBalance(account), depositTransaction.getBalanceBeforeTransaction());
 
         bank.withdraw(customer, account, withdrawAmount);
 
@@ -67,7 +67,7 @@ public class TransactionTest {
         Transaction withdrawTransaction = customer.getTransactions().getFirst(); // Latest transaction will be first
         Assertions.assertEquals(account.getAccountNumber(), withdrawTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(withdrawAmount, withdrawTransaction.getAmount());
-        Assertions.assertEquals(customer.getAccount(account.getAccountNumber()).getBalance() + withdrawAmount, withdrawTransaction.getBalanceBeforeTransaction());
+        Assertions.assertEquals(customer.getBalance(account) + withdrawAmount, withdrawTransaction.getBalanceBeforeTransaction());
     }
 
 }

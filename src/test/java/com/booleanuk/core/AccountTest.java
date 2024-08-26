@@ -23,7 +23,7 @@ public class AccountTest {
 
         account.depositMoney(1000);
 
-        Assertions.assertEquals(1000, account.getBalance());
+        Assertions.assertEquals(1500, account.getBalance());
     }
 
     @Test

@@ -6,21 +6,22 @@ public class Transaction {
     private final LocalDate date;
     private final double amount;
     private final double balance;
+    private final boolean isOverdraft;
 
-    public Transaction(double amount, double balance) {
+    public Transaction(double amount, double balance, boolean isOverdraft) {
         this.date = LocalDate.now();
         this.amount = amount;
         this.balance = balance;
-    }
-
-    public double getBalance() {
-        return balance;
+        this.isOverdraft = isOverdraft;
     }
 
     public double getAmount() {
         return this.amount;
     }
 
+    public boolean getIsOverdraft() {
+        return this.isOverdraft;
+    }
 
     @Override
     public String toString() {

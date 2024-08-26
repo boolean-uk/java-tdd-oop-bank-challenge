@@ -29,17 +29,17 @@ abstract class Account {
 
     public void deposit(double amount) {
         this.balance += amount;
-        this.transactions.add(new Transaction(amount, this.getBalance()));
+        this.transactions.add(new Transaction(amount, this.balance, false));
     }
 
     public void withdraw(double amount) {
         if ((this.balance - amount) > 0.0) {
             this.balance -= amount;
-            this.transactions.add(new Transaction(-amount, this.getBalance()));
+            this.transactions.add(new Transaction(-amount, this.balance, false));
         }
         else if (this.overdraftRequest.isApproved() && amount <= this.overdraftRequest.getRequestedLimit()) {
             this.balance -= amount;
-            this.transactions.add(new Transaction(-amount, this.getBalance()));
+            this.transactions.add(new Transaction(-amount, this.balance,true));
         }
     }
 
@@ -69,10 +69,16 @@ abstract class Account {
         this.transactions = transactions;
     }
 
+    // TODO: Need to fix overdraft bug in this.
     public double getBalance() {
         double balance = 0.0;
         for (Transaction transaction : this.transactions) {
-            balance += transaction.getAmount();
+            if (transaction.getIsOverdraft()) {
+                balance -= transaction.getAmount();
+            }
+            else {
+                balance += transaction.getAmount();
+            }
         }
         return balance;
     }
@@ -94,6 +100,12 @@ abstract class Account {
         bankManager.receiveRequest(current.getOverdraftRequest());
         bankManager.processRequest();
 
+        current.withdraw(200);
+        current.deposit(500);
+        current.withdraw(100);
+
         current.printStatement();
+        System.out.println(current.getBalance());
+
     }
 }

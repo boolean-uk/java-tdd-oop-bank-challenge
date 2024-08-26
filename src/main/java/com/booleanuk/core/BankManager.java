@@ -21,7 +21,7 @@ public class BankManager {
             boolean requestCondition = limit > MIN && limit <= MAX;
             if (requestCondition) {
                 request.approve();
-                System.out.println("Request approved for account: " + request.getAccount().getAccountNumber());
+                System.out.println("Request approved for account: " + request.getAccount().getAccountNumber() + "\n");
             }
             else {
                 request.reject();

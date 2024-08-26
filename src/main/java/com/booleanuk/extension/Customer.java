@@ -50,6 +50,15 @@ public class Customer {
         return true;
     }
 
+    public boolean requestOverdraft(Account account, double amount){
+
+        if (account instanceof CurrentAccount currentAccount){
+            OverdraftRequest overdraftRequest = new OverdraftRequest(amount);
+            currentAccount.setOverdraftRequest(overdraftRequest);
+        }
+        return true;
+    }
+
     public boolean generateBankStatement(Account account){
         if (!accounts.contains(account)){
             return false;

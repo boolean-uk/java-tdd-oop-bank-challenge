@@ -33,6 +33,10 @@ public class Account {
         return transactions.stream().mapToDouble(Transaction::getAmount).sum();
     }
 
+    public OverdraftRequest getOverdraftRequest(){
+        return null;
+    }
+
     public List<Transaction> getTransactions() {
         return transactions;
     }

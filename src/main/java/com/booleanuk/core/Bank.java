@@ -59,4 +59,24 @@ public class Bank {
         return false;
     }
 
+    public boolean deposit(Customer customer, Account account, double amount) {
+        if (!this.customers.containsKey(customer.getId())) return false;
+        if (this.customers.get(customer.getId()).getAccount(account.getAccountNumber()) == null) return false;
+        if (!this.checkIfAccountNumberExists(account.getAccountNumber())) return false;
+
+        this.customers.get(customer.getId()).getAccount(account.getAccountNumber()).deposit(amount);
+
+        return true;
+    }
+
+    public boolean withdraw(Customer customer, Account account, double amount) {
+        if (!this.customers.containsKey(customer.getId())) return false;
+        if (this.customers.get(customer.getId()).getAccount(account.getAccountNumber()) == null) return false;
+        if (!this.checkIfAccountNumberExists(account.getAccountNumber())) return false;
+
+        this.customers.get(customer.getId()).getAccount(account.getAccountNumber()).withdraw(amount);
+
+        return true;
+    }
+
 }

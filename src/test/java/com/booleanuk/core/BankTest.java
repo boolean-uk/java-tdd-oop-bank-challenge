@@ -11,14 +11,15 @@ public class BankTest {
         SavingAccount savingAccount = new SavingAccount(50);
 
         // I want to withdraw from currentAccount and put it in my savingAccount
-        currentAccount.withdrawMoney(300);
+        currentAccount.withdrawMoney(300, 0);
         savingAccount.depositMoney(300);
 
         Assertions.assertEquals(200, currentAccount.getBalance());
         Assertions.assertEquals(350, savingAccount.getBalance());
         currentAccount.depositMoney(700);
         currentAccount.depositMoney(1000);
-        currentAccount.withdrawMoney(1000);
+        currentAccount.withdrawMoney(1000, 0);
+        currentAccount.withdrawMoney(300, 0);
         currentAccount.printOutTransactions();
     }
 }

@@ -49,5 +49,7 @@ public class BankManagerTest {
         //Should be under the limit of overdraft and return true
         Assertions.assertTrue(bankManager.withdrawFromAccount(account, 500));
 
+        account.printOutTransactions();
+
     }
 }

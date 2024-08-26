@@ -33,8 +33,8 @@ public class Account {
         }
     }
 
-    public void withdrawMoney(float amount){
-        if(this.balanceChecker - amount >= 0) {
+    public void withdrawMoney(float amount, float overdraftLimit){
+        if((this.balanceChecker - amount) >= overdraftLimit) {
             Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
             transactionsList.add(transaction);
             this.balanceChecker -= amount;
@@ -60,7 +60,7 @@ public class Account {
                 if(transaction.getTransactionType() == 0) {
                     System.out.println(transaction.getDate() + " || " + transaction.getAmount() + " \t||\t\t\t" +  "|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
                 }else {
-                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (this.balanceChecker));
+                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
                 }
             }
         }

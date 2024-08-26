@@ -27,4 +27,6 @@ To create a savingsAccount or a currentAccount the user has to specify it when c
 | String branch                           | Withdraw(float amount): void    | Get the amount from balance                     | Returns "money" from the balance |
 |                                         |                                 |                                                 | Insufficient amount              |
 |                                         | calculateAccountBalance(): void | Calculate the account balance from transactions |                                  |
-|    
+
+
+![ClassDiagram of extension](bankChallengeExtension.drawio.png)    

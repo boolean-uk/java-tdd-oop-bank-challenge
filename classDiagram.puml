@@ -17,7 +17,7 @@ Class Account {
 - Type ownerBranch
 + deposit(): void
 + withdraw(): boolean
-+ generateBankStatement(): String
++ generateBankStatement(): void
 + calculateBalanceFromTransactionHistory(): int
 + requestOverdraft(): void
 }

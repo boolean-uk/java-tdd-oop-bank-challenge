@@ -18,7 +18,7 @@ public class AccountTest {
         account.deposit(deposit);
 
         // Get amount in the first transaction in the log.
-        int amount = account.getTransactionHistory().getFirst().amount;
+        int amount = account.getTransactionHistory().getFirst().getAmount();
 
         // Assert that the sum is registered in the transactions.
         Assertions.assertEquals(deposit, amount);
@@ -31,7 +31,7 @@ public class AccountTest {
 
         // Compute the leftover in the account.
         for (Transaction t : account.getTransactionHistory()){
-            accountBalance += t.amount;
+            accountBalance += t.getAmount();
         }
 
         // Assert that the remaining amount is correct

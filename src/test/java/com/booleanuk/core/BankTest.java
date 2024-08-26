@@ -19,9 +19,9 @@ public class BankTest {
     @Test
     public void testAddCustomerToBank() {
         Bank bank = new Bank("Swedbank");
-        Customer customer = new Customer();
+        bank.addCustomer(new Customer());
 
-        Assertions.assertEquals(bank.getCustomers().getFirst().getId(), customer.getId());
+        Assertions.assertEquals(10, bank.getCustomers().getFirst().getId().length());
     }
 
 }

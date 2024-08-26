@@ -1,14 +1,14 @@
 
-| Class          | Member variables    | Methods                                    | Scenario | Output |
-|----------------|---------------------|--------------------------------------------|----------|--------|
-| `AccountOwner` |                     |                                            |          |        |
-|                | bankName : String   |                                            |          |        |
-|                | bankBranch : String |                                            |          |        |
-|                | ownerID : String    |                                            |          |        |
-|                | name : String       |                                            |          |        |
-|                | Arraylist<Account>  |                                            |          |        | 
-|                |                     | createAccount(accountType : String)        |          |        |
-|                |                     | generateBankStatement(accountNumber : int) |          |        |
+| Class          | Member variables    | Methods                                    | Scenario                                                                    | Output                            |
+|----------------|---------------------|--------------------------------------------|-----------------------------------------------------------------------------|-----------------------------------|
+| `AccountOwner` |                     |                                            |                                                                             |                                   |
+|                | bankName : String   |                                            |                                                                             |                                   |
+|                | bankBranch : String |                                            |                                                                             |                                   |
+|                | ownerID : String    |                                            |                                                                             |                                   |
+|                | name : String       |                                            |                                                                             |                                   |
+|                | Arraylist<Account>  |                                            |                                                                             |                                   | 
+|                |                     | openNewAccount(accountType : String)       | Should create a new account and add it to Arraylist account                 | "New account successfully opened" |
+|                |                     | generateBankStatement(accountNumber : int) | Takes the accountable and then retrieves the bankStatement for that account |                                   |
 
 
 | Class     | Member Variables                       | Methods                                           | Scenario                                                                                                | Output                         |

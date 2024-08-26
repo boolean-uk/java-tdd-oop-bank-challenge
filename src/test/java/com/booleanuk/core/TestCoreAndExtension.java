@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class TestCore{
+public class TestCoreAndExtension {
 
     @Test
     public void testDeposit(){
@@ -56,6 +55,15 @@ public class TestCore{
                         LocalDate.now() + " || 500     ||        || 500\n" +
                         LocalDate.now() + " || 300     ||        || 800\n" +
                         LocalDate.now() + " ||         || 50     || 750", current.statement());
+    }
+
+    @Test
+    public void testToggleOverdraft(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        Assertions.assertFalse(current.getOverdraft());
+        current.toggleOverdraft();
+        Assertions.assertTrue(current.getOverdraft());
     }
 
     /*@Test

@@ -7,6 +7,7 @@ public class Account {
     private int accountNr;
     private double interest;
     private ArrayList<Transaction> transactions;
+    private String branch;
 
     public Account(double interest){
         accountNr = 1;
@@ -73,5 +74,13 @@ public class Account {
             counter--;
         }
         return result;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 }

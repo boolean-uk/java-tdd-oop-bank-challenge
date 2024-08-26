@@ -17,6 +17,7 @@ public abstract class Account {
         this.balance = balance;
         this.transactions = new ArrayList<>();
 
+
     }
 
 
@@ -80,10 +81,11 @@ public abstract class Account {
         if (amount > 0 && amount <= this.balance) {
             this.balance -= amount;
             addTransaction(amount, "debit");
-            return "Withdrawal Successful";
+            return "Withdrawal successful";
         }
-        return "You dont have enough money for this withdrawal!";
+        return "Insufficient funds!";
     }
+
 
     public void printHeader() {
         String header = String.format("%-10s || %-7s || %-7s || %-7s", "date", "credit", "debit", "balance");

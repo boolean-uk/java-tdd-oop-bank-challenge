@@ -38,7 +38,40 @@ public class Account {
         return result;
     }
 
-    public void statement(){
+    public String statement(){
+        int counter = transactions.size() - 1;
+        String result = "date       || credit  || debit  || balance\n";
+        for(Transaction transaction : transactions){
+            int balance = 0;
+            int credit = transaction.getCredit();
+            int debit = transaction.getDebit();
+            result += transaction.getDate() + " || ";
 
+            if(credit == 0){
+                result += "       ";
+            }
+            else{
+                result += String.format("%-7s", credit);
+            }
+            result += " || ";
+
+            if(debit == 0){
+                result += "      ";
+            }
+            else{
+                result += String.format("%-6s", debit);
+            }
+            result += " || ";
+
+            for(int i = 0; i < transactions.size() - counter; ++i){
+                balance += transactions.get(i).getCredit() - transactions.get(i).getDebit();
+            }
+            result += balance;
+            if(!(transaction == transactions.getLast())){
+                result += "\n";
+            }
+            counter--;
+        }
+        return result;
     }
 }

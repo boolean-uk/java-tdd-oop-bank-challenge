@@ -45,6 +45,19 @@ public class TestCore{
         Assertions.assertEquals(750, current.getBalance());
     }
 
+    @Test
+    public void testStatement(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        current.deposit(500);
+        current.deposit(300);
+        current.withdraw(50);
+        Assertions.assertEquals("date       || credit  || debit  || balance\n" +
+                        LocalDate.now() + " || 500     ||        || 500\n" +
+                        LocalDate.now() + " || 300     ||        || 800\n" +
+                        LocalDate.now() + " ||         || 50     || 750", current.statement());
+    }
+
     /*@Test
     public void testAddAccount(){
         Customer customer1 = new Customer("customer1");

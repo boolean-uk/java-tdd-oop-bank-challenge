@@ -20,7 +20,9 @@ abstract class Account {
     }
 
     public void withdraw(double amount) {
-
+        if ((this.balance - amount) > 0.0) {
+            this.balance -= amount;
+        }
     }
 
     public void printStatement() {

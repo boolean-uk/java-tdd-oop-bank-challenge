@@ -20,18 +20,11 @@ public class BankManager {
 
     }
 
-    public void addCurrentAccount(float firstDeposit, String branch) {
-        CurrentAccount currentAccount = new CurrentAccount(firstDeposit, currentAccounts.size());
+    public void addAccount(float firstDeposit, String typeOfAccount, String branch) {
+        CurrentAccount currentAccount = new CurrentAccount(firstDeposit);
         currentAccounts.put(currentAccounts.size(), currentAccount);
-        currentAccountsList.put("currentAccounts", currentAccounts);
+        currentAccountsList.put(typeOfAccount, currentAccounts);
         branches.put(branch, currentAccountsList);
-    }
-
-    public void addSavingAccount(float firstDeposit, String branch) {
-        SavingAccount savingAccount = new SavingAccount(firstDeposit, savingAccounts.size());
-        savingAccounts.put(savingAccounts.size(), savingAccount);
-        savingAccountsList.put("savingAccounts", savingAccounts);
-        branches.put(branch, savingAccountsList);
     }
 
     public Account getCurrentAccountWithIDInBranch(String branch, String typeOfAccount, int id) {

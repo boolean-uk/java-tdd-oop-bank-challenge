@@ -7,8 +7,8 @@ public class BankTest {
 
     @Test
     public void makeABankTest() {
-        CurrentAccount currentAccount = new CurrentAccount(500, 0);
-        SavingAccount savingAccount = new SavingAccount(50, 0);
+        CurrentAccount currentAccount = new CurrentAccount(500);
+        SavingAccount savingAccount = new SavingAccount(50);
 
         // I want to withdraw from currentAccount and put it in my savingAccount
         currentAccount.withdrawMoney(300);

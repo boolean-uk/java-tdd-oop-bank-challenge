@@ -3,11 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Account {
-    private int id;
     private float balanceChecker;
     private ArrayList<Transaction> transactionsList;
 
-    public Account(float firstDeposit, int id) {
+    public Account(float firstDeposit) {
         this.balanceChecker = firstDeposit;
         this.transactionsList = new ArrayList<>();
         //First initial deposit of account

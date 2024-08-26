@@ -7,19 +7,19 @@ public class AccountTest {
 
     @Test
     public void createAccountTest() {
-        Account account = new Account(500, 0);
+        Account account = new Account(500);
     }
 
     @Test
     public void getCurrentBalance() {
-        Account account = new Account(500, 0);
+        Account account = new Account(500);
 
         Assertions.assertEquals(500, account.getBalance());
     }
 
     @Test
     public void depositMoneyTest() {
-        Account account = new Account(500, 0);
+        Account account = new Account(500);
 
         account.depositMoney(1000);
 
@@ -28,7 +28,7 @@ public class AccountTest {
 
     @Test
     public void withdrawMoneyTest() {
-        Account account = new Account(500, 0);
+        Account account = new Account(500);
 
         account.withdrawMoney(250);
 
@@ -37,7 +37,7 @@ public class AccountTest {
 
     @Test
     public void checkBalanceCheckerTest() {
-        Account account = new Account(500, 0);
+        Account account = new Account(500);
 
         account.depositMoney(500);
 

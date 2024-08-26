@@ -43,7 +43,7 @@ public class AccountTest {
     @Test
     public void withdrawalTestIfAmountExceedsLimit() {
         Account account = new CurrentAccount(500);
-        Assertions.assertEquals("You dont have enough money for this withdrawal!", account.withdraw(600));
+        Assertions.assertEquals("You don't have enough money for this withdrawal!", account.withdraw(600));
 
 
     }
@@ -86,6 +86,29 @@ public class AccountTest {
         retrievedAccount.applyInterest();
         Assertions.assertNotNull(retrievedAccount, "Saving account sohuld not be null!");
         Assertions.assertEquals(expectedBalance, retrievedAccount.getBalance(),0.01);
+    }
+
+    @Test
+    public void withdrawalTestRejected() {
+        Customer customer =  new Customer("Melvin", "Seelan");
+        Account currentAccount = new CurrentAccount(500);
+        customer.addAccount(currentAccount);
+        CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
+        retrievedAccount.requestOverdraft(300);
+        Assertions.assertFalse(retrievedAccount.approveOverdraft(200));
+    }
+
+    @Test
+    public void withdrawalTestAccepted() {
+        Customer customer =  new Customer("Melvin", "Seelan");
+        Account currentAccount = new CurrentAccount(500);
+        customer.addAccount(currentAccount);
+        CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
+        retrievedAccount.requestOverdraft(500);
+        retrievedAccount.approveOverdraft(500);
+        retrievedAccount.getApprovedOverdraftLimit();
+        boolean approvalResult = retrievedAccount.isOverdraftApproved();
+        Assertions.assertTrue(approvalResult, "Overdraft should be approved successfully");
     }
 
 }

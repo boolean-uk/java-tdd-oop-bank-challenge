@@ -30,20 +30,20 @@ public abstract class Account {
     }
 
     public void printBankstatement() {
-        System.out.println("\t Date \t \t \t|| Credit\t|| Debit\t|| Balance");
+        System.out.println("Date       || Credit   || Debit    || Balance");
         if(!bankStatement.isEmpty()){
             for(Transaction transaction : bankStatement.reversed()){
-                if (transaction.getType() == TransactionType.DEPOSIT){
-                    System.out.println(transaction.getDate() +" || " + transaction.getAmount() + " || " + "\t \t \t" + " || " + transaction.getBalance());
+                if (transaction.getType() == TransactionType.DEPOSIT) {
+                    System.out.printf("%-11s || %-8.2f || %-8s || %.2f%n", transaction.getDate(), transaction.getAmount(), "", transaction.getBalance());
 
+                } else {
+                    System.out.printf("%-11s || %-8s || %-8.2f || %.2f%n", transaction.getDate(), "", transaction.getAmount(), transaction.getBalance());
                 }
-                else {
-                    System.out.println(transaction.getDate() +" || " + "\t \t \t" + " || " + transaction.getAmount() + " || " + transaction.getBalance());
-                }
-
             }
         }
-        System.out.println("No transactions found!");
+        else {
+            System.out.println("No transactions found!");
+        }
     }
 
     public abstract String deposit(double amount);

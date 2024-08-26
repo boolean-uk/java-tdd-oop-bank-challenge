@@ -18,6 +18,8 @@ public class BankstatementTest {
         Assertions.assertEquals(3, currentAccount.getBankStatement().size());
     }
 
+
+
     @Test
     public void TestPrintBankstatement(){
         AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
@@ -28,8 +30,15 @@ public class BankstatementTest {
         currentAccount.withdraw(500);
 
         currentAccount.printBankstatement();
+    }
 
+    @Test
+    public void TestPrintEmptyBankstatement(){
+        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
+        CurrentAccount currentAccount = new CurrentAccount(me);
 
+        //"No transactions found!"
+        currentAccount.printBankstatement();
     }
 
 

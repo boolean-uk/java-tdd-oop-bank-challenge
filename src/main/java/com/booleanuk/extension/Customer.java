@@ -54,7 +54,7 @@ public class Customer {
         if (!accounts.contains(account)){
             return false;
         }
-        if (account instanceof CurrentAccount currentAccount){
+        if (account instanceof CurrentAccount currentAccount && currentAccount.getOverdraftLimit() >= amount ){
             OverdraftRequest overdraftRequest = new OverdraftRequest(amount);
             currentAccount.setOverdraftRequest(overdraftRequest);
             return true;

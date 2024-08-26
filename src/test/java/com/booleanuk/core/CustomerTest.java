@@ -23,11 +23,11 @@ public class CustomerTest {
         Assertions.assertEquals(1, customer.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(customer2.requestCurrentAccount());
+        Assertions.assertFalse(customer2.requestCurrentAccount(), "Customer are not a customer of the bank.");
 
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));
-        Assertions.assertFalse(customer3.requestCurrentAccount());
+        Assertions.assertFalse(customer3.requestCurrentAccount(), "Customer are not a customer of the bank.");
     }
 
     @Test
@@ -39,11 +39,11 @@ public class CustomerTest {
         Assertions.assertEquals(1, customer.getAccounts().size());
 
         Customer customer2 = new Customer("Name");
-        Assertions.assertFalse(customer2.requestSavingsAccount());
+        Assertions.assertFalse(customer2.requestSavingsAccount(), "Customer are not a customer of the bank.");
 
         Customer customer3 = new Customer("Name");
         customer3.setBank(new Bank("Name"));
-        Assertions.assertFalse(customer3.requestCurrentAccount());
+        Assertions.assertFalse(customer3.requestCurrentAccount(), "Customer are not a customer of the bank.");
     }
 
     @Test
@@ -79,7 +79,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void testDepositInCurrentAccount() {
+    public void testDeposit() {
         double amountToDeposit = 100.00;
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
@@ -97,8 +97,29 @@ public class CustomerTest {
         Assertions.assertFalse(customer.deposit(account, amountToDeposit));
         Assertions.assertEquals(0, account.getBalance());
         Assertions.assertEquals(0, account.getTransactions().size());
+    }
 
+    @Test
+    public void testWithdraw() {
+        double amountToWithdraw = 100.00;
+        double amountToDeposit = 200.00;
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        customer.requestCurrentAccount();
+        Account currentAccount = customer.getAccounts().getFirst();
+        customer.deposit(currentAccount, amountToDeposit);
 
+        Assertions.assertTrue(customer.withdraw(currentAccount, amountToWithdraw));
+        Assertions.assertEquals(amountToDeposit - amountToWithdraw, currentAccount.getBalance());
+        Assertions.assertEquals(2, currentAccount.getTransactions().size());
+
+        Customer customer2 = new Customer("Name");
+        bank.addCustomer(customer2);
+        Account account = new Account();
+        Assertions.assertFalse(customer.deposit(account, amountToWithdraw), "Account not in the customer accounts.");
+        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(0, account.getTransactions().size());
     }
 
 }

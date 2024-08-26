@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class AccountTest {
@@ -12,7 +13,7 @@ public class AccountTest {
     public void testCreateCurrentAccount() {
         Account currentAccount = new CurrentAccount("AC1");
 
-        currentAccount.getAccountNumber("AC1", currentAccount.getAccountNumber());
+        Assertions.assertEquals("AC1", currentAccount.getAccountNumber());
     }
 
 }

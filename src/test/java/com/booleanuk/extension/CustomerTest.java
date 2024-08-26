@@ -171,6 +171,16 @@ public class CustomerTest {
         Assertions.assertTrue(customer.requestOverdraft(currentAccount, 1000.00));
         Assertions.assertEquals(1000.00, currentAccount.getOverdraftRequest().getAmount());
         Assertions.assertFalse(currentAccount.getOverdraftRequest().isApproved());
+
+        currentAccount.getOverdraftRequest().setApproved(true);
+        Assertions.assertTrue(currentAccount.getOverdraftRequest().isApproved());
+
+        Customer customer2 = new Customer("Name");
+        bank.addCustomer(customer2);
+        Account account = new Account();
+        Assertions.assertFalse(customer.requestOverdraft(account, 1000.00), "Account not in the customer accounts.");
+        Assertions.assertNull(account.getOverdraftRequest(), "Account should not have overdraft request.");
+
     }
 
 }

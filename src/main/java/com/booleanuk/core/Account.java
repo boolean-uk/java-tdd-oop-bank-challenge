@@ -18,12 +18,22 @@ public abstract class Account {
     public Branch getOwnerBranch(){ return this.ownerBranch; }
 
     public void deposit(int amount){
+        if (amount < 1){
+            System.out.println("Invalid amount.");
+            return;
+        }
+
         int currentBalance = calculateCurrentBalance();
         Transaction t = new Transaction(amount, currentBalance);
         this.transactionHistory.add(t);
     }
 
     public boolean withdraw(int amount){
+        if (amount < 1){
+            System.out.println("Invalid amount.");
+            return false;
+        }
+
         int currentBalance = calculateCurrentBalance();
         if (currentBalance < amount && !canOverdraft){
             System.out.println("Insufficient funds.");

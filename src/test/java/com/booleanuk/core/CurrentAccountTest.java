@@ -63,4 +63,20 @@ public class CurrentAccountTest {
 
     }
 
+    @Test
+    public void TestIfWithdrawalWorks(){
+        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(me);
+
+        //If I do a valid withdrawal I should get the correct output and the bankStatement should increment
+        //first I deposit 2000£ size of bank statement should now be 1
+        savingsAccount.deposit(2000);
+
+        //If i now withdraw 1800£ i expect
+        Assertions.assertEquals("New Balance: 200.0£", savingsAccount.withdraw(1800));
+
+        //Should now have two transactions in bank statement.
+        Assertions.assertEquals(2, savingsAccount.getBankStatement().size());
+
+    }
 }

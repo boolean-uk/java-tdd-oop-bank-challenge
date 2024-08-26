@@ -34,4 +34,8 @@ public class BankManager {
         branches.put(branch, savingAccountsList);
     }
 
+    public Account getCurrentAccountWithIDInBranch(String branch, int id) {
+        return branches.get(branch).get("currentAccounts").get(id);
+    }
+
 }

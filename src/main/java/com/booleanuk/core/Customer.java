@@ -3,12 +3,16 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Customer {
-    String name;
-    ArrayList<Account> accounts;
+    private String name;
+    private ArrayList<Account> accounts;
+    private int customerID;
 
-    public Customer(String name){
+
+
+    public Customer(String name, int customerID){
         this.name = name;
         this.accounts = new ArrayList<>();
+        this.customerID = customerID;
     }
 
     public void addAccount(Account account){
@@ -29,6 +33,14 @@ public class Customer {
     public String getName(){
         return this.name;
     }
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
     // Override equals and hashCode
     @Override
     public boolean equals(Object obj) {

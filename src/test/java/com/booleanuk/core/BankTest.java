@@ -17,7 +17,7 @@ public class BankTest {
     @Test
     public void newAccountTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein");
+        Customer customer1 = new Customer("Jostein",1);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         bank.newAccount(customer1, "Current");

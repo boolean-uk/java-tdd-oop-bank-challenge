@@ -6,13 +6,14 @@ import java.util.HashMap;
 public class Bank {
     //private HashMap<Customer, ArrayList<Account>> customers;
     private ArrayList<Customer> customers;
-    private int uniqueID;
+    private int accountID;
+    private int customerID;
     private String branch;
 
     public Bank(String branch){
         //this.customers = new HashMap<>();
         this.customers = new ArrayList<>();
-        this.uniqueID = 0;
+        this.accountID = 0;
         this.branch = branch;
 
     }
@@ -35,16 +36,16 @@ public class Bank {
 
         if (customerExists(customer)){
             if(accountType.equals("Saving")){
-                Account newAccount = new SavingsAccount(branch, uniqueID);
+                Account newAccount = new SavingsAccount(branch, accountID);
                 System.out.println("Created new saving account");
                 customer.addAccount(newAccount);
-                uniqueID += 1;
+                accountID += 1;
                 return true;
             }else if(accountType.equals("Current")){
-                Account newAccount = new CurrentAccount(branch, uniqueID);
+                Account newAccount = new CurrentAccount(branch, accountID);
                 System.out.println("created new current account for user: " + customer.getName());
                 customer.addAccount(newAccount);
-                uniqueID += 1;
+                accountID += 1;
                 return true;
             }
         }
@@ -61,10 +62,10 @@ public class Bank {
     }
 
     public int getUniqueID() {
-        return uniqueID;
+        return accountID;
     }
 
     public void setUniqueID(int uniqueID) {
-        this.uniqueID = uniqueID;
+        this.accountID = uniqueID;
     }
 }

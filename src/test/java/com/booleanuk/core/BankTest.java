@@ -57,7 +57,7 @@ public class BankTest {
 
         bank.withdraw(customer, currentAcc, 1000);
 
-        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 1500);
+        Assertions.assertEquals(customer.getAccount(currentAcc.getAccountNumber()).getBalance(), 500);
     }
 
 }

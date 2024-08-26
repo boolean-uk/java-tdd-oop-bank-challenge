@@ -94,6 +94,9 @@ public class AccountTest {
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
         Account account = c.getAccounts().getFirst();
+
+        Assertions.assertFalse(account.overdraftRequested);
+
         account.requestOverdraft();
 
         Assertions.assertTrue(account.overdraftRequested);

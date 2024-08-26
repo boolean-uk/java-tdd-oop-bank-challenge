@@ -51,6 +51,10 @@ public class CustomerTest {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");
         Assertions.assertEquals(0, customer.getAccounts().size());
+
+        bank.addCustomer(customer);
+        customer.requestCurrentAccount();
+        Assertions.assertEquals(1, customer.getAccounts().size());
     }
 
     @Test

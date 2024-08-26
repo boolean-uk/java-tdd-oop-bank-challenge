@@ -7,12 +7,16 @@ abstract class Account {
     private String accountNumber;
     private double balance;
     private ArrayList<Transaction> transactions;
+    private boolean approvedOverdraft;
+    private double overdraftLimit;
 
     public Account(String fullName, String accountNumber) {
         this.fullName = fullName;
         this.accountNumber = accountNumber;
         this.setBalance(0.0);
         this.setTransactions(new ArrayList<>());
+        this.approvedOverdraft = false;
+        this.overdraftLimit = 0.0;
     }
 
     public void deposit(double amount) {
@@ -25,6 +29,10 @@ abstract class Account {
             this.balance -= amount;
             this.transactions.add(new Transaction(-amount, this.getBalance()));
         }
+    }
+
+    public String requestOverdraft(double limit) {
+        return "";
     }
 
     public void printStatement() {

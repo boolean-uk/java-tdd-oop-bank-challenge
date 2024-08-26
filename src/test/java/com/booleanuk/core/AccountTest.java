@@ -53,4 +53,11 @@ public class AccountTest {
         double balance = currentAccount.getBalance();
         Assertions.assertEquals(1300.0, balance);
     }
+
+    @Test
+    public void testRequestOverdraft() {
+        String requestResult = currentAccount.requestOverdraft(500);
+
+        Assertions.assertEquals("Overdraft approved with a limit of: 500", requestResult);
+    }
 }

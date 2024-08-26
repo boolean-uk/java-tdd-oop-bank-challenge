@@ -3,9 +3,10 @@
 
 
 ### Customer class
-| Method                        | Scenario                                                                    | Output                                                                                                                                             |
-|-------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| `openAccount(String): String` | New current account<br/>New savings account<br/>Account name already exists | "Opened a new current account: 'Account.name'"<br/>"Opened a new savings account: 'Account.name'"<br/>"Your already have an account by this name." |
+| Method                                       | Scenario                                            | Output                                                                                                                     |
+|----------------------------------------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| `openCurrentAccount(String, String): String` | New current account<br/>Account name already exists | "Opened a new current account: 'Account.name', at branch: 'branch.name'."<br/>"Your already have an account by this name." |
+| `openSavingsAccount(String, String): String` | New savings account<br/>Account name already exists | "Opened a new savings account: 'Account.name', at branch: 'branch.name'."<br/>"Your already have an account by this name." |
 
 
 ### Transaction class

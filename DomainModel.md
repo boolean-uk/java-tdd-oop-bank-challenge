@@ -18,15 +18,15 @@ I want to deposit and withdraw funds.
 All variables in each class is private and has setters and getters.
 In constructor of Account, the user has to do a deposit so the balance is not 0.
 ## Account
-| Variable               | Method                          | Scenario                                        | Outcome                          |
-|------------------------|---------------------------------|-------------------------------------------------|----------------------------------|
-| id                     | Deposit(float amount): void     | Put in amount to deposit into account           | Add the deposit to the balance   |
-| Balance                |                                 |                                                 |                                  |
-| ArrayList<Transaction> |                                 |                                                 |                                  |
-|                        | Withdraw(float amount): void    | Get the amount from balance                     | Returns "money" from the balance |
-|                        |                                 |                                                 | Insufficient amount              |
-|                        | calculateAccountBalance(): void | Calculate the account balance from transactions |                                  |
-|                        |                                 |                                                 |                                  |
+| Variable                                | Method                          | Scenario                                        | Outcome                          |
+|-----------------------------------------|---------------------------------|-------------------------------------------------|----------------------------------|
+| id int                                  | Deposit(float amount): void     | Put in amount to deposit into account           | Add the deposit to the balance   |
+| balance float                           |                                 |                                                 |                                  |
+| ArrayList<Transaction> transactionsList |                                 |                                                 |                                  |
+|                                         | Withdraw(float amount): void    | Get the amount from balance                     | Returns "money" from the balance |
+|                                         |                                 |                                                 | Insufficient amount              |
+|                                         | calculateAccountBalance(): void | Calculate the account balance from transactions |                                  |
+|                                         |                                 |                                                 |                                  |
 
 
 ## currentAccount extends Account
@@ -43,6 +43,7 @@ Same function as accounts.
 |------------------------|--------|----------|---------|
 | ID int                 |        |          |         |
 | amount float           |        |          |         |
+| oldBalance float       |        |          |         |
 | date LocalDateTime     |        |          |         |
 | transactionType binary |        |          |         |
 Transactions tracks how much a user deposit or withdraw from the account. 

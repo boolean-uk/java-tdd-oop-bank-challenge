@@ -16,5 +16,9 @@ public class BankTest {
 
         Assertions.assertEquals(200, currentAccount.getBalance());
         Assertions.assertEquals(350, savingAccount.getBalance());
+        currentAccount.depositMoney(700);
+        currentAccount.depositMoney(1000);
+        currentAccount.withdrawMoney(1000);
+        currentAccount.printOutTransaction();
     }
 }

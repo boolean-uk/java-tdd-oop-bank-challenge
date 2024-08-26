@@ -12,7 +12,7 @@ public class Account {
         this.balanceChecker = firstDeposit;
         this.transactionsList = new ArrayList<>();
         //First initial deposit of account
-        Transaction initialTransaction = new Transaction(0, firstDeposit,0);
+        Transaction initialTransaction = new Transaction(0, firstDeposit, 0, 0);
         transactionsList.add(initialTransaction);
     }
 
@@ -28,8 +28,7 @@ public class Account {
 
     public void depositMoney(float amount) {
         if(amount > 0) {
-            Transaction transaction = new Transaction(transactionsList.size(), amount, 0);
-
+            Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 0);
             transactionsList.add(transaction);
             this.balanceChecker += amount;
         }else {
@@ -38,8 +37,8 @@ public class Account {
     }
 
     public void withdrawMoney(float amount){
-        if(this.balance - amount <= 0) {
-            Transaction transaction = new Transaction(transactionsList.size(), amount, 1);
+        if(this.balanceChecker - amount >= 0) {
+            Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
             transactionsList.add(transaction);
             this.balanceChecker -= amount;
         }else {
@@ -55,5 +54,18 @@ public class Account {
             }
         }
         this.balance = balanceController;
+    }
+
+    public void printOutTransaction() {
+        System.out.println("\t Date \t \t \t|| Deposit\t|| Withdraw\t|| Balance");
+        if(!transactionsList.isEmpty()){
+            for (Transaction transaction:  transactionsList.reversed()) {
+                if(transaction.getTransactionType() == 0) {
+                    System.out.println(transaction.getDate() + " || " + transaction.getAmount() + " \t||\t\t\t" +  "|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
+                }else {
+                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (this.balanceChecker));
+                }
+            }
+        }
     }
 }

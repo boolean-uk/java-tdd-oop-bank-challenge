@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Customer {
     private String name;
-    private ArrayList<Account> accounts;
+    //private ArrayList<Account> accounts;
+    private Current current;
+    private Savings savings;
 
-    Customer(String name){
+    public Customer(String name){
         this.name = name;
-        accounts = new ArrayList<>();
+        current = new Current();
+        savings = new Savings();
     }
 
     public String getName() {
@@ -19,11 +22,15 @@ public class Customer {
         this.name = name;
     }
 
-    public ArrayList<Account> getAccounts() {
-        return accounts;
+    public Current getCurrent() {
+        return current;
     }
 
-    public void addAccount(String type){
+    public Savings getSavings(){
+        return savings;
+    }
+
+    /*public void addAccount(String type){
         type = type.toLowerCase();
         if(type.equals("current")){
             Current current = new Current();
@@ -36,5 +43,5 @@ public class Customer {
         else{
             System.out.println("Error: No such account type.");
         }
-    }
+    }*/
 }

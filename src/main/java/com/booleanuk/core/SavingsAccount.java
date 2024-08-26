@@ -10,10 +10,12 @@ public class SavingsAccount extends Account{
     @Override
     public String deposit(double amount) {
 
-        Transaction depositTransaction = new Transaction(amount, 0, getBalance());
+        setBalance(getBalance() + amount);
+
+        Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount, getBalance());
         getBankStatement().add(depositTransaction);
 
-        setBalance(getBalance() + amount);
+
 
         return "New Balance: " + getBalance() + "£";
     }
@@ -21,10 +23,11 @@ public class SavingsAccount extends Account{
     @Override
     public String withdraw(double amount) {
         if (amount <= getBalance()){
-            Transaction withdrawTransaction = new Transaction(0, amount, getBalance());
-            getBankStatement().add(withdrawTransaction);
 
             setBalance(getBalance() - amount);
+
+            Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAWAL, amount, getBalance());
+            getBankStatement().add(withdrawTransaction);
 
             return "New Balance: " + getBalance() + "£";
         }

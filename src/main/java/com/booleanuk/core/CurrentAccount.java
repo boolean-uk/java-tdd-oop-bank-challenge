@@ -18,10 +18,10 @@ public class CurrentAccount extends Account{
     @Override
     public String deposit(double amount) {
 
-        Transaction depositTransaction = new Transaction(amount, 0, getBalance());
-        getBankStatement().add(depositTransaction);
-
         setBalance(getBalance() + amount);
+
+        Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount, getBalance());
+        getBankStatement().add(depositTransaction);
 
         return "New Balance: " + getBalance() + "£";
     }
@@ -36,10 +36,10 @@ public class CurrentAccount extends Account{
                 overdraftLimit -= overdraft;
             }
 
-            Transaction withdrawTransaction = new Transaction(0, amount, getBalance());
-            getBankStatement().add(withdrawTransaction);
-
             setBalance(getBalance() - amount);
+
+            Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAWAL, amount, getBalance());
+            getBankStatement().add(withdrawTransaction);
 
             return "New Balance: " + getBalance() + "£";
         }

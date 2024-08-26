@@ -18,6 +18,7 @@ public class CurrentAccountTest {
         Assertions.assertEquals("New Balance: 3000.0£", currentAccount.deposit(2000));
         Assertions.assertEquals(2, currentAccount.getBankStatement().size());
 
+
     }
 
     @Test
@@ -49,7 +50,7 @@ public class CurrentAccountTest {
         CurrentAccount currentAccount = new CurrentAccount(me);
 
         //This should now work because at current account overdraft is active.
-        Assertions.assertEquals("New balance: -100.0£", currentAccount.withdraw(100));
+        Assertions.assertEquals("New Balance: -100.0£", currentAccount.withdraw(100));
 
     }
 

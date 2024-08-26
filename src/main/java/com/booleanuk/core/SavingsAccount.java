@@ -13,7 +13,9 @@ public class SavingsAccount extends Account{
 
     @Override
     public void withdraw(int amount) {
-        this.addTransaction(amount, false);
+        if(amount <= getBalance()) {
+            this.addTransaction(amount, false);
+        } else System.out.println("You don't have enough balance");
     }
 
 }

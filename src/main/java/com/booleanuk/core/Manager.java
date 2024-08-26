@@ -7,4 +7,8 @@ public class Manager {
         this.branch = new Branch(branch.getBranchId());
 
     }
+
+    public boolean approveOverDraft(Account account, int amount) {
+        return false;
+    }
 }

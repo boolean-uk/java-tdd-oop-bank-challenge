@@ -13,6 +13,7 @@ public class MainTest {
     Costumer costumer = new Costumer("Individual");
     SavingsAccount savingsAccount;
     CurrentAccount currentAccount;
+    Manager manager;
 
     MainTest() {
         this.bank = new Bank();
@@ -20,6 +21,7 @@ public class MainTest {
         this.lundBranch = new Branch("individualBranch");
         this.savingsAccount = new SavingsAccount("12345", lundBranch);
         this.currentAccount = new CurrentAccount("12345", lundBranch);
+        this.manager = new Manager(lundBranch);
 
     }
 
@@ -121,6 +123,14 @@ public class MainTest {
     public void testGetBalance() {
         currentAccount.deposit(500);
         Assertions.assertEquals(500, currentAccount.getBalance());
+        currentAccount.withdraw(200);
+        Assertions.assertEquals(300, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testRequestOverDraft() {
+        Assertions.assertTrue(currentAccount.requestOverDraft(manager, 500));
+
     }
 }
 

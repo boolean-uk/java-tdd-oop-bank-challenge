@@ -6,11 +6,11 @@ public class CurrentAccount extends Account {
    private OverdraftRequest overdraftRequest;
 
    public CurrentAccount(){
-       this.overdraftLimit = setOverdraftLimit(1000);
+       setOverdraftLimit(1000);
    }
 
-    public double setOverdraftLimit(double overdraftLimit){
-         return overdraftLimit;
+    public void setOverdraftLimit(double overdraftLimit){
+         this.overdraftLimit = overdraftLimit;
     }
 
     public double getOverdraftLimit(){

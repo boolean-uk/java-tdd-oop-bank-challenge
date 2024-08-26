@@ -46,10 +46,10 @@ public class CustomerTest {
         String bankStatement =
                 "[Date        ||     Amount ||     Balance, " +
                 "----------------------------------------, " +
-                "26/08/2024  ||     £50.00 ||      £50.00, " +
-                "26/08/2024  ||     £30.00 ||      £80.00, " +
-                "26/08/2024  ||     £20.00 ||     £100.00, " +
-                "26/08/2024  ||    -£40.00 ||      £60.00]";
+                "26/08/2024  ||     50.00£ ||      50.00£, " +
+                "26/08/2024  ||     30.00£ ||      80.00£, " +
+                "26/08/2024  ||     20.00£ ||     100.00£, " +
+                "26/08/2024  ||    -40.00£ ||      60.00£]";
 
         Assertions.assertEquals(bankStatement, account.getBankStatement().toString());
     }
@@ -64,7 +64,7 @@ public class CustomerTest {
         account.deposit(267.96f);
         account.deposit(793.23f);
 
-        Assertions.assertEquals(String.format("%.2f", 1061.19f), String.format("%.2f", (float) account.getBalance()/100f));
+        Assertions.assertEquals(String.format("%.2f", 1061.19f), account.floatFormatter(account.centsToPounds(account.getBalance())));
     }
 
 

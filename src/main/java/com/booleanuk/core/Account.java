@@ -32,22 +32,35 @@ public class Account {
         return transactions.getLast().getBalance();
     }
 
+    public float centsToPounds(int num){
+        String string = floatFormatter((float) num/100f);
+        return Float.parseFloat(string);
+    }
+
+    public int poundsToCents(float num){
+        return (int) (num*100f);
+    }
+
+    public String floatFormatter(float num){
+        return String.format("%.2f", num);
+    }
+
     public ArrayList<String> getBankStatement() {
         return bankStatement;
     }
 
     public void deposit(float amount){
-        int newBalance = (getBalance() + ((int) (amount * 100)));
-        transactions.add(new Transaction("£" + String.format("%.2f", amount), newBalance));
+        int newBalance = getBalance() + poundsToCents(amount);
+        transactions.add(new Transaction(floatFormatter(amount)+ "£", newBalance));
     }
 
     public String withdraw(float amount){
-        if (amount > (float) getBalance()/100f){
+        if (amount > centsToPounds(getBalance())){
             return "Not enough funds.";
         }
 
         int newBalance = (getBalance() - ((int) (amount * 100)));
-        transactions.add(new Transaction("-£" + String.format("%.2f", amount), newBalance));
+        transactions.add(new Transaction("-" + floatFormatter(amount) + "£", newBalance));
         return "Funds withdrawed from account.";
     }
 
@@ -58,7 +71,7 @@ public class Account {
             bankStatement.add(String.format("%-11s %1s %10s %1s %11s",
                     transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "||",
                     transaction.getAmount(), "||",
-                    "£" + String.format("%.2f", (float) transaction.getBalance()/100f)));
+                    floatFormatter(centsToPounds(transaction.getBalance())) + "£"));
         }
     }
 

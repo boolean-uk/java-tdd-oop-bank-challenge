@@ -20,8 +20,8 @@ public class AccountTest {
         String bankStatement =
                 "[Date        ||     Amount ||     Balance, " +
                 "----------------------------------------, " +
-                "26/08/2024  ||    £100.00 ||     £100.00, " +
-                "26/08/2024  ||    -£30.00 ||      £70.00]";
+                "26/08/2024  ||    100.00£ ||     100.00£, " +
+                "26/08/2024  ||    -30.00£ ||      70.00£]";
 
         Assertions.assertEquals(bankStatement,account.getBankStatement().toString());
     }

@@ -9,9 +9,11 @@ public class Account {
     private ArrayList<Transaction> transactionsList;
 
     public Account(float firstDeposit) {
-        this.balance = firstDeposit;
         this.balanceChecker = firstDeposit;
         this.transactionsList = new ArrayList<>();
+        //First initial deposit of account
+        Transaction initialTransaction = new Transaction(0, firstDeposit,0);
+        transactionsList.add(initialTransaction);
     }
 
     public void depositMoney(float amount) {
@@ -25,7 +27,8 @@ public class Account {
         }
     }
 
-    public float getBalance() { 
+    public float getBalance() {
+        calculateAccountBalance();
         return this.balance;
     }
 

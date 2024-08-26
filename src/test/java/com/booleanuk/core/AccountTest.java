@@ -34,4 +34,13 @@ public class AccountTest {
 
         Assertions.assertEquals(250, account.getBalance());
     }
+
+    @Test
+    public void checkBalanceCheckerTest() {
+        Account account = new Account(500);
+
+        account.depositMoney(500);
+
+        Assertions.assertEquals(account.getBalanceChecker(), account.getBalance());
+    }
 }

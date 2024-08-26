@@ -22,6 +22,9 @@ public class AccountTest {
 
     @Test
     public void testWithdrawMoney() {
-
+        currentAccount.deposit(500.0);
+        currentAccount.withdraw(200.0);
+        double currentBalance = currentAccount.getBalance();
+        Assertions.assertEquals(300.0, currentBalance);
     }
 }

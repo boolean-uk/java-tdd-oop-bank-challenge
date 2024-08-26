@@ -4,20 +4,19 @@ import java.time.LocalDateTime;
 
 public class Transaction {
     private LocalDateTime date;
-    private float balance;
-    private float amount;
+    private String balance;
+    private String amount;
 
-    public Transaction(float amount, int balance) {
-        // Make sure returns date in correct format
+    public Transaction(String amount, int balance) {
         this.date = LocalDateTime.now();
         this.amount = amount;
-        this.balance =  balance/100f;
+        this.balance =  "£" + String.format("%.2f", balance/100f);
     }
-    public float getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public float getAmount() {
+    public String getAmount() {
         return amount;
     }
 

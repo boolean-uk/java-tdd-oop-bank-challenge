@@ -3,15 +3,25 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class AccountTest {
 
     @Test
     public void generateBankStatement(){
         Account account = new Account("Test");
-        account.deposit(100);
-        account.deposit(20);
+        account.deposit(100f);
+        account.withdraw(30f);
         account.generateBankStatement();
         account.printBankStatement();
+
+        //Remember to change date when testing
+        String bankStatement =
+                "[Date        ||     Amount ||     Balance, " +
+                "----------------------------------------, " +
+                "26/08/2024  ||    £100.00 ||     £100.00, " +
+                "26/08/2024  ||    -£30.00 ||      £70.00]";
+
+        Assertions.assertEquals(bankStatement,account.getBankStatement().toString());
     }
 
     @Test

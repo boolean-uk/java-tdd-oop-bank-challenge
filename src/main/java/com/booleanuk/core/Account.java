@@ -18,13 +18,21 @@ public class Account {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public float getBalance() {
         return balance/100f;
     }
 
+    public ArrayList<String> getBankStatement() {
+        return bankStatement;
+    }
+
     public void deposit(float amount){
         this.balance += (int) (amount * 100);
-        transactions.add(new Transaction(amount, this.balance));
+        transactions.add(new Transaction("£" + String.format("%.2f", amount), this.balance));
     }
 
     public String withdraw(float amount){
@@ -33,7 +41,7 @@ public class Account {
         }
 
         this.balance -= (int) (amount * 100);
-        transactions.add(new Transaction(-amount, this.balance));
+        transactions.add(new Transaction("-£" + String.format("%.2f", amount), this.balance));
         return "Funds withdrawed from account.";
     }
 
@@ -43,8 +51,8 @@ public class Account {
         for (Transaction transaction : transactions) {
             bankStatement.add(String.format("%-11s %1s %10s %1s %11s",
                     transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "||",
-                    String.format("%.2f", transaction.getAmount()), "||",
-                    String.format("%.2f", transaction.getBalance())));
+                    transaction.getAmount(), "||",
+                    transaction.getBalance()));
         }
     }
 

@@ -7,6 +7,11 @@ public class CustomerTest {
 
     @Test
     public void CreateCurrentAccountTest(){
+        /*
+        As a customer,
+        So I can safely store and use my money,
+        I want to create a current account.
+         */
         Customer c = new Customer();
 
         // Verify that list of accounts is empty
@@ -24,6 +29,12 @@ public class CustomerTest {
 
     @Test
     public void CreateSavingsAccountTest(){
+        /*
+        As a customer,
+        So I can save for a rainy day,
+        I want to create a savings account.
+        */
+
         Customer c = new Customer();
 
         // Verify that list of accounts is empty

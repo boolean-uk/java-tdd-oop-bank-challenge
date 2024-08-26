@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class AccountTest {
     @Test
     public void DepositAndWithdrawalTest(){
+        /*
+        As a customer,
+        So I can use my account,
+        I want to deposit and withdraw funds.
+         */
         Customer c = new Customer();
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
@@ -44,6 +49,12 @@ public class AccountTest {
 
     @Test
     public void CalculateCurrentBalanceTest(){
+        /*
+        As an engineer,
+        So I don't need to keep track of state,
+        I want account balances to be calculated based on
+        transaction history instead of stored in memory.
+         */
         Customer c = new Customer();
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
@@ -60,13 +71,17 @@ public class AccountTest {
         account.deposit(deposit2);
         account.deposit(deposit3);
 
-        int currentBalance = c.getAccounts().getFirst().calculateCurrentBalance();
-
-        Assertions.assertEquals(1337+7331+1234, currentBalance);
+        Assertions.assertEquals(1337+7331+1234, c.getAccounts().getFirst().calculateCurrentBalance());
     }
 
     @Test
     public void GenerateBankStatementTest(){
+        /*
+        As a customer,
+        So I can keep a record of my finances,
+        I want to generate bank statements with transaction dates,
+        amounts, and balance at the time of transaction.
+         */
         Customer c = new Customer();
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
@@ -90,6 +105,11 @@ public class AccountTest {
 
     @Test
     public void RequestOverdraftTest(){
+        /*
+        As a customer,
+        So I have an emergency fund,
+        I want to be able to request an overdraft on my account.
+         */
         Customer c = new Customer();
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
@@ -104,6 +124,11 @@ public class AccountTest {
 
     @Test
     public void approveOrRejectOverdraftRequestTest(){
+        /*
+        As a bank manager,
+        So I can safeguard our funds,
+        I want to approve or reject overdraft requests.
+         */
         Customer c = new Customer();
         c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
@@ -127,6 +152,11 @@ public class AccountTest {
 
     @Test
     public void accountAssociatedWithSpecificBranchTest(){
+        /*
+        As a bank manager,
+        So I can expand,
+        I want accounts to be associated with specific branches.
+         */
         Customer c = new Customer();
         Branch b = new Branch("Oslo");
         c.createAccount(Customer.AccountType.CURRENT, b);

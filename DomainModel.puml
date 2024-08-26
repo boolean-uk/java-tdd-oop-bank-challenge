@@ -34,6 +34,7 @@ class OverdraftRequest{
 class Transaction{
     -amount: double
     -date: LocalDateTime
+    +getAmount(): double
 }
 
 class Bank{
@@ -50,10 +51,6 @@ Bank -- OverdraftRequest
 Bank -- Branch
 
 
-
-
-
-
 class Manager{
     - branch: Branch
     - bank: Bank
@@ -62,6 +59,10 @@ class Manager{
 }
 Manager -- Branch
 
-enum Branch{}
+enum Branch{
+    Oslo,
+    London,
+    Stockholm
+}
 
 @enduml

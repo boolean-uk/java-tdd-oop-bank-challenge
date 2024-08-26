@@ -42,7 +42,7 @@ public class Customer {
     }
 
     protected void addTransaction(Transaction newTransaction) {
-        this.transactions.add(newTransaction);
+        this.transactions.addFirst(newTransaction);
     }
 
 }

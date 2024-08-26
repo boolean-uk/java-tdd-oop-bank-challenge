@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class CustomerTest {
 
+    //Core requirements
+    //
     // User story 1: Create a current account
     @Test
     public void openCurrentAccount(){

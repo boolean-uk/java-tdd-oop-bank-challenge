@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 public class AccountTest {
 
+    //Core requirements
+    //
     @Test
     public void generateBankStatement(){
         Account account = new Account("Test");
@@ -38,5 +40,16 @@ public class AccountTest {
         account.deposit(100);
         Assertions.assertEquals("Funds withdrawed from account.", account.withdraw(50));
         Assertions.assertEquals(String.format("%.2f", 50f), String.format("%.2f", (float) account.getBalance()/100));
+    }
+
+    // Extension requirements
+    //
+    // User story 1: Account balance calculated on transaction history
+    @Test
+    public void calculateAccountBalance(){
+        Account account = new Account("Test");
+        Assertions.assertEquals(0, account.getBalance());
+        account.deposit(100);
+        Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100));
     }
 }

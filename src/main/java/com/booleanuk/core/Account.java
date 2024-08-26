@@ -26,6 +26,10 @@ public class Account {
     }
 
     public Transaction withdraw(int money){
+        if(getBalance() - money <= 0){
+            System.out.println("Non allowed overdraft!");
+            return null;
+        }
         Transaction newTransaction = new Transaction(0, money);
         transactions.add(newTransaction);
         return newTransaction;

@@ -1,19 +1,18 @@
 package com.booleanuk.core;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Transaction {
-    private Date date;
+    private LocalDate date;
     private double amount;
     private double balance;
 
-    public Transaction(Date date, double amount, double balance) {
+    public Transaction(LocalDate date, double amount, double balance) {
         this.date = date;
         this.amount = amount;
         this.balance = balance;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

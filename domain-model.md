@@ -113,13 +113,8 @@ to calculate the balance by using the *transactions* arraylist instead of the lo
 |--------------|-----------|----------|-------------------------------------------------|
 | `getBalance` |           | `Double` | Iterate over transactions and sums the amounts. |
 
-For the second user story I added 2 additional members in the `Account` class to keep track of
-the overdraft approval and limit. 
 
-| Member              | Type      | Description                                                    |
-|---------------------|-----------|----------------------------------------------------------------|
-| `approvedOverdraft` | `Boolean` | False by default and set to true when the request is approved. |
-| `overdraftLimit`    | `Double`  | The limit of the overdraft (maximum 1000).                     |
+
 
 
 

@@ -7,16 +7,24 @@ abstract class Account {
     private String accountNumber;
     private double balance;
     private ArrayList<Transaction> transactions;
-    private boolean approvedOverdraft;
-    private double overdraftLimit;
+    private OverdraftRequest overdraftRequest;
 
     public Account(String fullName, String accountNumber) {
         this.fullName = fullName;
         this.accountNumber = accountNumber;
         this.setBalance(0.0);
         this.setTransactions(new ArrayList<>());
-        this.approvedOverdraft = false;
-        this.overdraftLimit = 0.0;
+        this.overdraftRequest = null;
+    }
+
+    public void requestOverdraft(double limit) {
+        if (this.overdraftRequest == null) {
+            this.overdraftRequest = new OverdraftRequest(this, limit);
+            System.out.println("Overdraft request submitted for limit: " + limit);
+        }
+        else {
+            System.out.println("An overdraft request is already pending.");
+        }
     }
 
     public void deposit(double amount) {
@@ -25,22 +33,13 @@ abstract class Account {
     }
 
     public void withdraw(double amount) {
-        if ((this.balance - amount) > 0.0) {
+        if (this.balance) {
             this.balance -= amount;
             this.transactions.add(new Transaction(-amount, this.getBalance()));
-        }
-    }
-
-    public String requestOverdraft(double limit) {
-
-        // Assuming the limit would be somewhere around 1000.
-        if (limit > 0 && limit <= 1000) {
-            this.approvedOverdraft = true;
-            this.overdraftLimit = limit;
-            return "Overdraft approved with a limit of: " + limit;
+            System.out.println("Successful withdraw, new balance is: " + this.getBalance());
         }
         else {
-            return "Max overdraft limit is 1000 in this bank!";
+            System.out.println("Insufficient funds, even with overdraft.");
         }
     }
 
@@ -52,6 +51,14 @@ abstract class Account {
         for (Transaction transaction : transactions.reversed()) {
             System.out.println(transaction);
         }
+    }
+
+    public void clearOverdraftRequest() {
+        this.overdraftRequest = null;
+    }
+
+    public String getAccountNumber() {
+        return this.accountNumber;
     }
 
     public ArrayList<Transaction> getTransactions() {
@@ -72,5 +79,24 @@ abstract class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public OverdraftRequest getOverdraftRequest() {
+        return this.overdraftRequest;
+    }
+
+    public static void main(String[] args) {
+
+        Current currentAccount = new Current("Bobby", "22433423424");
+        currentAccount.requestOverdraft(1000);
+
+        BankManager manager = new BankManager();
+        manager.receiveRequest(currentAccount.getOverdraftRequest());
+        manager.processRequest();
+
+        currentAccount.withdraw(500);
+
+        currentAccount.printStatement();
+
     }
 }

@@ -147,4 +147,17 @@ public class AccountTest {
 
     }
 
+    @Test
+    public void ifOverDraftRejected() {
+        Customer customer =  new Customer("Melvin", "Seelan");
+        Branch osloBranch = new Branch("Oslo");
+        Account currentAccount = new CurrentAccount(500, osloBranch);
+        customer.addAccount(currentAccount);
+        CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
+        retrievedAccount.requestOverdraft(300);
+        retrievedAccount.rejectOverdraft();
+        Assertions.assertFalse(retrievedAccount.isOverdraftApproved());
+
+    }
+
 }

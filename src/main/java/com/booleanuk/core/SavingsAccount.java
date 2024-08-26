@@ -5,6 +5,7 @@ public class SavingsAccount extends Account {
     private final double interest;
 
     public SavingsAccount(double interest) {
+        super("");
         this.interest = interest;
     }
 

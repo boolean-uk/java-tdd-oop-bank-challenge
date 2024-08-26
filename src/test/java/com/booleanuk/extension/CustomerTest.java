@@ -213,7 +213,10 @@ public class CustomerTest {
         customer.requestOverdraft(currentAccount, 100.00);
         currentAccount.getOverdraftRequest().setApproved(true);
 
-        Assertions.assertTrue(customer.withdraw(currentAccount, 100.00), "Overdraft request is not approved.");
+        Assertions.assertTrue(customer.withdraw(currentAccount, 100.00), "Overdraft request is approved. Withdraw should be successful.");
+        Assertions.assertEquals(-100.00, currentAccount.getBalance());
+
+        Assertions.assertFalse(customer.withdraw(currentAccount, 1.00), "Withdrawal exceeds approved overdraft limit");
         Assertions.assertEquals(-100.00, currentAccount.getBalance());
     }
 

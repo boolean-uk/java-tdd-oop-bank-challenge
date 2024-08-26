@@ -19,7 +19,9 @@ public class Account {
     }
 
     public Transaction deposit(int money){
-        return null;
+        Transaction newTransaction = new Transaction(money, 0);
+        transactions.add(newTransaction);
+        return newTransaction;
     }
 
     public Transaction withdraw(){

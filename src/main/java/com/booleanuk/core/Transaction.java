@@ -11,12 +11,12 @@ public class Transaction {
     private int debit;
     private int balance;
 
-    public Transaction(){
-        id = UUID.randomUUID().toString();
-        date = new Date();
-        credit = 0;
-        debit = 0;
-        balance = 0;
+    public Transaction(int credit, int debit){
+        this.id = UUID.randomUUID().toString();
+        this.date = new Date();
+        this.credit = credit;
+        this.debit = debit;
+        this.balance = 0;
     }
 
     public String getId() {

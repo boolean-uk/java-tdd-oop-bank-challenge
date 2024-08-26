@@ -11,6 +11,7 @@ public class TestCore{
         Assertions.assertTrue(customer1.getCurrent().getTransactions().isEmpty());
         Assertions.assertEquals(500, customer1.getCurrent().deposit(500).getBalance());
         Assertions.assertEquals(750, customer1.getCurrent().deposit(250).getBalance());
+        Assertions.assertEquals(2, customer1.getCurrent().getTransactions().size());
     }
 
     /*@Test

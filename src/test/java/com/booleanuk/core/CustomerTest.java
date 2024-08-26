@@ -138,7 +138,10 @@ public class CustomerTest {
         customer.withdraw(currentAccount, 50.00);
         customer.deposit(currentAccount, 200.00);
         customer.withdraw(currentAccount, 100.00);
-        customer.deposit(currentAccount, 300.00);
+        customer.deposit(currentAccount, 1500.00);
+        customer.withdraw(currentAccount, 1000.00);
+
+
         Assertions.assertTrue(customer.generateBankStatement(currentAccount));
     }
 }

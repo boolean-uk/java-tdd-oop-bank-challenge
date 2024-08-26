@@ -86,8 +86,16 @@ public class AccountTest {
 
         assert(out.toString().contains("26/08/2024 || 20.00      ||            || 20.00"));
         assert(out.toString().contains("26/08/2024 ||            || 15.00      || 5.00"));
+    }
 
+    @Test
+    public void RequestOverdraftTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
 
+        Account account = c.getAccounts().getFirst();
+        account.requestOverdraft();
 
+        Assertions.assertTrue(account.overdraftRequested);
     }
 }

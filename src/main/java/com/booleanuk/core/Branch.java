@@ -6,4 +6,8 @@ public class Branch {
     public Branch(String name){
         this.name = name;
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

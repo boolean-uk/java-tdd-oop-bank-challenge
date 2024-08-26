@@ -1,25 +1,27 @@
 @startuml
 
-Class Transaction {
-- date: String
-- amount: int
-- currentBalance: int
-}
-
 Class Customer {
 - accounts : ArrayList<Account>
++ accountType: enum
++ createAccount(type: AccountType, branch: Branch): void
 }
 
 Class Account {
-- canOverdraft: boolean
-- balance: int
 - transactionHistory: ArrayList<Transaction>
-- Type ownerBranch
-+ deposit(): void
-+ withdraw(): boolean
-+ generateBankStatement(): void
+- canOverdraft: boolean
+- overdraftRequested: boolean
+- ownerBranch: Branch
+
++ deposit(amount: int): void
++ withdraw(amount: int): boolean
+
 + calculateBalanceFromTransactionHistory(): int
++ generateBankStatement(): void
++ printBankStatement(list: ArrayList<String>): void
+
 + requestOverdraft(): void
++ rejectOverdraftRequest(): void
++ acceptOverdraftRequest(): void
 }
 
 Class Savings extends Account {
@@ -28,11 +30,13 @@ Class Savings extends Account {
 Class Current extends Account {
 }
 
-Class Manager(){
-+ manageOverdraftRequest()
+Class Transaction {
+- date: String
+- amount: int
+- currentBalance: int
 }
 
 Class Branch {
-- accounts : ArrayList<Account>
+- name: String
 }
 @enduml

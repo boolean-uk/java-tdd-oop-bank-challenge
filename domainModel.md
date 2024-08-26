@@ -72,18 +72,18 @@ I want statements to be sent as messages to my phone.
 |-------------------------------|-------------------------------------------------------------|
 | `ArrayList<Account> accounts` | List of all the accounts belonging to a specific customer.  |
 
-| Methods                                       | Scenario                                              | Outputs |
-|-----------------------------------------------|-------------------------------------------------------|---------|
-| `void createAccount(AccountType accountType)` | Manager wants to accept or reject overdraft requests. | -       |
+| Methods                                                      | Scenario                             | Outputs |
+|--------------------------------------------------------------|--------------------------------------|---------|
+| `void createAccount(AccountType accountType, Branch branch)` | Customer wants to create an account. | -       |
 
 
 ### Account Abstract Class
-| Variables                                   | Description                                |
-|---------------------------------------------|--------------------------------------------|
-| `int balance`                               | Contains the balance of the account.       |
-| `ArrayList<Transaction> transactionHistory` | Contains the history of transactions.      |
-| `boolean canOverdraft`                      | Decides if customer can overdraft account. |
-| `Type ownerBranch`                          | Branch associated with account.            |
+| Variables                                   | Description                                                                        |
+|---------------------------------------------|------------------------------------------------------------------------------------|
+| `ArrayList<Transaction> transactionHistory` | Contains the history of transactions.                                              |
+| `boolean canOverdraft`                      | Decides if customer can overdraft account.                                         |
+| `boolean overdraftRequested`                | Contains information whether overdrafted has been requested for the given account. |
+| `Branch ownerBranch`                        | Branch associated with account.                                                    |
 
 | Methods                                        | Scenario                                                                                       | Outputs                                                                                          |
 |------------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
@@ -91,9 +91,12 @@ I want statements to be sent as messages to my phone.
 | `boolean withdraw(int amount)`                 | Customer wants to withdraw money from the account.                                             | If customer has sufficient money in account, or overdraft has been accepted.                     |
 |                                                |                                                                                                | False if customer does not have sufficient money in account and overdraft has not been accepted. |
 | `void generateBankStatement()`                 | Creates list of transactions, including dates, amounts and balance.                            | -                                                                                                |
+| `void printBankStatement()`                    | Prints the bank statement.                                                                     | -                                                                                                |
 | `int calculateBalanceFromTransactionHistory()` | Customer wants account balance to be based on transaction history instead of stored in memory. | -                                                                                                |
 | `void printBankStatement()`                    | Prints either of the aforementioned bank statements.                                           |                                                                                                  |
 | `void requestOverdraft()`                      | Customer wants to be allowed to overdraft the account.                                         | -                                                                                                |
+| `void rejectOverdraftRequest()`                | The manager wants to reject an overdraft request.                                              | -                                                                                                |
+| `void acceptOverdraftRequest()`                | The manager wants to accept an overdraft request.                                              ||
 
 ### SavingsAccount extends Account Class
 
@@ -101,16 +104,11 @@ I want statements to be sent as messages to my phone.
 ### CurrentAccount extends Account Class
 
 ### Transaction 
-| Variables     | Description                                      |
-|---------------|--------------------------------------------------|
-| `String date` | Contains the date of the transaction.            |
-| `int amount`  | Contains the amount of the transaction.          |
-| `int balance` | Contains the balance at the time of transaction. | 
-
-### Manager Class
-| Methods                         | Scenario                                              | Outputs |
-|---------------------------------|-------------------------------------------------------|---------|
-| `void manageOverdraftRequest()` | Manager wants to accept or reject overdraft requests. | -       |
+| Variables            | Description                                      |
+|----------------------|--------------------------------------------------|
+| `String date`        | Contains the date of the transaction.            |
+| `int amount`         | Contains the amount of the transaction.          |
+| `int currentBalance` | Contains the balance at the time of transaction. | 
 
 ### Branch Class
 | Variables     | Description                      |

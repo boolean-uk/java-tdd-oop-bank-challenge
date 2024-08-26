@@ -9,20 +9,39 @@ public class SavingsAccount implements Account{
     private int uniqueID;
     private String branch;
     private double balance;
+    private double overdraftAmount;
 
     public SavingsAccount(String branch, int uniqueID){
         this.branch = branch;
         this.uniqueID = uniqueID;
         this.balance = 0;
         this.transactions = new ArrayList<>();
+        this.overdraftAmount = 1000;
     }
 
 
 
     public double newTransaction(double depositAmount, double withdrawAmount, int transactionID){
+        double currentBalance = calculateAccountBalance();
+        double projectedBalance = currentBalance + depositAmount - withdrawAmount;
+
+        if(projectedBalance< 0){
+            //Check if account is allowed to overdraft
+            if(overdraftAmount >= Math.abs(projectedBalance)){
+                Transaction t = new Transaction(depositAmount, withdrawAmount);
+                transactions.add(t);
+                return projectedBalance;
+            }else{
+                System.out.println("This account is not allowed to overdraft this amount");
+                return currentBalance;
+            }
+        }
+
+
         Transaction t = new Transaction(depositAmount, withdrawAmount);
 
         transactions.add(t);
+        System.out.println("test");
 
         double newBalance = calculateAccountBalance();
         return newBalance;
@@ -72,32 +91,6 @@ public class SavingsAccount implements Account{
 
         return "";
     }
-    /*
-    public String generateAccountStatement() {
-        // Header for the account statement
-        System.out.println("date       || credit  || debit  || balance");
-
-        // Variable to keep track of the running balance
-        double balance = 0.0;
-
-        // Loop through the transactions and print the formatted statement
-        for (Transaction t : transactions) {
-            LocalDateTime date = t.getCurrentDateTime();
-            double depositAmount = t.getDepositAmount();
-            double withdrawAmount = t.getWithdrawAmount();
-
-            // Update the balance based on the transaction
-            balance += depositAmount;
-
-            balance -= withdrawAmount;
-            System.out.printf("%s || %.2f  ||   %.2f      || %.2f\n", date, depositAmount, withdrawAmount, balance);
-
-        }
-
-        return "";
-    }
-
-     */
 
 
     public double getBalance(){

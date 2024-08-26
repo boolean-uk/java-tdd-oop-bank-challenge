@@ -1,10 +1,6 @@
 package com.booleanuk.core;
 
-import com.booleanuk.core.bank.Account;
-import com.booleanuk.core.bank.Bank;
-import com.booleanuk.core.bank.Customer;
-import com.booleanuk.core.bank.SavingsAccount;
-import com.booleanuk.core.bank.Transaction;
+import com.booleanuk.core.bank.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +10,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void testCreateTransaction() {
+    public void testCreateTransactionDeposit() {
         Bank bank = new Bank("Swedbank");
         Customer customer = bank.addCustomer(new Customer());
         Account account = bank.newAccount(customer, new SavingsAccount(1.1));
@@ -28,6 +24,48 @@ public class TransactionTest {
         Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
         Assertions.assertEquals(amount, firstTransaction.getAmount());
         Assertions.assertEquals(customer.getAccount(account.getAccountNumber()).getBalance() - amount, firstTransaction.getBalanceBeforeTransaction());
+    }
+
+    @Test
+    public void testCreateTransactionWithdraw() {
+        Bank bank = new Bank("Swedbank");
+        Customer customer = bank.addCustomer(new Customer());
+        Account account = bank.newAccount(customer, new CurrentAccount());
+        final double amount = 1000;
+
+        bank.withdraw(customer, account, amount);
+
+        Transaction firstTransaction = customer.getTransactions().getFirst();
+
+
+        Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
+        Assertions.assertEquals(amount, firstTransaction.getAmount());
+        Assertions.assertEquals(0, firstTransaction.getBalanceBeforeTransaction());
+    }
+
+    @Test
+    public void testCreateTransactionDepositAndWithdraw() {
+        Bank bank = new Bank("Swedbank");
+        Customer customer = bank.addCustomer(new Customer());
+        Account account = bank.newAccount(customer, new CurrentAccount());
+        final double depositAmount = 1000;
+        final double withdrawAmount = 500;
+
+        bank.deposit(customer, account, depositAmount);
+
+        // deposit transaction
+        Transaction depositTransaction = customer.getTransactions().getFirst();
+        Assertions.assertEquals(account.getAccountNumber(), depositTransaction.getFromAccount().getAccountNumber());
+        Assertions.assertEquals(depositAmount, depositTransaction.getAmount());
+        Assertions.assertEquals(depositAmount - customer.getAccount(account.getAccountNumber()).getBalance(), depositTransaction.getBalanceBeforeTransaction());
+
+        bank.withdraw(customer, account, withdrawAmount);
+
+        // withdraw transaction
+        Transaction withdrawTransaction = customer.getTransactions().getFirst(); // Latest transaction will be first
+        Assertions.assertEquals(account.getAccountNumber(), withdrawTransaction.getFromAccount().getAccountNumber());
+        Assertions.assertEquals(withdrawAmount, withdrawTransaction.getAmount());
+        Assertions.assertEquals(customer.getAccount(account.getAccountNumber()).getBalance() + withdrawAmount, withdrawTransaction.getBalanceBeforeTransaction());
     }
 
 }

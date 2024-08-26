@@ -61,12 +61,30 @@ public class Bank {
         return false;
     }
 
+    private boolean checkIfTransactionIdExists(String newTransactionId) {
+        for (Customer c : this.customers.values()) {
+            for (Transaction t : c.getTransactions()) if (t.getId().equals(newTransactionId)) return true;
+        }
+        return false;
+    }
+
     public boolean deposit(Customer customer, Account account, double amount) {
         if (!this.customers.containsKey(customer.getId())) return false;
         if (this.customers.get(customer.getId()).getAccount(account.getAccountNumber()) == null) return false;
-        if (!this.checkIfAccountNumberExists(account.getAccountNumber())) return false;
 
-        this.customers.get(customer.getId()).getAccount(account.getAccountNumber()).deposit(amount);
+        Customer actualCustomer = this.customers.get(customer.getId());
+        Account actualAccount = actualCustomer.getAccount(account.getAccountNumber());
+
+        if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
+
+        // Generating a new transaction id
+        String newTransactionId = "";
+        do {
+            newTransactionId = this.idGenerate.generateId(5);
+        } while (this.checkIfTransactionIdExists(newTransactionId));
+
+        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), newTransactionId));
+        actualCustomer.getAccount(account.getAccountNumber()).deposit(amount);
 
         return true;
     }

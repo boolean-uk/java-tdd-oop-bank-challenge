@@ -24,4 +24,14 @@ public class BankTest {
         Assertions.assertEquals(10, bank.getCustomers().getFirst().getId().length());
     }
 
+    @Test
+    public void testAddAccountToCustomer() {
+        Bank bank = new Bank("Swedbank");
+        Customer newCustomer = bank.addCustomer(new Customer());
+        Account newAccount = bank.newAccount(newCustomer, new CurrentAccount());
+
+        Assertions.assertTrue(newCustomer.getAccounts().size() == 1);
+        Assertions.assertEquals(newCustomer.getAccounts().getFirst().getAccountNumber(), newAccount.getAccountNumber());
+    }
+
 }

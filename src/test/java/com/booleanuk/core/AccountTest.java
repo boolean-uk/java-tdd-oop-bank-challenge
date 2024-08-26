@@ -135,7 +135,7 @@ public class AccountTest {
     }
 
     @Test
-    public boolean ifOverDraftApproved() {
+    public void ifOverDraftApproved() {
         Customer customer =  new Customer("Melvin", "Seelan");
         Branch osloBranch = new Branch("Oslo");
         Account currentAccount = new CurrentAccount(500, osloBranch);
@@ -143,7 +143,7 @@ public class AccountTest {
         CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
         retrievedAccount.requestOverdraft(300);
         retrievedAccount.approveOverdraft(300);
-        Assertions.assertTrue(ifOverDraftApproved());
+        Assertions.assertTrue(retrievedAccount.isOverdraftApproved());
 
     }
 

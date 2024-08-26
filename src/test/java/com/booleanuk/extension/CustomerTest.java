@@ -158,4 +158,19 @@ public class CustomerTest {
 
         Assertions.assertTrue(customer.generateBankStatement(currentAccount));
     }
+
+    @Test
+    public void testRequestOverdraft() {
+        Bank bank = new Bank("Bank");
+        Customer customer = new Customer("Name");
+        bank.addCustomer(customer);
+        Branch branch = bank.getBranches().getFirst();
+        customer.requestCurrentAccount(branch);
+        Account currentAccount = customer.getAccounts().getFirst();
+
+        Assertions.assertTrue(customer.requestOverdraft(currentAccount, 1000.00));
+        Assertions.assertEquals(1000.00, currentAccount.getOverdraftRequest().getAmount());
+        Assertions.assertFalse(currentAccount.getOverdraftRequest().isApproved());
+    }
+
 }

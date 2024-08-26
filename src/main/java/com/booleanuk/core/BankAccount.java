@@ -3,11 +3,11 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class BankAccount {
-	private final String bank;
+	private final Bank bank;
 	private boolean canOverdraft;
 	private ArrayList<Transaction> transactions;
 
-	public BankAccount(String bank){
+	public BankAccount(Bank bank){
 		this.bank = bank;
 		this.canOverdraft = false; // defaulted to false
 		this.transactions = new ArrayList<>();
@@ -33,5 +33,13 @@ public class BankAccount {
 
 	public void RequestOverdraft(){
 
+	}
+
+	public void setCanOverdraft(boolean canOverdraft) {
+		this.canOverdraft = canOverdraft;
+	}
+
+	public boolean canOverdraft(){
+		return canOverdraft;
 	}
 }

@@ -6,7 +6,7 @@ public class TestBankAccount {
 
 	@Test
 	public void testBankAccountConstr(){
-		BankAccount ba = new BankAccount("Oslo");
+		BankAccount ba = new BankAccount(new Bank());
 	}
 
 }

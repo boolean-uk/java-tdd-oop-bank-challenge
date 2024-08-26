@@ -36,7 +36,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        LocalDateTime date = LocalDateTime.now();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String formattedDate = date.format(dateFormat);
 

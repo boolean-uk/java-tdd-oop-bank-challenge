@@ -3,10 +3,10 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class Account {
-    private int balance;
-    private ArrayList<Transaction> transactionHistory;
-    private boolean canOverdraft;
-    private Branch ownerBranch;
+    protected int balance;
+    protected ArrayList<Transaction> transactionHistory;
+    protected boolean canOverdraft;
+    protected Branch ownerBranch;
 
     public Account(Branch branch){
         this.ownerBranch = branch;

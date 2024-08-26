@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Customer {
-    ArrayList<Account> accounts;
+    private ArrayList<Account> accounts;
 
     enum AccountType {
         SAVINGS,
@@ -15,6 +15,10 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
 
+    public ArrayList<Account> getAccounts(){
+        return this.accounts;
+    }
+
     public void createAccount(AccountType type, Branch branch){
         if (type == AccountType.CURRENT) {
             accounts.add(new CurrentAccount(branch));
@@ -22,4 +26,6 @@ public class Customer {
             accounts.add(new SavingsAccount(branch));
         }
     }
+
+
 }

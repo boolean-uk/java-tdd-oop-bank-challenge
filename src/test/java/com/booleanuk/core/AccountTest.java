@@ -52,4 +52,11 @@ public class AccountTest {
         account.deposit(100);
         Assertions.assertEquals(String.format("%.2f", 100f), String.format("%.2f", (float) account.getBalance()/100));
     }
+
+    // User story 2: Accounts are associated with specific branches
+    @Test
+    public void isAccountAssociatedWithBranch(){
+        Account account = new CurrentAccount("Test", "Oslo");
+        Assertions.assertEquals("Oslo", account.getBranch());
+    }
 }

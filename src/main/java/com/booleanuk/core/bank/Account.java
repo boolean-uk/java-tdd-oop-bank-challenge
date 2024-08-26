@@ -3,7 +3,6 @@ package com.booleanuk.core.bank;
 public abstract class Account {
 
     private String accountNumber;
-    private double balance = 0;
 
     protected Account(String accNumber) {
         this.accountNumber = accNumber;
@@ -19,18 +18,6 @@ public abstract class Account {
 
     protected void setAccountNumber(String accNumber) {
         this.accountNumber = accNumber;
-    }
-
-    protected void deposit(double amount) {
-        this.balance += amount;
-    }
-
-    protected void withdraw(double amount) {
-        this.balance -= amount;
-    }
-
-    public double getBalance() {
-        return this.balance;
     }
 
 }

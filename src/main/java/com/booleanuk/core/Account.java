@@ -24,18 +24,26 @@ public abstract class Account {
     public void addTransaction(int amount, boolean isCredit) {
         Transaction transaction = new Transaction(date, amount ,isCredit);
         transactions.add(transaction);
+        transaction.setBalance(getBalance());
     }
 
     public double getBalance() {
-        double balance = 0.0;
+        int balance = 0;
         for (Transaction transactions : transactions ) {
             if(transactions.getIsCredit()) {
-               balance += transactions.getAmount();
+               balance += (int) (transactions.getAmount() * 100);
             } else {
-                balance -= transactions.getAmount();
+                balance -= (int) (transactions.getAmount() * 100);
             }
         }
-        return balance;
+        return balance / 100.0;
+    }
+
+    public void printStatement() {
+        System.out.println("date       || credit  || debit  || balance");
+        for (Transaction transaction : this.getTransactions()) {
+            System.out.println(transaction);
+        }
     }
 
 }

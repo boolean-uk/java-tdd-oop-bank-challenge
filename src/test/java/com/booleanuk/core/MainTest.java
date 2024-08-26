@@ -45,15 +45,16 @@ public class MainTest {
     public void testAddAccountToCostumerSavingsAccount() {
         int deposit = 500;
         stockholmBranch.createSavingsAccount(costumer, deposit);
-        Assertions.assertEquals(1, costumer.getAccountsForCostumer().size());
+        Assertions.assertEquals(1, stockholmBranch.getAccountsForBranch().size());
+
         lundBranch.createSavingsAccount(costumer, deposit);
-        Assertions.assertEquals(1, costumer.getAccountsForCostumer().size());
+        Assertions.assertEquals(1, lundBranch.getAccountsForBranch().size());
     }
 
     @Test
     public void testAddAccountToBranchCurrentAccount() {
         int deposit = 500;
-        stockholmBranch.createSavingsAccount(costumer,deposit);
+        stockholmBranch.createCurrentAccount(costumer);
         Assertions.assertEquals(1, stockholmBranch.getAccountsForBranch().size());
 
         lundBranch.createCurrentAccount(costumer);
@@ -132,6 +133,14 @@ public class MainTest {
         Assertions.assertTrue(currentAccount.requestOverDraft(manager, 500));
         Assertions.assertFalse(currentAccount.requestOverDraft(manager, 1001));
 
+    }
+
+    @Test
+    public void testPrintStatement() {
+        currentAccount.deposit(500);
+        currentAccount.withdraw(100);
+        currentAccount.withdraw(200);
+        currentAccount.printStatement();
     }
 }
 

@@ -108,4 +108,33 @@ public class Bank {
         return this.customers.get(customer.getId()).getTransactions();
     }
 
+    public boolean requestOverdraft(Customer c, Account a, double amount) {
+        // Check if given custom even exists
+        if (!this.customers.containsKey(c.getId())) return false;
+
+        // Check if given account is owned by the given customer
+        if (this.customers.get(c.getId()).getAccount(a.getAccountNumber()) == null) return false;
+
+        Overdraft overdraft = new Overdraft(this.generateOverdraftId(), a, amount);
+        this.customers.get(c.getId()).registerOverdraft(overdraft);
+        return true;
+    }
+
+    private String generateOverdraftId() {
+        String newOverdraftId = "";
+        do {
+            newOverdraftId = this.idGenerate.generateId(6);
+        } while (this.checkIfOverdraftIdExists(newOverdraftId));
+        return newOverdraftId;
+    }
+
+    private boolean checkIfOverdraftIdExists(String id) {
+        for (Customer c : this.customers.values()) {
+            for (Overdraft o : c.getAllOverdrafts()) {
+                if (o.getId().equals(id)) return true;
+            }
+        }
+        return false;
+    }
+
 }

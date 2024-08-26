@@ -73,4 +73,17 @@ public class Customer {
         return toReturn;
     }
 
+    public double getBalance(Account account) {
+        double balance = 0;
+        for (Transaction transaction : this.transactions) {
+            if (transaction.getFromAccount().getAccountNumber().equals(account.getAccountNumber())) {
+                if (transaction.getTransactionType() == Transaction.TransactionType.CREDIT)
+                    balance += transaction.getAmount();
+                else
+                    balance -= transaction.getAmount();
+            }
+        }
+        return balance;
+    }
+
 }

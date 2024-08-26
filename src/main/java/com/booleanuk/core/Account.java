@@ -31,7 +31,11 @@ public class Account {
     }
 
     public int getBalance(){
-        return 0;
+        int result = 0;
+        for(Transaction transaction : transactions){
+            result += transaction.getCredit() - transaction.getDebit();
+        }
+        return result;
     }
 
     public void statement(){

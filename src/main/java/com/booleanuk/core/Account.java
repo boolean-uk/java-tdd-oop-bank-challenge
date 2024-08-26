@@ -31,4 +31,8 @@ public class Account {
     public void statement(){
 
     }
+
+    public int getBalance(){
+        return 0;
+    }
 }

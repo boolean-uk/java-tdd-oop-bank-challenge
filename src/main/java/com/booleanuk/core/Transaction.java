@@ -16,7 +16,6 @@ public class Transaction {
         this.date = new Date();
         this.credit = credit;
         this.debit = debit;
-        this.balance = 0;
     }
 
     public String getId() {
@@ -49,13 +48,5 @@ public class Transaction {
 
     public void setDebit(int debit) {
         this.debit = debit;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
     }
 }

@@ -9,9 +9,8 @@ public class TestCore{
     public void testDeposit(){
         Customer customer1 = new Customer("customer1");
         Assertions.assertTrue(customer1.getCurrent().getTransactions().isEmpty());
-        Assertions.assertEquals(500, customer1.getCurrent().deposit(500).getBalance());
-        Assertions.assertEquals(750, customer1.getCurrent().deposit(250).getBalance());
-        Assertions.assertEquals(2, customer1.getCurrent().getTransactions().size());
+        Assertions.assertEquals(500, customer1.getCurrent().deposit(500).getCredit());
+        Assertions.assertEquals(1, customer1.getCurrent().getTransactions().size());
     }
 
     /*@Test

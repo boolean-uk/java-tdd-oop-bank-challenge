@@ -6,7 +6,9 @@ public abstract class Account {
     protected int balance;
     protected ArrayList<Transaction> transactionHistory;
     protected boolean canOverdraft;
+    protected boolean overdraftRequested;
     protected Branch ownerBranch;
+
 
     public Account(Branch branch){
         this.ownerBranch = branch;
@@ -60,6 +62,15 @@ public abstract class Account {
     public void printBankStatement(ArrayList<String> list){
         for (String s : list){
             System.out.println(s);
+        }
+    }
+
+    public void requestOverdraft(){
+        if (!this.overdraftRequested) {
+            this.overdraftRequested = true;
+            System.out.println("Overdraft requested.");
+        } else {
+            System.out.println("Overdraft has already been requested.");
         }
     }
 }

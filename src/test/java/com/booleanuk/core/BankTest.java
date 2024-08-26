@@ -1,5 +1,9 @@
 package com.booleanuk.core;
 
+import com.booleanuk.core.bank.Account;
+import com.booleanuk.core.bank.Bank;
+import com.booleanuk.core.bank.CurrentAccount;
+import com.booleanuk.core.bank.Customer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

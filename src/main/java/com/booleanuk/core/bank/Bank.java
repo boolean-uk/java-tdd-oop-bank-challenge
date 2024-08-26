@@ -1,4 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.core.bank;
+
+import com.booleanuk.core.IdGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;

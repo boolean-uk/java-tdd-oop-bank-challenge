@@ -1,4 +1,4 @@
-package com.booleanuk.core;
+package com.booleanuk.core.bank;
 
 import java.util.ArrayList;
 

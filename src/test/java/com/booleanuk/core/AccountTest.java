@@ -57,7 +57,9 @@ public class AccountTest {
     @Test
     public void testRequestOverdraft() {
         String requestResult = currentAccount.requestOverdraft(500);
+        Assertions.assertEquals("Overdraft approved with a limit of: 500.0", requestResult);
 
-        Assertions.assertEquals("Overdraft approved with a limit of: 500", requestResult);
+        String errorResult = currentAccount.requestOverdraft(1500);
+        Assertions.assertEquals("Max overdraft limit is 1000 in this bank!", errorResult);
     }
 }

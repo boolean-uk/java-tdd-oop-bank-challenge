@@ -32,7 +32,16 @@ abstract class Account {
     }
 
     public String requestOverdraft(double limit) {
-        return "";
+
+        // Assuming the limit would be somewhere around 1000.
+        if (limit > 0 && limit <= 1000) {
+            this.approvedOverdraft = true;
+            this.overdraftLimit = limit;
+            return "Overdraft approved with a limit of: " + limit;
+        }
+        else {
+            return "Max overdraft limit is 1000 in this bank!";
+        }
     }
 
     public void printStatement() {

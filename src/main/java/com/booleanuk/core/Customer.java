@@ -17,8 +17,9 @@ public class Customer {
 
     public void createAccount(AccountType type, Branch branch){
         if (type == AccountType.CURRENT) {
-            Account account = new CurrentAccount(branch);
-            accounts.add(account);
+            accounts.add(new CurrentAccount(branch));
+        } else {
+            accounts.add(new SavingsAccount(branch));
         }
     }
 }

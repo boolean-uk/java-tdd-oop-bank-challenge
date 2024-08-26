@@ -101,4 +101,27 @@ public class AccountTest {
 
         Assertions.assertTrue(account.overdraftRequested);
     }
+
+    @Test
+    public void approveOrRejectOverdraftRequestTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        account.requestOverdraft();
+
+        // Assert that overdraft has been requested.
+        Assertions.assertTrue(account.overdraftRequested);
+
+        account.rejectOverdraftRequest();
+
+        // Assert that account can not be overdrafted.
+        Assertions.assertFalse(account.canOverdraft);
+
+        account.acceptOverdraftRequest();
+
+        // Assert that account can be overdrafted.
+        Assertions.assertTrue(account.canOverdraft);
+    }
 }

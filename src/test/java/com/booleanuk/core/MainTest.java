@@ -116,6 +116,12 @@ public class MainTest {
         Assertions.assertFalse(transaction1.getIsCredit());
 
     }
+
+    @Test
+    public void testGetBalance() {
+        currentAccount.deposit(500);
+        Assertions.assertEquals(500, currentAccount.getBalance());
+    }
 }
 
 

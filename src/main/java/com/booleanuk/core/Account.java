@@ -26,4 +26,8 @@ public abstract class Account {
         transactions.add(transaction);
     }
 
+    public double getBalance() {
+        return 0.0;
+    }
+
 }

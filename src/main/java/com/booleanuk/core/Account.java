@@ -16,6 +16,16 @@ public class Account {
         transactionsList.add(initialTransaction);
     }
 
+
+    public float getBalanceChecker() {
+        return this.balanceChecker;
+    }
+
+    public float getBalance() {
+        calculateAccountBalance();
+        return this.balance;
+    }
+
     public void depositMoney(float amount) {
         if(amount > 0) {
             Transaction transaction = new Transaction(transactionsList.size(), amount, 0);
@@ -27,26 +37,23 @@ public class Account {
         }
     }
 
-    public float getBalance() {
-        calculateAccountBalance();
-        return this.balance;
-    }
-
     public void withdrawMoney(float amount){
-        if(this.balance - amount > 0) {
+        if(this.balance - amount <= 0) {
             Transaction transaction = new Transaction(transactionsList.size(), amount, 1);
             transactionsList.add(transaction);
-            this.balanceChecker += amount;
+            this.balanceChecker -= amount;
         }else {
             System.out.println("Insufficient amount of transaction.");
         }
     }
 
     public void calculateAccountBalance() {
+        float balanceController = 0;
         if(!transactionsList.isEmpty()) {
             for (Transaction transaction: transactionsList) {
-                this.balance += transaction.getAmount();
+                balanceController += transaction.getAmount();
             }
         }
+        this.balance = balanceController;
     }
 }

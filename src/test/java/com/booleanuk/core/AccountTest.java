@@ -18,7 +18,7 @@ public class AccountTest {
 
     @Test
     public void testCreateSavingsAccount() {
-        Account savingsAccount = new SavingsAccount("AC1");
+        Account savingsAccount = new SavingsAccount("AC1", 1.1);
 
         Assertions.assertEquals("AC1", savingsAccount.getAccountNumber());
     }

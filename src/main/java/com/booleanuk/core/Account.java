@@ -3,23 +3,18 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public abstract class Account {
-    protected int balance;
     protected ArrayList<Transaction> transactionHistory;
     protected boolean canOverdraft;
     protected boolean overdraftRequested;
     protected Branch ownerBranch;
 
-
     public Account(Branch branch){
         this.ownerBranch = branch;
-        this.balance = 0;
         this.transactionHistory = new ArrayList<>();
         this.canOverdraft = false;
     }
 
-    public int getBalance(){ return this.balance; }
     public ArrayList<Transaction> getTransactionHistory(){ return this.transactionHistory; }
-    public boolean getCanOverdraft(){ return this.canOverdraft; }
     public Branch getOwnerBranch(){ return this.ownerBranch; }
 
     public void deposit(int amount){
@@ -28,10 +23,16 @@ public abstract class Account {
         this.transactionHistory.add(t);
     }
 
-    public void withdraw(int amount){
+    public boolean withdraw(int amount){
         int currentBalance = calculateCurrentBalance();
+        if (currentBalance < amount && !canOverdraft){
+            System.out.println("Insufficient funds.");
+            return false;
+        }
+
         Transaction t = new Transaction(-amount, currentBalance);
         this.transactionHistory.add(t);
+        return true;
     }
 
     public int calculateCurrentBalance(){
@@ -82,6 +83,6 @@ public abstract class Account {
     }
 
     public void acceptOverdraftRequest(){
-        if (overdraftRequested) { this.canOverdraft = true; };
+        if (overdraftRequested) { this.canOverdraft = true; }
     }
 }

@@ -1,13 +1,12 @@
 package com.booleanuk.core;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private String date;
-    private int amount;
-    private int currentBalance;
+    private final String date;
+    private final int amount;
+    private final int currentBalance;
 
     public Transaction(int amount, int previousAmount){
         this.date = formatDate();

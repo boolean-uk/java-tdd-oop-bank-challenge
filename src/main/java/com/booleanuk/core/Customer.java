@@ -1,12 +1,11 @@
 package com.booleanuk.core;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Customer {
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
-    enum AccountType {
+    public enum AccountType {
         SAVINGS,
         CURRENT
     }

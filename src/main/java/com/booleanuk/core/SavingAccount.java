@@ -3,8 +3,8 @@ package com.booleanuk.core;
 public class SavingAccount extends Account {
     private double interestRate;
 
-    public SavingAccount(double balance, double interestRate) {
-        super(balance);
+    public SavingAccount(double balance, double interestRate, Branch branch) {
+        super(balance, branch);
         this.interestRate = interestRate;
     }
 

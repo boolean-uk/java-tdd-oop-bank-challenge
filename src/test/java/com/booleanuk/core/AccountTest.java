@@ -7,19 +7,22 @@ public class AccountTest {
 
     @Test
     public void makeCurrentAccountTest() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         Assertions.assertNotNull(account, "The account should be created");
     }
 
     @Test
     public void checkBalance() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         Assertions.assertEquals(500, account.getBalance());
     }
 
     @Test
     public void DepositTest() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         account.deposit(100);
         Assertions.assertEquals(600, account.getBalance());
 
@@ -27,7 +30,8 @@ public class AccountTest {
 
     @Test
     public void WithdrawalTest() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         account.withdraw(100);
         Assertions.assertEquals(400, account.getBalance());
 
@@ -35,14 +39,16 @@ public class AccountTest {
 
     @Test
     public void NegativeDepositTest() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         Assertions.assertEquals("The amount should be positive!", account.deposit(-100));
 
     }
 
     @Test
     public void withdrawalTestIfAmountExceedsLimit() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         Assertions.assertEquals("You don't have enough money for this withdrawal!", account.withdraw(600));
 
 
@@ -51,7 +57,8 @@ public class AccountTest {
 
     @Test
     public void addTransactionShouldPrintHeaderOnce() {
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         Assertions.assertFalse(account.isHeaderPrinted(), "Header should not be printed initially");
         account.addTransaction(1000.00, "credit");
         account.addTransaction(500.00, "debit");
@@ -64,7 +71,8 @@ public class AccountTest {
     @Test
     public void getInterestRateTest() {
         Customer customer = new Customer("Melvin", "Seelan");
-        Account account = new SavingAccount(500, 3);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new SavingAccount(500,3, osloBranch);
         customer.addAccount(account);
         Assertions.assertTrue(true, "Account should be of type SavingAccount");
         Assertions.assertEquals(customer.getAccounts().get(0).getBalance(),500);
@@ -79,7 +87,8 @@ public class AccountTest {
     @Test
     public void applyInterestRateTest() {
         Customer customer =  new Customer("Melvin", "Seelan");
-        Account savingAccount = new SavingAccount(500, 3);
+        Branch osloBranch = new Branch("Oslo");
+        Account savingAccount = new SavingAccount(500, 3, osloBranch);
         customer.addAccount(savingAccount);
         double expectedBalance = 500 + (500*3.00/100);
         SavingAccount retrievedAccount = (SavingAccount) customer.getAccounts().get(0);
@@ -91,7 +100,8 @@ public class AccountTest {
     @Test
     public void getOverDraftLimit() {
         Customer customer =  new Customer("Melvin", "Seelan");
-        Account currentAccount = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account currentAccount = new CurrentAccount(500, osloBranch);
         customer.addAccount(currentAccount);
         CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
         retrievedAccount.requestOverdraft(300);
@@ -102,7 +112,8 @@ public class AccountTest {
     @Test
     public void withdrawalTestRejected() {
         Customer customer =  new Customer("Melvin", "Seelan");
-        Account currentAccount = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account currentAccount = new CurrentAccount(500, osloBranch);
         customer.addAccount(currentAccount);
         CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
         retrievedAccount.requestOverdraft(300);
@@ -112,7 +123,8 @@ public class AccountTest {
     @Test
     public void withdrawalTestAccepted() {
         Customer customer =  new Customer("Melvin", "Seelan");
-        Account currentAccount = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account currentAccount = new CurrentAccount(500, osloBranch);
         customer.addAccount(currentAccount);
         CurrentAccount retrievedAccount = (CurrentAccount) customer.getAccounts().get(0);
         retrievedAccount.requestOverdraft(500);

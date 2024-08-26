@@ -15,7 +15,8 @@ public class CustomerTest {
     @Test
     public void addAccountToCustomerCheckBalance() {
         Customer customer = new Customer("Abdul", "Khan");
-        Account account = new CurrentAccount(500);
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(500, osloBranch);
         customer.addAccount(account);
         Assertions.assertNotNull(customer.getAccounts(), "The account should not be empty!");
         Assertions.assertEquals(500, customer.getAccounts().get(0).getBalance());

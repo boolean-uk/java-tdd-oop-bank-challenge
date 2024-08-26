@@ -6,8 +6,8 @@ public class CurrentAccount extends Account {
     private double approvedOverdraftLimit;
     private boolean overdraftApproved;
 
-    public CurrentAccount(double balance) {
-        super(balance);
+    public CurrentAccount(double balance, Branch branch) {
+        super(balance, branch);
         this.overDraftLimit = 0;
 
     }

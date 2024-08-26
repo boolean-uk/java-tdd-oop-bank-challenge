@@ -9,15 +9,24 @@ public abstract class Account {
     private double balance;
     private List<String> transactions;
     private boolean headerPrinted = false;
+    private Branch branch;
 
 
 
-    public Account(double balance) {
+    public Account(double balance, Branch branch) {
         this.accountID = generateRandomAccountId();
         this.balance = balance;
         this.transactions = new ArrayList<>();
+        this.branch = branch;
 
+    }
 
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 
     public void addTransaction(double amount, String type) {
@@ -84,7 +93,6 @@ public abstract class Account {
         }
         return "Insufficient funds!";
     }
-
 
     public void printHeader() {
         String header = String.format("%-10s || %-7s || %-7s || %-7s", "date", "credit", "debit", "balance");

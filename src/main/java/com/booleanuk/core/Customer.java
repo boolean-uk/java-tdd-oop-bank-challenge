@@ -25,4 +25,8 @@ public class Customer {
         return id;
     }
 
+    protected void addAccount(Account newAccount) {
+        this.accounts.add(newAccount);
+    }
+
 }

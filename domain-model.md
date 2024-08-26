@@ -1,0 +1,1 @@
+# Domain Model - Core Requirements

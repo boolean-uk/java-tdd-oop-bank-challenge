@@ -13,7 +13,7 @@ public class TransactionTest {
     public void testCreateTransactionDeposit() {
         Bank bank = new Bank("Swedbank");
         Customer customer = bank.addCustomer(new Customer());
-        Account account = bank.newAccount(customer, new SavingsAccount(1.1));
+        Account account = bank.newAccount(customer, new SavingsAccount(Account.Branch.GOTHENBURG, 1.1));
         final double amount = 1000;
 
         bank.deposit(customer, account, amount);
@@ -31,7 +31,7 @@ public class TransactionTest {
     public void testCreateTransactionWithdraw() {
         Bank bank = new Bank("Swedbank");
         Customer customer = bank.addCustomer(new Customer());
-        Account account = bank.newAccount(customer, new CurrentAccount());
+        Account account = bank.newAccount(customer, new CurrentAccount(Account.Branch.GOTHENBURG));
         final double amount = 1000;
 
         bank.withdraw(customer, account, amount);
@@ -49,7 +49,7 @@ public class TransactionTest {
     public void testCreateTransactionDepositAndWithdraw() {
         Bank bank = new Bank("Swedbank");
         Customer customer = bank.addCustomer(new Customer());
-        Account account = bank.newAccount(customer, new CurrentAccount());
+        Account account = bank.newAccount(customer, new CurrentAccount(Account.Branch.GOTHENBURG));
         final double depositAmount = 1000;
         final double withdrawAmount = 500;
 

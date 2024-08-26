@@ -3,7 +3,7 @@
 Class Transaction {
 - date: LocalDateTime
 - amount: int
-- currentBalance: float
+- currentBalance: int
 }
 
 Class Customer {
@@ -36,8 +36,4 @@ Class Manager(){
 Class Branch {
 - accounts : ArrayList<Account>
 }
-
-
-
-
 @enduml

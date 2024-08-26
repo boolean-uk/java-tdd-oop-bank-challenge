@@ -72,6 +72,11 @@ I want statements to be sent as messages to my phone.
 |-------------------------------|-------------------------------------------------------------|
 | `ArrayList<Account> accounts` | List of all the accounts belonging to a specific customer.  |
 
+| Methods                                       | Scenario                                              | Outputs |
+|-----------------------------------------------|-------------------------------------------------------|---------|
+| `void createAccount(AccountType accountType)` | Manager wants to accept or reject overdraft requests. | -       |
+
+
 ### Account Abstract Class
 | Variables                                   | Description                                |
 |---------------------------------------------|--------------------------------------------|
@@ -100,3 +105,7 @@ I want statements to be sent as messages to my phone.
 |---------------------------------|-------------------------------------------------------|---------|
 | `void manageOverdraftRequest()` | Manager wants to accept or reject overdraft requests. | -       |
 
+### Branch Class
+| Variables     | Description                      |
+|---------------|----------------------------------|
+| `String name` | Contains the name of the branch. |

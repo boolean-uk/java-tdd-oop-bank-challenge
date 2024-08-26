@@ -18,6 +18,4 @@ public class CustomerTest {
         // Verify that list of accounts contains one element
         Assertions.assertEquals(1, c.accounts.size());
     }
-
-
 }

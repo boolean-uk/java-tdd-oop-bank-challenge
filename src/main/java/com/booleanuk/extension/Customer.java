@@ -57,8 +57,9 @@ public class Customer {
         if (account instanceof CurrentAccount currentAccount){
             OverdraftRequest overdraftRequest = new OverdraftRequest(amount);
             currentAccount.setOverdraftRequest(overdraftRequest);
+            return true;
         }
-        return true;
+        return false;
     }
 
     public boolean generateBankStatement(Account account){

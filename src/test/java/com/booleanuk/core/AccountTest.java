@@ -71,6 +71,66 @@ public class AccountTest {
     }
 
     @Test
+    public void Deposit0Test(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.deposit(0);
+
+        Assertions.assertTrue(out.toString().contains("Invalid amount"));
+    }
+
+    @Test
+    public void DepositNegativeNumberTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.deposit(-50);
+
+        Assertions.assertTrue(out.toString().contains("Invalid amount"));
+    }
+
+    @Test
+    public void Withdraw0Test(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.withdraw(0);
+
+        Assertions.assertTrue(out.toString().contains("Invalid amount"));
+    }
+
+    @Test
+    public void WithdrawNegativeNumberTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.withdraw(-50);
+
+        Assertions.assertTrue(out.toString().contains("Invalid amount"));
+    }
+
+    @Test
     public void CalculateCurrentBalanceTest(){
         /*
         As an engineer,

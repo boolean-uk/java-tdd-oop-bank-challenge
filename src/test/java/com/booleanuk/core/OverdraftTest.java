@@ -44,4 +44,20 @@ public class OverdraftTest {
         Assertions.assertTrue(max.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.APPROVED);
     }
 
+    @Test
+    public void testCreateAndRejectOverdraft() {
+        Customer max = this.bank.addCustomer(new Customer());
+        Account maxAccount = this.bank.newAccount(max, new CurrentAccount(DEFAULT_BRANCH));
+
+        this.bank.requestOverdraft(max, maxAccount, 1000);
+        Overdraft overdraftRequest = max.getOverdrafts(maxAccount).getFirst(); // Only one overdraft on this account so getFirst() is ok
+
+        // Confirming registration of overdraft request
+        Assertions.assertTrue(overdraftRequest.getStatus() == Overdraft.OverdraftStatus.PENDING);
+
+        Assertions.assertTrue(this.bank.rejectOverdraft(overdraftRequest));
+
+        Assertions.assertTrue(max.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.REJECTED);
+    }
+
 }

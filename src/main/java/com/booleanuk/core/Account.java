@@ -37,6 +37,10 @@ abstract class Account {
             this.balance -= amount;
             this.transactions.add(new Transaction(-amount, this.getBalance()));
         }
+        else if (this.overdraftRequest.isApproved() && amount <= this.overdraftRequest.getRequestedLimit()) {
+            this.balance -= amount;
+            this.transactions.add(new Transaction(-amount, this.getBalance()));
+        }
     }
 
     public void printStatement() {
@@ -81,5 +85,15 @@ abstract class Account {
         return this.overdraftRequest;
     }
 
+    public static void main(String[] args) {
 
+        Current current = new Current("bob", "43832894324");
+        current.requestOverdraft(500);
+
+        BankManager bankManager = new BankManager();
+        bankManager.receiveRequest(current.getOverdraftRequest());
+        bankManager.processRequest();
+
+        current.printStatement();
+    }
 }

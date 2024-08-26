@@ -52,6 +52,10 @@ public class Customer {
         return true;
     }
 
+    public boolean generateBankStatement(Account account){
+        return true;
+    }
+
     public List<Account> getAccounts() {
         return accounts;
     }

@@ -10,6 +10,7 @@ public class BankTest {
         Bank bank = new Bank("Bank");
         Assertions.assertNotNull(bank);
         Assertions.assertEquals("Bank", bank.getName());
+        Assertions.assertNotNull(bank.getBranches());
     }
 
     @Test

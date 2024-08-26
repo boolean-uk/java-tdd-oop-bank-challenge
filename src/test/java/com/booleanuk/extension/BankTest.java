@@ -14,6 +14,15 @@ public class BankTest {
     }
 
     @Test
+    public void testAddBranch() {
+        Bank bank = new Bank("Bank");
+        Branch branch = new Branch("00", "Address");
+        Assertions.assertTrue(bank.addBranch(branch));
+        Assertions.assertTrue(bank.getBranches().contains(branch));
+        Assertions.assertFalse(bank.addBranch(branch));
+    }
+
+    @Test
     public void testAddCustomer() {
         Bank bank = new Bank("Bank");
         Customer customer = new Customer("Name");

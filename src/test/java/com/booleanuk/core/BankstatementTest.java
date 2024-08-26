@@ -18,8 +18,6 @@ public class BankstatementTest {
         Assertions.assertEquals(3, currentAccount.getBankStatement().size());
     }
 
-
-
     @Test
     public void TestPrintBankstatement(){
         AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");

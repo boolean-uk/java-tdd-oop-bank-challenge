@@ -30,7 +30,7 @@ public abstract class Account {
     }
 
     public void printBankstatement() {
-        System.out.println("Date       || Credit   || Debit    || Balance");
+        System.out.println("Date        || Credit   || Debit    || Balance");
         if(!bankStatement.isEmpty()){
             for(Transaction transaction : bankStatement.reversed()){
                 if (transaction.getType() == TransactionType.DEPOSIT) {

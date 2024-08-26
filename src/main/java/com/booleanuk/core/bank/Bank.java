@@ -77,13 +77,7 @@ public class Bank {
 
         if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
 
-        // Generating a new transaction id
-        String newTransactionId = "";
-        do {
-            newTransactionId = this.idGenerate.generateId(5);
-        } while (this.checkIfTransactionIdExists(newTransactionId));
-
-        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), newTransactionId));
+        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId()));
         actualCustomer.getAccount(account.getAccountNumber()).deposit(amount);
 
         return true;
@@ -92,11 +86,23 @@ public class Bank {
     public boolean withdraw(Customer customer, Account account, double amount) {
         if (!this.customers.containsKey(customer.getId())) return false;
         if (this.customers.get(customer.getId()).getAccount(account.getAccountNumber()) == null) return false;
-        if (!this.checkIfAccountNumberExists(account.getAccountNumber())) return false;
 
-        this.customers.get(customer.getId()).getAccount(account.getAccountNumber()).withdraw(amount);
+        Customer actualCustomer = this.customers.get(customer.getId());
+        Account actualAccount = actualCustomer.getAccount(account.getAccountNumber());
 
+        if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
+
+        actualCustomer.addTransaction(new Transaction(amount, account.getBalance(), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId()));
+        actualCustomer.getAccount(account.getAccountNumber()).withdraw(amount);
         return true;
+    }
+
+    private String generateTransactionId() {
+        String newTransactionId = "";
+        do {
+            newTransactionId = this.idGenerate.generateId(5);
+        } while (this.checkIfTransactionIdExists(newTransactionId));
+        return newTransactionId;
     }
 
 }

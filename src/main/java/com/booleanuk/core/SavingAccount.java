@@ -1,4 +1,9 @@
 package com.booleanuk.core;
 
-public class SavingAccount {
+public class SavingAccount extends Account{
+
+    public SavingAccount(float firstDeposit) {
+        super(firstDeposit);
+    }
+
 }

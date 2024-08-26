@@ -13,7 +13,7 @@ abstract class Account {
         this.fullName = fullName;
         this.accountNumber = accountNumber;
         this.setBalance(0.0);
-        this.setTransactions(new ArrayList<>());
+        this.transactions = new ArrayList<>();
         this.overdraftRequest = null;
     }
 
@@ -33,13 +33,9 @@ abstract class Account {
     }
 
     public void withdraw(double amount) {
-        if (this.balance) {
+        if ((this.balance - amount) > 0.0) {
             this.balance -= amount;
             this.transactions.add(new Transaction(-amount, this.getBalance()));
-            System.out.println("Successful withdraw, new balance is: " + this.getBalance());
-        }
-        else {
-            System.out.println("Insufficient funds, even with overdraft.");
         }
     }
 
@@ -85,18 +81,5 @@ abstract class Account {
         return this.overdraftRequest;
     }
 
-    public static void main(String[] args) {
 
-        Current currentAccount = new Current("Bobby", "22433423424");
-        currentAccount.requestOverdraft(1000);
-
-        BankManager manager = new BankManager();
-        manager.receiveRequest(currentAccount.getOverdraftRequest());
-        manager.processRequest();
-
-        currentAccount.withdraw(500);
-
-        currentAccount.printStatement();
-
-    }
 }

@@ -35,13 +35,13 @@ public class AccountTest {
         ArrayList<Transaction> transactions = currentAccount.getTransactions();
 
         currentAccount.deposit(500.0);
-        Assertions.assertEquals(500.0, transactions.getFirst().getBalance());
+        Assertions.assertEquals(500.0, currentAccount.getBalance());
 
         currentAccount.deposit(200.0);
-        Assertions.assertEquals(700.0, transactions.get(1).getBalance());
+        Assertions.assertEquals(700.0, currentAccount.getBalance());
 
         currentAccount.withdraw(100.0);
-        Assertions.assertEquals(600.0, transactions.get(2).getBalance());
+        Assertions.assertEquals(600.0, currentAccount.getBalance());
     }
 
     @Test

@@ -24,7 +24,7 @@ public class Account {
         return newTransaction;
     }
 
-    public Transaction withdraw(){
+    public Transaction withdraw(int money){
         return null;
     }
 

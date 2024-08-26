@@ -42,4 +42,14 @@ public class CurrentAccountTest {
         Assertions.assertEquals("Insufficient Funds", currentAccount.withdraw(400));
 
     }
+
+    @Test
+    public void TestIfTooMuchWithdrawalGivesNegativesDueToOverdraft(){
+        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
+        CurrentAccount currentAccount = new CurrentAccount(me);
+
+        //This should now work because at current account overdraft is active.
+        Assertions.assertEquals("New balance: -100.0£", currentAccount.withdraw(100));
+
+    }
 }

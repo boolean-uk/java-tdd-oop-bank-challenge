@@ -17,6 +17,9 @@ public class CustomerTest {
 
         // Verify that list of accounts contains one element
         Assertions.assertEquals(1, c.accounts.size());
+
+        // Asserting that account is a current account
+        Assertions.assertInstanceOf(CurrentAccount.class, c.accounts.getFirst());
     }
 
     @Test
@@ -31,5 +34,8 @@ public class CustomerTest {
 
         // Verify that list of accounts contains one element
         Assertions.assertEquals(1, c.accounts.size());
+
+        // Asserting that account is a savings account
+        Assertions.assertInstanceOf(CurrentAccount.class, c.accounts.getFirst());
     }
 }

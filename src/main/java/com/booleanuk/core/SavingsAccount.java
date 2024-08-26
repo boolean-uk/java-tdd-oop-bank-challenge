@@ -4,8 +4,7 @@ public class SavingsAccount extends Account {
 
     private final double interest;
 
-    public SavingsAccount(String accNumber, double interest) {
-        super(accNumber);
+    public SavingsAccount(double interest) {
         this.interest = interest;
     }
 

@@ -2,14 +2,22 @@ package com.booleanuk.core;
 
 public abstract class Account {
 
-    private final String accountNumber;
+    private String accountNumber;
 
-    public Account(String accNumber) {
+    protected Account(String accNumber) {
         this.accountNumber = accNumber;
+    }
+
+    public Account(){
+
     }
 
     public String getAccountNumber() {
         return this.accountNumber;
+    }
+
+    protected void setAccountNumber(String accNumber){
+       this.accountNumber = accNumber;
     }
 
 }

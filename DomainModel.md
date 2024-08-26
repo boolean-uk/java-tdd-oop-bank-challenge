@@ -18,13 +18,15 @@ I want to deposit and withdraw funds.
 All variables in each class is private and has setters and getters.
 In constructor of Account, the user has to do a deposit so the balance is not 0.
 ## Account
-| Variable               | Method                 | Scenario                              | Outcome                          |
-|------------------------|------------------------|---------------------------------------|----------------------------------|
-| id                     | Deposit(float amount)  | Put in amount to deposit into account | Add the deposit to the balance   |
-| Balance                |                        |                                       |                                  |
-| ArrayList<Transaction> |                        |                                       |                                  |
-|                        | Withdraw(float amount) | Get the amount from balance           | Returns "money" from the balance |
-|                        |                        |                                       | Insufficient amount              |
+| Variable               | Method                  | Scenario                                        | Outcome                          |
+|------------------------|-------------------------|-------------------------------------------------|----------------------------------|
+| id                     | Deposit(float amount)   | Put in amount to deposit into account           | Add the deposit to the balance   |
+| Balance                |                         |                                                 |                                  |
+| ArrayList<Transaction> |                         |                                                 |                                  |
+|                        | Withdraw(float amount)  | Get the amount from balance                     | Returns "money" from the balance |
+|                        |                         |                                                 | Insufficient amount              |
+|                        | calculateAccountBalance | Calculate the account balance from transactions |                                  |
+|                        |                         |                                                 |                                  |
 
 
 ## currentAccount extends Account
@@ -45,4 +47,5 @@ Same function as accounts.
 | transactionType binary |        |          |         |
 Transactions tracks how much a user deposit or withdraw from the account. 
 TransactionType holds if it's a deposit or withdraw. Deposit is 0 and withdraw is a 1.
+Transactions can never be removed from the list, therefore the ID is the size of the arraylist
 

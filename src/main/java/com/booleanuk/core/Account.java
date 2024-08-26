@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Account {
     private int id;
     private float balance;
+    private float balanceChecker;
     private ArrayList<Transaction> transactionsList;
 
     public Account(float firstDeposit) {
         this.balance = firstDeposit;
+        this.balanceChecker = firstDeposit;
         this.transactionsList = new ArrayList<>();
     }
 
@@ -17,23 +19,31 @@ public class Account {
             Transaction transaction = new Transaction(transactionsList.size(), amount, 0);
 
             transactionsList.add(transaction);
-            this.balance += amount;
+            this.balanceChecker += amount;
         }else {
             System.out.println("Cannot add 0 or a negative amount");
         }
     }
 
-    public float getBalance() {
+    public float getBalance() { 
         return this.balance;
     }
 
-    public void withdrawMoney(float amout){
-        if(this.balance - amout > 0) {
-            Transaction transaction = new Transaction(transactionsList.size(), amout, 1);
+    public void withdrawMoney(float amount){
+        if(this.balance - amount > 0) {
+            Transaction transaction = new Transaction(transactionsList.size(), amount, 1);
             transactionsList.add(transaction);
-            this.balance -= amout;
+            this.balanceChecker += amount;
         }else {
             System.out.println("Insufficient amount of transaction.");
+        }
+    }
+
+    public void calculateAccountBalance() {
+        if(!transactionsList.isEmpty()) {
+            for (Transaction transaction: transactionsList) {
+                this.balance += transaction.getAmount();
+            }
         }
     }
 }

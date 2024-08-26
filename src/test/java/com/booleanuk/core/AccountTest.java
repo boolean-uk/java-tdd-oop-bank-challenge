@@ -8,7 +8,7 @@ public class AccountTest {
     @Test
     public void newTransactionTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1);
+        Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         SavingsAccount savings1 = customer1.getSavingsAccount();
@@ -30,7 +30,7 @@ public class AccountTest {
     @Test
     public void generateAccountStatementTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1);
+        Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         SavingsAccount savings1 = customer1.getSavingsAccount();
@@ -48,7 +48,7 @@ public class AccountTest {
     @Test
     public void overDraftWithdrawTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1);
+        Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         SavingsAccount savings1 = customer1.getSavingsAccount();
@@ -58,10 +58,22 @@ public class AccountTest {
         newBalance = bank.newTransaction(savings1, 0, 1000);
         newBalance = bank.newTransaction(savings1, 0, 1000);
         newBalance = bank.newTransaction(savings1, 0, 1000);
-        newBalance = bank.newTransaction(savings1, 0, 1000); // currentbalance if overdraft successful = -2000
+        newBalance = bank.newTransaction(savings1, 0, 1000); // newBalance if overdraft successful = -2000
 
         savings1.generateAccountStatement();
         Assertions.assertEquals(-1000, newBalance);
+    }
 
+    @Test
+    public void requestOverdraftTest(){
+        Bank bank = new Bank("Oslo");
+        Customer customer1 = new Customer("Jostein",1, bank);
+        bank.newCustomer(customer1);
+        bank.newAccount(customer1, "Saving");
+        SavingsAccount savings1 = customer1.getSavingsAccount();
+
+        savings1.requestOverdraft(5000.00);
+
+        //customer1.requestOverdraft(int accountID,  )
     }
 }

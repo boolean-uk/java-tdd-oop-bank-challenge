@@ -8,16 +8,16 @@ public class BankTest {
     @Test
     public void newCustomerTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein", 1);
+        Customer customer1 = new Customer("Jostein", 1, bank);
         bank.newCustomer(customer1);
-        Assertions.assertTrue(bank.newCustomer(new Customer("Haakon", 2)));
-        Assertions.assertFalse(bank.newCustomer(new Customer("Haakon", 2)));
+        Assertions.assertTrue(bank.newCustomer(new Customer("Haakon", 2, bank)));
+        Assertions.assertFalse(bank.newCustomer(new Customer("Haakon", 2, bank)));
     }
 
     @Test
     public void newAccountTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1);
+        Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
         bank.newAccount(customer1, "Current");
@@ -30,7 +30,7 @@ public class BankTest {
     @Test
     public void newTransactionTest(){
         Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1);
+        Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
     }
 

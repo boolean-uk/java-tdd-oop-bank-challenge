@@ -181,6 +181,12 @@ public class CustomerTest {
         Assertions.assertFalse(customer.requestOverdraft(account, 1000.00), "Account not in the customer accounts.");
         Assertions.assertNull(account.getOverdraftRequest(), "Account should not have overdraft request.");
 
+        customer2.requestSavingsAccount(branch);
+        Account savingsAccount = customer2.getAccounts().getFirst();
+        System.out.println(savingsAccount.getClass());
+        Assertions.assertFalse(customer2.requestOverdraft(savingsAccount, 1000.00), "Account is not a current account.");
+        Assertions.assertNull(savingsAccount.getOverdraftRequest(), "Account should not have overdraft request.");
+
     }
 
 }

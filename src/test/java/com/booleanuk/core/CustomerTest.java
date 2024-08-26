@@ -47,6 +47,6 @@ public class CustomerTest {
         Assertions.assertEquals(1, c.getAccounts().size());
 
         // Asserting that account is a savings account
-        Assertions.assertInstanceOf(CurrentAccount.class, c.getAccounts().getFirst());
+        Assertions.assertInstanceOf(SavingsAccount.class, c.getAccounts().getFirst());
     }
 }

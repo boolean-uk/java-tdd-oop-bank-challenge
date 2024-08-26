@@ -8,17 +8,21 @@ public class Main {
         CurrentAccount currentAccount = new CurrentAccount(500, osloBranch);
         SavingAccount savingAccount = new SavingAccount(1000, 2.5, trondheimBranch);
         customer.addAccount(currentAccount);
-        customer.addAccount(savingAccount);
-        System.out.println("Deposit Result: " + currentAccount.deposit(100));
-        System.out.println("Withdrawal Result: " + currentAccount.withdraw(400));
+        //customer.addAccount(savingAccount);
+        currentAccount.withdraw(100);
         currentAccount.requestOverdraft(300);
         currentAccount.approveOverdraft(300);
-        System.out.println("Withdrawal Result with Overdraft: " + currentAccount.withdraw(600));
-        System.out.println("Current Account Balance: " + currentAccount.getBalance());
-        System.out.println("Saving Account Balance: " + savingAccount.getBalance());
-        System.out.println("Current Account Branch: " + currentAccount.getBranch());
-        System.out.println("Saving Account Branch: " + savingAccount.getBranch());
-        savingAccount.applyInterest();
-        savingAccount.withdraw(400);
+        currentAccount.withdraw(700);
+
+
+
+        //currentAccount.rejectOverdraft();
+        //System.out.println("Withdrawal Result with Overdraft: " + currentAccount.withdraw(600));
+        //System.out.println("Current Account Balance: " + currentAccount.getBalance());
+        //System.out.println("Saving Account Balance: " + savingAccount.getBalance());
+        //System.out.println("Current Account Branch: " + currentAccount.getBranch());
+        //System.out.println("Saving Account Branch: " + savingAccount.getBranch());
+        //savingAccount.applyInterest();
+        //savingAccount.withdraw(400);
     }
 }

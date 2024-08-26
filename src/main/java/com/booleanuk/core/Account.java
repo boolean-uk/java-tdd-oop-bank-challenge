@@ -12,7 +12,6 @@ public abstract class Account {
     private Branch branch;
 
 
-
     public Account(double balance, Branch branch) {
         this.accountID = generateRandomAccountId();
         this.balance = balance;

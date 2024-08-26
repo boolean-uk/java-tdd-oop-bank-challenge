@@ -72,6 +72,10 @@ public class CustomerTest {
     public void testGetBank() {
         Customer customer = new Customer("Name");
         Assertions.assertNull(customer.getBank());
+
+        Bank bank = new Bank("Bank");
+        customer.setBank(bank);
+        Assertions.assertEquals(bank, customer.getBank());
     }
 
     @Test

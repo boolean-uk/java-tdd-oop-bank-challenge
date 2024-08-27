@@ -35,6 +35,7 @@ public class Controller {
                     break;
                 case 2:
                     currentUser = view.chooseUser(new ArrayList<>(users));
+                    break;
                 case 3:
                     if (currentUser == null) {
                         currentUser = view.chooseUser(new ArrayList<>(users));
@@ -46,7 +47,7 @@ public class Controller {
                         currentUser = view.chooseUser(new ArrayList<>(users));
                     }
                     account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
-                    account.deposit(view.depositAmount());
+                    view.print(account.deposit(view.depositAmount()));
                     break;
                 case 5:
                     if (currentUser == null) {
@@ -54,6 +55,28 @@ public class Controller {
                     }
                     account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
                     view.printBalance(account.calculateBalance());
+                    break;
+                case 6:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
+                    if (account instanceof CurrentAccount) {
+                        view.print(((CurrentAccount) account).withdraw(view.withdrawAmount()));
+                    } else {
+                        view.notCurrentAccount();
+                    }
+
+                    break;
+                case 7:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
+                    Depositable targetAccount = view.chooseDepositable();
+                    int transferSum = view.depositAmount();
+                    view.print(account.transfer(targetAccount.getAccountId(), transferSum));
+
                     break;
                 case 12:
                     users.add(new User("11", "Huey"));

@@ -1,6 +1,7 @@
 package com.booleanuk.core;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class View {
@@ -17,6 +18,8 @@ public class View {
         System.out.println("3. Create account");
         System.out.println("4. Deposit");
         System.out.println("5. See balance");
+        System.out.println("6. Withdraw");
+        System.out.println("7. Transfer");
         System.out.println("12. (For testing) Add starting data");
 
         return getInt();
@@ -73,7 +76,14 @@ public class View {
     }
 
     public int depositAmount() {
-        System.out.println("How much money do you with to deposit?");
+        System.out.println("How much money do you wish to deposit?");
+        String amount = scanner.nextLine();
+        amount = amount.replace(',', '.');
+        return Math.round(Float.parseFloat(amount) * 100);
+    }
+
+    public int withdrawAmount() {
+        System.out.println("How much money do you wish to withdraw?");
         String amount = scanner.nextLine();
         amount = amount.replace(',', '.');
         return Math.round(Float.parseFloat(amount) * 100);
@@ -89,5 +99,23 @@ public class View {
 
     public void printBalance(int balance) {
         System.out.printf("In this account you have %.2f money.%n", (float) balance / 100);
+    }
+
+    public void print(String str) {
+        System.out.println(str);
+    }
+
+    public void notCurrentAccount() {
+        System.out.println("To withdraw you need to use a current account.");
+    }
+
+    public Depositable chooseDepositable() {
+        System.out.println("Choose an account to transfer to.\nAccount numbers:");
+        List<String> keyset = Controller.depositables.keySet().stream().toList();
+        for (int i = 1; i <= Controller.depositables.size(); i++) {
+            System.out.printf("%d. %s%n", i, keyset.get(i - 1));
+        }
+        int choice = getInt();
+        return Controller.depositables.get(keyset.get(choice - 1));
     }
 }

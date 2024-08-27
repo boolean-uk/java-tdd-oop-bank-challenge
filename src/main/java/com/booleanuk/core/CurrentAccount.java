@@ -41,7 +41,7 @@ public class CurrentAccount extends Account {
         double availableFunds = currentBalance + getApprovedOverdraftLimit();
 
         if (availableFunds >= amount) {
-            setBalance(currentBalance - amount);  // Use setBalance to update the balance
+            setBalance(currentBalance - amount);
             addTransaction(-amount, "debit");
             return "Withdrawal Successful";
         } else {

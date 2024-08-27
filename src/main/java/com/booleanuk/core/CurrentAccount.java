@@ -31,7 +31,23 @@ public class CurrentAccount extends Account {
 
     @Override
     public String transfer(String targetAccountId, int sum) {
-        return ""; // TODO
+        int balance = calculateBalance();
+        if (balance < sum) {
+            return String.format("Your balance of %.2f is too low to send a sum of %.2f.%n", (float) balance / 100, (float) sum / 100);
+        }
+        Depositable d = Controller.depositables.get(targetAccountId);
+        Transaction t;
+        if (d.isCurrentAccount()) {
+            t = new Transaction(LocalDateTime.now(), this.accountId, targetAccountId, sum);
+            d.deposit(t);
+            transactions.add(t);
+            return String.format("%.2f money has now been transferred from account %s to account %s.%n", (float) sum/100, this.accountId, targetAccountId);
+        } else {
+            t = new Transaction(LocalDateTime.now().plusDays(3), this.accountId, targetAccountId, sum);
+            Controller.depositables.get(targetAccountId).deposit(t);
+            transactions.add(t);
+            return String.format("%.2f money will be transferred from account %s to account %s in three (3) days.%n", (float) sum/100, this.accountId, targetAccountId);
+        }
     }
 
     @Override

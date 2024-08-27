@@ -15,7 +15,6 @@ public class CustomerTest {
         bank.newTransaction(savings1,1000,200);
         bank.newTransaction(savings1,1000,200);
         bank.newTransaction(savings1,1000,200);
-
         Assertions.assertEquals(savings1, customer1.getAccount(0));
     }
 

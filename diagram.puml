@@ -10,7 +10,7 @@ class Customer{
 }
 Customer -- BankAccount
 
-class BankAccount{
+abstract class BankAccount{
     - bank: Bank
     - canOverdraft: boolean
     + transactions: ArrayList<Transaction>

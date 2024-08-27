@@ -10,16 +10,12 @@ public class Account {
     private ArrayList<String> bankStatement;
     private String accountName;
     private Branch branch;
-    private Boolean canOverdraft;
-    private Boolean overdraftRequestPending;
 
     public Account(String accountName, Branch branch){
         this.transactions = new ArrayList<>();
         this.bankStatement = new ArrayList<>();
         this.accountName = accountName;
         this.branch = branch;
-        this.canOverdraft = false;
-        this.overdraftRequestPending = false;
     }
 
     public String getAccountName() {
@@ -37,18 +33,6 @@ public class Account {
         return transactions.getLast().getBalanceInCents();
     }
 
-    public Boolean getOverdraftRequestPending() {
-        return overdraftRequestPending;
-    }
-
-    public void setOverdraftRequestPending(Boolean overdraftRequestPending) {
-        this.overdraftRequestPending = overdraftRequestPending;
-    }
-
-    public void setCanOverdraft(Boolean canOverdraft) {
-        this.canOverdraft = canOverdraft;
-    }
-
     public ArrayList<String> getBankStatement() {
         return bankStatement;
     }
@@ -59,7 +43,8 @@ public class Account {
     }
 
     public String withdraw(float amountInPounds){
-        if (amountInPounds > centsToPounds(getBalanceInCents()) && !canOverdraft){
+        // Change to class != savings!!:
+        if (amountInPounds > centsToPounds(getBalanceInCents()) && getClass() != CurrentAccount.class){
             return "Not enough funds.";
         }
 

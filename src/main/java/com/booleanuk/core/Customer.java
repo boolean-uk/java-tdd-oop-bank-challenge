@@ -40,10 +40,4 @@ public class Customer {
         return null;
     }
 
-    public void requestOverdraft(Account account){
-        if (account != null){
-            account.setOverdraftRequestPending(true);
-        }
-    }
-
 }

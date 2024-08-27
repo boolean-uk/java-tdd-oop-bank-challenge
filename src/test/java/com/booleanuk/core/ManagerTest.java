@@ -13,9 +13,9 @@ public class ManagerTest {
     public void canApproveOverdraftRequest(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings", Branch.Oslo);
-        Account account = customer.getAccount("Test Savings");
-        customer.requestOverdraft(account);
+        customer.openCurrentAccount("Test Savings", Branch.Oslo);
+        CurrentAccount account = (CurrentAccount) customer.getAccount("Test Savings");
+        account.requestOverdraft();
 
         Manager manager = new Manager();
         manager.approveOverdraftRequest(account);
@@ -28,9 +28,9 @@ public class ManagerTest {
     public void canRejectOverdraftRequest(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings", Branch.Oslo);
-        Account account = customer.getAccount("Test Savings");
-        customer.requestOverdraft(account);
+        customer.openCurrentAccount("Test Savings", Branch.Oslo);
+        CurrentAccount account = (CurrentAccount) customer.getAccount("Test Savings");
+        account.requestOverdraft();
 
         Manager manager = new Manager();
         manager.denyOverdraftRequest(account);

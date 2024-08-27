@@ -92,11 +92,11 @@ public class CustomerTest {
     public void canCustomerRequestOverdraft(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings", Branch.Oslo);
-        Account account = customer.getAccount("Test Savings");
+        customer.openCurrentAccount("Test Current", Branch.Oslo);
+        CurrentAccount account = (CurrentAccount) customer.getAccount("Test Current");
         account.deposit(250f);
 
-        customer.requestOverdraft(account);
+        account.requestOverdraft();
         Assertions.assertTrue(account.getOverdraftRequestPending());
     }
 
@@ -104,11 +104,11 @@ public class CustomerTest {
     public void canCustomerOverdraft(){
         ArrayList<Account> accounts = new ArrayList<>();
         Customer customer = new Customer(accounts);
-        customer.openSavingsAccount("Test Savings", Branch.Oslo);
-        Account account = customer.getAccount("Test Savings");
+        customer.openCurrentAccount("Test Savings", Branch.Oslo);
+        CurrentAccount account = (CurrentAccount) customer.getAccount("Test Savings");
         account.deposit(250f);
 
-        customer.requestOverdraft(account);
+        account.requestOverdraft();
         Manager manager = new Manager();
         manager.approveOverdraftRequest(account);
 

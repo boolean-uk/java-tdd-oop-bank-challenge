@@ -13,8 +13,9 @@ public class Bank {
         this.idCounter = 0;
         this.accounts = new HashMap<>();
         this.branches = new ArrayList<>();
-        this.branches.add("Private");
-        this.branches.add("Company");
+        this.branches.add("Stockholm");
+        this.branches.add("Oslo");
+        this.branches.add("Copenhagen");
     }
 
     public int createAccount(String type, String branch) {

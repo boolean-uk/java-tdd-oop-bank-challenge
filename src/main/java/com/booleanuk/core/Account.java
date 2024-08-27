@@ -35,7 +35,7 @@ public class Account {
             String formattedDateTime = currentDateTime.format(formatter);
 
             double balance = this.getBalance();
-            Transaction transaction = new Transaction(formattedDateTime, depositAmount, balance);
+            Transaction transaction = new Transaction(formattedDateTime, depositAmount, balance + depositAmount);
             this.transactions.add(transaction);
         }else{
             System.out.println("You cannot deposit a 0 or negative amount.");
@@ -49,7 +49,7 @@ public class Account {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             String formattedDateTime = currentDateTime.format(formatter);
             double balance = this.getBalance();
-            Transaction transaction = new Transaction(formattedDateTime, withdrawAmount, balance);
+            Transaction transaction = new Transaction(formattedDateTime, withdrawAmount, balance + withdrawAmount);
             this.transactions.add(transaction);
         }else{
             System.out.println("You cannot withdraw a 0 or positive amount.");
@@ -65,7 +65,7 @@ public class Account {
     }
 
     public void generateStatement(){
-        System.out.printf("%-25s %-20s %-25s%n", "Transaction Date", "Transaction Amount", "Balance before transaction");
+        System.out.printf("%-25s %-20s %-25s%n", "Transaction Date", "Transaction Amount", "Balance");
         System.out.println("---------------------------------------------------------------");
 
         for (Transaction transaction : this.transactions) {

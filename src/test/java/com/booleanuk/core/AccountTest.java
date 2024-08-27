@@ -37,4 +37,5 @@ public class AccountTest {
         account.generateStatement();
        // Assertions.assertEquals(0, account.getBalance());
     }
+
 }

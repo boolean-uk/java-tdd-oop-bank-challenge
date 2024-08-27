@@ -30,9 +30,9 @@ public class Customer {
         return accounts;
     }
 
-    public SavingsAccount getSavingsAccount(){
+    public SavingsAccount getSavingsAccount(int uniqueID){
         for(Account a: accounts){
-            if (a instanceof SavingsAccount) {
+            if (a.getUniqueID() == uniqueID) {
                 return ((SavingsAccount) a);
             }
         }

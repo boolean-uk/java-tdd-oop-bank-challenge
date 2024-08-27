@@ -45,4 +45,5 @@ public class Transaction {
     public void setWithdrawAmount(double withdrawAmount) {
         this.withdrawAmount = withdrawAmount;
     }
+
 }

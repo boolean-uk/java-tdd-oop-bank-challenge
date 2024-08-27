@@ -11,6 +11,7 @@ public interface Account {
     public void setBalance(double newBalance);
     public void setOverdraftAmount(Double overdraftAmount);
 
+    public int getUniqueID();
 
 
     public ArrayList<Transaction> getTransactions();

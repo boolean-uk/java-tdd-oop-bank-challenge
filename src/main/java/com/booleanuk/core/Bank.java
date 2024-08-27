@@ -105,7 +105,6 @@ public class Bank {
 
             if (decision.equals("yes")) {
                 account.setOverdraftAmount(overdraftAmount);
-                //overdraftRequests.removeFirst();
                 System.out.println("Overdraft request approved.");
 
             } else if (decision.equals("no")) {
@@ -116,6 +115,7 @@ public class Bank {
             }
 
         }
+        overdraftRequests.clear();
     }
 
     public static void main(String[] args) {
@@ -127,13 +127,16 @@ public class Bank {
         bank.newAccount(customer1, "Current");
 
 
-        savings1.newTransaction(0, 1000, bank.getTransactionID()); //
+        savings1.newTransaction(0, 1000, bank.getTransactionID()); //this should fail
         savings1.requestOverdraft(5000.00);
-        current1.requestOverdraft(5000.00);
+
 
         //try overdrafting with new limits
 
         bank.reviewOverdrafts();
+        savings1.newTransaction(0, 3000, bank.getTransactionID());//This should pass now
+
+        savings1.generateAccountStatement();
     }
 
 }

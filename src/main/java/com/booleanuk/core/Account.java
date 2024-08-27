@@ -29,8 +29,15 @@ public abstract class Account implements Depositable {
 
     public int calculateBalance(int i) {
         LocalDateTime now = LocalDateTime.now().plusDays(i);
-        return transactions.stream().filter(transaction -> transaction.transactionTime().isBefore(now))
+        int toTransactions = transactions.stream()
+                .filter(transaction -> transaction.transactionTime().isBefore(now))
+                .filter(transaction -> transaction.toAccount().equals(accountId))
                 .mapToInt(Transaction::value).sum();
+        int awayTransactions = transactions.stream()
+                .filter(transaction -> transaction.transactionTime().isBefore(now))
+                .filter(transaction -> transaction.fromAccount().equals(accountId))
+                .mapToInt(Transaction::value).sum();
+        return toTransactions - awayTransactions;
     }
 
     public int calculateBalance() {

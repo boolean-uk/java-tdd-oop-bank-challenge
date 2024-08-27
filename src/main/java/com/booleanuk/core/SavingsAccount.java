@@ -14,13 +14,13 @@ public class SavingsAccount extends Account {
 
 
     @Override
-    public int deposit(int sum) {
-        return 0; // TODO
+    public String deposit(int sum) {
+        transactions.add(new Transaction(LocalDateTime.now().plusDays(3), "-1", this.accountId, sum));
+        return String.format("The %.2f money will be deposited in three (3) days to the account %s.", (float) sum/100, this.accountId);
     }
 
     @Override
-    public int deposit(Transaction transaction) {
-        return 0;
+    public void deposit(Transaction transaction) {
     }
 
     @Override

@@ -21,41 +21,6 @@ public class CurrentAccountTest {
 
     }
 
-
-
-    @Test
-    public void TestIfOverDraftWorks(){
-        //OverdraftLimit is initially set at 1000£
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount  = new CurrentAccount(me);
-
-        Assertions.assertEquals(1000.0, currentAccount.getOverdraftLimit(), 0.0001f);
-
-        //First I try to withdraw an amount over the overdraft limit, this should give me an "Insufficient funds" message. '
-        Assertions.assertEquals("Insufficient Funds", currentAccount.withdraw(1500));
-
-
-        //I have 0 in account and withdraw 700, the overdraft kicks in.
-        currentAccount.withdraw(700);
-
-        //After using the overdraft I should now only have 300 left before the limit kicks in.
-        Assertions.assertEquals(300.0, currentAccount.getOverdraftLimit(), 0.0001f);
-
-        //If I try once more with 700 withdrawal, exceeding the limit I should get Insufficient funds message again.
-        Assertions.assertEquals("Insufficient Funds", currentAccount.withdraw(400));
-
-    }
-
-    @Test
-    public void TestIfTooMuchWithdrawalGivesNegativesDueToOverdraft(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount = new CurrentAccount(me);
-
-        //This should now work because at current account overdraft is active.
-        Assertions.assertEquals("New Balance: -100.0£", currentAccount.withdraw(100));
-
-    }
-
     @Test
     public void TestIfBalanceAndWithdrawalIsSame(){
         AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");

@@ -36,8 +36,6 @@ public class CurrentAccount extends Account{
     @Override
     public String deposit(double amount) {
 
-        setBalance(getBalance() + amount);
-
         Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount, getBalance());
         getBankStatement().add(depositTransaction);
 
@@ -53,8 +51,6 @@ public class CurrentAccount extends Account{
 
                 overdraftLimit -= overdraft;
             }
-
-            setBalance(getBalance() - amount);
 
             Transaction withdrawTransaction = new Transaction(TransactionType.WITHDRAWAL, amount, getBalance());
             getBankStatement().add(withdrawTransaction);

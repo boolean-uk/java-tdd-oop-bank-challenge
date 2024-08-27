@@ -158,6 +158,14 @@ This is the methods in the OverdraftRequest class:
 | `reject`     |           | `void`    | Sets the value of isApproved to false. |
 | `isApproved` |           | `Boolean` | Returns the isApproved value.          |
 
+Methods in BankManager:
+
+| Name              | Parameter                   | Return    | Description                                                             |
+|-------------------|-----------------------------|-----------|-------------------------------------------------------------------------|
+| `receiveRequest`  | `OverdraftRequest request`  | `void`    | Adds a specific request to the bank managers pending requests list.     |
+| `processRequest`  |                             | `void`    | Processes all the requests in the pending list and approve/reject them. |
+
+
 
 
 

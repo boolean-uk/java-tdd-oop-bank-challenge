@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Bank {
-    //private HashMap<Customer, ArrayList<Account>> customers;
     private ArrayList<Customer> customers;
     private ArrayList<OverdraftRequest> overdraftRequests;
     private int accountID;
@@ -13,7 +12,6 @@ public class Bank {
     private String branch;
 
     public Bank(String branch){
-        //this.customers = new HashMap<>();
         this.customers = new ArrayList<>();
         this.overdraftRequests = new ArrayList<>();
         this.accountID = 0;
@@ -56,7 +54,6 @@ public class Bank {
         return null;
     }
 
-    //added transaction func to Bank so we can keep track of unique transaction ID's
     public double newTransaction(Account account, double depositAmount,double withdrawAmount){
         double newBalance = account.newTransaction(depositAmount, withdrawAmount, transactionID);
         transactionID += 1;
@@ -124,11 +121,13 @@ public class Bank {
         bank.newCustomer(customer1);
         SavingsAccount savings1 = ((SavingsAccount) bank.newAccount(customer1, "Saving"));
         CurrentAccount current1 = ((CurrentAccount) bank.newAccount(customer1, "Current"));
-        bank.newAccount(customer1, "Current");
 
-
-        savings1.newTransaction(0, 1000, bank.getTransactionID()); //this should fail
+        savings1.newTransaction(2000, 1000, bank.getTransactionID());
+        current1.newTransaction(5000, 0, bank.getTransactionID());
+        savings1.newTransaction(5000, 0, bank.getTransactionID());
+        current1.newTransaction(5000, 1000, bank.getTransactionID());
         savings1.requestOverdraft(5000.00);
+        current1.requestOverdraft(2000.00);
 
 
         //try overdrafting with new limits
@@ -136,7 +135,7 @@ public class Bank {
         bank.reviewOverdrafts();
         savings1.newTransaction(0, 3000, bank.getTransactionID());//This should pass now
 
-        savings1.generateAccountStatement();
+        customer1.generateCustomerStatement();
     }
 
 }

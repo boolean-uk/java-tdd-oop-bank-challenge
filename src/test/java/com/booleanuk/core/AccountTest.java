@@ -11,8 +11,8 @@ public class AccountTest {
         Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
-        SavingsAccount savings1 = customer1.getSavingsAccount(0);
-        double newBalance = bank.newTransaction(savings1, 1000, 0);
+        Account savings1 = customer1.getAccount(0);
+        double newBalance = bank.newTransaction(savings1, 1000, 250);
         newBalance = bank.newTransaction(savings1, 500, 0);
 
         /*
@@ -22,7 +22,7 @@ public class AccountTest {
 
          */
 
-        Assertions.assertEquals(1500, customer1.getSavingsAccount(0).getBalance());
+        Assertions.assertEquals(1250, customer1.getAccount(0).getBalance());
 
     }
 
@@ -33,7 +33,7 @@ public class AccountTest {
         Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
-        SavingsAccount savings1 = customer1.getSavingsAccount(0);
+        Account savings1 = customer1.getAccount(0);
         double newBalance = bank.newTransaction(savings1, 1000, 0);
         newBalance = bank.newTransaction(savings1, 1000, 0);
         newBalance = bank.newTransaction(savings1, 1000, 0);
@@ -51,7 +51,7 @@ public class AccountTest {
         Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
         bank.newAccount(customer1, "Saving");
-        SavingsAccount savings1 = customer1.getSavingsAccount(0);
+        Account savings1 = customer1.getAccount(0);
         savings1.setOverdraftAmount(1000.00);
 
         double newBalance = bank.newTransaction(savings1, 2000, 0);

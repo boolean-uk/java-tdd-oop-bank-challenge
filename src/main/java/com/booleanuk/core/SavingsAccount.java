@@ -41,17 +41,13 @@ public class SavingsAccount implements Account{
             }
         }
 
-
         Transaction t = new Transaction(depositAmount, withdrawAmount);
-
         transactions.add(t);
-        System.out.println("test");
-
         double newBalance = calculateAccountBalance();
         return newBalance;
     }
 
-    private double calculateAccountBalance(){
+    public double calculateAccountBalance(){
         double totalDeposit = 0;
         double totalWithdraw = 0;
         for (Transaction t: transactions){
@@ -68,7 +64,7 @@ public class SavingsAccount implements Account{
         String headerFormat = "%-12s || %-10s || %-10s || %-10s\n";
         String rowFormat = "%-12s || %10s || %10s || %10s\n";
 
-        System.out.println("Account ID: " );
+        System.out.println("User: " + customer.getName() + "    Account ID: " + uniqueID );
         System.out.printf(headerFormat, "date", "credit", "debit", "balance");
         double balance = 0.0;
 
@@ -96,12 +92,15 @@ public class SavingsAccount implements Account{
         return "";
     }
 
-    public void requestOverdraft(Double overdraftAmount){
+    public void requestOverdraft(double overdraftAmount){
+        System.out.println("Cannot request a overdraft on a savings account");
+
+        /*
         OverdraftRequest request = new OverdraftRequest(this.customer, this, 5000);
         bank.addOverdraftRequest(request);
         System.out.println("Overdraft request sent");
 
-
+         */
     }
 
     public void setOverdraftAmount(Double overdraftAmount){

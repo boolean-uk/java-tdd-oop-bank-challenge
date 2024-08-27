@@ -30,35 +30,26 @@ public class Customer {
         return accounts;
     }
 
-    public SavingsAccount getSavingsAccount(int uniqueID){
+    public Account getAccount(int uniqueID){
         for(Account a: accounts){
             if (a.getUniqueID() == uniqueID) {
-                return ((SavingsAccount) a);
+                return (a);
             }
         }
         return null;
     }
-    public CurrentAccount getCurrentAccount(){
+
+    //print out all statements for all accounts for this customer
+    public boolean generateCustomerStatement(){
         for (Account a: accounts){
-            if(a instanceof CurrentAccount){
-                return ((CurrentAccount) a);
-            }
+            a.generateAccountStatement();
+
         }
-        return null;
+        return true;
     }
-
-
-
 
     public String getName(){
         return this.name;
-    }
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
     }
 
     // Override equals and hashCode

@@ -32,6 +32,7 @@ public class BankTest {
         Bank bank = new Bank("Oslo");
         Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
+
     }
 
     @Test

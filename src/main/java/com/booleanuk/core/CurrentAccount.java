@@ -22,6 +22,7 @@ public class CurrentAccount implements Account {
         this.customer = customer;
     }
 
+
     public double newTransaction(double depositAmount, double withdrawAmount, int transactionID){
         double currentBalance = calculateAccountBalance();
         double projectedBalance = currentBalance + depositAmount - withdrawAmount;
@@ -38,17 +39,13 @@ public class CurrentAccount implements Account {
             }
         }
 
-
         Transaction t = new Transaction(depositAmount, withdrawAmount);
-
         transactions.add(t);
-        System.out.println("test");
-
         double newBalance = calculateAccountBalance();
         return newBalance;
     }
 
-    private double calculateAccountBalance(){
+    public double calculateAccountBalance(){
         double totalDeposit = 0;
         double totalWithdraw = 0;
         for (Transaction t: transactions){
@@ -65,12 +62,16 @@ public class CurrentAccount implements Account {
         String headerFormat = "%-12s || %-10s || %-10s || %-10s\n";
         String rowFormat = "%-12s || %10s || %10s || %10s\n";
 
-        System.out.println("Account ID: " );
+        System.out.println();
+        System.out.println("User: " + customer.getName() + "    Account ID: " + uniqueID );
         System.out.printf(headerFormat, "date", "credit", "debit", "balance");
         double balance = 0.0;
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+        if(transactions.size()<=0){
+            return "";
+        }
         // Loop through the transactions and print the formatted statement
         for (Transaction t : transactions) {
             String date = t.getCurrentDateTime().format(formatter);
@@ -93,10 +94,11 @@ public class CurrentAccount implements Account {
         return "";
     }
 
-    public void requestOverdraft(Double overdraftAmount){
-        OverdraftRequest request = new OverdraftRequest(this.customer, this, overdraftAmount);
+    public void requestOverdraft(double overdraftAmount){
+        OverdraftRequest request = new OverdraftRequest(this.customer, this, 5000);
         bank.addOverdraftRequest(request);
         System.out.println("Overdraft request sent");
+
 
     }
 

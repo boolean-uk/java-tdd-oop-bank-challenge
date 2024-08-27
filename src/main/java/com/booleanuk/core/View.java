@@ -1,6 +1,10 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +24,7 @@ public class View {
         System.out.println("5. See balance");
         System.out.println("6. Withdraw");
         System.out.println("7. Transfer");
+        System.out.println("8. Bank statement");
         System.out.println("12. (For testing) Add starting data");
 
         return getInt();
@@ -117,5 +122,23 @@ public class View {
         }
         int choice = getInt();
         return Controller.depositables.get(keyset.get(choice - 1));
+    }
+
+    public void printBankStatement(ArrayList<Transaction> transactions, String accountNumber) {
+        transactions.sort(Comparator.comparing(Transaction::transactionTime));
+        System.out.println("date       || credit  || debit  || balance");
+        for (Transaction t: transactions) {
+            String date = formatDate(t.transactionTime());
+            String credit = t.toAccount().equals(accountNumber) ? "      " : String.format("%.2f", (float) t.value() / 100);
+            String debit = t.fromAccount().equals(accountNumber) ? "      " : String.format("%.2f", (float) t.value() / 100);
+            int dayDif = (int) ChronoUnit.DAYS.between(LocalDateTime.now(), t.transactionTime());
+            float displayMoney = (float) Account.calculateBalance(transactions, accountNumber, dayDif) / 100;
+            System.out.printf("%s || %s || %s || %.2f%n", date, credit,debit, displayMoney);
+        }
+    }
+
+    private String formatDate(LocalDateTime t) {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyy");
+        return t.format(f);
     }
 }

@@ -78,6 +78,14 @@ public class Controller {
                     view.print(account.transfer(targetAccount.getAccountId(), transferSum));
 
                     break;
+                case 8:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
+                    view.printBankStatement(new ArrayList<>(account.transactions), account.accountId);
+
+                    break;
                 case 12:
                     users.add(new User("11", "Huey"));
                     users.add(new User("12", "Dewey"));
@@ -95,12 +103,15 @@ public class Controller {
                     }
                     Transaction t1 = new Transaction(LocalDateTime.now().minusDays(10), "-1", "000", 10000);
                     Transaction t2 = new Transaction(LocalDateTime.now().minusDays(6), "000", "001", 5000);
-                    Transaction t3 = new Transaction(LocalDateTime.now().plusDays(1), "000", "002", 3000);
+                    Transaction t3 = new Transaction(LocalDateTime.now().plusDays(100), "000", "002", 1000);
+                    Transaction t4 = new Transaction(LocalDateTime.now().plusDays(1), "000", "002", 3000);
                     accs.getFirst().deposit(t1);
                     accs.getFirst().deposit(t2);
                     accs.get(1).deposit(t2);
                     accs.getFirst().deposit(t3);
                     accs.get(2).deposit(t3);
+                    accs.getFirst().deposit(t4);
+                    accs.get(2).deposit(t4);
                     users.getFirst().addAccount(accs.get(0));
                     users.get(1).addAccount(accs.get(1));
                     users.get(1).addAccount(accs.get(2));

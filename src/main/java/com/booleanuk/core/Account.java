@@ -53,20 +53,12 @@ abstract class Account {
         }
     }
 
-    public void clearOverdraftRequest() {
-        this.overdraftRequest = null;
-    }
-
     public String getAccountNumber() {
         return this.accountNumber;
     }
 
     public ArrayList<Transaction> getTransactions() {
         return transactions;
-    }
-
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public double getBalance() {
@@ -83,23 +75,5 @@ abstract class Account {
 
     public OverdraftRequest getOverdraftRequest() {
         return this.overdraftRequest;
-    }
-
-    public static void main(String[] args) {
-
-        Current current = new Current("bob", "43832894324");
-        current.requestOverdraft(500);
-
-        BankManager bankManager = new BankManager();
-        bankManager.receiveRequest(current.getOverdraftRequest());
-        bankManager.processRequest();
-
-        current.withdraw(200);
-        current.deposit(500);
-        current.withdraw(100);
-
-        current.printStatement();
-        System.out.println(current.getBalance());
-
     }
 }

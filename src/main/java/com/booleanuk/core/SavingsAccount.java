@@ -4,7 +4,6 @@ public class SavingsAccount extends Account{
 
     SavingsAccount(AccountOwner owner) {
         super(owner);
-
     }
 
     @Override

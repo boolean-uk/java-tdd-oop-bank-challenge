@@ -29,11 +29,11 @@
 |                                  |                         | applyOverdraft(amount : double) | applies  overdraft to the balance. |        |
 |                                  |                         |                                 |                                    |        |
 
-| Class                            | Member Variable       | Methods             | Scenario                             | Output |
-|----------------------------------|-----------------------|---------------------|--------------------------------------|--------|
-| `SavingsAccount extends Account` |                       |                     |                                      |        |
-|                                  | interestRate : double |                     |                                      |        |
-|                                  |                       | applyInterestRate() | applies interest rate to the account |        |
+| Class                            | Member Variable | Methods | Scenario | Output |
+|----------------------------------|-----------------|---------|----------|--------|
+| `SavingsAccount extends Account` |                 |         |          |        |
+|                                  |                 |         |          |        |
+|                                  |                 |         |          |        |
     
 | Class         | Member Variable      | Methods   | Scenario                 | Output   |
 |---------------|----------------------|-----------|--------------------------|----------|

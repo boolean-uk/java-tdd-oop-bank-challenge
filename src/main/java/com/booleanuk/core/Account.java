@@ -9,7 +9,6 @@ public abstract class Account implements Depositable {
     protected String branchId;
     protected String accountId;
 
-    public abstract int withdraw(int sum);
     public abstract String transfer(String targetAccountId, int sum);
 
 

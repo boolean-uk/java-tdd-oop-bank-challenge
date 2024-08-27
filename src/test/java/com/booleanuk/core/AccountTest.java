@@ -12,7 +12,7 @@ public class AccountTest {
     @BeforeEach
     public void setUp() {
         String accountNumber = "01234567891";
-        this.currentAccount = new Current("Bobs Bagel", accountNumber);
+        this.currentAccount = new Current("Bobs Bagel", accountNumber, Branch.OSLO);
     }
 
     @Test
@@ -77,5 +77,10 @@ public class AccountTest {
 
         OverdraftRequest request = currentAccount.getOverdraftRequest();
         Assertions.assertFalse(request.isApproved());
+    }
+
+    @Test
+    public void testAccountIsConnectedToABranch() {
+        Assertions.assertEquals(Branch.OSLO, currentAccount.getBranch());
     }
 }

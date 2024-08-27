@@ -8,13 +8,15 @@ abstract class Account {
     private double balance;
     private ArrayList<Transaction> transactions;
     private OverdraftRequest overdraftRequest;
+    private final Branch branch;
 
-    public Account(String fullName, String accountNumber) {
+    public Account(String fullName, String accountNumber, Branch branch) {
         this.fullName = fullName;
         this.accountNumber = accountNumber;
         this.setBalance(0.0);
         this.transactions = new ArrayList<>();
         this.overdraftRequest = null;
+        this.branch = branch;
     }
 
     public void requestOverdraft(double limit) {
@@ -41,6 +43,11 @@ abstract class Account {
             this.balance -= amount;
             this.transactions.add(new Transaction(-amount, this.balance,true));
         }
+    }
+
+    public void printBranchInformation() {
+        String msg = "The account: " + this.getAccountNumber() + " is located in the " + this.getBranch() + " branch";
+        System.out.println(msg);
     }
 
     public void printStatement() {
@@ -75,5 +82,9 @@ abstract class Account {
 
     public OverdraftRequest getOverdraftRequest() {
         return this.overdraftRequest;
+    }
+
+    public Branch getBranch() {
+        return this.branch;
     }
 }

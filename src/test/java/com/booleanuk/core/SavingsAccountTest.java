@@ -32,4 +32,19 @@ class SavingsAccountTest {
         Assertions.assertEquals(1, b.getTransactions().size());
         Assertions.assertEquals(a.getTransactions().getLast(), b.getTransactions().getLast());
     }
+
+    @Test
+    public void testTransferWithoutMoney() {
+        Account a = new SavingsAccount("1", "0000", "01");
+        Account b = new CurrentAccount("1", "0000", "02");
+        Controller.depositables.put("01", a);
+        Controller.depositables.put("02", b);
+        Assertions.assertEquals(0, a.calculateBalance());
+        Assertions.assertEquals("Not enough balance in 3 days to transfer 50.00 money. Please deposit more money first.", a.transfer("02", 5000), "");
+        Assertions.assertEquals(0, b.calculateBalance());
+        Assertions.assertEquals(0, a.calculateBalance());
+        Assertions.assertEquals(0, a.getTransactions().size());
+        Assertions.assertEquals(0, b.getTransactions().size());
+
+    }
 }

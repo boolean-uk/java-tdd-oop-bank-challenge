@@ -24,6 +24,7 @@ public class Controller {
 
     private void mainMenu() {
         boolean keepRunning = true;
+        Account account;
         while (keepRunning) {
             int chosenOption = view.mainMenu();
             switch (chosenOption) {
@@ -34,6 +35,26 @@ public class Controller {
                     break;
                 case 2:
                     currentUser = view.chooseUser(new ArrayList<>(users));
+                case 3:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    currentUser.addAccount(view.getAccount(currentUser.getUserId(), generateAccountId()));
+                    break;
+                case 4:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
+                    account.deposit(view.depositAmount());
+                    break;
+                case 5:
+                    if (currentUser == null) {
+                        currentUser = view.chooseUser(new ArrayList<>(users));
+                    }
+                    account = currentUser.getAccount(view.chooseAccountNumber(currentUser.getAccountNumbers()));
+                    view.printBalance(account.calculateBalance());
+                    break;
                 case 12:
                     users.add(new User("11", "Huey"));
                     users.add(new User("12", "Dewey"));
@@ -79,6 +100,18 @@ public class Controller {
         String finalStringNumber = stringNumber;
         if (users.stream().anyMatch(user -> user.getUserId().equals(finalStringNumber))) {
             stringNumber = generateUserId();
+        }
+        return stringNumber;
+    }
+
+    private String generateAccountId() {
+        Random random = new Random();
+        long randomNumber = random.nextLong() % 10000000000L;
+        randomNumber = Math.abs(randomNumber);
+        String stringNumber = String.format("%010d", randomNumber);
+        String finalStringNumber = stringNumber;
+        if (depositables.keySet().stream().anyMatch(account -> account.equals(finalStringNumber))) {
+            stringNumber = generateAccountId();
         }
         return stringNumber;
     }

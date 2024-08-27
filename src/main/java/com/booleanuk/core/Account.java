@@ -17,20 +17,12 @@ public abstract class Account {
         this.balance = 0.00;
     }
 
-    private double getBalance(){
+    protected double getBalance(){
         return this.balance;
     }
 
-    protected double retrieveBalance(){
-        return getBalance();
-    }
-
-    private void setBalance(double newBalance){
+    protected void setBalance(double newBalance){
         this.balance = newBalance;
-    }
-
-    protected void adjustBalance(double newBalance){
-        setBalance(newBalance);
     }
 
     protected ArrayList<Transaction> getBankStatement(){

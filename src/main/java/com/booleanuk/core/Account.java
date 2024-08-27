@@ -10,7 +10,7 @@ public abstract class Account implements Depositable {
     protected String accountId;
 
     public abstract int withdraw(int sum);
-    public abstract int transfer(String targetAccountId, int sum);
+    public abstract String transfer(String targetAccountId, int sum);
 
 
     @Override
@@ -27,9 +27,17 @@ public abstract class Account implements Depositable {
         return accountId;
     }
 
-    public int calculateBalance() {
-        LocalDateTime now = LocalDateTime.now();
+    public int calculateBalance(int i) {
+        LocalDateTime now = LocalDateTime.now().plusDays(i);
         return transactions.stream().filter(transaction -> transaction.transactionTime().isBefore(now))
                 .mapToInt(Transaction::value).sum();
+    }
+
+    public int calculateBalance() {
+        return calculateBalance(0);
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return new ArrayList<>(transactions);
     }
 }

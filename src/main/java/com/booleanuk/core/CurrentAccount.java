@@ -25,8 +25,8 @@ public class CurrentAccount extends Account {
     }
 
     @Override
-    public int transfer(String targetAccountId, int sum) {
-        return 0; // TODO
+    public String transfer(String targetAccountId, int sum) {
+        return ""; // TODO
     }
 
     @Override

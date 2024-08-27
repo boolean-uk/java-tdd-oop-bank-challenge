@@ -52,10 +52,7 @@ public class AccountTest {
         newBalance = bank.newTransaction(savings1, 1000, 0);
         newBalance = bank.newTransaction(savings1, 1000, 5000);
         System.out.println(newBalance);
-        savings1.generateAccountStatement();
-
-        //double newBalance = customer1.getSavingsAccount().newTransaction(1000, 0);
-        //customer1.getSavingsAccount().generateAccountStatement();
+        savings1.generateAccountStatement(); //not sure how to test this function
     }
 
     @Test
@@ -85,9 +82,6 @@ public class AccountTest {
         SavingsAccount savings1 = ((SavingsAccount) bank.newAccount(customer1, "Saving"));
         CurrentAccount current1 = ((CurrentAccount) bank.newAccount(customer1, "Current"));
         bank.newAccount(customer1, "Current");
-
-
-
 
         savings1.requestOverdraft(5000.00);
         current1.requestOverdraft(5000.00);

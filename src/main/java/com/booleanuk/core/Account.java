@@ -87,7 +87,7 @@ public class Account {
                 if(transaction.getTransactionType() == 0) {
                     System.out.println(transaction.getDate() + " || " + transaction.getAmount() + " \t||\t\t\t" +  "|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
                 }else {
-                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (transaction.getAmountBeforeTransaction() - transaction.getAmount()));
+                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
                 }
             }
         }

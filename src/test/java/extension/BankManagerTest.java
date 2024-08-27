@@ -52,6 +52,9 @@ public class BankManagerTest {
 
         Account account = bankManager.getCurrentAccountWithIDInBranch(branch, typeOfAccount, id);
 
+        Assertions.assertFalse(bankManager.withdrawFromAccount(account, 250));
+        account.setCanOverdraft();
+
         Assertions.assertFalse(bankManager.withdrawFromAccount(account, 1000));
 
         Assertions.assertTrue(bankManager.withdrawFromAccount(account, 250));

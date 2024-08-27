@@ -18,4 +18,17 @@ public class BranchTest {
         Assertions.assertEquals(currentAccount.getBranch(),osloBranch);
     }
 
+
+    @Test
+    public void checkAccountIDInBranch() {
+        Branch trondheimBranch = new Branch("Trondheim");
+        Customer customer = new Customer("Melvin", "Seelan");
+        SavingAccount savingAccount = new SavingAccount(1000, 2.5, trondheimBranch);
+        SavingAccount savingAccount1 = new SavingAccount(1000, 2.5, trondheimBranch);
+        customer.addAccount(savingAccount);
+        customer.addAccount(savingAccount1);
+        Assertions.assertNotNull(trondheimBranch.getAccounts());
+
+    }
+
 }

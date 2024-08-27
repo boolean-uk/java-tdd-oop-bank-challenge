@@ -17,6 +17,7 @@ public abstract class Account {
         this.balance = balance;
         this.transactions = new ArrayList<>();
         this.branch = branch;
+        branch.addAccount(this);
 
     }
 

@@ -14,7 +14,7 @@ public class TestCustomer {
 		b1.withdraw(30);
 		b1.deposit(45); //185
 
-		c.createAccount(BankType.Savings);
+		c.createAccount(BankType.Debit);
 		BankAccount b2 = c.getAccount(1);
 		b2.deposit(1000);
 		b2.withdraw(300);
@@ -32,6 +32,7 @@ public class TestCustomer {
 //		2024-08-26 ||            ||      300.0 ||    700.0
 //		2024-08-26 ||     1000.0 ||            ||   1000.0
 		String result = c.generateStatements();
+		System.out.println(result);
 		String[] expectedToContain = {"285", "240.0", "270", "100", "1020"};
 		for(String s : expectedToContain){
 			Assertions.assertTrue(result.contains(s));

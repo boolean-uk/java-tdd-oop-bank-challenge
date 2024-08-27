@@ -66,4 +66,16 @@ public class AccountTest {
         double balance = currentAccount.getBalance();
         Assertions.assertEquals(-200.0, balance);
     }
+
+    @Test
+    public void testRejectOverdraftRequest() {
+        currentAccount.requestOverdraft(1500);
+
+        BankManager manager = new BankManager();
+        manager.receiveRequest(currentAccount.getOverdraftRequest());
+        manager.processRequest();
+
+        OverdraftRequest request = currentAccount.getOverdraftRequest();
+        Assertions.assertFalse(request.isApproved());
+    }
 }

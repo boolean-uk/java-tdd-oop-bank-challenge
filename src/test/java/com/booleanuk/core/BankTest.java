@@ -34,18 +34,19 @@ public class BankTest {
 
     @Test
     public void withdrawTest() {
-        currentAccount.deposit(1000);
-        currentAccount.withdraw(1499,-500);
-        Assertions.assertEquals(-498, currentAccount.calculateBalance());
 
-        Assertions.assertTrue(currentAccount.calculateBalance() >= -500);
+        currentAccount.deposit(1000);
+        currentAccount.approveOverdraft(500);
+
+        currentAccount.withdraw(1500);
+        Assertions.assertEquals(-500, currentAccount.calculateBalance());
 
     }
 
     @Test
     public void bankStatementTest(){
         currentAccount.deposit(1000);
-        currentAccount.withdraw(1500, -500);
+        currentAccount.withdraw(1500);
         currentAccount.deposit(5000);
 
         bank.printStatement("1");

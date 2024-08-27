@@ -6,10 +6,14 @@ import java.util.List;
 public class Account {
 
     private final List<Transaction> transactions;
+    private double overdraftLimit;
+    private boolean overdraftAllowed;
 
     public Account() {
 
         this.transactions = new ArrayList<>();
+        this.overdraftLimit = 0.0;
+        this.overdraftAllowed = false;
     }
 
     public void deposit(double amount){
@@ -18,12 +22,17 @@ public class Account {
 
     }
 
-    public void withdraw(double amount, double overdraftLimit){
+    public void withdraw(double amount){
 
-        if (calculateBalance() >= overdraftLimit){
+        if (overdraftAllowed && (calculateBalance() - amount >= -overdraftLimit)) {
+
             this.transactions.add(new Transaction(0, amount));
-        }else
+
+        } else {
+
             System.out.println("Insufficient funds");
+
+        };
 
     }
 
@@ -39,7 +48,16 @@ public class Account {
     }
 
     public List<Transaction> getTransactions() {
+
         return transactions;
+
+    }
+
+    public void approveOverdraft(double limit) {
+
+        this.overdraftAllowed = true;
+        this.overdraftLimit = limit;
+
     }
 
 

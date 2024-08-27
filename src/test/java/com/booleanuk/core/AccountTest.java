@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class AccountTest {
 
     @Test
@@ -158,6 +160,21 @@ public class AccountTest {
         retrievedAccount.rejectOverdraft();
         Assertions.assertFalse(retrievedAccount.isOverdraftApproved());
 
+    }
+
+    @Test
+    public void TransactionAddedTest() {
+
+        Branch osloBranch = new Branch("Oslo");
+        Account account = new CurrentAccount(1000, osloBranch);
+        account.addTransaction(500.00, "credit");
+
+        List<String> transactions = account.getTransactions();
+        Assertions.assertEquals(1, transactions.size(), "There should be one transaction recorded.");
+
+        String transaction = transactions.get(0);
+        Assertions.assertTrue(transaction.contains("500.00"), "The transaction should include the credited amount.");
+        Assertions.assertTrue(transaction.contains("1000.00"), "The transaction should include the current balance.");
     }
 
 }

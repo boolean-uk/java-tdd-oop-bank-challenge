@@ -1,0 +1,86 @@
+@startuml
+class Customer{
+    - id: String
+    - bank: Bank
+    - customerBankAccounts: ArrayList<BankAccount>
+    + createAccount(): String
+    + generateStatements(): String
+    + getAccount(): BankAccount
+    + requestOverdraft(acc: BankAccount): void
+}
+Customer -- BankAccount
+
+abstract class BankAccount{
+    - bank: Bank
+    - canOverdraft: boolean
+    + transactions: ArrayList<Transaction>
+    + banktype: BankType
+    + generateStatement(): String
+    + deposit(amount: double): String
+    + withdraw(amount: double): String
+    + requestOverdraft(): boolean
+}
+
+BankAccount -- Transaction
+BankAccount -- OverdraftRequest
+
+class BankAccountSavings extends BankAccount{
+    + withdraw(amount: double): String
+    + requestOverdraft(): boolean
+}
+
+class BankAccountDebit extends BankAccount{
+    + withdraw(amount: double): String
+}
+
+
+class StringUtils{
+    + leftAlignStringWithPadding(s: String, pad: int): String
+    + rightAlignStringWithPadding(s: String, pad: int): String
+    + centerAlignStringWithPadding(s: String, pad: int): String
+}
+
+Bank -- StringUtils
+class OverdraftRequest{
+    - account: BankAccount
+    + accept(): void
+    + deny(): void
+}
+
+
+
+class Transaction{
+    -amount: double
+    -date: LocalDateTime
+    +getAmount(): double
+}
+
+class Bank{
+    - customers: ArrayList<Customer>
+    - managers: ArrayList<Manager>
+    - bankAccounts: ArrayList<BankAccount>
+    - overdraftRequests: ArrayList<OverdraftRequest>
+    + createCustomer(): Customer
+}
+Bank -- Customer
+Bank -- Manager
+Bank -- BankAccount
+Bank -- OverdraftRequest
+Bank -- Branch
+
+
+class Manager{
+    - branch: Branch
+    - bank: Bank
+
+
+}
+Manager -- Branch
+
+enum Branch{
+    Oslo,
+    London,
+    Stockholm
+}
+
+@enduml

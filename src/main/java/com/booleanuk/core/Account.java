@@ -27,16 +27,17 @@ public abstract class Account {
   }
 
   private int balance(int nTransactions) {
-    int balance = 0;
-    for (int i = 0; i <= nTransactions; ++i) {
-      Transaction transaction = this.transactions.get(i);
-      if (transaction.type() == TransactionType.DEPOSIT)
-        balance += transaction.amount();
-      else if (transaction.type() == TransactionType.WITHDRAWAL)
-        balance -= transaction.amount();
-    }
-
-    return balance;
+    return this.transactions.stream()
+        .limit(nTransactions + 1)
+        .mapToInt(transaction -> {
+          TransactionType type = transaction.type();
+          if (type == TransactionType.DEPOSIT)
+            return transaction.amount();
+          else if (type == TransactionType.WITHDRAWAL)
+            return -transaction.amount();
+          else
+            return 0;
+        }).sum();
   }
 
   public void deposit(int amount) {
@@ -64,9 +65,7 @@ public abstract class Account {
   }
 
   public void forceWithdraw(int amount, LocalDateTime time) {
-    System.out.println("alksdlkalskd " + this.balance());
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
-    System.out.println("alksdlkalskd2222 " + this.balance());
   }
 
   public String getHistory() {

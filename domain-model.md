@@ -21,7 +21,7 @@
 | Bournemouth |
 
 ## Domain model abstract Account class
-| Methods                                                                   |                                                           |                                                    |
+| Methods                                                                   | Scenario                                                  | Output                                             |
 |---------------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------|
 | `int balance()`                                                           | User wants to know the balance in their account           |                                                    |
 |                                                                           |                                                           |                                                    |

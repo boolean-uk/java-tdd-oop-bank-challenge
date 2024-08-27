@@ -1,7 +1,5 @@
-package extension;
+package com.booleanuk.core;
 
-import com.booleanuk.core.Account;
-import com.booleanuk.core.BankManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

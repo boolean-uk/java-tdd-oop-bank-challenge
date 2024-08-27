@@ -28,4 +28,13 @@ public class AccountTest {
         System.out.println(account.getBalance());
         Assertions.assertEquals(0, account.getBalance());
     }
+
+    @Test
+    public void testgenerateStatement(){
+        Account account = new Account();
+        account.depositFunds(5.00);
+        account.withdrawFunds(-5.00);
+        System.out.println(account.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
+    }
 }

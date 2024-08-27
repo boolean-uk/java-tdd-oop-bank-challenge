@@ -17,6 +17,10 @@ public abstract class Account {
         this.balance = 0.00;
     }
 
+    protected AccountOwner getOwner(){
+        return this.owner;
+    }
+
     protected double getBalance(){
         return this.balance;
     }
@@ -27,6 +31,10 @@ public abstract class Account {
 
     protected ArrayList<Transaction> getBankStatement(){
         return this.bankStatement;
+    }
+
+    protected int getAccountNumber(){
+        return this.accountNumber;
     }
 
     public void printBankstatement() {

@@ -1,18 +1,36 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class CurrentAccount extends Account{
+
+    ArrayList<Overdraft> pendingOverdraftRequests;
 
     private double overdraftLimit;
 
     CurrentAccount(AccountOwner owner) {
         super(owner);
+        this.pendingOverdraftRequests = new ArrayList<>();
 
-        //Setting overdraft as 1000 for now
-        this.overdraftLimit = 1000.0;
+        //Initially overdraft limit is set to 0.0
+        this.overdraftLimit = 0.0;
+
     }
 
-    public double getOverdraftLimit(){
+    protected double getOverdraftLimit(){
         return overdraftLimit;
+    }
+
+    protected void setOverdraftLimit(double newOverdraftLimit){
+        this.overdraftLimit = newOverdraftLimit;
+    }
+
+    public String makeOverdraftRequest(double amount, String message){
+        Overdraft newOverdraft = new Overdraft(message, amount);
+
+        pendingOverdraftRequests.add(newOverdraft);
+
+        return "New overdraft request added";
     }
 
     @Override

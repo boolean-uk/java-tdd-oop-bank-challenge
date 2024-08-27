@@ -18,6 +18,10 @@ public class AccountOwner {
         this.accounts = new ArrayList<>();
     }
 
+    protected String getname(){
+        return this.name;
+    }
+
 
 
 

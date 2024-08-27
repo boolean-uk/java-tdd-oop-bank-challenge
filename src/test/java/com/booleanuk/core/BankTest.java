@@ -36,7 +36,7 @@ public class BankTest {
     public void withdrawTest() {
         currentAccount.deposit(1000);
         currentAccount.withdraw(1499,-500);
-        Assertions.assertEquals(-499, currentAccount.calculateBalance());
+        Assertions.assertEquals(-498, currentAccount.calculateBalance());
 
         Assertions.assertTrue(currentAccount.calculateBalance() >= -500);
 

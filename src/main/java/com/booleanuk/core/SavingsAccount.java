@@ -24,6 +24,5 @@ public class SavingsAccount extends Account {
       throw new CantOverdraftException(this);
 
     this.transactions.add(new Transaction(amount, TransactionType.WITHDRAWAL, time));
-
   }
 }

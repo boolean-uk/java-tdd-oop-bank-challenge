@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public abstract class Account {
   protected List<Transaction> transactions;
   protected Branch branch;
 

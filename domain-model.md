@@ -7,6 +7,11 @@
 |                    | `void accept()`  | Bank manager wants to accept the given overdraft request  | Users balance goes negative |
 |                    | `void decline()` | Bank manager wants to decline the given overdraft request |                             | 
 
+## Domain model CantOverdraftException class
+| Extends            |
+|--------------------|
+| `RuntimeException` |
+
 ## Domain model Branch enum
 | Variants    |
 |-------------|
@@ -15,21 +20,21 @@
 | Southampton |
 | Bournemouth |
 
-## Domain model Account interface
-| Methods                                                                   |
-|---------------------------------------------------------------------------|
-| `int balance()`                                                           |
-|                                                                           |
-| `void deposit(int amount)`                                                |
-| `void deposit(int amount, LocalDateTime time)`                            |
-|                                                                           |
-| `void withdraw(int amount) throws OverdraftException`                     |
-| `void withdraw(int amount, LocalDateTime time) throws OverdraftException` |
-|                                                                           |
-| `void forceWithdraw(int amount)`                                          |
-| `void forceWithdraw(int amount, LocalDateTime time)`                      |
-|                                                                           |
-| `String getHistory()`                                                     |
+## Domain model abstract Account class
+| Methods                                                                   |                                                           |                                                    |
+|---------------------------------------------------------------------------|-----------------------------------------------------------|----------------------------------------------------|
+| `int balance()`                                                           | User wants to know the balance in their account           |                                                    |
+|                                                                           |                                                           |                                                    |
+| `void deposit(int amount)`                                                | User wants to deposit some money into their account       |                                                    |
+| `void deposit(int amount, LocalDateTime time)`                            | User wants to deposit some money into their account       |                                                    |
+|                                                                           |                                                           |                                                    |
+| `void withdraw(int amount) throws OverdraftException`                     | User wants to withdraw some money from their account      |                                                    |
+| `void withdraw(int amount, LocalDateTime time) throws OverdraftException` | User wants to withdraw some money from their account      |                                                    |
+|                                                                           |                                                           |                                                    |
+| `void forceWithdraw(int amount)`                                          | Manager wants to force a withdrawal to allow an overdraft |                                                    |
+| `void forceWithdraw(int amount, LocalDateTime time)`                      | Manager wants to force a withdrawal to allow an overdraft |                                                    |
+|                                                                           |                                                           |                                                    |
+| `String getHistory()`                                                     | User wants to get a bank statement                        | Nicely formatted history of all their transactions |
 
 ## Domain model TransactionType enum
 | Variants     |
@@ -46,16 +51,18 @@
 |                        | `String toStringWithBalance(int balance)` | User wants to get a nicely formatted statement for a transaction | A nicely formatted statement for a transaction | 
 
 ## Domain model CurrentAccount class
-| Implements |
-|------------|
-| `Account`  |
+| Extends   |
+|-----------|
+| `Account` |
 
 ## Domain model SavingsAccount class
-- This class is just a copy of `CurrentAccount` with no difference in behavior.
-
-| Extends          |
-|------------------|
-| `CurrentAccount` |
+| Extends   | Overrides                                                                     | Scenario                      | Output    |
+|-----------|-------------------------------------------------------------------------------|-------------------------------|-----------|
+| `Account` |                                                                               |                               |           |
+|           | `void withdraw(int amount) throws CantOverdraftException`                     | User withdraws a valid amount |           |
+|           |                                                                               | User tries to overdraft       | Exception |
+|           | `void withdraw(int amount, LocalDateTime time) throws CantOverdraftException` | User withdraws a valid amount |           |
+|           |                                                                               | User tries to overdraft       | Exception |
 
 ## Domain model MessageController class
 | Variables                    | Methods                                                   | Scenario                                                 | Output                                   |

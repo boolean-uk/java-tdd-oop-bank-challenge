@@ -48,7 +48,7 @@ public class Customer {
         this.transactions.addFirst(newTransaction);
     }
 
-    public ArrayList<String> getTransactionPrintout() {
+    public ArrayList<String> getTransactionPrintout() { // Returns an ArrayList with Strings, each String should be printed out on own line
         ArrayList<String> toReturn = new ArrayList<>();
 
         toReturn.add("date \t\t || credit \t\t || debit \t\t || balance");
@@ -76,7 +76,7 @@ public class Customer {
         return toReturn;
     }
 
-    public double getBalance(Account account) {
+    public double getBalance(Account account) { //  Returns the balance of the given account
         double balance = 0;
         for (Transaction transaction : this.transactions) {
             if (transaction.getFromAccount().getAccountNumber().equals(account.getAccountNumber())) {

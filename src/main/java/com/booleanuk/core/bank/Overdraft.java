@@ -16,7 +16,7 @@ public class Overdraft {
     public Overdraft(String id, Account account, double amount) {
         this.id = id;
         this.account = account;
-        this.status = OverdraftStatus.PENDING;
+        this.status = OverdraftStatus.PENDING; // Pending status from beginning
         this.amount = amount;
     }
 

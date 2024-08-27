@@ -15,7 +15,7 @@ public class Transaction {
     private double balanceBeforeTransaction;
     private Account fromAccount;
     private String id;
-    private TransactionType transactionType;
+    private TransactionType transactionType; // CREDIT or DEBIT
 
     protected Transaction(double amount, double balanceBeforeTransaction, Account fromAccount, String id, TransactionType transactionType) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

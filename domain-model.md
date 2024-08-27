@@ -1,6 +1,8 @@
 
 Core model:
 
+All getters and setters are not included in the model.
+
 | Classes           | Variables                            | Methods                                      | Scenarios                                                                    | Outputs                                          |
 |-------------------|--------------------------------------|----------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------|
 | `Customer`        | `name: String`                       | `requestCurrentAccount()`                    | Customer requests a current account from the bank and the account is created | Current account requested and return true        |
@@ -51,6 +53,8 @@ Core model:
 
 
 Extension model:
+
+All getters and setters are not included in the model.
 
 | Classes            | Variables                             | Methods                                                    | Scenarios                                                                    | Outputs                                          |
 |--------------------|---------------------------------------|------------------------------------------------------------|------------------------------------------------------------------------------|--------------------------------------------------|

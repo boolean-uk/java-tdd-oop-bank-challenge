@@ -106,12 +106,63 @@ I want to approve or reject overdraft requests.
 
 ## Changes made to the existing code
 
+--------------------------------------
+
 To complete the first user story, I have updated the `getBalance()` getter in the abstract `Account` class
 to calculate the balance by using the *transactions* arraylist instead of the local *balance* member.
 
 | Method       | Parameter | Return   | Description                                     |
 |--------------|-----------|----------|-------------------------------------------------|
 | `getBalance` |           | `Double` | Iterate over transactions and sums the amounts. |
+
+## New Classes
+
+--------------------------------------
+
+These are the new classes that has been implemented to complete user story 2 and 3:
+
+| Class              | Description                                     | Relation                     |
+|--------------------|-------------------------------------------------|------------------------------|
+| `OverdraftRequest` | Object representing a single overdraft request. | Used in the Account class.   |
+| `Bankmanager`      | Used to approve/reject pending requests.        | Aggregates OverdraftRequest. |
+
+### Members (Fields)
+
+--------------------------------------
+
+Here is an overview of the members in the OverdraftRequest class:
+
+| Member          | Type      | Description                                        |
+|-----------------|-----------|----------------------------------------------------|
+| `account`       | `Account` | The account associated with the overdraft request. |
+| `requestLimit`  | `Double`  | The requested overdraft amount.                    |
+| `isApproved`    | `Boolean` | To keep track of approved/rejected requests.       |
+
+And these are the members in BankManager:
+
+| Member            | Type        | Description                             |
+|-------------------|-------------|-----------------------------------------|
+| `pendingRequests` | `ArrayList` | The date when the transaction was made. |
+| `MIN`             | `Double`    | Constant for min request limit.         |
+| `MAX`             | `Double`    | Constant for max request limit.         |
+
+### Methods
+
+------------------------------------
+
+This is the methods in the OverdraftRequest class:
+
+| Name         | Parameter | Return    | Description                            |
+|--------------|-----------|-----------|----------------------------------------|
+| `approve`    |           | `void`    | Sets the value of isApproved to true.  |
+| `reject`     |           | `void`    | Sets the value of isApproved to false. |
+| `isApproved` |           | `Boolean` | Returns the isApproved value.          |
+
+
+
+
+
+
 
 
 

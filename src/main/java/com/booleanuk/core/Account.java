@@ -30,6 +30,10 @@ public class Account {
     }
 
     public double getBalance() {
+        double balance = 0.0;
+        for (Transaction transaction : this.transactions) {
+            balance += transaction.getTransactionAmount();
+        }
         return balance;
     }
 

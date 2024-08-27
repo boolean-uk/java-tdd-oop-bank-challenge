@@ -1,0 +1,43 @@
+@startuml
+
+Class Customer {
+- accounts : ArrayList<Account>
++ accountType: enum
++ createAccount(type: AccountType, branch: Branch): void
+}
+
+Class Account {
+- transactionHistory: ArrayList<Transaction>
+- canOverdraft: boolean
+- overdraftRequested: boolean
+- ownerBranch: Branch
+- maxOverdraft: int
+
++ deposit(amount: int): void
++ withdraw(amount: int): boolean
+
++ calculateBalanceFromTransactionHistory(): int
++ generateBankStatement(): void
++ printBankStatement(list: ArrayList<String>): void
+
++ requestOverdraft(): void
++ rejectOverdraftRequest(): void
++ acceptOverdraftRequest(): void
+}
+
+Class Savings extends Account {
+}
+
+Class Current extends Account {
+}
+
+Class Transaction {
+- date: String
+- amount: int
+- currentBalance: int
+}
+
+Class Branch {
+- name: String
+}
+@enduml

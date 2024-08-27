@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class CurrentAccount extends Account {
@@ -13,13 +14,9 @@ public class CurrentAccount extends Account {
 
 
     @Override
-    public int deposit(int sum) {
-        return 0; // TODO
-    }
-
-    @Override
-    public int deposit(Transaction transaction) {
-        return 0;
+    public String deposit(int sum) {
+        transactions.add(new Transaction(LocalDateTime.now(), "-1", this.accountId, sum));
+        return String.format("The %.2f money is now deposited to the account %s.", (float) sum/100, this.accountId);
     }
 
     @Override

@@ -7,11 +7,13 @@ public abstract class Account {
     protected boolean canOverdraft;
     protected boolean overdraftRequested;
     protected Branch ownerBranch;
+    protected int maxOverdraft;
 
     public Account(Branch branch){
         this.ownerBranch = branch;
         this.transactionHistory = new ArrayList<>();
         this.canOverdraft = false;
+        this.maxOverdraft = -500;
     }
 
     public ArrayList<Transaction> getTransactionHistory(){ return this.transactionHistory; }
@@ -35,13 +37,21 @@ public abstract class Account {
         }
 
         int currentBalance = calculateCurrentBalanceFromTransactionHistory();
-        if (currentBalance < amount && !canOverdraft){
-            System.out.println("Insufficient funds.");
-            return false;
+        if (currentBalance < amount){
+            if (!canOverdraft){
+                System.out.println("Insufficient funds.");
+                return false;
+            }
+
+            else if (currentBalance - amount < maxOverdraft){
+                    System.out.println("Exceeding available overdraft.");
+                    return false;
+            }
         }
 
         Transaction t = new Transaction(-amount, currentBalance);
         this.transactionHistory.add(t);
+        System.out.println("Withdrawal successful.");
         return true;
     }
 
@@ -70,7 +80,7 @@ public abstract class Account {
         printBankStatement(statement);
     }
 
-    public void printBankStatement(ArrayList<String> list){
+    private void printBankStatement(ArrayList<String> list){
         for (String s : list){
             System.out.println(s);
         }

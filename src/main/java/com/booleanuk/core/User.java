@@ -10,6 +10,7 @@ public class User {
     public User(String userId, String name) {
         this.accounts = new ArrayList<>();
         this.userId = userId;
+        this.name = name;
     }
 
     public String getUserId() {
@@ -30,5 +31,9 @@ public class User {
             nums.add(a.getAccountId());
         }
         return nums;
+    }
+
+    public Account getAccount(String accountId) {
+        return accounts.stream().filter(account -> account.accountId.equals(accountId)).findFirst().orElse(null);
     }
 }

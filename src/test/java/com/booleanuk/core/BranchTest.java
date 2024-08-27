@@ -31,4 +31,11 @@ public class BranchTest {
 
     }
 
+    @Test
+    public void checkBranchName() {
+        Branch newbranch = new Branch("Trondheim");
+        Assertions.assertEquals("Trondheim", newbranch.getBranchName());
+
+    }
+
 }

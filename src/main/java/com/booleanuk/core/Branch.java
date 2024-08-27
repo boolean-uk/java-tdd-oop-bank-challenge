@@ -12,6 +12,10 @@ public class Branch {
         this.accounts = new ArrayList<>();
     }
 
+    public String getBranchName() {
+        return branchName;
+    }
+
     public List<Account> getAccounts() {
         return accounts;
     }

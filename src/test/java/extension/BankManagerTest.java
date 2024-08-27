@@ -26,9 +26,19 @@ public class BankManagerTest {
         String typeOfAccount = "savingAccount";
         int id = 0;
 
-        bankManager.addAccount(500, typeOfAccount, branch);
-
+        Assertions.assertTrue(bankManager.addAccount(500, typeOfAccount, branch));
         Assertions.assertEquals(500, bankManager.getCurrentAccountWithIDInBranch(branch, typeOfAccount, id).getBalance());
+    }
+
+    @Test
+    public void makeANewTypeOfAccountTest() {
+        BankManager bankManager = new BankManager();
+        String branch = "Oslo";
+        String typeOfAccount = "funAccount";
+        int id = 0;
+
+        Assertions.assertFalse(bankManager.addAccount(500, typeOfAccount, branch));
+
     }
 
     @Test

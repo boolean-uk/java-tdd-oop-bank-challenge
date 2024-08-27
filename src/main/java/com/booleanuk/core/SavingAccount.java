@@ -6,4 +6,8 @@ public class SavingAccount extends Account{
         super(firstDeposit);
     }
 
+    public SavingAccount(float firstDeposit, String branch) {
+        super(firstDeposit, branch);
+    }
+
 }

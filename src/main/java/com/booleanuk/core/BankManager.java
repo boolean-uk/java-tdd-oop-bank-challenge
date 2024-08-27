@@ -6,22 +6,35 @@ public class BankManager {
 
     //Branch -> Type of account -> account
     private HashMap<String, HashMap<String, HashMap<Integer, Account>>> branches;
-    private HashMap<String, HashMap<Integer, Account>> AccountsList;
+    private HashMap<String, HashMap<Integer, Account>> accountsList;
     private HashMap<Integer, Account> accounts;
     private float overdraftLimit = -250;
 
     public BankManager() {
         branches = new HashMap<>();
-        AccountsList = new HashMap<>();
+        accountsList = new HashMap<>();
         accounts = new HashMap<>();
 
     }
 
-    public void addAccount(float firstDeposit, String typeOfAccount, String branch) {
-        CurrentAccount currentAccount = new CurrentAccount(firstDeposit);
-        accounts.put(accounts.size(), currentAccount);
-        AccountsList.put(typeOfAccount, accounts);
-        branches.put(branch, AccountsList);
+    public boolean addAccount(float firstDeposit, String typeOfAccount, String branch) {
+        if(typeOfAccount.equals("currentAccount")) {
+            CurrentAccount currentAccount = new CurrentAccount(firstDeposit, branch);
+            accounts.put(accounts.size(), currentAccount);
+            accountsList.put(typeOfAccount, accounts);
+            branches.put(branch, accountsList);
+            return true;
+        }else if (typeOfAccount.equals("savingAccount")) {
+            SavingAccount savingAccount = new SavingAccount(firstDeposit, branch);
+            accounts.put(accounts.size(), savingAccount);
+            accountsList.put(typeOfAccount, accounts);
+            branches.put(branch, accountsList);
+            return true;
+        }else {
+            System.out.println("Cannot make " + typeOfAccount + " in our bank");
+            return false;
+        }
+
     }
 
     public Account getCurrentAccountWithIDInBranch(String branch, String typeOfAccount, int id) {
@@ -29,12 +42,20 @@ public class BankManager {
     }
 
     public boolean withdrawFromAccount(Account account, float amount) {
-        if((account.getBalance() - amount) >= this.overdraftLimit) {
-            account.withdrawMoney(amount, this.overdraftLimit);
-            return true;
+        if(account.getCanOverdraft()) {
+            if((account.getBalance() - amount) >= this.overdraftLimit) {
+                account.withdrawMoney(amount, this.overdraftLimit);
+                return true;
+            }else {
+                return false;
+            }
         }else {
             return false;
         }
     }
 
+    public boolean canAccountOverdraft(Account account) {
+        account.setCanOverdraft();
+        return account.getCanOverdraft();
+    }
 }

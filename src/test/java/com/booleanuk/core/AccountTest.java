@@ -30,7 +30,7 @@ public class AccountTest {
     public void withdrawMoneyTest() {
         Account account = new Account(500);
 
-        account.withdrawMoney(250, 0);
+        account.withdrawMoney(250);
 
         Assertions.assertEquals(250, account.getBalance());
     }

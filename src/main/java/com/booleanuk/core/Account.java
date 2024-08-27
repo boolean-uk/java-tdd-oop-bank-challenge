@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Account {
     private float balanceChecker;
     private ArrayList<Transaction> transactionsList;
+    private String branch;
+    private boolean canOverdraft = false;
 
     public Account(float firstDeposit) {
         this.balanceChecker = firstDeposit;
@@ -14,6 +16,12 @@ public class Account {
         transactionsList.add(initialTransaction);
     }
 
+    public Account(float firstDeposit, String branch) {
+        this.balanceChecker = firstDeposit;
+        this.transactionsList = new ArrayList<>();
+        transactionsList.add(new Transaction(0, firstDeposit, 0, 0));
+        this.branch = branch;
+    }
 
     public float getBalanceChecker() {
         return this.balanceChecker;
@@ -21,6 +29,14 @@ public class Account {
 
     public float getBalance() {
         return calculateAccountBalance();
+    }
+
+    public boolean getCanOverdraft() {
+        return this.canOverdraft;
+    }
+
+    public void setCanOverdraft() {
+        this.canOverdraft = !this.canOverdraft;
     }
 
     public void depositMoney(float amount) {
@@ -33,6 +49,17 @@ public class Account {
         }
     }
 
+    public void withdrawMoney(float amount){
+        if((this.balanceChecker - amount) >= 0) {
+            Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
+            transactionsList.add(transaction);
+            this.balanceChecker -= amount;
+        }else {
+            System.out.println("Insufficient amount of transaction.");
+        }
+    }
+
+    //For overdraft, you have to ask the manager
     public void withdrawMoney(float amount, float overdraftLimit){
         if((this.balanceChecker - amount) >= overdraftLimit) {
             Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
@@ -60,7 +87,7 @@ public class Account {
                 if(transaction.getTransactionType() == 0) {
                     System.out.println(transaction.getDate() + " || " + transaction.getAmount() + " \t||\t\t\t" +  "|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
                 }else {
-                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (transaction.getAmountBeforeTransaction() + transaction.getAmount()));
+                    System.out.println(transaction.getDate() + " || \t\t\t" + "|| " + transaction.getAmount() + " \t|| " + (transaction.getAmountBeforeTransaction() - transaction.getAmount()));
                 }
             }
         }

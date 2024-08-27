@@ -8,7 +8,6 @@ public class BankManager {
     private HashMap<String, HashMap<String, HashMap<Integer, Account>>> branches;
     private HashMap<String, HashMap<Integer, Account>> accountsList;
     private HashMap<Integer, Account> accounts;
-    private float overdraftLimit = -250;
 
     public BankManager() {
         branches = new HashMap<>();
@@ -42,13 +41,10 @@ public class BankManager {
     }
 
     public boolean withdrawFromAccount(Account account, float amount) {
-        if(account.getCanOverdraft()) {
-            if((account.getBalance() - amount) >= this.overdraftLimit) {
-                account.withdrawMoney(amount, this.overdraftLimit);
-                return true;
-            }else {
-                return false;
-            }
+        if((account.getBalance() - amount) >= account.getOverdraftLimit()) {
+            account.withdrawMoney(amount);
+
+            return true;
         }else {
             return false;
         }

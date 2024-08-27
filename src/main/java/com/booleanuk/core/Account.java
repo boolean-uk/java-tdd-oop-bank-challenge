@@ -7,6 +7,7 @@ public class Account {
     private ArrayList<Transaction> transactionsList;
     private String branch;
     private boolean canOverdraft = false;
+    private float overdraftLimit = 0;
 
     public Account(float firstDeposit) {
         this.balanceChecker = firstDeposit;
@@ -38,6 +39,13 @@ public class Account {
     public void setCanOverdraft() {
         this.canOverdraft = !this.canOverdraft;
     }
+    public void setOverdraftLimit(float overdraftLimit) {
+        this.overdraftLimit = -overdraftLimit;
+    }
+
+    public float getOverdraftLimit() {
+        return this.overdraftLimit;
+    }
 
     public void depositMoney(float amount) {
         if(amount > 0) {
@@ -49,24 +57,23 @@ public class Account {
         }
     }
 
-    public void withdrawMoney(float amount){
-        if((this.balanceChecker - amount) >= 0) {
-            Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
-            transactionsList.add(transaction);
-            this.balanceChecker -= amount;
-        }else {
-            System.out.println("Insufficient amount of transaction.");
-        }
-    }
 
     //For overdraft, you have to ask the manager
-    public void withdrawMoney(float amount, float overdraftLimit){
-        if((this.balanceChecker - amount) >= overdraftLimit) {
-            Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
-            transactionsList.add(transaction);
-            this.balanceChecker -= amount;
+    public void withdrawMoney(float amount){
+        if(this.balanceChecker >= this.overdraftLimit) {
+            if((this.balanceChecker - amount) >= this.overdraftLimit) {
+                Transaction transaction = new Transaction(transactionsList.size(), amount, this.balanceChecker, 1);
+                transactionsList.add(transaction);
+                this.balanceChecker -= amount;
+                //overdraftLimit is a negative number and -- = + therefore I remove the - from overdraftlimit to get a negative value
+                if(getCanOverdraft() && this.overdraftLimit < 0){
+                    this.overdraftLimit = (-this.overdraftLimit) - amount ;
+                }
+            }else {
+                System.out.println("Insufficient amount of transaction.");
+            }
         }else {
-            System.out.println("Insufficient amount of transaction.");
+            System.out.println("Under your overdraft limit.");
         }
     }
 

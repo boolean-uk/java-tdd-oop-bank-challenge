@@ -7,9 +7,9 @@ import java.util.Vector;
 public abstract class Account {
     private double balance;
     //private HashMap<String, double[]> bankStatement=new HashMap<>();
-    private ArrayList<String[]> bankStatement=new ArrayList<>();
-    private boolean overdraftRequest=false;
-    private boolean overdraft=false;
+    private ArrayList<String[]> transactionHistory=new ArrayList<>();
+    protected boolean overdraftRequest=false;
+    protected boolean overdraft=false;
     String branch;
 
     public Account(double amount, String branch){
@@ -27,17 +27,18 @@ public abstract class Account {
         balance+=amount;
         //bankStatement.put(time, new double[]{amount, balance});
         //String.valueOf(amount);
-        bankStatement.add(new String[]{time, String.valueOf(amount), String.valueOf(balance)});
+        transactionHistory.add(new String[]{time, String.valueOf(amount), String.valueOf(balance)});
         return true;
     }
 
     public boolean withdraw(double amount, String time){
-        if (amount<balance | overdraft){
+        if (amount<balance | (overdraft & balance-amount>-1000)){
             balance-=amount;
             //bankStatement.put(time, new double[]{-amount, balance});
-            bankStatement.add(new String[]{time, String.valueOf(-amount), String.valueOf(balance)});
+            transactionHistory.add(new String[]{time, String.valueOf(-amount), String.valueOf(balance)});
             return true;
         }else{
+            System.out.println("Unable to withdraw more money.");
             return false;
         }
 
@@ -47,8 +48,8 @@ public abstract class Account {
     public double calculateBalance(){
         double findBalance=0;
 
-        for (int i=0; i<bankStatement.size();i++) {
-            findBalance+=Double.parseDouble(bankStatement.get(i)[1]);
+        for (int i=0; i<transactionHistory.size();i++) {
+            findBalance+=Double.parseDouble(transactionHistory.get(i)[1]);
         }
 
         balance=findBalance;
@@ -60,16 +61,16 @@ public abstract class Account {
     public void generateBankStatement(){
         System.out.println("date       || credit || debit || balance");
         String info;
-        for (int i=bankStatement.size()-1; i>=0; i--){
-            double direct=Double.parseDouble(bankStatement.get(i)[1]);
+        for (int i=transactionHistory.size()-1; i>=0; i--){
+            double direct=Double.parseDouble(transactionHistory.get(i)[1]);
             if(direct>0){
-                info=("|| "+ direct+" ||       || "+bankStatement.get(i)[2]);
+                info=("|| "+ direct+" ||       || "+transactionHistory.get(i)[2]);
             }
             else{
-                info=("||        || "+ -direct+" || "+bankStatement.get(i)[2]);
+                info=("||        || "+ -direct+" || "+transactionHistory.get(i)[2]);
             }
 
-            System.out.println(bankStatement.get(i)[0]+" "+info);
+            System.out.println(transactionHistory.get(i)[0]+" "+info);
 
         }
     }
@@ -78,25 +79,7 @@ public abstract class Account {
         return balance;
     }
 
-    public void requestOverdraft(){
-        overdraftRequest=true;
-    }
 
-    public boolean isOverdraftRequest() {
-        return overdraftRequest;
-    }
-
-    public boolean isOverdraft() {
-        return overdraft;
-    }
-
-    public boolean answerOverdraft(boolean answer){
-        if (overdraftRequest){
-            overdraft=answer;
-            return true;
-        }
-        return false;
-    }
 
     public String getBranch() {
         return branch;

@@ -18,14 +18,20 @@ class BankAccount{
     + generateStatement(): String
     + deposit(amount: double): String
     + withdraw(amount: double): String
-    + requestOverdraft(): void
+    + requestOverdraft(): boolean
 }
 
 BankAccount -- Transaction
 BankAccount -- OverdraftRequest
 
-class BankAccountSavings extends BankAccount{}
-class BankAccountDebit extends BankAccount{}
+class BankAccountSavings extends BankAccount{
+    + withdraw(amount: double): String
+    + requestOverdraft(): boolean
+}
+
+class BankAccountDebit extends BankAccount{
+    + withdraw(amount: double): String
+}
 
 
 class StringUtils{

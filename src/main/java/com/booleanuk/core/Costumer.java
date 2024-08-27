@@ -15,9 +15,6 @@ public class Costumer {
        accounts.add(account);
     }
 
-    public String getCostumerId() {
-        return costumerId;
-    }
 
     public ArrayList<Account> getAccountsForCostumer() {
         return accounts;

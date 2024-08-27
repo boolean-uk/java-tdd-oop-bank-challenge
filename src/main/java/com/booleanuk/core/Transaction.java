@@ -14,7 +14,6 @@ public class Transaction {
         this.date = localDateTime;
         this.amount = amount;
         this.isCredit = isCredit;
-        this.balance = balance;
 
     }
 
@@ -26,9 +25,6 @@ public class Transaction {
         return isCredit;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
 
     public double getAmount() {
         return amount;

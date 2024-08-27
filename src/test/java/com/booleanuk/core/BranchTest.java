@@ -20,7 +20,7 @@ public class BranchTest {
 
 
     @Test
-    public void checkAccountIDInBranch() {
+    public void checkAccountIDInBranchExist() {
         Branch trondheimBranch = new Branch("Trondheim");
         Customer customer = new Customer("Melvin", "Seelan");
         SavingAccount savingAccount = new SavingAccount(1000, 2.5, trondheimBranch);

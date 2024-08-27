@@ -19,8 +19,13 @@ public class Current extends Account{
 
     public Transaction overdraft(int money){
         if(overdraft){
+            if(super.getBalance() - money < -1000){
+                System.out.println("Non allowed overdraft!");
+                return null;
+            }
             Transaction newTransaction = new Transaction(0, money);
             super.getTransactions().add(newTransaction);
+            return newTransaction;
         }
         return null;
     }

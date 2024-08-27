@@ -79,6 +79,30 @@ public class TestCoreAndExtension {
         Assertions.assertEquals(-500, current.getBalance());
     }
 
+    @Test
+    public void testOverdraftLimit(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        current.toggleOverdraft();
+        current.overdraft(1001);
+        Assertions.assertEquals(0, current.getBalance());
+        current.overdraft(1000);
+        Assertions.assertEquals(-1000, current.getBalance());
+    }
+
+    @Test
+    public void testPrint(){
+        Customer customer1 = new Customer("customer1");
+        Current current = customer1.getCurrent();
+        current.deposit(500);
+        current.deposit(300);
+        current.withdraw(50);
+        System.out.println(current.statement());
+    }
+
+
+
+
     /*@Test
     public void testAddAccount(){
         Customer customer1 = new Customer("customer1");

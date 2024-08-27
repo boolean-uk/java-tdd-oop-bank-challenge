@@ -1,6 +1,5 @@
 package com.booleanuk.core;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Account {
@@ -26,7 +25,7 @@ public class Account {
     }
 
     public Transaction withdraw(int money){
-        if(getBalance() - money <= 0){
+        if(getBalance() - money < 0){
             System.out.println("Non allowed overdraft!");
             return null;
         }

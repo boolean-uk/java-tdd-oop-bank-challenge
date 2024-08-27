@@ -84,6 +84,7 @@ I want statements to be sent as messages to my phone.
 | `boolean canOverdraft`                      | Decides if customer can overdraft account.                                         |
 | `boolean overdraftRequested`                | Contains information whether overdrafted has been requested for the given account. |
 | `Branch ownerBranch`                        | Branch associated with account.                                                    |
+| `int maxOverdraft`                          | Max amount the can be overdrafted from the account.                                |
 
 | Methods                                        | Scenario                                                                                       | Outputs                                                                                          |
 |------------------------------------------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|

@@ -11,6 +11,7 @@ Class Account {
 - canOverdraft: boolean
 - overdraftRequested: boolean
 - ownerBranch: Branch
+- maxOverdraft: int
 
 + deposit(amount: int): void
 + withdraw(amount: int): boolean

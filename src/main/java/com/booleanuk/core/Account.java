@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public abstract class Account implements Depositable {
-    private ArrayList<Transaction> transactions;
-    private String ownerId;
-    private String branchId;
-    private String accountId;
+    protected ArrayList<Transaction> transactions;
+    protected String ownerId;
+    protected String branchId;
+    protected String accountId;
 
     public abstract int withdraw(int sum);
     public abstract int transfer(String targetAccountId, int sum);
@@ -16,5 +16,9 @@ public abstract class Account implements Depositable {
     @Override
     public int deposit(int sum, LocalDateTime timeOfTransaction) {
         return 0;
+    }
+
+    public String getAccountId() {
+        return accountId;
     }
 }

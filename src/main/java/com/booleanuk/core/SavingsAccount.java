@@ -1,8 +1,18 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class SavingsAccount extends Account {
+
+    public SavingsAccount(String ownerId, String branchId, String accountId) {
+        this.transactions = new ArrayList<>();
+        this.ownerId = ownerId;
+        this.branchId = branchId;
+        this.accountId = accountId;
+    }
+
+
     @Override
     public int deposit(int sum) {
         return 0; // TODO
@@ -21,11 +31,6 @@ public class SavingsAccount extends Account {
     @Override
     public int transfer(String targetAccountId, int sum) {
         return 0; // TODO
-    }
-
-    @Override
-    public String getAccountId() {
-        return ""; // TODO
     }
 
     @Override

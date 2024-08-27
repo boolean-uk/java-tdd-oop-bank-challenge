@@ -1,6 +1,17 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
+
 public class CurrentAccount extends Account {
+
+    public CurrentAccount(String ownerId, String branchId, String accountId) {
+        this.transactions = new ArrayList<>();
+        this.ownerId = ownerId;
+        this.branchId = branchId;
+        this.accountId = accountId;
+    }
+
+
     @Override
     public int deposit(int sum) {
         return 0; // TODO
@@ -19,11 +30,6 @@ public class CurrentAccount extends Account {
     @Override
     public int transfer(String targetAccountId, int sum) {
         return 0; // TODO
-    }
-
-    @Override
-    public String getAccountId() {
-        return ""; // TODO
     }
 
     @Override

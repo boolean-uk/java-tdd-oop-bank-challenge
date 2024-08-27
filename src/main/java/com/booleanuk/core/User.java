@@ -19,4 +19,16 @@ public class User {
     public String getName() {
         return name;
     }
+
+    public void addAccount(Account account) {
+        accounts.add(account);
+    }
+
+    public ArrayList<String> getAccountNumbers() {
+        ArrayList<String> nums = new ArrayList<>();
+        for (Account a: accounts) {
+            nums.add(a.getAccountId());
+        }
+        return nums;
+    }
 }

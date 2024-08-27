@@ -1,7 +1,5 @@
-package com.booleanuk.core;
+package com.booleanuk.core.idgenerator;
 
-import com.booleanuk.core.idgenerator.IdGenerator;
-import com.booleanuk.core.idgenerator.IdPrefix;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

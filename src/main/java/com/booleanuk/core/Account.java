@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 public class Account {
     private String branch;
@@ -12,8 +13,16 @@ public class Account {
     private double overDraftLimit;
     ArrayList<Transaction> transactions = new ArrayList<>();
 
-    public Account() {
+    public Account(String accountType, String branch) {
+        this.branch = branch;
+        if(Objects.equals(accountType, "Current")){
+            this.overDraftEnabled = false;
+            this.overDraftLimit = 0.0;
 
+        }else if(Objects.equals(accountType, "Saving")){
+            this.overDraftEnabled = false;
+            this.overDraftLimit = 0.0;
+        }
     }
 
 
@@ -67,4 +76,19 @@ public class Account {
         }
     }
 
+    public double getOverDraftLimit() {
+        return overDraftLimit;
+    }
+
+    public boolean isOverDraftEnabled() {
+        return overDraftEnabled;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
 }

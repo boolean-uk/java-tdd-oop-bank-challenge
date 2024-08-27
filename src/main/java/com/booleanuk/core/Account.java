@@ -69,16 +69,10 @@ abstract class Account {
         this.transactions = transactions;
     }
 
-    // TODO: Need to fix overdraft bug in this.
     public double getBalance() {
         double balance = 0.0;
         for (Transaction transaction : this.transactions) {
-            if (transaction.getIsOverdraft()) {
-                balance -= transaction.getAmount();
-            }
-            else {
-                balance += transaction.getAmount();
-            }
+            balance += transaction.getAmount();
         }
         return balance;
     }

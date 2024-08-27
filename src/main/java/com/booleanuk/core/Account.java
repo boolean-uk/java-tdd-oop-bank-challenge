@@ -32,7 +32,7 @@ public abstract class Account {
     }
 
     public boolean withdraw(double amount, String time){
-        if (amount<balance | (overdraft & balance-amount>-1000)){
+        if (amount<balance | (overdraft & balance-amount>=-1000)){
             balance-=amount;
             //bankStatement.put(time, new double[]{-amount, balance});
             transactionHistory.add(new String[]{time, String.valueOf(-amount), String.valueOf(balance)});

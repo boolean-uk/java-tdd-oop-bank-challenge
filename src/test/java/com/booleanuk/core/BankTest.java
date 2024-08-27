@@ -19,21 +19,13 @@ public class BankTest {
         Bank bank = new Bank("Oslo");
         Customer customer1 = new Customer("Jostein",1, bank);
         bank.newCustomer(customer1);
-        bank.newAccount(customer1, "Saving");
-        bank.newAccount(customer1, "Current");
+        Account a1 = bank.newAccount(customer1, "Saving");
+        Account a2 = bank.newAccount(customer1, "Current");
 
-        for (Account a: customer1.getAccounts()){
-            System.out.println(a.toString());
-        }
+        Assertions.assertNotNull(a1);
+        Assertions.assertNotNull(a2);
     }
 
-    @Test
-    public void newTransactionTest(){
-        Bank bank = new Bank("Oslo");
-        Customer customer1 = new Customer("Jostein",1, bank);
-        bank.newCustomer(customer1);
-
-    }
 
     @Test
     public void reviewOverdraftRequests(){

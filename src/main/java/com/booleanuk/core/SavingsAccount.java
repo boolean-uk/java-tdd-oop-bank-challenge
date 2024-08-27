@@ -20,11 +20,6 @@ public class SavingsAccount extends Account {
     }
 
     @Override
-    public int withdraw(int sum) {
-        return 0; // TODO
-    }
-
-    @Override
     public String transfer(String targetAccountId, int sum) {
         if (calculateBalance(3) < sum) {
             return String.format("Not enough balance in 3 days to transfer %.2f money. Please deposit more money first.", (float) sum/100);

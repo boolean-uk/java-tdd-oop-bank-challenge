@@ -60,4 +60,21 @@ public class OverdraftTest {
         Assertions.assertTrue(max.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.REJECTED);
     }
 
+    @Test
+    public void testWithdrawWithRejectedOverdraft() {
+        Customer max = this.bank.addCustomer(new Customer());
+        Account maxAccount = this.bank.newAccount(max, new CurrentAccount(DEFAULT_BRANCH));
+
+        // Requesting overdraft for 1000
+        this.bank.requestOverdraft(max, maxAccount, 1000);
+
+        // Rejecting the overdraft request
+        this.bank.rejectOverdraft(max.getOverdrafts(maxAccount).getFirst());
+
+        // Confirming the rejecting
+        Assertions.assertTrue(max.getOverdrafts(maxAccount).getFirst().getStatus() == Overdraft.OverdraftStatus.REJECTED);
+
+        Assertions.assertFalse(this.bank.withdraw(max, maxAccount, 1000));
+    }
+
 }

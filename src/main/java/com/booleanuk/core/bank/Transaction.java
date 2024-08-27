@@ -20,7 +20,6 @@ public class Transaction {
     protected Transaction(double amount, double balanceBeforeTransaction, Account fromAccount, String id, TransactionType transactionType) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         this.date = format.format(new Date());
-        System.out.println("DATE: " + this.date);
         this.amount = amount;
         this.balanceBeforeTransaction = balanceBeforeTransaction;
         this.fromAccount = fromAccount;

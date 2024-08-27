@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class AccountTest {
     @Test
@@ -55,7 +57,7 @@ public class AccountTest {
 
         account.deposit(2000);
 
-        boolean result = account.withdraw(3000);
+        boolean result = account.withdraw(2500);
 
         // Assert that withdrawal failed.
         Assertions.assertFalse(result);
@@ -64,7 +66,7 @@ public class AccountTest {
         account.requestOverdraft();
         account.acceptOverdraftRequest();
 
-        result = account.withdraw(3000);
+        result = account.withdraw(2500);
 
         // Assert that the transaction was successful.
         Assertions.assertTrue(result);
@@ -131,6 +133,38 @@ public class AccountTest {
     }
 
     @Test
+    public void overdraftMoreThanMaxTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.CURRENT, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.requestOverdraft();
+        account.acceptOverdraftRequest();
+        account.withdraw(600);
+
+        Assertions.assertTrue(out.toString().contains("Exceeding available overdraft."));
+    }
+
+    @Test
+    public void sendOverdraftRequestForSavingsAccountTest(){
+        Customer c = new Customer();
+        c.createAccount(Customer.AccountType.SAVINGS, new Branch("Oslo"));
+
+        Account account = c.getAccounts().getFirst();
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        account.requestOverdraft();
+
+        Assertions.assertTrue(out.toString().contains("Overdrafting a savings account is not allowed."));
+    }
+
+    @Test
     public void CalculateCurrentBalanceFromTransactionHistoryTest(){
         /*
         As an engineer,
@@ -182,8 +216,11 @@ public class AccountTest {
 
         account.generateBankStatement();
 
-        assert(out.toString().contains("26/08/2024 || 20.00      ||            || 20.00"));
-        assert(out.toString().contains("26/08/2024 ||            || 15.00      || 5.00"));
+        LocalDateTime date = LocalDateTime.now();
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        assert(out.toString().contains(formattedDate + " || 20.00      ||            || 20.00"));
+        assert(out.toString().contains(formattedDate + " ||            || 15.00      || 5.00"));
     }
 
     @Test

@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public abstract class Account {
 
-    private int accountNumber;
     private AccountOwner owner;
     private ArrayList<Transaction> bankStatement;
+    private int branch;
 
-    Account(AccountOwner owner){
-        this.accountNumber = 12367;
+    Account(AccountOwner owner, int branch){
         this.owner = owner;
         this.bankStatement = new ArrayList<>();
+        this.branch = branch;
     }
 
     protected AccountOwner getOwner(){
@@ -37,10 +37,6 @@ public abstract class Account {
 
     protected ArrayList<Transaction> getBankStatement(){
         return this.bankStatement;
-    }
-
-    protected int getAccountNumber(){
-        return this.accountNumber;
     }
 
     public void printBankstatement() {

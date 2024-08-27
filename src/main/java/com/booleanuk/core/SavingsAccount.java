@@ -2,8 +2,8 @@ package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
 
-    SavingsAccount(AccountOwner owner) {
-        super(owner);
+    SavingsAccount(AccountOwner owner, int branch) {
+        super(owner, branch);
     }
 
     @Override
@@ -12,8 +12,6 @@ public class SavingsAccount extends Account{
 
         Transaction depositTransaction = new Transaction(TransactionType.DEPOSIT, amount, getBalance());
         getBankStatement().add(depositTransaction);
-
-
 
         return "New Balance: " + getBalance() + "£";
     }

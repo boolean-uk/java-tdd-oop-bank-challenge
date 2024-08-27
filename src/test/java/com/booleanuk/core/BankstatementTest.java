@@ -7,8 +7,10 @@ public class BankstatementTest {
 
     @Test
     public void TestBankstatementSize(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount = new CurrentAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        CurrentAccount currentAccount = new CurrentAccount(accountOwner, bankManager.getBranch());
         
         currentAccount.deposit(1000);
         currentAccount.deposit(2000);
@@ -20,8 +22,10 @@ public class BankstatementTest {
 
     @Test
     public void TestPrintBankstatement(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount = new CurrentAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        CurrentAccount currentAccount = new CurrentAccount(accountOwner, bankManager.getBranch());
 
         currentAccount.deposit(1000);
         currentAccount.deposit(2000);
@@ -32,8 +36,10 @@ public class BankstatementTest {
 
     @Test
     public void TestPrintEmptyBankstatement(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount = new CurrentAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        CurrentAccount currentAccount = new CurrentAccount(accountOwner, bankManager.getBranch());
 
         //"No transactions found!"
         currentAccount.printBankstatement();

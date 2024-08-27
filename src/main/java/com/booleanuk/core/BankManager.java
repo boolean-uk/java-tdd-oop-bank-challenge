@@ -7,11 +7,14 @@ public class BankManager {
     private int branch;
     private ArrayList<String> overdraftHistory;
 
-    BankManager(String name, int branch){
+    BankManager(String name){
         this.name = name;
-        this.branch = branch;
+        this.branch = 667453;
         this.overdraftHistory = new ArrayList<>();
+    }
 
+    protected int getBranch(){
+        return this.branch;
     }
 
     public String getOverdraftRequest(CurrentAccount account){

@@ -7,9 +7,10 @@ public class CurrentAccountTest {
 
     @Test
     public void TestIfDepositWorks(){
+        BankManager bankManager = new BankManager("David Beckham");
 
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        CurrentAccount currentAccount  = new CurrentAccount(me);
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        CurrentAccount currentAccount  = new CurrentAccount(accountOwner, bankManager.getBranch());
 
         //Should give correct return message and increase the arraylist where the transactions are stored by one.
         Assertions.assertEquals("New Balance: 1000.0£", currentAccount.deposit(1000));
@@ -23,8 +24,10 @@ public class CurrentAccountTest {
 
     @Test
     public void TestIfBalanceAndWithdrawalIsSame(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //If I withdraw the same as the balance I have I should get teh message below
         Assertions.assertEquals("New Balance: 0.0£", savingsAccount.withdraw(0));
@@ -33,8 +36,10 @@ public class CurrentAccountTest {
 
     @Test
     public void TestIfWithdrawalWorks(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //If I do a valid withdrawal I should get the correct output and the bankStatement should increment
         //first I deposit 2000£ size of bank statement should now be 1

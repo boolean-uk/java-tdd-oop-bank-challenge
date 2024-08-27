@@ -8,8 +8,8 @@ public class CurrentAccount extends Account{
 
     private double overdraftLimit;
 
-    CurrentAccount(AccountOwner owner) {
-        super(owner);
+    CurrentAccount(AccountOwner owner, int branch) {
+        super(owner, branch);
         this.pendingOverdraftRequests = new ArrayList<>();
 
         //Initially overdraft limit is set to 0.0

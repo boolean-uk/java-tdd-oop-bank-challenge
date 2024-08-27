@@ -7,9 +7,10 @@ public class SavingsAccountTest {
 
     @Test
     public void TestIfDepositWorks(){
+        BankManager bankManager = new BankManager("David Beckham");
 
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //Should give correct return message and increase the arraylist where the transactions are stored by one.
         Assertions.assertEquals("New Balance: 1000.0£", savingsAccount.deposit(1000));
@@ -21,8 +22,10 @@ public class SavingsAccountTest {
     }
     @Test
     public void TestIfTooMuchWithdrawal(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //First it should not work to withdraw anything on a new account with 0.00 balance.
         Assertions.assertEquals("Insufficient Funds", savingsAccount.withdraw(100));
@@ -31,8 +34,10 @@ public class SavingsAccountTest {
 
     @Test
     public void TestIfBalanceAndWithdrawalIsSame(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //If I withdraw the same as the balance I have I should get teh message below
         Assertions.assertEquals("New Balance: 0.0£", savingsAccount.withdraw(0));
@@ -41,8 +46,10 @@ public class SavingsAccountTest {
 
     @Test
     public void TestIfWithdrawalWorks(){
-        AccountOwner me = new AccountOwner("PS1234", "Benjamin Cool");
-        SavingsAccount savingsAccount = new SavingsAccount(me);
+        BankManager bankManager = new BankManager("David Beckham");
+
+        AccountOwner accountOwner = new AccountOwner("Benjamin Cool");
+        SavingsAccount savingsAccount = new SavingsAccount(accountOwner, bankManager.getBranch());
 
         //If I do a valid withdrawal I should get the correct output and the bankStatement should increment
         //first I deposit 2000£ size of bank statement should now be 1

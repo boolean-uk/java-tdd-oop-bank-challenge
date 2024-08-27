@@ -8,13 +8,13 @@ public class BankManagerTest {
     @Test
     public void TestIfOverdraftRequestIsVisibleForBankManager(){
         //Bank manager created
-        BankManager bankManager = new BankManager("David Beckham", 66542);
+        BankManager bankManager = new BankManager("David Beckham");
 
         //Account owner created
-        AccountOwner BenjaminEspresso = new AccountOwner("PS1234", "Benjamin Espresso");
+        AccountOwner BenjaminEspresso = new AccountOwner("Benjamin Espresso");
 
         //Current account created.
-        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso);
+        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso, bankManager.getBranch());
         currentAccount.makeOverdraftRequest(1000, "I need this for my golf clubs");
 
         //Should now be able to access the crated overdraft request as bank manager.
@@ -25,13 +25,13 @@ public class BankManagerTest {
     @Test
     public void TestIfNoMadeOverdraftRequestShows(){
         //Bank manager created
-        BankManager bankManager = new BankManager("David Beckham", 66542);
+        BankManager bankManager = new BankManager("David Beckham");
 
         //Account owner created
-        AccountOwner BenjaminEspresso = new AccountOwner("PS1234", "Benjamin Espresso");
+        AccountOwner BenjaminEspresso = new AccountOwner("Benjamin Espresso");
 
         //Current account created.
-        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso);
+        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso, bankManager.getBranch());
         Assertions.assertEquals("There are no pending overdraft requests for this account.", bankManager.getOverdraftRequest(currentAccount));
 
     }
@@ -39,13 +39,13 @@ public class BankManagerTest {
     @Test
     public void TestIfManagerCanAcceptOverdraftRequest(){
         //Bank manager created
-        BankManager bankManager = new BankManager("David Beckham", 66542);
+        BankManager bankManager = new BankManager("David Beckham");
 
         //Account owner created
-        AccountOwner BenjaminEspresso = new AccountOwner("PS1234", "Benjamin Espresso");
+        AccountOwner BenjaminEspresso = new AccountOwner("Benjamin Espresso");
 
         //Current account created.
-        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso);
+        CurrentAccount currentAccount = new CurrentAccount(BenjaminEspresso, bankManager.getBranch());
         currentAccount.deposit(500);
 
         currentAccount.makeOverdraftRequest(900, "I need this for my golf clubs");

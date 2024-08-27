@@ -24,12 +24,23 @@ class BankAccount{
 BankAccount -- Transaction
 BankAccount -- OverdraftRequest
 
+class BankAccountSavings extends BankAccount{}
+class BankAccountDebit extends BankAccount{}
 
+
+class StringUtils{
+    + leftAlignStringWithPadding(s: String, pad: int): String
+    + rightAlignStringWithPadding(s: String, pad: int): String
+    + centerAlignStringWithPadding(s: String, pad: int): String
+}
+
+Bank -- StringUtils
 class OverdraftRequest{
     - account: BankAccount
     + accept(): void
     + deny(): void
 }
+
 
 
 class Transaction{

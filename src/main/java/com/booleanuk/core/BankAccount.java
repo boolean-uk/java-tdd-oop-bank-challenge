@@ -6,10 +6,9 @@ import java.util.Collections;
 import static com.booleanuk.core.StringUtils.*;
 
 public abstract class BankAccount {
-	private final Customer customer;
-	private boolean canOverdraft;
-	private int overdraftMax;
-	public final ArrayList<Transaction> transactions;
+	protected final Customer customer;
+	protected boolean canOverdraft;
+	protected final ArrayList<Transaction> transactions;
 
 	public BankAccount(Customer customer) {
 		this.customer = customer;
@@ -93,20 +92,7 @@ public abstract class BankAccount {
 	}
 
 	public String withdraw(double amount){
-		// if can go below zero
-		if (canOverdraft){
-			transactions.add(new Transaction(-amount));
-			return "withdrew " + amount + " from account.";
-		}
-
-		// if cant: check if balance >= amount
-		double balance = getBalance();
-		if(balance >= amount){
-			transactions.add(new Transaction(-amount));
-			return "withdrew " + amount + " from account.";
-		}
-
-		return "Couldn't withdraw " + amount + " from account.";
+		return "Not implemented withdraw func";
 	}
 
 	public boolean requestOverdraft(){

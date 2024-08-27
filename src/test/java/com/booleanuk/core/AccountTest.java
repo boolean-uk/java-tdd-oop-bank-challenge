@@ -21,8 +21,8 @@ public class AccountTest {
         String bankStatement =
                 "[Date        ||     Amount ||     Balance, " +
                 "----------------------------------------, " +
-                "26/08/2024  ||    100.00£ ||     100.00£, " +
-                "26/08/2024  ||    -30.00£ ||      70.00£]";
+                "27/08/2024  ||    100.00£ ||     100.00£, " +
+                "27/08/2024  ||    -30.00£ ||      70.00£]";
 
         Assertions.assertEquals(bankStatement,account.getBankStatement().toString());
     }
@@ -31,7 +31,7 @@ public class AccountTest {
     public void depositFunds(){
         Account account = new Account("Test", Branch.Bergen);
         account.deposit(100);
-        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalanceInCents())));
 
     }
 
@@ -41,7 +41,7 @@ public class AccountTest {
         Assertions.assertEquals("Not enough funds.", account.withdraw(100));
         account.deposit(100);
         Assertions.assertEquals("Funds withdrawn from account.", account.withdraw(50));
-        Assertions.assertEquals(floatFormatter(50f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(50f), floatFormatter(centsToPounds(account.getBalanceInCents())));
     }
 
     // Extension requirements
@@ -50,9 +50,9 @@ public class AccountTest {
     @Test
     public void calculateAccountBalance(){
         Account account = new Account("Test", Branch.Oslo);
-        Assertions.assertEquals(0, account.getBalance());
+        Assertions.assertEquals(0, account.getBalanceInCents());
         account.deposit(100);
-        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(100f), floatFormatter(centsToPounds(account.getBalanceInCents())));
     }
 
     // User story 2: Accounts are associated with specific branches

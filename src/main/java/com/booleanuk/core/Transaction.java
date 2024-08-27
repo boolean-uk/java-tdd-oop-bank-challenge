@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 
 public class Transaction {
     private LocalDateTime date;
-    private int balance;
+    private int balanceInCents;
     private String amount;
 
-    public Transaction(String amount, int balance) {
+    public Transaction(String amount, int balanceInCents) {
         this.date = LocalDateTime.now();
         this.amount = amount;
-        this.balance =  balance;
+        this.balanceInCents = balanceInCents;
     }
-    public int getBalance() {
-        return balance;
+    public int getBalanceInCents() {
+        return balanceInCents;
     }
 
     public String getAmount() {

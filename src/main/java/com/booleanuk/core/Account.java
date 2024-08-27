@@ -30,11 +30,11 @@ public class Account {
         return branch;
     }
 
-    public int getBalance() {
+    public int getBalanceInCents() {
         if (transactions.isEmpty()){
             return 0;
         }
-        return transactions.getLast().getBalance();
+        return transactions.getLast().getBalanceInCents();
     }
 
     public Boolean getOverdraftRequestPending() {
@@ -53,18 +53,18 @@ public class Account {
         return bankStatement;
     }
 
-    public void deposit(float amount){
-        int newBalance = getBalance() + poundsToCents(amount);
-        transactions.add(new Transaction(floatFormatter(amount)+ "£", newBalance));
+    public void deposit(float amountInPounds){
+        int newBalanceInCents = getBalanceInCents() + poundsToCents(amountInPounds);
+        transactions.add(new Transaction(floatFormatter(amountInPounds)+ "£", newBalanceInCents));
     }
 
-    public String withdraw(float amount){
-        if (amount > centsToPounds(getBalance()) && !canOverdraft){
+    public String withdraw(float amountInPounds){
+        if (amountInPounds > centsToPounds(getBalanceInCents()) && !canOverdraft){
             return "Not enough funds.";
         }
 
-        int newBalance = (getBalance() - ((int) (amount * 100)));
-        transactions.add(new Transaction("-" + floatFormatter(amount) + "£", newBalance));
+        int newBalanceInCents = (getBalanceInCents() - poundsToCents(amountInPounds));
+        transactions.add(new Transaction("-" + floatFormatter(amountInPounds) + "£", newBalanceInCents));
         return "Funds withdrawn from account.";
     }
 
@@ -75,7 +75,7 @@ public class Account {
             bankStatement.add(String.format("%-11s %1s %10s %1s %11s",
                     transaction.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "||",
                     transaction.getAmount(), "||",
-                    floatFormatter(centsToPounds(transaction.getBalance())) + "£"));
+                    floatFormatter(centsToPounds(transaction.getBalanceInCents())) + "£"));
         }
     }
 

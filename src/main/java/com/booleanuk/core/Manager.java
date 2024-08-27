@@ -6,8 +6,9 @@ public class Manager {
 
     }
 
+    // account.getClass()== SavingsAccount.class
     public void approveOverdraftRequest(Account account){
-        if (account.getOverdraftRequestPending()){
+        if (account.getOverdraftRequestPending() ){
             account.setCanOverdraft(true);
             account.setOverdraftRequestPending(false);
         }

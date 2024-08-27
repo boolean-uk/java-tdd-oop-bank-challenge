@@ -49,10 +49,10 @@ public class CustomerTest {
         String bankStatement =
                 "[Date        ||     Amount ||     Balance, " +
                 "----------------------------------------, " +
-                "26/08/2024  ||     50.00£ ||      50.00£, " +
-                "26/08/2024  ||     30.00£ ||      80.00£, " +
-                "26/08/2024  ||     20.00£ ||     100.00£, " +
-                "26/08/2024  ||    -40.00£ ||      60.00£]";
+                "27/08/2024  ||     50.00£ ||      50.00£, " +
+                "27/08/2024  ||     30.00£ ||      80.00£, " +
+                "27/08/2024  ||     20.00£ ||     100.00£, " +
+                "27/08/2024  ||    -40.00£ ||      60.00£]";
 
         Assertions.assertEquals(bankStatement, account.getBankStatement().toString());
     }
@@ -67,7 +67,7 @@ public class CustomerTest {
         account.deposit(267.96f);
         account.deposit(793.23f);
 
-        Assertions.assertEquals(floatFormatter(1061.19f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(1061.19f), floatFormatter(centsToPounds(account.getBalanceInCents())));
     }
 
 
@@ -81,7 +81,7 @@ public class CustomerTest {
         account.deposit(250f);
 
         Assertions.assertEquals("Funds withdrawn from account.", account.withdraw(55f));
-        Assertions.assertEquals(floatFormatter(195f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(195f), floatFormatter(centsToPounds(account.getBalanceInCents())));
 
     }
 
@@ -113,7 +113,7 @@ public class CustomerTest {
         manager.approveOverdraftRequest(account);
 
         account.withdraw(1200f);
-        Assertions.assertEquals(floatFormatter(-950.00f), floatFormatter(centsToPounds(account.getBalance())));
+        Assertions.assertEquals(floatFormatter(-950.00f), floatFormatter(centsToPounds(account.getBalanceInCents())));
 
     }
 

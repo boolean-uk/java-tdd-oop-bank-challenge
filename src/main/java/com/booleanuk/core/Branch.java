@@ -31,7 +31,6 @@ public class Branch {
         }
     }
 
-
     @Override
     public String toString() {
         return branchName;

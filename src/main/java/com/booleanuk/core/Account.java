@@ -9,24 +9,36 @@ public class Account {
     private String accountType;
     private boolean overDraftEnabled;
     private double overDraftLimit;
-    private double balance;
     ArrayList<Transaction> transactions = new ArrayList<>();
 
     public Account() {
 
-    }
-    public Account(double balance) {
-    this.balance = balance;
     }
 
 
 
 
     public void depositFunds(double depositAmount){
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        double balance = this.getBalance();
-        Transaction transaction = new Transaction(currentDateTime.toString(), depositAmount, balance);
-        this.transactions.add(transaction);
+        if(depositAmount > 0){
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            double balance = this.getBalance();
+            Transaction transaction = new Transaction(currentDateTime.toString(), depositAmount, balance);
+            this.transactions.add(transaction);
+        }else{
+            System.out.println("You cannot deposit a 0 or negative amount.");
+        }
+
+    }
+
+    public void withdrawFunds(double withdrawAmount){
+        if(withdrawAmount < 0){
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            double balance = this.getBalance();
+            Transaction transaction = new Transaction(currentDateTime.toString(), withdrawAmount, balance);
+            this.transactions.add(transaction);
+        }else{
+            System.out.println("You cannot withdraw a 0 or positive amount.");
+        }
     }
 
     public double getBalance() {
@@ -37,7 +49,4 @@ public class Account {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 }

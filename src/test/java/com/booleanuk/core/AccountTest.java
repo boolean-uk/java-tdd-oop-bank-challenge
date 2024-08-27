@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class AccountTest {
     @Test
     public void testDepositFunds(){
-        Account account = new Account(15.00);
+        Account account = new Account();
         account.depositFunds(5.00);
         System.out.println(account.transactions.get(0).getTransactionAmount());
         Assertions.assertEquals(5,account.transactions.get(0).getTransactionAmount());
@@ -14,7 +14,7 @@ public class AccountTest {
 
     @Test
     public void testgetBalance(){
-        Account account = new Account(15.00);
+        Account account = new Account();
         account.depositFunds(5.00);
         System.out.println(account.getBalance());
         Assertions.assertEquals(5,account.getBalance());
@@ -22,9 +22,10 @@ public class AccountTest {
 
     @Test
     public void testWithdrawFunds(){
-        Account account = new Account(15.00);
+        Account account = new Account();
         account.depositFunds(5.00);
-        System.out.println(account.transactions.get(0).getTransactionAmount());
-        Assertions.assertEquals(5,account.transactions.get(0).getTransactionAmount());
+        account.withdrawFunds(-5.00);
+        System.out.println(account.getBalance());
+        Assertions.assertEquals(0, account.getBalance());
     }
 }

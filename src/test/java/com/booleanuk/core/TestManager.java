@@ -10,7 +10,7 @@ public class TestManager {
 		Manager m = new Manager(b);
 		Customer c = new Customer(b, "MyName");
 		BankAccount ba = c.createAccount(BankType.Debit);
-		ba.RequestOverdraft();
+		ba.requestOverdraft();
 
 
 		// assert default false
@@ -21,7 +21,7 @@ public class TestManager {
 		Assertions.assertTrue(ba.canOverdraft());
 
 		// make new request and deny
-		ba.RequestOverdraft();
+		ba.requestOverdraft();
 		m.concludeOverdraftRequestByIndex(false, 0);
 
 		// assert denied account

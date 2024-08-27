@@ -3,17 +3,17 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TestBankAccount {
+public class TestBankAccountDebit {
 
 	@Test
-	public void testBankAccountConstr(){
-		BankAccount ba = new BankAccount(new Customer(new Bank(Branch.Oslo), "Ole"));
+	public void testBankAccountDebitConstr(){
+		BankAccountDebit ba = new BankAccountDebit(new Customer(new Bank(Branch.Oslo), "Ole"));
 	}
 
 
 	@Test
 	public void testDepositAndWithDraw(){
-		BankAccount ba = new BankAccount(new Customer(new Bank(Branch.Oslo), "Ole"));
+		BankAccountDebit ba = new BankAccountDebit(new Customer(new Bank(Branch.Oslo), "Ole"));
 		double balance;
 		balance = ba.getBalance();
 		Assertions.assertEquals(0, balance);
@@ -31,7 +31,7 @@ public class TestBankAccount {
 
 	@Test
 	public void testGenerateBankStatement(){
-		BankAccount ba = new BankAccount(new Customer(new Bank(Branch.Oslo), "Ole"));
+		BankAccountDebit ba = new BankAccountDebit(new Customer(new Bank(Branch.Oslo), "Ole"));
 		ba.deposit(1500);
 		ba.withdraw(300);
 		ba.deposit(500);

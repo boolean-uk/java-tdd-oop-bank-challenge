@@ -12,10 +12,10 @@ public class TestBank {
 	@Test
 	public void testOverdraft(){
 		Bank b = new Bank(Branch.Oslo);
-		BankAccount ba = new BankAccount(new Customer(b, "Ole"));
+		BankAccount ba = new BankAccountDebit(new Customer(b, "Ole"));
 
 		Assertions.assertTrue(b.getOverdraftRequests().isEmpty());
-		ba.RequestOverdraft();
+		ba.requestOverdraft();
 		Assertions.assertFalse(b.getOverdraftRequests().isEmpty());
 
 		OverdraftRequest ora = b.getOverdraftRequest(0);

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TestOverdraftRequests {
 	@Test
 	public void testOverdraftRequest(){
-		BankAccount ba = new BankAccount(new Customer(new Bank(Branch.Oslo), "Ole"));
+		BankAccount ba = new BankAccountDebit(new Customer(new Bank(Branch.Oslo), "Ole"));
 		OverdraftRequest or = new OverdraftRequest(ba);
 
 		Assertions.assertFalse(ba.canOverdraft());

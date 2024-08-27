@@ -5,21 +5,16 @@ import java.util.Collections;
 
 import static com.booleanuk.core.StringUtils.*;
 
-public class BankAccount {
+public abstract class BankAccount {
 	private final Customer customer;
 	private boolean canOverdraft;
+	private int overdraftMax;
 	public final ArrayList<Transaction> transactions;
-	public BankType bankType;
 
-	public BankAccount(Customer customer){
+	public BankAccount(Customer customer) {
 		this.customer = customer;
 		this.canOverdraft = false; // defaulted to false
 		this.transactions = new ArrayList<>();
-		this.bankType = BankType.Debit; //defaulted to debit
-	}
-
-	public void setBankType(BankType bankType){
-		this.bankType = bankType;
 	}
 
 
@@ -114,8 +109,9 @@ public class BankAccount {
 		return "Couldn't withdraw " + amount + " from account.";
 	}
 
-	public void RequestOverdraft(){
+	public boolean requestOverdraft(){
 		customer.requestOverdraft(this);
+		return true;
 	}
 
 	public void setCanOverdraft(boolean canOverdraft) {
@@ -125,4 +121,6 @@ public class BankAccount {
 	public boolean canOverdraft(){
 		return canOverdraft;
 	}
+
+
 }

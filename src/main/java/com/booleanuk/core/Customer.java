@@ -14,8 +14,12 @@ public class Customer {
 	}
 
 	public BankAccount createAccount(BankType banktype){
-		BankAccount ba = new BankAccount(this);
-		ba.setBankType(banktype);
+		BankAccount ba;
+		switch (banktype){
+			case BankType.Debit -> ba = new BankAccountDebit(this);
+			case BankType.Savings -> ba = new BankAccountSavings(this);
+			default -> ba = null;
+		}
 		bank.addBankAccount(ba);
 		accounts.add(ba);
 		return ba;

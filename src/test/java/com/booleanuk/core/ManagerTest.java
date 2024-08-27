@@ -15,9 +15,10 @@ public class ManagerTest {
         Customer customer = new Customer(accounts);
         customer.openCurrentAccount("Test Savings", Branch.Oslo);
         CurrentAccount account = (CurrentAccount) customer.getAccount("Test Savings");
+        assert account != null;
         account.requestOverdraft();
 
-        Manager manager = new Manager();
+        Manager manager = new Manager(Branch.Oslo);
         manager.approveOverdraftRequest(account);
         Assertions.assertEquals("Funds withdrawn from account.", account.withdraw(2000f));
     }
@@ -32,7 +33,7 @@ public class ManagerTest {
         CurrentAccount account = (CurrentAccount) customer.getAccount("Test Savings");
         account.requestOverdraft();
 
-        Manager manager = new Manager();
+        Manager manager = new Manager(Branch.Oslo);
         manager.denyOverdraftRequest(account);
         Assertions.assertEquals("Not enough funds.", account.withdraw(2000f));
 

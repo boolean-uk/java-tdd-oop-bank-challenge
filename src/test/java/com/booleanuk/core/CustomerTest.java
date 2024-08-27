@@ -109,7 +109,7 @@ public class CustomerTest {
         account.deposit(250f);
 
         account.requestOverdraft();
-        Manager manager = new Manager();
+        Manager manager = new Manager(Branch.Oslo);
         manager.approveOverdraftRequest(account);
 
         account.withdraw(1200f);

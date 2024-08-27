@@ -3,7 +3,7 @@ package com.booleanuk.core;
 import java.util.ArrayList;
 
 public class Customer {
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
     public Customer(ArrayList<Account> accounts){
         this.accounts = accounts;

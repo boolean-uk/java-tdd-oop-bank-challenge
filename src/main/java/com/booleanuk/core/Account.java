@@ -6,10 +6,10 @@ import static com.booleanuk.core.NumberUtils.*;
 
 public class Account {
 
-    private ArrayList<Transaction> transactions;
-    private ArrayList<String> bankStatement;
-    private String accountName;
-    private Branch branch;
+    private final ArrayList<Transaction> transactions;
+    private final ArrayList<String> bankStatement;
+    private final String accountName;
+    private final Branch branch;
 
     public Account(String accountName, Branch branch){
         this.transactions = new ArrayList<>();
@@ -17,6 +17,9 @@ public class Account {
         this.accountName = accountName;
         this.branch = branch;
     }
+
+
+    // Getters and setters
 
     public String getAccountName() {
         return accountName;
@@ -26,15 +29,18 @@ public class Account {
         return branch;
     }
 
+    public ArrayList<String> getBankStatement() {
+        return bankStatement;
+    }
+
+
+    // Methods
+
     public int getBalanceInCents() {
         if (transactions.isEmpty()){
             return 0;
         }
         return transactions.getLast().getBalanceInCents();
-    }
-
-    public ArrayList<String> getBankStatement() {
-        return bankStatement;
     }
 
     public void deposit(float amountInPounds){

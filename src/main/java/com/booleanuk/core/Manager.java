@@ -1,21 +1,22 @@
 package com.booleanuk.core;
 
 public class Manager {
+    Branch branch;
 
-    public Manager(){
+    public Manager(Branch branch){
+        this.branch = branch;
 
     }
 
-    // account.getClass()== SavingsAccount.class
     public void approveOverdraftRequest(CurrentAccount account){
-        if (account.getOverdraftRequestPending() ){
+        if (account.getOverdraftRequestPending() && account.getBranch() == this.branch){
             account.setCanOverdraft(true);
             account.setOverdraftRequestPending(false);
         }
     }
 
-    public void denyOverdraftRequest(CurrentAccount account){
-        if (account.getOverdraftRequestPending()){
+    public void denyOverdraftRequest(CurrentAccount account ){
+        if (account.getOverdraftRequestPending() && account.getBranch() == this.branch){
             account.setCanOverdraft(false);
             account.setOverdraftRequestPending(false);
         }

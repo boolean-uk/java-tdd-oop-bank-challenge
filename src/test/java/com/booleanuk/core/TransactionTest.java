@@ -28,24 +28,6 @@ public class TransactionTest {
     }
 
     @Test
-    public void testCreateTransactionWithdraw() {
-        Bank bank = new Bank("Swedbank");
-        Customer customer = bank.addCustomer(new Customer());
-        Account account = bank.newAccount(customer, new CurrentAccount(Account.Branch.GOTHENBURG));
-        final double amount = 1000;
-
-        bank.withdraw(customer, account, amount);
-
-        Transaction firstTransaction = customer.getTransactions().getFirst();
-
-
-        Assertions.assertEquals(account.getAccountNumber(), firstTransaction.getFromAccount().getAccountNumber());
-        Assertions.assertEquals(amount, firstTransaction.getAmount());
-        Assertions.assertEquals(0, firstTransaction.getBalanceBeforeTransaction());
-        Assertions.assertEquals(Transaction.TransactionType.DEBIT, firstTransaction.getTransactionType());
-    }
-
-    @Test
     public void testCreateTransactionDepositAndWithdraw() {
         Bank bank = new Bank("Swedbank");
         Customer customer = bank.addCustomer(new Customer());

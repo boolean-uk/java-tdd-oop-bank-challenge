@@ -91,7 +91,24 @@ public class Bank {
 
         if (!this.checkIfAccountNumberExists(actualAccount.getAccountNumber())) return false;
 
-        actualCustomer.addTransaction(new Transaction(amount, actualCustomer.getBalance(actualAccount), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.DEBIT));
+        if (actualCustomer.getBalance(actualAccount) < amount) { // If withdraw is more than account's balance
+
+            // Check if customer has atleast one approved overdraft in their account
+            if (!actualCustomer.getOverdrafts(Overdraft.OverdraftStatus.APPROVED).isEmpty()) {
+                double totalApprovedOverdraftAmount = 0;
+                for (Overdraft o : actualCustomer.getOverdrafts(actualAccount)) {
+                    if (o.getStatus() == Overdraft.OverdraftStatus.APPROVED) {
+                        totalApprovedOverdraftAmount += o.getAmount();
+                    }
+                }
+
+                // Need to have negative since account balance gets negative value when overdraft requests are approved
+                if ((-totalApprovedOverdraftAmount + actualCustomer.getBalance(actualAccount)) >= amount) return false;
+            } else return false;
+        }
+
+        Transaction newTransaction = new Transaction(amount, actualCustomer.getBalance(actualAccount), actualCustomer.getAccount(account.getAccountNumber()), this.generateTransactionId(), Transaction.TransactionType.DEBIT);
+        actualCustomer.addTransaction(newTransaction);
 
         return true;
     }
@@ -140,8 +157,10 @@ public class Bank {
     public boolean approveOverdraft(Overdraft o) {
         for (Customer c : this.customers.values()) {
             for (Overdraft oo : c.getAllOverdrafts()) {
-                if (oo.getId().equals(o.getId())) oo.approveOverdraft();
-                return true;
+                if (oo.getId().equals(o.getId())) {
+                    oo.approveOverdraft();
+                    return true;
+                }
             }
         }
         return false;

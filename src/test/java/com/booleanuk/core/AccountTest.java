@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.lang.Math;
 
@@ -95,12 +96,6 @@ public class AccountTest {
         Assertions.assertFalse(currentAccount.withdraw(1001, "27/07/2024"));
 
     }
-
-
-
-
-
-
 
 
 

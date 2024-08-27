@@ -8,13 +8,11 @@ public abstract class Account {
     private int accountNumber;
     private AccountOwner owner;
     private ArrayList<Transaction> bankStatement;
-    private double balance;
 
     Account(AccountOwner owner){
         this.accountNumber = 12367;
         this.owner = owner;
         this.bankStatement = new ArrayList<>();
-        this.balance = 0.00;
     }
 
     protected AccountOwner getOwner(){
@@ -22,12 +20,20 @@ public abstract class Account {
     }
 
     protected double getBalance(){
-        return this.balance;
+        double sum = 0.0;
+
+        for(Transaction transaction : this.bankStatement){
+           if (transaction.getType() == TransactionType.DEPOSIT){
+               sum += transaction.getAmount();
+           }
+           else {
+               sum -= transaction.getAmount();
+           }
+        }
+
+        return sum;
     }
 
-    protected void setBalance(double newBalance){
-        this.balance = newBalance;
-    }
 
     protected ArrayList<Transaction> getBankStatement(){
         return this.bankStatement;
@@ -42,10 +48,10 @@ public abstract class Account {
         if(!bankStatement.isEmpty()){
             for(Transaction transaction : bankStatement.reversed()){
                 if (transaction.getType() == TransactionType.DEPOSIT) {
-                    System.out.printf("%-11s || %-8.2f || %-8s || %.2f%n", transaction.getDate(), transaction.getAmount(), "", transaction.getBalance());
+                    System.out.printf("%-11s || %-8.2f || %-8s || %.2f%n", transaction.getDate(), transaction.getAmount(), "", transaction.getBalance() + transaction.getAmount());
 
                 } else {
-                    System.out.printf("%-11s || %-8s || %-8.2f || %.2f%n", transaction.getDate(), "", transaction.getAmount(), transaction.getBalance());
+                    System.out.printf("%-11s || %-8s || %-8.2f || %.2f%n", transaction.getDate(), "", transaction.getAmount(), transaction.getBalance() - transaction.getAmount());
                 }
             }
         }

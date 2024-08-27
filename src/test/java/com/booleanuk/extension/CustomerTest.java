@@ -126,7 +126,6 @@ public class CustomerTest {
         Assertions.assertEquals(amountToDeposit - amountToWithdraw, currentAccount.getBalance());
         Assertions.assertEquals(2, currentAccount.getTransactions().size());
 
-
         Assertions.assertFalse(customer.withdraw(currentAccount, amountToWithdraw + 1));
         Assertions.assertEquals(amountToDeposit - amountToWithdraw, currentAccount.getBalance());
         Assertions.assertEquals(2, currentAccount.getTransactions().size());
@@ -134,11 +133,12 @@ public class CustomerTest {
         Customer customer2 = new Customer("Name");
         bank.addCustomer(customer2);
         Account account = new Account();
+
         Assertions.assertFalse(customer.deposit(account, amountToWithdraw), "Account not in the customer accounts.");
         Assertions.assertEquals(0, account.getBalance());
         Assertions.assertEquals(0, account.getTransactions().size());
     }
-    // generate bank statment test
+
     @Test
     public void testGenerateBankStatement() {
         Bank bank = new Bank("Bank");

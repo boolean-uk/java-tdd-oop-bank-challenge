@@ -167,14 +167,14 @@ public class AccountTest {
 
         Branch osloBranch = new Branch("Oslo");
         Account account = new CurrentAccount(1000, osloBranch);
-        account.addTransaction(500.00, "credit");
+        account.deposit(500.00);
 
         List<String> transactions = account.getTransactions();
         Assertions.assertEquals(1, transactions.size(), "There should be one transaction recorded.");
 
         String transaction = transactions.get(0);
         Assertions.assertTrue(transaction.contains("500.00"), "The transaction should include the credited amount.");
-        Assertions.assertTrue(transaction.contains("1000.00"), "The transaction should include the current balance.");
+        Assertions.assertTrue(transaction.contains("1500.00"), "The transaction should include the current balance.");
     }
 
 }

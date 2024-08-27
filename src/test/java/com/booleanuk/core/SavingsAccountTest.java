@@ -47,4 +47,17 @@ class SavingsAccountTest {
         Assertions.assertEquals(0, b.getTransactions().size());
 
     }
+
+    @Test
+    public void testCalculateBalanceWithMoneyTransferredAway() {
+        Account a = new SavingsAccount("1", "0000", "01");
+        Account b = new CurrentAccount("1", "0000", "02");
+        Controller.depositables.put("01", a);
+        Controller.depositables.put("02", b);
+        a.deposit(new Transaction(LocalDateTime.now().minusDays(1), "-1", "01", 10000));
+        Assertions.assertEquals(10000, a.calculateBalance());
+        a.transfer("02", 5000);
+        Assertions.assertEquals(10000, a.calculateBalance());
+        Assertions.assertEquals(5000, a.calculateBalance(5));
+    }
 }

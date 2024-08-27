@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
@@ -12,6 +13,7 @@ public class View {
     public int mainMenu() {
         System.out.println("What do you want to do?");
         System.out.println("1. Add User");
+        System.out.println("2. Log in as User");
         System.out.println("12. (For testing) Add starting data");
 
         return getInt();
@@ -41,5 +43,12 @@ public class View {
         for (String str: user.getAccountNumbers()) {
             System.out.println("  " + str);
         }
+    }
+
+    public User chooseUser(ArrayList<User> users) {
+        for (int i = 1; i <= users.size(); i++) {
+            System.out.printf("%d. %s%n", i, users.get(i));
+        }
+        return users.get(getInt());
     }
 }

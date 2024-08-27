@@ -14,11 +14,22 @@ public abstract class Account implements Depositable {
 
 
     @Override
-    public int deposit(int sum, LocalDateTime timeOfTransaction) {
-        return 0;
+    public void deposit(int sum, LocalDateTime timeOfTransaction) {
+        transactions.add(new Transaction(timeOfTransaction, "-1", this.accountId, sum));
+    }
+
+    @Override
+    public void deposit(Transaction transaction) {
+        transactions.add(transaction);
     }
 
     public String getAccountId() {
         return accountId;
+    }
+
+    public int calculateBalance() {
+        LocalDateTime now = LocalDateTime.now();
+        return transactions.stream().filter(transaction -> transaction.transactionTime().isBefore(now))
+                .mapToInt(Transaction::value).sum();
     }
 }

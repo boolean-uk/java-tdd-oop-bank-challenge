@@ -1,26 +1,52 @@
 package com.booleanuk.core.idgenerator;
 
+import com.booleanuk.core.bank.Bank;
+import com.booleanuk.core.bank.User;
+import com.booleanuk.core.accounts.Account;
+import com.booleanuk.core.accounts.AccountType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class IdGeneratorTest {
 
     @Test
     public void generateMultipleUniqueIds() {
-        Assertions.assertEquals("AC_1", new IdGenerator(IdPrefix.AC).getId());
-        Assertions.assertEquals("AC_2", new IdGenerator(IdPrefix.AC).getId());
-        Assertions.assertEquals("AC_3", new IdGenerator(IdPrefix.AC).getId());
+        Bank bank = new Bank();
 
-        Assertions.assertEquals("RE_1", new IdGenerator(IdPrefix.RE).getId());
-        Assertions.assertEquals("RE_2", new IdGenerator(IdPrefix.RE).getId());
-        Assertions.assertEquals("RE_3", new IdGenerator(IdPrefix.RE).getId());
+        User customer1 = bank.createUser("P_#1");
+        bank.createUserAccount(customer1, AccountType.CURRENT);
+        bank.createUserAccount(customer1, AccountType.SAVINGS);
 
-        Assertions.assertEquals("TR_1", new IdGenerator(IdPrefix.TR).getId());
-        Assertions.assertEquals("TR_2", new IdGenerator(IdPrefix.TR).getId());
-        Assertions.assertEquals("TR_3", new IdGenerator(IdPrefix.TR).getId());
+        Assertions.assertEquals("AC_1", customer1.getAllAccounts().get(0).getAccountNumber());
+        Assertions.assertEquals("AC_2", customer1.getAllAccounts().get(1).getAccountNumber());
 
-        Assertions.assertEquals("AC_4", new IdGenerator(IdPrefix.AC).getId());
-        Assertions.assertEquals("RE_4", new IdGenerator(IdPrefix.RE).getId());
-        Assertions.assertEquals("TR_4", new IdGenerator(IdPrefix.TR).getId());
+        User customer2 = bank.createUser("P_#1");
+        bank.createUserAccount(customer2, AccountType.CURRENT);
+        bank.createUserAccount(customer2, AccountType.SAVINGS);
+
+        Assertions.assertEquals("AC_3", customer2.getAllAccounts().get(0).getAccountNumber());
+        Assertions.assertEquals("AC_4", customer2.getAllAccounts().get(1).getAccountNumber());
+    }
+
+    @Test
+    public void generateMultilhjjljpleUniqueIds() {
+        Bank bank = new Bank();
+
+        User customer1 = bank.createUser("P_#1");
+        bank.createUserAccount(customer1, AccountType.CURRENT);
+        bank.createUserAccount(customer1, AccountType.SAVINGS);
+
+        Assertions.assertEquals("AC_1", customer1.getAllAccounts().get(0).getAccountNumber());
+        Assertions.assertEquals("AC_2", customer1.getAllAccounts().get(1).getAccountNumber());
+
+        User customer2 = bank.createUser("P_#1");
+        bank.createUserAccount(customer2, AccountType.CURRENT);
+        bank.createUserAccount(customer2, AccountType.SAVINGS);
+
+        Assertions.assertEquals("AC_3", customer2.getAllAccounts().get(0).getAccountNumber());
+        Assertions.assertEquals("AC_4", customer2.getAllAccounts().get(1).getAccountNumber());
     }
 }

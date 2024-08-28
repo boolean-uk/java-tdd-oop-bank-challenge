@@ -7,10 +7,25 @@ public class IdGenerator {
     private static int currentRE = 0;
     private static int currentTR = 0;
 
-    private final IdPrefix prefix;
+    private IdPrefix prefix;
     private String id;
 
-    public IdGenerator(IdPrefix prefix) {
+    public IdGenerator() {
+        // Reset
+        currentAC = 0;
+        currentRE = 0;
+        currentTR = 0;
+    }
+
+    private void setId(int currentNumber) {
+        this.id = prefix + "_" + currentNumber;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String createId(IdPrefix prefix) {
 
         // TODO: Duplication, could be improved?
 
@@ -26,13 +41,7 @@ public class IdGenerator {
             currentTR++;
             setId(currentTR);
         }
-    }
 
-    private void setId(int currentNumber) {
-        this.id = prefix + "_" + currentNumber;
-    }
-
-    public String getId() {
         return this.id;
     }
 }

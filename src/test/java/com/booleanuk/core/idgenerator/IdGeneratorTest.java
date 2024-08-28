@@ -4,8 +4,11 @@ import com.booleanuk.core.bank.Bank;
 import com.booleanuk.core.bank.User;
 import com.booleanuk.core.accounts.Account;
 import com.booleanuk.core.accounts.AccountType;
+import com.booleanuk.core.transactons.Transaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 public class IdGeneratorTest {
 
@@ -17,8 +20,13 @@ public class IdGeneratorTest {
         bank.createUserAccount(customer1, AccountType.CURRENT);
         bank.createUserAccount(customer1, AccountType.SAVINGS);
 
-        Assertions.assertEquals("AC_1", customer1.getAllAccounts().get(0).getAccountNumber());
-        Assertions.assertEquals("AC_2", customer1.getAllAccounts().get(1).getAccountNumber());
+        ArrayList<Account> accountss1 = customer1.getAllAccounts();
+        for (Account a : accountss1) {
+            System.out.println(a.getAccountNumber());
+        }
+
+        Assertions.assertEquals("AC_1", accountss1.get(0).getAccountNumber());
+        Assertions.assertEquals("AC_2", accountss1.get(1).getAccountNumber());
 
         User customer2 = bank.createUser("P_#1");
         bank.createUserAccount(customer2, AccountType.CURRENT);

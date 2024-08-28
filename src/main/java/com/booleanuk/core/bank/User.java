@@ -3,6 +3,7 @@ package com.booleanuk.core.bank;
 import com.booleanuk.core.accounts.Account;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +25,9 @@ public class User {
     }
 
     public ArrayList<Account> getAllAccounts() {
-        return new ArrayList<>(accounts.values());
+        ArrayList<Account> list = new ArrayList<>(accounts.values());
+//        Collections.reverse(list);
+
+        return list;
     }
 }

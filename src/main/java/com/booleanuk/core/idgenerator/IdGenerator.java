@@ -3,9 +3,9 @@ package com.booleanuk.core.idgenerator;
 public class IdGenerator {
 
     // Resource: https://www.freecodecamp.org/news/static-variables-in-java/
-    private static int currentAC = 0;
-    private static int currentRE = 0;
-    private static int currentTR = 0;
+    private int currentAC = 0;
+    private int currentRE = 0;
+    private int currentTR = 0;
 
     private IdPrefix prefix;
     private String id;

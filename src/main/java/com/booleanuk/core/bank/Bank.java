@@ -16,12 +16,10 @@ public class Bank {
 
     private IdGenerator idGenerator;
     private Map<String, User> customers;
-    private Map<String, Account> accounts;
     private Map<String, Request> requests;
 
     public Bank() {
         this.customers = new HashMap<>();
-        this.accounts = new HashMap<>();    // TODO: do I need this? I just use the ID
         this.requests = new HashMap<>();
         this.idGenerator = new IdGenerator();
     }

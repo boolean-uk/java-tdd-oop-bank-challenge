@@ -14,7 +14,6 @@ public class Transaction {
     private Double currentBalance;
 
     public Transaction(String id, Double amount, TransactionType type, Double currentBalance) {
-//        this.id = new IdGenerator(IdPrefix.TR).getId();
         this.id = id;
         this.transactionDate = LocalDateTime.now(); // TODO: Format later
         this.amount = amount;

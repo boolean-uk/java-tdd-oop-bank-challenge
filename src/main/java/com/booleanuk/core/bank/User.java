@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class User {
 
-    // TODO: Not safe to store personal numbers ike this, should be a uniwueId instead?
+    // TODO: Not safe to store personal numbers ike this, should be a uniqueId instead?
     // It's personal number for now for simplicity
 
     private String personalNumber;

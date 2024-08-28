@@ -7,9 +7,6 @@ import com.booleanuk.core.accounts.AccountType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 public class IdGeneratorTest {
 
     @Test
@@ -32,7 +29,7 @@ public class IdGeneratorTest {
     }
 
     @Test
-    public void generateMultilhjjljpleUniqueIds() {
+    public void generateMultipleUniqueIdsForAnotherBankeShouldHaveOwnIds() {
         Bank bank = new Bank();
 
         User customer1 = bank.createUser("P_#1");

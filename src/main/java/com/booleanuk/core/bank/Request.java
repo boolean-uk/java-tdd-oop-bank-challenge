@@ -1,8 +1,6 @@
-package com.booleanuk.core;
+package com.booleanuk.core.bank;
 
 import com.booleanuk.core.accounts.Account;
-import com.booleanuk.core.idgenerator.IdGenerator;
-import com.booleanuk.core.idgenerator.IdPrefix;
 
 public class Request {
 
@@ -10,8 +8,8 @@ public class Request {
     private final Account account;
     private Double overdraftSum;
 
-    public Request(Account account, Double overdraftSum) {
-        this.id = new IdGenerator(IdPrefix.RE).getId();
+    public Request(String id, Account account, Double overdraftSum) {
+        this.id = id;
         this.account = account;
         this.overdraftSum = overdraftSum;
     }

@@ -1,7 +1,7 @@
-package com.booleanuk.core;
+package com.booleanuk.core.bank;
 
 import com.booleanuk.core.accounts.Account;
-import com.booleanuk.core.accounts.CurrentAccount;
+import com.booleanuk.core.accounts.AccountType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +10,12 @@ public class BankTest {
     @Test
     public void makeRequest() {
         Bank bank = new Bank();
+        User customer = bank.createUser("P_#1");
 
-        Account account = new CurrentAccount();
-        Request request = new Request(account, 100.00);
+        bank.createUserAccount(customer, AccountType.CURRENT);
+        Account account = customer.getAllAccounts().get(0);
 
-        bank.makeRequest(request);
+        bank.makeRequest(account, 100.00);
         Assertions.assertEquals(1, bank.getAllRequests().size());
     }
 

@@ -5,18 +5,19 @@ import com.booleanuk.core.idgenerator.IdPrefix;
 import com.booleanuk.core.transactons.Transaction;
 import com.booleanuk.core.transactons.TransactionType;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Account {
 
+    private IdGenerator idGenerator;
     private final String accountNumber;
     private Branch branch;
     private boolean isPossibleToOverdraft;
     private Map<String, Transaction> transactions;
 
-    public Account() {
-        this.accountNumber = new IdGenerator(IdPrefix.AC).getId();
+    public Account(String accountNumber) {
+        this.idGenerator = new IdGenerator();
+        this.accountNumber = accountNumber;
         this.transactions = new HashMap<>();
     }
 
@@ -46,6 +47,7 @@ public abstract class Account {
 
     public void deposit(Double amount) {
         Transaction transaction = new Transaction(
+                this.idGenerator.createId(IdPrefix.TR),
                 amount,
                 TransactionType.DEBIT,
                 calculateBalance()
@@ -72,11 +74,19 @@ public abstract class Account {
         }
 
         Transaction transaction = new Transaction(
+                this.idGenerator.createId(IdPrefix.TR),
                 amount,
                 TransactionType.CREDIT,
                 currentBalance
         );
         this.addTransaction(transaction);
+    }
+
+    public ArrayList<Transaction> getAllTransactions() {
+        ArrayList<Transaction> list = new ArrayList<>(transactions.values());
+        Collections.reverse(list);
+
+        return list;
     }
 
     protected Double calculateBalance() {
@@ -96,4 +106,11 @@ public abstract class Account {
     }
 
     // TODO: printTransactionHistory
+    public void printTransactionHistory() {
+        System.out.println();
+        System.out.printf("%s", "date", "||");
+        for (Transaction transaction : transactions.values()) {
+            System.out.println();
+        }
+    }
 }

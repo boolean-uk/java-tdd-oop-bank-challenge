@@ -63,7 +63,7 @@ public class CurrentAccount implements Account {
         String rowFormat = "%-12s || %10s || %10s || %10s\n";
 
         System.out.println();
-        System.out.println("User: " + customer.getName() + "    Account ID: " + uniqueID );
+        System.out.println("User: " + customer.getName() + "    Account ID: " + uniqueID + "   Branch: " + branch);
         System.out.printf(headerFormat, "date", "credit", "debit", "balance");
         double balance = 0.0;
 

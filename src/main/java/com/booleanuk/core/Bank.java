@@ -109,6 +109,7 @@ public class Bank {
                 System.out.println("Overdraft request denied.");
             } else {
                 System.out.println("Invalid input. Please respond with 'yes' or 'no'.");
+                return;
             }
 
         }

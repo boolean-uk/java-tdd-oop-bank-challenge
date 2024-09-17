@@ -10,6 +10,12 @@ repositories {
 }
 
 dependencies {
+
+    implementation ("com.twilio.sdk:twilio:9.2.5")
+    testImplementation("org.slf4j:slf4j-simple:2.0.5")
+    testImplementation("com.sparkjava:spark-core:2.9.4")
+    testImplementation("com.twilio.sdk:twilio:9.2.5")
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }

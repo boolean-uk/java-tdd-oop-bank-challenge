@@ -1,0 +1,75 @@
+Controller
+	-users: ArrayList<User>
+	-currentUser: User
+	-view: View
+	+depositables: static HashMap<String, Depositable>
+	-mainMenu(): void
+	-generateUserId(): String
+	-generateAccountId(): String
+
+Account (Abstract Class):service
+	#transactions: ArrayList<Transaction>
+	#ownerId: String
+	#branchId: String
+	#accountId: String
+	+@transfer(String targetAccountId, int sum): String
+	+deposit(Transaction transaction): String
+	+getAccountId(): String
+	+calculateBalance(): int
+	+calculateBalance(int i): int
+	+calculateBalance(ArrayList<Transaction> transactions, String accountId, int i): static int
+
+Depositable (Interface):service
+	(T in return means its for testing purposes)
+	+deposit(int sum): int
+	+deposit(Transaction transaction): int
+	+deposit(int sum, LocalDateTime timeOfTransaction): T int
+	+getAccountId(): String
+	+isCurrentAccount(): boolean
+
+SavingsAccount
+	+deposit(int sum): String
+	+transfer(String targetAccountId, int sum): String
+	+isCurrentAccount(): boolean
+
+CurrentAccount
+	+deposit(int sum): int
+	+withdraw(int sum): int
+	+transfer(String targetAccountId, int sum): String
+	+isCurrentAccount(): boolean
+
+User
+	-accounts: ArrayList<Account>
+	-userId: String
+	-name: String
+	+getAccountNumbers(): ArrayList<String>
+	+addAccount(Account account): void
+	+getUserId(): String
+	+getName(): String
+	+getAccount(String accountId): Account
+
+View
+	-scanner: Scanner
+	+mainMenu(): int
+	+getInt(): int
+	+chooseUser(ArrayList<User> users): User
+	+printBankStatement(ArrayList<Transaction> transactions, String accountNumber): void
+	-formatDate(LocalDateTime t): String
+
+Transaction
+	-transactionTime: static LocalDateTime
+	-fromAccount: String
+	-toAccount: String
+	-value: int
+
+Account (Abstract Class)-->SavingsAccount
+Account (Abstract Class)-->CurrentAccount
+Depositable (Interface)-->Account (Abstract Class)
+User-->Account (Abstract Class)
+Controller-->User
+Controller-->View
+Controller-->Depositable (Interface)
+SavingsAccount-.->Transaction
+CurrentAccount-.->Transaction
+View-.->User
+View-.->Transaction

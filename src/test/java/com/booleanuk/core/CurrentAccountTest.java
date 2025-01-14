@@ -18,7 +18,7 @@ public class CurrentAccountTest {
     public void withdrawToAccount() {
         CurrentAccount currentAccount = new CurrentAccount(500);
 
-        currentAccount.deposit(currentAccount,200);
+        currentAccount.withdraw(currentAccount,200);
 
         Assertions.assertEquals(300, currentAccount.getBalance());
 

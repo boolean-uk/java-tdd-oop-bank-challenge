@@ -7,7 +7,6 @@ public class Account {
     private double balance = 0;
     private HashMap<String, Double> depositHistory = new HashMap<>();
     private HashMap<String, Double> withdrawHistory = new HashMap<>();
-    private String depositDate;
 
     public Account(double balance) {
         this.balance = balance;
@@ -44,8 +43,14 @@ public class Account {
     }
 
     public double deposit(Account account, double amount) {
-        account.addBalance(amount);
-        depositDate = java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n"));
+        balance += amount;
+        depositHistory.put(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")), amount);
+        return account.getBalance();
+    }
+
+    public double withdraw(Account account, double amount) {
+        balance -= amount;
+        withdrawHistory.put(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")), amount);
         return account.getBalance();
     }
 }

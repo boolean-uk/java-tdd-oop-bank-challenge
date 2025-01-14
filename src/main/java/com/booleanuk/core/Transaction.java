@@ -1,10 +1,11 @@
 package com.booleanuk.core;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 
-    private LocalDateTime time;
+    private String time;
     private float balance;
     private float amount;
     private boolean isWithdrawal;
@@ -13,7 +14,9 @@ public class Transaction {
         this.isWithdrawal = isWithdrawal;
         this.balance = balance;
         this.amount = amount;
-        this.time = LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.time = LocalDateTime.now().format(formatter);
     }
 
     public boolean getIsWithdrawal(){
@@ -28,8 +31,17 @@ public class Transaction {
         return this.amount;
     }
 
-    public LocalDateTime getTime(){
+    public String getTime(){
         return this.time;
+    }
+
+    @Override
+    public String toString() {
+        if (this.isWithdrawal){
+            return String.format("%-20s|| %-10s|| %-10s|| %-10s", time, "", String.valueOf(this.amount), balance);
+        }
+        return String.format("%-20s|| %-10s|| %-10s|| %-10s", time, String.valueOf(this.amount), "", balance);
+
     }
 
 }

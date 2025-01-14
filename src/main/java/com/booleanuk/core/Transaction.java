@@ -9,11 +9,11 @@ public class Transaction {
     private float amount;
     private boolean isWithdrawal;
 
-    public Transaction(boolean isWithdrawal, float balance, float amount, LocalDateTime time){
+    public Transaction(boolean isWithdrawal, float balance, float amount){
         this.isWithdrawal = isWithdrawal;
         this.balance = balance;
         this.amount = amount;
-        this.time = time;
+        this.time = LocalDateTime.now();
     }
 
     public boolean getIsWithdrawal(){
@@ -31,4 +31,5 @@ public class Transaction {
     public LocalDateTime getTime(){
         return this.time;
     }
+
 }

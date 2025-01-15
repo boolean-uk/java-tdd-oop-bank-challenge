@@ -24,21 +24,29 @@ public abstract class BankAccount {
         this.transactions = new ArrayList<>();
     }
 
-    public boolean withdraw(double amount) {
+    public boolean withdraw(double amount, LocalDateTime dateTime) {
         double balance = this.getBalance();
         if (amount <= balance) {
             balance -= amount;
-            transactions.add(new Transaction(-amount, balance, LocalDateTime.now()));
+            transactions.add(new Transaction(-amount, balance, dateTime));
         }
         return amount <= balance;
     }
 
+    public boolean withdraw(double amount) {
+        return this.withdraw(amount, LocalDateTime.now());
+    }
+
     // maybe can be void... or maybe consider overflow?
-    public boolean deposit(double amount) {
+    public boolean deposit(double amount, LocalDateTime dateTime) {
         double balance = this.getBalance();
         balance += amount;
-        transactions.add(new Transaction(amount, balance, LocalDateTime.now()));
+        transactions.add(new Transaction(amount, balance, dateTime));
         return true;
+    }
+
+    public boolean deposit(double amount) {
+        return this.deposit(amount, LocalDateTime.now());
     }
 
     // TODO Fix formatting

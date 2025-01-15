@@ -1,56 +1,43 @@
 package com.booleanuk.core;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Account {
     private double balance = 0;
-    private HashMap<String, Double> depositHistory = new HashMap<>();
-    private HashMap<String, Double> withdrawHistory = new HashMap<>();
+
+    public ArrayList<Transactions> getTransactions() {
+        return transactions;
+    }
+
+    private ArrayList<Transactions> transactions = new ArrayList<>();
 
     public Account(double balance) {
         this.balance = balance;
-        this.depositHistory = depositHistory;
-        this.withdrawHistory = withdrawHistory;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void addBalance(double balance) {
-        this.balance += balance;
-    }
-
-    public HashMap<String, Double> getDepositHistory() {
-        return depositHistory;
-    }
-
-    public void setDepositHistory(HashMap<String, Double> depositHistory) {
-        this.depositHistory = depositHistory;
-    }
-
-    public HashMap<String, Double> getWithdrawHistory() {
-        return withdrawHistory;
-    }
-
-    public void setWithdrawHistory(HashMap<String, Double> withdrawHistory) {
-        this.withdrawHistory = withdrawHistory;
-    }
-
     public double deposit(Account account, double amount) {
         balance += amount;
-        depositHistory.put(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")), amount);
+        String date = java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        Transactions transaction = new Transactions(amount, date, balance, "DEPOSIT");
+        transactions.add(transaction);
         return account.getBalance();
     }
 
     public double withdraw(Account account, double amount) {
         balance -= amount;
-        withdrawHistory.put(java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n")), amount);
+        String date = java.time.ZonedDateTime.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm\n"));
+        Transactions transaction = new Transactions(amount, date, balance, "WITHDRAW");
+        transactions.add(transaction);
         return account.getBalance();
+    }
+
+    public String bankStatement() {
+        String output = "";
     }
 }

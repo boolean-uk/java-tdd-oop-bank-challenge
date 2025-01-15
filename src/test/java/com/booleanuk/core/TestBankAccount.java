@@ -31,7 +31,9 @@ public class TestBankAccount {
 
     @Test
     public void depositAddsTheRightAmount() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        assertTrue(account.deposit(1000));
+        assertEquals(1000, account.getBalance());
     }
 
     @Test

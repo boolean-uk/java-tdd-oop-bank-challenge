@@ -16,7 +16,7 @@ public class SavingsAccountTest {
         savingsAccount.deposit(5000, localDateTime1);
 
 
-        Assertions.assertEquals(500, savingsAccount.getBalance());
+        Assertions.assertEquals(5000, savingsAccount.getBalance());
     }
 
     @Test
@@ -29,7 +29,7 @@ public class SavingsAccountTest {
         savingsAccount.withdraw(450, localDateTime2);
 
 
-        Assertions.assertEquals(50, savingsAccount.getBalance());
+        Assertions.assertEquals(4550, savingsAccount.getBalance());
     }
 
     @Test
@@ -50,37 +50,12 @@ public class SavingsAccountTest {
         savingsAccount.deposit(5000, localDateTime1);
         savingsAccount.withdraw(450, localDateTime2);
 
-        ArrayList<String> statement = savingsAccount.generateStatement();
+        String statement = savingsAccount.generateStatement();
 
-        Assertions.assertEquals(" ",statement);
-
-    }
-
-    @Test
-    public void requestOverdraftOverTheLimit(){
-        Branch branch = new Branch("Gothenburg");
-        BankAccount savingsAccount = new SavingsAccount(branch);
-
-        LocalDateTime localDateTime1 = LocalDateTime.of(2020, 4, 15, 14, 46, 55);
-        LocalDateTime localDateTime2 = LocalDateTime.of(2021, 5, 13, 11, 52, 25);
-        currentAccount.deposit(500, localDateTime1);
-        currentAccount.withdraw(850, localDateTime2);
-
-        Assertions.assertEquals(-250, savingsAccount.getBalance());
-
-    }
-
-    @Test
-    public void requestOverdraftUnderTheLimit(){
-        Branch branch = new Branch("Gothenburg");
-        BankAccount savingsAccount = new SavingsAccount(branch);
-
-        LocalDateTime localDateTime1 = LocalDateTime.of(2020, 4, 15, 14, 46, 55);
-        LocalDateTime localDateTime2 = LocalDateTime.of(2021, 5, 13, 11, 52, 25);
-        currentAccount.deposit(500, localDateTime1);
-        currentAccount.withdraw(1100, localDateTime2);
-
-        Assertions.assertEquals(500, savingsAccount.getBalance());
+        Assertions.assertEquals("Date: " + localDateTime1 + " || amount: " + "+" + 5000.0 +
+                " || balance: " + 5000.0 + "\n" +
+                "Date: " + localDateTime2 + " || amount: " + "-" + 450.0 + " || balance: " + 4550.0 + "\n"
+                ,statement);
 
     }
 }

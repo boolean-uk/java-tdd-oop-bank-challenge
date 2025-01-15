@@ -8,7 +8,7 @@ public class BranchTest {
     @Test
     public void addAccountToBranch(){
         Branch branch = new Branch("Gothenburg");
-        BankAccount currentAccount = new CurrentAccountTest(branch);
+        BankAccount currentAccount = new CurrentAccount(branch);
 
         Assertions.assertTrue( branch.addAccount(currentAccount));
     }

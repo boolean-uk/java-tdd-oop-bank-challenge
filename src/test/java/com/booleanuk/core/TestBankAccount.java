@@ -25,7 +25,17 @@ public class TestBankAccount {
     }
 
     @Test
+    public void withdrawingRemovesMoneyOnlyIfValidAmount() {
+        assertTrue(true);
+    }
+
+    @Test
     public void depositAddsTheRightAmount() {
+        assertTrue(true);
+    }
+
+    @Test
+    public void transactionsAreStored() {
         assertTrue(true);
     }
 

@@ -27,4 +27,8 @@ public class Transaction {
     public String getTypeOfTransaction() {
         return typeOfTransaction;
     }
+
+    public Double getNewBalance() {
+        return newBalance;
+    }
 }

@@ -49,7 +49,15 @@ public class Account {
     }
 
     public double getBalance() {
-        return this.balance;
+        double total = 0.0;
+        for (Transaction transaction: this.transactions) {
+            if (transaction.getType().equals("deposit")) {
+                total += transaction.getAmount();
+            } else {
+                total -= transaction.getAmount();
+            }
+        }
+        return total;
     }
 
     public int getAccountNumber() {

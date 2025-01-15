@@ -27,7 +27,7 @@ public class TransactionTest {
     public void testFormattingDeposit() {
         Transaction deposit = new Transaction(100.0);
         String date = new SimpleDateFormat("yyyy.MM.dd HH:mm z").format(Calendar.getInstance().getTime());
-        String testString = String.format("%s || %8s || %8s ||", date, " ", 100.0);
+        String testString = String.format("%21s || %10s || %8s || ", date, " ", 100.0);
         Assertions.assertEquals(testString, deposit.toString());
     }
 
@@ -35,7 +35,7 @@ public class TransactionTest {
     public void testFormattingWithdrawal() {
         Transaction withdrawal = new Transaction(-100.0);
         String date = new SimpleDateFormat("yyyy.MM.dd HH:mm z").format(Calendar.getInstance().getTime());
-        String testString = String.format("%s || %8s || %8s ||", date, 100.0, " ");
+        String testString = String.format("%21s || %10s || %8s || ", date, 100.0, " ");
         Assertions.assertEquals(testString, withdrawal.toString());
     }
 

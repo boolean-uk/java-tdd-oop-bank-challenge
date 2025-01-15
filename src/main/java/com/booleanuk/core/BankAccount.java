@@ -13,7 +13,12 @@ public class BankAccount {
 
         Double totalBalance = 0D;
         for(Transaction transaction : listOfTransactions){
-            totalBalance += transaction.getAmount();
+            if(transaction.getTypeOfTransaction().equals("Withdraw")){
+                totalBalance -= transaction.getAmount();
+            }
+            else {
+                totalBalance += transaction.getAmount();
+            }
         }
 
         this.balance = Math.round(totalBalance * 100.0) / 100.0;
@@ -48,11 +53,20 @@ public class BankAccount {
     }
 
     public Double makeWithDraw(Double amount, LocalDateTime dateTime){
-        if((this.balance + amount) < this.balance){
-            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw", (this.balance + amount));
+        if(amount > 0){
+            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw", (this.balance - amount));
             this.listOfTransactions.add(withdraw);
-            this.balance += amount;
+            this.balance -= amount;
         }
         return this.balance;
+    }
+
+    public String generateBankStatements(){
+        String correctBankStatement = "Date                || Credit   || Debit  || Balance\n";
+        System.out.println(this.listOfTransactions.size());
+        for(int i = (this.listOfTransactions.size() - 1); i >= 0; i--){
+            correctBankStatement += this.listOfTransactions.get(i).formatTransactionForBankStatement() + "\n";
+        }
+        return correctBankStatement;
     }
 }

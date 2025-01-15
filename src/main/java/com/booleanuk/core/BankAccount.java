@@ -4,12 +4,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class BankAccount {
-    private Integer uniqueBankNumber;
+    private Integer uniqueBankAccountNumber;
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
+    private Integer bankID;
 
-    public BankAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions){
-        this.uniqueBankNumber = uniqueBankNumber;
+    public BankAccount(Integer uniqueBankAccountNumber, ArrayList<Transaction> listOfTransactions, Integer bankID){
+        this.uniqueBankAccountNumber = uniqueBankAccountNumber;
 
         Double totalBalance = 0D;
         for(Transaction transaction : listOfTransactions){
@@ -23,12 +24,14 @@ public class BankAccount {
 
         this.balance = Math.round(totalBalance * 100.0) / 100.0;
         this.listOfTransactions = listOfTransactions;
+        this.bankID = bankID;
     }
 
-    public BankAccount(Integer uniqueBankNumber){
-        this.uniqueBankNumber = uniqueBankNumber;
+    public BankAccount(Integer uniqueBankAccountNumber, Integer bankID){
+        this.uniqueBankAccountNumber = uniqueBankAccountNumber;
         this.balance = 0D;
         this.listOfTransactions = new ArrayList<Transaction>();
+        this.bankID = bankID;
     }
 
     public Double getBalance() {
@@ -45,7 +48,7 @@ public class BankAccount {
     }
 
     public Integer getUniqueBankNumber() {
-        return uniqueBankNumber;
+        return uniqueBankAccountNumber;
     }
 
     public ArrayList<Transaction> getListOfTransactions() {

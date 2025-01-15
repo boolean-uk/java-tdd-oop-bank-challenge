@@ -23,7 +23,7 @@ public class BankAccountTest {
 
     @Test
     public void balanceIncreasesWhenDepositingValidAmount(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
@@ -32,7 +32,7 @@ public class BankAccountTest {
 
     @Test
     public void balanceStaysTheSameWhenDepositingNonValidAmount(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
@@ -41,7 +41,7 @@ public class BankAccountTest {
 
     @Test
     public void balanceDecreasesWhenWithdrawingValidAmount(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
@@ -50,7 +50,7 @@ public class BankAccountTest {
 
     @Test
     public void balanceStaysTheSameWhenWithdrawingNonValidAmount(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
@@ -62,7 +62,7 @@ public class BankAccountTest {
 
     @Test
     public void correctBankStatementsAreOutputed(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
         String correctBankStatement =
                                 "Date                || Credit   || Debit  || Balance\n" +
                                 "2025-01-13T13:58:10 ||        || 500.0    || 400.0\n" +
@@ -80,7 +80,7 @@ public class BankAccountTest {
     // Im updating my getter (getBalance()) so it is calculated whenever its called.
     @Test
     public void getterCalculateCorrectly(){
-        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        BankAccount account = new CurrentAccount(1, listOfTransactions, 1);
 
         Assertions.assertEquals(400, account.getBalance());
     }

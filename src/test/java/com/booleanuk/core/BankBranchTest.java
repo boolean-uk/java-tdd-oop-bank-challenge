@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class BankBranchTest {
     private ArrayList<BankAccount> listOfBankAccounts = new ArrayList<>(){{
-        BankAccount currentAccount = new CurrentAccount(1);
+        BankAccount currentAccount = new CurrentAccount(1, 1);
         add(currentAccount);
 
-        BankAccount savingsAccount = new SavingsAccount(2);
+        BankAccount savingsAccount = new SavingsAccount(2, 1);
         add(savingsAccount);
     }};
 
@@ -18,7 +18,7 @@ public class BankBranchTest {
     @Test
     public void bankAccountIdExistsAlready(){
         BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
-        BankAccount existingAccount = new CurrentAccount(1);
+        BankAccount existingAccount = new CurrentAccount(1, 1);
 
         Assertions.assertFalse(bankBranch.addAccount(existingAccount));
     }
@@ -26,9 +26,14 @@ public class BankBranchTest {
     @Test
     public void bankAccountIdDontExists(){
         BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
-        BankAccount newAccount = new CurrentAccount(3);
+        BankAccount newAccount = new CurrentAccount(3, 1);
 
         Assertions.assertTrue(bankBranch.addAccount(newAccount));
     }
+
+
+
+
+
 
 }

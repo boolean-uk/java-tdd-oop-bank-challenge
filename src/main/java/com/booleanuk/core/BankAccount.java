@@ -23,12 +23,9 @@ public abstract class BankAccount {
         for (Transaction transaction : collection) {
             if (Objects.equals(transaction.getType(), "credit")) {
                 balance += transaction.getAmount();
-                System.out.println("money was added:" + transaction.getAmount());
             } else {
                 balance -= transaction.getAmount();
-                System.out.println("money went away" + transaction.getAmount());
             }
-            System.out.println("after transaction:" + balance);
         }
         return balance;
     }
@@ -40,5 +37,14 @@ public abstract class BankAccount {
         double balanceAfter = balance += amount;
         transactions.put(ID, new Transaction(ID, type, amount, date, balanceAfter));
         return "Deposit successfull!";
+    }
+
+    public String withdraw(double amount) {
+        int ID = (int) (Math.random()* 90000) + 10000;
+        String type = "debit";
+        String date = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        double balanceAfter = balance -= amount;
+        transactions.put(ID, new Transaction(ID, type, amount, date, balanceAfter));
+        return "Withdraw successfull!";
     }
 }

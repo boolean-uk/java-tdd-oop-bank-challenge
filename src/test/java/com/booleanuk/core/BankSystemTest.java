@@ -8,14 +8,14 @@ public class BankSystemTest {
     @Test
     public void makeDepositTest() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         Assertions.assertNotEquals(null, bank.makeDeposit(acc.getID(), 200.0F));
     }
 
     @Test
     public void makeDepositAndCheckTransactionAmountTest() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction = bank.makeDeposit(acc.getID(), 200.0F);
         Assertions.assertEquals(200.0F, transaction.getAmount());
     }
@@ -23,7 +23,7 @@ public class BankSystemTest {
     @Test
     public void makeDepositAndCheckWrongTransactionAmountTest() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction = bank.makeDeposit(acc.getID(), 200.0F);
         Assertions.assertNotEquals(0F, transaction.getAmount());
     }
@@ -31,26 +31,37 @@ public class BankSystemTest {
     @Test
     public void checkDepositIsLoggedCorrectlyTest() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction = bank.makeDeposit(acc.getID(), 200.0F);
-        Assertions.assertEquals(transaction.getID(), bank.transactionMap.get(transaction.ID()).get(0).getID());
+        Assertions.assertEquals(transaction.getID(), bank.transactionMap.get(acc.getID()).get(0).getID());
     }
 
     @Test
-    public void checkDepositIsLoggedCorrectlyTest() {
+    public void checkDepositIsLoggedCorrectlyTest2() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction1 = bank.makeDeposit(acc.getID(), 200.0F);
         Transaction transaction2 = bank.makeDeposit(acc.getID(), 500.0F);
-        Assertions.assertEquals(transaction2.getAmount(), bank.transactionMap.get(transaction2.getAmount()).get(1).getID());
+        Assertions.assertEquals(transaction2.getAmount(), bank.transactionMap.get(acc.getID()).get(1).getAmount());
     }
 
     @Test
     public void makeWithdrawalAndCheckTransactionAmountTest() {
         BankSystem bank = new BankSystem();
-        Account acc = new Account(AccountType.CURRENT);
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
         acc.deposit(500F);
         Transaction transaction = bank.makeWithdrawal(acc.getID(), 400.0F);
-        Assertions.assertEquals(400.0F, transaction.getAmount());
+        Assertions.assertEquals(-400.0F, transaction.getAmount());
+    }
+
+    @Test
+    public void generateStatementTest() {
+        BankSystem bank = new BankSystem();
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
+        bank.makeDeposit(acc.getID(), 200.0F);
+        bank.makeDeposit(acc.getID(), 500.0F);
+        bank.makeDeposit(acc.getID(), 500.0F);
+        bank.makeWithdrawal(acc.getID(), 300.0F);
+        System.out.println(bank.generateStatement(acc.getID()));
     }
 }

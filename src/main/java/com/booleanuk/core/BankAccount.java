@@ -11,13 +11,14 @@ public abstract class BankAccount {
 
     public BankAccount() {
         Random random = new Random();
+        // account nrs can technically have leading 0s, but i'm not allowing that here
         this.accountNumber = random.nextInt(10000000, 99999999);
         this.balance = 0;
         this.transactions = new ArrayList<>();
     }
 
     public boolean withdraw(double amount) {
-        return true;
+        return false;
     }
 
     public boolean deposit(double amount) {

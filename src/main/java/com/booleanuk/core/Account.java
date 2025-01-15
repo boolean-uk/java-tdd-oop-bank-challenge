@@ -45,14 +45,14 @@ public class Account {
 
     public String bankStatement() {
         String output = String.format("%1$10s %2$10s %3$10s %4$10s %5$10s %6$10s %7$10s","Date", "||","Credit","||","Debit","||","Balance\n");
-        ArrayList<Transactions> temp = getTransactions();
-        Collections.reverse(temp);
+        ArrayList<Transactions> transactions = getTransactions();
+        Collections.reverse(transactions);
 
-        for (int i = 0; i < temp.size(); i++) {
-            if (temp.get(i).getType().equals("DEPOSIT")) {
-                output += String.format("%1$10s %2$10s %3$10s %4$10s %5$10s %6$10s %7$10s",temp.get(i).getDate(), "||",temp.get(i).getAmount(),"||","","||",temp.get(i).getBalance()+"\n");
+        for (int i = 0; i < transactions.size(); i++) {
+            if (transactions.get(i).getType().equals("DEPOSIT")) {
+                output += String.format("%1$10s %2$10s %3$10s %4$10s %5$10s %6$10s %7$10s",transactions.get(i).getDate(), "||",transactions.get(i).getAmount(),"||","","||",transactions.get(i).getBalance()+"\n");
             } else {
-                output += String.format("%1$10s %2$10s %3$10s %4$10s %5$10s %6$10s %7$10s",temp.get(i).getDate(), "||","","||",temp.get(i).getAmount(),"||",temp.get(i).getBalance()+"\n");
+                output += String.format("%1$10s %2$10s %3$10s %4$10s %5$10s %6$10s %7$10s",transactions.get(i).getDate(), "||","","||",transactions.get(i).getAmount(),"||",transactions.get(i).getBalance()+"\n");
             }
         }
         System.out.println(output);
@@ -60,6 +60,15 @@ public class Account {
     }
 
     public double calculateBalance() {
-
+        double total = 0;
+        ArrayList<Transactions> transactions = getTransactions();
+        for (int i = 0; i < transactions.size(); i++) {
+            if (transactions.get(i).getType().equals("DEPOSIT")) {
+                total += transactions.get(i).getAmount();
+            } else {
+                total -= transactions.get(i).getAmount();
+            }
+        }
+        return total;
     }
 }

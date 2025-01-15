@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Objects;
@@ -27,5 +29,14 @@ public class BankAccount {
             System.out.println(balance);
         }
         return balance;
+    }
+
+    public String deposit(double amount) {
+        int ID = (int) (Math.random()* 90000) + 10000;
+        String type = "credit";
+        String date = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        double balanceAfter = balance += amount;
+        transactions.put(ID, new Transaction(ID, type, amount, date, balanceAfter));
+        return "Deposit successfull!";
     }
 }

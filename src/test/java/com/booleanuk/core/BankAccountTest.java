@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.PrintStream;
 import java.util.HashMap;
 
 public class BankAccountTest {
@@ -13,14 +14,14 @@ public class BankAccountTest {
     @BeforeEach
     public void setUp() {
         HashMap<Integer, Transaction> savingsTransactions = new HashMap<>() {{
-            put(12345, new Transaction(12345, "credit", 200.0, "2025-01-15", 200.0));
-            put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15", 100.0));
-            put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16", 150.0));
+            put(12345, new Transaction(12345, "credit", 200.0, "2025-01-14T10:00:00", 200.0));
+            put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15T08:00:00", 100.0));
+            put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16T01:00:00", 150.0));
         }};
         HashMap<Integer, Transaction> currentTransactions = new HashMap<>() {{
-            put(12345, new Transaction(12345, "credit", 200.0, "2025-01-15", 200.0));
-            put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15", 100.0));
-            put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16", 150.0));
+            put(12345, new Transaction(12345, "credit", 200.0, "2025-01-14T10:00:00", 200.0));
+            put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15T08:00:00", 100.0));
+            put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16T01:00:00", 150.0));
         }};
         savingsAccount = new SavingsAccount(savingsTransactions, 87654321, 0.0);
         currentAccount = new CurrentAccount(currentTransactions, 54321678, 0.0);
@@ -46,5 +47,16 @@ public class BankAccountTest {
         Assertions.assertEquals("Withdraw successfull!", currentAccount.withdraw(20.0));
         Assertions.assertEquals(90.0, savingsAccount.getBalance());
         Assertions.assertEquals(130.0, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testGenerateBankStatement() {
+        String expectedOutput = "date || credit || debit || balance \n" +
+                                "2025-01-16 01:00:00 || 50.00 ||     || 150.00 \n" +
+                                "2025-01-15 08:00:00 ||    || 100.00 || 100.00 \n" +
+                                "2025-01-14 10:00:00 || 200.00 ||      || 200.00 \n";
+        Assertions.assertEquals(expectedOutput, savingsAccount.generateBankStatement());
+        Assertions.assertEquals(expectedOutput, currentAccount.generateBankStatement());
+
     }
 }

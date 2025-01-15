@@ -39,6 +39,11 @@ public class BankAccount {
     }
 
     public Double makeDeposit(Double amount, LocalDateTime dateTime){
-        return 600D;
+        if((this.balance + amount) > this.balance){
+            Transaction deposit = new Transaction(dateTime, amount, "Deposit");
+            this.listOfTransactions.add(deposit);
+            this.balance += amount;
+        }
+        return this.balance;
     }
 }

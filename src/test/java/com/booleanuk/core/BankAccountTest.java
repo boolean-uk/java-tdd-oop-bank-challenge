@@ -17,16 +17,25 @@ public class BankAccountTest {
         add(transaction2);
 
         LocalDateTime dateTime3 = dateTime1.plusDays(2);
-        Transaction transaction3 = new Transaction(dateTime3, 500D, "Withdraw");
+        Transaction transaction3 = new Transaction(dateTime3, -500D, "Withdraw");
         add(transaction3);
     }};
 
     @Test
-    public void balanceIncreases(){
+    public void balanceIncreasesWhenInputingValidAmount(){
         BankAccount account = new CurrentAccount(1, listOfTransactions);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
         Assertions.assertEquals(600D, account.makeDeposit(200D, dateTime));
+    }
+
+    @Test
+    public void balanceStaysTheSameWhenInputingNonValidAmount(){
+        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        LocalDateTime dateTime = LocalDateTime.now();
+        dateTime = dateTime.plusDays(4);
+
+        Assertions.assertEquals(400D, account.makeDeposit(-200D, dateTime));
     }
 }

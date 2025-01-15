@@ -18,7 +18,7 @@ public abstract class BankAccount {
     }
 
     public boolean withdraw(double amount) {
-        return false;
+        return amount <= balance;
     }
 
     // maybe can be void... or maybe consider overflow?

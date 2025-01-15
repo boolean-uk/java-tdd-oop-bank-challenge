@@ -40,7 +40,7 @@ public class BankBranchTest {
         BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
         BankAccount newAccount = new CurrentAccount(3, 1);
 
-        Assertions.assertEquals(1, bankBranch.belongsBankAccountToBankBranch(newAccount));
+        Assertions.assertTrue(bankBranch.belongsBankAccountToBankBranch(newAccount));
     }
 
 

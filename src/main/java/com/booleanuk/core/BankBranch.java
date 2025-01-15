@@ -28,4 +28,8 @@ public class BankBranch {
         this.listOfBankAccounts.add(accountToAdd);
         return true;
     }
+
+    public Boolean belongsBankAccountToBankBranch(BankAccount bankAccount){
+        return true;
+    }
 }

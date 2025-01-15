@@ -57,6 +57,9 @@ public class Account {
         }
         System.out.println(output);
         return output;
+    }
+
+    public double calculateBalance() {
 
     }
 }

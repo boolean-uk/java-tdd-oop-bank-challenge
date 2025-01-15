@@ -48,4 +48,16 @@ public class AccountTest {
 
         Assertions.assertEquals(0, sb.compareTo(sb2));
     }
+
+    @Test
+    public void testCalculatingBalance() {
+        CurrentAccount currentAccount = new CurrentAccount(123456789);
+
+        currentAccount.deposit(1500);
+        currentAccount.withdraw(500);
+        currentAccount.deposit(1000);
+
+        Assertions.assertEquals(2000, currentAccount.calculateBalance());
+
+    }
 }

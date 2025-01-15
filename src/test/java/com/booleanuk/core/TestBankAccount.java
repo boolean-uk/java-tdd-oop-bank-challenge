@@ -122,4 +122,21 @@ public class TestBankAccount {
         SavingsAccount account = new SavingsAccount(523611);
         assertFalse(account.setMaxOverdraft(-50));
     }
+
+    @Test
+    public void cannotGoBeyondOverdraftLimit() {
+        SavingsAccount account = new SavingsAccount(123456);
+        account.deposit(100);
+        assertFalse(account.withdraw(200));
+        assertEquals(100, account.getBalance());
+    }
+
+    @Test
+    public void canHaveNegativeBalanceWithinOverdraft() {
+        SavingsAccount account = new SavingsAccount(123456);
+        account.deposit(100);
+        account.setMaxOverdraft(200);
+        assertTrue(account.withdraw(200));
+        assertEquals(-100, account.getBalance());
+    }
 }

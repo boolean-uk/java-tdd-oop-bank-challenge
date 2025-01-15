@@ -3,6 +3,11 @@ package com.booleanuk.core;
 public class SavingsAccount extends BankAccount {
     private double maxOverdraft;
 
+    public SavingsAccount(String accountNumber, String branchNumber) {
+        super(accountNumber, branchNumber);
+        this.maxOverdraft = 0;
+    }
+
     public SavingsAccount(int branchNumber) {
         super(branchNumber);
         this.maxOverdraft = 0;

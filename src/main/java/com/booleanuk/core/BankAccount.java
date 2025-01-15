@@ -22,6 +22,13 @@ public abstract class BankAccount {
         this.transactions = new ArrayList<>();
     }
 
+    public BankAccount(String accountNumber, String branchNumber) {
+        // todo: make sure numbers are OK length
+        this.accountNumber = accountNumber;
+        this.branchNumber = branchNumber;
+        this.transactions = new ArrayList<>();
+    }
+
     public boolean withdraw(double amount, LocalDateTime dateTime) {
         double balance = this.getBalance();
         if (amount <= balance) {

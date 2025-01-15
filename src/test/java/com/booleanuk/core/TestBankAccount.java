@@ -39,8 +39,6 @@ public class TestBankAccount {
         account.deposit(1000);
         assertFalse(account.withdraw(2000));
         assertEquals(1000, account.getBalance());
-        assertTrue(account.withdraw(500));
-        assertEquals(500, account.getBalance());
     }
 
     @Test

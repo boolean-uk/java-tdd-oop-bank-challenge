@@ -18,7 +18,9 @@ public abstract class BankAccount {
     }
 
     public boolean withdraw(double amount) {
-        balance -= amount;
+        if (amount <= balance) {
+            balance -= amount;
+        }
         return amount <= balance;
     }
 

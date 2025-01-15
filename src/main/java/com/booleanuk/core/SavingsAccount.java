@@ -6,13 +6,13 @@ public class SavingsAccount extends BankAccount{
     private Integer uniqueBankNumber;
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
-    private Integer bankID;
+    private Integer branchID;
 
-    public SavingsAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions, Integer bankID){
-        super(uniqueBankNumber, listOfTransactions, bankID);
+    public SavingsAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions, Integer branchID){
+        super(uniqueBankNumber, listOfTransactions, branchID);
     }
 
-    public SavingsAccount(Integer uniqueBankNumber, Integer bankID){
-        super(uniqueBankNumber, bankID);
+    public SavingsAccount(Integer uniqueBankNumber, Integer branchID){
+        super(uniqueBankNumber, branchID);
     }
 }

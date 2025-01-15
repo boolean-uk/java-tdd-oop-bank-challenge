@@ -29,7 +29,4 @@ public class BankBranch {
         return true;
     }
 
-    public Boolean belongsBankAccountToBankBranch(BankAccount bankAccount){
-        return true;
-    }
 }

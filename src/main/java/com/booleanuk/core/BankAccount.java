@@ -7,9 +7,9 @@ public class BankAccount {
     private Integer uniqueBankAccountNumber;
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
-    private Integer bankID;
+    private Integer branchID;
 
-    public BankAccount(Integer uniqueBankAccountNumber, ArrayList<Transaction> listOfTransactions, Integer bankID){
+    public BankAccount(Integer uniqueBankAccountNumber, ArrayList<Transaction> listOfTransactions, Integer branchID){
         this.uniqueBankAccountNumber = uniqueBankAccountNumber;
 
         Double totalBalance = 0D;
@@ -24,14 +24,14 @@ public class BankAccount {
 
         this.balance = Math.round(totalBalance * 100.0) / 100.0;
         this.listOfTransactions = listOfTransactions;
-        this.bankID = bankID;
+        this.branchID = branchID;
     }
 
-    public BankAccount(Integer uniqueBankAccountNumber, Integer bankID){
+    public BankAccount(Integer uniqueBankAccountNumber, Integer branchID){
         this.uniqueBankAccountNumber = uniqueBankAccountNumber;
         this.balance = 0D;
         this.listOfTransactions = new ArrayList<Transaction>();
-        this.bankID = bankID;
+        this.branchID = branchID;
     }
 
     public Double getBalance() {
@@ -53,6 +53,10 @@ public class BankAccount {
 
     public ArrayList<Transaction> getListOfTransactions() {
         return listOfTransactions;
+    }
+
+    public Integer getBranchID() {
+        return branchID;
     }
 
     public Double makeDeposit(Double amount, LocalDateTime dateTime){

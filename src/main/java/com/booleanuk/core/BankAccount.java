@@ -7,18 +7,17 @@ import java.util.Random;
 
 public abstract class BankAccount {
     private final int accountNumber;
-    private double balance;
     private final List<Transaction> transactions;
 
     public BankAccount() {
         Random random = new Random();
         // account nrs can technically have leading 0s, but i'm not allowing that here
         this.accountNumber = random.nextInt(10000000, 99999999);
-        this.balance = 0;
         this.transactions = new ArrayList<>();
     }
 
     public boolean withdraw(double amount) {
+        double balance = this.getBalance();
         if (amount <= balance) {
             balance -= amount;
             transactions.add(new Transaction(-amount, balance, LocalDateTime.now()));
@@ -28,8 +27,9 @@ public abstract class BankAccount {
 
     // maybe can be void... or maybe consider overflow?
     public boolean deposit(double amount) {
+        double balance = this.getBalance();
         balance += amount;
-        transactions.add(new Transaction(amount, this.balance, LocalDateTime.now()));
+        transactions.add(new Transaction(amount, balance, LocalDateTime.now()));
         return true;
     }
 
@@ -58,6 +58,10 @@ public abstract class BankAccount {
     }
 
     public double getBalance() {
+        double balance = 0;
+        for (Transaction t : transactions) {
+            balance += t.getAmount();
+        }
         return balance;
     }
 

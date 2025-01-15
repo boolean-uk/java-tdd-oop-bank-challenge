@@ -3,6 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TestCurrentAccount {
 
     @Test
@@ -12,6 +15,14 @@ public class TestCurrentAccount {
         Assertions.assertEquals(100.00f, currentAccount.getBalance());
         currentAccount.deposit(74.00f);
         Assertions.assertEquals(174.00f, currentAccount.getBalance());
+    }
+
+    @Test
+    public void testInsufficientFunds(){
+        CurrentAccount currentAccount = new CurrentAccount();
+        currentAccount.deposit(100.00f);
+        currentAccount.withdraw(500.00f);
+        Assertions.assertEquals(100.00f, currentAccount.getBalance());
     }
 
     @Test
@@ -41,10 +52,14 @@ public class TestCurrentAccount {
 
     @Test
     public void testStatement(){
+        DateTimeFormatter testFormatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
         CurrentAccount currentAccount = new CurrentAccount();
         currentAccount.deposit(1000.00f);
         currentAccount.deposit(2000.00f);
         currentAccount.withdraw(500.00f);
-        System.out.println(currentAccount.generateStatement());
+        String expected = "date||credit||debit||balance\n" + LocalDateTime.now().format(testFormatter) +
+                "||||500.0||2500.0\n" + LocalDateTime.now().format(testFormatter) + "||2000.0||||3000.0\n" +
+                LocalDateTime.now().format(testFormatter) + "||1000.0||||1000.0";
+        Assertions.assertEquals(expected, currentAccount.generateStatement().replaceAll("[ ]+", "").strip());
     }
 }

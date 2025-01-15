@@ -34,7 +34,10 @@ public abstract class BankAccount {
     }
 
     public String generateBankStatement() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("date\t||credit\t||debit\t||balance\n");
+
+        return sb.toString();
     }
 
     public int getAccountNumber() {

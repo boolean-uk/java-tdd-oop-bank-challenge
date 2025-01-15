@@ -44,5 +44,13 @@ public class BankBranchTest {
         Assertions.assertTrue(bankBranch.belongsBankAccountToBankBranch(newAccount));
     }
 
+    @Test
+    public void bankAccountIsNotIncludedInBankBranchListOfBankAccounts(){
+        BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
+        BankAccount newAccount = new CurrentAccount(3, 1);
+
+        Assertions.assertFalse(bankBranch.belongsBankAccountToBankBranch(newAccount));
+    }
+
 
 }

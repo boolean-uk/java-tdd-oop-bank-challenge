@@ -1,5 +1,8 @@
 package com.booleanuk.core;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -14,9 +17,16 @@ public class BankAccountTest {
         add(transaction2);
 
         LocalDateTime dateTime3 = dateTime1.plusDays(2);
-        Transaction transaction3 = new Transaction(dateTime3, 900D, "Withdraw");
+        Transaction transaction3 = new Transaction(dateTime3, 500D, "Withdraw");
         add(transaction3);
     }};
 
+    @Test
+    public void balanceIncreases(){
+        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        LocalDateTime dateTime = LocalDateTime.now();
+        dateTime = dateTime.plusDays(4);
 
+        Assertions.assertEquals(600D, account.makeDeposit(200D, dateTime));
+    }
 }

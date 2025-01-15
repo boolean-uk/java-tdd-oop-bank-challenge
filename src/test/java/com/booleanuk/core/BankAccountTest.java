@@ -9,15 +9,15 @@ import java.util.ArrayList;
 public class BankAccountTest {
     private ArrayList<Transaction> listOfTransactions = new ArrayList<>(){{
         LocalDateTime dateTime1 = LocalDateTime.now();
-        Transaction transaction1 = new Transaction(dateTime1, 200D, "Deposit");
+        Transaction transaction1 = new Transaction(dateTime1, 200D, "Deposit", 200D);
         add(transaction1);
 
         LocalDateTime dateTime2 = dateTime1.plusHours(1);
-        Transaction transaction2 = new Transaction(dateTime2, 700D, "Deposit");
+        Transaction transaction2 = new Transaction(dateTime2, 700D, "Deposit", 900D);
         add(transaction2);
 
         LocalDateTime dateTime3 = dateTime1.plusDays(2);
-        Transaction transaction3 = new Transaction(dateTime3, -500D, "Withdraw");
+        Transaction transaction3 = new Transaction(dateTime3, -500D, "Withdraw", 400D);
         add(transaction3);
     }};
 

@@ -40,7 +40,7 @@ public class BankAccount {
 
     public Double makeDeposit(Double amount, LocalDateTime dateTime){
         if((this.balance + amount) > this.balance){
-            Transaction deposit = new Transaction(dateTime, amount, "Deposit");
+            Transaction deposit = new Transaction(dateTime, amount, "Deposit", (this.balance + amount));
             this.listOfTransactions.add(deposit);
             this.balance += amount;
         }
@@ -49,7 +49,7 @@ public class BankAccount {
 
     public Double makeWithDraw(Double amount, LocalDateTime dateTime){
         if((this.balance + amount) < this.balance){
-            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw");
+            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw", (this.balance + amount));
             this.listOfTransactions.add(withdraw);
             this.balance += amount;
         }

@@ -13,4 +13,16 @@ public class Transaction {
         this.amount = amount;
         this.typeOfTransaction = typeOfTransaction;
     }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public String getTypeOfTransaction() {
+        return typeOfTransaction;
+    }
 }

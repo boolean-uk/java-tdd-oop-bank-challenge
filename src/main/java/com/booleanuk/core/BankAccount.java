@@ -7,15 +7,19 @@ public class BankAccount {
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
 
-    public BankAccount(Integer uniqueBankNumber, Double balance, ArrayList<Transaction> listOfTransactions){
+    public BankAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions){
         this.uniqueBankNumber = uniqueBankNumber;
-        this.balance = balance;
+
+        for(Transaction transaction : listOfTransactions){
+            this.balance += transaction.getAmount();
+        }
+        this.balance = Math.round(this.balance * 100.0) / 100.0;
         this.listOfTransactions = listOfTransactions;
     }
 
-    public BankAccount(Integer uniqueBankNumber, Double balance){
+    public BankAccount(Integer uniqueBankNumber){
         this.uniqueBankNumber = uniqueBankNumber;
-        this.balance = balance;
+        this.balance = 0D;
         this.listOfTransactions = new ArrayList<Transaction>();
     }
 

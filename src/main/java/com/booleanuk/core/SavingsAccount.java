@@ -7,11 +7,11 @@ public class SavingsAccount extends BankAccount{
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
 
-    public SavingsAccount(Integer uniqueBankNumber, Double balance, ArrayList<Transaction> listOfTransactions){
-        super(uniqueBankNumber, balance, listOfTransactions);
+    public SavingsAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions){
+        super(uniqueBankNumber, listOfTransactions);
     }
 
-    public SavingsAccount(Integer uniqueBankNumber, Double balance){
-        super(uniqueBankNumber, balance);
+    public SavingsAccount(Integer uniqueBankNumber){
+        super(uniqueBankNumber);
     }
 }

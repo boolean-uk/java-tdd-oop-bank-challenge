@@ -7,11 +7,11 @@ public class CurrentAccount extends BankAccount{
     private Double balance;
     private ArrayList<Transaction> listOfTransactions;
 
-    public CurrentAccount(Integer uniqueBankNumber, Double balance, ArrayList<Transaction> listOfTransactions){
-        super(uniqueBankNumber, balance, listOfTransactions);
+    public CurrentAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions){
+        super(uniqueBankNumber, listOfTransactions);
     }
 
-    public CurrentAccount(Integer uniqueBankNumber, Double balance){
-        super(uniqueBankNumber, balance);
+    public CurrentAccount(Integer uniqueBankNumber){
+        super(uniqueBankNumber);
     }
 }

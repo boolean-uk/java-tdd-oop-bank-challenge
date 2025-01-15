@@ -32,7 +32,16 @@ public class BankAccount {
     }
 
     public Double getBalance() {
-        return balance;
+        Double calculatedBalance = 0D;
+        for(Transaction transaction : listOfTransactions){
+            if(transaction.getTypeOfTransaction().equals("Withdraw")){
+                calculatedBalance -= transaction.getAmount();
+            }
+            else {
+                calculatedBalance += transaction.getAmount();
+            }
+        }
+        return calculatedBalance;
     }
 
     public Integer getUniqueBankNumber() {
@@ -44,8 +53,8 @@ public class BankAccount {
     }
 
     public Double makeDeposit(Double amount, LocalDateTime dateTime){
-        if((this.balance + amount) > this.balance){
-            Transaction deposit = new Transaction(dateTime, amount, "Deposit", (this.balance + amount));
+        if((this.getBalance() + amount) > this.getBalance()){
+            Transaction deposit = new Transaction(dateTime, amount, "Deposit", (this.getBalance() + amount));
             this.listOfTransactions.add(deposit);
             this.balance += amount;
         }
@@ -54,7 +63,7 @@ public class BankAccount {
 
     public Double makeWithDraw(Double amount, LocalDateTime dateTime){
         if(amount > 0){
-            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw", (this.balance - amount));
+            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw", (this.getBalance() - amount));
             this.listOfTransactions.add(withdraw);
             this.balance -= amount;
         }

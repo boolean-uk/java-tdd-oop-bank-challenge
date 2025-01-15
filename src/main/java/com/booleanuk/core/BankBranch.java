@@ -20,6 +20,12 @@ public class BankBranch {
     }
 
     public boolean addAccount(BankAccount accountToAdd){
-        return false;
+        for(BankAccount account : this.listOfBankAccounts){
+            if(account.getUniqueBankNumber() == accountToAdd.getUniqueBankNumber()){
+                return false;
+            }
+        }
+        this.listOfBankAccounts.add(accountToAdd);
+        return true;
     }
 }

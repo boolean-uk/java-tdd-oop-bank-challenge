@@ -20,8 +20,15 @@ public class BankBranchTest {
         BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
         BankAccount existingAccount = new CurrentAccount(1, 5000D);
 
-
         Assertions.assertFalse(bankBranch.addAccount(existingAccount));
+    }
+
+    @Test
+    public void bankAccountIdDontExists(){
+        BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
+        BankAccount newAccount = new CurrentAccount(3, 5000D);
+
+        Assertions.assertTrue(bankBranch.addAccount(newAccount));
     }
 
 }

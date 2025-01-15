@@ -18,4 +18,16 @@ public class BankAccount {
         this.balance = balance;
         this.listOfTransactions = new ArrayList<Transaction>();
     }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public Integer getUniqueBankNumber() {
+        return uniqueBankNumber;
+    }
+
+    public ArrayList<Transaction> getListOfTransactions() {
+        return listOfTransactions;
+    }
 }

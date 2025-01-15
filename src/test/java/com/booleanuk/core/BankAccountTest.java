@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashMap;
 
 public class BankAccountTest {
+    private BankAccount bankAccount;
 
     @BeforeEach
     public void setUp() {
@@ -15,11 +16,11 @@ public class BankAccountTest {
             put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15", 100.0));
             put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16", 150.0));
         }};
-        Bankaccount bankaccount = new Bankaccount(12345678, transactions, 0.0);
+        bankAccount = new BankAccount(transactions, 12345678, 0.0);
     }
 
     @Test
     public void testGetBalance() {
-        Assertions.assertEquals(150.0, bankaccount.getBalance(12345678));
+        Assertions.assertEquals(150.0, bankAccount.getBalance());
     }
 }

@@ -6,13 +6,21 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class BankAccount {
-    private final int accountNumber;
+    private final String accountNumber;
+    private final String branchNumber;
     private final List<Transaction> transactions;
 
-    public BankAccount() {
+    public BankAccount(int branchNumber) {
         Random random = new Random();
-        // account nrs can technically have leading 0s, but i'm not allowing that here
-        this.accountNumber = random.nextInt(10000000, 99999999);
+        int randomAccountNumber = random.nextInt(99999999);
+        this.accountNumber = "0".repeat((int) (8 - Math.ceil(Math.log10(randomAccountNumber)))) + randomAccountNumber;
+        if (branchNumber > 999999) {
+            System.out.println("Invalid branch code (must be 6 digit number). Branch code will be set to 0.");
+            branchNumber = 0;
+        }
+        this.branchNumber = "0".repeat((int) (6 - Math.ceil(Math.log10(branchNumber)))) + branchNumber;
+        System.out.println(this.accountNumber);
+        System.out.println(this.branchNumber);
         this.transactions = new ArrayList<>();
     }
 
@@ -53,7 +61,7 @@ public abstract class BankAccount {
         return sb.toString();
     }
 
-    public int getAccountNumber() {
+    public String getAccountNumber() {
         return accountNumber;
     }
 
@@ -67,5 +75,9 @@ public abstract class BankAccount {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public String getBranchNumber() {
+        return branchNumber;
     }
 }

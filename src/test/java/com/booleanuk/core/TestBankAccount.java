@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 public class TestBankAccount {
     @Test
     public void newAccountInstancesAreValid() {
-        BankAccount currentAccount = new CurrentAccount();
-        BankAccount savingsAccount = new CurrentAccount();
-        assertTrue(currentAccount.getAccountNumber() / 10000000 >= 1);
+        BankAccount currentAccount = new CurrentAccount(999999);
+        assertEquals(8, currentAccount.getAccountNumber().length());
+        assertEquals(6, currentAccount.getBranchNumber().length());
         assertEquals(0, currentAccount.getBalance());
         assertEquals(0, currentAccount.getTransactions().size());
     }

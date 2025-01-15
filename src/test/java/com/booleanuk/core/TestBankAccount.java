@@ -89,7 +89,10 @@ public class TestBankAccount {
 
     @Test
     public void generateStatementOnNoTransactions() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        assertEquals(
+                "date\t||credit\t||debit\t||balance",
+                account.generateBankStatement());
     }
 
     @Test

@@ -12,7 +12,7 @@ public abstract class Account {
             return null;
         }
 
-        Transaction transaction = new Transaction(amount, getBalance(), true);
+        Transaction transaction = new Transaction(amount, getBalance() + amount, true);
         transactions.add(transaction);
 
         return transaction;
@@ -24,7 +24,7 @@ public abstract class Account {
             return null;
         }
 
-        Transaction transaction = new Transaction(amount, getBalance(), false);
+        Transaction transaction = new Transaction(amount, getBalance() - amount, false);
         transactions.add(transaction);
 
         return transaction;
@@ -54,7 +54,7 @@ public abstract class Account {
         String format = "| %-" + cellWidth + "s | %-" + cellWidth + "s | %-" + cellWidth + "s | %-" + cellWidth
                 + "s |%n";
         // add headers
-        sb.append(String.format(format, "Date", "Credit", "Debit", "getBalance()"));
+        sb.append(String.format(format, "Date", "Credit", "Debit", "Balance"));
 
         List<Transaction> descending = transactions.reversed();
 

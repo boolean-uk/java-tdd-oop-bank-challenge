@@ -3,7 +3,9 @@ package com.booleanuk.core;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class AccountTest {
 
@@ -40,8 +42,24 @@ public class AccountTest {
         account.makeTransaction(500.0);
         account.makeTransaction(-100.0);
         Assertions.assertEquals(400.0, account.getBalance());
-        Assertions.assertEquals("withdrawal", account.getTransactions().getFirst().getType());
+        Assertions.assertEquals("withdrawal", account.getTransactions().get(1).getType());
     }
+
+    @Test
+    public void testStatementGeneration() {
+        Account account = new Account(12345678);
+        account.makeTransaction(500.0);
+        account.makeTransaction(-100.0);
+        account.makeTransaction(150.0);
+        String date = new SimpleDateFormat("yyyy.MM.dd HH:mm z").format(Calendar.getInstance().getTime());
+        StringBuilder stringbuilder = new StringBuilder();
+        stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", "Date", "Withdrawal", "Deposit", "Balance"));
+        stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", date, " ", "500.0", "500.0"));
+        stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", date, "100.0", " ", "400.0"));
+        stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", date, " ", "150.0", "550.0"));
+        Assertions.assertEquals(0, stringbuilder.compareTo(account.generateStatement()));
+    }
+
 
 
 

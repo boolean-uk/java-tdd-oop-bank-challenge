@@ -50,7 +50,10 @@ public class TestBankAccount {
 
     @Test
     public void transactionsAreStored() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        assertTrue(account.deposit(1000));
+        assertTrue(account.withdraw(100));
+        assertEquals(2, account.getTransactions().size());
     }
 
     @Test

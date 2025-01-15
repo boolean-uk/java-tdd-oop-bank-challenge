@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 public class SavingsAccount extends Account{
 
+    private int maxWithdraws = 12;
     private int totWithdraws;
 
     public SavingsAccount() {

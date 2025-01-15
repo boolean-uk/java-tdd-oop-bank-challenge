@@ -12,6 +12,18 @@ public abstract class Account {
         return balance;
     }
 
+    public float calculateBalance(){
+        balance = 0.00f;
+        for (Transaction t : transactions){
+            if (t.getIsWithdrawal()){
+                balance -= t.getAmount();
+            }else {
+                balance += t.getAmount();
+            }
+        }
+        return  balance;
+    }
+
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }

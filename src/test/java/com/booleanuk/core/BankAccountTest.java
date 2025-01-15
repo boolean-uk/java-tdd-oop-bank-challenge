@@ -22,7 +22,7 @@ public class BankAccountTest {
     }};
 
     @Test
-    public void balanceIncreasesWhenInputingValidAmount(){
+    public void balanceIncreasesWhenDepositingValidAmount(){
         BankAccount account = new CurrentAccount(1, listOfTransactions);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
@@ -31,7 +31,7 @@ public class BankAccountTest {
     }
 
     @Test
-    public void balanceStaysTheSameWhenInputingNonValidAmount(){
+    public void balanceStaysTheSameWhenDepositingNonValidAmount(){
         BankAccount account = new CurrentAccount(1, listOfTransactions);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
@@ -40,11 +40,20 @@ public class BankAccountTest {
     }
 
     @Test
-    public void balanceDecreasesWhenInputingValidAmount(){
+    public void balanceDecreasesWhenWithdrawingValidAmount(){
         BankAccount account = new CurrentAccount(1, listOfTransactions);
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
         Assertions.assertEquals(300D, account.makeWithDraw(100D, dateTime));
+    }
+
+    @Test
+    public void balanceStaysTheSameWhenWithdrawingNonValidAmount(){
+        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        LocalDateTime dateTime = LocalDateTime.now();
+        dateTime = dateTime.plusDays(4);
+
+        Assertions.assertEquals(400D, account.makeWithDraw(-100D, dateTime));
     }
 }

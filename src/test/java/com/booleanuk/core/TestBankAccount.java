@@ -27,8 +27,20 @@ public class TestBankAccount {
     }
 
     @Test
+    public void withdrawingRemovesMoney() {
+        BankAccount account = new CurrentAccount();
+        account.deposit(1000);
+        assertTrue(account.withdraw(500));
+        assertEquals(500, account.getBalance());
+    }
+    @Test
     public void withdrawingRemovesMoneyOnlyIfValidAmount() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        account.deposit(1000);
+        assertFalse(account.withdraw(2000));
+        assertEquals(1000, account.getBalance());
+        assertTrue(account.withdraw(500));
+        assertEquals(500, account.getBalance());
     }
 
     @Test

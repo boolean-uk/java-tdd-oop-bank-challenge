@@ -38,4 +38,13 @@ public class BankAccountTest {
 
         Assertions.assertEquals(400D, account.makeDeposit(-200D, dateTime));
     }
+
+    @Test
+    public void balanceDecreasesWhenInputingValidAmount(){
+        BankAccount account = new CurrentAccount(1, listOfTransactions);
+        LocalDateTime dateTime = LocalDateTime.now();
+        dateTime = dateTime.plusDays(4);
+
+        Assertions.assertEquals(300D, account.makeWithDraw(100D, dateTime));
+    }
 }

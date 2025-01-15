@@ -51,10 +51,10 @@ public class BankAccountTest {
 
     @Test
     public void testGenerateBankStatement() {
-        String expectedOutput = "date || credit || debit || balance \n" +
-                                "2025-01-16 01:00:00 || 50.00 ||     || 150.00 \n" +
-                                "2025-01-15 08:00:00 ||    || 100.00 || 100.00 \n" +
-                                "2025-01-14 10:00:00 || 200.00 ||      || 200.00 \n";
+        String expectedOutput = "date || credit || debit || balance\n" +
+                "2025-01-16T01:00:00 || 50.0 ||  || 150.0\n" +
+                "2025-01-15T08:00:00 ||  || 100.0 || 100.0\n" +
+                "2025-01-14T10:00:00 || 200.0 ||  || 200.0\n";
         Assertions.assertEquals(expectedOutput, savingsAccount.generateBankStatement());
         Assertions.assertEquals(expectedOutput, currentAccount.generateBankStatement());
 

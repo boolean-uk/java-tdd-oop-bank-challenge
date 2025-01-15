@@ -98,18 +98,20 @@ public class TestBankAccount {
     @Test
     public void generateStatementOnSomeTransactions() {
         BankAccount account = new CurrentAccount();
-        LocalDateTime ldt = LocalDateTime.now();
-        account.deposit(1000);
-        account.withdraw(100);
-        account.withdraw(200);
+        LocalDateTime ldt1 = LocalDateTime.of(2012, 1, 14, 13, 54);
+        LocalDateTime ldt2 = LocalDateTime.of(2012, 1, 13, 22, 18);
+        LocalDateTime ldt3 = LocalDateTime.of(2012, 1, 10, 11, 27);
+        account.deposit(1000, ldt3);
+        account.withdraw(100, ldt2);
+        account.withdraw(200, ldt1);
 //        System.out.println(account.generateBankStatement());
 
         String sb = "date||credit||debit||balance" +
-                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "14/1/2012" +
                 "||||200.00||700.00" +
-                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "13/1/2012" +
                 "||||100.00||900.00" +
-                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "10/1/2012" +
                 "||1000.00||||1000.00".replaceAll("\\s+","");
 
         assertEquals(sb, account.generateBankStatement().replaceAll("\\s+",""));

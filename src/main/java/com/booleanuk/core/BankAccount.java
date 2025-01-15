@@ -19,8 +19,6 @@ public abstract class BankAccount {
             branchNumber = 0;
         }
         this.branchNumber = "0".repeat((int) (6 - Math.ceil(Math.log10(branchNumber)))) + branchNumber;
-        System.out.println(this.accountNumber);
-        System.out.println(this.branchNumber);
         this.transactions = new ArrayList<>();
     }
 

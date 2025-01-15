@@ -3,6 +3,8 @@ package com.booleanuk.core;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 public class TestBankAccount {
     @Test
     public void newAccountInstancesAreValid() {
@@ -54,6 +56,35 @@ public class TestBankAccount {
         assertTrue(account.deposit(1000));
         assertTrue(account.withdraw(100));
         assertEquals(2, account.getTransactions().size());
+    }
+
+    @Test
+    public void transactionsAreStoredCorrectly() {
+        BankAccount account = new CurrentAccount();
+        LocalDateTime ldt = LocalDateTime.now();
+        assertTrue(account.deposit(1000));
+        assertTrue(account.withdraw(100));
+        assertEquals(2, account.getTransactions().size());
+        LocalDateTime depTime = account.getTransactions().getFirst().getDateTime();
+        LocalDateTime wdrTime = account.getTransactions().getLast().getDateTime();
+        // deposit time correct within 1 s
+        assertEquals(ldt.toLocalDate(), depTime.toLocalDate());
+        assertEquals(ldt.getHour(), depTime.getHour());
+        assertEquals(ldt.getMinute(), depTime.getMinute());
+        assertEquals(ldt.getSecond(), depTime.getSecond());
+        // withdraw time correct within 1 s
+        assertEquals(ldt.toLocalDate(), wdrTime.toLocalDate());
+        assertEquals(ldt.getHour(), wdrTime.getHour());
+        assertEquals(ldt.getMinute(), wdrTime.getMinute());
+        assertEquals(ldt.getSecond(), wdrTime.getSecond());
+        // deposit amounts correct
+        Transaction dep = account.getTransactions().getFirst();
+        assertEquals(1000, dep.getAmount());
+        assertEquals(1000, dep.getCurrentBalance());
+        // withdraw amounts correct
+        Transaction wdr = account.getTransactions().getLast();
+        assertEquals(100, wdr.getAmount());
+        assertEquals(900, wdr.getCurrentBalance());
     }
 
     @Test

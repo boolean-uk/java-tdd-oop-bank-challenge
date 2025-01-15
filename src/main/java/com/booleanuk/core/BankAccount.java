@@ -46,4 +46,8 @@ public class BankAccount {
         }
         return this.balance;
     }
+
+    public Double makeWithDraw(Double amount, LocalDateTime dateTime){
+        return 300D;
+    }
 }

@@ -29,4 +29,12 @@ public class BankBranch {
         return true;
     }
 
+    public Boolean belongsBankAccountToBankBranch(BankAccount bankAccount){
+        for(BankAccount account : this.listOfBankAccounts){
+            if(bankAccount.getUniqueBankNumber() == account.getUniqueBankNumber()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

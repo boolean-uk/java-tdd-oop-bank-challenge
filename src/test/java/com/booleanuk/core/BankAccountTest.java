@@ -71,4 +71,18 @@ public class BankAccountTest {
 
         Assertions.assertEquals(correctBankStatement, account.generateBankStatements());
     }
+
+
+
+
+
+    // EXTENSION 1
+    // Im updating my getter (getBalance()) so it is calculated whenever its called.
+    @Test
+    public void getterCalculateCorrectly(){
+        BankAccount account = new CurrentAccount(1, listOfTransactions);
+
+        Assertions.assertEquals(400, account.getBalance());
+    }
+
 }

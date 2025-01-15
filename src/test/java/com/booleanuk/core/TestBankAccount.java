@@ -116,4 +116,10 @@ public class TestBankAccount {
 
         assertEquals(sb, account.generateBankStatement().replaceAll("\\s+",""));
     }
+
+    @Test
+    public void overdraftNeedsToBePositive() {
+        SavingsAccount account = new SavingsAccount(523611);
+        assertFalse(account.setMaxOverdraft(-50));
+    }
 }

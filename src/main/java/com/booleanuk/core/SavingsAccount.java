@@ -8,6 +8,7 @@ public class SavingsAccount extends BankAccount {
         this.maxOverdraft = 0;
     }
 
+    // probably won't be used, but useful in theory
     public boolean hasOverdraft() {
         return maxOverdraft > 0;
     }
@@ -17,6 +18,11 @@ public class SavingsAccount extends BankAccount {
     }
 
     public boolean setMaxOverdraft(double maxOverdraft) {
+        if (maxOverdraft < 0) {
+            System.out.println("Cannot set negative overdraft.");
+            return false;
+        }
+        this.maxOverdraft = maxOverdraft;
         return true;
     }
 }

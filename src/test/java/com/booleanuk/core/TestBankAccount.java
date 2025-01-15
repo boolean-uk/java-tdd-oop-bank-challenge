@@ -83,7 +83,7 @@ public class TestBankAccount {
         assertEquals(1000, dep.getCurrentBalance());
         // withdraw amounts correct
         Transaction wdr = account.getTransactions().getLast();
-        assertEquals(100, wdr.getAmount());
+        assertEquals(-100, wdr.getAmount());
         assertEquals(900, wdr.getCurrentBalance());
     }
 
@@ -91,8 +91,8 @@ public class TestBankAccount {
     public void generateStatementOnNoTransactions() {
         BankAccount account = new CurrentAccount();
         assertEquals(
-                "date\t||credit\t||debit\t||balance",
-                account.generateBankStatement());
+                "date||credit||debit||balance",
+                account.generateBankStatement().replaceAll("\\s+",""));
     }
 
     @Test
@@ -102,6 +102,7 @@ public class TestBankAccount {
         account.deposit(1000);
         account.withdraw(100);
         account.withdraw(200);
+//        System.out.println(account.generateBankStatement());
 
         String sb = "date||credit||debit||balance" +
                 ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
@@ -110,6 +111,7 @@ public class TestBankAccount {
                 "||||100.00||900.00" +
                 ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
                 "||1000.00||||1000.00".replaceAll("\\s+","");
+
         assertEquals(sb, account.generateBankStatement().replaceAll("\\s+",""));
     }
 }

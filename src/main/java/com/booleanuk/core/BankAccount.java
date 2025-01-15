@@ -21,7 +21,7 @@ public abstract class BankAccount {
     public boolean withdraw(double amount) {
         if (amount <= balance) {
             balance -= amount;
-            transactions.add(new Transaction(amount, balance, LocalDateTime.now()));
+            transactions.add(new Transaction(-amount, balance, LocalDateTime.now()));
         }
         return amount <= balance;
     }
@@ -33,9 +33,22 @@ public abstract class BankAccount {
         return true;
     }
 
+    // TODO Fix formatting
     public String generateBankStatement() {
         StringBuilder sb = new StringBuilder();
         sb.append("date\t||credit\t||debit\t||balance\n");
+
+        for (Transaction t : transactions.reversed()) {
+            sb.append(t.getDateTime().getDayOfMonth()).append("/")
+                    .append(t.getDateTime().getMonthValue()).append("/")
+                    .append(t.getDateTime().getYear()).append("||");
+            if (t.getAmount() > 0) {
+                sb.append(String.format("%.2f", Math.abs(t.getAmount()))).append("||\t");
+            } else {
+                sb.append("\t||").append(String.format("%.2f", Math.abs(t.getAmount())));
+            }
+            sb.append("||").append(String.format("%.2f", t.getCurrentBalance())).append("\n");
+        }
 
         return sb.toString();
     }

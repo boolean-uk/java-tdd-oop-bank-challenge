@@ -34,6 +34,13 @@ public class BankBranchTest {
 
 
 
+    // EXTENSION 2
+    @Test
+    public void bankAccountHaveTheSameBankID(){
+        BankBranch bankBranch = new BankBranch(1, "Gothenburg", listOfBankAccounts);
+        BankAccount newAccount = new CurrentAccount(3, 1);
 
+        Assertions.assertEquals(1, bankBranch.belongsBankAccountToBankBranch(newAccount));
+    }
 
 }

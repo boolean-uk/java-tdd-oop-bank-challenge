@@ -5,6 +5,11 @@ import java.util.List;
 
 public abstract class Account {
     private ArrayList<Transaction> transactions = new ArrayList<>();
+    private long accountNr;
+
+    public Account(long accountNr) {
+        this.accountNr = accountNr;
+    }
 
     Transaction deposit(float amount) {
         // amount must be greater than 0
@@ -74,5 +79,9 @@ public abstract class Account {
         }
 
         return sb.toString();
+    }
+
+    long getAccountNr() {
+        return accountNr;
     }
 }

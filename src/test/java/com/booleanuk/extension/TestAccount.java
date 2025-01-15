@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 public class TestAccount {
     @Test
     void testDeposit() {
-        Account acc = new CurrentAccount();
+        Account acc = new CurrentAccount(1);
 
         Assertions.assertEquals(0f, acc.getBalance());
         Transaction tran = acc.deposit(2500.50f);
@@ -21,7 +21,7 @@ public class TestAccount {
 
     @Test
     void testInvalidDeposit() {
-        Account acc = new CurrentAccount();
+        Account acc = new CurrentAccount(1);
 
         Transaction tran = acc.deposit(-1000f);
         Assertions.assertEquals(0f, acc.getBalance());
@@ -31,7 +31,7 @@ public class TestAccount {
 
     @Test
     void testValidWithdraw() {
-        Account acc = new CurrentAccount();
+        Account acc = new CurrentAccount(1);
 
         Assertions.assertEquals(0f, acc.getBalance());
         acc.deposit(2500f);
@@ -47,7 +47,7 @@ public class TestAccount {
 
     @Test
     void testInvalidWithdraw() {
-        Account acc = new CurrentAccount();
+        Account acc = new CurrentAccount(1);
 
         acc.deposit(1000f);
         Transaction tran = acc.withdraw(-1000f);
@@ -61,7 +61,7 @@ public class TestAccount {
 
     @Test
     void testAccountStatement() {
-        Account acc = new CurrentAccount();
+        Account acc = new CurrentAccount(1);
 
         acc.deposit(1000f);
         acc.deposit(2000f);

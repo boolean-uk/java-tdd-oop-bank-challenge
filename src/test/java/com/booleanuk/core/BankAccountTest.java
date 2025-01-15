@@ -8,6 +8,8 @@ import java.util.HashMap;
 
 public class BankAccountTest {
     private BankAccount bankAccount;
+    private SavingsAccount savingsAccount;
+    private CurrentAccount currentAccount;
 
     @BeforeEach
     public void setUp() {
@@ -17,10 +19,14 @@ public class BankAccountTest {
             put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16", 150.0));
         }};
         bankAccount = new BankAccount(transactions, 12345678, 0.0);
+        savingsAccount = new SavingsAccount(transactions, 12345678, 0.0);
+        currentAccount = new CurrentAccount(transactions, 12345678, 0.0);
     }
 
     @Test
     public void testGetBalance() {
         Assertions.assertEquals(150.0, bankAccount.getBalance());
+        Assertions.assertEquals(150.0, savingsAccount.getBalance());
+        Assertions.assertEquals(150.0, currentAccount.getBalance());
     }
 }

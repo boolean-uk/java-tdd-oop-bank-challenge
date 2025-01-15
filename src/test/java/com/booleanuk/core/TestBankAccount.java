@@ -6,7 +6,11 @@ import org.junit.jupiter.api.Test;
 public class TestBankAccount {
     @Test
     public void newAccountInstancesAreValid() {
-        assertTrue(true);
+        BankAccount currentAccount = new CurrentAccount();
+        BankAccount savingsAccount = new CurrentAccount();
+        assertTrue(currentAccount.getAccountNumber() / 10000000 >= 1);
+        assertEquals(0, currentAccount.getBalance());
+        assertEquals(0, currentAccount.getTransactions().size());
     }
     @Test
     public void withdrawTooMuchShouldFail() {

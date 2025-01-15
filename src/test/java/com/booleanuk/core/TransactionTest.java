@@ -15,7 +15,7 @@ public class TransactionTest {
         Transaction transaction = new Transaction(ID, type, amount, date, balanceAfter);
 
         Assertions.assertEquals(12345, transaction.getID());
-        Assertions.assertEquals("credit", transaction,getType());
+        Assertions.assertEquals("credit", transaction.getType());
         Assertions.assertEquals(50.0, transaction.getAmount());
         Assertions.assertEquals("2025-01-15", transaction.getDate());
         Assertions.assertEquals(50.0, transaction.getBalanceAfter());

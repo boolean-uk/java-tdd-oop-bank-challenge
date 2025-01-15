@@ -29,4 +29,11 @@ public class BankAccountTest {
         Assertions.assertEquals(150.0, savingsAccount.getBalance());
         Assertions.assertEquals(150.0, currentAccount.getBalance());
     }
+
+    @Test
+    public void testDeposit() {
+        Assertions.assertEquals("Deposit successfull!", bankAccount.deposit(50.0));
+        Assertions.assertEquals("Deposit successfull!", savingsAccount.deposit(50.0));
+        Assertions.assertEquals("Deposit successfull!", currentAccount.deposit(50.0));
+    }
 }

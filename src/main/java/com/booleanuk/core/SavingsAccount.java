@@ -1,5 +1,7 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
+
 public class SavingsAccount extends BankAccount {
     private double maxOverdraft;
 
@@ -11,6 +13,20 @@ public class SavingsAccount extends BankAccount {
     public SavingsAccount(int branchNumber) {
         super(branchNumber);
         this.maxOverdraft = 0;
+    }
+
+    @Override
+    public boolean withdraw(double amount, LocalDateTime dateTime) {
+        if (getBalance() - amount < - maxOverdraft) {
+            return false;
+        }
+        getTransactions().add(new Transaction(-amount, getBalance() - amount, dateTime));
+        return true;
+    }
+
+    @Override
+    public boolean withdraw(double amount) {
+        return this.withdraw(amount, LocalDateTime.now());
     }
 
     // probably won't be used, but useful in theory

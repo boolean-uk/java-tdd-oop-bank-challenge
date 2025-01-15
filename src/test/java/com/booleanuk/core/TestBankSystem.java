@@ -8,6 +8,7 @@ public class TestBankSystem {
     public void approvingOverdraftRequestWorksCorrectly() {
         BankSystem bs = new BankSystem();
         SavingsAccount account = new SavingsAccount("12345678", "123456");
+        bs.addSavingsAccount(account);
         OverdraftRequest or = new OverdraftRequest(account.getAccountNumber(), account.getBranchNumber(), 500);
         bs.approve(or);
         assertTrue(account.hasOverdraft());

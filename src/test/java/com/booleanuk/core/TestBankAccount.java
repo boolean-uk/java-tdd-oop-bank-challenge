@@ -21,7 +21,9 @@ public class TestBankAccount {
 
     @Test
     public void canWithdrawWithinReason() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        account.deposit(1000);
+        assertTrue(account.withdraw(500));
     }
 
     @Test

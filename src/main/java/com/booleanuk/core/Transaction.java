@@ -48,9 +48,9 @@ public class Transaction {
     @Override
     public String toString() {
         if (this.type.equals("withdrawal")) {
-            return String.format("%s || %8s || %8s ||", this.date, this.amount, " ");
+            return String.format("%21s || %10s || %8s || ", this.date, this.amount, " ");
         } else {
-            return String.format("%s || %8s || %8s ||", this.date, " ", this.amount);
+            return String.format("%21s || %10s || %8s || ", this.date, " ", this.amount);
         }
 
     }

@@ -58,6 +58,7 @@ public class AccountTest {
         stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", date, "100.0", " ", "400.0"));
         stringbuilder.append(String.format("%21s || %10s || %8s || %8s\n", date, " ", "150.0", "550.0"));
         Assertions.assertEquals(0, stringbuilder.compareTo(account.generateStatement()));
+
     }
 
 

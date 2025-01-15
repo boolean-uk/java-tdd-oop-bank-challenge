@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class BankAccount {
+public abstract class BankAccount {
     private HashMap<Integer, Transaction> transactions;
     private int accountNumber;
     private double balance;
@@ -23,10 +23,12 @@ public class BankAccount {
         for (Transaction transaction : collection) {
             if (Objects.equals(transaction.getType(), "credit")) {
                 balance += transaction.getAmount();
+                System.out.println("money was added:" + transaction.getAmount());
             } else {
                 balance -= transaction.getAmount();
+                System.out.println("money went away" + transaction.getAmount());
             }
-            System.out.println(balance);
+            System.out.println("after transaction:" + balance);
         }
         return balance;
     }

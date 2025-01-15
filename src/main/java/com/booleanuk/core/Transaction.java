@@ -2,6 +2,7 @@ package com.booleanuk.core;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
     private LocalDateTime date;
@@ -30,5 +31,18 @@ public class Transaction {
 
     public Double getNewBalance() {
         return newBalance;
+    }
+
+    public String formatTransactionForBankStatement(){
+        String formatedTransaction = "";
+
+        formatedTransaction = this.getDate().toString() + " || ";
+        if(this.getTypeOfTransaction().equals("Debit")){
+            formatedTransaction += "       || " + this.getAmount() + "    || " + this.getNewBalance();
+        } else if (this.getTypeOfTransaction().equals("Credit")) {
+            formatedTransaction += this.getAmount() + "    ||        || " + this.getNewBalance();
+        }
+
+        return formatedTransaction;
     }
 }

@@ -33,7 +33,7 @@ public class BankSystemTest {
         BankSystem bank = new BankSystem();
         Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction = bank.makeDeposit(acc.getID(), 200.0F);
-        Assertions.assertEquals(transaction.getID(), bank.transactionMap.get(acc.getID()).get(0).getID());
+        Assertions.assertEquals(transaction.getID(), bank.getTransactionMap().get(acc.getID()).get(0).getID());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class BankSystemTest {
         Account acc = bank.createBankAccount(AccountType.CURRENT);
         Transaction transaction1 = bank.makeDeposit(acc.getID(), 200.0F);
         Transaction transaction2 = bank.makeDeposit(acc.getID(), 500.0F);
-        Assertions.assertEquals(transaction2.getAmount(), bank.transactionMap.get(acc.getID()).get(1).getAmount());
+        Assertions.assertEquals(transaction2.getAmount(), bank.getTransactionMap().get(acc.getID()).get(1).getAmount());
     }
 
     @Test
@@ -63,5 +63,22 @@ public class BankSystemTest {
         bank.makeDeposit(acc.getID(), 500.0F);
         bank.makeWithdrawal(acc.getID(), 300.0F);
         System.out.println(bank.generateStatement(acc.getID()));
+    }
+
+    @Test
+    public void createOverdraftTest() {
+        BankSystem bank = new BankSystem();
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
+        Assertions.assertEquals(0, bank.getOverdraftRequests().size());
+        bank.requestOverdraft(acc.getID(), 1000F);
+        Assertions.assertEquals(1, bank.getOverdraftRequests().size());
+    }
+
+    @Test
+    public void createOverdraftTest2() {
+        BankSystem bank = new BankSystem();
+        Account acc = bank.createBankAccount(AccountType.CURRENT);
+        bank.requestOverdraft(acc.getID(), 1000.0F);
+        Assertions.assertEquals(1000.0F, bank.getOverdraftRequests().get(acc.getID()));
     }
 }

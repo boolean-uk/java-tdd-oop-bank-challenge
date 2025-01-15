@@ -2,16 +2,19 @@ package com.booleanuk.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.UUID;
 
 public class BankSystem {
 
-    HashMap<UUID, ArrayList<Transaction>> transactionMap;
-    HashMap<UUID, Account> accountMap;
+    private HashMap<UUID, ArrayList<Transaction>> transactionMap;
+    private HashMap<UUID, Account> accountMap;
+    private HashMap<UUID, Float> overdraftRequests;
 
     public BankSystem() {
         transactionMap = new HashMap<>();
         accountMap = new HashMap<>();
+        overdraftRequests = new HashMap<>();
     }
 
     public Account createBankAccount(AccountType accountType) {
@@ -48,6 +51,36 @@ public class BankSystem {
         return transaction;
     }
 
+    public boolean requestOverdraft(UUID accountID, float amount) {
+        if(amount <= 0) {
+            System.out.println("Overdraft amount must be above £0");
+            return false;
+        }
+        if(overdraftRequests.containsKey(accountID)) {
+            System.out.println("Your previous overdraft request has been updated.");
+        }
+        overdraftRequests.put(accountID, amount);
+        return true;
+    }
+
+    public void reviewOverdrafts() {
+
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        for(UUID k : overdraftRequests.keySet()) {
+            System.out.println("Account " + k + " requests an overdraft of £" + overdraftRequests.get(k) + ".");
+            System.out.println("Would you like to confirm this request? (Y / N)");
+            input = sc.nextLine();
+            if(input.equalsIgnoreCase("y")) {
+                this.accountMap.get(k).setOverdraft(overdraftRequests.get(k));
+                System.out.println("Overdraft request has been granted.");
+            } else {
+                System.out.println("Overdraft request has been declined.");
+            }
+            overdraftRequests.remove(k);
+        }
+    }
+
     public StringBuilder generateStatement(UUID accountID) {
         ArrayList<Transaction> transactions = this.transactionMap.get(accountID);
         StringBuilder statement = new StringBuilder();
@@ -64,5 +97,17 @@ public class BankSystem {
         }
         System.out.println(statement);
         return statement;
+    }
+
+    public HashMap<UUID, ArrayList<Transaction>> getTransactionMap() {
+        return this.transactionMap;
+    }
+
+    public HashMap<UUID, Account> getAccountMap() {
+        return this.accountMap;
+    }
+
+    public HashMap<UUID, Float> getOverdraftRequests() {
+        return this.overdraftRequests;
     }
 }

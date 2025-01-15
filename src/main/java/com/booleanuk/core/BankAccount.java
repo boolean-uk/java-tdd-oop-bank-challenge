@@ -48,6 +48,11 @@ public class BankAccount {
     }
 
     public Double makeWithDraw(Double amount, LocalDateTime dateTime){
-        return 300D;
+        if((this.balance + amount) < this.balance){
+            Transaction withdraw = new Transaction(dateTime, amount, "Withdraw");
+            this.listOfTransactions.add(withdraw);
+            this.balance += amount;
+        }
+        return this.balance;
     }
 }

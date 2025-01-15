@@ -45,7 +45,7 @@ public class BankAccountTest {
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
-        Assertions.assertEquals(300D, account.makeWithDraw(100D, dateTime));
+        Assertions.assertEquals(300D, account.makeWithDraw(-100D, dateTime));
     }
 
     @Test
@@ -54,6 +54,6 @@ public class BankAccountTest {
         LocalDateTime dateTime = LocalDateTime.now();
         dateTime = dateTime.plusDays(4);
 
-        Assertions.assertEquals(400D, account.makeWithDraw(-100D, dateTime));
+        Assertions.assertEquals(400D, account.makeWithDraw(100D, dateTime));
     }
 }

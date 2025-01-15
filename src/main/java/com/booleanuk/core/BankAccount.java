@@ -6,7 +6,7 @@ import java.util.Random;
 
 public abstract class BankAccount {
     private final int accountNumber;
-    private final double balance;
+    private double balance;
     private final List<Transaction> transactions;
 
     public BankAccount() {
@@ -21,7 +21,9 @@ public abstract class BankAccount {
         return false;
     }
 
+    // maybe can be void... or maybe consider overflow?
     public boolean deposit(double amount) {
+        balance += amount;
         return true;
     }
 

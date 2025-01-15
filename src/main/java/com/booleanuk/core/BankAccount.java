@@ -20,16 +20,16 @@ public abstract class BankAccount {
 
     public boolean withdraw(double amount) {
         if (amount <= balance) {
-            transactions.add(new Transaction(0, 0, LocalDateTime.now()));
             balance -= amount;
+            transactions.add(new Transaction(amount, balance, LocalDateTime.now()));
         }
         return amount <= balance;
     }
 
     // maybe can be void... or maybe consider overflow?
     public boolean deposit(double amount) {
-        transactions.add(new Transaction(0, 0, LocalDateTime.now()));
         balance += amount;
+        transactions.add(new Transaction(amount, this.balance, LocalDateTime.now()));
         return true;
     }
 

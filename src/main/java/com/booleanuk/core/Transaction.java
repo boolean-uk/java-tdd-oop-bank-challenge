@@ -37,9 +37,9 @@ public class Transaction {
         String formatedTransaction = "";
 
         formatedTransaction = this.getDate().toString() + " || ";
-        if(this.getTypeOfTransaction().equals("Debit")){
+        if(this.getTypeOfTransaction().equals("Withdraw")){
             formatedTransaction += "       || " + this.getAmount() + "    || " + this.getNewBalance();
-        } else if (this.getTypeOfTransaction().equals("Credit")) {
+        } else if (this.getTypeOfTransaction().equals("Deposit")) {
             formatedTransaction += this.getAmount() + "    ||        || " + this.getNewBalance();
         }
 

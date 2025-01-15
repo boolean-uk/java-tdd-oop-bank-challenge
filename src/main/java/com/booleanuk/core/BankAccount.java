@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +20,7 @@ public abstract class BankAccount {
 
     public boolean withdraw(double amount) {
         if (amount <= balance) {
+            transactions.add(new Transaction(0, 0, LocalDateTime.now()));
             balance -= amount;
         }
         return amount <= balance;
@@ -26,6 +28,7 @@ public abstract class BankAccount {
 
     // maybe can be void... or maybe consider overflow?
     public boolean deposit(double amount) {
+        transactions.add(new Transaction(0, 0, LocalDateTime.now()));
         balance += amount;
         return true;
     }

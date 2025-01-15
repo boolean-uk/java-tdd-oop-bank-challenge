@@ -39,4 +39,12 @@ public class BankAccountTest {
         Assertions.assertEquals(180.0, savingsAccount.getBalance());
         Assertions.assertEquals(190.0, currentAccount.getBalance());
     }
+
+    @Test
+    public void testWithdraw() {
+        Assertions.assertEquals("Withdraw successfull!", savingsAccount.withdraw(60.0));
+        Assertions.assertEquals("Withdraw successfull", currentAccount.withdraw(20));
+        Assertions.assertEquals(120.0, savingsAccount.getBalance());
+        Assertions.assertEquals(170.0, currentAccount.getBalance());
+    }
 }

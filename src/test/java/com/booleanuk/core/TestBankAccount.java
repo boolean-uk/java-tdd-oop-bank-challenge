@@ -97,6 +97,19 @@ public class TestBankAccount {
 
     @Test
     public void generateStatementOnSomeTransactions() {
-        assertTrue(true);
+        BankAccount account = new CurrentAccount();
+        LocalDateTime ldt = LocalDateTime.now();
+        account.deposit(1000);
+        account.withdraw(100);
+        account.withdraw(200);
+
+        String sb = "date||credit||debit||balance" +
+                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "||||200.00||700.00" +
+                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "||||100.00||900.00" +
+                ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() +
+                "||1000.00||||1000.00".replaceAll("\\s+","");
+        assertEquals(sb, account.generateBankStatement().replaceAll("\\s+",""));
     }
 }

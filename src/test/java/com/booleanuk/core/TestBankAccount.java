@@ -14,7 +14,9 @@ public class TestBankAccount {
     }
     @Test
     public void withdrawTooMuchShouldFail() {
-        assertTrue(true);
+        BankAccount currentAccount = new CurrentAccount();
+        double amount = 1000;
+        assertFalse(currentAccount.withdraw(amount));
     }
 
     @Test

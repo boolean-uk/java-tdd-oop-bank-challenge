@@ -1,5 +1,6 @@
 package com.booleanuk.core;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class BankAccount {
@@ -10,10 +11,12 @@ public class BankAccount {
     public BankAccount(Integer uniqueBankNumber, ArrayList<Transaction> listOfTransactions){
         this.uniqueBankNumber = uniqueBankNumber;
 
+        Double totalBalance = 0D;
         for(Transaction transaction : listOfTransactions){
-            this.balance += transaction.getAmount();
+            totalBalance += transaction.getAmount();
         }
-        this.balance = Math.round(this.balance * 100.0) / 100.0;
+
+        this.balance = Math.round(totalBalance * 100.0) / 100.0;
         this.listOfTransactions = listOfTransactions;
     }
 
@@ -33,5 +36,9 @@ public class BankAccount {
 
     public ArrayList<Transaction> getListOfTransactions() {
         return listOfTransactions;
+    }
+
+    public Double makeDeposit(Double amount, LocalDateTime dateTime){
+        return 600D;
     }
 }

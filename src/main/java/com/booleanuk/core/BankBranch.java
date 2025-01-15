@@ -18,4 +18,8 @@ public class BankBranch {
         this.location = location;
         this.listOfBankAccounts = new ArrayList<BankAccount>();
     }
+
+    public boolean addAccount(BankAccount accountToAdd){
+        return false;
+    }
 }

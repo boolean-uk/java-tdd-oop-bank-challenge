@@ -23,7 +23,7 @@ public class AccountTest {
         Account account = new Account(1, 12345678);
         account.makeTransaction(100.0);
         Assertions.assertEquals(100.0, account.getBalance());
-        Assertions.assertEquals("deposit", account.getTransactions().getFirst().getType());
+        Assertions.assertEquals(Transaction.Type.DEPOSIT, account.getTransactions().getFirst().getType());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class AccountTest {
         account.makeTransaction(500.0);
         account.makeTransaction(-100.0);
         Assertions.assertEquals(400.0, account.getBalance());
-        Assertions.assertEquals("withdrawal", account.getTransactions().get(1).getType());
+        Assertions.assertEquals(Transaction.Type.WITHDRAWAL, account.getTransactions().get(1).getType());
     }
 
     @Test

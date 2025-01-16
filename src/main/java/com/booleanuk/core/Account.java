@@ -8,12 +8,19 @@ public class Account {
     private final int accountNumber;
     private StringBuilder stringBuilder = new StringBuilder();
     private int prefix;
+    private double limit;
+    private boolean overDraftRequested;
+    private double requestedLimit;
+
 
     public Account(int prefix, int accountNumber) {
         this.accountNumber = accountNumber;
         this.transactions = new ArrayList<>();
         this.stringBuilder.insert(0, String.format("%21s || %10s || %8s || %8s\n", "Date", "Withdrawal", "Deposit", "Balance"));
         this.prefix = prefix;
+        this.limit = 0.0;
+        this.requestedLimit = 0.0;
+        this.overDraftRequested = false;
     }
 
     public void makeTransaction(double amount) {
@@ -37,10 +44,10 @@ public class Account {
     public double getBalance() {
         double total = 0.0;
         for (Transaction transaction: this.transactions) {
-            if (transaction.getType().equals("deposit")) {
+            if (transaction.getType().equals(Transaction.Type.DEPOSIT)) {
                 total += transaction.getAmount();
             } else {
-                if (total - transaction.getAmount() > 0) {
+                if (total - transaction.getAmount() > this.limit) {
                     total -= transaction.getAmount();
                 }
             }
@@ -56,8 +63,24 @@ public class Account {
         return this.prefix;
     }
 
+    public double getLimit() {
+        return this.limit;
+    }
 
+    public void requestOverdraft(double amount) {
+        this.overDraftRequested = true;
+        this.requestedLimit = amount;
+    }
 
+    public void changeLimit() {
+        this.limit -= this.requestedLimit;
+        this.overDraftRequested = false;
+        this.requestedLimit = 0.0;
+    }
+
+    public boolean getRequestStatus() {
+        return this.overDraftRequested;
+    }
 
 
 }

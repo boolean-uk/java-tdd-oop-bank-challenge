@@ -1,12 +1,15 @@
 package com.booleanuk.core;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class TransactionTest {
+
+
 
     @Test
     public void testDate() {
@@ -16,10 +19,10 @@ public class TransactionTest {
     @Test
     public void testSetType() {
         Transaction deposit = new Transaction(100.0);
-        Assertions.assertEquals("deposit", deposit.getType());
+        Assertions.assertEquals(Transaction.Type.DEPOSIT, deposit.getType());
         Assertions.assertEquals(100.0, deposit.getAmount());
         Transaction withdrawal = new Transaction((-100.0));
-        Assertions.assertEquals("withdrawal", withdrawal.getType());
+        Assertions.assertEquals(Transaction.Type.WITHDRAWAL, withdrawal.getType());
         Assertions.assertEquals(100.0, deposit.getAmount());
     }
 

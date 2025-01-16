@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.PrintStream;
 import java.util.HashMap;
 
 public class BankAccountTest {
@@ -23,8 +22,8 @@ public class BankAccountTest {
             put(54321, new Transaction(54321, "debit", 100.0, "2025-01-15T08:00:00", 100.0));
             put(32145, new Transaction(32145, "credit", 50.0, "2025-01-16T01:00:00", 150.0));
         }};
-        savingsAccount = new SavingsAccount(savingsTransactions, 87654321, 0.0);
-        currentAccount = new CurrentAccount(currentTransactions, 54321678, 0.0);
+        savingsAccount = new SavingsAccount("Gothenburg", savingsTransactions, 87654321, 0.0);
+        currentAccount = new CurrentAccount("Stockholm", currentTransactions, 54321678, 0.0);
     }
 
     @Test

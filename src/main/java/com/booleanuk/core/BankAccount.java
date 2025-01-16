@@ -5,11 +5,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public abstract class BankAccount {
+    private String branch;
     private HashMap<Integer, Transaction> transactions;
     private int accountNumber;
     private double balance;
 
-    public BankAccount(HashMap<Integer, Transaction> transactions, int accountNumber, double balance) {
+    public BankAccount(String branch, HashMap<Integer, Transaction> transactions, int accountNumber, double balance) {
+        this.branch = branch;
         this.transactions = transactions;
         this.accountNumber = accountNumber;
         this.balance = balance;

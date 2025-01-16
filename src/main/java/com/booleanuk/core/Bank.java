@@ -14,11 +14,13 @@ public class Bank {
         if (Objects.equals(type, "currentAccount")) {
             HashMap<Integer, Transaction> transactions = new HashMap<>();
             double initialBalance = 0.0;
-            CurrentAccount currentAccount = new CurrentAccount(transactions, ID, initialBalance);
+            CurrentAccount currentAccount = new CurrentAccount(branch, transactions, ID, initialBalance);
+            accounts.put(branch, currentAccount);
         } else if (Objects.equals(type, "savingsAccount")) {
             HashMap<Integer, Transaction> transactions = new HashMap<>();
             double initialBalance = 0.0;
-            SavingsAccount savingsAccount = new SavingsAccount(transactions, ID, initialBalance);
+            SavingsAccount savingsAccount = new SavingsAccount(branch, transactions, ID, initialBalance);
+            accounts.put(branch, savingsAccount);
         }
         return "Account created successfully!";
     }

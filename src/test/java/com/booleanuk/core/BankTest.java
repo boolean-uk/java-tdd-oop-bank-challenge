@@ -21,7 +21,9 @@ public class BankTest {
         String branch = "Gothenburg";
         String accountType = "currentAccount";
         int ID = 12345;
+        String invalidType = "otherAccount";
 
-        Assertions.assertEquals("Account created successfully!", bank.createAccount(branch, accountType, ID));
+        Assertions.assertEquals("currentAccount created successfully!", bank.createAccount(branch, accountType, ID));
+        Assertions.assertEquals("Account could not be created, invalid account type", bank.createAccount(branch, invalidType, ID));
     }
 }

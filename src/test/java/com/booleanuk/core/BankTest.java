@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class BankTest {
     private HashMap<String, BankAccount> bankAccounts;
@@ -13,6 +12,7 @@ public class BankTest {
 
     @BeforeEach
     public void setUp() {
+        this.bankAccounts = new HashMap<>();
         this.bank = new Bank(bankAccounts);
     }
 

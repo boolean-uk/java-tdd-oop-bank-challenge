@@ -8,12 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BankTest {
-    private Map<String, BankAccount> bankAccounts;
+    private HashMap<String, BankAccount> bankAccounts;
     private Bank bank;
 
     @BeforeEach
     public void setUp() {
-        Bank bank = new Bank();
+        this.bank = new Bank(bankAccounts);
     }
 
     @Test
@@ -22,6 +22,6 @@ public class BankTest {
         String accountType = "currentAccount";
         int ID = 12345;
 
-        Assertions.assertEquals("currentAccount created successfully!", bank.createAccount);
+        Assertions.assertEquals("Account created successfully!", bank.createAccount(branch, accountType, ID));
     }
 }

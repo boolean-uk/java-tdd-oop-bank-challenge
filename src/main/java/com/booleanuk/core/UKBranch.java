@@ -7,10 +7,13 @@ public class UKBranch implements Branch {
 
     private final ArrayList<Account> accounts = new ArrayList<>();
     private final int prefix = 3;
+    private double overdraftLimit = 72.0;
 
     @Override
-    public void handleOverdraftRequest(double amountInPounds, Account account) {
-
+    public void handleOverdraftRequest(double amountInKroner, Account account) {
+        if (account instanceof CurrentAccount && account.getRequestStatus() && amountInKroner <= this.overdraftLimit) {
+            account.changeLimit();
+        }
     }
 
     @Override

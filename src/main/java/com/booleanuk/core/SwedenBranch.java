@@ -7,10 +7,13 @@ public class SwedenBranch implements Branch {
 
     private final ArrayList<Account> accounts = new ArrayList<>();
     private final int prefix = 2;
+    private double overdraftLimit = 982.0;
 
     @Override
-    public void handleOverdraftRequest(double amountInKrona, Account account) {
-
+    public void handleOverdraftRequest(double amountInKroner, Account account) {
+        if (account instanceof CurrentAccount && account.getRequestStatus() && amountInKroner <= this.overdraftLimit) {
+            account.changeLimit();
+        }
     }
 
     @Override

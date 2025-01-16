@@ -6,12 +6,14 @@ public class NorwayBranch implements Branch {
 
     private final ArrayList<Account> accounts = new ArrayList<>();
     private final int prefix = 1;
+    private double overdraftLimit = 1000.0;
 
 
     @Override
     public void handleOverdraftRequest(double amountInKroner, Account account) {
-
-    //Want the limit to be 1000
+        if (account instanceof CurrentAccount && account.getRequestStatus() && amountInKroner <= this.overdraftLimit) {
+            account.changeLimit();
+        }
     }
 
     @Override
@@ -28,6 +30,4 @@ public class NorwayBranch implements Branch {
     public ArrayList<Account> getAccounts() {
         return this.accounts;
     }
-
-
 }
